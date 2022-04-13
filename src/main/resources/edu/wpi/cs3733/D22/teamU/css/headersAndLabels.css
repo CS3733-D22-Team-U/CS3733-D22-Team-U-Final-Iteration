@@ -1,0 +1,29 @@
+.header{
+    -fx-background-color: #044E9A;
+    -fx-background-radius: 0 0 35 35;
+    -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);
+}
+
+.horizontalLabel{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0 0 35 35;
+    -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);
+}
+
+.verticalLabel{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0 0 35 35;
+    -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);
+}
+.headerText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 48;
+    -fx-font-weight: bold;
+}
+
+.labelText{
+    -fx-fill: #044E9A;
+    -fx-font-size: 36;
+    -fx-font-weight: bold;
+}
+

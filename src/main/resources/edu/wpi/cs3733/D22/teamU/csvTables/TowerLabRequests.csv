@@ -1,0 +1,16 @@
+ID,Patient,Staff,LabType,Date,Time
+b,b,b,b,b,b
+6712,sad,asdaf,COVID-19 Test,2022-04-05,21:04:02
+7120,test,test,Blood Test,2022-04-05,21:58:36
+3024,Test,Test,Urine Test,2022-04-05,22:04:06
+7009,a,a,Other,2022-04-05,22:05:26
+5229,a,a,Drug Screen Test,2022-04-05,22:13:14
+3265,a,a,Blood Test,2022-04-05,22:14:05
+8775,n,n,Pregnancy Test,2022-04-05,22:14:28
+2015,deepti,hello,COVID-19 Test,2022-04-05,22:18:28
+8716,,,Urine Test,2022-04-10,16:12:31
+5352,,,Pregnancy Test,2022-04-10,16:12:31
+5836,,,Other,2022-04-10,16:12:31
+7328,josselin,anyone,Other,2022-04-10,19:46:50
+5885,N/A,N/A,covid,N/A,N/A
+3080,,,Urine Test,2022-04-11,22:13:41

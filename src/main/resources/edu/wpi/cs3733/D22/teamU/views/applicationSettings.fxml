@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.applicationSettingsController">
+    <children>
+        <Pane prefHeight="750.0" prefWidth="258.0" style="-fx-background-color: #044E9A; -fx-background-radius: 0 35 35 0;">
+            <children>
+                <Text fill="WHITE" layoutX="33.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                    <font>
+                        <Font name="System Bold" size="50.0" />
+                    </font>
+                </Text>
+                <ImageView fitHeight="42.0" fitWidth="44.0" layoutX="109.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/Vector.png" />
+                    </image>
+                </ImageView>
+                <Button layoutY="341.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Help">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutY="273.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Application Settings" textFill="#044e9a">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <font>
+                        <Font name="System Bold" size="23.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutY="200.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Privacy Settings">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutY="158.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="Account Settings">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            </children></Pane>
+      <Text fill="#044e9a" layoutX="300.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Theme:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#044e9a" layoutX="308.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Driver:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <ToggleButton layoutX="493.0" layoutY="235.0" mnemonicParsing="false" onAction="#embedderDriver" selected="true" text="Embedded">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <toggleGroup>
+            <ToggleGroup fx:id="driverChange" />
+         </toggleGroup></ToggleButton>
+      <ImageView fitHeight="42.0" fitWidth="48.0" layoutX="494.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/lightmode.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="48.0" layoutX="558.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/darkmode.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="645.0" layoutY="638.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="161.0" fitWidth="90.0" layoutX="1000.0" layoutY="650.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/unicornLogo.png" />
+         </image>
+      </ImageView>
+      <ToggleButton layoutX="570.0" layoutY="235.0" mnemonicParsing="false" onAction="#clientServerDriver" text="Client Server" toggleGroup="$driverChange">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ToggleButton>
+    </children>
+</AnchorPane>
