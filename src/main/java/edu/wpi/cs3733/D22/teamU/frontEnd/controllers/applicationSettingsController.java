@@ -21,7 +21,7 @@ public class applicationSettingsController {
 
     // Udb.getInstance().changeDriver(true);
     DBController.udb.changeDriver(true);
-    System.out.println("clientServer");
+    System.out.println("embeddedServer");
   }
 
   public void clientServerDriver(ActionEvent actionEvent) throws SQLException, IOException {
