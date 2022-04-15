@@ -5,9 +5,10 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -58,7 +59,7 @@ public class sideViewController extends ServiceController {
   @FXML TableColumn<EquipmentUI, String> equipmentName;
 
   ObservableList<EquipmentUI> equipment = FXCollections.observableArrayList();
-  Udb udb = DBController.udb;
+  // Udb udb = DBController.udb;
   ArrayList<String> nodeIDs;
 
   @SneakyThrows
@@ -172,9 +173,9 @@ public class sideViewController extends ServiceController {
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
 
-  private ObservableList<EquipmentUI> getEquipmentList() {
+  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
-    for (Equipment equipment : udb.EquipmentImpl.EquipmentList) {
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
           new EquipmentUI(
               equipment.getName(),
@@ -189,8 +190,8 @@ public class sideViewController extends ServiceController {
 
   ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
 
-  private ObservableList<EquipmentUI> getActiveRequestList() {
-    for (EquipRequest equipRequest : udb.equipRequestImpl.hList().values()) {
+  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
+    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
       equipmentUIRequests.add(
           new edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI(
               equipRequest.getID(),
@@ -209,7 +210,11 @@ public class sideViewController extends ServiceController {
         new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
     location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
     locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("amountInUse"));
-    equipFloor.setItems(getEquipmentList());
+    try {
+      equipFloor.setItems(getEquipmentList());
+    } catch (Exception e) {
+      System.out.println(e);
+    }
   }
 
   @Override

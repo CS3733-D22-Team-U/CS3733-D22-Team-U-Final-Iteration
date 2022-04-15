@@ -4,10 +4,10 @@ import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.lab.LabUI;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
@@ -40,20 +40,26 @@ public class labRequestServices extends ServiceController {
   ObservableList<LabUI> labUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
 
-  Udb udb = DBController.udb;
+  // Udb udb = DBController.udb;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     for (Node checkbox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkbox);
     }
   }
 
-  private void setUpActiveRequests() {
+  private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
     patientNameReq.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     activeReqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
@@ -63,8 +69,8 @@ public class labRequestServices extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<LabUI> getActiveRequestList() {
-    for (LabRequest request : udb.labRequestImpl.hList().values()) {
+  private ObservableList<LabUI> getActiveRequestList() throws SQLException, IOException {
+    for (LabRequest request : Udb.getInstance().labRequestImpl.hList().values()) {
       labUIRequests.add(
           new LabUI(
               request.getID(),
@@ -104,18 +110,22 @@ public class labRequestServices extends ServiceController {
                 request.getRequestDate(),
                 request.getRequestTime()));
         try {
-          udb.labRequestImpl.add(
-              new LabRequest(
-                  request.getId(),
-                  request.getPatientName(),
-                  new Employee(request.getId()),
-                  request.getLabType(),
-                  request.getRequestDate(),
-                  request.getRequestTime()));
+          Udb.getInstance()
+              .labRequestImpl
+              .add(
+                  new LabRequest(
+                      request.getId(),
+                      request.getPatientName(),
+                      new Employee(request.getId()),
+                      request.getLabType(),
+                      request.getRequestDate(),
+                      request.getRequestTime()));
           submission.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();
           submission.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
+        } catch (SQLException e) {
+          e.printStackTrace();
         }
       }
     }

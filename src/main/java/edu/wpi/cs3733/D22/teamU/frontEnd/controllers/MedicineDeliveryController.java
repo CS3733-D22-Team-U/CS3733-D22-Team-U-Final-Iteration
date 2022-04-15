@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine.medicineUI;
 import java.io.IOException;
@@ -79,14 +78,20 @@ public class MedicineDeliveryController extends ServiceController {
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<TextField> checkBoxInput = FXCollections.observableArrayList();
 
-  Udb udb = DBController.udb;
+  // Udb udb = DBController.udb;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     for (Node checkbox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkbox);
     }
@@ -96,7 +101,7 @@ public class MedicineDeliveryController extends ServiceController {
     }
   }
 
-  private void setUpActiveRequests() {
+  private void setUpActiveRequests() throws SQLException, IOException {
     reqID.setCellValueFactory(new PropertyValueFactory<>("id"));
     reqPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     reqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
@@ -108,8 +113,8 @@ public class MedicineDeliveryController extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<medicineUI> getActiveRequestList() {
-    for (MedicineRequest request : udb.medicineRequestImpl.hList().values()) {
+  private ObservableList<medicineUI> getActiveRequestList() throws SQLException, IOException {
+    for (MedicineRequest request : Udb.getInstance().medicineRequestImpl.hList().values()) {
       medUIRequests.add(
           new medicineUI(
               request.getID(),
@@ -170,16 +175,18 @@ public class MedicineDeliveryController extends ServiceController {
                 request.getTime(),
                 amount));
         try {
-          udb.medicineRequestImpl.add(
-              new MedicineRequest(
-                  request.getId(),
-                  request.getName(),
-                  request.getPatientName(),
-                  request.getStatus(),
-                  request.getEmployee(),
-                  request.getDestination(),
-                  request.getDate(),
-                  request.getTime()));
+          Udb.getInstance()
+              .medicineRequestImpl
+              .add(
+                  new MedicineRequest(
+                      request.getId(),
+                      request.getName(),
+                      request.getPatientName(),
+                      request.getStatus(),
+                      request.getEmployee(),
+                      request.getDestination(),
+                      request.getDate(),
+                      request.getTime()));
           processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();

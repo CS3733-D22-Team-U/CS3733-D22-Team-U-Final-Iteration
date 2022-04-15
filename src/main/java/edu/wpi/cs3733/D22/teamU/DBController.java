@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.sql.SQLException;
 
 public class DBController {
-  public static Udb udb;
 
   public static void main(String[] args) throws IOException, SQLException {
+
     String username, password;
     try {
       username = args[0];
@@ -91,7 +91,7 @@ public class DBController {
     Udb.username = username;
     Udb.password = password;
     Udb.CSVfiles = CSVfiles;
-    udb = Udb.getInstance();
+    Udb.getInstance();
 
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);

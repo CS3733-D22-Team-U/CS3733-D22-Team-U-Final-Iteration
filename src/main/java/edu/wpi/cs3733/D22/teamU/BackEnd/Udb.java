@@ -40,9 +40,11 @@ public final class Udb {
     if (change) {
       DB_LOC = "jdbc:derby:UDB;";
       driver = "org.apache.derby.jdbc.EmbeddedDriver";
+      System.out.println("embeddedServer");
     } else {
       DB_LOC = "jdbc:derby://localhost:1527/UDBClient;";
       driver = "org.apache.derby.jdbc.ClientDriver";
+      System.out.println("clientServer");
     }
 
     authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
@@ -84,7 +86,7 @@ public final class Udb {
     this.CSVfiles = CSVfiles;
 
     // THIS WILL RUN THE SERVER IN PORT 1527 IN THE BACKGROUND EVEN WHEN YOU CLOSE THE APP
-    //    Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
+    // Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
     // start");
     // netstat -ano | findstr :1527
     // taskkill /PID [your #] /F
@@ -202,12 +204,12 @@ public final class Udb {
   // OR THE X IN THE CORNER
   public void closeConnection() throws SQLException {
     connection.close();
-    removeConnection();
+    // removeConnection();
   }
 
   // ============================================================= Facade Functions
 
-  public void edit(Object thingToAdd) throws IOException {
+  public void edit(Object thingToAdd) throws IOException, SQLException {
 
     switch (thingToAdd.getClass().getSimpleName()) {
       case "Location":
@@ -244,7 +246,7 @@ public final class Udb {
     }
   }
 
-  public void add(Object thingToAdd) throws IOException {
+  public void add(Object thingToAdd) throws IOException, SQLException {
 
     switch (thingToAdd.getClass().getSimpleName()) {
       case "Location":

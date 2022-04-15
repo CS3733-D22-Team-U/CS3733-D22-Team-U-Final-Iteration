@@ -20,10 +20,14 @@ public class applicationSettingsController {
   public void embedderDriver(ActionEvent actionEvent) throws SQLException, IOException {
 
     Udb.getInstance().changeDriver(true);
+    // DBController.udb.changeDriver(true);
+    System.out.println("embeddedServer");
   }
 
   public void clientServerDriver(ActionEvent actionEvent) throws SQLException, IOException {
 
     Udb.getInstance().changeDriver(false);
+    // DBController.udb.changeDriver(false);
+    System.out.println("clientServer");
   }
 }
