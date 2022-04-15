@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 public class DBController {
 
-
   public static void main(String[] args) throws IOException, SQLException {
+
     String username, password;
     try {
       username = args[0];
@@ -88,9 +88,10 @@ public class DBController {
       locationTest,
       equipmentTest
     };
-    Udb.getInstance().username = username;
-    Udb.getInstance().password = password;
-    Udb.getInstance().CSVfiles = CSVfiles;
+    Udb.username = username;
+    Udb.password = password;
+    Udb.CSVfiles = CSVfiles;
+    Udb.getInstance();
 
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
