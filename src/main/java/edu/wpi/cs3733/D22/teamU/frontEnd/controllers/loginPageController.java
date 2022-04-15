@@ -49,7 +49,7 @@ public class loginPageController extends ServiceController {
                         try {
                           scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/Dashboard.fxml");
                         } catch (IOException e) {
-                          feedback.setText("Wrong Username/Password");
+                          e.printStackTrace();
                         }
                         Stage appStage =
                             (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

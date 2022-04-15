@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import java.io.IOException;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +11,7 @@ import javafx.scene.shape.Shape;
 
 public class LocationNode extends Group {
   private Location location;
-  private Udb udb = DBController.udb;
+  // private Udb udb = DBController.udb;
   private AnchorPane pane;
   private double x, y;
   private final double scale = 15;
