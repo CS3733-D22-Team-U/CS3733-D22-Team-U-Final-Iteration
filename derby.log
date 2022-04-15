@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Fri Apr 15 03:17:33 UTC 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-2b39-d912-0000076065a0 
-on database directory C:\Users\William\Documents\GitHub\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
-Loaded from file:/C:/Users/William/AppData/Roaming/JetBrains/IntelliJIdea2021.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
-java.vendor=JetBrains s.r.o.
-java.runtime.version=11.0.13+7-b1751.25
+Thu Apr 14 23:52:57 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-2b5a-41df-00000bcea200 
+on database directory C:\Users\William\Documents\GitHub\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44 
+Loaded from file:/C:/Users/William/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=13.0.2+8
 user.dir=C:\Users\William\Documents\GitHub\CS3733-D22-Team-U-Prototype-3
 os.name=Windows 10
 os.arch=amd64

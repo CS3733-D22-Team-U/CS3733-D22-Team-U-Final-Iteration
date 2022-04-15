@@ -26,8 +26,8 @@ public final class Udb {
 
   private static Udb Instance;
 
-  public String DB_LOC = "jdbc:derby://localhost:1527/UDBClient;";
-  public String driver = "org.apache.derby.jdbc.ClientDriver";
+  public String DB_LOC = "jdbc:derby:UDB;";
+  public String driver = "org.apache.derby.jdbc.EmbeddedDriver";
   public static String[] CSVfiles;
   public static String username;
   public static String password;
@@ -204,7 +204,7 @@ public final class Udb {
   // OR THE X IN THE CORNER
   public void closeConnection() throws SQLException {
     connection.close();
-    removeConnection();
+    // removeConnection();
   }
 
   // ============================================================= Facade Functions
