@@ -271,8 +271,8 @@ public class MedicineDeliveryController extends ServiceController {
                   request.getEmployee(),
                   request.getDestination(),
                   request.getDate(),
-                  request.getTime(),
-                      request.getRequestAmount()));
+                  request.getTime()
+                      ));
           processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();

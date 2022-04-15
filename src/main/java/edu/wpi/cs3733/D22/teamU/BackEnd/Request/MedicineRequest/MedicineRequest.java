@@ -17,8 +17,8 @@ public class MedicineRequest extends Request {
       Employee employee,
       String location,
       String date,
-      String time,
-      int amount) {
+      String time
+      ) {
 
     this.ID = ID;
     this.name = name;
