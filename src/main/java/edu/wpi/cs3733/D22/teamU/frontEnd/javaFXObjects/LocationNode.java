@@ -3,8 +3,12 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.DBController;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
+import java.net.URL;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -29,6 +33,13 @@ public class LocationNode extends Group {
       color = Color.YELLOW;
     } else color = Color.BLACK;
 
+    ImageView iv = new ImageView();
+    URL a = Uapp.class.getClassLoader().getResource("edu/wpi/cs3733/D22/teamU/icons/labIcon.png");
+    iv.setImage(new Image(String.valueOf(a)));
+    iv.setFitHeight(scale * 5);
+    iv.setFitWidth(scale * 5);
+    iv.setX(x - iv.getFitWidth() / 2);
+    iv.setY(y - iv.getFitHeight() / 2);
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
       r.setX(x - scale);
@@ -38,7 +49,8 @@ public class LocationNode extends Group {
       setColor(r);
       r.setStroke(color);
       r.setStrokeWidth(5);
-      getChildren().add(r);
+      // getChildren().add(r);
+      getChildren().add(iv);
     } else {
       Circle c = new Circle();
       c.setCenterY(y);
