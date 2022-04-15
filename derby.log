@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-Wed Apr 13 14:08:18 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-241c-a46a-00000959c9a8 
-on database directory C:\Users\redst\CS 2033\CS3733-D22-Team-U-Prototype-2\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
-Loaded from file:/C:/Users/redst/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Microsoft
-java.runtime.version=11.0.14.1+1-LTS
-user.dir=C:\Users\redst\CS 2033\CS3733-D22-Team-U-Prototype-2
-os.name=Windows 11
+Fri Apr 15 19:28:54 UTC 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-2eb3-23df-0000076065a0 
+on database directory C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/belia/AppData/Roaming/JetBrains/IntelliJIdea2021.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=11.0.14.1+1-b1751.46
+user.dir=C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3
+os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
