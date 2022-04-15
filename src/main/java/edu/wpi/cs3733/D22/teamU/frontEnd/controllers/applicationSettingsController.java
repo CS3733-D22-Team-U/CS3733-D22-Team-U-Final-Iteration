@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,11 +19,15 @@ public class applicationSettingsController {
 
   public void embedderDriver(ActionEvent actionEvent) throws SQLException, IOException {
 
-    Udb.getInstance().changeDriver(true);
+    // Udb.getInstance().changeDriver(true);
+    DBController.udb.changeDriver(true);
+    System.out.println("embeddedServer");
   }
 
   public void clientServerDriver(ActionEvent actionEvent) throws SQLException, IOException {
 
-    Udb.getInstance().changeDriver(false);
+    // Udb.getInstance().changeDriver(false);
+    DBController.udb.changeDriver(false);
+    System.out.println("clientServer");
   }
 }
