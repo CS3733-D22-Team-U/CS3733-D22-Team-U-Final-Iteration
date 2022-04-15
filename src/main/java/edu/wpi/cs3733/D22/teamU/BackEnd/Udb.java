@@ -26,8 +26,8 @@ public final class Udb {
 
   private static Udb Instance;
 
-  public String DB_LOC = "jdbc:derby:UDB;";
-  public String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+  public String DB_LOC = "jdbc:derby://localhost:1527/UDBClient;";
+  public String driver = "org.apache.derby.jdbc.ClientDriver";
   public static String[] CSVfiles;
   public static String username;
   public static String password;
@@ -40,9 +40,11 @@ public final class Udb {
     if (change) {
       DB_LOC = "jdbc:derby:UDB;";
       driver = "org.apache.derby.jdbc.EmbeddedDriver";
+      System.out.println("embeddedServer");
     } else {
       DB_LOC = "jdbc:derby://localhost:1527/UDBClient;";
       driver = "org.apache.derby.jdbc.ClientDriver";
+      System.out.println("clientServer");
     }
 
     authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
@@ -207,7 +209,7 @@ public final class Udb {
 
   // ============================================================= Facade Functions
 
-  public void edit(Object thingToAdd) throws IOException {
+  public void edit(Object thingToAdd) throws IOException, SQLException {
 
     switch (thingToAdd.getClass().getSimpleName()) {
       case "Location":
@@ -244,7 +246,7 @@ public final class Udb {
     }
   }
 
-  public void add(Object thingToAdd) throws IOException {
+  public void add(Object thingToAdd) throws IOException, SQLException {
 
     switch (thingToAdd.getClass().getSimpleName()) {
       case "Location":
