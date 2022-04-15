@@ -162,9 +162,10 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
         String date = results.getString("date");
         String time = results.getString("time");
 
+        int amount;
         MedicineRequest SQLRow =
             new MedicineRequest(
-                id, name, patientName, status, checkEmployee(staff), location, date, time);
+                id, name, patientName, status, checkEmployee(staff), location, date, time, amount);
 
         List.put(id, SQLRow);
       }
@@ -229,7 +230,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO SUch STAFF");
+        System.out.println("No SUch STAFF");
       }
     }
   }

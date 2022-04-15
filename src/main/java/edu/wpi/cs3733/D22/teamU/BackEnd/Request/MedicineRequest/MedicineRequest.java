@@ -7,6 +7,7 @@ public class MedicineRequest extends Request {
   String patientName;
   String status;
   String destination;
+  int amount;
 
   public MedicineRequest(
       String ID,
@@ -16,7 +17,9 @@ public class MedicineRequest extends Request {
       Employee employee,
       String location,
       String date,
-      String time) {
+      String time,
+      int amount) {
+
     this.ID = ID;
     this.name = name;
     this.patientName = patientName;
@@ -25,6 +28,7 @@ public class MedicineRequest extends Request {
     this.destination = location;
     this.date = date;
     this.time = time;
+    this.amount = amount;
   }
 
   public String getPatientName() {
@@ -49,5 +53,13 @@ public class MedicineRequest extends Request {
 
   public void getDestination(String location) {
     this.destination = location;
+  }
+
+  public void setAmount(int newAmount){
+    this.amount = newAmount;
+  }
+
+  public int getAmount(){
+    return amount;
   }
 }

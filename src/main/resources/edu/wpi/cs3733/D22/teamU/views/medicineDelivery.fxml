@@ -50,7 +50,7 @@
                                                               <Font size="17.0" />
                                                           </font>
                                                       </Text>
-                                                      <TextField fx:id="patientName" promptText="Patient Name" />
+                                          <ComboBox fx:id="patient" prefWidth="150.0" />
                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination:" wrappingWidth="140.931640625">
                                                           <font>
                                                               <Font size="17.0" />

@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import javafx.scene.control.ComboBox;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
@@ -36,12 +38,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
+
 public class MedicineDeliveryController extends ServiceController {
 
   public ComboBox<String> locations;
   public ComboBox employees;
+  public ComboBox<String> patient;
   @FXML Button submitButton;
   @FXML Button clearButton;
+
 
   @FXML JFXCheckBox Advil;
   @FXML JFXCheckBox Alprozalam;
@@ -108,6 +113,28 @@ public class MedicineDeliveryController extends ServiceController {
     for(Location l: udb.locationImpl.list()){
       nodeIDs.add(l.getNodeID());
     }
+    patient.setTooltip(new Tooltip());
+    patient.getItems().addAll(
+            "Harsh",
+            "Marko",
+            "Tim",
+            "Will",
+            "Deepti",
+            "Joselin",
+            "Nick",
+            "Kody",
+            "Mike",
+            "Belisha",
+            "Iain",
+            "Wong",
+            "Big Wong",
+            "MR.HARSH",
+            "Patient00678569420");
+    new ComboBoxAutoComplete<String>(patient, 650, 290);
+
+
+
+
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
@@ -174,18 +201,19 @@ public class MedicineDeliveryController extends ServiceController {
               request.getID(),
               request.getName(),
               request.getPatientName(),
+              request.getDestination(),
               request.getStatus(),
               request.getEmployee(),
-              request.getDestination(),
               request.getDate(),
-              request.getTime()));
+              request.getTime(),
+              request.getAmount()));
     }
     return medUIRequests;
   }
 
-  public Employee checkEmployee(String employee) throws SQLException, IOException {
-    if (Udb.getInstance().EmployeeImpl.List.get(employee) != null) {
-      return Udb.getInstance().EmployeeImpl.List.get(employee);
+  public Employee checkEmployee(String employee) throws NullPointerException, IOException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
     } else {
       Employee empty = new Employee("N/A");
       return empty;
@@ -199,12 +227,12 @@ public class MedicineDeliveryController extends ServiceController {
   @SneakyThrows
   @Override
   public void addRequest() {
-    String patientInput = patientName.getText().trim();
+    //String patientInput = patientName.getText().trim();
+    String patient2 = patient.getValue().toString();
     String staffInput = (employees.getId().toString());
     String destinationInput = locations.getValue().toString();
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
@@ -214,13 +242,14 @@ public class MedicineDeliveryController extends ServiceController {
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
 
-                    staffInput,
+
+                    patient2,
                 destinationInput,
                 "Ordered",
-                    (checkEmployee(staffInput)),
+                    (checkEmployee(employees.getValue().toString())),
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
-                amount);
+                    69420);
         activeRequestTable.setItems(
             newRequest(
                 request.getId(),
@@ -233,7 +262,7 @@ public class MedicineDeliveryController extends ServiceController {
                 request.getTime(),
                 amount));
         try {
-          udb.medicineRequestImpl.add(
+          udb.add(
               new MedicineRequest(
                   request.getId(),
                   request.getName(),
@@ -242,20 +271,26 @@ public class MedicineDeliveryController extends ServiceController {
                   request.getEmployee(),
                   request.getDestination(),
                   request.getDate(),
-                  request.getTime()));
+                  request.getTime(),
+                      request.getRequestAmount()));
           processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();
           processText.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
+          process();
+          clear();
         }
       }
     }
     clear();
   }
 
+
+
   public void enableTxt() {
     if (Advil.isSelected()) {
       advilTxt.setDisable(false);
+      //reset.setVisible();
     }
     if (Alprozalam.isSelected()) {
       alproTxt.setDisable(false);
