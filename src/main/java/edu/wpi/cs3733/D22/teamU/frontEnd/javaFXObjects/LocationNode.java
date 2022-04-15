@@ -3,8 +3,10 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.DBController;
+import java.awt.*;
 import java.io.IOException;
 import javafx.scene.Group;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -25,6 +27,10 @@ public class LocationNode extends Group {
     this.x = x;
     this.y = y;
     Color color;
+
+    Circle c = new Circle();
+    setIcon(c);
+
     if (location.getRequests().size() > 0) {
       color = Color.YELLOW;
     } else color = Color.BLACK;
@@ -35,66 +41,81 @@ public class LocationNode extends Group {
       r.setWidth(2 * scale);
       r.setHeight(2 * scale);
       r.setY(y - scale);
-      setColor(r);
+      // setIcon(r);
       r.setStroke(color);
       r.setStrokeWidth(5);
-      getChildren().add(r);
-    } else {
-      Circle c = new Circle();
-      c.setCenterY(y);
-      c.setCenterX(x);
-      c.setRadius(scale);
-      setColor(c);
-      c.setStroke(color);
-      c.setStrokeWidth(5);
-      getChildren().add(c);
+      // getChildren().add(r);
     }
   }
 
-  private void setColor(Shape s) {
+  private void addMapIcon(ImageView aView) {
+    aView.setFitHeight(scale * 5);
+    aView.setFitWidth(scale * 5);
+    aView.setX(x - (aView.getFitWidth() / 2));
+    aView.setY(y - (aView.getFitHeight() / 2));
+    aView.setScaleX(.8);
+    aView.setScaleY(.8);
+    getChildren().add(aView);
+  }
+
+  private void setIcon(Shape s) {
 
     switch (location.getNodeType()) {
       case "PATI":
-        s.setFill(Color.RED);
+        ImageView pati = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
+        addMapIcon(pati);
         break;
       case "STOR":
-        s.setFill(Color.ORANGE);
+        ImageView stor = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
+        addMapIcon(stor);
         break;
       case "DIRT":
-        s.setFill(Color.YELLOW);
+        ImageView dirt = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
+        addMapIcon(dirt);
         break;
       case "HALL":
-        s.setFill(Color.GREEN);
+        ImageView hall = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
+        addMapIcon(hall);
         break;
       case "ELEV":
-        s.setFill(Color.BLUE);
+        ImageView elev = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
+        addMapIcon(elev);
         break;
       case "REST":
-        s.setFill(Color.BLUEVIOLET);
+        ImageView rest = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
+        addMapIcon(rest);
         break;
       case "STAI":
-        s.setFill(Color.PURPLE);
+        ImageView stair = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
+        addMapIcon(stair);
         break;
       case "DEPT":
-        s.setFill(Color.ROSYBROWN);
+        ImageView dept = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
+        addMapIcon(dept);
         break;
       case "LABS":
-        s.setFill(Color.SILVER);
+        ImageView labs = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
+        addMapIcon(labs);
         break;
       case "INFO":
-        s.setFill(Color.WHEAT);
+        ImageView info = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
+        addMapIcon(info);
         break;
       case "CONF":
-        s.setFill(Color.BLACK);
+        ImageView conf = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
+        addMapIcon(conf);
         break;
       case "EXIT":
-        s.setFill(Color.DARKRED);
+        ImageView exit = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
+        addMapIcon(exit);
         break;
       case "RETL":
-        s.setFill(Color.MAGENTA);
+        ImageView retail = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
+        addMapIcon(retail);
         break;
       case "SERV":
-        s.setFill(Color.INDIANRED);
+        ImageView serv = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
+        addMapIcon(serv);
         break;
       default:
         s.setFill(Color.YELLOWGREEN);
