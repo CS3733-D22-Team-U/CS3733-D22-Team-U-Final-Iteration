@@ -8,11 +8,11 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
   ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
 
   ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
-  Udb udb = DBController.udb;
+  // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -73,10 +73,11 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+    // udb = Udb.getInstance();
     setUpAllEquipment();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
-    for (Location l : udb.locationImpl.list()) {
+    for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
     }
     locations.setTooltip(new Tooltip());
@@ -84,7 +85,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for (Employee l : udb.EmployeeImpl.hList().values()) {
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
     }
     employees.setTooltip(new Tooltip());
@@ -122,7 +123,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
   }
 
-  private void setUpAllEquipment() {
+  private void setUpAllEquipment() throws SQLException, IOException {
     nameCol.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
     inUse.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
     available.setCellValueFactory(
@@ -132,7 +133,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     table.setItems(getEquipmentList());
   }
 
-  private void setUpActiveRequests() {
+  private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
     activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
     activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
@@ -156,9 +157,9 @@ public class EquipmentDeliverySystemController extends ServiceController {
     return equipmentUIRequests;
   }
 
-  private ObservableList<EquipmentUI> getEquipmentList() {
+  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
-    for (Equipment equipment : udb.EquipmentImpl.EquipmentList) {
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
           new EquipmentUI(
               equipment.getName(),
@@ -171,8 +172,8 @@ public class EquipmentDeliverySystemController extends ServiceController {
     return equipmentUI;
   }
 
-  private ObservableList<EquipmentUI> getActiveRequestList() {
-    for (EquipRequest equipRequest : udb.equipRequestImpl.hList().values()) {
+  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
+    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
       equipmentUIRequests.add(
           new EquipmentUI(
               equipRequest.getID(),
@@ -237,19 +238,22 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 request.getRequestTime(),
                 1));
         try {
-          udb.add( // TODO Have random ID and enter Room Destination
-              new EquipRequest(
-                  request.getId(),
-                  request.getEquipmentName(),
-                  request.getRequestAmount(),
-                  request.getType(),
-                  checkEmployee(employees.getValue().toString()),
-                  request.getDestination(),
-                  request.getRequestDate(),
-                  request.getRequestTime(),
-                  1));
+          Udb.getInstance()
+              .add( // TODO Have random ID and enter Room Destination
+                  new EquipRequest(
+                      request.getId(),
+                      request.getEquipmentName(),
+                      request.getRequestAmount(),
+                      request.getType(),
+                      checkEmployee(employees.getValue().toString()),
+                      request.getDestination(),
+                      request.getRequestDate(),
+                      request.getRequestTime(),
+                      1));
 
         } catch (IOException e) {
+          e.printStackTrace();
+        } catch (SQLException e) {
           e.printStackTrace();
         }
       }

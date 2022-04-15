@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public Statement statement;
   public ArrayList<Equipment> EquipmentList = new ArrayList<Equipment>();
   public String csvFile;
-  private Udb udb = DBController.udb;
+  // private Udb udb = DBController.udb;
 
   /**
    * Constructor for EquipmentDaoImpl
@@ -67,7 +66,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   }
 
   @Override
-  public void CSVToJava() throws IOException {
+  public void CSVToJava() throws IOException, SQLException {
     EquipmentList = new ArrayList<Equipment>();
     String s;
     File file = new File(csvFile);
@@ -78,7 +77,11 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       if (row.length == size) {
         Equipment e =
             new Equipment(row[0], Integer.parseInt(row[1]), Integer.parseInt(row[2]), row[4]);
-        Location l = udb.locationImpl.list().get(udb.locationImpl.list().indexOf(e.locationID));
+        Location l =
+            Udb.getInstance()
+                .locationImpl
+                .list()
+                .get(Udb.getInstance().locationImpl.list().indexOf(e.locationID));
         l.addEquipment(e);
         EquipmentList.add(e);
       }
@@ -191,7 +194,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   }
 
   @Override
-  public void printTable() throws IOException {
+  public void printTable() throws IOException, SQLException {
     // csv to java
     CSVToJava();
     // display equipment and attributes
