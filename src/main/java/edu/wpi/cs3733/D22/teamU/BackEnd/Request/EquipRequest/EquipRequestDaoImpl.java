@@ -19,10 +19,10 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   public ArrayList<EquipRequest> list = new ArrayList<EquipRequest>();
   private Udb udb;
 
-  public EquipRequestDaoImpl(Statement statement, String csvfile) {
+  public EquipRequestDaoImpl(Statement statement, String csvfile) throws SQLException, IOException {
     this.csvFile = csvfile;
     this.statement = statement;
-    udb = DBController.udb;
+    this.udb = Udb.getInstance();
   }
 
   @Override

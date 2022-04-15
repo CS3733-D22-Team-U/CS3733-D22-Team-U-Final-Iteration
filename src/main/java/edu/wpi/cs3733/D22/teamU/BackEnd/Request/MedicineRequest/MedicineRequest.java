@@ -2,37 +2,31 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
-
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 public class MedicineRequest extends Request {
-  String patientName;
   String status;
   String destination;
+  int amount;
 
   public MedicineRequest(
       String ID,
       String name,
+      int amount,
       String patientName,
       String status,
       Employee employee,
-      String location,
+      String destination,
       String date,
       String time) {
     this.ID = ID;
     this.name = name;
+    this.amount = amount;
     this.patientName = patientName;
     this.status = status;
     this.employee = employee;
-    this.destination = location;
+    this.destination = destination;
     this.date = date;
     this.time = time;
-  }
-
-  public String getPatientName() {
-    return patientName;
-  }
-
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
   }
 
   public String getStatus() {
@@ -43,11 +37,20 @@ public class MedicineRequest extends Request {
     this.status = status;
   }
 
-  public String getDestination() {
-    return destination;
+  public void setDestination(String destination) {
+    this.destination = destination;
   }
 
-  public void getDestination(String location) {
-    this.destination = location;
+  public String getDestination()
+  {
+    return this.destination;
+  }
+
+  public int getAmount() {
+    return amount;
+  }
+
+  public void setAmount(int amount) {
+    this.amount = amount;
   }
 }
