@@ -2,19 +2,25 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine.medicineUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +38,11 @@ import lombok.SneakyThrows;
 
 public class MedicineDeliveryController extends ServiceController {
 
+  public ComboBox<String> locations;
+  public ComboBox employees;
+  @FXML Button submitButton;
+  @FXML Button clearButton;
+
   @FXML JFXCheckBox Advil;
   @FXML JFXCheckBox Alprozalam;
   @FXML JFXCheckBox AmphetamineSalt;
@@ -39,7 +50,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML JFXCheckBox Lisinopril;
   @FXML JFXCheckBox Metformin;
   @FXML JFXCheckBox specialCheck;
-  @FXML Button clearButton;
+
   @FXML TextArea specialReq;
   @FXML TextField patientName;
   @FXML TextField staffName;
@@ -67,8 +78,9 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TableColumn<medicineUI, String> reqPatient;
   @FXML TableColumn<medicineUI, String> reqStaff;
   @FXML TableColumn<medicineUI, String> reqMed;
+  @FXML TableColumn<medicineUI, String> reqStatus;
   @FXML TableColumn<medicineUI, String> reqAmount;
-  @FXML TableColumn<medicineUI, String> reqDest;
+  @FXML TableColumn<medicineUI, String> reqLocation;
   @FXML TableColumn<medicineUI, String> reqDate;
   @FXML TableColumn<medicineUI, String> reqTime;
 
@@ -78,15 +90,37 @@ public class MedicineDeliveryController extends ServiceController {
   ObservableList<medicineUI> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<TextField> checkBoxInput = FXCollections.observableArrayList();
+  ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
+  ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
 
   Udb udb = DBController.udb;
+  ArrayList<String> nodeIDs;
+  ArrayList<String> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     setUpActiveRequests();
+    nodeIDs = new ArrayList<>();
+    for(Location l: udb.locationImpl.list()){
+      nodeIDs.add(l.getNodeID());
+    }
+    locations.setTooltip(new Tooltip());
+    locations.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
+
+    staff = new ArrayList<>();
+    for(Employee l: udb.EmployeeImpl.hList().values()){
+      staff.add(l.getEmployeeID());
+    }
+
+    employees.setTooltip(new Tooltip());
+    employees.getItems().addAll(staff);
+    new ComboBoxAutoComplete<String>(employees, 675, 380);
+
     for (Node checkbox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkbox);
     }
@@ -94,17 +128,42 @@ public class MedicineDeliveryController extends ServiceController {
     for (Node textField : medVbox.getChildren()) {
       checkBoxInput.add((TextField) textField);
     }
+
+    for (int i = 0; i < checkBoxesInput.size(); i++) {
+      int finalI = i;
+      checkBoxesInput
+              .get(i)
+              .disableProperty()
+              .bind(
+                      Bindings.createBooleanBinding(
+                              () -> !checkBoxes.get(finalI).isSelected(),
+                              checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+    }
+    clearButton
+            .disableProperty()
+            .bind(
+                    Bindings.createBooleanBinding(
+                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+
+    submitButton
+            .disableProperty()
+            .bind(
+                    Bindings.createBooleanBinding(
+                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
   }
 
   private void setUpActiveRequests() {
     reqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    reqPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    reqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
     reqMed.setCellValueFactory(new PropertyValueFactory<>("name"));
-    reqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-    reqDest.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    reqPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    reqLocation.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    reqStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    reqStaff.setCellValueFactory(new PropertyValueFactory<>("employee"));
     reqDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     reqTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+
     activeRequestTable.setItems(getActiveRequestList());
   }
 
@@ -115,9 +174,9 @@ public class MedicineDeliveryController extends ServiceController {
               request.getID(),
               request.getName(),
               request.getPatientName(),
-              request.getDestination(),
               request.getStatus(),
               request.getEmployee(),
+              request.getDestination(),
               request.getDate(),
               request.getTime()));
     }
@@ -133,28 +192,32 @@ public class MedicineDeliveryController extends ServiceController {
     }
   }
 
+  //note for self:
+  //employee currently returning N/A because checkEmployee is always returning N/A
+  //csv file is in wrong order
+
   @SneakyThrows
   @Override
   public void addRequest() {
     String patientInput = patientName.getText().trim();
-    String staffInput = staffName.getText().trim();
-    String destinationInput = destination.getText().trim();
+    String staffInput = (employees.getId().toString());
+    String destinationInput = locations.getValue().toString();
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
-        // int amount = Integer.parseInt(checkBoxInput.get(i).toString().trim());
-        int amount = 24;
+        int amount = 69420;
         medicineUI request =
             new medicineUI(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
+
+                    staffInput,
                 destinationInput,
                 "Ordered",
-                patientInput,
-                checkEmployee(staffInput),
+                    (checkEmployee(staffInput)),
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
                 amount);
@@ -164,7 +227,7 @@ public class MedicineDeliveryController extends ServiceController {
                 request.getName(),
                 request.getPatientName(),
                 request.getDestination(),
-                "Ordered",
+                "Done",
                 request.getEmployee(),
                 request.getDate(),
                 request.getTime(),

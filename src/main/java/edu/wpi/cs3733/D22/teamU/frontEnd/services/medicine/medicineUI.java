@@ -16,23 +16,22 @@ public class medicineUI {
   private int requestAmount;
 
   public medicineUI(
-      String id,
-      String name,
-      String patientName,
-      String destination,
-      String status,
-      Employee employee,
-      String date,
-      String time) {
-    this.id = id;
+          String ID,
+          String name,
+          String patientName,
+          String status,
+          Employee employee,
+          String location,
+          String date,
+          String time) {
+    this.id = ID;
     this.name = name;
     this.patientName = patientName;
-    this.destination = destination;
     this.status = status;
     this.employee = employee;
+    this.destination = location;
     this.date = date;
     this.time = time;
-    staffName = employee.getEmployeeID();
   }
 
   public medicineUI(
