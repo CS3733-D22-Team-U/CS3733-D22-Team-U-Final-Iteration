@@ -7,7 +7,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.DBController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine.medicineUI;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,6 +45,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TextField staffName;
   @FXML TextField advilTxt;
   // @FXML TextField IDtxt;
+  //@FXML TextField amount;
   @FXML TextField alproTxt;
   @FXML TextField saltTxt;
   @FXML TextField atorvTxt;
@@ -63,14 +64,14 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TabPane tab;
   @FXML TextField destination;
 
-  @FXML TableColumn<medicineUI, String> reqID;
-  @FXML TableColumn<medicineUI, String> reqPatient;
-  @FXML TableColumn<medicineUI, String> reqStaff;
-  @FXML TableColumn<medicineUI, String> reqMed;
-  @FXML TableColumn<medicineUI, String> reqAmount;
-  @FXML TableColumn<medicineUI, String> reqDest;
-  @FXML TableColumn<medicineUI, String> reqDate;
-  @FXML TableColumn<medicineUI, String> reqTime;
+  @FXML TableColumn<MedicineRequest, String> reqID;
+  @FXML TableColumn<MedicineRequest, String> reqPatient;
+  @FXML TableColumn<MedicineRequest, String> reqStaff;
+  @FXML TableColumn<MedicineRequest, String> reqMed;
+  @FXML TableColumn<MedicineRequest, String> reqAmount;
+  @FXML TableColumn<MedicineRequest, String> reqDest;
+  @FXML TableColumn<MedicineRequest, String> reqDate;
+  @FXML TableColumn<MedicineRequest, String> reqTime;
 
   @FXML TableView<MedicineRequest> activeRequestTable;
   @FXML VBox requestHolder;
@@ -99,7 +100,6 @@ public class MedicineDeliveryController extends ServiceController {
   private void setUpActiveRequests() {
     reqID.setCellValueFactory(new PropertyValueFactory<>("id"));
     reqPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    reqAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     reqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
     reqMed.setCellValueFactory(new PropertyValueFactory<>("name"));
     reqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
@@ -141,6 +141,7 @@ public class MedicineDeliveryController extends ServiceController {
     String patientInput = patientName.getText().trim();
     String staffInput = staffName.getText().trim();
     String destinationInput = destination.getText().trim();
+    //String amountInput = amount.getText().trim();
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -153,24 +154,24 @@ public class MedicineDeliveryController extends ServiceController {
             new MedicineRequest(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
-                0,
+                amount,
                 patientInput,
                 "Ordered",
                 checkEmployee(staffInput),
-                destinationInput,
+                    destinationInput,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11));
         activeRequestTable.setItems(
             newRequest(
-                request.getID(),
-                request.getName(),
-                request.getAmount(),
-                request.getPatientName(),
-                "Ordered",
-                request.getEmployee(),
-                request.getDestination(),
-                request.getDate(),
-                request.getTime()));
+                    request.getID(),
+                    request.getName(),
+                    request.getAmount(),
+                    request.getPatientName(),
+                    request.getStatus(),
+                    request.getEmployee(),
+                    request.getDestination(),
+                    request.getDate(),
+                    request.getTime()));
         try {
           udb.medicineRequestImpl.add(
               new MedicineRequest(
@@ -339,15 +340,15 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   private ObservableList<MedicineRequest> newRequest(
-      String id,
-      String name,
-      int amount,
-      String patientName,
-      String status,
-      Employee employee,
-      String location,
-      String date,
-      String time) {
+          String id,
+          String name,
+          int amount,
+          String patientName,
+          String status,
+          Employee employee,
+          String location,
+          String date,
+          String time) {
     medUIRequests.add(
         new MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
     return medUIRequests;
