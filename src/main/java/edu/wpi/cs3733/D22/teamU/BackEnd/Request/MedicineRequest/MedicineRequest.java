@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+
 public class MedicineRequest extends Request {
   String status;
   String destination;
@@ -41,8 +41,7 @@ public class MedicineRequest extends Request {
     this.destination = destination;
   }
 
-  public String getDestination()
-  {
+  public String getDestination() {
     return this.destination;
   }
 

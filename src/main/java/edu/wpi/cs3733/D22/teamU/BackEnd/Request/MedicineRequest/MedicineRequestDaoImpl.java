@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,8 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
   public ArrayList<MedicineRequest> list = new ArrayList<MedicineRequest>();
   private Udb udb;
 
-  public MedicineRequestDaoImpl(Statement statement, String csvfile) throws SQLException, IOException {
+  public MedicineRequestDaoImpl(Statement statement, String csvfile)
+      throws SQLException, IOException {
     this.csvFile = csvfile;
     this.statement = statement;
     this.udb = Udb.getInstance();
@@ -59,17 +59,17 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
       String[] row = s.split(",");
       if (row.length == size) { // or change to 9 if no work
         MedicineRequest m =
-                new MedicineRequest(
-                        row[0],
-                        row[1],
-                        Integer.parseInt(row[2]),
-                        row[3],
-                        row[4],
-                        checkEmployee(row[5]),
-                        row[6],
-                        row[7],
-                        row[8]);
-        List.put(row[0],m);
+            new MedicineRequest(
+                row[0],
+                row[1],
+                Integer.parseInt(row[2]),
+                row[3],
+                row[4],
+                checkEmployee(row[5]),
+                row[6],
+                row[7],
+                row[8]);
+        List.put(row[0], m);
 
         try {
           Location temp = new Location();
@@ -77,8 +77,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
           Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
           l.addRequest(m);
           m.setLocation(l);
-        } catch (Exception exception)
-        {
+        } catch (Exception exception) {
         }
       }
     }
@@ -213,23 +212,23 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
         "ID |\t Name |\t Amount |\t Patient Name |\t Status |\t Employee Name |\t Location |\t Date |\t Time");
     for (MedicineRequest request : this.List.values()) {
       System.out.println(
-              request.ID
-                      + " | \t"
-                      + request.name
-                      + " | \t"
-                      + request.amount
-                      + " | \t"
-                      + request.patientName
-                      + " | \t"
-                      + request.status
-                      + " | \t"
-                      + request.employee.getEmployeeID()
-                      + " | \t"
-                      + request.location
-                      + " | \t"
-                      + request.date
-                      + " | \t"
-                      + request.time);
+          request.ID
+              + " | \t"
+              + request.name
+              + " | \t"
+              + request.amount
+              + " | \t"
+              + request.patientName
+              + " | \t"
+              + request.status
+              + " | \t"
+              + request.employee.getEmployeeID()
+              + " | \t"
+              + request.location
+              + " | \t"
+              + request.date
+              + " | \t"
+              + request.time);
     }
   }
 

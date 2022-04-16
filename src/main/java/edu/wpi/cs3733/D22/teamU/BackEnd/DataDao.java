@@ -12,7 +12,7 @@ public interface DataDao<T> {
 
   HashMap<String, T> hList();
 
-  void CSVToJava() throws IOException;
+  void CSVToJava() throws IOException, SQLException;
 
   void JavaToSQL();
 
@@ -20,11 +20,11 @@ public interface DataDao<T> {
 
   void JavaToCSV(String csvFile) throws IOException;
 
-  void printTable() throws IOException;
+  void printTable() throws IOException, SQLException;
 
-  void edit(T data) throws IOException;
+  void edit(T data) throws IOException, SQLException;
 
-  void add(T data) throws IOException;
+  void add(T data) throws IOException, SQLException;
 
   void remove(T data) throws IOException;
 

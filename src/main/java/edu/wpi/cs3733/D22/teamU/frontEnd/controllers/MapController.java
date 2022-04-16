@@ -82,7 +82,7 @@ public class MapController extends ServiceController {
   @FXML Pane assistPane;
   @FXML Button addBTN;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
-  Udb udb = Udb.getInstance();
+  // Udb udb;
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
 
@@ -91,6 +91,7 @@ public class MapController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
+
     addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
@@ -103,58 +104,64 @@ public class MapController extends ServiceController {
     locations = new HashMap<>();
     setUpMap();
     mapUI.clear();
-    for (Location loc : udb.locationImpl.locations) {
-      mapUI.add(
-          new MapUI(
-              loc.getNodeID(),
-              loc.getXcoord(),
-              loc.getYcoord(),
-              loc.getFloor(),
-              loc.getBuilding(),
-              loc.getNodeType(),
-              loc.getLongName(),
-              loc.getShortName()));
+    try {
+      for (Location loc : Udb.getInstance().locationImpl.locations) {
+        mapUI.add(
+            new MapUI(
+                loc.getNodeID(),
+                loc.getXcoord(),
+                loc.getYcoord(),
+                loc.getFloor(),
+                loc.getBuilding(),
+                loc.getNodeType(),
+                loc.getLongName(),
+                loc.getShortName()));
 
-      String s = loc.getFloor();
-      LocationNode ln;
-      try {
-        AnchorPane temp = new AnchorPane();
-        switch (s) {
-          case "L1":
-            temp = lowerLevel1Pane;
-            break;
-          case "L2":
-            temp = lowerLevel2Pane;
-            break;
-          case "1":
-            temp = floor1Pane;
-            break;
-          case "2":
-            temp = floor2Pane;
-            break;
-          case "3":
-            temp = floor3Pane;
-            break;
-          case "4":
-            temp = floor4Pane;
-            break;
-          case "5":
-            temp = floor5Pane;
-            break;
+        String s = loc.getFloor();
+        LocationNode ln;
+        try {
+          AnchorPane temp = new AnchorPane();
+          switch (s) {
+            case "L1":
+              temp = lowerLevel1Pane;
+              break;
+            case "L2":
+              temp = lowerLevel2Pane;
+              break;
+            case "1":
+              temp = floor1Pane;
+              break;
+            case "2":
+              temp = floor2Pane;
+              break;
+            case "3":
+              temp = floor3Pane;
+              break;
+            case "4":
+              temp = floor4Pane;
+              break;
+            case "5":
+              temp = floor5Pane;
+              break;
+          }
+          // double x = lnOld.getPane().getPrefWidth() / imageX * (double) l.getXcoord() + 80;
+          // double y = lnOld.getPane().getPrefHeight() / imageY * (double) l.getYcoord();
+          double scale = Double.min(temp.getPrefHeight(), temp.getPrefWidth());
+          double x = scale / imageX * loc.getXcoord();
+          double y = scale / imageY * loc.getYcoord();
+          ln = new LocationNode(loc, x, y, temp);
+          ln.setOnMouseClicked(this::popupOpen);
+          locations.put(loc.getNodeID(), ln);
+          temp.getChildren().add(ln);
+
+        } catch (Exception e) {
+          e.printStackTrace();
         }
-        // double x = lnOld.getPane().getPrefWidth() / imageX * (double) l.getXcoord() + 80;
-        // double y = lnOld.getPane().getPrefHeight() / imageY * (double) l.getYcoord();
-        double scale = Double.min(temp.getPrefHeight(), temp.getPrefWidth());
-        double x = scale / imageX * loc.getXcoord();
-        double y = scale / imageY * loc.getYcoord();
-        ln = new LocationNode(loc, x, y, temp);
-        ln.setOnMouseClicked(this::popupOpen);
-        locations.put(loc.getNodeID(), ln);
-        temp.getChildren().add(ln);
-
-      } catch (Exception e) {
-        e.printStackTrace();
       }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
     mapTable.setItems(mapUI);
     popupAddPane = new AnchorPane();
@@ -374,17 +381,21 @@ public class MapController extends ServiceController {
             }
           } else if (n2 instanceof Button) {
             Button b = (Button) n2;
-            switch (b.getId()) {
-              case "edit":
-                b.setDisable(!Udb.admin);
-                b.setOnMouseClicked(this::popupEdit);
-                break;
-              case "remove":
-                b.setDisable(!Udb.admin);
-                b.setOnMouseClicked(this::popupRemove);
-                break;
-              default:
-                break;
+            try {
+              switch (b.getId()) {
+                case "edit":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupEdit);
+                  break;
+                case "remove":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupRemove);
+                  break;
+                default:
+                  break;
+              }
+            } catch (Exception e) {
+              System.out.println("map Controller line 400");
             }
           }
         }
@@ -411,10 +422,14 @@ public class MapController extends ServiceController {
 
     try {
 
-      Location old = udb.locationImpl.list().get(udb.locationImpl.list().indexOf(l));
+      Location old =
+          Udb.getInstance()
+              .locationImpl
+              .list()
+              .get(Udb.getInstance().locationImpl.list().indexOf(l));
       l.setEquipment(old.getEquipment());
       l.setRequests(old.getRequests());
-      udb.locationImpl.edit(l);
+      Udb.getInstance().locationImpl.edit(l);
       LocationNode lnOld = locations.get(l.getNodeID());
       double scale = Double.min(lnOld.getPane().getPrefHeight(), lnOld.getPane().getPrefWidth());
       double x = scale / imageX * l.getXcoord();
@@ -427,7 +442,7 @@ public class MapController extends ServiceController {
       lnOld.getPane().getChildren().remove(lnOld);
       lnNew.getPane().getChildren().add(lnNew);
       // toMap(actionEvent);
-    } catch (IOException e) {
+    } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
   }
@@ -445,12 +460,14 @@ public class MapController extends ServiceController {
             popupShortName.getText());
 
     try {
-      udb.locationImpl.remove(l);
+      Udb.getInstance().locationImpl.remove(l);
       LocationNode lnOld = locations.get(l.getNodeID());
       locations.remove(l.getNodeID());
       Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
     } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
@@ -468,7 +485,7 @@ public class MapController extends ServiceController {
             addLongName.getText(),
             addShortName.getText());
     try {
-      udb.locationImpl.add(l);
+      Udb.getInstance().locationImpl.add(l);
       String s = l.getFloor();
       AnchorPane temp = new AnchorPane();
       switch (s) {
@@ -503,6 +520,8 @@ public class MapController extends ServiceController {
       temp.getChildren().add(ln);
       popUpAdd(mouseEvent);
     } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
