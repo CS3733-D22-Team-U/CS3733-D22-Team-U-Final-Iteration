@@ -95,7 +95,7 @@ public class DBController {
 
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
-    udb.menu(); // Uncomment this to start terminal menu
+    // udb.menu(); // Uncomment this to start terminal menu
   }
 
   public static String copyFile(InputStream inputPath, String outputPath) throws IOException {

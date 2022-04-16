@@ -5,32 +5,27 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LaundryRequest extends Request {
 
+  String patientName;
   String status;
   String destination;
-  String pickUpDate;
-  String dropOffDate;
-  String services;
-  String notes;
 
   public LaundryRequest(
       String ID,
+      String name,
       String patientName,
       Employee employee,
       String status,
-      String destination,
-      String pickUpDate,
-      String dropOffDate,
-      String services,
-      String additionalNotes) {
+      String location,
+      String date,
+      String time) {
     this.ID = ID;
+    this.name = name; // type of lab request
     this.patientName = patientName;
     this.employee = employee;
     this.status = status;
-    this.destination = destination;
-    this.pickUpDate = pickUpDate;
-    this.dropOffDate = dropOffDate;
-    this.services = services;
-    this.notes = additionalNotes;
+    this.destination = location;
+    this.date = date;
+    this.time = time;
   }
 
   public String getPatientName() {
@@ -55,37 +50,5 @@ public class LaundryRequest extends Request {
 
   public void setDestination(String location) {
     this.destination = location;
-  }
-
-  public String getPickUpDate() {
-    return pickUpDate;
-  }
-
-  public void setPickUpDate(String pickUpDate) {
-    this.pickUpDate = pickUpDate;
-  }
-
-  public String getDropOffDate() {
-    return dropOffDate;
-  }
-
-  public void setDropOffDate(String dropOffDate) {
-    this.dropOffDate = dropOffDate;
-  }
-
-  public String getServices() {
-    return services;
-  }
-
-  public void setServices(String services) {
-    this.services = services;
-  }
-
-  public String getNotes() {
-    return notes;
-  }
-
-  public void setNotes(String notes) {
-    this.notes = notes;
   }
 }

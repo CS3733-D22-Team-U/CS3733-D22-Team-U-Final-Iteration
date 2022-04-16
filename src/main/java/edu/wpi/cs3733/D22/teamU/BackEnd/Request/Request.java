@@ -7,16 +7,6 @@ import java.util.ArrayList;
 public abstract class Request {
   public String ID;
   public String name;
-
-  public String getPatientName() {
-    return patientName;
-  }
-
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
-  }
-
-  public String patientName;
   public String date;
   public String time;
   public Employee employee;

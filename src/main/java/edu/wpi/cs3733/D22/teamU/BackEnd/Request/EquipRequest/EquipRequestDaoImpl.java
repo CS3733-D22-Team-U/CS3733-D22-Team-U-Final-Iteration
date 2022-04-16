@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,12 +16,12 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   public HashMap<String, EquipRequest> List = new HashMap<String, EquipRequest>();
   public String csvFile;
   public ArrayList<EquipRequest> list = new ArrayList<EquipRequest>();
-  private Udb udb;
+  // Udb udb;
 
-  public EquipRequestDaoImpl(Statement statement, String csvfile) throws SQLException, IOException {
+  public EquipRequestDaoImpl(Statement statement, String csvfile) {
     this.csvFile = csvfile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
+    // udb = DBController.udb;
   }
 
   @Override
@@ -73,7 +72,11 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(e.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(e);
           e.setLocation(l);
         } catch (Exception exception) {
@@ -273,15 +276,14 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   }
 
   @Override
-  public void edit(EquipRequest data) throws IOException {
+  public void edit(EquipRequest data) throws IOException, SQLException {
     // takes entries from SQL table that match input node and updates it with a new floor and
     // location type
     // input ID
-    udb = DBController.udb;
 
     if (List.containsKey(data.ID)) {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, udb.locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
@@ -301,14 +303,13 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    * @throws IOException
    */
   @Override
-  public void add(EquipRequest data) throws IOException {
-    udb = DBController.udb;
+  public void add(EquipRequest data) throws IOException, SQLException {
 
     if (List.containsKey(data.ID)) {
       System.out.println("A Request With This ID Already Exists");
     } else {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, udb.locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.put(data.ID, data);
         this.JavaToSQL();
@@ -327,7 +328,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    */
   @Override
   public void remove(EquipRequest data) throws IOException {
-    udb = DBController.udb;
 
     try {
       data.location.getRequests().remove(data);
