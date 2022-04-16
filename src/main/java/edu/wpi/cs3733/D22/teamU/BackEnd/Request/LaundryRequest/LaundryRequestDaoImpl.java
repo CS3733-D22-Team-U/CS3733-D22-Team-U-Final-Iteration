@@ -30,7 +30,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     return this.List;
   }
 
-  // CHecks whether an employee exists
+  // Checks whether an employee exists
   // Returns Employee if exists
   // Returns empty employee with employee ID = N/A
   public Employee checkEmployee(String employee) {
@@ -56,7 +56,15 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         List.put(
             row[0],
             new LaundryRequest(
-                row[0], row[1], row[2], checkEmployee(row[3]), row[4], row[5], row[6], row[7]));
+                row[0],
+                row[1],
+                checkEmployee(row[2]),
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+                row[7],
+                row[8]));
       }
     }
   }
@@ -75,21 +83,20 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
       statement.execute(
           "CREATE TABLE LaundryRequest("
               + "ID varchar(10) not null,"
-              + "name varchar(20) not null,"
               + "patientName varchar(20) not null,"
               + "staff varchar(20) not null,"
               + "status varchar(20) not null,"
               + "location varchar(15) not null,"
-              + "date varchar(10) not null,"
-              + "time varchar(10) not null)");
+              + "pickUp varchar(10) not null,"
+              + "dropOff varchar(10) not null,"
+              + "services varchar(50) not null,"
+              + "notes varchar(50) not null)");
 
       for (LaundryRequest currLaud : List.values()) {
         statement.execute(
             "INSERT INTO LaundryRequest VALUES("
                 + "'"
                 + currLaud.getID()
-                + "','"
-                + currLaud.getName()
                 + "','"
                 + currLaud.getPatientName()
                 + "','"
@@ -99,9 +106,13 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 + "','"
                 + currLaud.getLocation()
                 + "','"
-                + currLaud.getDate()
+                + currLaud.getPickUpDate()
                 + "','"
-                + currLaud.getTime()
+                + currLaud.getDropOffDate()
+                + "','"
+                + currLaud.getServices()
+                + "','"
+                + currLaud.getNotes()
                 + "')");
       }
     } catch (SQLException e) {
@@ -118,17 +129,26 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
 
       while (results.next()) {
         String ID = results.getString("ID");
-        String name = results.getString("name");
         String patientName = results.getString("patientName");
         String staff = results.getString("staff");
         String status = results.getString("status");
         String location = results.getString("location");
-        String date = results.getString("date");
-        String time = results.getString("time");
+        String pickUp = results.getString("pickUp");
+        String dropOff = results.getString("dropOff");
+        String services = results.getString("services");
+        String notes = results.getString("notes");
 
         LaundryRequest SQLRow =
             new LaundryRequest(
-                ID, name, patientName, checkEmployee(staff), status, location, date, time);
+                ID,
+                patientName,
+                checkEmployee(staff),
+                status,
+                location,
+                pickUp,
+                dropOff,
+                services,
+                notes);
 
         List.put(ID, SQLRow);
       }
@@ -143,8 +163,6 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
 
     fw.append("ID");
     fw.append(",");
-    fw.append("Type");
-    fw.append(",");
     fw.append("PatientName");
     fw.append(",");
     fw.append("Staff");
@@ -153,16 +171,17 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     fw.append(",");
     fw.append("Location");
     fw.append(",");
-    fw.append("Date");
+    fw.append("Pick Up");
     fw.append(",");
-    fw.append("Time");
+    fw.append("Drop Off");
     fw.append(",");
+    fw.append("Services");
+    fw.append(",");
+    fw.append("Notes");
     fw.append("\n");
 
     for (LaundryRequest request : List.values()) {
       fw.append(request.getID());
-      fw.append(",");
-      fw.append(request.getName());
       fw.append(",");
       fw.append(request.getPatientName());
       fw.append(",");
@@ -172,9 +191,13 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
       fw.append(",");
       fw.append(request.getDestination());
       fw.append(",");
-      fw.append(request.getDate());
+      fw.append(request.getPickUpDate());
       fw.append(",");
-      fw.append(request.getTime());
+      fw.append(request.getDropOffDate());
+      fw.append(",");
+      fw.append(request.getServices());
+      fw.append(",");
+      fw.append(request.getNotes());
       fw.append("\n");
     }
     fw.close();
@@ -184,12 +207,10 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
   public void printTable() throws IOException {
     CSVToJava();
     System.out.println(
-        "ID |\t Type |\t Patient Name |\t Staff |\t Status |\t Location |\t Date |\t Time");
+        "ID |\t Patient Name |\t Staff |\t Status |\t Location |\t Pick Up |\t Drop Off |\t Services |\t Notes");
     for (LaundryRequest request : this.List.values()) {
       System.out.println(
           request.ID
-              + " | \t"
-              + request.name
               + " | \t"
               + request.patientName
               + " | \t"
@@ -197,11 +218,15 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + " | \t"
               + request.status
               + " | \t"
-              + request.location
+              + request.destination
               + " | \t"
-              + request.date
+              + request.pickUpDate
               + " | \t"
-              + request.time);
+              + request.dropOffDate
+              + " | \t"
+              + request.services
+              + " | \t"
+              + request.notes);
     }
   }
 
@@ -217,7 +242,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO SUch STAFF");
+        System.out.println("NO Such STAFF");
       }
     } else {
       System.out.println("Doesn't Exist");
@@ -276,19 +301,17 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     Scanner labInput = new Scanner(System.in);
 
     String inputID = "None";
-    String inputName = "none";
     String inputPatient = "N/A";
     String inputStaff = "N/A";
     String inputStatus = "N/A";
     String inputLocation = "N/A";
-    String inputDate = "N/A";
-    String inputTime = "N/A";
+    String inputPick = "N/A";
+    String inputDrop = "N/A";
+    String inputServices = "N/A";
+    String inputNotes = "N/A";
 
     System.out.println("Input ID: ");
     inputID = labInput.nextLine();
-
-    System.out.println("Input type: ");
-    inputName = labInput.nextLine();
 
     System.out.println("Staff Name: ");
     inputStaff = labInput.nextLine();
@@ -296,6 +319,14 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     Employee empty = new Employee(inputStaff);
 
     return new LaundryRequest(
-        inputID, inputName, inputPatient, empty, inputStatus, inputLocation, inputDate, inputTime);
+        inputID,
+        inputPatient,
+        empty,
+        inputStatus,
+        inputLocation,
+        inputPick,
+        inputDrop,
+        inputServices,
+        inputNotes);
   }
 }
