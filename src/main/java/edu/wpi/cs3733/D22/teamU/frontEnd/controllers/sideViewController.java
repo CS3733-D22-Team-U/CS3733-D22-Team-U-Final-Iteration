@@ -142,16 +142,38 @@ public class sideViewController extends ServiceController {
     CheckBox ck = (CheckBox) actionEvent.getSource();
     switch (ck.getId()) {
       case "checked":
-        recLower2.setVisible(true);
-        recLower1.setVisible(true);
-        recLevel1.setVisible(true);
-        recLevel2.setVisible(true);
-        recLevel3.setVisible(true);
-        recLevel4.setVisible(true);
-        recLevel5.setVisible(true);
+        room1.setVisible(true);
+        room2.setVisible(true);
+        room3.setVisible(true);
+        room4.setVisible(true);
+        room5.setVisible(true);
+        room6.setVisible(true);
+        room7.setVisible(true);
+        room8.setVisible(true);
+        room9.setVisible(true);
+        room10.setVisible(true);
+        room11.setVisible(true);
+        room12.setVisible(true);
+        room13.setVisible(true);
         break;
     }
-    disableRooms();
+    switch (ck.getId()) {
+      case "unchecked":
+        room1.setVisible(false);
+        room2.setVisible(false);
+        room3.setVisible(false);
+        room4.setVisible(false);
+        room5.setVisible(false);
+        room6.setVisible(false);
+        room7.setVisible(false);
+        room8.setVisible(false);
+        room9.setVisible(false);
+        room10.setVisible(false);
+        room11.setVisible(false);
+        room12.setVisible(false);
+        room13.setVisible(false);
+        break;
+    }
   }
 
   public void disableRooms() {
