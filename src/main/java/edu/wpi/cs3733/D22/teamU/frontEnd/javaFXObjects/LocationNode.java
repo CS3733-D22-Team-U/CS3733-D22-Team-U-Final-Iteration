@@ -1,11 +1,16 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -15,12 +20,12 @@ import javafx.scene.shape.Shape;
 
 public class LocationNode extends Group {
   private Location location;
-  private Udb udb = DBController.udb;
   private AnchorPane pane;
   private double x, y;
   private final double scale = 15;
 
   public LocationNode(Location location, double x, double y, AnchorPane pane) throws IOException {
+
     super();
     this.location = location;
     this.pane = pane;
@@ -29,26 +34,30 @@ public class LocationNode extends Group {
     Color color;
 
     Circle c = new Circle();
-    setIcon(c);
-
-    if (location.getRequests().size() > 0) {
-      color = Color.YELLOW;
-    } else color = Color.BLACK;
+    setLocationIcon(c);
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
-      r.setX(x - scale);
-      r.setWidth(2 * scale);
-      r.setHeight(2 * scale);
-      r.setY(y - scale);
-      // setIcon(r);
-      r.setStroke(color);
-      r.setStrokeWidth(5);
+      //      r.setX(x - scale);
+      //      r.setWidth(2 * scale);
+      //      r.setHeight(2 * scale);
+      //      r.setY(y - scale);
+      setEquip(r);
+      //      r.setStroke(color);
+      //      r.setStrokeWidth(5);
       // getChildren().add(r);
+    }
+
+    if (location.getRequests().size() > 0) {
+      Rectangle r = new Rectangle();
+      setRequest(r);
     }
   }
 
-  private void addMapIcon(ImageView aView) {
+  private void addMapIcon(String resource) {
+    ImageView aView = new ImageView();
+    URL a = Uapp.class.getClassLoader().getResource(resource);
+    aView.setImage(new Image(String.valueOf(a)));
     aView.setFitHeight(scale * 5);
     aView.setFitWidth(scale * 5);
     aView.setX(x - (aView.getFitWidth() / 2));
@@ -58,64 +67,119 @@ public class LocationNode extends Group {
     getChildren().add(aView);
   }
 
-  private void setIcon(Shape s) {
+  //  private void setRequest(Shape s) {
+  //    for (int i = 0; i < location.getRequests().size(); i++) {
+  //      Request aRequest = location.getRequests().get(i);
+  //      if (location.getRequests().size() > 1) {
+  //        ImageView multi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
+  //        addMapIcon(multi);
+  //      } else if (aRequest instanceof EquipRequest) {
+  //        ImageView medEquip = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
+  //        addMapIcon(medEquip);
+  //      } else if (aRequest instanceof LabRequest) {
+  //        ImageView labServ = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
+  //        addMapIcon(labServ);
+  //      } else if (aRequest instanceof MedicineRequest) {
+  //        ImageView medi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+  //        addMapIcon(medi);
+  //      }
+  //    }
+  //  }
+
+  private void setRequest(Shape s) {
+    int dupes = 0;
+    boolean equipCheck = true;
+    boolean labCheck = true;
+    boolean medicineCheck = true;
+    for (Request request : location.getRequests()) {
+      if (request instanceof EquipRequest && equipCheck) {
+        dupes++;
+        equipCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
+        continue;
+      }
+      if (request instanceof LabRequest && labCheck) {
+        dupes++;
+        labCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
+        continue;
+      }
+      if (request instanceof MedicineRequest && medicineCheck) {
+        dupes++;
+        medicineCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (dupes > 1) {
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
+        break;
+      }
+    }
+  }
+
+  private void setEquip(Shape s) {
+    for (int i = 0; i < location.getEquipment().size(); i++) {
+      String name = location.getEquipment().get(i).getName();
+      switch (name) {
+        case "Beds":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
+          break;
+        case "Infusion Pumps":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
+          break;
+        case "Recliners":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
+          break;
+        default:
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/DefaultEquip.png");
+      }
+    }
+  }
+
+  private void setLocationIcon(Shape s) {
 
     switch (location.getNodeType()) {
       case "PATI":
-        ImageView pati = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
-        addMapIcon(pati);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
         break;
       case "STOR":
-        ImageView stor = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
-        addMapIcon(stor);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
         break;
       case "DIRT":
-        ImageView dirt = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
-        addMapIcon(dirt);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
         break;
       case "HALL":
-        ImageView hall = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
-        addMapIcon(hall);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
         break;
       case "ELEV":
-        ImageView elev = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
-        addMapIcon(elev);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
         break;
       case "REST":
-        ImageView rest = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
-        addMapIcon(rest);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
         break;
       case "STAI":
-        ImageView stair = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
-        addMapIcon(stair);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
         break;
       case "DEPT":
-        ImageView dept = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
-        addMapIcon(dept);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
         break;
       case "LABS":
-        ImageView labs = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
-        addMapIcon(labs);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
         break;
       case "INFO":
-        ImageView info = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
-        addMapIcon(info);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
         break;
       case "CONF":
-        ImageView conf = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
-        addMapIcon(conf);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
         break;
       case "EXIT":
-        ImageView exit = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
-        addMapIcon(exit);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
         break;
       case "RETL":
-        ImageView retail = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
-        addMapIcon(retail);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
         break;
       case "SERV":
-        ImageView serv = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
-        addMapIcon(serv);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
         break;
       default:
         s.setFill(Color.YELLOWGREEN);
