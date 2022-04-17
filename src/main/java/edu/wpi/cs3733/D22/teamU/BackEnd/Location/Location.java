@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Location;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.Edge;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,6 +19,7 @@ public class Location {
   String shortName;
   ArrayList<Equipment> equipment = new ArrayList<>();
   ArrayList<Request> requests = new ArrayList<>();
+  ArrayList<Edge> connected = new ArrayList<>();
   /** Empty constructor */
   public Location() {}
 
@@ -199,5 +202,13 @@ public class Location {
 
   public void setEquipment(ArrayList<Equipment> equipment) {
     this.equipment = equipment;
+  }
+
+  public ArrayList<Edge> getConnected() {
+    return connected;
+  }
+
+  public void setConnected(ArrayList<Edge> connected) {
+    this.connected = connected;
   }
 }
