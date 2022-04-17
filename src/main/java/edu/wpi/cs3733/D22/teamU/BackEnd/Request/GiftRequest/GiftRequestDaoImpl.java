@@ -246,7 +246,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
         System.out.println("No Such Employee Exists in Database");
       }
     } else {
-      System.out.println("The Specified Request Does Not Exist");
+      System.out.println("A Request With This ID Already Does Not Exist");
     }
 
   }
