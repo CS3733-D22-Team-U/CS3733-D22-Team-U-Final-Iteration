@@ -6,9 +6,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class GiftRequest extends Request {
   public String gifts;
   public String message;
-  public String status;
-  public String destination;
-
 
   public GiftRequest(
       String ID,
@@ -49,20 +46,5 @@ public class GiftRequest extends Request {
     this.message = message;
   }
 
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public String getDestination() {
-    return destination;
-  }
-
-  public void setDestination(String destination) {
-    this.destination = destination;
-  }
 }
 

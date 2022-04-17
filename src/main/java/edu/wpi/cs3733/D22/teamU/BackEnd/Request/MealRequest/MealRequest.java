@@ -6,17 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class MealRequest extends Request {
 
     String dietRest;
-    String destination;
     String addNotes;
-    String status;
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
 
     public MealRequest(
             String ID,
@@ -55,11 +45,4 @@ public class MealRequest extends Request {
         this.addNotes = addNotes;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

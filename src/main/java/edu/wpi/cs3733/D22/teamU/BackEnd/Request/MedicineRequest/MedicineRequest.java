@@ -4,8 +4,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class MedicineRequest extends Request {
-  String status;
-  String destination;
   int amount;
 
   public MedicineRequest(
@@ -29,21 +27,6 @@ public class MedicineRequest extends Request {
     this.time = time;
   }
 
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public void setDestination(String destination) {
-    this.destination = destination;
-  }
-
-  public String getDestination() {
-    return this.destination;
-  }
 
   public int getAmount() {
     return amount;

@@ -6,7 +6,23 @@ import java.util.ArrayList;
 
 public abstract class Request {
   public String ID;
-  public String name;
+  public String name; // or lab type
+  public String patientName;
+  public String date;
+  public String time;
+  public String status;
+
+  public String getDestination() {
+    return destination;
+  }
+
+  public void setDestination(String destination) {
+    this.destination = destination;
+  }
+
+  public String destination;
+  public Employee employee;
+  public Location location;
 
   public String getPatientName() {
     return patientName;
@@ -15,12 +31,6 @@ public abstract class Request {
   public void setPatientName(String patientName) {
     this.patientName = patientName;
   }
-
-  public String patientName;
-  public String date;
-  public String time;
-  public Employee employee;
-  public Location location;
 
   public String getID() {
     return ID;
@@ -77,4 +87,12 @@ public abstract class Request {
   public Location getLocation() {
     return location;
   }
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 }
+

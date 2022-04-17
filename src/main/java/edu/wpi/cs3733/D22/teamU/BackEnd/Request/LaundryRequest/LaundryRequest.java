@@ -5,8 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LaundryRequest extends Request {
 
-  String status;
-  String destination;
   String pickUpDate;
   String dropOffDate;
   String services;
@@ -31,30 +29,6 @@ public class LaundryRequest extends Request {
     this.dropOffDate = dropOffDate;
     this.services = services;
     this.notes = additionalNotes;
-  }
-
-  public String getPatientName() {
-    return patientName;
-  }
-
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public String getDestination() {
-    return destination;
-  }
-
-  public void setDestination(String location) {
-    this.destination = location;
   }
 
   public String getPickUpDate() {
