@@ -28,7 +28,7 @@ public abstract class Request {
   }
 
   public String getID() {
-    return ID;
+    return this.ID;
   }
 
   public void setID(String ID) {

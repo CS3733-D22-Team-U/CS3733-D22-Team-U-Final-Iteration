@@ -181,42 +181,42 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
     try {
       statement.execute(
-              "CREATE TABLE EquipRequest("
-                      + "ID varchar(10) not null,"
-                      + "name varchar(50) not null, "
-                      + "amount int not null,"
-                      + "typeOfRequest varchar(10),"
-                      + "status varchar(15) not null,"
-                      + "staff varchar(20) not null,"
-                      + "destination varchar(10) not null,"
-                      + "date varchar(10) not null,"
-                      + "time varchar(10) not null,"
-                      + "pri int not null)");
+          "CREATE TABLE EquipRequest("
+              + "ID varchar(10) not null,"
+              + "name varchar(50) not null, "
+              + "amount int not null,"
+              + "typeOfRequest varchar(10),"
+              + "status varchar(15) not null,"
+              + "staff varchar(20) not null,"
+              + "destination varchar(10) not null,"
+              + "date varchar(10) not null,"
+              + "time varchar(10) not null,"
+              + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
         statement.execute(
-                "INSERT INTO EquipRequest VALUES("
-                        + "'"
-                        + currReq.getID()
-                        + "','"
-                        + currReq.getName()
-                        + "',"
-                        + currReq.getAmount()
-                        + ",'"
-                        + currReq.getType()
-                        + "','"
-                        + currReq.getStatus()
-                        + "','"
-                        + currReq.getEmployee().getEmployeeID()
-                        + "','"
-                        + currReq.getDestination()
-                        + "','"
-                        + currReq.getDate()
-                        + "','"
-                        + currReq.getTime()
-                        + "',"
-                        + currReq.getPri()
-                        + ")");
+            "INSERT INTO EquipRequest VALUES("
+                + "'"
+                + currReq.getID()
+                + "','"
+                + currReq.getName()
+                + "',"
+                + currReq.getAmount()
+                + ",'"
+                + currReq.getType()
+                + "','"
+                + currReq.getStatus()
+                + "','"
+                + currReq.getEmployee().getEmployeeID()
+                + "','"
+                + currReq.getDestination()
+                + "','"
+                + currReq.getDate()
+                + "','"
+                + currReq.getTime()
+                + "',"
+                + currReq.getPri()
+                + ")");
       }
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
@@ -243,7 +243,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
         EquipRequest SQLRow =
             new EquipRequest(
-                id, name, amount, type, status,checkEmployee(staff), destination, date, time, pri);
+                id, name, amount, type, status, checkEmployee(staff), destination, date, time, pri);
 
         List.put(id, SQLRow);
       }
