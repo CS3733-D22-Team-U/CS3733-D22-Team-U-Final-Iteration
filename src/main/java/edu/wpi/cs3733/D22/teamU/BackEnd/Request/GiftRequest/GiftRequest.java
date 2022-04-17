@@ -19,7 +19,7 @@ public class GiftRequest extends Request {
       String date,
       String time) {
     this.ID = ID;
-    this.name = name; //sender name
+    this.name = name; // sender name
     this.patientName = patientName;
     this.gifts = gifts;
     this.message = message;

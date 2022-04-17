@@ -16,13 +16,11 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
   public String csvFile;
   public HashMap<String, LaundryRequest> List = new HashMap<String, LaundryRequest>();
   public ArrayList<LaundryRequest> list = new ArrayList<LaundryRequest>();
-  private Udb udb;
 
   public LaundryRequestDaoImpl(Statement statement, String csvFile)
       throws SQLException, IOException {
     this.csvFile = csvFile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -73,7 +71,11 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

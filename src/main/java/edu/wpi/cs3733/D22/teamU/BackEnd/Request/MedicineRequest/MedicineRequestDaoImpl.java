@@ -18,13 +18,11 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
   public String csvFile;
   public HashMap<String, MedicineRequest> List = new HashMap<String, MedicineRequest>();
   public ArrayList<MedicineRequest> list = new ArrayList<MedicineRequest>();
-  private Udb udb;
 
   public MedicineRequestDaoImpl(Statement statement, String csvfile)
       throws SQLException, IOException {
     this.csvFile = csvfile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -74,7 +72,11 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
