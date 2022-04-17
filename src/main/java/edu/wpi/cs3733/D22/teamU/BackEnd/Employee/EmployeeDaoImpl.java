@@ -13,8 +13,9 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   // make constant in locationDao
   public Statement statement;
   public String CSVfile;
-  public static HashMap<String, Employee> List = new HashMap<String, Employee>();
+  public HashMap<String, Employee> List = new HashMap<String, Employee>();
   public ArrayList<Employee> list = new ArrayList<Employee>();
+
 
   public EmployeeDaoImpl(Statement statement, String CSVfile) {
     this.CSVfile = CSVfile;
@@ -131,17 +132,17 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   public void JavaToCSV(String csvFile) throws IOException {
     PrintWriter fw = new PrintWriter(new File(csvFile));
 
-    fw.append("employeeID");
+    fw.append("Employee ID");
     fw.append(",");
-    fw.append("occupation");
+    fw.append("Occupation");
     fw.append(",");
-    fw.append("reports");
+    fw.append("Reports");
     fw.append(",");
-    fw.append("onDuty");
+    fw.append("On Duty");
     fw.append(",");
-    fw.append("username");
+    fw.append("Username");
     fw.append(",");
-    fw.append("password");
+    fw.append("Password");
     fw.append("\n");
 
     Set<String> keys = List.keySet();
