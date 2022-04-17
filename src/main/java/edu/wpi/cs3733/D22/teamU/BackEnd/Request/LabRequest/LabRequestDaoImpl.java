@@ -61,7 +61,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       if (row.length == columns) {
         LabRequest r =
             new LabRequest(
-                row[0], row[2], row[3], row[4], checkEmployee(row[5]), row[6], row[7], row[8]);
+                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();

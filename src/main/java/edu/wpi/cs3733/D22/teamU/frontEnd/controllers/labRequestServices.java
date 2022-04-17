@@ -85,7 +85,7 @@ public class labRequestServices extends ServiceController {
   }
 
   @Override
-  public void addRequest() throws SQLException, IOException {
+  public void addRequest() {
     // String labInput = ...
     String patientInput = patientNameField.getText().trim();
     String staffInput = staffMemberField.getText().trim();
@@ -94,26 +94,37 @@ public class labRequestServices extends ServiceController {
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
-        LabRequest request =
-            new LabRequest(
-                (int) rand + "",
-                "lab",
-                patientInput,
-                "In Progress",
-                checkEmployee(staffInput),
-                checkBoxes.get(i).getText().trim(),
-                sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11));
-        activeRequestTable.setItems(
-            newRequest(
-                request.getID(),
-                request.getName(),
-                request.getPatientName(),
-                request.getStatus(),
-                request.getEmployee().getEmployeeID(),
-                request.getDestination(),
-                request.getDate(),
-                request.getTime()));
+        LabRequest request = null;
+        try {
+          request =
+              new LabRequest(
+                  (int) rand + "",
+                  "lab",
+                  patientInput,
+                  "In Progress",
+                  checkEmployee(staffInput),
+                  checkBoxes.get(i).getText().trim(),
+                  sdf3.format(timestamp).substring(0, 10),
+                  sdf3.format(timestamp).substring(11));
+        } catch (SQLException e) {
+          e.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        try {
+          activeRequestTable.setItems(
+              newRequest(
+                  request.getID(),
+                  request.getName(),
+                  request.getPatientName(),
+                  request.getStatus(),
+                  request.getEmployee().getEmployeeID(),
+                  request.getDestination(),
+                  request.getDate(),
+                  request.getTime()));
+        } catch (SQLException | IOException e) {
+          e.printStackTrace();
+        }
         try {
           Udb.getInstance()
               .labRequestImpl

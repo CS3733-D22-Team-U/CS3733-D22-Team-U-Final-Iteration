@@ -39,7 +39,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @FXML TableColumn<EquipRequest, Integer> available;
   @FXML TableColumn<EquipRequest, Integer> total;
   @FXML TableColumn<EquipRequest, String> location;
-  @FXML TableView<EquipRequest> table;
+  @FXML TableView<Equipment> table;
   @FXML VBox requestHolder;
   @FXML Text requestText;
   @FXML Button clearButton;
@@ -57,7 +57,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @FXML VBox inputFields;
   @FXML VBox locationInput;
 
-  ObservableList<EquipRequest> equipmentUI = FXCollections.observableArrayList();
+  ObservableList<Equipment> equipmentUI = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
@@ -170,21 +170,16 @@ public class EquipmentDeliverySystemController extends ServiceController {
     return equipmentUIRequests;
   }
 
-  private ObservableList<EquipRequest> getEquipmentList() throws SQLException, IOException {
+  private ObservableList<Equipment> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
-          new EquipRequest(
-              equipment.getID(),
+          new Equipment(
               equipment.getName(),
               equipment.getAmount(),
-              equipment.getType(),
               equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
               equipment.getLocationID()));
     }
-
     return equipmentUI;
   }
 
@@ -240,8 +235,11 @@ public class EquipmentDeliverySystemController extends ServiceController {
         EquipRequest request =
             new EquipRequest(
                 (int) rand + "",
-                checkBoxes.get(i).getText(),
+                "equipment",
                 requestAmount,
+                checkBoxes.get(i).getText(),
+                "in progress",
+                new Employee("n/a"),
                 room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
@@ -254,7 +252,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 request.getAmount(),
                 request.getType(),
                 request.getStatus(),
-                request.getEmployee()
+                request.getEmployee().getEmployeeID(),
                 request.getDestination(),
                 request.getDate(),
                 request.getTime(),
@@ -263,15 +261,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
           Udb.getInstance()
               .add( // TODO Have random ID and enter Room Destination
                   new EquipRequest(
-                      request.getId(),
-                      request.getEquipmentName(),
-                      request.getRequestAmount(),
+                      request.getID(),
+                      request.getName(),
+                      request.getAmount(),
                       request.getType(),
                       request.getStatus(),
                       checkEmployee(employees.getValue().toString()),
                       request.getDestination(),
-                      request.getRequestDate(),
-                      request.getRequestTime(),
+                      request.getDate(),
+                      request.getTime(),
                       1));
 
         } catch (IOException e) {
