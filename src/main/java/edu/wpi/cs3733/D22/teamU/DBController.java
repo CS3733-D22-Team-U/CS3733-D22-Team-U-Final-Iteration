@@ -92,9 +92,9 @@ public class DBController {
             LabRequest,
             laundryRequest,
             medicineRequest,
+            locationEdge,
             locationTest,
-            equipmentTest,
-            locationEdge
+            equipmentTest
     };
     Udb.username = username;
     Udb.password = password;

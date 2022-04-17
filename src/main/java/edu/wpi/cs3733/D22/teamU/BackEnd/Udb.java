@@ -178,6 +178,7 @@ public final class Udb {
     laundryRequestImpl = new LaundryRequestDaoImpl(statement, CSVfiles[5]);
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
 
+
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
 
