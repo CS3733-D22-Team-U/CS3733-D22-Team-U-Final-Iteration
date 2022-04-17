@@ -16,12 +16,10 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   public HashMap<String, EquipRequest> List = new HashMap<String, EquipRequest>();
   public String csvFile;
   public ArrayList<EquipRequest> list = new ArrayList<EquipRequest>();
-  private Udb udb;
 
   public EquipRequestDaoImpl(Statement statement, String csvfile) throws SQLException, IOException {
     this.csvFile = csvfile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -73,7 +71,11 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -181,42 +183,42 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
     try {
       statement.execute(
-              "CREATE TABLE EquipRequest("
-                      + "ID varchar(10) not null,"
-                      + "name varchar(50) not null, "
-                      + "amount int not null,"
-                      + "typeOfRequest varchar(10),"
-                      + "status varchar(15) not null,"
-                      + "staff varchar(20) not null,"
-                      + "destination varchar(10) not null,"
-                      + "date varchar(10) not null,"
-                      + "time varchar(10) not null,"
-                      + "pri int not null)");
+          "CREATE TABLE EquipRequest("
+              + "ID varchar(10) not null,"
+              + "name varchar(50) not null, "
+              + "amount int not null,"
+              + "typeOfRequest varchar(10),"
+              + "status varchar(15) not null,"
+              + "staff varchar(20) not null,"
+              + "destination varchar(10) not null,"
+              + "date varchar(10) not null,"
+              + "time varchar(10) not null,"
+              + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
         statement.execute(
-                "INSERT INTO EquipRequest VALUES("
-                        + "'"
-                        + currReq.getID()
-                        + "','"
-                        + currReq.getName()
-                        + "',"
-                        + currReq.getAmount()
-                        + ",'"
-                        + currReq.getType()
-                        + "','"
-                        + currReq.getStatus()
-                        + "','"
-                        + currReq.getEmployee().getEmployeeID()
-                        + "','"
-                        + currReq.getDestination()
-                        + "','"
-                        + currReq.getDate()
-                        + "','"
-                        + currReq.getTime()
-                        + "',"
-                        + currReq.getPri()
-                        + ")");
+            "INSERT INTO EquipRequest VALUES("
+                + "'"
+                + currReq.getID()
+                + "','"
+                + currReq.getName()
+                + "',"
+                + currReq.getAmount()
+                + ",'"
+                + currReq.getType()
+                + "','"
+                + currReq.getStatus()
+                + "','"
+                + currReq.getEmployee().getEmployeeID()
+                + "','"
+                + currReq.getDestination()
+                + "','"
+                + currReq.getDate()
+                + "','"
+                + currReq.getTime()
+                + "',"
+                + currReq.getPri()
+                + ")");
       }
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
@@ -243,7 +245,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
         EquipRequest SQLRow =
             new EquipRequest(
-                id, name, amount, type, status,checkEmployee(staff), destination, date, time, pri);
+                id, name, amount, type, status, checkEmployee(staff), destination, date, time, pri);
 
         List.put(id, SQLRow);
       }
@@ -281,14 +283,14 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   }
 
   @Override
-  public void edit(EquipRequest data) throws IOException {
+  public void edit(EquipRequest data) throws IOException, SQLException {
     // takes entries from SQL table that match input node and updates it with a new floor and
     // location type
     // input ID
 
     if (List.containsKey(data.ID)) {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, udb.locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
@@ -308,13 +310,13 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    * @throws IOException
    */
   @Override
-  public void add(EquipRequest data) throws IOException {
+  public void add(EquipRequest data) throws IOException, SQLException {
 
     if (List.containsKey(data.ID)) {
       System.out.println("A Request With This ID Already Exists");
     } else {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, udb.locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.put(data.ID, data);
         this.JavaToSQL();

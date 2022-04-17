@@ -18,12 +18,10 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
   public String csvFile;
   public HashMap<String, GiftRequest> List = new HashMap<String, GiftRequest>();
   public ArrayList<GiftRequest> list = new ArrayList<GiftRequest>();
-  private Udb udb;
 
   public GiftRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
     this.statement = statement;
     this.csvFile = csvFile;
-    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -63,7 +61,11 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

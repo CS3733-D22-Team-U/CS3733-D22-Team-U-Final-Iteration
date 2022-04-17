@@ -16,12 +16,10 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
   public String csvFile;
   public HashMap<String, LabRequest> List = new HashMap<String, LabRequest>();
   public ArrayList<LabRequest> list = new ArrayList<LabRequest>();
-  private Udb udb;
 
   public LabRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
     this.csvFile = csvFile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -68,7 +66,11 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

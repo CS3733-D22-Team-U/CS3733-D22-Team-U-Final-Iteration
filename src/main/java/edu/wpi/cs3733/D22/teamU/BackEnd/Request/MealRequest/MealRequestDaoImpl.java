@@ -15,12 +15,10 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public Statement statement;
   public HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
   public String csvFile;
-  private Udb udb;
 
   public MealRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
     this.csvFile = csvFile;
     this.statement = statement;
-    this.udb = Udb.getInstance();
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
@@ -67,7 +65,11 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
-          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .locations
+                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
