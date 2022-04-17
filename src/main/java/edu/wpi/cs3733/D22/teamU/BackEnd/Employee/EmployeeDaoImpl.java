@@ -13,9 +13,8 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   // make constant in locationDao
   public Statement statement;
   public String CSVfile;
-  public HashMap<String, Employee> List = new HashMap<String, Employee>();
+  public static HashMap<String, Employee> List = new HashMap<String, Employee>();
   public ArrayList<Employee> list = new ArrayList<Employee>();
-
 
   public EmployeeDaoImpl(Statement statement, String CSVfile) {
     this.CSVfile = CSVfile;
