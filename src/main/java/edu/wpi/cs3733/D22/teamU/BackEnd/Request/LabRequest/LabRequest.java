@@ -5,8 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LabRequest extends Request {
 
-  public String destination;
-
   public LabRequest(
       String ID,
       String labType,
