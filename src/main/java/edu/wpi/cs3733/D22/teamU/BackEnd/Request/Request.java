@@ -11,18 +11,13 @@ public abstract class Request {
   public String date;
   public String time;
   public String status;
-
-  public String getDestination() {
-    return destination;
-  }
+  public String destination;
+  public Employee employee;
+  public Location location;
 
   public void setDestination(String destination) {
     this.destination = destination;
   }
-
-  public String destination;
-  public Employee employee;
-  public Location location;
 
   public String getPatientName() {
     return patientName;
@@ -76,6 +71,10 @@ public abstract class Request {
     this.location = location;
   }
 
+  public String getDestination() {
+    return destination;
+  }
+
   public void updateLocation(String dest, ArrayList<Location> locations) {
     Location temp = new Location();
     temp.setNodeID(dest);
@@ -87,12 +86,12 @@ public abstract class Request {
   public Location getLocation() {
     return location;
   }
+
   public String getStatus() {
-    return status;
+    return this.status;
   }
 
   public void setStatus(String status) {
     this.status = status;
   }
 }
-

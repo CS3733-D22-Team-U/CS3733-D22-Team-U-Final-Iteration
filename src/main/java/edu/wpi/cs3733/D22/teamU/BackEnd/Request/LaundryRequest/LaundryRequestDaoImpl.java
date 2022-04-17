@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,10 +16,13 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
   public String csvFile;
   public HashMap<String, LaundryRequest> List = new HashMap<String, LaundryRequest>();
   public ArrayList<LaundryRequest> list = new ArrayList<LaundryRequest>();
+  private Udb udb;
 
-  public LaundryRequestDaoImpl(Statement statement, String csvFile) {
+  public LaundryRequestDaoImpl(Statement statement, String csvFile)
+      throws SQLException, IOException {
     this.csvFile = csvFile;
     this.statement = statement;
+    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -53,8 +58,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        List.put(
-            row[0],
+        LaundryRequest r =
             new LaundryRequest(
                 row[0],
                 row[1],
@@ -64,7 +68,16 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 row[5],
                 row[6],
                 row[7],
-                row[8]));
+                row[8]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
       }
     }
   }

@@ -3,9 +3,8 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
-
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,10 +18,12 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
   public String csvFile;
   public HashMap<String, GiftRequest> List = new HashMap<String, GiftRequest>();
   public ArrayList<GiftRequest> list = new ArrayList<GiftRequest>();
+  private Udb udb;
 
-  public GiftRequestDaoImpl(Statement statement, String csvFile) {
+  public GiftRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
     this.statement = statement;
     this.csvFile = csvFile;
+    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -46,8 +47,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        List.put(
-            row[0],
+        GiftRequest r =
             new GiftRequest(
                 row[0],
                 row[1],
@@ -58,7 +58,16 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
                 checkEmployee(row[6]),
                 row[7],
                 row[8],
-                row[9]));
+                row[9]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
       }
     }
   }
@@ -80,50 +89,48 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
       System.out.println("didn't drop table");
     }
     try {
-      statement.execute
-              ("CREATE TABLE GiftRequest("
-                      + "ID varchar (10) not null,"
-                      + "name varchar (20) not null,"
-                      + "patientName varchar (20) not null,"
-                      + "gifts varchar (35) not null,"
-                      + "message varchar (200) not null,"
-                      + "status varchar (15) not null,"
-                      + "employee varchar (20) not null,"
-                      + "destination varchar(15) not null,"
-                      + "date varchar (10) not null,"
-                      + "time varchar (10) not null)");
+      statement.execute(
+          "CREATE TABLE GiftRequest("
+              + "ID varchar (10) not null,"
+              + "name varchar (20) not null,"
+              + "patientName varchar (20) not null,"
+              + "gifts varchar (35) not null,"
+              + "message varchar (200) not null,"
+              + "status varchar (15) not null,"
+              + "employee varchar (20) not null,"
+              + "destination varchar(15) not null,"
+              + "date varchar (10) not null,"
+              + "time varchar (10) not null)");
 
       for (GiftRequest currGift : List.values()) {
         statement.execute(
-                "INSERT INTO GiftRequest VALUES("
-                        + "'"
-                        + currGift.getID()
-                        + "','"
-                        + currGift.getName()
-                        + "','"
-                        + currGift.getPatientName()
-                        + "','"
-                        + currGift.getGifts()
-                        + "','"
-                        + currGift.getMessage()
-                        + "','"
-                        + currGift.getStatus()
-                        + "','"
-                        + currGift.getEmployee().getEmployeeID()
-                        + "','"
-                        + currGift.getDestination()
-                        + "','"
-                        + currGift.getDate()
-                        + "','"
-                        + currGift.getTime()
-                        + "')");
+            "INSERT INTO GiftRequest VALUES("
+                + "'"
+                + currGift.getID()
+                + "','"
+                + currGift.getName()
+                + "','"
+                + currGift.getPatientName()
+                + "','"
+                + currGift.getGifts()
+                + "','"
+                + currGift.getMessage()
+                + "','"
+                + currGift.getStatus()
+                + "','"
+                + currGift.getEmployee().getEmployeeID()
+                + "','"
+                + currGift.getDestination()
+                + "','"
+                + currGift.getDate()
+                + "','"
+                + currGift.getTime()
+                + "')");
       }
+    } catch (SQLException e) {
+      System.out.println("Connection failed. Check output console.");
     }
-    catch(SQLException e)
-      {
-        System.out.println("Connection failed. Check output console.");
-      }
-    }
+  }
 
   @Override
   public void SQLToJava() {
@@ -144,12 +151,21 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
         String date = results.getString("date");
         String time = results.getString("time");
 
-        GiftRequest SQLRow = new GiftRequest(id, name, patientName,gifts,message,status,checkEmployee(employee),destination,date,time);
+        GiftRequest SQLRow =
+            new GiftRequest(
+                id,
+                name,
+                patientName,
+                gifts,
+                message,
+                status,
+                checkEmployee(employee),
+                destination,
+                date,
+                time);
         List.put(id, SQLRow);
       }
-    }
-    catch (SQLException e)
-    {
+    } catch (SQLException e) {
       System.out.println("Database does not exist.");
     }
   }
@@ -209,35 +225,37 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     // csv to java
     CSVToJava();
     // display locations and attributes
-    System.out.println("ID |\t Sender |\t Patient |\t Gifts |\t Message |\t Staff |\t Destination |\t Date |\t Time");
+    System.out.println(
+        "ID |\t Sender |\t Patient |\t Gifts |\t Message |\t Staff |\t Destination |\t Date |\t Time");
     for (GiftRequest request : this.List.values()) {
       System.out.println(
-              request.ID
-                      + " | \t"
-                      + request.name
-                      + " | \t"
-                      + request.patientName
-                      + " | \t"
-                      + request.gifts
-                      + " | \t"
-                      + request.message
-                      + " | \t"
-                      + request.status
-                      + " | \t"
-                      + request.employee.getEmployeeID()
-                      + " | \t"
-                      + request.destination
-                      + " | \t"
-                      + request.date
-                      + " | \t"
-                      + request.time);
+          request.ID
+              + " | \t"
+              + request.name
+              + " | \t"
+              + request.patientName
+              + " | \t"
+              + request.gifts
+              + " | \t"
+              + request.message
+              + " | \t"
+              + request.status
+              + " | \t"
+              + request.employee.getEmployeeID()
+              + " | \t"
+              + request.destination
+              + " | \t"
+              + request.date
+              + " | \t"
+              + request.time);
     }
   }
 
   @Override
   public void edit(GiftRequest data) throws IOException, SQLException {
     if (List.containsKey(data.ID)) { // check if node exists
-      if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) { // check if employee to be added exists
+      if (EmployeeDaoImpl.List.containsKey(
+          data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
@@ -248,23 +266,22 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     } else {
       System.out.println("A Request With This ID Already Does Not Exist");
     }
-
   }
 
   @Override
   public void add(GiftRequest data) throws IOException, SQLException {
-      if (List.containsKey(data.ID)) {
-        System.out.println("A Request With This ID Already Exists");
+    if (List.containsKey(data.ID)) {
+      System.out.println("A Request With This ID Already Exists");
+    } else {
+      if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+        data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
+        this.List.put(data.ID, data);
+        this.JavaToSQL();
+        this.JavaToCSV(csvFile);
       } else {
-        if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-          data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
-          this.List.put(data.ID, data);
-          this.JavaToSQL();
-          this.JavaToCSV(csvFile);
-        } else {
-          System.out.println("No Such Employee Exists in Database");
-        }
+        System.out.println("No Such Employee Exists in Database");
       }
+    }
   }
 
   @Override
@@ -308,7 +325,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     String inputSender = "N/A";
     String inputPatient = "N/A";
     String inputGifts = "N/A";
-    String inputMessage =  "N/A";
+    String inputMessage = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
     String inputDestination = "N/A";
@@ -327,8 +344,19 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     System.out.println("Input Staff: ");
     inputStaff = labInput.nextLine();
 
-    Employee empty = new Employee(inputStaff);;
+    Employee empty = new Employee(inputStaff);
+    ;
 
-    return new GiftRequest(inputID, inputSender, inputPatient, inputGifts, inputMessage, inputStatus, empty, inputDestination, inputDate, inputTime);
+    return new GiftRequest(
+        inputID,
+        inputSender,
+        inputPatient,
+        inputGifts,
+        inputMessage,
+        inputStatus,
+        empty,
+        inputDestination,
+        inputDate,
+        inputTime);
   }
 }

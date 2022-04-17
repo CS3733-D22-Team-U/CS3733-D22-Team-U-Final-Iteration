@@ -58,7 +58,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) { // or change to 9 if no work
-        MedicineRequest m =
+        MedicineRequest r =
             new MedicineRequest(
                 row[0],
                 row[1],
@@ -69,14 +69,14 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
                 row[6],
                 row[7],
                 row[8]);
-        List.put(row[0], m);
+        List.put(row[0], r);
 
         try {
           Location temp = new Location();
-          temp.setNodeID(m.destination);
+          temp.setNodeID(r.destination);
           Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
-          l.addRequest(m);
-          m.setLocation(l);
+          l.addRequest(r);
+          r.setLocation(l);
         } catch (Exception exception) {
         }
       }

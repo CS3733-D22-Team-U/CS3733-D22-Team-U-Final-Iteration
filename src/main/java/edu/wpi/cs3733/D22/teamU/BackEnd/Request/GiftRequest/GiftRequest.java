@@ -15,11 +15,11 @@ public class GiftRequest extends Request {
       String message,
       String status,
       Employee employee,
-      String destination, // destination
+      String destination,
       String date,
       String time) {
     this.ID = ID;
-    this.name = name;
+    this.name = name; //sender name
     this.patientName = patientName;
     this.gifts = gifts;
     this.message = message;
@@ -45,6 +45,4 @@ public class GiftRequest extends Request {
   public void setMessage(String message) {
     this.message = message;
   }
-
 }
-

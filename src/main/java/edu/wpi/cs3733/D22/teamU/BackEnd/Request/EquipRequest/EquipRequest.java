@@ -13,6 +13,7 @@ public class EquipRequest extends Request {
       String name,
       int amount,
       String typeOfRequest,
+      String status,
       Employee employee,
       String destination,
       String date,
@@ -22,6 +23,7 @@ public class EquipRequest extends Request {
     this.name = name;
     this.amount = amount;
     this.typeOfRequest = typeOfRequest;
+    this.status = status;
     this.employee = employee;
     this.destination = destination;
     this.date = date;

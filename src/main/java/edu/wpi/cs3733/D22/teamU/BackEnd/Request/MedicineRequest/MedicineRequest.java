@@ -27,7 +27,6 @@ public class MedicineRequest extends Request {
     this.time = time;
   }
 
-
   public int getAmount() {
     return amount;
   }

@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,10 +16,12 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
   public String csvFile;
   public HashMap<String, LabRequest> List = new HashMap<String, LabRequest>();
   public ArrayList<LabRequest> list = new ArrayList<LabRequest>();
+  private Udb udb;
 
-  public LabRequestDaoImpl(Statement statement, String csvFile) {
+  public LabRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
     this.csvFile = csvFile;
     this.statement = statement;
+    this.udb = Udb.getInstance();
   }
 
   @Override
@@ -57,8 +61,18 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        List.put(
-            row[0], new LabRequest(row[0], row[2], row[3], row[4], checkEmployee(row[5]), row[6], row[7], row[8]));
+        LabRequest r =
+            new LabRequest(
+                row[0], row[2], row[3], row[4], checkEmployee(row[5]), row[6], row[7], row[8]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
       }
     }
   }
@@ -124,7 +138,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
               + "ID varchar(10) not null,"
               + "labType varchar(50),"
               + "patient varchar(50) not null, "
-                  + "status varchar(15),"
+              + "status varchar(15),"
               + "staff varchar(50) not null,"
               + "destination varchar(15),"
               + "date varchar(10) not null,"
@@ -172,7 +186,9 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
         String date = results.getString("date");
         String time = results.getString("time");
 
-        LabRequest SQLRow = new LabRequest(id, labType, patient, status,checkEmployee(staff), destination, date, time);
+        LabRequest SQLRow =
+            new LabRequest(
+                id, labType, patient, status, checkEmployee(staff), destination, date, time);
 
         List.put(id, SQLRow);
       }
@@ -185,24 +201,25 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     // csv to java
     CSVToJava();
     // display locations and attributes
-    System.out.println("ID |\t Lab Type |\t Patient |\t Status |\t Staff |\t Destination |\t Date |\t Time");
+    System.out.println(
+        "ID |\t Lab Type |\t Patient |\t Status |\t Staff |\t Destination |\t Date |\t Time");
     for (LabRequest request : this.List.values()) {
       System.out.println(
-              request.ID
-                      + " | \t"
-                      + " | \t"
-                      + request.name
-                      + request.patientName
-                      + " | \t"
-                      + " | \t"
-                      + request.status
-                      + request.employee.getEmployeeID()
-                      + " | \t"
-                      + request.destination
-                      + " | \t"
-                      + request.date
-                      + " | \t"
-                      + request.time);
+          request.ID
+              + " | \t"
+              + " | \t"
+              + request.name
+              + request.patientName
+              + " | \t"
+              + " | \t"
+              + request.status
+              + request.employee.getEmployeeID()
+              + " | \t"
+              + request.destination
+              + " | \t"
+              + request.date
+              + " | \t"
+              + request.time);
     }
   }
 
@@ -324,6 +341,14 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
 
     Employee empty = new Employee(inputStaff);
 
-    return new LabRequest(inputID,inputType,inputPatient, inputStatus, empty, inputDestination, inputDate, inputTime);
+    return new LabRequest(
+        inputID,
+        inputType,
+        inputPatient,
+        inputStatus,
+        empty,
+        inputDestination,
+        inputDate,
+        inputTime);
   }
 }

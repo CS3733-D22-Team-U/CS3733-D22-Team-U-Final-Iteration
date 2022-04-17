@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.DBController;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -57,25 +56,26 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) {
-        EquipRequest e =
+        EquipRequest r =
             new EquipRequest(
                 row[0],
                 row[1],
                 Integer.parseInt(row[2]),
                 row[3],
-                checkEmployee(row[4]),
-                row[5],
+                row[4],
+                checkEmployee(row[5]),
                 row[6],
                 row[7],
-                Integer.parseInt(row[8]));
-        List.put(row[0], e);
+                row[8],
+                Integer.parseInt(row[9]));
+        List.put(row[0], r);
 
         try {
           Location temp = new Location();
-          temp.setNodeID(e.destination);
+          temp.setNodeID(r.destination);
           Location l = udb.locationImpl.locations.get(udb.locationImpl.locations.indexOf(temp));
-          l.addRequest(e);
-          e.setLocation(l);
+          l.addRequest(r);
+          r.setLocation(l);
         } catch (Exception exception) {
         }
       }
@@ -97,13 +97,13 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 row[1],
                 Integer.parseInt(row[2]),
                 row[3],
-                checkEmployee(row[4]),
-                row[5],
+                row[4],
+                checkEmployee(row[5]),
                 row[6],
                 row[7],
-                Integer.parseInt(row[8]));
+                row[8],
+                Integer.parseInt(row[9]));
         List.put(row[0], e);
-
         try {
           Location temp = new Location();
           temp.setNodeID(e.destination);
@@ -133,6 +133,8 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     fw.append(",");
     fw.append("Type");
     fw.append(",");
+    fw.append("Status");
+    fw.append(",");
     fw.append("Employee");
     fw.append(",");
     fw.append("Destination");
@@ -152,6 +154,8 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
       fw.append(Integer.toString(request.getAmount()));
       fw.append(",");
       fw.append(request.getType());
+      fw.append(",");
+      fw.append(request.getStatus());
       fw.append(",");
       fw.append(request.getEmployee().getEmployeeID());
       fw.append(",");
@@ -177,39 +181,42 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
     try {
       statement.execute(
-          "CREATE TABLE EquipRequest("
-              + "ID varchar(10) not null,"
-              + "name varchar(50) not null, "
-              + "amount int not null,"
-              + "typeOfRequest varchar(10),"
-              + "staff varchar(20) not null,"
-              + "destination varchar(10) not null,"
-              + "date varchar(10) not null,"
-              + "time varchar(10) not null,"
-              + "pri int not null)");
+              "CREATE TABLE EquipRequest("
+                      + "ID varchar(10) not null,"
+                      + "name varchar(50) not null, "
+                      + "amount int not null,"
+                      + "typeOfRequest varchar(10),"
+                      + "status varchar(15) not null,"
+                      + "staff varchar(20) not null,"
+                      + "destination varchar(10) not null,"
+                      + "date varchar(10) not null,"
+                      + "time varchar(10) not null,"
+                      + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
         statement.execute(
-            "INSERT INTO EquipRequest VALUES("
-                + "'"
-                + currReq.getID()
-                + "','"
-                + currReq.getName()
-                + "',"
-                + currReq.getAmount()
-                + ",'"
-                + currReq.getType()
-                + "','"
-                + currReq.getEmployee().getEmployeeID()
-                + "','"
-                + currReq.getDestination()
-                + "','"
-                + currReq.getDate()
-                + "','"
-                + currReq.getTime()
-                + "',"
-                + currReq.getPri()
-                + ")");
+                "INSERT INTO EquipRequest VALUES("
+                        + "'"
+                        + currReq.getID()
+                        + "','"
+                        + currReq.getName()
+                        + "',"
+                        + currReq.getAmount()
+                        + ",'"
+                        + currReq.getType()
+                        + "','"
+                        + currReq.getStatus()
+                        + "','"
+                        + currReq.getEmployee().getEmployeeID()
+                        + "','"
+                        + currReq.getDestination()
+                        + "','"
+                        + currReq.getDate()
+                        + "','"
+                        + currReq.getTime()
+                        + "',"
+                        + currReq.getPri()
+                        + ")");
       }
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
@@ -227,6 +234,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         String name = results.getString("name");
         int amount = results.getInt("amount");
         String type = results.getString("typeOfRequest");
+        String status = results.getString("status");
         String staff = results.getString("staff");
         String destination = results.getString("destination");
         String date = results.getString("date");
@@ -235,7 +243,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
         EquipRequest SQLRow =
             new EquipRequest(
-                id, name, amount, type, checkEmployee(staff), destination, date, time, pri);
+                id, name, amount, type, status,checkEmployee(staff), destination, date, time, pri);
 
         List.put(id, SQLRow);
       }
@@ -277,7 +285,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     // takes entries from SQL table that match input node and updates it with a new floor and
     // location type
     // input ID
-    udb = DBController.udb;
 
     if (List.containsKey(data.ID)) {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
@@ -302,7 +309,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    */
   @Override
   public void add(EquipRequest data) throws IOException {
-    udb = DBController.udb;
 
     if (List.containsKey(data.ID)) {
       System.out.println("A Request With This ID Already Exists");
@@ -314,7 +320,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO SUch STAFF");
+        System.out.println("No Such Staff Exists in Database");
       }
     }
   }
@@ -327,8 +333,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    */
   @Override
   public void remove(EquipRequest data) throws IOException {
-    udb = DBController.udb;
-
     try {
       data.location.getRequests().remove(data);
       List.remove(data.ID);
@@ -365,13 +369,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     }
   }
 
-  /*@Override
-  public int search(String id) { // TODO search
-    int index = -1;
-    for (int i = 0; i < list().size(); i++) if (id.equals(list().get(i).ID)) index = i;
-    return index;
-  }*/
-
   public EquipRequest askUser() {
     Scanner reqInput = new Scanner(System.in);
 
@@ -383,6 +380,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     String inputDestination = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";
+    String inputStatus = "N/A";
     int inputPriority = 0;
 
     System.out.println("Input request ID: ");
@@ -401,6 +399,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         inputName,
         inputAmount,
         inputType,
+        inputStatus,
         empty,
         inputDestination,
         inputDate,
