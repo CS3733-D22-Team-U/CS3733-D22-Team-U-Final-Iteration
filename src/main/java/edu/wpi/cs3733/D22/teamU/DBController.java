@@ -24,69 +24,77 @@ public class DBController {
     folder.mkdir();
 
     InputStream csvLocationFile =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLocations.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLocations.csv");
     String location = copyFile(csvLocationFile, "csvTables/TowerLocations.csv");
 
     InputStream csvEmployee =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEmployees.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEmployees.csv");
     String employee = copyFile(csvEmployee, "csvTables/TowerEmployees.csv");
 
     InputStream csvEquipment =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEquipment.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEquipment.csv");
     String equipment = copyFile(csvEquipment, "csvTables/TowerEquipment.csv");
 
     InputStream csvEquipRequest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEquipRequests.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerEquipRequests.csv");
     String equipRequest = copyFile(csvEquipRequest, "csvTables/TowerEquipRequests.csv");
 
     InputStream csvLabRequest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLabRequests.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLabRequests.csv");
     String LabRequest = copyFile(csvLabRequest, "csvTables/TowerLabRequests.csv");
 
     InputStream csvLaundryRequest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLaundryRequests.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerLaundryRequests.csv");
     String laundryRequest = copyFile(csvLaundryRequest, "csvTables/TowerLaundryRequests.csv");
 
     InputStream csvMedicineRequest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMedicineRequests.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMedicineRequests.csv");
     String medicineRequest = copyFile(csvMedicineRequest, "csvTables/TowerMedicineRequests.csv");
 
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerLocations.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerLocations.csv");
     String locationTest = copyFile(csvLocationFileTest, "csvTables/TESTTowerLocations.csv");
     InputStream csvEquipmentTest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerEquipment.csv");
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerEquipment.csv");
     String equipmentTest = copyFile(csvEquipmentTest, "csvTables/TESTTowerEquipment.csv");
 
+    //Edges
+    InputStream csvLocationEdge =
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/AddEdges.csv");
+    String locationEdge = copyFile(csvEquipmentTest, "csvTables/AddEdges.csv");
+
     String[] CSVfiles = {
-      location,
-      employee,
-      equipment,
-      equipRequest,
-      LabRequest,
-      laundryRequest,
-      medicineRequest,
-      locationTest,
-      equipmentTest
+            location,
+            employee,
+            equipment,
+            equipRequest,
+            LabRequest,
+            laundryRequest,
+            medicineRequest,
+            locationTest,
+            equipmentTest,
+            locationEdge
     };
     Udb.username = username;
     Udb.password = password;
