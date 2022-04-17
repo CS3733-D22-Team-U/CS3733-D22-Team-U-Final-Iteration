@@ -12,10 +12,13 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import java.io.*;
@@ -75,6 +78,8 @@ public final class Udb {
   public LabRequestDaoImpl labRequestImpl;
   public LaundryRequestDaoImpl laundryRequestImpl;
   public MedicineRequestDaoImpl medicineRequestImpl;
+  public MealRequestDaoImpl mealRequestImpl;
+  public GiftRequestDaoImpl giftRequestImpl;
 
   public static boolean admin;
 
@@ -177,6 +182,9 @@ public final class Udb {
     labRequestImpl = new LabRequestDaoImpl(statement, CSVfiles[4]);
     laundryRequestImpl = new LaundryRequestDaoImpl(statement, CSVfiles[5]);
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
+    mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[7]);
+    giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[8]);
+
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -198,6 +206,12 @@ public final class Udb {
 
     medicineRequestImpl.CSVToJava();
     medicineRequestImpl.JavaToSQL();
+
+    mealRequestImpl.CSVToJava();
+    mealRequestImpl.JavaToSQL();
+
+    giftRequestImpl.CSVToJava();
+    giftRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON

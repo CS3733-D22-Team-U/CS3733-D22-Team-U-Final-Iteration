@@ -71,6 +71,12 @@ public class DBController {
                     .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerGiftRequests.csv");
     String giftRequest = copyFile(csvGiftRequest,"csvTables/TowerGiftRequests.csv");
 
+    InputStream csvMealRequest =
+            Main.class
+                    .getClassLoader()
+                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
+    String mealRequest = copyFile(csvMealRequest,"csvTables/TowerMealRequests.csv");
+
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
         Main.class
@@ -91,7 +97,8 @@ public class DBController {
       LabRequest,
       laundryRequest,
       medicineRequest,
-      giftRequest
+      giftRequest,
+      mealRequest
     };
     Udb.username = username;
     Udb.password = password;
