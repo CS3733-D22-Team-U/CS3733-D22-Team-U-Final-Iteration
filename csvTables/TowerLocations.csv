@@ -123,7 +123,7 @@ CHALL010L2,860,307,L2,Tower,HALL,Hallway 10 Floor L2,Hallway C010L2
 WELEV00LL2,533,382,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 WELEV00ML2,568,738,L2,Tower,ELEV,Elevator M Floor L2,Elevator ML2
 WHALL001L2,493,850,L2,Tower,HALL,Hallway Connector 1 Floor L2,Hallway W01L2
-uSTOR0L1,376,318,L1,Tower,STOR,OR Bed Park,ORBP
+uSTOR0L1,377,318,L1,Tower,STOR,OR Bed Park,ORBP
 uSTOR00101,208,389,1,Tower,STOR,West Plaza,West Plaza
 uSTOR02903,274,220,3,Tower,STOR,Clean Equipment Storage Pod B,CESB
 uSTOR02603,268,548,3,Tower,STOR,Clean Equipment Storage Pod C,CESC

@@ -47,6 +47,7 @@ ID,Name,Amount,Type,Employee,Destination,Date,Time,Priority
 3353,Bone Saw,78,Equipment,test1,uSTOR0L1,4/4/2022,23:13:37,1
 1404,Body Bag,567,Equipment,test,jaja,2022-04-12,22:48:06,1
 2216,Sethoscope,45,Equipment,test2,uSTOR0L1,4/4/2022,23:13:37,1
+544,Body Bag,10,Equipment,18282,FEXIT00201,2022-04-16,16:38:38,1
 5005,Catheter,676,Equipment,test4,HHALL00503,2022-04-15,00:00:33,1
 4678,Catheter,4,Equipment,test4,HHALL00503,2022-04-14,23:59:28,1
 1405,Catheter,4,Equipment,test4,HHALL00503,2022-04-14,23:59:56,1

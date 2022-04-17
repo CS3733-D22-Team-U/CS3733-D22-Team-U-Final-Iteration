@@ -35,32 +35,7 @@
                           <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="540.0" prefWidth="870.0">
                                   <children>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="289.0">
-                                          <children>
-                                              <VBox fx:id="nameVbox" layoutX="99.0" layoutY="64.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                                                  <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assigned Staff Member:" wrappingWidth="175.931640625">
-                                                          <font>
-                                                              <Font size="17.0" />
-                                                          </font>
-                                                      </Text>
-                                          <ComboBox fx:id="employees" prefWidth="150.0" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name:" wrappingWidth="140.931640625">
-                                                          <font>
-                                                              <Font size="17.0" />
-                                                          </font>
-                                                      </Text>
-                                          <ComboBox fx:id="patient" prefWidth="150.0" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination:" wrappingWidth="140.931640625">
-                                                          <font>
-                                                              <Font size="17.0" />
-                                                          </font>
-                                                      </Text>
-                                          <ComboBox fx:id="locations" prefWidth="150.0" />
-                                                  </children>
-                                              </VBox>
-                                          </children>
-                                      </AnchorPane>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="289.0" />
                                       <VBox fx:id="requestHolder" layoutX="357.0" layoutY="102.0" prefHeight="200.0" prefWidth="152.0" spacing="30.0">
                                           <children>
                                               <JFXCheckBox fx:id="Advil" onAction="#enableTxt" prefHeight="18.0" prefWidth="16.0" text="Advil" />
@@ -129,6 +104,28 @@
                                               <DropShadow />
                                           </effect>
                                       </Button>
+                                        <VBox fx:id="nameVbox" layoutX="106.0" layoutY="53.0" prefHeight="200.0" prefWidth="219.0" spacing="10.0">
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assigned Staff Member:" wrappingWidth="175.931640625">
+                                                    <font>
+                                                        <Font size="17.0" />
+                                                    </font>
+                                                </Text>
+                                    <ComboBox fx:id="employees" prefHeight="26.0" prefWidth="125.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name:" wrappingWidth="140.931640625">
+                                                    <font>
+                                                        <Font size="17.0" />
+                                                    </font>
+                                                </Text>
+                                    <ComboBox fx:id="patient" prefHeight="26.0" prefWidth="125.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination:" wrappingWidth="140.931640625">
+                                                    <font>
+                                                        <Font size="17.0" />
+                                                    </font>
+                                                </Text>
+                                    <ComboBox fx:id="locations" prefHeight="26.0" prefWidth="389.0" />
+                                            </children>
+                                        </VBox>
                                   </children>
                               </AnchorPane>
                           </content>

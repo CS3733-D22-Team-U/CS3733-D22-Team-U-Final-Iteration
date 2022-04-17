@@ -99,7 +99,7 @@ public class MedicineDeliveryController extends ServiceController {
   ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
 
   Udb udb = DBController.udb;
-  ArrayList<String> nodeIDs;
+  ArrayList<String> longNames;
   ArrayList<String> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -109,9 +109,9 @@ public class MedicineDeliveryController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     setUpActiveRequests();
-    nodeIDs = new ArrayList<>();
+    longNames = new ArrayList<>();
     for(Location l: udb.locationImpl.list()){
-      nodeIDs.add(l.getNodeID());
+      longNames.add(l.getLongName());
     }
     patient.setTooltip(new Tooltip());
     patient.getItems().addAll(
@@ -136,12 +136,12 @@ public class MedicineDeliveryController extends ServiceController {
 
 
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
+    locations.getItems().addAll(longNames);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
     for(Employee l: udb.EmployeeImpl.hList().values()){
-      staff.add(l.getEmployeeID());
+      staff.add(l.getUsername());
     }
 
     employees.setTooltip(new Tooltip());
@@ -273,12 +273,13 @@ public class MedicineDeliveryController extends ServiceController {
                   request.getDate(),
                   request.getTime()
                       ));
-          processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
+          //processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
+          process();
+          //clear();
         } catch (IOException e) {
           e.printStackTrace();
           processText.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
-          process();
-          clear();
+
         }
       }
     }
@@ -370,7 +371,7 @@ public class MedicineDeliveryController extends ServiceController {
     new Thread(
             () -> {
               try {
-                Thread.sleep(2000); // milliseconds
+                Thread.sleep(500); // milliseconds
                 Platform.runLater(
                     () -> {
                       processText.setText(
@@ -412,7 +413,9 @@ public class MedicineDeliveryController extends ServiceController {
                     });
               } catch (InterruptedException ie) {
               }
+              clear();
             })
+
         .start();
   }
 
