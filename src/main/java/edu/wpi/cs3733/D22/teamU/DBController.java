@@ -66,16 +66,16 @@ public class DBController {
     String medicineRequest = copyFile(csvMedicineRequest, "csvTables/TowerMedicineRequests.csv");
 
     InputStream csvGiftRequest =
-            Main.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerGiftRequests.csv");
-    String giftRequest = copyFile(csvGiftRequest,"csvTables/TowerGiftRequests.csv");
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerGiftRequests.csv");
+    String giftRequest = copyFile(csvGiftRequest, "csvTables/TowerGiftRequests.csv");
 
     InputStream csvMealRequest =
-            Main.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
-    String mealRequest = copyFile(csvMealRequest,"csvTables/TowerMealRequests.csv");
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
+    String mealRequest = copyFile(csvMealRequest, "csvTables/TowerMealRequests.csv");
 
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =

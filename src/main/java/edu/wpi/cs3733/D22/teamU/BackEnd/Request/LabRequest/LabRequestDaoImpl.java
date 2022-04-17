@@ -79,6 +79,32 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     }
   }
 
+  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+    List = new HashMap<String, LabRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == columns) {
+        LabRequest r =
+            new LabRequest(
+                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+      }
+    }
+  }
+
   /**
    * Copies the array list: EquipmentList and writes it into the CSV file
    *

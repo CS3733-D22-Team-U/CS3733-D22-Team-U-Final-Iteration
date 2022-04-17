@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, MedicineRequest> List = new HashMap<String, MedicineRequest>();
+  public static HashMap<String, MedicineRequest> List = new HashMap<String, MedicineRequest>();
   public ArrayList<MedicineRequest> list = new ArrayList<MedicineRequest>();
 
   public MedicineRequestDaoImpl(Statement statement, String csvfile)
@@ -77,6 +77,41 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+      }
+    }
+  }
+
+  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+    List = new HashMap<String, MedicineRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    int size = br.readLine().split(",").length;
+    br.readLine();
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == size) { // or change to 9 if no work
+        MedicineRequest r =
+            new MedicineRequest(
+                row[0],
+                row[1],
+                Integer.parseInt(row[2]),
+                row[3],
+                row[4],
+                checkEmployee(row[5]),
+                row[6],
+                row[7],
+                row[8]);
+        List.put(row[0], r);
+
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

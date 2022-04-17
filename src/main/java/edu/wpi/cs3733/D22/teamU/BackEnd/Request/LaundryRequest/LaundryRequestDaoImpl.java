@@ -84,6 +84,40 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     }
   }
 
+  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+    List = new HashMap<String, LaundryRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == columns) {
+        LaundryRequest r =
+            new LaundryRequest(
+                row[0],
+                row[1],
+                checkEmployee(row[2]),
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+                row[7],
+                row[8]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+      }
+    }
+  }
+
   // string
   // map.get(row
   @Override

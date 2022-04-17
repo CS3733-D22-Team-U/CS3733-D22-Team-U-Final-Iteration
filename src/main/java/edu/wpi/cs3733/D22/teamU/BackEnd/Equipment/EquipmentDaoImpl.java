@@ -14,7 +14,6 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public ArrayList<Equipment> EquipmentList = new ArrayList<Equipment>();
   public String csvFile;
 
-
   /**
    * Constructor for EquipmentDaoImpl
    *
@@ -22,7 +21,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
    */
   public EquipmentDaoImpl(Statement statement, String csvFile) {
     this.statement = statement;
-    this.csvFile = csvFile;  // private Udb udb = DBController.udb;
+    this.csvFile = csvFile; // private Udb udb = DBController.udb;
   }
 
   @Override

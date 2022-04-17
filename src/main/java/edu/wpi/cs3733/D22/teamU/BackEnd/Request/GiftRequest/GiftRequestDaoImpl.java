@@ -74,6 +74,41 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     }
   }
 
+  public void CSVToJava(ArrayList<Location> locations) throws IOException, SQLException {
+    List = new HashMap<String, GiftRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == columns) {
+        GiftRequest r =
+            new GiftRequest(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                checkEmployee(row[6]),
+                row[7],
+                row[8],
+                row[9]);
+        List.put(row[0], r);
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+      }
+    }
+  }
+
   private Employee checkEmployee(String employee) {
     if (EmployeeDaoImpl.List.get(employee) != null) {
       return EmployeeDaoImpl.List.get(employee);

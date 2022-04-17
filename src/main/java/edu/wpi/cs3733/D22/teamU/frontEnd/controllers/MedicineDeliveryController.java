@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
@@ -114,7 +115,7 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (MedicineRequest request : Udb.getInstance().medicineRequestImpl.hList().values()) {
+    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
           new MedicineRequest(
               request.getID(),
