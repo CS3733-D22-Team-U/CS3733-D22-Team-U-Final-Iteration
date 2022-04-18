@@ -212,6 +212,9 @@ public final class Udb {
 
     mealRequestImpl.CSVToJava(locationImpl.list());
     mealRequestImpl.JavaToSQL();
+
+    mealRequestImpl.CSVToJava(locationImpl.list());
+    mealRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
