@@ -22,10 +22,13 @@ import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
@@ -33,8 +36,7 @@ import lombok.SneakyThrows;
 public class EquipmentDeliverySystemController extends ServiceController {
 
   public ComboBox<String> locations;
-  public ComboBox employees;
-  @FXML TabPane tabPane;
+  public ComboBox<String> employees;
   @FXML TableColumn<EquipmentUI, String> nameCol;
   @FXML TableColumn<EquipmentUI, Integer> inUse;
   @FXML TableColumn<EquipmentUI, Integer> available;
@@ -56,13 +58,19 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   @FXML TableView<EquipmentUI> activeRequestTable;
   @FXML VBox inputFields;
-  @FXML VBox locationInput;
+
+  @FXML StackPane requestsStack;
+  @FXML Pane newRequestPane;
+  @FXML Pane allEquipPane;
+  @FXML Pane activeRequestPane;
+
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+  @FXML Button allEquipButton;
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
-
   ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
@@ -98,6 +106,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     for (Node textArea : inputFields.getChildren()) {
       checkBoxesInput.add((JFXTextArea) textArea);
     }
+
     for (int i = 0; i < checkBoxesInput.size(); i++) {
       int finalI = i;
       checkBoxesInput
@@ -115,12 +124,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
                 checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
 
+    // BooleanBinding submit =locations.idProperty().isEmpty().and(
+    // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
     submitButton
         .disableProperty()
         .bind(
             Bindings.createBooleanBinding(
-                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+                () ->
+                    ((checkBoxes.stream().anyMatch(JFXCheckBox::isSelected))
+                        && !locations.promptTextProperty().isEmpty().get())));
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {
@@ -309,5 +321,44 @@ public class EquipmentDeliverySystemController extends ServiceController {
       Employee empty = new Employee("N/A");
       return empty;
     }
+  }
+
+  public void switchToNewRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(true);
+    allEquipButton.setUnderline(false);
+  }
+
+  public void switchToActive(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(true);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(false);
+  }
+
+  public void switchToEquipment(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(true);
   }
 }
