@@ -63,15 +63,13 @@ public class Menu {
         break;
 
       case 11:
-
         break;
 
       case 12:
-
         break;
 
       case 13:
-        //exit whole menu
+        // exit whole menu
         break;
     }
   }

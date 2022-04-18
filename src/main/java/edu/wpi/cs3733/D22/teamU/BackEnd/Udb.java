@@ -24,7 +24,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import java.io.*;
 import java.sql.*;
-import java.util.Scanner;
 
 public final class Udb {
 
