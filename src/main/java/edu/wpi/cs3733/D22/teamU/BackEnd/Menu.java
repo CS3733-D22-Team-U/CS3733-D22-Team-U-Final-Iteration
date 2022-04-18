@@ -24,8 +24,11 @@ public class Menu {
             + "9 - Meal Request\n"
             + "10 - Religious Request\n"
             + "11 - Translator Request\n"
-            + "12- Change Server\n"
-            + "13 - Quit\n");
+            + "12 -  Maintenance Request\n"
+            + "13 - Computer Service Request\n"
+            + "14 - Security Request \n"
+            + "15 - Change Server\n"
+            + "16 - Quit\n");
 
     switch (userInput.nextInt()) {
       case 1:
@@ -68,16 +71,23 @@ public class Menu {
         translatorRequestMenu();
         break;
 
-      case 12:
-
-        break;
-
       case 13:
+        maintenanceRequestMenu();
+        break;
+      case 14:
+        compservRequestMenu();
+        break;
+      case 15:
+        securityRequestMenu();
+        break;
+      case 16:
+        serveChangeMenu();
+        break;
+      case 17:
         // exit whole menu
         break;
     }
   }
-
 
   private void serveChangeMenu() throws SQLException, IOException {
     Scanner changeInput = new Scanner(System.in);
@@ -528,19 +538,19 @@ public class Menu {
     switch (mealInput.nextInt()) {
       case 1:
         Udb.getInstance().religiousRequestImpl.printTable();
-        mealRequestMenu();
+        religiousRequestMenu();
         break;
       case 2:
         Udb.getInstance().edit(Udb.getInstance().religiousRequestImpl.askUser());
-        mealRequestMenu();
+        religiousRequestMenu();
         break;
       case 3:
         Udb.getInstance().add(Udb.getInstance().religiousRequestImpl.askUser());
-        mealRequestMenu();
+        religiousRequestMenu();
         break;
       case 4:
         Udb.getInstance().remove(Udb.getInstance().religiousRequestImpl.askUser());
-        mealRequestMenu();
+        religiousRequestMenu();
         break;
       case 5:
         Scanner justNeedCSVName = new Scanner(System.in);
@@ -549,7 +559,7 @@ public class Menu {
         String nameOfFile = justNeedCSVName.nextLine();
 
         Udb.getInstance().saveTableAsCSV("ReligiousRequest", nameOfFile);
-        mealRequestMenu();
+        religiousRequestMenu();
         break;
       case 6:
         // menu
@@ -574,19 +584,19 @@ public class Menu {
     switch (employeeInput.nextInt()) {
       case 1:
         Udb.getInstance().translatorRequestImpl.printTable();
-        employeesMenu();
+        translatorRequestMenu();
         break;
       case 2:
         Udb.getInstance().edit(Udb.getInstance().translatorRequestImpl.askUser());
-        employeesMenu();
+        translatorRequestMenu();
         break;
       case 3:
         Udb.getInstance().add(Udb.getInstance().translatorRequestImpl.askUser());
-        employeesMenu();
+        translatorRequestMenu();
         break;
       case 4:
         Udb.getInstance().remove(Udb.getInstance().translatorRequestImpl.askUser());
-        employeesMenu();
+        translatorRequestMenu();
         break;
       case 5:
         Scanner justNeedCSVName = new Scanner(System.in);
@@ -595,7 +605,7 @@ public class Menu {
         String nameOfFile = justNeedCSVName.nextLine();
 
         Udb.getInstance().saveTableAsCSV("TranslateRequests", nameOfFile);
-        employeesMenu();
+        translatorRequestMenu();
         break;
       case 6:
         // menu
@@ -603,4 +613,134 @@ public class Menu {
         break;
     }
   }
+  private void maintenanceRequestMenu() throws SQLException, IOException {
+    Scanner employeeInput = new Scanner(System.in);
+
+    System.out.println(
+            "1 - List Maintenance Request Information\n"
+                    + "2 - Change Maintenance Request\n"
+                    + "3 - Enter New Maintenance Request\n"
+                    + "4 - Delete Maintenance Request \n"
+                    + "5 - Save Maintenance Request Information to CSV file\n"
+                    + "6 - Return to Main Menu\n");
+    switch (employeeInput.nextInt()) {
+      case 1:
+        Udb.getInstance().maintenanceRequestImpl.printTable();
+        maintenanceRequestMenu();
+        break;
+      case 2:
+        Udb.getInstance().edit(Udb.getInstance().maintenanceRequestImpl.askUser());
+        maintenanceRequestMenu();
+        break;
+      case 3:
+        Udb.getInstance().add(Udb.getInstance().maintenanceRequestImpl.askUser());
+        maintenanceRequestMenu();
+        break;
+      case 4:
+        Udb.getInstance().remove(Udb.getInstance().maintenanceRequestImpl.askUser());
+        maintenanceRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        Udb.getInstance().saveTableAsCSV("MaintenanceRequests", nameOfFile);
+        maintenanceRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+    }
+  }
+
+  private void compservRequestMenu() throws SQLException, IOException {
+    Scanner employeeInput = new Scanner(System.in);
+
+    System.out.println(
+            "1 - List Computer Service Request Information\n"
+                    + "2 - Change Computer Service Request\n"
+                    + "3 - Enter New Computer Service Request\n"
+                    + "4 - Delete Computer Service Request\n"
+                    + "5 - Save Computer Service Request Information to CSV file\n"
+                    + "6 - Return to Main Menu\n");
+    switch (employeeInput.nextInt()) {
+      case 1:
+        Udb.getInstance().compservRequestImpl.printTable();
+        compservRequestMenu();
+        break;
+      case 2:
+        Udb.getInstance().edit(Udb.getInstance().compservRequestImpl.askUser());
+        compservRequestMenu();
+        break;
+      case 3:
+        Udb.getInstance().add(Udb.getInstance().compservRequestImpl.askUser());
+        compservRequestMenu();
+        break;
+      case 4:
+        Udb.getInstance().remove(Udb.getInstance().compservRequestImpl.askUser());
+        compservRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        Udb.getInstance().saveTableAsCSV("CompServRequests", nameOfFile);
+        compservRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+    }
+  }
+
+  private void securityRequestMenu() throws SQLException, IOException {
+    Scanner employeeInput = new Scanner(System.in);
+
+    System.out.println(
+            "1 - List Security Request Information\n"
+                    + "2 - Change Security Request\n"
+                    + "3 - Enter New Security Request\n"
+                    + "4 - Delete Security Request\n"
+                    + "5 - Save Security Request Information to CSV file\n"
+                    + "6 - Return to Main Menu\n");
+    switch (employeeInput.nextInt()) {
+      case 1:
+        Udb.getInstance().securityRequestImpl.printTable();
+        securityRequestMenu();
+        break;
+      case 2:
+        Udb.getInstance().edit(Udb.getInstance().securityRequestImpl.askUser());
+        securityRequestMenu();
+        break;
+      case 3:
+        Udb.getInstance().add(Udb.getInstance().securityRequestImpl.askUser());
+        securityRequestMenu();
+        break;
+      case 4:
+        Udb.getInstance().remove(Udb.getInstance().securityRequestImpl.askUser());
+        securityRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        Udb.getInstance().saveTableAsCSV("SecurityRequests", nameOfFile);
+        securityRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+    }
+  }
+
+
 }
