@@ -24,6 +24,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
 
 import java.io.*;
@@ -277,7 +278,11 @@ public final class Udb {
         break;
 
       case "ReligiousRequest":
-        ReligiousRequestImpl.edit((ReligiousRequest) thingToAdd);
+        religiousRequestImpl.edit((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.edit((TranslatorRequest) thingToAdd);
         break;
 
       default:
@@ -325,6 +330,14 @@ public final class Udb {
         mealRequestImpl.add((MealRequest) thingToAdd);
         break;
 
+      case "ReligousRequest":
+        religiousRequestImpl.add((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.add((TranslatorRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.add()");
         break;
@@ -368,6 +381,14 @@ public final class Udb {
 
       case "MealRequest":
         mealRequestImpl.remove((MealRequest) thingToAdd);
+        break;
+
+      case "ReligiousRequest":
+        religiousRequestImpl.remove((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.remove((TranslatorRequest) thingToAdd);
         break;
 
       default:
@@ -415,6 +436,13 @@ public final class Udb {
       case "MealRequest":
         mealRequestImpl.saveTableAsCSV(nameOfCSV);
         break;
+
+      case "ReligiousRequest":
+        religiousRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.saveTableAsCSV(nameOfCSV);
 
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");
