@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Menu;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.File;
 import java.io.IOException;
@@ -75,7 +76,14 @@ public class DBController {
         Main.class
             .getClassLoader()
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
-    String mealRequest = copyFile(csvMealRequest, "csvTables/TowerMealRequests.csv");
+    String mealRequest = copyFile(csvGiftRequest, "csvTables/TowerMealRequests.csv");
+
+    InputStream csvTranslatorRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerTranslatorRequests.csv");
+    String translateRequest =
+        copyFile(csvTranslatorRequest, "csvTables/TowerTranslatorRequests.csv");
 
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
@@ -107,7 +115,8 @@ public class DBController {
 
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
-    // Udb.getInstance().menu(); // Uncomment this to start terminal menu
+    Menu m = new Menu();
+    m.menu(); // Uncomment this to start terminal menu
   }
 
   public static String copyFile(InputStream inputPath, String outputPath) throws IOException {
