@@ -156,7 +156,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in MealRequestImp");
     }
   }
 

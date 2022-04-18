@@ -194,7 +194,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in LabRequestImp");
     }
   }
 

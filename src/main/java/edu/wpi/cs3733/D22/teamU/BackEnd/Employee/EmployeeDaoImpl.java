@@ -92,7 +92,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("hsbd");
+      System.out.println("JavaToSQL error in EmployeeImp");
     }
   }
 
