@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
@@ -68,6 +69,33 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
           System.out.println("Location Not Found" + r.destination);
         }
       }
+    }
+  }
+
+  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+    List = new HashMap<String, TranslatorRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == columns) {
+        TranslatorRequest r =
+                new TranslatorRequest(
+                        row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[6], row[7], row[8]);
+        List.put(row[0], r);
+
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+    }
     }
   }
 
