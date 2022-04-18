@@ -18,6 +18,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
@@ -29,7 +30,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequ
 
 import java.io.*;
 import java.sql.*;
-import java.util.Scanner;
 
 public final class Udb {
 
@@ -56,6 +56,7 @@ public final class Udb {
   public GiftRequestDaoImpl giftRequestImpl;
   public ReligiousRequestDaoImpl religiousRequestImpl;
   public TranslatorRequestDaoImpl translatorRequestImpl;
+  public MaintenanceRequestDaoImpl maintenanceRequestImpl;
 
   public static boolean admin;
 
@@ -194,6 +195,7 @@ public final class Udb {
     mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
     religiousRequestImpl = new ReligiousRequestDaoImpl(statement, CSVfiles[9]);
     translatorRequestImpl = new TranslatorRequestDaoImpl(statement, CSVfiles[10]);
+    maintenanceRequestImpl = new MaintenanceRequestDaoImpl(statement, CSVfiles[11]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -225,7 +227,8 @@ public final class Udb {
     religiousRequestImpl.CSVToJava(locationImpl.list());
     religiousRequestImpl.JavaToSQL();
 
-
+    maintenanceRequestImpl.CSVToJava(locationImpl.list());
+    maintenanceRequestImpl.JavaToSQL();
 
   }
 
