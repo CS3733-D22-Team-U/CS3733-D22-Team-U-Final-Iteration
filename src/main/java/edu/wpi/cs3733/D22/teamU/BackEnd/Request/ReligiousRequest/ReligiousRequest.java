@@ -10,8 +10,7 @@ public class ReligiousRequest extends Request {
     private String religion;
 
     ReligiousRequest(String ID, String name, String date, String time,
-                     String patient, String religion, Employee employee,
-                     Location location){
+                     String patient, String religion, String status, String destination, Employee employee,){
 
         this.ID = ID;
         this.name = name;
@@ -19,8 +18,9 @@ public class ReligiousRequest extends Request {
         this.time = time;
         this.patient = patient;
         this.religion = religion;
+        this.status = status;
+        this.destination = destination;
         this.employee = employee;
-        this.location = location;
     }
 
 
