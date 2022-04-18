@@ -10,7 +10,7 @@ public class ReligiousRequest extends Request {
     private String religion;
 
     ReligiousRequest(String ID, String name, String date, String time,
-                     String patient, String religion, String status, String destination, Employee employee,){
+                     String patient, String religion, String status, String destination, Employee employee){
 
         this.ID = ID;
         this.name = name;

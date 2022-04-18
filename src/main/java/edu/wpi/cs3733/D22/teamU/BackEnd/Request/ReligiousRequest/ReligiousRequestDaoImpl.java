@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     public Statement statement;
@@ -23,6 +24,11 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     public ReligiousRequestDaoImpl(Statement statement, String csvfile) {
         this.csvFile = csvfile;
         this.statement = statement;
+    }
+
+    @Override
+    public ArrayList<ReligiousRequest> list() {
+        return null;
     }
 
     @Override
@@ -206,24 +212,129 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 "ID |\t Name |\t Date |\t Time |\t Patient |\t Religion |\t Status |\t Destination |\t Employee");
         for (ReligiousRequest request : this.List.values()) {
             System.out.println(
-                    request.ID
+                    request.getID()
                             + " | \t"
-                            + request.name
+                            + request.getName()
                             + " | \t"
-                            + request.amount
+                            + request.getDate()
                             + " | \t"
-                            + request.patientName
+                            + request.getTime()
                             + " | \t"
-                            + request.status
+                            + request.getPatient()
                             + " | \t"
-                            + request.employee.getEmployeeID()
+                            + request.getReligion()
                             + " | \t"
-                            + request.location
+                            + request.getStatus()
                             + " | \t"
-                            + request.date
+                            + request.getDestination()
                             + " | \t"
-                            + request.time);
+                            + request.getEmployee().getEmployeeID());
         }
     }
 
+    @Override
+    public void edit(ReligiousRequest data) throws IOException {
+        // takes entries from SQL table that match input node and updates it with a new floor and
+        // location type
+        // input ID
+        if (List.containsKey(data.ID)) {
+            if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+                data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
+                this.List.replace(data.ID, data);
+                this.JavaToSQL();
+                this.JavaToCSV(csvFile);
+            } else {
+                System.out.println("No Such STAFF");
+            }
+        } else {
+            System.out.println("Doesn't Exist");
+        }
+    }
+
+    @Override
+    public void add(ReligiousRequest data) throws IOException {
+        if (List.containsKey(data.ID)) {
+            System.out.println("A Request With This ID Already Exists");
+        } else {
+            if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+                data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
+                this.List.put(data.ID, data);
+                this.JavaToSQL();
+                this.JavaToCSV(csvFile);
+            } else {
+                System.out.println("No Such STAFF");
+            }
+        }
+    }
+
+    @Override
+    public void remove(ReligiousRequest data) throws IOException {
+        // removes entries from SQL table that match input node
+        try {
+            this.List.remove(data.ID);
+            this.JavaToSQL();
+            this.JavaToCSV(csvFile);
+        } catch (Exception e) {
+            System.out.println("This Data Point Was Not Found");
+        }
+    }
+
+    @Override
+    public int search(String id) {
+        return 0;
+    }
+
+    public void saveTableAsCSV(String CSVName) throws SQLException {
+        // takes entries from SQL table and an input name, from there it makes a new CSV file
+
+        String csvFilePath = "./" + CSVName + ".csv";
+
+        try {
+            new File(csvFilePath);
+            this.SQLToJava();
+            this.JavaToCSV(csvFilePath);
+
+        } catch (IOException e) {
+            System.out.println(e.fillInStackTrace());
+        }
+    }
+
+    public ReligiousRequest askUser() {
+        Scanner reqInput = new Scanner(System.in);
+
+        String inputID = "None";
+        String inputName = "N/A";
+        String inputDate = "N/A";
+        String inputTime = "N/A";
+        String inputPatient = "N/A";
+        String inputReligion = "N/A";
+        String inputStatus = "N/A";
+        String inputDestination = "N/A";
+        String inputEmployee = "N/A";
+
+        System.out.println("Input request ID: ");
+        inputID = reqInput.nextLine();
+
+        System.out.println("Input name: ");
+        inputName = reqInput.nextLine();
+
+        System.out.println("Input Religion ");
+        inputReligion = reqInput.nextLine();
+
+        System.out.println("Input Staff name: ");
+        inputEmployee = reqInput.nextLine();
+
+        Employee empty = new Employee(inputEmployee);
+
+        return new ReligiousRequest(
+                inputID,
+                inputName,
+                inputDate,
+                inputTime,
+                inputPatient,
+                inputReligion,
+                inputStatus,
+                inputDestination,
+                empty);
+    }
 }
