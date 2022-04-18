@@ -167,7 +167,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
       fw.append(",");
       fw.append(request.getTime());
       fw.append(",");
-      fw.append(Integer.toString(request.getPri()));
+      fw.append(Integer.toString(request.getPriority()));
       fw.append("\n");
     }
     fw.close();
@@ -217,7 +217,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 + "','"
                 + currReq.getTime()
                 + "',"
-                + currReq.getPri()
+                + currReq.getPriority()
                 + ")");
       }
     } catch (SQLException e) {
@@ -278,7 +278,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
               + " | \t"
               + request.time
               + " | \t"
-              + request.pri);
+              + request.priority);
     }
   }
 

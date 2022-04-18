@@ -34,11 +34,11 @@ public class EquipmentDeliverySystemController extends ServiceController {
   public ComboBox<String> locations;
   public ComboBox employees;
   @FXML TabPane tabPane;
-  @FXML TableColumn<EquipRequest, String> nameCol;
-  @FXML TableColumn<EquipRequest, Integer> inUse;
-  @FXML TableColumn<EquipRequest, Integer> available;
-  @FXML TableColumn<EquipRequest, Integer> total;
-  @FXML TableColumn<EquipRequest, String> location;
+  @FXML TableColumn<Equipment, String> nameCol;
+  @FXML TableColumn<Equipment, Integer> inUse;
+  @FXML TableColumn<Equipment, Integer> available;
+  @FXML TableColumn<Equipment, String> total;
+  @FXML TableColumn<Equipment, String> location;
   @FXML TableView<Equipment> table;
   @FXML VBox requestHolder;
   @FXML Text requestText;
@@ -123,23 +123,24 @@ public class EquipmentDeliverySystemController extends ServiceController {
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("equipmentName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<EquipRequest, Integer>("amountInUse"));
-    available.setCellValueFactory(
-        new PropertyValueFactory<EquipRequest, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<EquipRequest, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("location"));
+    nameCol.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Name"));
+    inUse.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("InUse"));
+    available.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Available"));
+    total.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Amount"));
+    location.setCellValueFactory(new PropertyValueFactory<Equipment, String>("locationID"));
+
     table.setItems(getEquipmentList());
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
-    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    activeReqName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    activeReqType.setText("Status");
+    activeReqType.setCellValueFactory(new PropertyValueFactory<>("status"));
     activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
     activeRequestTable.setItems(getActiveRequestList());
   }
@@ -196,7 +197,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPri()));
+              equipRequest.getPriority()));
     }
     return equipmentUIRequests;
   }
@@ -256,7 +257,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 request.getDestination(),
                 request.getDate(),
                 request.getTime(),
-                request.getPri()));
+                request.getPriority()));
         try {
           Udb.getInstance()
               .add( // TODO Have random ID and enter Room Destination

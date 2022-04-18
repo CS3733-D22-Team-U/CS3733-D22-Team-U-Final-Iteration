@@ -6,7 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class EquipRequest extends Request {
   int amount;
   String typeOfRequest;
-  int pri;
+  int priority;
 
   public EquipRequest(
       String ID,
@@ -18,7 +18,7 @@ public class EquipRequest extends Request {
       String destination,
       String date,
       String time,
-      int pri) {
+      int priority) {
     this.ID = ID;
     this.name = name;
     this.amount = amount;
@@ -28,7 +28,7 @@ public class EquipRequest extends Request {
     this.destination = destination;
     this.date = date;
     this.time = time;
-    this.pri = pri;
+    this.priority = priority;
   }
 
   public int getAmount() {
@@ -47,11 +47,11 @@ public class EquipRequest extends Request {
     this.typeOfRequest = newType;
   }
 
-  public int getPri() {
-    return this.pri;
+  public int getPriority() {
+    return this.priority;
   }
 
-  public void setPri(int newPri) {
-    this.pri = newPri;
+  public void setPriority(int newPri) {
+    this.priority = newPri;
   }
 }
