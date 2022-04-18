@@ -203,8 +203,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
         CSVToJava();
         // display locations and attributes
         System.out.println(
-                "ID |\t Name |\t date |\t time |\t patient |\t religion |\t Location |\t Date |\t Time");
-        for (MedicineRequest request : this.List.values()) {
+                "ID |\t Name |\t Date |\t Time |\t Patient |\t Religion |\t Status |\t Destination |\t Employee");
+        for (ReligiousRequest request : this.List.values()) {
             System.out.println(
                     request.ID
                             + " | \t"
