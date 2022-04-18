@@ -55,6 +55,8 @@ public class MapController extends ServiceController {
   @FXML ScrollPane imagesPane6;
   @FXML ScrollPane imagesPane7;
 
+  @FXML Pane pane;
+
 
   /*Add Popup*/
   AnchorPane popupAddPane;
@@ -218,6 +220,10 @@ public class MapController extends ServiceController {
               imagesPane5.setPannable(true);
               imagesPane6.setPannable(true);
               imagesPane7.setPannable(true);
+              //popupXCoord.setText("ln.getLayoutX()");
+              //popupYCoord.setText("ln.getLayoutY()");
+
+
 
               //setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
               //setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
