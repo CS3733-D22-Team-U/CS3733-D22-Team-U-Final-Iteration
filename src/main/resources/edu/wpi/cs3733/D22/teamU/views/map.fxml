@@ -250,8 +250,6 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-            <Button layoutX="109.0" layoutY="102.0" mnemonicParsing="false" onAction="#enablePan" text="enable" />
-            <Button layoutX="206.0" layoutY="103.0" mnemonicParsing="false" onAction="#disablePan" text="disable" />
             </children>
         </Pane>
         <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" layoutX="24.0" layoutY="136.0" prefHeight="558.0" prefWidth="24.0">
