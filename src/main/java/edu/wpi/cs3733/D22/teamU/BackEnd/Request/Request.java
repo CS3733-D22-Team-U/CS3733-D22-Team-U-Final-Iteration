@@ -5,15 +5,15 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import java.util.ArrayList;
 
 public abstract class Request {
-  public String ID;
-  public String name; // or lab type
-  public String patientName;
-  public String date;
-  public String time;
-  public String status;
-  public String destination;
-  public Employee employee;
-  public Location location;
+public String ID;
+public String name; // or lab type
+public String patientName;
+public String date;
+public String time;
+public String status;
+public String destination;
+public Employee employee;
+public Location location;
 
   public void setDestination(String destination) {
     this.destination = destination;
