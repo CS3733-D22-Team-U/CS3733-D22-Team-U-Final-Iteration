@@ -25,4 +25,12 @@ public class TranslatorRequest extends Request {
         this.date = date;
         this.time = time;
     }
+
+    public String getToLang() {
+        return toLang;
+    }
+
+    public void setToLang(String toLang) {
+        this.toLang = toLang;
+    }
 }
