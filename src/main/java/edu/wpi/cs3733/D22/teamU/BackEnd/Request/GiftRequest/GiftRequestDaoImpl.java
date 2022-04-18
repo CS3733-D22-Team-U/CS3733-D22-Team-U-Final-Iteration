@@ -366,7 +366,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     String inputMessage = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
-    String inputDestination = "N/A";
+    String inputDestination = "FDEPT00101";
     String inputDate = "N/A";
     String inputTime = "N/A";
 

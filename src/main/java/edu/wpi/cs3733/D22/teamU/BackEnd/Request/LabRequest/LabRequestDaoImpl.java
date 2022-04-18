@@ -353,7 +353,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     String inputType = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";
-    String inputDestination = "N/A";
+    String inputDestination = "FDEPT00101";
 
     System.out.println("Input Lab ID: ");
     inputID = labInput.nextLine();

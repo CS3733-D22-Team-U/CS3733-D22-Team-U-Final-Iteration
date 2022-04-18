@@ -347,7 +347,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
     String inputDietRest = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
-    String inputDestination = "N/A";
+    String inputDestination = "FDEPT00101";
     String inputAddNotes = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";

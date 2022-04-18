@@ -354,7 +354,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     String inputPatient = "N/A";
     String inputStaff = "N/A";
     String inputStatus = "N/A";
-    String inputLocation = "N/A";
+    String inputLocation = "FDEPT00101";
     String inputPick = "N/A";
     String inputDrop = "N/A";
     String inputServices = "N/A";
