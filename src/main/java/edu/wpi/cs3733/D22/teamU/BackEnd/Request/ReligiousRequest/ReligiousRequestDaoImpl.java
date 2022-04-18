@@ -180,21 +180,49 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 String id = results.getString("ID");
                 String name = results.getString("name");
                 String date = results.getString("date");
-                String patientName = results.getString("patientName");
+                String time = results.getString("time");
+                String patient = results.getString("patient");
+                String religion = results.getString("religion");
                 String status = results.getString("status");
-                String staff = results.getString("staff");
-                String location = results.getString("location");
-                String date = results.getString("date");
-                String employee = results.getString("time");
+                String destination = results.getString("destination");
+                String employee = results.getString("employee");
 
                 ReligiousRequest SQLRow =
                         new ReligiousRequest(
-                                id, name, date, time, patient, checkEmployee(staff), location, date, time);
+                                id, name, date, time, patient, religion, status, destination, checkEmployee(employee));
 
                 List.put(id, SQLRow);
             }
         } catch (SQLException e) {
             System.out.println("request not found");
+        }
+    }
+
+    public void printTable() throws IOException {
+        // csv to java
+        CSVToJava();
+        // display locations and attributes
+        System.out.println(
+                "ID |\t Name |\t date |\t time |\t patient |\t religion |\t Location |\t Date |\t Time");
+        for (MedicineRequest request : this.List.values()) {
+            System.out.println(
+                    request.ID
+                            + " | \t"
+                            + request.name
+                            + " | \t"
+                            + request.amount
+                            + " | \t"
+                            + request.patientName
+                            + " | \t"
+                            + request.status
+                            + " | \t"
+                            + request.employee.getEmployeeID()
+                            + " | \t"
+                            + request.location
+                            + " | \t"
+                            + request.date
+                            + " | \t"
+                            + request.time);
         }
     }
 
