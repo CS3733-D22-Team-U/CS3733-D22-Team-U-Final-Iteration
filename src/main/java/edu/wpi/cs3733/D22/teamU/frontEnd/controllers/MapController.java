@@ -425,11 +425,7 @@ public class MapController extends ServiceController {
 
     try {
 
-      Location old =
-          Udb.getInstance()
-              .locationImpl
-              .list()
-              .get(Udb.getInstance().locationImpl.list().indexOf(l));
+      Location old = Udb.getInstance().locationImpl.hList().get(l.getNodeID());
       l.setEquipment(old.getEquipment());
       l.setRequests(old.getRequests());
       Udb.getInstance().locationImpl.edit(l);
