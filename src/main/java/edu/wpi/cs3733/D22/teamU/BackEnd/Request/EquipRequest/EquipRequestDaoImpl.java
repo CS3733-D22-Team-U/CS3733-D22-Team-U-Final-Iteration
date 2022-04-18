@@ -16,12 +16,10 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   public HashMap<String, EquipRequest> List = new HashMap<String, EquipRequest>();
   public String csvFile;
   public ArrayList<EquipRequest> list = new ArrayList<EquipRequest>();
-  // Udb udb;
 
-  public EquipRequestDaoImpl(Statement statement, String csvfile) {
+  public EquipRequestDaoImpl(Statement statement, String csvfile) throws SQLException, IOException {
     this.csvFile = csvfile;
     this.statement = statement;
-    // udb = DBController.udb;
   }
 
   @Override
@@ -56,29 +54,30 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) {
-        EquipRequest e =
+        EquipRequest r =
             new EquipRequest(
                 row[0],
                 row[1],
                 Integer.parseInt(row[2]),
                 row[3],
-                checkEmployee(row[4]),
-                row[5],
+                row[4],
+                checkEmployee(row[5]),
                 row[6],
                 row[7],
-                Integer.parseInt(row[8]));
-        List.put(row[0], e);
+                row[8],
+                Integer.parseInt(row[9]));
+        List.put(row[0], r);
 
         try {
           Location temp = new Location();
-          temp.setNodeID(e.destination);
+          temp.setNodeID(r.destination);
           Location l =
               Udb.getInstance()
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
-          l.addRequest(e);
-          e.setLocation(l);
+          l.addRequest(r);
+          r.setLocation(l);
         } catch (Exception exception) {
         }
       }
@@ -100,13 +99,13 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 row[1],
                 Integer.parseInt(row[2]),
                 row[3],
-                checkEmployee(row[4]),
-                row[5],
+                row[4],
+                checkEmployee(row[5]),
                 row[6],
                 row[7],
-                Integer.parseInt(row[8]));
+                row[8],
+                Integer.parseInt(row[9]));
         List.put(row[0], e);
-
         try {
           Location temp = new Location();
           temp.setNodeID(e.destination);
@@ -136,6 +135,8 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     fw.append(",");
     fw.append("Type");
     fw.append(",");
+    fw.append("Status");
+    fw.append(",");
     fw.append("Employee");
     fw.append(",");
     fw.append("Destination");
@@ -155,6 +156,8 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
       fw.append(Integer.toString(request.getAmount()));
       fw.append(",");
       fw.append(request.getType());
+      fw.append(",");
+      fw.append(request.getStatus());
       fw.append(",");
       fw.append(request.getEmployee().getEmployeeID());
       fw.append(",");
@@ -185,6 +188,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
               + "name varchar(50) not null, "
               + "amount int not null,"
               + "typeOfRequest varchar(10),"
+              + "status varchar(15) not null,"
               + "staff varchar(20) not null,"
               + "destination varchar(10) not null,"
               + "date varchar(10) not null,"
@@ -202,6 +206,8 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 + currReq.getAmount()
                 + ",'"
                 + currReq.getType()
+                + "','"
+                + currReq.getStatus()
                 + "','"
                 + currReq.getEmployee().getEmployeeID()
                 + "','"
@@ -230,6 +236,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         String name = results.getString("name");
         int amount = results.getInt("amount");
         String type = results.getString("typeOfRequest");
+        String status = results.getString("status");
         String staff = results.getString("staff");
         String destination = results.getString("destination");
         String date = results.getString("date");
@@ -238,7 +245,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
         EquipRequest SQLRow =
             new EquipRequest(
-                id, name, amount, type, checkEmployee(staff), destination, date, time, pri);
+                id, name, amount, type, status, checkEmployee(staff), destination, date, time, pri);
 
         List.put(id, SQLRow);
       }
@@ -315,7 +322,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO SUch STAFF");
+        System.out.println("No Such Staff Exists in Database");
       }
     }
   }
@@ -328,7 +335,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
    */
   @Override
   public void remove(EquipRequest data) throws IOException {
-
     try {
       data.location.getRequests().remove(data);
       List.remove(data.ID);
@@ -365,13 +371,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     }
   }
 
-  /*@Override
-  public int search(String id) { // TODO search
-    int index = -1;
-    for (int i = 0; i < list().size(); i++) if (id.equals(list().get(i).ID)) index = i;
-    return index;
-  }*/
-
   public EquipRequest askUser() {
     Scanner reqInput = new Scanner(System.in);
 
@@ -383,6 +382,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     String inputDestination = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";
+    String inputStatus = "N/A";
     int inputPriority = 0;
 
     System.out.println("Input request ID: ");
@@ -401,6 +401,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         inputName,
         inputAmount,
         inputType,
+        inputStatus,
         empty,
         inputDestination,
         inputDate,

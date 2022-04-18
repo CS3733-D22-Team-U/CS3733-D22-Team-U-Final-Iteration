@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest;
+package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
@@ -6,38 +6,22 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
+public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public Statement statement;
+  public HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
   public String csvFile;
-  public static HashMap<String, MedicineRequest> List = new HashMap<String, MedicineRequest>();
-  public ArrayList<MedicineRequest> list = new ArrayList<MedicineRequest>();
 
-  public MedicineRequestDaoImpl(Statement statement, String csvfile)
-      throws SQLException, IOException {
-    this.csvFile = csvfile;
+  public MealRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
+    this.csvFile = csvFile;
     this.statement = statement;
   }
 
-  @Override
-  public ArrayList<MedicineRequest> list() {
-    return null;
-  }
-
-  @Override
-  public HashMap<String, MedicineRequest> hList() {
-    return this.List;
-  }
-  // Checks whether an employee exists
-  // Returns Employee if exists
-  // Returns empty employee with employee ID = N/A
-  public Employee checkEmployee(String employee) {
+  public Employee checkEmployee(String employee) throws NullPointerException {
     if (EmployeeDaoImpl.List.get(employee) != null) {
       return EmployeeDaoImpl.List.get(employee);
     } else {
@@ -46,24 +30,33 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     }
   }
 
+  @Override
+  public ArrayList<MealRequest> list() {
+    return null;
+  }
+
+  @Override
+  public HashMap<String, MealRequest> hList() {
+    return this.List;
+  }
+
   public void CSVToJava() throws IOException {
-    List = new HashMap<String, MedicineRequest>();
+    List = new HashMap<String, MealRequest>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     int size = br.readLine().split(",").length;
-    br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == size) { // or change to 9 if no work
-        MedicineRequest r =
-            new MedicineRequest(
+      if (row.length == size) {
+        MealRequest r =
+            new MealRequest(
                 row[0],
                 row[1],
-                Integer.parseInt(row[2]),
+                row[2],
                 row[3],
-                row[4],
-                checkEmployee(row[5]),
+                checkEmployee(row[4]),
+                row[5],
                 row[6],
                 row[7],
                 row[8]);
@@ -86,23 +79,22 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
   }
 
   public void CSVToJava(ArrayList<Location> locations) throws IOException {
-    List = new HashMap<String, MedicineRequest>();
+    List = new HashMap<String, MealRequest>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     int size = br.readLine().split(",").length;
-    br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == size) { // or change to 9 if no work
-        MedicineRequest r =
-            new MedicineRequest(
+      if (row.length == size) {
+        MealRequest r =
+            new MealRequest(
                 row[0],
                 row[1],
-                Integer.parseInt(row[2]),
+                row[2],
                 row[3],
-                row[4],
-                checkEmployee(row[5]),
+                checkEmployee(row[4]),
+                row[5],
                 row[6],
                 row[7],
                 row[8]);
@@ -120,42 +112,127 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     }
   }
 
+  @Override
+  public void JavaToSQL() {
+    try {
+      statement.execute("Drop table MealRequest");
+    } catch (Exception e) {
+      System.out.println("didn't drop table");
+    }
+
+    try {
+      statement.execute(
+          "CREATE TABLE MealRequest("
+              + "ID varchar(10) not null,"
+              + "patientName varchar(20) not null,"
+              + "dietRist varchar(100) not null,"
+              + "status varchar(15) not null,"
+              + "employee varchar(20) not null,"
+              + "destination varchar(15) not null,"
+              + "addNotes varchar(200) not null,"
+              + "date varchar(10) not null,"
+              + "time varchar(10) not null)");
+      for (MealRequest currMeal : List.values()) {
+        statement.execute(
+            "INSERT INTO MealRequest VALUES("
+                + "'"
+                + currMeal.getID()
+                + "','"
+                + currMeal.getPatientName()
+                + "','"
+                + currMeal.getDietRest()
+                + "','"
+                + currMeal.getStatus()
+                + "','"
+                + currMeal.getEmployee().getEmployeeID()
+                + "','"
+                + currMeal.getDestination()
+                + "','"
+                + currMeal.getAddNotes()
+                + "','"
+                + currMeal.getDate()
+                + "','"
+                + currMeal.getTime()
+                + "')");
+      }
+    } catch (SQLException e) {
+      System.out.println("Connection failed. Check output console.");
+    }
+  }
+
+  @Override
+  public void SQLToJava() {
+    List = new HashMap<String, MealRequest>();
+    try {
+      ResultSet results;
+      results = statement.executeQuery("SELECT * FROM MealRequest");
+      while (results.next()) {
+        String id = results.getString("ID");
+        String patientName = results.getString("patientName");
+        String dietRest = results.getString("dietRest");
+        String status = results.getString("status");
+        String employee = results.getString("employee");
+        String destination = results.getString("destination");
+        String addNotes = results.getString("addNotes");
+        String date = results.getString("date");
+        String time = results.getString("time");
+
+        MealRequest SQLRow =
+            new MealRequest(
+                id,
+                patientName,
+                dietRest,
+                status,
+                checkEmployee(employee),
+                destination,
+                addNotes,
+                date,
+                time);
+
+        List.put(id, SQLRow);
+      }
+    } catch (SQLException e) {
+      System.out.println("request not found");
+    }
+  }
+
+  @Override
   public void JavaToCSV(String csvFile) throws IOException {
     PrintWriter fw = new PrintWriter(new File(csvFile));
 
     fw.append("ID");
     fw.append(",");
-    fw.append("Name");
+    fw.append("Patient");
     fw.append(",");
-    fw.append("Amount");
-    fw.append(",");
-    fw.append("PatientName");
+    fw.append("Diet Restrictions");
     fw.append(",");
     fw.append("Status");
     fw.append(",");
-    fw.append("EmployeeName");
+    fw.append("Staff");
     fw.append(",");
-    fw.append("Location");
+    fw.append("Destination");
+    fw.append(",");
+    fw.append("Additional Notes");
     fw.append(",");
     fw.append("Date");
     fw.append(",");
     fw.append("Time");
     fw.append("\n");
 
-    for (MedicineRequest request : List.values()) {
+    for (MealRequest request : List.values()) {
       fw.append(request.getID());
       fw.append(",");
-      fw.append(request.getName());
-      fw.append(",");
-      fw.append(Integer.toString(request.getAmount()));
-      fw.append(",");
       fw.append(request.getPatientName());
+      fw.append(",");
+      fw.append(request.getDietRest());
       fw.append(",");
       fw.append(request.getStatus());
       fw.append(",");
       fw.append(request.getEmployee().getEmployeeID());
       fw.append(",");
       fw.append(request.getDestination());
+      fw.append(",");
+      fw.append(request.getAddNotes());
       fw.append(",");
       fw.append(request.getDate());
       fw.append(",");
@@ -165,150 +242,77 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     fw.close();
   }
 
-  public void JavaToSQL() {
-
-    try {
-      statement.execute("Drop table MedicineRequest");
-    } catch (Exception e) {
-      System.out.println("didn't drop table");
-    }
-
-    try {
-      statement.execute(
-          "CREATE TABLE MedicineRequest("
-              + "ID varchar(10) not null,"
-              + "name varchar(50) not null, "
-              + "amount int not null,"
-              + "patientName varchar(50) not null,"
-              + "status varchar(50) not null,"
-              + "staff varchar(50) not null,"
-              + "destination varchar(50) not null,"
-              + "date varchar(10) not null,"
-              + "time varchar(10) not null)");
-      for (MedicineRequest currReq : List.values()) {
-        statement.execute(
-            "INSERT INTO MedicineRequest VALUES("
-                + "'"
-                + currReq.getID()
-                + "','"
-                + currReq.getName()
-                + "',"
-                + currReq.getAmount()
-                + ",'"
-                + currReq.getPatientName()
-                + "','"
-                + currReq.getStatus()
-                + "','"
-                + currReq.getEmployee().getEmployeeID()
-                + "','"
-                + currReq.getDestination()
-                + "','"
-                + currReq.getDate()
-                + "','"
-                + currReq.getTime()
-                + "')");
-      }
-    } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
-    }
-  }
-
-  public void SQLToJava() {
-    List = new HashMap<String, MedicineRequest>();
-    try {
-      ResultSet results;
-      results = statement.executeQuery("SELECT * FROM MedicineRequest");
-
-      while (results.next()) {
-        String id = results.getString("ID");
-        String name = results.getString("name");
-        int amount = results.getInt("amount");
-        String patientName = results.getString("patientName");
-        String status = results.getString("status");
-        String staff = results.getString("staff");
-        String location = results.getString("location");
-        String date = results.getString("date");
-        String time = results.getString("time");
-
-        MedicineRequest SQLRow =
-            new MedicineRequest(
-                id, name, amount, patientName, status, checkEmployee(staff), location, date, time);
-
-        List.put(id, SQLRow);
-      }
-    } catch (SQLException e) {
-      System.out.println("request not found");
-    }
-  }
-
-  public void printTable() throws IOException {
-    // csv to java
+  @Override
+  public void printTable() throws IOException { // csv to java
     CSVToJava();
     // display locations and attributes
     System.out.println(
-        "ID |\t Name |\t Amount |\t Patient Name |\t Status |\t Employee Name |\t Location |\t Date |\t Time");
-    for (MedicineRequest request : this.List.values()) {
+        "ID |\t Patient |\t Diet Restrictions |\t Status |\t Staff |\t Destination |\t Additional Notes |\t Date |\t Time");
+    for (MealRequest request : this.List.values()) {
       System.out.println(
           request.ID
               + " | \t"
-              + request.name
-              + " | \t"
-              + request.amount
-              + " | \t"
               + request.patientName
+              + " | \t"
+              + request.dietRest
+              + " | \t"
+              + request.dietRest
               + " | \t"
               + request.status
               + " | \t"
               + request.employee.getEmployeeID()
               + " | \t"
-              + request.location
+              + request.destination
+              + " | \t"
+              + request.addNotes
               + " | \t"
               + request.date
               + " | \t"
-              + request.time);
+              + request.time
+              + " | \t");
     }
   }
 
   @Override
-  public void edit(MedicineRequest data) throws IOException {
-    // takes entries from SQL table that match input node and updates it with a new floor and
-    // location type
-    // input ID
+  public void edit(MealRequest data) throws IOException, SQLException {
     if (List.containsKey(data.ID)) {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("No Such STAFF");
+        System.out.println("No Such Employee Exists in Database");
       }
     } else {
-      System.out.println("Doesn't Exist");
+      System.out.println("A Request With This ID Already Does Not Exist");
     }
   }
 
   @Override
-  public void add(MedicineRequest data) throws IOException {
+  public void add(MealRequest data) throws IOException, SQLException {
     if (List.containsKey(data.ID)) {
       System.out.println("A Request With This ID Already Exists");
     } else {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.put(data.ID, data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("No Such STAFF");
+        System.out.println("No Such Employee Exists in Database");
       }
     }
   }
 
   @Override
-  public void remove(MedicineRequest data) throws IOException {
-    // removes entries from SQL table that match input node
+  public void remove(MealRequest data) throws IOException {
+
     try {
-      this.List.remove(data.ID);
+      data.location.getRequests().remove(data);
+      List.remove(data.ID);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
@@ -321,9 +325,8 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     return 0;
   }
 
+  @Override
   public void saveTableAsCSV(String CSVName) throws SQLException {
-    // takes entries from SQL table and an input name, from there it makes a new CSV file
-
     String csvFilePath = "./" + CSVName + ".csv";
 
     try {
@@ -336,41 +339,45 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     }
   }
 
-  public MedicineRequest askUser() {
+  @Override
+  public MealRequest askUser() {
     Scanner reqInput = new Scanner(System.in);
 
     String inputID = "None";
-    String inputName = "N/A";
-    int inputAmount;
-    String inputPatientName = "N/A";
+    String inputPatient = "N/A";
+    String inputDietRest = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
-    String inputLocation = "N/A";
+    String inputDestination = "N/A";
+    String inputAddNotes = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";
 
-    System.out.println("Input request ID: ");
+    System.out.println("Input Request ID: ");
     inputID = reqInput.nextLine();
 
-    System.out.println("Input name: ");
-    inputName = reqInput.nextLine();
+    System.out.println("Input Patient Name: ");
+    inputPatient = reqInput.nextLine();
 
-    System.out.println("Input request amount: ");
-    inputAmount = Integer.parseInt(reqInput.nextLine());
+    System.out.println("Input Diet Restriction: ");
+    inputDietRest = reqInput.nextLine();
+
+    System.out.println("Input Location Node: ");
+    inputDestination = reqInput.nextLine();
 
     System.out.println("Input Staff name: ");
     inputStaff = reqInput.nextLine();
 
     Employee empty = new Employee(inputStaff);
 
-    return new MedicineRequest(
+    return new MealRequest(
         inputID,
-        inputName,
-        inputAmount,
-        inputPatientName,
+        inputPatient,
+        inputDietRest,
         inputStatus,
         empty,
-        inputLocation,
+        inputDestination,
+        inputAddNotes,
         inputDate,
         inputTime);
   }

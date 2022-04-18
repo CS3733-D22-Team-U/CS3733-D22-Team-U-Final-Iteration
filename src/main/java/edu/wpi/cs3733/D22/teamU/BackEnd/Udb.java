@@ -12,10 +12,12 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import java.io.*;
@@ -31,6 +33,43 @@ public final class Udb {
   public static String[] CSVfiles;
   public static String username;
   public static String password;
+
+  public Connection connection;
+  public Statement statement;
+  public String authentication;
+
+  public LocationDaoImpl locationImpl;
+  public EquipmentDaoImpl EquipmentImpl;
+  public EmployeeDaoImpl EmployeeImpl;
+  public EquipRequestDaoImpl equipRequestImpl;
+  public LabRequestDaoImpl labRequestImpl;
+  public LaundryRequestDaoImpl laundryRequestImpl;
+  public MedicineRequestDaoImpl medicineRequestImpl;
+  public MealRequestDaoImpl mealRequestImpl;
+  public GiftRequestDaoImpl giftRequestImpl;
+
+  public static boolean admin;
+
+  private Udb(String username, String password, String[] CSVfiles)
+      throws IOException, SQLException {
+    admin = true;
+    this.username = username;
+    this.password = password;
+    this.CSVfiles = CSVfiles;
+
+    // THIS WILL RUN THE SERVER IN PORT 1527 IN THE BACKGROUND EVEN WHEN YOU CLOSE THE APP
+    // Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
+    // start");
+    // netstat -ano | findstr :1527
+    // taskkill /PID [your #] /F
+    // java -jar %DERBY_HOME%\lib\derbyrun.jar server start
+
+    statement = null;
+    authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
+
+    databaseInit();
+    // create connection
+  }
 
   public void changeDriver(boolean change) throws IOException, SQLException {
     // embedded driver
@@ -62,41 +101,6 @@ public final class Udb {
 
   public static void removeConnection() {
     Instance = null;
-  }
-
-  public Connection connection;
-  public Statement statement;
-  public String authentication;
-
-  public LocationDaoImpl locationImpl;
-  public EquipmentDaoImpl EquipmentImpl;
-  public EmployeeDaoImpl EmployeeImpl;
-  public EquipRequestDaoImpl equipRequestImpl;
-  public LabRequestDaoImpl labRequestImpl;
-  public LaundryRequestDaoImpl laundryRequestImpl;
-  public MedicineRequestDaoImpl medicineRequestImpl;
-
-  public static boolean admin;
-
-  private Udb(String username, String password, String[] CSVfiles)
-      throws IOException, SQLException {
-    admin = true;
-    this.username = username;
-    this.password = password;
-    this.CSVfiles = CSVfiles;
-
-    // THIS WILL RUN THE SERVER IN PORT 1527 IN THE BACKGROUND EVEN WHEN YOU CLOSE THE APP
-    // Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
-    // start");
-    // netstat -ano | findstr :1527
-    // taskkill /PID [your #] /F
-    // java -jar %DERBY_HOME%\lib\derbyrun.jar server start
-
-    statement = null;
-    authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
-
-    databaseInit();
-    // create connection
   }
 
   public void databaseCreate() throws SQLException {
@@ -177,6 +181,8 @@ public final class Udb {
     labRequestImpl = new LabRequestDaoImpl(statement, CSVfiles[4]);
     laundryRequestImpl = new LaundryRequestDaoImpl(statement, CSVfiles[5]);
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
+    giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[7]);
+    mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -190,14 +196,20 @@ public final class Udb {
     equipRequestImpl.CSVToJava(locationImpl.list());
     equipRequestImpl.JavaToSQL();
 
-    labRequestImpl.CSVToJava();
+    labRequestImpl.CSVToJava(locationImpl.list());
     labRequestImpl.JavaToSQL();
 
-    laundryRequestImpl.CSVToJava();
+    laundryRequestImpl.CSVToJava(locationImpl.list());
     laundryRequestImpl.JavaToSQL();
 
-    medicineRequestImpl.CSVToJava();
+    medicineRequestImpl.CSVToJava(locationImpl.list());
     medicineRequestImpl.JavaToSQL();
+
+    giftRequestImpl.CSVToJava(locationImpl.list());
+    giftRequestImpl.JavaToSQL();
+
+    mealRequestImpl.CSVToJava(locationImpl.list());
+    mealRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON

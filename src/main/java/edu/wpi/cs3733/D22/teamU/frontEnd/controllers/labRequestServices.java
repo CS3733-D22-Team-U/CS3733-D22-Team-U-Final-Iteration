@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.lab.LabUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -28,16 +27,16 @@ public class labRequestServices extends ServiceController {
   @FXML TextArea otherField;
   @FXML TextField patientNameField;
   @FXML TextField staffMemberField;
-  @FXML TableColumn<LabUI, String> activeReqID;
-  @FXML TableColumn<LabUI, String> patientNameReq;
-  @FXML TableColumn<LabUI, String> activeReqStaff;
-  @FXML TableColumn<LabUI, String> activeReqType;
-  @FXML TableColumn<LabUI, String> activeDate;
-  @FXML TableColumn<LabUI, String> activeTime;
-  @FXML TableView<LabUI> activeRequestTable;
+  @FXML TableColumn<LabRequest, String> activeReqID;
+  @FXML TableColumn<LabRequest, String> patientNameReq;
+  @FXML TableColumn<LabRequest, String> activeReqStaff;
+  @FXML TableColumn<LabRequest, String> activeReqType;
+  @FXML TableColumn<LabRequest, String> activeDate;
+  @FXML TableColumn<LabRequest, String> activeTime;
+  @FXML TableView<LabRequest> activeRequestTable;
   @FXML VBox requestHolder;
 
-  ObservableList<LabUI> labUIRequests = FXCollections.observableArrayList();
+  ObservableList<LabRequest> labUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
 
   // Udb udb = DBController.udb;
@@ -69,14 +68,16 @@ public class labRequestServices extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<LabUI> getActiveRequestList() throws SQLException, IOException {
+  private ObservableList<LabRequest> getActiveRequestList() throws SQLException, IOException {
     for (LabRequest request : Udb.getInstance().labRequestImpl.hList().values()) {
       labUIRequests.add(
-          new LabUI(
+          new LabRequest(
               request.getID(),
-              request.getPatient(),
-              request.getEmployee().getEmployeeID(),
               request.getName(),
+              request.getPatientName(),
+              request.getStatus(),
+              request.getEmployee(),
+              request.getDestination(),
               request.getDate(),
               request.getTime()));
     }
@@ -85,7 +86,7 @@ public class labRequestServices extends ServiceController {
 
   @Override
   public void addRequest() {
-
+    // String labInput = ...
     String patientInput = patientNameField.getText().trim();
     String staffInput = staffMemberField.getText().trim();
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -93,33 +94,50 @@ public class labRequestServices extends ServiceController {
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
-        LabUI request =
-            new LabUI(
-                (int) rand + "",
-                patientInput,
-                staffInput,
-                checkBoxes.get(i).getText().trim(),
-                sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11));
-        activeRequestTable.setItems(
-            newRequest(
-                request.getId(),
-                request.getPatientName(),
-                request.getStaffName(),
-                request.getLabType(),
-                request.getRequestDate(),
-                request.getRequestTime()));
+        LabRequest request = null;
+        try {
+          request =
+              new LabRequest(
+                  (int) rand + "",
+                  "lab",
+                  patientInput,
+                  "In Progress",
+                  checkEmployee(staffInput),
+                  checkBoxes.get(i).getText().trim(),
+                  sdf3.format(timestamp).substring(0, 10),
+                  sdf3.format(timestamp).substring(11));
+        } catch (SQLException e) {
+          e.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        try {
+          activeRequestTable.setItems(
+              newRequest(
+                  request.getID(),
+                  request.getName(),
+                  request.getPatientName(),
+                  request.getStatus(),
+                  request.getEmployee().getEmployeeID(),
+                  request.getDestination(),
+                  request.getDate(),
+                  request.getTime()));
+        } catch (SQLException | IOException e) {
+          e.printStackTrace();
+        }
         try {
           Udb.getInstance()
               .labRequestImpl
               .add(
                   new LabRequest(
-                      request.getId(),
+                      request.getID(),
+                      request.getName(),
                       request.getPatientName(),
-                      new Employee(request.getId()),
-                      request.getLabType(),
-                      request.getRequestDate(),
-                      request.getRequestTime()));
+                      request.getStatus(),
+                      checkEmployee(request.getEmployee().getEmployeeID()),
+                      request.getDestination(),
+                      request.getDate(),
+                      request.getTime()));
           submission.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();
@@ -132,10 +150,29 @@ public class labRequestServices extends ServiceController {
     clear();
   }
 
-  private ObservableList<LabUI> newRequest(
-      String id, String patientName, String staffName, String labType, String date, String time) {
-    labUIRequests.add(new LabUI(id, patientName, staffName, labType, date, time));
+  private ObservableList<LabRequest> newRequest(
+      String id,
+      String labType,
+      String patientName,
+      String status,
+      String staffName,
+      String destination,
+      String date,
+      String time)
+      throws SQLException, IOException {
+    labUIRequests.add(
+        new LabRequest(
+            id, labType, patientName, status, checkEmployee(staffName), destination, date, time));
     return labUIRequests;
+  }
+
+  private Employee checkEmployee(String employee) throws SQLException, IOException {
+    if (Udb.getInstance().EmployeeImpl.List.get(employee) != null) {
+      return Udb.getInstance().EmployeeImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
   }
 
   @Override
