@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,8 +30,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Scale;
+import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
+
+
+
   /*Edit Remove Popup*/
   public TextField popupNodeID;
   public TextField popupXCoord;
@@ -86,10 +92,13 @@ public class MapController extends ServiceController {
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
 
-  public MapController() throws IOException, SQLException {}
+  public MapController() throws IOException, SQLException {
+
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     super.initialize(location, resources);
 
     addBTN.setDisable(!Udb.admin);
@@ -153,7 +162,37 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
+
+          //code to drag node around
+          final Delta dragDelta = new Delta();
+          ln.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+              // record a delta distance for the drag and drop operation.
+              dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+              dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+              ln.setCursor(Cursor.MOVE);
+            }
+          });
+          ln.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+              ln.setCursor(Cursor.HAND);
+            }
+          });
+          ln.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+              ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+              ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+            }
+          });
+          ln.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+              ln.setCursor(Cursor.HAND);
+            }
+          });
+
+
           ln.setOnMouseClicked(this::popupOpen);
+
           locations.put(loc.getNodeID(), ln);
           temp.getChildren().add(ln);
 
@@ -197,6 +236,14 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
   }
+
+
+
+
+
+
+
+  class Delta { double x, y; }
 
   private void setScroll(AnchorPane pane) {
     pane.setOnScroll(
