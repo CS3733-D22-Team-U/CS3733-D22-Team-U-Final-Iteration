@@ -63,7 +63,7 @@ public class Menu {
         break;
 
       case 11:
-        // exits whole menu
+
         break;
 
       case 12:
@@ -72,6 +72,7 @@ public class Menu {
 
       case 13:
         //exit whole menu
+        break;
     }
   }
 
