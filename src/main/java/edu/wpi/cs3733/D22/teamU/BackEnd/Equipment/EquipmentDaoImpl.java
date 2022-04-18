@@ -155,7 +155,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
         EquipmentList.add(SQLRow);
       }
     } catch (SQLException e) {
-      System.out.println(e);
+      System.out.println("JavaToSQL error in EquipmentImp");
     }
   }
 

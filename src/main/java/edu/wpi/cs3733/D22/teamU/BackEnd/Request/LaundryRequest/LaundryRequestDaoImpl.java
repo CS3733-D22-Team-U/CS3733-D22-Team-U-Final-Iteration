@@ -153,7 +153,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 + "','"
                 + currLaud.getStatus()
                 + "','"
-                + currLaud.getLocation()
+                + currLaud.getLocation().getNodeID()
                 + "','"
                 + currLaud.getPickUpDate()
                 + "','"
@@ -165,7 +165,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in LaundryRequestImp");
+      e.printStackTrace();
     }
   }
 
@@ -353,7 +354,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     String inputPatient = "N/A";
     String inputStaff = "N/A";
     String inputStatus = "N/A";
-    String inputLocation = "N/A";
+    String inputLocation = "FDEPT00101";
     String inputPick = "N/A";
     String inputDrop = "N/A";
     String inputServices = "N/A";

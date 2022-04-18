@@ -209,7 +209,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in MedicineRequestImp");
     }
   }
 
@@ -345,7 +345,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     String inputPatientName = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
-    String inputLocation = "N/A";
+    String inputLocation = "FDEPT00101";
     String inputDate = "N/A";
     String inputTime = "N/A";
 

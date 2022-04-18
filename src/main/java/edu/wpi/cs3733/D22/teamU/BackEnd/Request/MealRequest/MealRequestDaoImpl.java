@@ -125,7 +125,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
           "CREATE TABLE MealRequest("
               + "ID varchar(10) not null,"
               + "patientName varchar(20) not null,"
-              + "dietRist varchar(100) not null,"
+              + "dietRest varchar(100) not null,"
               + "status varchar(15) not null,"
               + "employee varchar(20) not null,"
               + "destination varchar(15) not null,"
@@ -156,7 +156,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in MealRequestImp");
     }
   }
 
@@ -311,8 +311,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public void remove(MealRequest data) throws IOException {
 
     try {
-      data.location.getRequests().remove(data);
-      List.remove(data.ID);
+      this.List.remove(data.ID);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
@@ -343,12 +342,12 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public MealRequest askUser() {
     Scanner reqInput = new Scanner(System.in);
 
-    String inputID = "None";
+    String inputID;
     String inputPatient = "N/A";
     String inputDietRest = "N/A";
     String inputStatus = "N/A";
     String inputStaff = "N/A";
-    String inputDestination = "N/A";
+    String inputDestination = "FDEPT00101";
     String inputAddNotes = "N/A";
     String inputDate = "N/A";
     String inputTime = "N/A";

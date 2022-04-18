@@ -221,7 +221,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 + ")");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in EquipRequestImp");
     }
   }
 
@@ -379,7 +379,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     int inputAmount = 0;
     String inputType = "N/A";
     String inputStaff = "N/A";
-    String inputDestination = "N/A";
+    String inputDestination = "FDEPT00101";
     String inputDate = "N/A";
     String inputTime = "N/A";
     String inputStatus = "N/A";
