@@ -7,9 +7,14 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DraggableMaker;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +29,9 @@ public class LocationNode extends Group {
   private double x, y;
   private final double scale = 15;
 
+
+
+
   public LocationNode(Location location, double x, double y, AnchorPane pane) throws IOException {
 
     super();
@@ -35,6 +43,10 @@ public class LocationNode extends Group {
 
     Circle c = new Circle();
     setLocationIcon(c);
+    DraggableMaker draggableMaker = new DraggableMaker();
+    draggableMaker.makeDraggable(c);
+
+
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
@@ -51,8 +63,13 @@ public class LocationNode extends Group {
     if (location.getRequests().size() > 0) {
       Rectangle r = new Rectangle();
       setRequest(r);
+      DraggableMaker draggableMaker2 = new DraggableMaker();
+      draggableMaker.makeDraggable(r);
+
     }
   }
+
+
 
   private void addMapIcon(String resource) {
     ImageView aView = new ImageView();
@@ -65,6 +82,8 @@ public class LocationNode extends Group {
     aView.setScaleX(.8);
     aView.setScaleY(.8);
     getChildren().add(aView);
+
+
   }
 
   //  private void setRequest(Shape s) {
