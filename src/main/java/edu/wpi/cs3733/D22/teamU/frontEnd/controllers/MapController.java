@@ -96,8 +96,11 @@ public class MapController extends ServiceController {
 
   }
 
-  @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+
+
+
 
     super.initialize(location, resources);
 
@@ -168,6 +171,9 @@ public class MapController extends ServiceController {
           ln.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
               // record a delta distance for the drag and drop operation.
+             // setPaneOnMousePressedEventHandler(null);
+             // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+
               dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
               dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
               ln.setCursor(Cursor.MOVE);
@@ -176,6 +182,8 @@ public class MapController extends ServiceController {
           ln.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
               ln.setCursor(Cursor.HAND);
+              //setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+              //setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
             }
           });
           ln.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -187,8 +195,12 @@ public class MapController extends ServiceController {
           ln.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
               ln.setCursor(Cursor.HAND);
+
             }
           });
+
+
+
 
 
           ln.setOnMouseClicked(this::popupOpen);
@@ -576,35 +588,108 @@ public class MapController extends ServiceController {
     }
   }
 
+
+
+
+
   // Pan by Pressing and Dragging
   double orgSceneX, orgSceneY;
   double orgTranslateX, orgTranslateY;
   EventHandler<MouseEvent> paneOnMousePressedEventHandler =
-      new EventHandler<MouseEvent>() {
 
-        @Override
-        public void handle(MouseEvent t) {
-          orgSceneX = t.getSceneX();
-          orgSceneY = t.getSceneY();
-          orgTranslateX = ((AnchorPane) (t.getSource())).getTranslateX();
-          orgTranslateY = ((AnchorPane) (t.getSource())).getTranslateY();
-        }
-      };
+          new EventHandler<MouseEvent>() {
+
+
+            @Override
+            public void handle(MouseEvent t) {
+              orgSceneX = t.getSceneX();
+              orgSceneY = t.getSceneY();
+              orgTranslateX = ((AnchorPane) (t.getSource())).getTranslateX();
+              orgTranslateY = ((AnchorPane) (t.getSource())).getTranslateY();
+            }
+          };
+
+
 
   EventHandler<MouseEvent> paneOnMouseDraggedEventHandler =
-      new EventHandler<MouseEvent>() {
+          new EventHandler<MouseEvent>() {
 
-        @Override
-        public void handle(MouseEvent t) {
-          double offsetX = t.getSceneX() - orgSceneX;
-          double offsetY = t.getSceneY() - orgSceneY;
-          double newTranslateX = orgTranslateX + offsetX;
-          double newTranslateY = orgTranslateY + offsetY;
 
-          ((AnchorPane) (t.getSource())).setTranslateX(newTranslateX);
-          ((AnchorPane) (t.getSource())).setTranslateY(newTranslateY);
-        }
-      };
+            @Override
+            public void handle(MouseEvent t) {
+              double offsetX = t.getSceneX() - orgSceneX;
+              double offsetY = t.getSceneY() - orgSceneY;
+              double newTranslateX = orgTranslateX + offsetX;
+              double newTranslateY = orgTranslateY + offsetY;
+
+              ((AnchorPane) (t.getSource())).setTranslateX(newTranslateX);
+              ((AnchorPane) (t.getSource())).setTranslateY(newTranslateY);
+            }
+          };
+
+
+  public void enablePan(){
+    EventHandler<MouseEvent> paneOnMousePressedEventHandler =
+
+            new EventHandler<MouseEvent>() {
+
+
+              @Override
+              public void handle(MouseEvent t) {
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                orgTranslateX = ((AnchorPane) (t.getSource())).getTranslateX();
+                orgTranslateY = ((AnchorPane) (t.getSource())).getTranslateY();
+              }
+            };
+
+
+
+    EventHandler<MouseEvent> paneOnMouseDraggedEventHandler =
+            new EventHandler<MouseEvent>() {
+
+
+              @Override
+              public void handle(MouseEvent t) {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+
+                ((AnchorPane) (t.getSource())).setTranslateX(newTranslateX);
+                ((AnchorPane) (t.getSource())).setTranslateY(newTranslateY);
+              }
+            };
+  }
+
+
+  public void disablePan(){
+
+    EventHandler<MouseEvent> paneOnMouseDraggedEventHandler =
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent t) {
+
+              }
+            };
+
+
+    EventHandler<MouseEvent> paneOnMousePressedEventHandler =
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent t) {
+              }
+            };
+
+  }
+
+
+
+
+
+
+
+
 
   public void test(ZoomEvent zoomEvent) {}
 }
