@@ -65,6 +65,13 @@ public class Menu {
       case 11:
         // exits whole menu
         break;
+
+      case 12:
+
+        break;
+
+      case 13:
+        //exit whole menu
     }
   }
 
