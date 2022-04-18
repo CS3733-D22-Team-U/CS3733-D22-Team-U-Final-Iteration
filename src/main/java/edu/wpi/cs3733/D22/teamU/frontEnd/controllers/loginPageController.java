@@ -11,6 +11,7 @@ import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -25,6 +26,7 @@ public class loginPageController extends ServiceController {
   public TextField username;
   public Text feedback;
   @FXML Circle loadingCircle;
+  @FXML Group loginGroup;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +51,7 @@ public class loginPageController extends ServiceController {
                         try {
                           scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/Dashboard.fxml");
                         } catch (IOException e) {
-                          feedback.setText("Wrong Username/Password");
+                          e.printStackTrace();
                         }
                         Stage appStage =
                             (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
