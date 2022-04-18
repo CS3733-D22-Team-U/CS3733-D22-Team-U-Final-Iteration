@@ -80,6 +80,40 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     }
   }
 
+  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+    List = new HashMap<String, ReligiousRequest>();
+    String s;
+    File file = new File(csvFile);
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    br.readLine();
+    while ((s = br.readLine()) != null) {
+      String[] row = s.split(",");
+      if (row.length == 8) {
+        ReligiousRequest r =
+                new ReligiousRequest(
+                        row[0],
+                        row[1],
+                        row[2],
+                        row[3],
+                        row[4],
+                        row[5],
+                        row[6],
+                        row[7],
+                        checkEmployee(row[8]));
+        List.put(row[0], r);
+
+        try {
+          Location temp = new Location();
+          temp.setNodeID(r.destination);
+          Location l = locations.get(locations.indexOf(temp));
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+      }
+    }
+  }
+
   public void JavaToCSV(String csvFile) throws IOException {
     PrintWriter fw = new PrintWriter(new File(csvFile));
 

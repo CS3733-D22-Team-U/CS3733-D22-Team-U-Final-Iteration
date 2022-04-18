@@ -22,11 +22,14 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
 
 import java.io.*;
 import java.sql.*;
+import java.util.Scanner;
 
 public final class Udb {
 
@@ -51,6 +54,8 @@ public final class Udb {
   public MedicineRequestDaoImpl medicineRequestImpl;
   public MealRequestDaoImpl mealRequestImpl;
   public GiftRequestDaoImpl giftRequestImpl;
+  public ReligiousRequestDaoImpl religiousRequestImpl;
+  public TranslatorRequestDaoImpl translatorRequestImpl;
 
   public static boolean admin;
 
@@ -187,7 +192,8 @@ public final class Udb {
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
     giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[7]);
     mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
-    mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]); // modify
+    religiousRequestImpl = new ReligiousRequestDaoImpl(statement, CSVfiles[9]);
+    translatorRequestImpl = new TranslatorRequestDaoImpl(statement, CSVfiles[10]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -216,8 +222,10 @@ public final class Udb {
     mealRequestImpl.CSVToJava(locationImpl.list());
     mealRequestImpl.JavaToSQL();
 
-    mealRequestImpl.CSVToJava(locationImpl.list());
-    mealRequestImpl.JavaToSQL();
+    religiousRequestImpl.CSVToJava(locationImpl.list());
+    religiousRequestImpl.JavaToSQL();
+
+
 
   }
 
@@ -269,6 +277,14 @@ public final class Udb {
         mealRequestImpl.edit((MealRequest) thingToAdd);
         break;
 
+      case "ReligiousRequest":
+        religiousRequestImpl.edit((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.edit((TranslatorRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.edit()");
         break;
@@ -312,6 +328,14 @@ public final class Udb {
 
       case "MealRequest":
         mealRequestImpl.add((MealRequest) thingToAdd);
+        break;
+
+      case "ReligousRequest":
+        religiousRequestImpl.add((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.add((TranslatorRequest) thingToAdd);
         break;
 
       default:
@@ -359,6 +383,14 @@ public final class Udb {
         mealRequestImpl.remove((MealRequest) thingToAdd);
         break;
 
+      case "ReligiousRequest":
+        religiousRequestImpl.remove((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.remove((TranslatorRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.remove()");
         break;
@@ -404,6 +436,13 @@ public final class Udb {
       case "MealRequest":
         mealRequestImpl.saveTableAsCSV(nameOfCSV);
         break;
+
+      case "ReligiousRequest":
+        religiousRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.saveTableAsCSV(nameOfCSV);
 
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");
