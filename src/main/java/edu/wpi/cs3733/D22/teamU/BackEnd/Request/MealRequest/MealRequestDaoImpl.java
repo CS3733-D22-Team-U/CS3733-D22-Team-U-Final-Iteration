@@ -125,7 +125,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
           "CREATE TABLE MealRequest("
               + "ID varchar(10) not null,"
               + "patientName varchar(20) not null,"
-              + "dietRist varchar(100) not null,"
+              + "dietRest varchar(100) not null,"
               + "status varchar(15) not null,"
               + "employee varchar(20) not null,"
               + "destination varchar(15) not null,"
