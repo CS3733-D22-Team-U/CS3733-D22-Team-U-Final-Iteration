@@ -22,6 +22,9 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
+
 import java.io.*;
 import java.sql.*;
 
@@ -184,6 +187,7 @@ public final class Udb {
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
     giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[7]);
     mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
+    mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]); // modify
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -214,6 +218,7 @@ public final class Udb {
 
     mealRequestImpl.CSVToJava(locationImpl.list());
     mealRequestImpl.JavaToSQL();
+
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
