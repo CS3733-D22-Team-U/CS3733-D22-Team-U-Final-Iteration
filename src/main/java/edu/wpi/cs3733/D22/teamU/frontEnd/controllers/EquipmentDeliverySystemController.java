@@ -8,6 +8,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -67,6 +69,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Button allEquipButton;
+  @FXML Text time;
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
@@ -122,7 +125,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
         .bind(
             Bindings.createBooleanBinding(
                 () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
 
     // BooleanBinding submit =locations.idProperty().isEmpty().and(
     // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
@@ -130,9 +133,22 @@ public class EquipmentDeliverySystemController extends ServiceController {
         .disableProperty()
         .bind(
             Bindings.createBooleanBinding(
-                () ->
-                    ((checkBoxes.stream().anyMatch(JFXCheckBox::isSelected))
-                        && !locations.promptTextProperty().isEmpty().get())));
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+    handleTime();
+  }
+
+  private void handleTime() {
+    Thread timeThread =
+        new Thread(
+            () -> {
+              while (Uapp.running) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String timeStampTime = sdf3.format(timestamp).substring(11);
+                time.setText(timeStampTime);
+              }
+            });
+    timeThread.start();
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {
@@ -360,5 +376,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(false);
     allEquipButton.setUnderline(true);
+  }
+
+  public void mouseHovered(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: #E6F6F7");
+  }
+
+  public void mouseExit(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: transparent");
   }
 }
