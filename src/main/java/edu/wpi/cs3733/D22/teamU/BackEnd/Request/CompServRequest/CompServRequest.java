@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamU.BackEnd.Request.CSRequest;
+package edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;

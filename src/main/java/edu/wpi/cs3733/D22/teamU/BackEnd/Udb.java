@@ -10,6 +10,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.EquipmentDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
