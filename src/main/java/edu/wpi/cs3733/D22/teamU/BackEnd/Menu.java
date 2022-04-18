@@ -69,7 +69,7 @@ public class Menu {
         break;
 
       case 12:
-        serveChangeMenu();
+
         break;
 
       case 13:
@@ -77,6 +77,7 @@ public class Menu {
         break;
     }
   }
+
 
   private void serveChangeMenu() throws SQLException, IOException {
     Scanner changeInput = new Scanner(System.in);

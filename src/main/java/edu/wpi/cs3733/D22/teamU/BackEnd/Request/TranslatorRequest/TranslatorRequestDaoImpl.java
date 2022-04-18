@@ -6,6 +6,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+
+import javax.swing.plaf.nimbus.State;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +21,11 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   public String csvFile;
   public HashMap<String, TranslatorRequest> List = new HashMap<String, TranslatorRequest>();
   public ArrayList<TranslatorRequest> list = new ArrayList<TranslatorRequest>();
+
+  public TranslatorRequestDaoImpl(Statement statement, String CSVfile){
+    this.statement = statement;
+    this.csvFile = CSVfile;
+  }
 
   @Override
   public ArrayList<TranslatorRequest> list() {
