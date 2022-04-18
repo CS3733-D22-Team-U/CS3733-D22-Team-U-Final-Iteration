@@ -72,11 +72,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         try {
           Location temp = new Location();
           temp.setNodeID(e.destination);
-          Location l =
-              Udb.getInstance()
-                  .locationImpl
-                  .locations
-                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          Location l = Udb.getInstance().locationImpl.locations.get(temp.getNodeID());
           l.addRequest(e);
           e.setLocation(l);
         } catch (Exception exception) {
@@ -283,13 +279,13 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
 
     if (List.containsKey(data.ID)) {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.hList());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO SUch STAFF");
+        System.out.println("NO SUCH STAFF");
       }
     } else {
       System.out.println("Doesn't Exist");
@@ -309,7 +305,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
       System.out.println("A Request With This ID Already Exists");
     } else {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
+        data.updateLocation(data.destination, Udb.getInstance().locationImpl.hList());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.put(data.ID, data);
         this.JavaToSQL();

@@ -77,7 +77,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     setUpAllEquipment();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
+    for (Location l : Udb.getInstance().locationImpl.hList().values()) {
       nodeIDs.add(l.getNodeID());
     }
     locations.setTooltip(new Tooltip());
@@ -159,7 +159,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList.values()) {
       equipmentUI.add(
           new EquipmentUI(
               equipment.getName(),

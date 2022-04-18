@@ -175,7 +175,7 @@ public class sideViewController extends ServiceController {
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList.values()) {
       equipmentUI.add(
           new EquipmentUI(
               equipment.getName(),

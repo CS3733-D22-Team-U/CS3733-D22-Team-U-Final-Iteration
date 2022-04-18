@@ -108,7 +108,7 @@ public class MapController extends ServiceController {
     setUpMap();
     mapUI.clear();
     try {
-      for (Location loc : Udb.getInstance().locationImpl.locations) {
+      for (Location loc : Udb.getInstance().locationImpl.locations.values()) {
         mapUI.add(
             new MapUI(
                 loc.getNodeID(),

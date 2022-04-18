@@ -14,7 +14,7 @@ public class LocationDaoImpl implements DataDao<Location> {
 
   // make constant in locationDao
   public Statement statement;
-  public ArrayList<Location> locations = new ArrayList<Location>();
+  public HashMap<String, Location> locations = new HashMap<String, Location>();
   public String csvFile;
 
   /**
@@ -36,7 +36,7 @@ public class LocationDaoImpl implements DataDao<Location> {
    */
   @Override
   public void CSVToJava() throws IOException {
-    locations = new ArrayList<Location>();
+    locations = new HashMap<String, Location>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -44,7 +44,8 @@ public class LocationDaoImpl implements DataDao<Location> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == 8)
-        locations.add(
+        locations.put(
+            row[0],
             new Location(
                 row[0],
                 Integer.parseInt(row[1]),
@@ -62,12 +63,12 @@ public class LocationDaoImpl implements DataDao<Location> {
 
   @Override
   public ArrayList<Location> list() {
-    return locations;
+    return null;
   }
 
   @Override
   public HashMap<String, Location> hList() {
-    return null;
+    return locations;
   }
 
   /**
@@ -94,8 +95,7 @@ public class LocationDaoImpl implements DataDao<Location> {
               + "longName varchar(900) not null,"
               + "shortName varchar(600))");
 
-      for (int j = 0; j < locations.size(); j++) {
-        Location currLoc = locations.get(j);
+      for (Location currLoc : locations.values()) {
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -131,7 +131,7 @@ public class LocationDaoImpl implements DataDao<Location> {
    */
   @Override
   public void SQLToJava() {
-    locations = new ArrayList<Location>();
+    locations = new HashMap<String, Location>();
 
     try {
       ResultSet results;
@@ -157,7 +157,7 @@ public class LocationDaoImpl implements DataDao<Location> {
         SQLRow.longName = longName;
         SQLRow.shortName = shortName;
 
-        locations.add(SQLRow);
+        locations.put(nodeID, SQLRow);
       }
     } catch (SQLException e) {
       System.out.println("location does not exist.");
@@ -193,24 +193,22 @@ public class LocationDaoImpl implements DataDao<Location> {
     fw.append("shortName");
     fw.append("\n");
 
-    for (int i = 0;
-        i < locations.size();
-        i++) { // ask about how this was working without and = sign
-      fw.append(locations.get(i).nodeID);
+    for (Location location : locations.values()) {
+      fw.append(location.nodeID);
       fw.append(",");
-      fw.append(Integer.toString(locations.get(i).xcoord));
+      fw.append(Integer.toString(location.xcoord));
       fw.append(",");
-      fw.append(Integer.toString(locations.get(i).ycoord));
+      fw.append(Integer.toString(location.ycoord));
       fw.append(",");
-      fw.append(locations.get(i).floor);
+      fw.append(location.floor);
       fw.append(",");
-      fw.append(locations.get(i).building);
+      fw.append(location.building);
       fw.append(",");
-      fw.append(locations.get(i).nodeType);
+      fw.append(location.nodeType);
       fw.append(",");
-      fw.append(locations.get(i).longName);
+      fw.append(location.longName);
       fw.append(",");
-      fw.append(locations.get(i).shortName);
+      fw.append(location.shortName);
       fw.append("\n");
     }
     fw.close();
@@ -224,7 +222,7 @@ public class LocationDaoImpl implements DataDao<Location> {
     // display locations and attributes
     System.out.println(
         "Node |\t X |\t Y |\t Level |\t Building |\t Type |\t Long Name |\t Short Name");
-    for (Location location : this.locations) {
+    for (Location location : this.locations.values()) {
       System.out.println(
           location.nodeID
               + " | \t"
@@ -256,11 +254,11 @@ public class LocationDaoImpl implements DataDao<Location> {
     // takes entries from SQL table that match input node and updates it with a new floor and
     // location type
     // input ID
-    try {
-      list().set(search(data.nodeID), data);
+    if (locations.containsKey(data.nodeID)) {
+      hList().replace(data.nodeID, data);
       this.JavaToSQL(); // t
       this.JavaToCSV(csvFile); // t
-    } catch (Exception e) {
+    } else {
       System.out.println("This Object Does Not Exist");
     }
   }
@@ -274,12 +272,12 @@ public class LocationDaoImpl implements DataDao<Location> {
   @Override
   public void add(Location data) throws IOException {
     // add a new entry to the SQL table
-    try {
-      locations.get(search(data.nodeID));
+    if (locations.containsKey(data.nodeID)) {
+      // locations.get(search(data.nodeID));
       System.out.println("An Object With This ID Already Exists");
-    } catch (Exception e) {
+    } else {
       Location newLocation = data;
-      this.locations.add(newLocation);
+      this.locations.put(data.nodeID, newLocation);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     }
@@ -296,27 +294,33 @@ public class LocationDaoImpl implements DataDao<Location> {
   public void remove(Location data) throws IOException {
     // removes entries from SQL table that match input node
     // Udb udb = DBController.udb;
-    try {
-      Location temp = locations.get(search(data.nodeID));
+    if (locations.containsKey(data.nodeID)) {
+      Location temp = locations.get(data.nodeID);
       System.out.println(data.getRequests().size());
-      for (Request e : temp.getRequests()) {
-        if (e instanceof EquipRequest) Udb.getInstance().equipRequestImpl.hList().remove(e.getID());
+      try {
+        for (Request e : temp.getRequests()) {
+          if (e instanceof EquipRequest)
+            Udb.getInstance().equipRequestImpl.hList().remove(e.getID());
+        }
+        Udb.getInstance().equipRequestImpl.JavaToCSV(Udb.getInstance().equipRequestImpl.csvFile);
+        Udb.getInstance().equipRequestImpl.JavaToSQL();
+      } catch (Exception e) {
+        System.out.println("getInstance() threw an error");
       }
-      Udb.getInstance().equipRequestImpl.JavaToCSV(Udb.getInstance().equipRequestImpl.csvFile);
-      Udb.getInstance().equipRequestImpl.JavaToSQL();
-      this.locations.remove(search(data.nodeID));
+      this.locations.remove(data.nodeID);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
-    } catch (Exception e) {
+    } else {
       System.out.println("This Data Point Was Not Found");
     }
   }
 
   @Override
   public int search(String id) { // TODO search
-    int index = -1;
+    /*int index = -1;
     for (int i = 0; i < list().size(); i++) if (id.equals(list().get(i).nodeID)) index = i;
-    return index;
+    return index;*/
+    return -1;
   }
 
   /**

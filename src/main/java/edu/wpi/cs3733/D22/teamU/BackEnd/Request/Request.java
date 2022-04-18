@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Request {
   public String ID;
@@ -56,10 +56,10 @@ public abstract class Request {
     this.location = location;
   }
 
-  public void updateLocation(String dest, ArrayList<Location> locations) {
+  public void updateLocation(String dest, HashMap<String, Location> locations) {
     Location temp = new Location();
     temp.setNodeID(dest);
-    Location l = locations.get(locations.indexOf(temp));
+    Location l = locations.get(temp.getNodeID());
     l.addRequest(this);
     setLocation(l);
   }
