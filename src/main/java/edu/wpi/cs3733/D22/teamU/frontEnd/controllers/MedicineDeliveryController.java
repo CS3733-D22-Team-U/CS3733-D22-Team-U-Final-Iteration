@@ -152,17 +152,24 @@ public class MedicineDeliveryController extends ServiceController {
         double rand = Math.random() * 10000;
         // int amount = Integer.parseInt(checkBoxInput.get(i).toString().trim());
         int amount = 24;
-        medicineUI request =
-            new medicineUI(
-                (int) rand + "",
-                checkBoxes.get(i).getText(),
-                destinationInput,
-                "Ordered",
-                patientInput,
-                checkEmployee(staffInput),
-                sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11),
-                amount);
+        medicineUI request = null;
+        try {
+          request =
+              new medicineUI(
+                  (int) rand + "",
+                  checkBoxes.get(i).getText(),
+                  destinationInput,
+                  "Ordered",
+                  patientInput,
+                  checkEmployee(staffInput),
+                  sdf3.format(timestamp).substring(0, 10),
+                  sdf3.format(timestamp).substring(11),
+                  amount);
+        } catch (SQLException throwables) {
+          throwables.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         activeRequestTable.setItems(
             newRequest(
                 request.getId(),
@@ -188,7 +195,7 @@ public class MedicineDeliveryController extends ServiceController {
                       request.getDate(),
                       request.getTime()));
           processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
           e.printStackTrace();
           processText.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
         }

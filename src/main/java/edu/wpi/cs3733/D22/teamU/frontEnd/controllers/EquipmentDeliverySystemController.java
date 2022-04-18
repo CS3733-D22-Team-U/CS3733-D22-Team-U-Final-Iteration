@@ -74,19 +74,43 @@ public class EquipmentDeliverySystemController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllEquipment();
-    setUpActiveRequests();
+    try {
+      setUpAllEquipment();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l.getNodeID());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+    try {
+      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(l.getEmployeeID());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -166,9 +190,10 @@ public class EquipmentDeliverySystemController extends ServiceController {
               equipment.getInUse(),
               equipment.getAvailable(),
               equipment.getAmount(),
-              equipment.getLocationID()));
+              equipment.getLocationID(),
+              equipment.getLocation().getFloor(),
+              equipment.getLocation().getNodeType()));
     }
-
     return equipmentUI;
   }
 
@@ -182,7 +207,9 @@ public class EquipmentDeliverySystemController extends ServiceController {
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPri()));
+              equipRequest.getPri(),
+              equipRequest.getLocation().getFloor(),
+              equipRequest.getLocation().getNodeType()));
     }
     return equipmentUIRequests;
   }

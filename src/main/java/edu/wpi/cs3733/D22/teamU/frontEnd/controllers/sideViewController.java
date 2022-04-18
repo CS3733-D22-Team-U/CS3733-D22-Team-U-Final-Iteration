@@ -3,19 +3,22 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
@@ -52,16 +55,14 @@ public class sideViewController extends ServiceController {
   @FXML Rectangle room11;
   @FXML Rectangle room12;
   @FXML Rectangle room13;
-  @FXML CheckBox roomCheck;
   @FXML TableView<EquipmentUI> equipFloor;
   @FXML TableColumn<EquipmentUI, String> location;
   @FXML TableColumn<EquipmentUI, String> locationType;
+  @FXML TableColumn<EquipmentUI, String> floor;
   @FXML TableColumn<EquipmentUI, String> equipmentName;
+  @FXML TextField filterField;
 
-  ObservableList<EquipmentUI> equipment = FXCollections.observableArrayList();
   // Udb udb = DBController.udb;
-  ArrayList<String> nodeIDs;
-
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -139,103 +140,51 @@ public class sideViewController extends ServiceController {
     recLevel5.setVisible(false);
   }
 
-  public void showRooms(ActionEvent actionEvent) {
-    CheckBox ck = (CheckBox) actionEvent.getSource();
-    switch (ck.getId()) {
-      case "checked":
-        room1.setVisible(true);
-        room2.setVisible(true);
-        room3.setVisible(true);
-        room4.setVisible(true);
-        room5.setVisible(true);
-        room6.setVisible(true);
-        room7.setVisible(true);
-        room8.setVisible(true);
-        room9.setVisible(true);
-        room10.setVisible(true);
-        room11.setVisible(true);
-        room12.setVisible(true);
-        room13.setVisible(true);
-        break;
-    }
-    switch (ck.getId()) {
-      case "unchecked":
-        room1.setVisible(false);
-        room2.setVisible(false);
-        room3.setVisible(false);
-        room4.setVisible(false);
-        room5.setVisible(false);
-        room6.setVisible(false);
-        room7.setVisible(false);
-        room8.setVisible(false);
-        room9.setVisible(false);
-        room10.setVisible(false);
-        room11.setVisible(false);
-        room12.setVisible(false);
-        room13.setVisible(false);
-        break;
-    }
-  }
-
-  public void disableRooms() {
-    room1.setVisible(false);
-    room2.setVisible(false);
-    room3.setVisible(false);
-    room4.setVisible(false);
-    room5.setVisible(false);
-    room6.setVisible(false);
-    room7.setVisible(false);
-    room8.setVisible(false);
-    room9.setVisible(false);
-    room10.setVisible(false);
-    room11.setVisible(false);
-    room12.setVisible(false);
-    room13.setVisible(false);
-  }
-
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
+
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      equipmentUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
+      if (equipment.getLocation() != null)
+        equipmentUI.add(
+            new EquipmentUI(
+                equipment.getLocationID(),
+                equipment.getName(),
+                equipment.getAmount(),
+                equipment.getLocation().getShortName(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
     }
-
     return equipmentUI;
-  }
-
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
-
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
-    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
-      equipmentUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI(
-              equipRequest.getID(),
-              equipRequest.getName(),
-              equipRequest.getAmount(),
-              equipRequest.getDestination(),
-              equipRequest.getDate(),
-              equipRequest.getTime(),
-              equipRequest.getPri()));
-    }
-    return equipmentUIRequests;
   }
 
   private void setUpAllEquipment() {
     equipmentName.setCellValueFactory(
         new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("amountInUse"));
+    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("id"));
+    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
+    floor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
+    FilteredList<EquipmentUI> filteredData = new FilteredList<>(equipmentUI, p -> true);
+    filterField
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              filteredData.setPredicate(
+                  equipment -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                      return true;
+                    }
+                    return false;
+                  });
+            });
+    SortedList<EquipmentUI> sortedData = new SortedList<>(filteredData);
+    sortedData.comparatorProperty().bind(equipFloor.comparatorProperty());
+    equipFloor.setItems(sortedData);
     try {
       equipFloor.setItems(getEquipmentList());
     } catch (Exception e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
