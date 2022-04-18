@@ -311,8 +311,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public void remove(MealRequest data) throws IOException {
 
     try {
-      data.location.getRequests().remove(data);
-      List.remove(data.ID);
+      this.List.remove(data.ID);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
@@ -343,7 +342,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public MealRequest askUser() {
     Scanner reqInput = new Scanner(System.in);
 
-    String inputID = "None";
+    String inputID;
     String inputPatient = "N/A";
     String inputDietRest = "N/A";
     String inputStatus = "N/A";
