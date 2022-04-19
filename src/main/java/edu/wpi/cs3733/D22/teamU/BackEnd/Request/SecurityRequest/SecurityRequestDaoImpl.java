@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest;
+package edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
@@ -13,41 +13,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
-
+public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, MaintenanceRequest> List = new HashMap<String, MaintenanceRequest>();
-  public ArrayList<MaintenanceRequest> list = new ArrayList<MaintenanceRequest>();
+  public HashMap<String, SecurityRequest> List = new HashMap<String, SecurityRequest>();
+  public ArrayList<SecurityRequest> list = new ArrayList<SecurityRequest>();
 
-  public MaintenanceRequestDaoImpl(Statement statement, String csvFile)
-      throws SQLException, IOException {
+  public SecurityRequestDaoImpl(Statement statement, String csvFile) {
     this.statement = statement;
     this.csvFile = csvFile;
   }
 
-  public Employee checkEmployee(String employee) {
-    if (EmployeeDaoImpl.List.get(employee) != null) {
-      return EmployeeDaoImpl.List.get(employee);
-    } else {
-      Employee empty = new Employee("N/A");
-      return empty;
-    }
-  }
-
   @Override
-  public ArrayList<MaintenanceRequest> list() {
+  public ArrayList<SecurityRequest> list() {
     return null;
   }
 
   @Override
-  public HashMap<String, MaintenanceRequest> hList() {
-    return null;
+  public HashMap<String, SecurityRequest> hList() {
+    return this.List;
   }
 
   @Override
   public void CSVToJava() throws IOException, SQLException {
-    List = new HashMap<String, MaintenanceRequest>();
+    List = new HashMap<String, SecurityRequest>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -56,13 +45,13 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        MaintenanceRequest r =
-            new MaintenanceRequest(
+        SecurityRequest r =
+            new SecurityRequest(
                 row[0],
                 row[1],
                 row[2],
-                row[3],
-                checkEmployee(row[4]),
+                checkEmployee(row[3]),
+                row[4],
                 row[5],
                 row[6],
                 row[7],
@@ -85,7 +74,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
   }
 
   public void CSVToJava(ArrayList<Location> locations) throws IOException, SQLException {
-    List = new HashMap<String, MaintenanceRequest>();
+    List = new HashMap<String, SecurityRequest>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -94,13 +83,13 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        MaintenanceRequest r =
-            new MaintenanceRequest(
+        SecurityRequest r =
+            new SecurityRequest(
                 row[0],
                 row[1],
                 row[2],
-                row[3],
-                checkEmployee(row[4]),
+                checkEmployee(row[3]),
+                row[4],
                 row[5],
                 row[6],
                 row[7],
@@ -118,87 +107,94 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
     }
   }
 
+  private Employee checkEmployee(String employee) {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
+  }
+
   @Override
   public void JavaToSQL() {
     try {
-      statement.execute("Drop table LaundrMaintenanceRequest");
-    } catch (Exception e) {
+      statement.execute("Drop table SecurityRequest");
+    } catch (SQLException e) {
       System.out.println("didn't drop table");
     }
-
     try {
       statement.execute(
-          "CREATE TABLE MaintenanceRequest("
-              + "ID varchar(10) not null,"
-              + "name varchar(20) not null,"
-              + "status varchar(20) not null,"
-              + "destination varchar(20) not null,"
-              + "employee varchar(15) not null,"
-              + "typeOfMaintenance varchar(20) not null,"
-              + "description varchar(60) not null,"
-              + "date varchar(10) not null,"
-              + "time varchar(10) not null)");
+          "CREATE TABLE SecurityRequest("
+              + "ID varchar (10) not null,"
+              + "name varchar (20) not null,"
+              + "status varchar (15) not null,"
+              + "employee varchar (20) not null,"
+              + "destination varchar(15) not null,"
+              + "description varchar (200) not null,"
+              + "lethal varchar(10) not null,"
+              + "date varchar (10) not null,"
+              + "time varchar (10) not null)");
 
-      for (MaintenanceRequest currMainReq : List.values()) {
+      for (SecurityRequest currSecurity : List.values()) {
         statement.execute(
-            "INSERT INTO LaundryRequest VALUES("
+            "INSERT INTO SecurityRequest VALUES("
                 + "'"
-                + currMainReq.getID()
+                + currSecurity.getID()
                 + "','"
-                + currMainReq.getName()
+                + currSecurity.getName()
                 + "','"
-                + currMainReq.getStatus()
+                + currSecurity.getStatus()
                 + "','"
-                + currMainReq.getDestination()
+                + currSecurity.getEmployee().getEmployeeID()
                 + "','"
-                + currMainReq.getEmployee().getEmployeeID()
+                + currSecurity.getDestination()
                 + "','"
-                + currMainReq.getTypeOfMaintenance()
+                + currSecurity.getDescriptionOfThreat()
                 + "','"
-                + currMainReq.getDescription()
+                + currSecurity.getLeathalForcePermited()
                 + "','"
-                + currMainReq.getDate()
+                + currSecurity.getDate()
                 + "','"
-                + currMainReq.getTime()
+                + currSecurity.getTime()
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("JavaToSQL error in MaintenanceRequestImp");
-      e.printStackTrace();
+      System.out.println("JavaToSQL error in SecurityRequestImp");
+      System.out.println(e);
     }
   }
 
   @Override
   public void SQLToJava() {
-    List = new HashMap<String, MaintenanceRequest>();
+    List = new HashMap<String, SecurityRequest>();
     try {
       ResultSet results;
-      results = statement.executeQuery("SELECT * FROM MaintenanceRequest");
+      results = statement.executeQuery("SELECT * FROM SecurityRequest");
 
       while (results.next()) {
-        String ID = results.getString("ID");
+        String id = results.getString("ID");
         String name = results.getString("name");
         String status = results.getString("status");
-        String destination = results.getString("destination");
         String employee = results.getString("employee");
-        String typeOfMaintenance = results.getString("typeOfMaintenance");
+        String destination = results.getString("destination");
         String description = results.getString("description");
+        String lethal = results.getString("lethal");
         String date = results.getString("date");
         String time = results.getString("time");
 
-        MaintenanceRequest SQLRow =
-            new MaintenanceRequest(
-                ID,
+        SecurityRequest SQLRow =
+            new SecurityRequest(
+                id,
                 name,
                 status,
-                destination,
                 checkEmployee(employee),
-                typeOfMaintenance,
+                destination,
                 description,
+                lethal,
                 date,
                 time);
-
-        List.put(ID, SQLRow);
+        List.put(id, SQLRow);
       }
     } catch (SQLException e) {
       System.out.println("Database does not exist.");
@@ -211,37 +207,37 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
 
     fw.append("ID");
     fw.append(",");
-    fw.append("name");
+    fw.append("Name");
     fw.append(",");
     fw.append("Status");
     fw.append(",");
+    fw.append("Staff");
+    fw.append(",");
     fw.append("Destination");
     fw.append(",");
-    fw.append("Employee");
-    fw.append(",");
-    fw.append("Type of Maintenance");
-    fw.append(",");
     fw.append("Description");
+    fw.append(",");
+    fw.append("Lethal");
     fw.append(",");
     fw.append("Date");
     fw.append(",");
     fw.append("Time");
     fw.append("\n");
 
-    for (MaintenanceRequest request : List.values()) {
+    for (SecurityRequest request : List.values()) {
       fw.append(request.getID());
       fw.append(",");
       fw.append(request.getName());
       fw.append(",");
       fw.append(request.getStatus());
       fw.append(",");
-      fw.append(request.getDestination());
-      fw.append(",");
       fw.append(request.getEmployee().getEmployeeID());
       fw.append(",");
-      fw.append(request.getTypeOfMaintenance());
+      fw.append(request.getDestination());
       fw.append(",");
-      fw.append(request.getDescription());
+      fw.append(request.getDescriptionOfThreat());
+      fw.append(",");
+      fw.append(request.getLeathalForcePermited());
       fw.append(",");
       fw.append(request.getDate());
       fw.append(",");
@@ -253,10 +249,12 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
 
   @Override
   public void printTable() throws IOException, SQLException {
+    // csv to java
     CSVToJava();
+    // display locations and attributes
     System.out.println(
-        "ID |\t Name |\t Status |\t Destination |\t Employee |\t Type Of Maintenance |\t Description |\t Date |\t Time");
-    for (MaintenanceRequest request : this.List.values()) {
+        "ID |\t Name |\t Status |\t Staff |\t Destination |\t Description |\t Lethal |\t Date |\t Time");
+    for (SecurityRequest request : this.List.values()) {
       System.out.println(
           request.ID
               + " | \t"
@@ -264,13 +262,13 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
               + " | \t"
               + request.status
               + " | \t"
+              + request.employee.getEmployeeID()
+              + " | \t"
               + request.destination
               + " | \t"
-              + request.getEmployee().getEmployeeID()
+              + request.descriptionOfThreat
               + " | \t"
-              + request.typeOfMaintenance
-              + " | \t"
-              + request.description
+              + request.leathalForcePermited
               + " | \t"
               + request.date
               + " | \t"
@@ -279,26 +277,24 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
   }
 
   @Override
-  public void edit(MaintenanceRequest data) throws IOException, SQLException {
-    // takes entries from SQL table that match input node and updates it with a new floor and
-    // location type
-    // input ID
-    if (List.containsKey(data.ID)) {
-      if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
+  public void edit(SecurityRequest data) throws IOException, SQLException {
+    if (List.containsKey(data.ID)) { // check if node exists
+      if (EmployeeDaoImpl.List.containsKey(
+          data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO Such STAFF");
+        System.out.println("No Such Employee Exists in Database");
       }
     } else {
-      System.out.println("Doesn't Exist");
+      System.out.println("A Request With This ID Already Does Not Exist");
     }
   }
 
   @Override
-  public void add(MaintenanceRequest data) throws IOException, SQLException {
+  public void add(SecurityRequest data) throws IOException, SQLException {
     if (List.containsKey(data.ID)) {
       System.out.println("A Request With This ID Already Exists");
     } else {
@@ -308,13 +304,13 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
-        System.out.println("NO Such STAFF");
+        System.out.println("No Such Employee Exists in Database");
       }
     }
   }
 
   @Override
-  public void remove(MaintenanceRequest data) throws IOException {
+  public void remove(SecurityRequest data) throws IOException {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
@@ -331,8 +327,10 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
   }
 
   @Override
-  public void saveTableAsCSV(String nameOfCSV) throws SQLException {
-    String csvFilePath = "./" + nameOfCSV + ".csv";
+  public void saveTableAsCSV(String CSVName) throws SQLException {
+    // takes entries from SQL table and an input name, from there it makes a new CSV file
+
+    String csvFilePath = "./" + CSVName + ".csv";
 
     try {
       new File(csvFilePath);
@@ -345,35 +343,38 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
   }
 
   @Override
-  public MaintenanceRequest askUser() {
+  public SecurityRequest askUser() {
     Scanner labInput = new Scanner(System.in);
 
-    String inputID = "None";
-    String inputName = "N/A";
+    String inputID = "N/A";
+    String inputSender = "N/A";
     String inputStatus = "N/A";
-    String inputDestination = "N/A";
-    String inputEmployee = "N/A";
-    String inputTypeOfMaintenance = "N/A";
-    String inputDescription = "N/A";
+    String inputStaff = "test2";
+    String inputDestination = "FDEPT00101";
+    String inputDescript = "N/A";
+    String inputLethal = "absolutely";
     String inputDate = "N/A";
     String inputTime = "N/A";
 
-    System.out.println("Input Type of Maintenance: ");
-    inputTypeOfMaintenance = labInput.nextLine();
+    System.out.println("Input Request ID: ");
+    inputID = labInput.nextLine();
 
-    System.out.println("Description: ");
-    inputDescription = labInput.nextLine();
+    System.out.println("Input Staff: ");
+    inputStaff = labInput.nextLine();
 
-    Employee empty = new Employee(inputEmployee);
+    System.out.println("Input Destination: ");
+    inputDestination = labInput.nextLine();
 
-    return new MaintenanceRequest(
+    Employee empty = new Employee(inputStaff);
+
+    return new SecurityRequest(
         inputID,
-        inputName,
+        inputSender,
         inputStatus,
-        inputDestination,
         empty,
-        inputTypeOfMaintenance,
-        inputDescription,
+        inputDestination,
+        inputDescript,
+        inputLethal,
         inputDate,
         inputTime);
   }

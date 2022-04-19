@@ -528,12 +528,12 @@ public class Menu {
     Scanner mealInput = new Scanner(System.in);
 
     System.out.println(
-            "1 - List Religious Request Information\n"
-                    + "2 - Change Religious Request\n"
-                    + "3 - Enter New Religious Request\n"
-                    + "4 - Delete Religious Request \n"
-                    + "5 - Save Religious Request Information to CSV file\n"
-                    + "6 - Return to Main Menu\n");
+        "1 - List Religious Request Information\n"
+            + "2 - Change Religious Request\n"
+            + "3 - Enter New Religious Request\n"
+            + "4 - Delete Religious Request \n"
+            + "5 - Save Religious Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
 
     switch (mealInput.nextInt()) {
       case 1:
@@ -571,16 +571,17 @@ public class Menu {
         break;
     }
   }
+
   private void translatorRequestMenu() throws SQLException, IOException {
     Scanner employeeInput = new Scanner(System.in);
 
     System.out.println(
-            "1 - List Translator Request Information\n"
-                    + "2 - Change Translator Request\n"
-                    + "3 - Enter New Translator Request\n"
-                    + "4 - Delete Translator Request \n"
-                    + "5 - Save Translator Request Information to CSV file\n"
-                    + "6 - Return to Main Menu\n");
+        "1 - List Translator Request Information\n"
+            + "2 - Change Translator Request\n"
+            + "3 - Enter New Translator Request\n"
+            + "4 - Delete Translator Request \n"
+            + "5 - Save Translator Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
     switch (employeeInput.nextInt()) {
       case 1:
         Udb.getInstance().translatorRequestImpl.printTable();
@@ -613,16 +614,17 @@ public class Menu {
         break;
     }
   }
+
   private void maintenanceRequestMenu() throws SQLException, IOException {
     Scanner employeeInput = new Scanner(System.in);
 
     System.out.println(
-            "1 - List Maintenance Request Information\n"
-                    + "2 - Change Maintenance Request\n"
-                    + "3 - Enter New Maintenance Request\n"
-                    + "4 - Delete Maintenance Request \n"
-                    + "5 - Save Maintenance Request Information to CSV file\n"
-                    + "6 - Return to Main Menu\n");
+        "1 - List Maintenance Request Information\n"
+            + "2 - Change Maintenance Request\n"
+            + "3 - Enter New Maintenance Request\n"
+            + "4 - Delete Maintenance Request \n"
+            + "5 - Save Maintenance Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
     switch (employeeInput.nextInt()) {
       case 1:
         Udb.getInstance().maintenanceRequestImpl.printTable();
@@ -660,27 +662,27 @@ public class Menu {
     Scanner employeeInput = new Scanner(System.in);
 
     System.out.println(
-            "1 - List Computer Service Request Information\n"
-                    + "2 - Change Computer Service Request\n"
-                    + "3 - Enter New Computer Service Request\n"
-                    + "4 - Delete Computer Service Request\n"
-                    + "5 - Save Computer Service Request Information to CSV file\n"
-                    + "6 - Return to Main Menu\n");
+        "1 - List Computer Service Request Information\n"
+            + "2 - Change Computer Service Request\n"
+            + "3 - Enter New Computer Service Request\n"
+            + "4 - Delete Computer Service Request\n"
+            + "5 - Save Computer Service Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
     switch (employeeInput.nextInt()) {
       case 1:
-        Udb.getInstance().compservRequestImpl.printTable();
+        Udb.getInstance().compServRequestImpl.printTable();
         compservRequestMenu();
         break;
       case 2:
-        Udb.getInstance().edit(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().edit(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 3:
-        Udb.getInstance().add(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().add(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 4:
-        Udb.getInstance().remove(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().remove(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 5:
@@ -703,12 +705,12 @@ public class Menu {
     Scanner employeeInput = new Scanner(System.in);
 
     System.out.println(
-            "1 - List Security Request Information\n"
-                    + "2 - Change Security Request\n"
-                    + "3 - Enter New Security Request\n"
-                    + "4 - Delete Security Request\n"
-                    + "5 - Save Security Request Information to CSV file\n"
-                    + "6 - Return to Main Menu\n");
+        "1 - List Security Request Information\n"
+            + "2 - Change Security Request\n"
+            + "3 - Enter New Security Request\n"
+            + "4 - Delete Security Request\n"
+            + "5 - Save Security Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
     switch (employeeInput.nextInt()) {
       case 1:
         Udb.getInstance().securityRequestImpl.printTable();
@@ -741,6 +743,4 @@ public class Menu {
         break;
     }
   }
-
-
 }
