@@ -106,7 +106,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   @Override
   public void JavaToSQL() {
     try {
-      statement.execute("Drop table MedicineRequest");
+      statement.execute("Drop table TranslatorRequest");
     } catch (Exception e) {
       System.out.println("didn't drop table");
     }

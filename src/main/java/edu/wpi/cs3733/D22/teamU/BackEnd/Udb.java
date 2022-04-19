@@ -359,7 +359,7 @@ public final class Udb {
         mealRequestImpl.add((MealRequest) thingToAdd);
         break;
 
-      case "ReligousRequest":
+      case "ReligiousRequest":
         religiousRequestImpl.add((ReligiousRequest) thingToAdd);
         break;
 
