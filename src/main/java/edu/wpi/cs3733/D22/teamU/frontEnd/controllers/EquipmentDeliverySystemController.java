@@ -210,7 +210,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPri()));
+              equipRequest.getPriority()));
     }
     return equipmentUIRequests;
   }
@@ -273,6 +273,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
                       request.getEquipmentName(),
                       request.getRequestAmount(),
                       request.getType(),
+                      "sent",
                       checkEmployee(employees.getValue().toString()),
                       request.getDestination(),
                       request.getRequestDate(),

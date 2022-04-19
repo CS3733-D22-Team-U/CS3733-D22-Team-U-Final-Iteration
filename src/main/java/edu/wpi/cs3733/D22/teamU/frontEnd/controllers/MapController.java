@@ -120,6 +120,9 @@ public class MapController extends ServiceController {
     setScroll(floor5Pane);
 
     locations = new HashMap<>();
+    //    for(LocationNode ln: locations.values())
+    //      ln.setV
+
     setUpMap();
     mapUI.clear();
     try {
