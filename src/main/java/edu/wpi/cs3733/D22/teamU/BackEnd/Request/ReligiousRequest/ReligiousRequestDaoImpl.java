@@ -49,10 +49,10 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     BufferedReader br = new BufferedReader(new FileReader(file));
     String[] header = br.readLine().split(",");
     int columns = header.length;
-    br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
@@ -85,7 +85,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
   public void CSVToJava(ArrayList<Location> locations) throws IOException {
     List = new HashMap<String, ReligiousRequest>();
     String s;
-    File file = new File(csvFile);
+    File file = new File(this.csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     br.readLine();
     while ((s = br.readLine()) != null) {
