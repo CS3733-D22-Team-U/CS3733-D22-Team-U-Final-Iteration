@@ -45,7 +45,7 @@ public abstract class ServiceController implements Initializable, Service {
   }
 
   public void toMedicineDelivery(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/medicineDelivery.fxml");
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/medRevamp.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
   }
