@@ -65,6 +65,18 @@ public class DBController {
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMedicineRequests.csv");
     String medicineRequest = copyFile(csvMedicineRequest, "csvTables/TowerMedicineRequests.csv");
 
+    InputStream csvGiftRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerGiftRequests.csv");
+    String giftRequest = copyFile(csvGiftRequest, "csvTables/TowerGiftRequests.csv");
+
+    InputStream csvMealRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
+    String mealRequest = copyFile(csvMealRequest, "csvTables/TowerMealRequests.csv");
+
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
         Main.class
@@ -85,8 +97,8 @@ public class DBController {
       LabRequest,
       laundryRequest,
       medicineRequest,
-      locationTest,
-      equipmentTest
+      giftRequest,
+      mealRequest
     };
     Udb.username = username;
     Udb.password = password;
@@ -95,7 +107,7 @@ public class DBController {
 
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
-    // udb.menu(); // Uncomment this to start terminal menu
+    // Udb.getInstance().menu(); // Uncomment this to start terminal menu
   }
 
   public static String copyFile(InputStream inputPath, String outputPath) throws IOException {

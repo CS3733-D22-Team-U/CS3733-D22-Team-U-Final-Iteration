@@ -5,50 +5,61 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LaundryRequest extends Request {
 
-  String patientName;
-  String status;
-  String destination;
+  String pickUpDate;
+  String dropOffDate;
+  String services;
+  String notes;
 
   public LaundryRequest(
       String ID,
-      String name,
       String patientName,
       Employee employee,
       String status,
-      String location,
-      String date,
-      String time) {
+      String destination,
+      String pickUpDate,
+      String dropOffDate,
+      String services,
+      String additionalNotes) {
     this.ID = ID;
-    this.name = name; // type of lab request
     this.patientName = patientName;
     this.employee = employee;
     this.status = status;
-    this.destination = location;
-    this.date = date;
-    this.time = time;
+    this.destination = destination;
+    this.pickUpDate = pickUpDate;
+    this.dropOffDate = dropOffDate;
+    this.services = services;
+    this.notes = additionalNotes;
   }
 
-  public String getPatientName() {
-    return patientName;
+  public String getPickUpDate() {
+    return pickUpDate;
   }
 
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
+  public void setPickUpDate(String pickUpDate) {
+    this.pickUpDate = pickUpDate;
   }
 
-  public String getStatus() {
-    return status;
+  public String getDropOffDate() {
+    return dropOffDate;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setDropOffDate(String dropOffDate) {
+    this.dropOffDate = dropOffDate;
   }
 
-  public String getDestination() {
-    return destination;
+  public String getServices() {
+    return services;
   }
 
-  public void setDestination(String location) {
-    this.destination = location;
+  public void setServices(String services) {
+    this.services = services;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
   }
 }
