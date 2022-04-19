@@ -605,7 +605,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("TranslateRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("TranslatorRequest", nameOfFile);
         translatorRequestMenu();
         break;
       case 6:
