@@ -126,7 +126,6 @@ public class MedicineDeliveryController extends ServiceController {
             "Belisha",
             "Iain",
             "Wong",
-            "Big Wong",
             "MR.HARSH",
             "Patient00678569420");
     new ComboBoxAutoComplete<String>(patient, 650, 290);
@@ -225,7 +224,7 @@ public class MedicineDeliveryController extends ServiceController {
   public void addRequest() {
     // String patientInput = patientName.getText().trim();
     String patient2 = patient.getValue().toString();
-    String staffInput = (employees.getId().toString());
+    String staffInput = (employees.getValue().toString());
     String destinationInput = locations.getValue().toString();
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -240,7 +239,7 @@ public class MedicineDeliveryController extends ServiceController {
                 patient2,
                 destinationInput,
                 "Ordered",
-                (checkEmployee(employees.getValue().toString())),
+                (checkEmployee(employees.getId().toString())),
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
                 69420);
