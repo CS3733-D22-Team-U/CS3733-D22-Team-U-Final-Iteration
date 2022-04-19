@@ -94,7 +94,7 @@ public class labRequestServices extends ServiceController {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
     setUpAllEquipment();
-    //    setUpActiveRequests();
+    setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
@@ -173,7 +173,7 @@ public class labRequestServices extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<EquipmentUI> newRequest(
+  private ObservableList<LabUI> newRequest(
       String id,
       String name,
       int amount,
@@ -182,7 +182,7 @@ public class labRequestServices extends ServiceController {
       String time,
       int priority) {
     labUIRequestss.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
-    return labUIRequestss;
+    return labUIRequests;
   }
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
