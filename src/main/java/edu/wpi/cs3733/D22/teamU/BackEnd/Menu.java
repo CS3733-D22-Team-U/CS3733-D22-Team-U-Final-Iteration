@@ -734,7 +734,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("SecurityRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("SecurityRequest", nameOfFile);
         securityRequestMenu();
         break;
       case 6:
