@@ -8,17 +8,13 @@ import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
@@ -34,7 +30,7 @@ public class sideViewController extends ServiceController {
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
   @FXML Pane assistPane;
-  @FXML SplitMenuButton chooseFloor;
+  @FXML ComboBox<String> chooseFloor;
   @FXML Rectangle recLower2;
   @FXML Rectangle recLower1;
   @FXML Rectangle recLevel1;
@@ -55,18 +51,23 @@ public class sideViewController extends ServiceController {
   @FXML Rectangle room11;
   @FXML Rectangle room12;
   @FXML Rectangle room13;
+  @FXML CheckBox roomCheck;
   @FXML TableView<EquipmentUI> equipFloor;
   @FXML TableColumn<EquipmentUI, String> location;
   @FXML TableColumn<EquipmentUI, String> locationType;
-  @FXML TableColumn<EquipmentUI, String> floor;
   @FXML TableColumn<EquipmentUI, String> equipmentName;
-  @FXML TextField filterField;
+  @FXML TableColumn<EquipmentUI, String> floor;
 
+  String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
   // Udb udb = DBController.udb;
+  ArrayList<String> nodeIDs;
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
+    chooseFloor.setItems(FXCollections.observableArrayList(floors));
+
     setUpAllEquipment();
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
@@ -88,6 +89,34 @@ public class sideViewController extends ServiceController {
             assistPane.setDisable(false);
           }
         });
+  }
+
+  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+
+  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
+    equipmentUI.clear();
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+      String floor = chooseFloor.getValue();
+      if (floor == null)
+        equipmentUI.add(
+            new EquipmentUI(
+                equipment.getLocationID(),
+                equipment.getName(),
+                equipment.getAmount(),
+                equipment.getLocation().getShortName(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+      else if (equipment.getLocation().getFloor().equals(floors))
+        equipmentUI.add(
+            new EquipmentUI(
+                equipment.getLocationID(),
+                equipment.getName(),
+                equipment.getAmount(),
+                equipment.getLocation().getShortName(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+    }
+    return equipmentUI;
   }
 
   public void lower(ActionEvent actionEvent) {
@@ -140,47 +169,12 @@ public class sideViewController extends ServiceController {
     recLevel5.setVisible(false);
   }
 
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
-
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    equipmentUI.clear();
-
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      if (equipment.getLocation() != null)
-        equipmentUI.add(
-            new EquipmentUI(
-                equipment.getLocationID(),
-                equipment.getName(),
-                equipment.getAmount(),
-                equipment.getLocation().getShortName(),
-                equipment.getLocation().getFloor(),
-                equipment.getLocation().getNodeType()));
-    }
-    return equipmentUI;
-  }
-
   private void setUpAllEquipment() {
     equipmentName.setCellValueFactory(
         new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
     location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("id"));
     locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
     floor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
-    FilteredList<EquipmentUI> filteredData = new FilteredList<>(equipmentUI, p -> true);
-    filterField
-        .textProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              filteredData.setPredicate(
-                  equipment -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                      return true;
-                    }
-                    return false;
-                  });
-            });
-    SortedList<EquipmentUI> sortedData = new SortedList<>(filteredData);
-    sortedData.comparatorProperty().bind(equipFloor.comparatorProperty());
-    equipFloor.setItems(sortedData);
     try {
       equipFloor.setItems(getEquipmentList());
     } catch (Exception e) {
