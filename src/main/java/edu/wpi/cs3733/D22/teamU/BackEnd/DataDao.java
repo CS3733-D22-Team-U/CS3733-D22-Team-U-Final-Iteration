@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,6 +16,8 @@ public interface DataDao<T> {
   HashMap<String, T> hList();
 
   void CSVToJava() throws IOException, SQLException;
+
+  void CSVToJava(ArrayList<Location> locations) throws IOException, SQLException;
 
   void JavaToSQL();
 
