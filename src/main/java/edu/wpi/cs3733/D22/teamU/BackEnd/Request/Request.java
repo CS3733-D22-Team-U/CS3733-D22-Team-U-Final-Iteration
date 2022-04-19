@@ -6,14 +6,29 @@ import java.util.ArrayList;
 
 public abstract class Request {
   public String ID;
-  public String name;
+  public String name; // or lab type
+  public String patientName;
   public String date;
   public String time;
+  public String status;
+  public String destination;
   public Employee employee;
   public Location location;
 
+  public void setDestination(String destination) {
+    this.destination = destination;
+  }
+
+  public String getPatientName() {
+    return patientName;
+  }
+
+  public void setPatientName(String patientName) {
+    this.patientName = patientName;
+  }
+
   public String getID() {
-    return ID;
+    return this.ID;
   }
 
   public void setID(String ID) {
@@ -56,6 +71,10 @@ public abstract class Request {
     this.location = location;
   }
 
+  public String getDestination() {
+    return destination;
+  }
+
   public void updateLocation(String dest, ArrayList<Location> locations) {
     Location temp = new Location();
     temp.setNodeID(dest);
@@ -66,5 +85,13 @@ public abstract class Request {
 
   public Location getLocation() {
     return location;
+  }
+
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 }

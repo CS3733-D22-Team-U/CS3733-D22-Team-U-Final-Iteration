@@ -8,9 +8,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,14 +21,10 @@ import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
@@ -38,43 +32,37 @@ import lombok.SneakyThrows;
 public class EquipmentDeliverySystemController extends ServiceController {
 
   public ComboBox<String> locations;
-  public ComboBox<String> employees;
-  @FXML TableColumn<EquipmentUI, String> nameCol;
-  @FXML TableColumn<EquipmentUI, Integer> inUse;
-  @FXML TableColumn<EquipmentUI, Integer> available;
-  @FXML TableColumn<EquipmentUI, Integer> total;
-  @FXML TableColumn<EquipmentUI, String> location;
-  @FXML TableView<EquipmentUI> table;
+  public ComboBox employees;
+  @FXML TabPane tabPane;
+  @FXML TableColumn<Equipment, String> nameCol;
+  @FXML TableColumn<Equipment, Integer> inUse;
+  @FXML TableColumn<Equipment, Integer> available;
+  @FXML TableColumn<Equipment, String> total;
+  @FXML TableColumn<Equipment, String> location;
+  @FXML TableView<Equipment> table;
   @FXML VBox requestHolder;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
-  @FXML TableColumn<EquipmentUI, String> activeReqID;
-  @FXML TableColumn<EquipmentUI, String> activeReqName;
-  @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
-  @FXML TableColumn<EquipmentUI, String> activeReqType;
-  @FXML TableColumn<EquipmentUI, String> activeReqDestination;
-  @FXML TableColumn<EquipmentUI, String> activeDate;
-  @FXML TableColumn<EquipmentUI, String> activeTime;
-  @FXML TableColumn<EquipmentUI, Integer> activePriority;
+  @FXML TableColumn<EquipRequest, String> activeReqID;
+  @FXML TableColumn<EquipRequest, String> activeReqName;
+  @FXML TableColumn<EquipRequest, Integer> activeReqAmount;
+  @FXML TableColumn<EquipRequest, String> activeReqType;
+  @FXML TableColumn<EquipRequest, String> activeReqDestination;
+  @FXML TableColumn<EquipRequest, String> activeDate;
+  @FXML TableColumn<EquipRequest, String> activeTime;
+  @FXML TableColumn<EquipRequest, Integer> activePriority;
 
-  @FXML TableView<EquipmentUI> activeRequestTable;
+  @FXML TableView<EquipRequest> activeRequestTable;
   @FXML VBox inputFields;
+  @FXML VBox locationInput;
 
-  @FXML StackPane requestsStack;
-  @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
-  @FXML Pane activeRequestPane;
-
-  @FXML Button newReqButton;
-  @FXML Button activeReqButton;
-  @FXML Button allEquipButton;
-  @FXML Text time;
-
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+  ObservableList<Equipment> equipmentUI = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
+  ObservableList<JFXTextArea> locInput = FXCollections.observableArrayList();
+
+  ObservableList<EquipRequest> equipmentUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
@@ -83,7 +71,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
+    super.initialize(location, resources);
     // udb = Udb.getInstance();
     setUpAllEquipment();
     setUpActiveRequests();
@@ -109,7 +97,6 @@ public class EquipmentDeliverySystemController extends ServiceController {
     for (Node textArea : inputFields.getChildren()) {
       checkBoxesInput.add((JFXTextArea) textArea);
     }
-
     for (int i = 0; i < checkBoxesInput.size(); i++) {
       int finalI = i;
       checkBoxesInput
@@ -125,92 +112,92 @@ public class EquipmentDeliverySystemController extends ServiceController {
         .bind(
             Bindings.createBooleanBinding(
                 () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
 
-    // BooleanBinding submit =locations.idProperty().isEmpty().and(
-    // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
     submitButton
         .disableProperty()
         .bind(
             Bindings.createBooleanBinding(
                 () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
-    handleTime();
-  }
-
-  private void handleTime() {
-    Thread timeThread =
-        new Thread(
-            () -> {
-              while (Uapp.running) {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                String timeStampTime = sdf3.format(timestamp).substring(11);
-                time.setText(timeStampTime);
-              }
-            });
-    timeThread.start();
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
-    available.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUI, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
+    nameCol.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Name"));
+    inUse.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("InUse"));
+    available.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Available"));
+    total.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Amount"));
+    location.setCellValueFactory(new PropertyValueFactory<Equipment, String>("locationID"));
+
     table.setItems(getEquipmentList());
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
-    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    activeReqName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    activeReqType.setText("Status");
+    activeReqType.setCellValueFactory(new PropertyValueFactory<>("status"));
     activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<EquipmentUI> newRequest(
+  private ObservableList<EquipRequest> newRequest(
       String id,
       String name,
       int amount,
+      String typeOfRequest,
+      String status,
+      String employee,
       String destination,
       String date,
       String time,
       int priority) {
-    equipmentUIRequests.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
+    equipmentUIRequests.add(
+        new EquipRequest(
+            id,
+            name,
+            amount,
+            typeOfRequest,
+            status,
+            checkEmployee(employee),
+            destination,
+            date,
+            time,
+            priority));
     return equipmentUIRequests;
   }
 
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
+  private ObservableList<Equipment> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
-          new EquipmentUI(
+          new Equipment(
               equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
               equipment.getAmount(),
+              equipment.getInUse(),
               equipment.getLocationID()));
     }
-
     return equipmentUI;
   }
 
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
+  private ObservableList<EquipRequest> getActiveRequestList() throws SQLException, IOException {
     for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
       equipmentUIRequests.add(
-          new EquipmentUI(
+          new EquipRequest(
               equipRequest.getID(),
               equipRequest.getName(),
               equipRequest.getAmount(),
+              equipRequest.getType(),
+              equipRequest.getStatus(),
+              equipRequest.getEmployee(),
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPri()));
+              equipRequest.getPriority()));
     }
     return equipmentUIRequests;
   }
@@ -246,11 +233,14 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
         double rand = Math.random() * 10000;
 
-        EquipmentUI request =
-            new EquipmentUI(
+        EquipRequest request =
+            new EquipRequest(
                 (int) rand + "",
-                checkBoxes.get(i).getText(),
+                "equipment",
                 requestAmount,
+                checkBoxes.get(i).getText(),
+                "in progress",
+                new Employee("n/a"),
                 room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
@@ -258,25 +248,29 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
         activeRequestTable.setItems(
             newRequest(
-                request.getId(),
-                request.getEquipmentName(),
-                request.getRequestAmount(),
+                request.getID(),
+                request.getName(),
+                request.getAmount(),
+                request.getType(),
+                request.getStatus(),
+                request.getEmployee().getEmployeeID(),
                 request.getDestination(),
-                request.getRequestDate(),
-                request.getRequestTime(),
-                1));
+                request.getDate(),
+                request.getTime(),
+                request.getPriority()));
         try {
           Udb.getInstance()
               .add( // TODO Have random ID and enter Room Destination
                   new EquipRequest(
-                      request.getId(),
-                      request.getEquipmentName(),
-                      request.getRequestAmount(),
+                      request.getID(),
+                      request.getName(),
+                      request.getAmount(),
                       request.getType(),
+                      request.getStatus(),
                       checkEmployee(employees.getValue().toString()),
                       request.getDestination(),
-                      request.getRequestDate(),
-                      request.getRequestTime(),
+                      request.getDate(),
+                      request.getTime(),
                       1));
 
         } catch (IOException e) {
@@ -337,54 +331,5 @@ public class EquipmentDeliverySystemController extends ServiceController {
       Employee empty = new Employee("N/A");
       return empty;
     }
-  }
-
-  public void switchToNewRequest(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    newReq.setVisible(true);
-    newReq.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(true);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToActive(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(true);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToEquipment(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
-  }
-
-  public void mouseHovered(MouseEvent mouseEvent) {
-    Button button = (Button) mouseEvent.getSource();
-    button.setStyle("-fx-border-color: #E6F6F7");
-  }
-
-  public void mouseExit(MouseEvent mouseEvent) {
-    Button button = (Button) mouseEvent.getSource();
-    button.setStyle("-fx-border-color: transparent");
   }
 }
