@@ -19,7 +19,7 @@ public class MealRequest extends Request {
       String date,
       String time) {
     this.ID = ID;
-    this.name = patientName;
+    this.patientName = patientName;
     this.dietRest = dietRest;
     this.status = status;
     this.employee = employee;

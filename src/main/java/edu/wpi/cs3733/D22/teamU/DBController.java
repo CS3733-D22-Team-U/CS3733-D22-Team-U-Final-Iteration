@@ -124,7 +124,7 @@ public class DBController {
     String equipmentTest = copyFile(csvEquipmentTest, "csvTables/TESTTowerEquipment.csv");
 
     String[] CSVfiles = {
-      location,
+      location, // 0
       employee,
       equipment,
       equipRequest,
@@ -133,8 +133,8 @@ public class DBController {
       medicineRequest,
       giftRequest,
       mealRequest,
-      translateRequest,
-      religousRequest,
+      religousRequest, // 9
+      translateRequest, // 10
       maintenanceRequest, // 11
       securityRequest,
       compServiceRequest

@@ -310,9 +310,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.edit((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.edit((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.edit()");
@@ -359,7 +361,7 @@ public final class Udb {
         mealRequestImpl.add((MealRequest) thingToAdd);
         break;
 
-      case "ReligousRequest":
+      case "ReligiousRequest":
         religiousRequestImpl.add((ReligiousRequest) thingToAdd);
         break;
 
@@ -373,9 +375,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.add((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.add((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.add()");
@@ -436,9 +440,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.remove((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.remove((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.remove()");
@@ -492,15 +498,19 @@ public final class Udb {
 
       case "TranslatorRequest":
         translatorRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "MaintenanceRequest":
         maintenanceRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "SecurityRequest":
         securityRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");

@@ -58,7 +58,7 @@ public class Menu {
       case 8:
         giftRequestMenu();
         break;
-
+        // need to be tested
       case 9:
         mealRequestMenu();
         break;
@@ -71,19 +71,19 @@ public class Menu {
         translatorRequestMenu();
         break;
 
-      case 13:
+      case 12:
         maintenanceRequestMenu();
         break;
-      case 14:
+      case 13:
         compservRequestMenu();
         break;
-      case 15:
+      case 14:
         securityRequestMenu();
         break;
-      case 16:
+      case 15:
         serveChangeMenu();
         break;
-      case 17:
+      case 16:
         // exit whole menu
         break;
     }
@@ -605,7 +605,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("TranslateRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("TranslatorRequest", nameOfFile);
         translatorRequestMenu();
         break;
       case 6:
@@ -648,7 +648,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("MaintenanceRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("MaintenanceRequest", nameOfFile);
         maintenanceRequestMenu();
         break;
       case 6:
@@ -691,7 +691,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("CompServRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("CompServRequest", nameOfFile);
         compservRequestMenu();
         break;
       case 6:
@@ -734,7 +734,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("SecurityRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("SecurityRequest", nameOfFile);
         securityRequestMenu();
         break;
       case 6:
