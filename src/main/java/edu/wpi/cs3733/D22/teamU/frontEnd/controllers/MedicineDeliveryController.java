@@ -2,7 +2,11 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
@@ -12,8 +16,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +32,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -39,6 +51,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML JFXCheckBox Metformin;
   @FXML JFXCheckBox specialCheck;
   @FXML Button clearButton;
+  @FXML Button submitButton;
   @FXML TextArea specialReq;
   @FXML TextField patientName;
   @FXML TextField staffName;
@@ -63,61 +76,177 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TabPane tab;
   @FXML TextField destination;
 
-  @FXML TableColumn<MedicineRequest, String> reqID;
-  @FXML TableColumn<MedicineRequest, String> reqPatient;
-  @FXML TableColumn<MedicineRequest, String> reqStaff;
-  @FXML TableColumn<MedicineRequest, String> reqMed;
-  @FXML TableColumn<MedicineRequest, String> reqAmount;
-  @FXML TableColumn<MedicineRequest, String> reqDest;
-  @FXML TableColumn<MedicineRequest, String> reqDate;
-  @FXML TableColumn<MedicineRequest, String> reqTime;
+  @FXML Text time;
+
+  @FXML TableColumn<MedicineRequest, String> activeReqID;
+  @FXML TableColumn<MedicineRequest, String> activeReqName;
+  @FXML TableColumn<MedicineRequest, Integer> activeReqAmount;
+  @FXML TableColumn<MedicineRequest, String> activeReqType;
+  @FXML TableColumn<MedicineRequest, String> activeReqDestination;
+  @FXML TableColumn<MedicineRequest, String> activeDate;
+  @FXML TableColumn<MedicineRequest, String> activeTime;
+  @FXML TableColumn<MedicineRequest, Integer> activePriority;
+
+  @FXML TableColumn<MedicineRequest, String> nameCol;
+  @FXML TableColumn<MedicineRequest, Integer> inUse;
+  @FXML TableColumn<MedicineRequest, Integer> available;
+  @FXML TableColumn<MedicineRequest, Integer> total;
+  @FXML TableColumn<MedicineRequest, String> location;
+
+  @FXML TableView<MedicineRequest> table;
+
+  @FXML Text requestText;
 
   @FXML TableView<MedicineRequest> activeRequestTable;
   @FXML VBox requestHolder;
 
+  @FXML
+  StackPane requestsStack;
+  @FXML Pane newRequestPane;
+  @FXML Pane allEquipPane;
+  @FXML Pane activeRequestPane;
+
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+  @FXML Button allEquipButton;
+  public ComboBox<String> locations;
+  public ComboBox<String> employees;
+  ArrayList<String> nodeIDs;
+  @FXML VBox inputFields;
+
+  ArrayList<String> staff;
+
+  ObservableList<MedicineRequest> medicineRequests = FXCollections.observableArrayList();
+
+
   ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
-  ObservableList<TextField> checkBoxInput = FXCollections.observableArrayList();
+  ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
 
   // Udb udb = DBController.udb;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    super.initialize(location, resources);
-    try {
-      setUpActiveRequests();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
+    // super.initialize(location, resources);
+    // udb = Udb.getInstance();
+    setUpAllMed();
+    setUpActiveRequests();
+    nodeIDs = new ArrayList<>();
+    for (Location l : Udb.getInstance().locationImpl.list()) {
+      nodeIDs.add(l.getNodeID());
     }
-    for (Node checkbox : requestHolder.getChildren()) {
-      checkBoxes.add((JFXCheckBox) checkbox);
+    locations.setTooltip(new Tooltip());
+    locations.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
+
+    staff = new ArrayList<>();
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l.getEmployeeID());
+    }
+    employees.setTooltip(new Tooltip());
+    employees.getItems().addAll(staff);
+    new ComboBoxAutoComplete<String>(employees, 675, 380);
+
+    for (Node checkBox : requestHolder.getChildren()) {
+      checkBoxes.add((JFXCheckBox) checkBox);
+    }
+    for (Node textArea : inputFields.getChildren()) {
+      checkBoxesInput.add((JFXTextArea) textArea);
     }
 
-    for (Node textField : medVbox.getChildren()) {
-      checkBoxInput.add((TextField) textField);
+    for (int i = 0; i < checkBoxesInput.size(); i++) {
+      int finalI = i;
+      checkBoxesInput
+              .get(i)
+              .disableProperty()
+              .bind(
+                      Bindings.createBooleanBinding(
+                              () -> !checkBoxes.get(finalI).isSelected(),
+                              checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
     }
+    clearButton
+            .disableProperty()
+            .bind(
+                    Bindings.createBooleanBinding(
+                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                            checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+
+    // BooleanBinding submit =locations.idProperty().isEmpty().and(
+    // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
+    submitButton
+            .disableProperty()
+            .bind(
+                    Bindings.createBooleanBinding(
+                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                            checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+    handleTime();
+  }
+
+  private void handleTime() {
+    Thread timeThread =
+            new Thread(
+                    () -> {
+                      while (Uapp.running) {
+                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                        String timeStampTime = sdf3.format(timestamp).substring(11);
+                        time.setText(timeStampTime);
+                      }
+                    });
+    timeThread.start();
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
-    reqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    reqPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    reqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
-    reqMed.setCellValueFactory(new PropertyValueFactory<>("name"));
-    reqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-    reqDest.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    reqDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-    reqTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
+    activeReqName.setCellValueFactory(new PropertyValueFactory<>("medicineName"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
+    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
+    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
+    activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
     activeRequestTable.setItems(getActiveRequestList());
+
+  }
+
+  private ObservableList<MedicineRequest> newRequest(
+          String id,
+          String name,
+          int amount,
+          String patientName,
+          String status,
+          Employee employee,
+          String destination,
+          String date,
+          String time,
+          int priority) {
+    medicineRequests.add(new MedicineRequest(id, name, amount, patientName, status, employee, destination, date, time));
+    return medicineRequests;
+  }
+
+
+
+
+
+
+
+
+  private void setUpAllMed() throws SQLException, IOException {
+    nameCol.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>("medicineName"));
+    inUse.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("amountInUse"));
+    available.setCellValueFactory(
+            new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("amountAvailable"));
+    total.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("totalAmount"));
+    location.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>("location"));
+    //table.setItems(getEquipmentList());
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
+    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
-          new MedicineRequest(
+          new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
               request.getID(),
               request.getName(),
               request.getAmount(),
@@ -140,6 +269,56 @@ public class MedicineDeliveryController extends ServiceController {
     }
   }
 
+
+  public void switchToNewRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(true);
+    allEquipButton.setUnderline(false);
+  }
+
+  public void switchToActive(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(true);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(false);
+  }
+
+  public void switchToMedicine(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(true);
+  }
+
+  public void mouseHovered(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: #E6F6F7");
+  }
+
+  public void mouseExit(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: transparent");
+  }
+
   @SneakyThrows
   @Override
   public void addRequest() {
@@ -155,8 +334,8 @@ public class MedicineDeliveryController extends ServiceController {
         double rand = Math.random() * 10000;
         // int amount = Integer.parseInt(checkBoxInput.get(i).toString().trim());
         int amount = 24;
-        MedicineRequest request =
-            new MedicineRequest(
+        edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request =
+            new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
                 amount,
@@ -181,7 +360,7 @@ public class MedicineDeliveryController extends ServiceController {
           Udb.getInstance()
               .medicineRequestImpl
               .add(
-                  new MedicineRequest(
+                  new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
                       request.getID(),
                       request.getName(),
                       request.getAmount(),
@@ -346,7 +525,7 @@ public class MedicineDeliveryController extends ServiceController {
     appStage.show();
   }
 
-  private ObservableList<MedicineRequest> newRequest(
+  private ObservableList<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest> newRequest(
       String id,
       String name,
       int amount,
@@ -357,7 +536,7 @@ public class MedicineDeliveryController extends ServiceController {
       String date,
       String time) {
     medUIRequests.add(
-        new MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
+        new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
     return medUIRequests;
   }
 
@@ -366,4 +545,25 @@ public class MedicineDeliveryController extends ServiceController {
 
   @Override
   public void updateRequest() {}
+
+  public void clearRequest() {
+    for (int i = 0; i < checkBoxes.size(); i++) {
+      checkBoxes.get(i).setSelected(false);
+      checkBoxesInput.get(i).clear();
+    }
+    requestText.setText("Cleared Requests!");
+    requestText.setVisible(true);
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(1500); // milliseconds
+                Platform.runLater(
+                        () -> {
+                          requestText.setVisible(false);
+                        });
+              } catch (InterruptedException ie) {
+              }
+            })
+            .start();
+  }
 }

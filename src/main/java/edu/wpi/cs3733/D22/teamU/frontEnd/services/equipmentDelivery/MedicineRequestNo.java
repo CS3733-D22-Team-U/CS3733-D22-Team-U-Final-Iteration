@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery;
 
-public class EquipmentUI {
+public class MedicineRequestNo {
   private String id;
   private String equipmentName;
   private String location;
@@ -15,7 +15,7 @@ public class EquipmentUI {
 
   private int priority;
 
-  public EquipmentUI(String name, int inUse, int available, int total, String location) {
+  public MedicineRequestNo(String name, int inUse, int available, int total, String location) {
     equipmentName = name;
     amountInUse = inUse;
     amountAvailable = available;
@@ -23,7 +23,7 @@ public class EquipmentUI {
     this.location = location;
   }
 
-  public EquipmentUI(
+  public MedicineRequestNo(
       String id,
       String name,
       int request,

@@ -5,7 +5,7 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
+import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.MedicineRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -53,12 +53,12 @@ public class sideViewController extends ServiceController {
   @FXML Rectangle room12;
   @FXML Rectangle room13;
   @FXML CheckBox roomCheck;
-  @FXML TableView<EquipmentUI> equipFloor;
-  @FXML TableColumn<EquipmentUI, String> location;
-  @FXML TableColumn<EquipmentUI, String> locationType;
-  @FXML TableColumn<EquipmentUI, String> equipmentName;
+  @FXML TableView<MedicineRequest> equipFloor;
+  @FXML TableColumn<MedicineRequest, String> location;
+  @FXML TableColumn<MedicineRequest, String> locationType;
+  @FXML TableColumn<MedicineRequest, String> equipmentName;
 
-  ObservableList<EquipmentUI> equipment = FXCollections.observableArrayList();
+  ObservableList<MedicineRequest> equipment = FXCollections.observableArrayList();
   // Udb udb = DBController.udb;
   ArrayList<String> nodeIDs;
 
@@ -171,13 +171,13 @@ public class sideViewController extends ServiceController {
     room13.setVisible(false);
   }
 
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+  ObservableList<MedicineRequest> equipmentUI = FXCollections.observableArrayList();
 
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
+  private ObservableList<MedicineRequest> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
-          new EquipmentUI(
+          new MedicineRequest(
               equipment.getName(),
               equipment.getInUse(),
               equipment.getAvailable(),
@@ -188,12 +188,12 @@ public class sideViewController extends ServiceController {
     return equipmentUI;
   }
 
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
+  ObservableList<MedicineRequest> equipmentUIRequests = FXCollections.observableArrayList();
 
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
+  private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
     for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
       equipmentUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI(
+          new MedicineRequest(
               equipRequest.getID(),
               equipRequest.getName(),
               equipRequest.getAmount(),
@@ -207,9 +207,9 @@ public class sideViewController extends ServiceController {
 
   private void setUpAllEquipment() {
     equipmentName.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("amountInUse"));
+        new PropertyValueFactory<MedicineRequest, String>("equipmentName"));
+    location.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("location"));
+    locationType.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("amountInUse"));
     try {
       equipFloor.setItems(getEquipmentList());
     } catch (Exception e) {
