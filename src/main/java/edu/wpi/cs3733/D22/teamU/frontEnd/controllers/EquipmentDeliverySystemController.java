@@ -273,6 +273,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
                       request.getEquipmentName(),
                       request.getRequestAmount(),
                       request.getType(),
+                      "sent",
                       checkEmployee(employees.getValue().toString()),
                       request.getDestination(),
                       request.getRequestDate(),
