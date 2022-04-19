@@ -28,6 +28,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
 import java.io.*;
@@ -240,10 +242,10 @@ public final class Udb {
     maintenanceRequestImpl.JavaToSQL();
 
     securityRequestImpl.CSVToJava(locationImpl.list());
-    securityRequestImpl.JavaToSQL(locationImpl.list());
+    securityRequestImpl.JavaToSQL();
 
     compServRequestImpl.CSVToJava(locationImpl.list());
-    compServRequestImpl.JavaToSQL(locationImpl.list());
+    compServRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
@@ -308,9 +310,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.edit((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.edit((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.edit()");
@@ -357,7 +361,7 @@ public final class Udb {
         mealRequestImpl.add((MealRequest) thingToAdd);
         break;
 
-      case "ReligousRequest":
+      case "ReligiousRequest":
         religiousRequestImpl.add((ReligiousRequest) thingToAdd);
         break;
 
@@ -371,9 +375,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.add((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.add((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.add()");
@@ -434,9 +440,11 @@ public final class Udb {
 
       case "SecurityRequest":
         securityRequestImpl.remove((SecurityRequest) thingToAdd);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.remove((CompServRequest) thingToAdd);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.remove()");
@@ -490,15 +498,19 @@ public final class Udb {
 
       case "TranslatorRequest":
         translatorRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "MaintenanceRequest":
         maintenanceRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "SecurityRequest":
         securityRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       case "CompServRequest":
         compServRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
 
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");

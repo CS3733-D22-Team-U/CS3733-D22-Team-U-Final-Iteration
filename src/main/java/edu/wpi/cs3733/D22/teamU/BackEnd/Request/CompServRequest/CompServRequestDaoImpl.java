@@ -114,14 +114,14 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
               + "message varchar (200) not null,"
               + "status varchar (15) not null,"
               + "employee varchar (20) not null,"
-              + "room varchar(15) not null,"
+              + "room varchar(20) not null,"
               + "date varchar (10) not null,"
               + "time varchar (10) not null,"
               + "device varchar(20) not null)");
 
       for (CompServRequest currCSR : List.values()) {
         statement.execute(
-            "INSERT INTO GiftRequest VALUES("
+            "INSERT INTO CompServRequest VALUES("
                 + "'"
                 + currCSR.getID()
                 + "','"
@@ -333,7 +333,6 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
     inputDestination = csInput.nextLine();
 
     Employee empty = new Employee(inputStaff);
-    ;
 
     return new CompServRequest(
         inputID,
