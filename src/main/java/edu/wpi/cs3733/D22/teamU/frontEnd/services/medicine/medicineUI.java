@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-import javafx.scene.control.TableColumn;
 
 public class medicineUI {
 
@@ -17,15 +16,15 @@ public class medicineUI {
   private int requestAmount;
 
   public medicineUI(
-          String ID,
-          String name,
-          String patientName,
-          String location,
-          String status,
-          Employee employee,
-          String date,
-          String time,
-          int requestAmount) {
+      String ID,
+      String name,
+      String patientName,
+      String location,
+      String status,
+      Employee employee,
+      String date,
+      String time,
+      int requestAmount) {
     this.id = ID;
     this.name = name;
     this.patientName = patientName;
@@ -36,10 +35,6 @@ public class medicineUI {
     this.time = time;
     this.requestAmount = requestAmount;
   }
-
-
-
-
 
   public String getId() {
     return id;

@@ -3,9 +3,8 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import javafx.scene.control.ComboBox;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
@@ -15,7 +14,6 @@ import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine.medicineUI;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -38,7 +37,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
-
 public class MedicineDeliveryController extends ServiceController {
 
   public ComboBox<String> locations;
@@ -46,7 +44,6 @@ public class MedicineDeliveryController extends ServiceController {
   public ComboBox<String> patient;
   @FXML Button submitButton;
   @FXML Button clearButton;
-
 
   @FXML JFXCheckBox Advil;
   @FXML JFXCheckBox Alprozalam;
@@ -110,11 +107,13 @@ public class MedicineDeliveryController extends ServiceController {
     super.initialize(location, resources);
     setUpActiveRequests();
     longNames = new ArrayList<>();
-    for(Location l: udb.locationImpl.list()){
+    for (Location l : udb.locationImpl.list()) {
       longNames.add(l.getLongName());
     }
     patient.setTooltip(new Tooltip());
-    patient.getItems().addAll(
+    patient
+        .getItems()
+        .addAll(
             "Harsh",
             "Marko",
             "Tim",
@@ -132,15 +131,12 @@ public class MedicineDeliveryController extends ServiceController {
             "Patient00678569420");
     new ComboBoxAutoComplete<String>(patient, 650, 290);
 
-
-
-
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(longNames);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for(Employee l: udb.EmployeeImpl.hList().values()){
+    for (Employee l : udb.EmployeeImpl.hList().values()) {
       staff.add(l.getUsername());
     }
 
@@ -159,26 +155,26 @@ public class MedicineDeliveryController extends ServiceController {
     for (int i = 0; i < checkBoxesInput.size(); i++) {
       int finalI = i;
       checkBoxesInput
-              .get(i)
-              .disableProperty()
-              .bind(
-                      Bindings.createBooleanBinding(
-                              () -> !checkBoxes.get(finalI).isSelected(),
-                              checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+          .get(i)
+          .disableProperty()
+          .bind(
+              Bindings.createBooleanBinding(
+                  () -> !checkBoxes.get(finalI).isSelected(),
+                  checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
     }
     clearButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
 
     submitButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
   }
 
   private void setUpActiveRequests() {
@@ -220,14 +216,14 @@ public class MedicineDeliveryController extends ServiceController {
     }
   }
 
-  //note for self:
-  //employee currently returning N/A because checkEmployee is always returning N/A
-  //csv file is in wrong order
+  // note for self:
+  // employee currently returning N/A because checkEmployee is always returning N/A
+  // csv file is in wrong order
 
   @SneakyThrows
   @Override
   public void addRequest() {
-    //String patientInput = patientName.getText().trim();
+    // String patientInput = patientName.getText().trim();
     String patient2 = patient.getValue().toString();
     String staffInput = (employees.getId().toString());
     String destinationInput = locations.getValue().toString();
@@ -241,15 +237,13 @@ public class MedicineDeliveryController extends ServiceController {
             new medicineUI(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
-
-
-                    patient2,
+                patient2,
                 destinationInput,
                 "Ordered",
-                    (checkEmployee(employees.getValue().toString())),
+                (checkEmployee(employees.getValue().toString())),
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
-                    69420);
+                69420);
         activeRequestTable.setItems(
             newRequest(
                 request.getId(),
@@ -271,27 +265,24 @@ public class MedicineDeliveryController extends ServiceController {
                   request.getEmployee(),
                   request.getDestination(),
                   request.getDate(),
-                  request.getTime()
-                      ));
-          //processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
+                  request.getTime()));
+          // processText.setText("Request for " + checkBoxes.get(i).getText() + " successfully
+          // sent.");
           process();
-          //clear();
+          // clear();
         } catch (IOException e) {
           e.printStackTrace();
           processText.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
-
         }
       }
     }
     clear();
   }
 
-
-
   public void enableTxt() {
     if (Advil.isSelected()) {
       advilTxt.setDisable(false);
-      //reset.setVisible();
+      // reset.setVisible();
     }
     if (Alprozalam.isSelected()) {
       alproTxt.setDisable(false);
@@ -415,7 +406,6 @@ public class MedicineDeliveryController extends ServiceController {
               }
               clear();
             })
-
         .start();
   }
 

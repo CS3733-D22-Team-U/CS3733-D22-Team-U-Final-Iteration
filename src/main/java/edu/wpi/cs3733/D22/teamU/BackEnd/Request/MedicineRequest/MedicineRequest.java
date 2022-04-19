@@ -17,8 +17,7 @@ public class MedicineRequest extends Request {
       Employee employee,
       String location,
       String date,
-      String time
-      ) {
+      String time) {
 
     this.ID = ID;
     this.name = name;
@@ -55,11 +54,11 @@ public class MedicineRequest extends Request {
     this.destination = location;
   }
 
-  public void setAmount(int newAmount){
+  public void setAmount(int newAmount) {
     this.amount = newAmount;
   }
 
-  public int getAmount(){
+  public int getAmount() {
     return amount;
   }
 }
