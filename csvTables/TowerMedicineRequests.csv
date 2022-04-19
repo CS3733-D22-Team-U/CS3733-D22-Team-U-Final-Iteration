@@ -1,8 +1,13 @@
-ID,Name,Amount,Patient,Status,Employee,Destination,Date,Time
-6719,Lisinopril,3,test,Kody,test,uSTOR00101,2022-04-13,12:57:07
-test,test,3,N/A,N/A,N/A,uSTOR00101,N/A,N/A
-9359,Advil,2,uPATI05C1,test1,test,uSTOR00101,2022-04-12,23:44:19
+ID,Name,Amount,PatientName,Status,EmployeeName,Location,Date,Time
+720,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:33:30
+2334,Amphetamine Salt,5,BRUH,sent,00003,FDEPT00501,2022-04-19,16:39:15
+4563,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:33:39
+3422,Advil,5,BRUH,sent,00001,FDEPT00301,2022-04-19,16:42:07
 testing,for real,1,N/A,N/A,N/A,uSTOR00101,N/A,N/A
-3000,Alprozalam,1,test,Kody,test,uSTOR00101,2022-04-13,12:57:07
-4655,Atorvastatin,1,test,Kody,test,uSTOR00101,2022-04-13,12:57:07
-8812,Amphetamine Salt,1,test,Kody,test,uSTOR00101,2022-04-13,12:57:07
+2583,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:33:43
+3000,Alprozalam,1,test,Kody,N/A,uSTOR00101,2022-04-13,12:57:07
+4655,Atorvastatin,1,test,Kody,N/A,uSTOR00101,2022-04-13,12:57:07
+8812,Amphetamine Salt,1,test,Kody,N/A,uSTOR00101,2022-04-13,12:57:07
+3887,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:35:07
+8043,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:33:35
+3271,Advil,1,BRUH,sent,00003,FDEPT00301,2022-04-19,17:01:57
