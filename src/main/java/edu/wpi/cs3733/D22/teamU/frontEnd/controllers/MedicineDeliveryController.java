@@ -135,6 +135,21 @@ public class MedicineDeliveryController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
+    patientInput.add("Harsh");
+    patientInput.add("Marko");
+    patientInput.add("Marko");
+    patientInput.add("Nick");
+    patientInput.add("Kody");
+    patientInput.add("Deepti");
+    patientInput.add("Joselin");
+    patientInput.add("Tim");
+    patientInput.add("Will");
+    patientInput.add("Mike");
+    patientInput.add("Belisha");
+    patientInput.add("Iain");
+
+    patients.setTooltip(new Tooltip());
+    patients.getItems().addAll(patientInput);
 
     setUpAllMed();
     setUpActiveRequests();
@@ -364,14 +379,14 @@ public class MedicineDeliveryController extends ServiceController {
                 .append(", ");
 
         double rand = Math.random() * 10000;
-        String patient = "BRUH";
+        //String patient = "BRUH";
 
         MedicineRequest request =
                 new MedicineRequest(
                         (int) rand + "",
                         checkBoxes.get(i).getText(),
                         requestAmount,
-                        patient,
+                        patients.getValue().toString(),
                         "Ordered",
                         checkEmployee(employees.getValue().toString()),
                         room,
