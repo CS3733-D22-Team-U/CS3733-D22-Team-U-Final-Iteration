@@ -648,7 +648,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("MaintenanceRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("MaintenanceRequest", nameOfFile);
         maintenanceRequestMenu();
         break;
       case 6:
