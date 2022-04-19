@@ -29,7 +29,7 @@ public class Uapp extends Application {
     primaryStage.getIcons().add(new Image(String.valueOf(a)));
     primaryStage.setTitle("Mass General Brigham");
     primaryStage.setScene(scene);
-    primaryStage.setResizable(false);
+    primaryStage.setResizable(true);
     primaryStage.show();
   }
 

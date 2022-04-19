@@ -200,7 +200,7 @@ public class sideViewController extends ServiceController {
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPri()));
+              equipRequest.getPriority()));
     }
     return equipmentUIRequests;
   }
