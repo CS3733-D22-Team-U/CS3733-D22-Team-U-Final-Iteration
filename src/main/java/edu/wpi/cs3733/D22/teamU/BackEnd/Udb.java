@@ -12,10 +12,14 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import java.io.*;
@@ -31,6 +35,43 @@ public final class Udb {
   public static String[] CSVfiles;
   public static String username;
   public static String password;
+
+  public Connection connection;
+  public Statement statement;
+  public String authentication;
+
+  public LocationDaoImpl locationImpl;
+  public EquipmentDaoImpl EquipmentImpl;
+  public EmployeeDaoImpl EmployeeImpl;
+  public EquipRequestDaoImpl equipRequestImpl;
+  public LabRequestDaoImpl labRequestImpl;
+  public LaundryRequestDaoImpl laundryRequestImpl;
+  public MedicineRequestDaoImpl medicineRequestImpl;
+  public MealRequestDaoImpl mealRequestImpl;
+  public GiftRequestDaoImpl giftRequestImpl;
+
+  public static boolean admin;
+
+  private Udb(String username, String password, String[] CSVfiles)
+      throws IOException, SQLException {
+    admin = true;
+    this.username = username;
+    this.password = password;
+    this.CSVfiles = CSVfiles;
+
+    // THIS WILL RUN THE SERVER IN PORT 1527 IN THE BACKGROUND EVEN WHEN YOU CLOSE THE APP
+    // Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
+    // start");
+    // netstat -ano | findstr :1527
+    // taskkill /PID [your #] /F
+    // java -jar %DERBY_HOME%\lib\derbyrun.jar server start
+
+    statement = null;
+    authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
+
+    databaseInit();
+    // create connection
+  }
 
   public void changeDriver(boolean change) throws IOException, SQLException {
     // embedded driver
@@ -62,41 +103,6 @@ public final class Udb {
 
   public static void removeConnection() {
     Instance = null;
-  }
-
-  public Connection connection;
-  public Statement statement;
-  public String authentication;
-
-  public LocationDaoImpl locationImpl;
-  public EquipmentDaoImpl EquipmentImpl;
-  public EmployeeDaoImpl EmployeeImpl;
-  public EquipRequestDaoImpl equipRequestImpl;
-  public LabRequestDaoImpl labRequestImpl;
-  public LaundryRequestDaoImpl laundryRequestImpl;
-  public MedicineRequestDaoImpl medicineRequestImpl;
-
-  public static boolean admin;
-
-  private Udb(String username, String password, String[] CSVfiles)
-      throws IOException, SQLException {
-    admin = true;
-    this.username = username;
-    this.password = password;
-    this.CSVfiles = CSVfiles;
-
-    // THIS WILL RUN THE SERVER IN PORT 1527 IN THE BACKGROUND EVEN WHEN YOU CLOSE THE APP
-    // Runtime.getRuntime().exec("cmd /c java -jar %DERBY_HOME%\\lib\\derbyrun.jar server
-    // start");
-    // netstat -ano | findstr :1527
-    // taskkill /PID [your #] /F
-    // java -jar %DERBY_HOME%\lib\derbyrun.jar server start
-
-    statement = null;
-    authentication = DB_LOC + "user=" + username + ";password=" + password + ";";
-
-    databaseInit();
-    // create connection
   }
 
   public void databaseCreate() throws SQLException {
@@ -177,6 +183,8 @@ public final class Udb {
     labRequestImpl = new LabRequestDaoImpl(statement, CSVfiles[4]);
     laundryRequestImpl = new LaundryRequestDaoImpl(statement, CSVfiles[5]);
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
+    giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[7]);
+    mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -190,14 +198,20 @@ public final class Udb {
     equipRequestImpl.CSVToJava(locationImpl.list());
     equipRequestImpl.JavaToSQL();
 
-    labRequestImpl.CSVToJava();
+    labRequestImpl.CSVToJava(locationImpl.list());
     labRequestImpl.JavaToSQL();
 
-    laundryRequestImpl.CSVToJava();
+    laundryRequestImpl.CSVToJava(locationImpl.list());
     laundryRequestImpl.JavaToSQL();
 
-    medicineRequestImpl.CSVToJava();
+    medicineRequestImpl.CSVToJava(locationImpl.list());
     medicineRequestImpl.JavaToSQL();
+
+    giftRequestImpl.CSVToJava(locationImpl.list());
+    giftRequestImpl.JavaToSQL();
+
+    mealRequestImpl.CSVToJava(locationImpl.list());
+    mealRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
@@ -240,6 +254,14 @@ public final class Udb {
         medicineRequestImpl.edit((MedicineRequest) thingToAdd);
         break;
 
+      case "GiftRequest":
+        giftRequestImpl.edit((GiftRequest) thingToAdd);
+        break;
+
+      case "MealRequest":
+        mealRequestImpl.edit((MealRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.edit()");
         break;
@@ -277,6 +299,14 @@ public final class Udb {
         medicineRequestImpl.add((MedicineRequest) thingToAdd);
         break;
 
+      case "GiftRequest":
+        giftRequestImpl.add((GiftRequest) thingToAdd);
+        break;
+
+      case "MealRequest":
+        mealRequestImpl.add((MealRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.add()");
         break;
@@ -312,6 +342,14 @@ public final class Udb {
 
       case "MedicineRequest":
         medicineRequestImpl.remove((MedicineRequest) thingToAdd);
+        break;
+
+      case "GiftRequest":
+        giftRequestImpl.remove((GiftRequest) thingToAdd);
+        break;
+
+      case "MealRequest":
+        mealRequestImpl.remove((MealRequest) thingToAdd);
         break;
 
       default:
@@ -352,6 +390,14 @@ public final class Udb {
         medicineRequestImpl.saveTableAsCSV(nameOfCSV);
         break;
 
+      case "GiftRequest":
+        giftRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "MealRequest":
+        mealRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");
         break;
@@ -375,8 +421,10 @@ public final class Udb {
             + "5 - Lab Request\n"
             + "6 - Laundry Request\n"
             + "7 - Medicine Request\n"
-            + "8 - Change Server\n"
-            + "9 - Quit\n");
+            + "8 - Gift Request\n"
+            + "9 - Meal Request\n"
+            + "10 - Change Server\n"
+            + "11 - Quit\n");
 
     switch (userInput.nextInt()) {
       case 1:
@@ -404,10 +452,18 @@ public final class Udb {
         break;
 
       case 8:
-        serveChangeMenu();
+        giftRequestMenu();
         break;
 
       case 9:
+        mealRequestMenu();
+        break;
+
+      case 10:
+        serveChangeMenu();
+        break;
+
+      case 11:
         // exits whole menu
         break;
     }
@@ -602,6 +658,9 @@ public final class Udb {
         // menu
         menu();
         break;
+      default:
+        menu();
+        break;
     }
   }
 
@@ -696,6 +755,7 @@ public final class Udb {
         break;
       default:
         System.out.println("Something went wrong");
+        menu();
         break;
     }
   }
@@ -743,6 +803,103 @@ public final class Udb {
         break;
       default:
         System.out.println("Something went wrong");
+        menu();
+        break;
+    }
+  }
+
+  private void giftRequestMenu() throws SQLException, IOException {
+    Scanner giftInput = new Scanner(System.in);
+
+    System.out.println(
+        "1 - List Gift Request Information\n"
+            + "2 - Change Gift Request\n"
+            + "3 - Enter New Gift Request\n"
+            + "4 - Delete Gift Request \n"
+            + "5 - Save Gift Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
+
+    switch (giftInput.nextInt()) {
+      case 1:
+        giftRequestImpl.printTable();
+        giftRequestMenu();
+        break;
+      case 2:
+        edit(giftRequestImpl.askUser());
+        giftRequestMenu();
+        break;
+      case 3:
+        add(giftRequestImpl.askUser());
+        giftRequestMenu();
+        break;
+      case 4:
+        remove(giftRequestImpl.askUser());
+        giftRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        saveTableAsCSV("GiftRequest", nameOfFile);
+        giftRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+      default:
+        System.out.println("Something went wrong");
+        menu();
+        break;
+    }
+  }
+
+  private void mealRequestMenu() throws SQLException, IOException {
+    Scanner mealInput = new Scanner(System.in);
+
+    System.out.println(
+        "1 - List Meal Request Information\n"
+            + "2 - Change Meal Request\n"
+            + "3 - Enter New Meal Request\n"
+            + "4 - Delete Meal Request \n"
+            + "5 - Save Meal Request Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
+
+    switch (mealInput.nextInt()) {
+      case 1:
+        mealRequestImpl.printTable();
+        mealRequestMenu();
+        break;
+      case 2:
+        edit(mealRequestImpl.askUser());
+        mealRequestMenu();
+        break;
+      case 3:
+        add(mealRequestImpl.askUser());
+        mealRequestMenu();
+        break;
+      case 4:
+        remove(mealRequestImpl.askUser());
+        mealRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        saveTableAsCSV("MealRequest", nameOfFile);
+        mealRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+      default:
+        System.out.println("Something went wrong");
+        menu();
         break;
     }
   }
