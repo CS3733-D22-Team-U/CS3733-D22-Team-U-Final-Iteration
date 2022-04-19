@@ -121,7 +121,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
   @Override
   public void JavaToSQL() {
     try {
-      statement.execute("Drop table LaundrMaintenanceRequest");
+      statement.execute("Drop table MaintenanceRequest");
     } catch (Exception e) {
       System.out.println("didn't drop table");
     }
@@ -141,7 +141,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
 
       for (MaintenanceRequest currMainReq : List.values()) {
         statement.execute(
-            "INSERT INTO LaundryRequest VALUES("
+            "INSERT INTO Maintenance VALUES("
                 + "'"
                 + currMainReq.getID()
                 + "','"
