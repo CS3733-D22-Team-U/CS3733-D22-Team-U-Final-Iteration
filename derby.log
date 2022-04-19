@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Apr 18 15:24:49 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-3e22-7eaa-00001cc11198 
-on database directory C:\Users\Marko Vila\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
-Loaded from file:/C:/Users/Marko%20Vila/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+Mon Apr 18 19:53:55 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-3f18-dbd9-00000cf1de00 
+on database directory C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
+Loaded from file:/C:/Users/belia/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
 java.vendor=Microsoft
 java.runtime.version=11.0.14.1+1-LTS
-user.dir=C:\Users\Marko Vila\IdeaProjects\CS3733-D22-Team-U-Prototype-3
+user.dir=C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
