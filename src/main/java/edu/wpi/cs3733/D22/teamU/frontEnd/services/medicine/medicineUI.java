@@ -57,8 +57,6 @@ public class medicineUI {
     staffName = employee.getEmployeeID();
   }
 
-
-
   public String getId() {
     return id;
   }

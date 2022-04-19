@@ -4,13 +4,12 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,9 +17,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -100,8 +96,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TableView<MedicineRequest> activeRequestTable;
   @FXML VBox requestHolder;
 
-  @FXML
-  StackPane requestsStack;
+  @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allEquipPane;
   @FXML Pane activeRequestPane;
@@ -117,7 +112,6 @@ public class MedicineDeliveryController extends ServiceController {
   ArrayList<String> staff;
 
   ObservableList<MedicineRequest> medicineRequests = FXCollections.observableArrayList();
-
 
   ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
@@ -160,41 +154,41 @@ public class MedicineDeliveryController extends ServiceController {
     for (int i = 0; i < checkBoxesInput.size(); i++) {
       int finalI = i;
       checkBoxesInput
-              .get(i)
-              .disableProperty()
-              .bind(
-                      Bindings.createBooleanBinding(
-                              () -> !checkBoxes.get(finalI).isSelected(),
-                              checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+          .get(i)
+          .disableProperty()
+          .bind(
+              Bindings.createBooleanBinding(
+                  () -> !checkBoxes.get(finalI).isSelected(),
+                  checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
     }
     clearButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
 
     // BooleanBinding submit =locations.idProperty().isEmpty().and(
     // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
     submitButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
     handleTime();
   }
 
   private void handleTime() {
     Thread timeThread =
-            new Thread(
-                    () -> {
-                      while (Uapp.running) {
-                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                        String timeStampTime = sdf3.format(timestamp).substring(11);
-                        time.setText(timeStampTime);
-                      }
-                    });
+        new Thread(
+            () -> {
+              while (Uapp.running) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String timeStampTime = sdf3.format(timestamp).substring(11);
+                time.setText(timeStampTime);
+              }
+            });
     timeThread.start();
   }
 
@@ -208,43 +202,52 @@ public class MedicineDeliveryController extends ServiceController {
     activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
     activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
     activeRequestTable.setItems(getActiveRequestList());
-
   }
 
   private ObservableList<MedicineRequest> newRequest(
-          String id,
-          String name,
-          int amount,
-          String patientName,
-          String status,
-          Employee employee,
-          String destination,
-          String date,
-          String time,
-          int priority) {
-    medicineRequests.add(new MedicineRequest(id, name, amount, patientName, status, employee, destination, date, time));
+      String id,
+      String name,
+      int amount,
+      String patientName,
+      String status,
+      Employee employee,
+      String destination,
+      String date,
+      String time,
+      int priority) {
+    medicineRequests.add(
+        new MedicineRequest(
+            id, name, amount, patientName, status, employee, destination, date, time));
     return medicineRequests;
   }
 
-
-
-
-
-
-
-
   private void setUpAllMed() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>("medicineName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("amountInUse"));
+    nameCol.setCellValueFactory(
+        new PropertyValueFactory<
+            edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>(
+            "medicineName"));
+    inUse.setCellValueFactory(
+        new PropertyValueFactory<
+            edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>(
+            "amountInUse"));
     available.setCellValueFactory(
-            new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>("location"));
-    //table.setItems(getEquipmentList());
+        new PropertyValueFactory<
+            edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>(
+            "amountAvailable"));
+    total.setCellValueFactory(
+        new PropertyValueFactory<
+            edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, Integer>(
+            "totalAmount"));
+    location.setCellValueFactory(
+        new PropertyValueFactory<
+            edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest, String>(
+            "location"));
+    // table.setItems(getEquipmentList());
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
+    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request :
+        MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
           new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
               request.getID(),
@@ -268,7 +271,6 @@ public class MedicineDeliveryController extends ServiceController {
       return empty;
     }
   }
-
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -525,18 +527,20 @@ public class MedicineDeliveryController extends ServiceController {
     appStage.show();
   }
 
-  private ObservableList<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest> newRequest(
-      String id,
-      String name,
-      int amount,
-      String patientName,
-      String status,
-      Employee employee,
-      String location,
-      String date,
-      String time) {
+  private ObservableList<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest>
+      newRequest(
+          String id,
+          String name,
+          int amount,
+          String patientName,
+          String status,
+          Employee employee,
+          String location,
+          String date,
+          String time) {
     medUIRequests.add(
-        new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
+        new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
+            id, name, amount, patientName, status, employee, location, date, time));
     return medUIRequests;
   }
 
@@ -558,12 +562,12 @@ public class MedicineDeliveryController extends ServiceController {
               try {
                 Thread.sleep(1500); // milliseconds
                 Platform.runLater(
-                        () -> {
-                          requestText.setVisible(false);
-                        });
+                    () -> {
+                      requestText.setVisible(false);
+                    });
               } catch (InterruptedException ie) {
               }
             })
-            .start();
+        .start();
   }
 }

@@ -34,6 +34,4 @@ public class MedicineRequest extends Request {
   public void setAmount(int amount) {
     this.amount = amount;
   }
-
-
 }
