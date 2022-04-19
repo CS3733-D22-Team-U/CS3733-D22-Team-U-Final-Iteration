@@ -56,7 +56,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
       if (row.length == columns) {
         TranslatorRequest r =
             new TranslatorRequest(
-                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[6], row[7], row[8]);
+                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
         List.put(row[0], r);
 
         try {
@@ -88,7 +88,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
       if (row.length == columns) {
         TranslatorRequest r =
             new TranslatorRequest(
-                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[6], row[7], row[8]);
+                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
         List.put(row[0], r);
 
         try {
@@ -106,7 +106,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   @Override
   public void JavaToSQL() {
     try {
-      statement.execute("Drop table MedicineRequest");
+      statement.execute("Drop table TranslatorRequest");
     } catch (Exception e) {
       System.out.println("didn't drop table");
     }
@@ -329,7 +329,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     System.out.println("Input Patient Name: ");
     inputpatientName = reqInput.nextLine();
 
-    System.out.println("Input request amount: ");
+    System.out.println("Input requested language: ");
     inputToLang = reqInput.nextLine();
 
     System.out.println("Input Staff name: ");

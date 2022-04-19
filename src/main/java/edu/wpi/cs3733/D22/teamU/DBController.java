@@ -81,8 +81,8 @@ public class DBController {
     InputStream csvReligousRequest =
         Main.class
             .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReligousRequests.csv");
-    String religousRequest = copyFile(csvReligousRequest, "csvTables/TowerReligousRequests.csv");
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReligiousRequests.csv");
+    String religousRequest = copyFile(csvReligousRequest, "csvTables/TowerReligiousRequests.csv");
 
     InputStream csvTranslatorRequest =
         Main.class
@@ -95,8 +95,21 @@ public class DBController {
         Main.class
             .getClassLoader()
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMaintenanceRequests.csv");
-    String MaintenanceRequest =
+    String maintenanceRequest =
         copyFile(csvMaintenanceRequest, "csvTables/TowerMaintenanceRequests.csv");
+
+    InputStream csvSecurityRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerSecurityRequests.csv");
+    String securityRequest = copyFile(csvSecurityRequest, "csvTables/TowerSecurityRequests.csv");
+
+    InputStream csvCompServiceRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerCompServiceRequest.csv");
+    String compServiceRequest =
+        copyFile(csvCompServiceRequest, "csvTables/TowerCompServiceRequest.csv");
 
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
@@ -111,7 +124,7 @@ public class DBController {
     String equipmentTest = copyFile(csvEquipmentTest, "csvTables/TESTTowerEquipment.csv");
 
     String[] CSVfiles = {
-      location,
+      location, // 0
       employee,
       equipment,
       equipRequest,
@@ -120,9 +133,11 @@ public class DBController {
       medicineRequest,
       giftRequest,
       mealRequest,
-      translateRequest,
-      religousRequest,
-      MaintenanceRequest
+      religousRequest, // 9
+      translateRequest, // 10
+      maintenanceRequest, // 11
+      securityRequest,
+      compServiceRequest
     };
     Udb.username = username;
     Udb.password = password;
