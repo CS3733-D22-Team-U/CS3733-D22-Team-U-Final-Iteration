@@ -256,8 +256,6 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
               + " | \t"
               + request.dietRest
               + " | \t"
-              + request.dietRest
-              + " | \t"
               + request.status
               + " | \t"
               + request.employee.getEmployeeID()
