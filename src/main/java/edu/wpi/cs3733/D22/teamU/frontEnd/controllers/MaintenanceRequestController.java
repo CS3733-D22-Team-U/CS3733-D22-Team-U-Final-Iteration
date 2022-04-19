@@ -4,13 +4,12 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -40,26 +39,21 @@ public class MaintenanceRequestController extends ServiceController {
 
   public ComboBox<String> locations;
   public ComboBox<String> employees;
-  @FXML TableColumn<EquipmentUI, String> nameCol;
-  @FXML TableColumn<EquipmentUI, Integer> inUse;
-  @FXML TableColumn<EquipmentUI, Integer> available;
-  @FXML TableColumn<EquipmentUI, Integer> total;
-  @FXML TableColumn<EquipmentUI, String> location;
-  @FXML TableView<EquipmentUI> table;
+  @FXML TableView<MaintenanceRequest> table;
   @FXML VBox requestHolder;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
-  @FXML TableColumn<EquipmentUI, String> activeReqID;
-  @FXML TableColumn<EquipmentUI, String> activeReqName;
-  @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
-  @FXML TableColumn<EquipmentUI, String> activeReqType;
-  @FXML TableColumn<EquipmentUI, String> activeReqDestination;
-  @FXML TableColumn<EquipmentUI, String> activeDate;
-  @FXML TableColumn<EquipmentUI, String> activeTime;
-  @FXML TableColumn<EquipmentUI, Integer> activePriority;
+  @FXML TableColumn<MaintenanceRequest, String> activeReqID;
+  @FXML TableColumn<MaintenanceRequest, String> activeReqName;
+  @FXML TableColumn<MaintenanceRequest, Integer> activeReqAmount;
+  @FXML TableColumn<MaintenanceRequest, String> activeReqType;
+  @FXML TableColumn<MaintenanceRequest, String> activeReqDestination;
+  @FXML TableColumn<MaintenanceRequest, String> activeDate;
+  @FXML TableColumn<MaintenanceRequest, String> activeTime;
+  @FXML TableColumn<MaintenanceRequest, Integer> activePriority;
 
-  @FXML TableView<EquipmentUI> activeRequestTable;
+  @FXML TableView<MaintenanceRequest> activeRequestTable;
   @FXML VBox inputFields;
 
   @FXML StackPane requestsStack;
@@ -72,10 +66,12 @@ public class MaintenanceRequestController extends ServiceController {
   @FXML Button allEquipButton;
   @FXML Text time;
 
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+  @FXML TextArea textInput;
+
+  ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
+  ObservableList<MaintenanceRequest> maintenanceUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
@@ -86,7 +82,7 @@ public class MaintenanceRequestController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllEquipment();
+    setUpAllMaintenance();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
@@ -152,14 +148,14 @@ public class MaintenanceRequestController extends ServiceController {
     timeThread.start();
   }
 
-  private void setUpAllEquipment() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
+  private void setUpAllMaintenance() throws SQLException, IOException {
+    nameCol.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("equipmentName"));
+    inUse.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, Integer>("amountInUse"));
     available.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUI, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    table.setItems(getEquipmentList());
+        new PropertyValueFactory<MaintenanceRequest, Integer>("amountAvailable"));
+    total.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, Integer>("totalAmount"));
+    location.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("location"));
+    table.setItems(getMaintenanceRequestsList());
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -171,49 +167,55 @@ public class MaintenanceRequestController extends ServiceController {
     activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
     activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
-    activeRequestTable.setItems(getActiveRequestList());
+    activeRequestTable.setItems(getActiveMaintenanceRequestList());
   }
 
-  private ObservableList<EquipmentUI> newRequest(
-      String id,
-      String name,
-      int amount,
-      String destination,
-      String date,
-      String time,
-      int priority) {
-    equipmentUIRequests.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
-    return equipmentUIRequests;
+  private ObservableList<MaintenanceRequest> newRequest(
+      String id, String name,
+      String status, String destination,
+      Employee employee, String typeOfMaintenanceRequest,
+      String description, String date,
+      String time) {
+    maintenanceUIRequests.add(new MaintenanceRequest(id, name, status, destination, employee, typeOfMaintenanceRequest, description, date, time));
+    return maintenanceUIRequests;
   }
 
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    equipmentUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      equipmentUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
+  private ObservableList<MaintenanceRequest> getMaintenanceRequestsList() throws SQLException, IOException {
+    maintenanceRequests.clear();
+    for (MaintenanceRequest maintenanceReq : Udb.getInstance().maintenanceRequestImpl.list) {
+      maintenanceRequests.add(
+          new MaintenanceRequest(
+              maintenanceReq.getID(),
+              maintenanceReq.getName(),
+              maintenanceReq.getStatus(),
+              maintenanceReq.getDestination(),
+              maintenanceReq.getEmployee(),
+              maintenanceReq.getTypeOfMaintenance(),
+              maintenanceReq.getDescription(),
+              maintenanceReq.getDate(),
+              maintenanceReq.getTime()));
     }
 
-    return equipmentUI;
+    return maintenanceRequests;
   }
 
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
-    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
-      equipmentUIRequests.add(
-          new EquipmentUI(
-              equipRequest.getID(),
-              equipRequest.getName(),
-              equipRequest.getAmount(),
-              equipRequest.getDestination(),
-              equipRequest.getDate(),
-              equipRequest.getTime(),
-              equipRequest.getPri()));
+
+
+  private ObservableList<MaintenanceRequest> getActiveMaintenanceRequestList() throws SQLException, IOException {
+    for (MaintenanceRequest maintenanceReq : Udb.getInstance().maintenanceRequestImpl.list) {
+      maintenanceUIRequests.add(
+          new MaintenanceRequest(
+                  maintenanceReq.getID(),
+                  maintenanceReq.getName(),
+                  maintenanceReq.getStatus(),
+                  maintenanceReq.getDestination(),
+                  maintenanceReq.getEmployee(),
+                  maintenanceReq.getTypeOfMaintenance(),
+                  maintenanceReq.getDescription(),
+                  maintenanceReq.getDate(),
+                  maintenanceReq.getTime()));
     }
-    return equipmentUIRequests;
+    return maintenanceUIRequests;
   }
 
   @Override
@@ -247,8 +249,8 @@ public class MaintenanceRequestController extends ServiceController {
 
         double rand = Math.random() * 10000;
 
-        EquipmentUI request =
-            new EquipmentUI(
+        MaintenanceRequest request =
+            new MaintenanceRequest(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
                 requestAmount,
