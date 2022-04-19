@@ -8,6 +8,15 @@ public class LabUI {
   private String labType;
   private String requestDate;
   private String requestTime;
+  private String location;
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
 
   public int getActiveReqAmount() {
     return activeReqAmount;
@@ -23,6 +32,7 @@ public class LabUI {
       String staffName,
       int amountOfLabEquipment,
       String labType,
+      String location,
       String requestDate,
       String requestTime) {
     this.id = id;
@@ -32,6 +42,7 @@ public class LabUI {
     this.requestDate = requestDate;
     this.requestTime = requestTime;
     this.activeReqAmount = amountOfLabEquipment;
+    this.location = location;
   }
 
   public String getId() {

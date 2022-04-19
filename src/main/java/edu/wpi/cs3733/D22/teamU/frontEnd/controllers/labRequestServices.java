@@ -8,6 +8,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.lab.LabUI;
 import java.io.IOException;
@@ -39,12 +40,7 @@ public class labRequestServices extends ServiceController {
   public Button toHelpPage;
   public Button clear;
   public Label submission;
-
-  @FXML TableColumn<EquipmentUI, String> nameCol;
-  @FXML TableColumn<EquipmentUI, Integer> inUse;
-  @FXML TableColumn<EquipmentUI, Integer> available;
-  @FXML TableColumn<EquipmentUI, Integer> total;
-  @FXML TableColumn<EquipmentUI, String> location;
+  public ComboBox<String> locations;
 
   @FXML TextArea otherField;
   @FXML TextField patientNameField;
@@ -57,6 +53,7 @@ public class labRequestServices extends ServiceController {
   @FXML TableColumn<LabUI, String> activeDate;
   @FXML TableColumn<LabUI, String> activeTime;
   @FXML TableColumn<LabUI, Integer> activeReqAmount;
+  @FXML TableColumn<LabUI, Integer> activeReqDestination;
 
   @FXML TableView<LabUI> activeRequestTable;
   @FXML VBox requestHolder;
@@ -92,12 +89,14 @@ public class labRequestServices extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllEquipment();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
     }
+    locations.setTooltip(new Tooltip());
+    locations.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
@@ -152,16 +151,6 @@ public class labRequestServices extends ServiceController {
     timeThread.start();
   }
 
-  private void setUpAllEquipment() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
-    available.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUI, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    table.setItems(getEquipmentList());
-  }
-
   private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
     patientNameReq.setCellValueFactory(new PropertyValueFactory<>("patientName"));
@@ -170,6 +159,7 @@ public class labRequestServices extends ServiceController {
     activeReqType.setCellValueFactory(new PropertyValueFactory<>("labType"));
     activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
+    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("location"));
     activeRequestTable.setItems(getActiveRequestList());
   }
 
@@ -205,10 +195,11 @@ public class labRequestServices extends ServiceController {
       labUIRequests.add(
           new LabUI(
               request.getID(),
-              request.getPatient(),
+              request.getPatientName(),
               request.getEmployee().getEmployeeID(),
               request.getAmount(),
               request.getName(),
+              request.getDestination(),
               request.getDate(),
               request.getTime()));
     }
@@ -226,6 +217,7 @@ public class labRequestServices extends ServiceController {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
         String inputString = checkBoxesInput.get(i).getText().trim();
+        String room = locations.getValue().toString();
         LabUI request =
             new LabUI(
                 (int) rand + "",
@@ -233,6 +225,7 @@ public class labRequestServices extends ServiceController {
                 staffInput,
                 Integer.parseInt(inputString),
                 checkBoxes.get(i).getText().trim(),
+                room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11));
         activeRequestTable.setItems(
@@ -242,6 +235,7 @@ public class labRequestServices extends ServiceController {
                 request.getStaffName(),
                 request.getActiveReqAmount(),
                 request.getLabType(),
+                request.getLocation(),
                 request.getRequestDate(),
                 request.getRequestTime()));
         try {
@@ -250,10 +244,12 @@ public class labRequestServices extends ServiceController {
               .add(
                   new LabRequest(
                       request.getId(),
-                      request.getPatientName(),
-                      new Employee(request.getId()),
-                      request.getActiveReqAmount(),
                       request.getLabType(),
+                      request.getActiveReqAmount(),
+                      request.getPatientName(),
+                      "Sent",
+                      new Employee(request.getId()),
+                      request.getLocation(),
                       request.getRequestDate(),
                       request.getRequestTime()));
           //          submission.setText("Request for " + checkBoxes.get(i).getText() + "
@@ -275,9 +271,10 @@ public class labRequestServices extends ServiceController {
       String staffName,
       int amount,
       String labType,
+      String location,
       String date,
       String time) {
-    labUIRequests.add(new LabUI(id, patientName, staffName, amount, labType, date, time));
+    labUIRequests.add(new LabUI(id, patientName, staffName, amount, labType, location, date, time));
     return labUIRequests;
   }
 
@@ -297,7 +294,6 @@ public class labRequestServices extends ServiceController {
       checkBoxes.get(i).setSelected(false);
     }
     patientNameField.setText("");
-    otherField.setText("");
     staffMemberField.setText("");
   }
 
