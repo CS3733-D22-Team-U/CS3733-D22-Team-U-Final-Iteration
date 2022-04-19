@@ -1,4 +1,4 @@
-derby.log
+/derby.log
 *.lock
 UDB/
 gradle/
