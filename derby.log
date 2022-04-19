@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Apr 18 19:02:49 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-3eea-114b-00000d4861e8 
+Mon Apr 18 19:17:37 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-3ef7-9f1a-00000eddaf98 
 on database directory /Users/krob/IdeaProjects/CS3733-D22-Team-U-Prototype-3/UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6a6824be 
 Loaded from file:/Users/krob/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
 java.vendor=Amazon.com Inc.
