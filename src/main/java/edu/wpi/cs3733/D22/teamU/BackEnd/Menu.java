@@ -691,7 +691,7 @@ public class Menu {
         System.out.println("Enter the name of the CSV file");
         String nameOfFile = justNeedCSVName.nextLine();
 
-        Udb.getInstance().saveTableAsCSV("CompServRequests", nameOfFile);
+        Udb.getInstance().saveTableAsCSV("CompServRequest", nameOfFile);
         compservRequestMenu();
         break;
       case 6:
