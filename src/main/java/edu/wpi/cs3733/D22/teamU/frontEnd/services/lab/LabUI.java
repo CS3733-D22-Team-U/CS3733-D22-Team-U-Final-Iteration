@@ -4,14 +4,24 @@ public class LabUI {
   private String id;
   private String patientName;
   private String staffName;
+  private int activeReqAmount;
   private String labType;
   private String requestDate;
   private String requestTime;
+
+  public int getActiveReqAmount() {
+    return activeReqAmount;
+  }
+
+  public void setActiveReqAmount(int activeReqAmount) {
+    this.activeReqAmount = activeReqAmount;
+  }
 
   public LabUI(
       String id,
       String patientName,
       String staffName,
+      int amountOfLabEquipment,
       String labType,
       String requestDate,
       String requestTime) {
@@ -21,6 +31,7 @@ public class LabUI {
     this.labType = labType;
     this.requestDate = requestDate;
     this.requestTime = requestTime;
+    this.activeReqAmount = amountOfLabEquipment;
   }
 
   public String getId() {

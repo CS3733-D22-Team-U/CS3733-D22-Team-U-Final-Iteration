@@ -49,20 +49,19 @@ public class labRequestServices extends ServiceController {
   @FXML TextArea otherField;
   @FXML TextField patientNameField;
   @FXML TextField staffMemberField;
+
   @FXML TableColumn<LabUI, String> activeReqID;
   @FXML TableColumn<LabUI, String> patientNameReq;
   @FXML TableColumn<LabUI, String> activeReqStaff;
   @FXML TableColumn<LabUI, String> activeReqType;
   @FXML TableColumn<LabUI, String> activeDate;
   @FXML TableColumn<LabUI, String> activeTime;
+  @FXML TableColumn<LabUI, Integer> activeReqAmount;
+
   @FXML TableView<LabUI> activeRequestTable;
   @FXML VBox requestHolder;
   @FXML Text requestText;
   // Testing below
-  @FXML TableColumn<EquipmentUI, String> activeReqName;
-  @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
-  @FXML TableColumn<EquipmentUI, String> activeReqDestination;
-  @FXML TableColumn<EquipmentUI, Integer> activePriority;
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allEquipPane;
@@ -165,8 +164,9 @@ public class labRequestServices extends ServiceController {
 
   private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    //    patientNameReq.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    //    activeReqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
+    patientNameReq.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    activeReqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("activeReqAmount"));
     activeReqType.setCellValueFactory(new PropertyValueFactory<>("labType"));
     activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
@@ -207,6 +207,7 @@ public class labRequestServices extends ServiceController {
               request.getID(),
               request.getPatient(),
               request.getEmployee().getEmployeeID(),
+              request.getAmount(),
               request.getName(),
               request.getDate(),
               request.getTime()));
@@ -224,11 +225,13 @@ public class labRequestServices extends ServiceController {
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         double rand = Math.random() * 10000;
+        String inputString = checkBoxesInput.get(i).getText().trim();
         LabUI request =
             new LabUI(
                 (int) rand + "",
                 patientInput,
                 staffInput,
+                Integer.parseInt(inputString),
                 checkBoxes.get(i).getText().trim(),
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11));
@@ -237,6 +240,7 @@ public class labRequestServices extends ServiceController {
                 request.getId(),
                 request.getPatientName(),
                 request.getStaffName(),
+                request.getActiveReqAmount(),
                 request.getLabType(),
                 request.getRequestDate(),
                 request.getRequestTime()));
@@ -248,13 +252,15 @@ public class labRequestServices extends ServiceController {
                       request.getId(),
                       request.getPatientName(),
                       new Employee(request.getId()),
+                      request.getActiveReqAmount(),
                       request.getLabType(),
                       request.getRequestDate(),
                       request.getRequestTime()));
-          submission.setText("Request for " + checkBoxes.get(i).getText() + " successfully sent.");
+          //          submission.setText("Request for " + checkBoxes.get(i).getText() + "
+          // successfully sent.");
         } catch (IOException e) {
           e.printStackTrace();
-          submission.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
+          //          submission.setText("Request for " + checkBoxes.get(i).getText() + " failed.");
         } catch (SQLException e) {
           e.printStackTrace();
         }
@@ -264,8 +270,14 @@ public class labRequestServices extends ServiceController {
   }
 
   private ObservableList<LabUI> newRequest(
-      String id, String patientName, String staffName, String labType, String date, String time) {
-    labUIRequests.add(new LabUI(id, patientName, staffName, labType, date, time));
+      String id,
+      String patientName,
+      String staffName,
+      int amount,
+      String labType,
+      String date,
+      String time) {
+    labUIRequests.add(new LabUI(id, patientName, staffName, amount, labType, date, time));
     return labUIRequests;
   }
 

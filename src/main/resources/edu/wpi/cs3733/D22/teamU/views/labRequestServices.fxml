@@ -64,12 +64,13 @@
             </Pane>
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
-                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                      <children>
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
                               <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="activeReqName" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="activeReqStaff" prefWidth="75.0" text="Staff" />
+                              <TableColumn fx:id="patientNameReq" prefWidth="75.0" text="Name" />
                               <TableColumn fx:id="activeReqAmount" prefWidth="75.0" text="Amount Requested" />
                               <TableColumn fx:id="activeReqType" prefWidth="75.0" text="Type" />
                               <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />
