@@ -88,7 +88,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == 8) {
+      if (row.length == 9) {
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
