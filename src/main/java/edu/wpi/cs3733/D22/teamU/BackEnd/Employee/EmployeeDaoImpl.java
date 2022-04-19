@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
-public class EmployeeDaoImpl implements DataDao<Employee> {
+public class EmployeeDaoImpl {
 
   // make constant in locationDao
   public Statement statement;
@@ -55,6 +55,8 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
                 row[5].trim()));
     }
   }
+
+
 
   /** JavaToSQL: takes the global list of Java objects and translates them into a SQL database */
   public void JavaToSQL() {

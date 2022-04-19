@@ -90,16 +90,16 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
       String[] row = s.split(",");
       if (row.length == 8) {
         ReligiousRequest r =
-                new ReligiousRequest(
-                        row[0],
-                        row[1],
-                        row[2],
-                        row[3],
-                        row[4],
-                        row[5],
-                        row[6],
-                        row[7],
-                        checkEmployee(row[8]));
+            new ReligiousRequest(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+                row[7],
+                checkEmployee(row[8]));
         List.put(row[0], r);
 
         try {

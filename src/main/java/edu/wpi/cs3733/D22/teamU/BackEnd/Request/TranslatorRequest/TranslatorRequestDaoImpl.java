@@ -4,10 +4,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-
-import javax.swing.plaf.nimbus.State;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +19,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   public HashMap<String, TranslatorRequest> List = new HashMap<String, TranslatorRequest>();
   public ArrayList<TranslatorRequest> list = new ArrayList<TranslatorRequest>();
 
-  public TranslatorRequestDaoImpl(Statement statement, String CSVfile){
+  public TranslatorRequestDaoImpl(Statement statement, String CSVfile) {
     this.statement = statement;
     this.csvFile = CSVfile;
   }
@@ -90,8 +87,8 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
       String[] row = s.split(",");
       if (row.length == columns) {
         TranslatorRequest r =
-                new TranslatorRequest(
-                        row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[6], row[7], row[8]);
+            new TranslatorRequest(
+                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[6], row[7], row[8]);
         List.put(row[0], r);
 
         try {
@@ -102,7 +99,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
           r.setLocation(l);
         } catch (Exception exception) {
         }
-    }
+      }
     }
   }
 

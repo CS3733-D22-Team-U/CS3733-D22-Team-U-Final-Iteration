@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd;
 
-import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

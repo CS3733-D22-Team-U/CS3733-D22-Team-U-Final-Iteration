@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,8 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
   public String csvFile;
   public HashMap<String, CompServRequest> List = new HashMap<String, CompServRequest>();
 
-  public CompServRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
+  public CompServRequestDaoImpl(Statement statement, String csvFile)
+      throws SQLException, IOException {
     this.statement = statement;
     this.csvFile = csvFile;
   }
@@ -47,14 +47,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
       if (row.length == columns) {
         CompServRequest r =
             new CompServRequest(
-                row[0],
-                row[1],
-                row[2],
-                checkEmployee(row[3]),
-                row[4],
-                row[5],
-                row[6],
-                row[7]);
+                row[0], row[1], row[2], checkEmployee(row[3]), row[4], row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -84,14 +77,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
       if (row.length == columns) {
         CompServRequest r =
             new CompServRequest(
-                row[0],
-                row[1],
-                row[2],
-                checkEmployee(row[3]),
-                row[4],
-                row[5],
-                row[6],
-                row[7]);
+                row[0], row[1], row[2], checkEmployee(row[3]), row[4], row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -150,7 +136,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
                 + currCSR.getDate()
                 + "','"
                 + currCSR.getTime()
-                +"','"
+                + "','"
                 + currCSR.getDevice()
                 + "')");
       }
@@ -179,14 +165,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
 
         CompServRequest SQLRow =
             new CompServRequest(
-                id,
-                message,
-                status,
-                checkEmployee(employee),
-                destination,
-                date,
-                time,
-                device);
+                id, message, status, checkEmployee(employee), destination, date, time, device);
         List.put(id, SQLRow);
       }
     } catch (SQLException e) {
@@ -241,8 +220,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
     // csv to java
     CSVToJava();
     // display locations and attributes
-    System.out.println(
-        "ID |\t Message |\t Staff |\t Room |\t Date |\t Time |\t Device");
+    System.out.println("ID |\t Message |\t Staff |\t Room |\t Date |\t Time |\t Device");
     for (CompServRequest request : this.List.values()) {
       System.out.println(
           request.ID
