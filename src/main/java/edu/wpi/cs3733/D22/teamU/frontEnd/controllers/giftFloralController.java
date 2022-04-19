@@ -1,111 +1,108 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
+import com.jfoenix.controls.JFXCheckBox;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 
 public class giftFloralController extends ServiceController {
 
-  @FXML JFXHamburger hamburger;
-  @FXML VBox vBoxPane;
-  @FXML Pane pane;
-  @FXML Pane assistPane;
-  @FXML TextField senderField;
-  @FXML TextField recieverField;
-  @FXML TextField staffField;
-  @FXML TextField roomField;
-  @FXML TextField requestID;
-  @FXML Text processingText;
-  @FXML JFXTextArea messageText;
-  @FXML CheckBox balloonBox;
-  @FXML CheckBox flowerBox;
-  @FXML CheckBox plantBox;
-  @FXML CheckBox basketBox;
+  public ComboBox<String> locations;
+  public ComboBox<String> employees;
+  @FXML Button clearButton;
+  @FXML Button submitButton;
+  @FXML VBox requestHolder;
+  @FXML Text requestText;
+  @FXML VBox inputFields;
+  @FXML StackPane requestsStack;
+  @FXML Pane newRequestPane;
+  @FXML Pane activeRequestPane;
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+  @FXML Text time;
 
+  ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
+  ObservableList<GiftRequest> giftRequest = FXCollections.observableArrayList();
+  ArrayList<String> nodeIDs;
+  ArrayList<String> staff;
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
+    setUpActiveRequests();
+    nodeIDs = new ArrayList<>();
+    for (Location l : Udb.getInstance().locationImpl.list()) {
+      nodeIDs.add(l.getNodeID());
+    }
+    locations.setTooltip(new Tooltip());
+    locations.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
 
-    closeTransition.setRate(-1);
-    hamburger.addEventHandler(
-        MouseEvent.MOUSE_CLICKED,
-        e -> {
-          closeTransition.setRate(closeTransition.getRate() * -1);
-          closeTransition.play();
-          vBoxPane.setVisible(!vBoxPane.isVisible());
-          pane.setDisable(!pane.isDisable());
-          if (pane.isDisable()) {
-            hamburger.setPrefWidth(200);
-            pane.setEffect(new GaussianBlur(10));
-            assistPane.setDisable(true);
-          } else {
-            pane.setEffect(null);
-            hamburger.setPrefWidth(77);
-            assistPane.setDisable(false);
-          }
-        });
-  }
+    staff = new ArrayList<>();
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l.getEmployeeID());
+    }
+    employees.setTooltip(new Tooltip());
+    employees.getItems().addAll(staff);
+    new ComboBoxAutoComplete<String>(employees, 675, 380);
 
-  public void submit(ActionEvent actionEvent) {
-    processingText.setText("Processing...");
-    processingText.setVisible(true);
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(1500); // milliseconds
-                Platform.runLater(
-                    () -> {
-                      processingText.setText("Done");
-                    });
-                Thread.sleep(1500); // milliseconds
-                Platform.runLater(
-                    () -> {
-                      processingText.setVisible(false);
-                      balloonBox.setSelected(false);
-                      plantBox.setSelected(false);
-                      flowerBox.setSelected(false);
-                      basketBox.setSelected(false);
-                      senderField.setText("");
-                      recieverField.setText("");
-                      staffField.setText("");
-                      roomField.setText("");
-                      requestID.setText("");
-                      messageText.setText("");
-                    });
-              } catch (InterruptedException ie) {
-              }
-            })
-        .start();
-  }
+    for (Node checkBox : requestHolder.getChildren()) {
+      checkBoxes.add((JFXCheckBox) checkBox);
+    }
 
-  public void clear(ActionEvent actionEvent) {
-    balloonBox.setSelected(false);
-    plantBox.setSelected(false);
-    flowerBox.setSelected(false);
-    basketBox.setSelected(false);
-    senderField.setText("");
-    recieverField.setText("");
-    staffField.setText("");
-    roomField.setText("");
-    requestID.setText("");
-    messageText.setText("");
+    for (int i = 0; i < checkBoxes.size(); i++) {
+      int finalI = i;
+      checkBoxes
+          .get(i)
+          .disableProperty()
+          .bind(
+              Bindings.createBooleanBinding(
+                  () -> !checkBoxes.get(finalI).isSelected(),
+                  checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+    }
+    clearButton
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+
+    // BooleanBinding submit =locations.idProperty().isEmpty().and(
+    // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
+    submitButton
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+    handleTime();
   }
 
   public void toHelp(ActionEvent actionEvent) throws IOException {
