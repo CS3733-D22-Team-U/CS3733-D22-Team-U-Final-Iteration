@@ -71,19 +71,19 @@ public class Menu {
         translatorRequestMenu();
         break;
 
-      case 13:
+      case 12:
         maintenanceRequestMenu();
         break;
-      case 14:
+      case 13:
         compservRequestMenu();
         break;
-      case 15:
+      case 14:
         securityRequestMenu();
         break;
-      case 16:
+      case 15:
         serveChangeMenu();
         break;
-      case 17:
+      case 16:
         // exit whole menu
         break;
     }

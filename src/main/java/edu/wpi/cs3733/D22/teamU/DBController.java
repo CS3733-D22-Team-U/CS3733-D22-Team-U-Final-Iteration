@@ -94,9 +94,9 @@ public class DBController {
     InputStream csvMaintenanceRequest =
         Main.class
             .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMaintenanceRequests.csv");
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMaintenanceRequest.csv");
     String maintenanceRequest =
-        copyFile(csvMaintenanceRequest, "csvTables/TowerMaintenanceRequests.csv");
+        copyFile(csvMaintenanceRequest, "csvTables/TowerMaintenanceRequest.csv");
 
     InputStream csvSecurityRequest =
         Main.class
