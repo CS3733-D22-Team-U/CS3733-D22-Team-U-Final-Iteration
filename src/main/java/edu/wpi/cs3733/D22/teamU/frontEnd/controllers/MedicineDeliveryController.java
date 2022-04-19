@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
@@ -118,7 +119,9 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML VBox inputFields;
 
   ArrayList<String> staff;
-  ArrayList<String> patientInput;
+  ArrayList<String> staffID;
+  ArrayList<String> staffUSER;
+  ArrayList<String> patientInput = new ArrayList<String>();
 
   ObservableList<MedicineRequest> medicineRequests = FXCollections.observableArrayList();
 
@@ -161,10 +164,16 @@ public class MedicineDeliveryController extends ServiceController {
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
+
+
     staff = new ArrayList<>();
+    staffUSER = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getUsername());
+      staff.add(l.getEmployeeID());
+      staffUSER.add(l.getUsername());
     }
+
+
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<String>(employees, 675, 380);
@@ -291,9 +300,9 @@ public class MedicineDeliveryController extends ServiceController {
     return medUIRequests;
   }
 
-  public Employee checkEmployee(String employee) throws SQLException, IOException {
-    if (Udb.getInstance().EmployeeImpl.List.get(employee) != null) {
-      return Udb.getInstance().EmployeeImpl.List.get(employee);
+  public Employee checkEmployee(String employee) throws NullPointerException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
     } else {
       Employee empty = new Employee("N/A");
       return empty;
@@ -367,6 +376,7 @@ public class MedicineDeliveryController extends ServiceController {
           inputString = checkBoxesInput.get(i).getText().trim();
         }
         String room = locations.getValue().toString();
+        String staff = employees.getValue();
 
         requestAmount = Integer.parseInt(inputString);
 
@@ -414,7 +424,7 @@ public class MedicineDeliveryController extends ServiceController {
                                   request.getAmount(),
                                   request.getPatientName(),
                                   "sent",
-                                  checkEmployee(employees.getValue().toString()),
+                                  checkEmployee(staff),
                                   request.getDestination(),
                                   request.getDate(),
                                   request.getTime()));
@@ -588,7 +598,7 @@ public class MedicineDeliveryController extends ServiceController {
     appStage.show();
   }
 
-  private ObservableList<edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest>
+  private ObservableList<MedicineRequest>
       newRequest(
           String id,
           String name,
@@ -600,7 +610,7 @@ public class MedicineDeliveryController extends ServiceController {
           String date,
           String time) {
     medUIRequests.add(
-        new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
+        new MedicineRequest(
             id, name, amount, patientName, status, employee, location, date, time));
     return medUIRequests;
   }

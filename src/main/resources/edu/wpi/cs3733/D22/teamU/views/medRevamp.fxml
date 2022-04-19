@@ -67,7 +67,7 @@
                 </Pane>
                 <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
                     <children>
-                        <Text layoutX="28.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Medicine Delivery Request">
+                        <Text layoutX="77.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Medicine Delivery Request">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -91,87 +91,87 @@
                                                                         <Insets />
                                                                     </VBox.margin>
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Alprozalam">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Amphetamine Salt">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top3" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Atorvastatin">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top4" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Lisinopril">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top5" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Metformin">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top6" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Oxycodone">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top7" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Doxycycline">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top8" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Maropenem">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top9" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Codeine">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top10" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Ketamine">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top11" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Fentanyl">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top12" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Warfarin">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top13" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Trazodone">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top14" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Insulin">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                                 <JFXCheckBox fx:id="top15" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Glucose">
                                                                     <font>
-                                                                        <Font size="20.0" />
+                                                                        <Font size="18.0" />
                                                                     </font>
                                                                 </JFXCheckBox>
                                                             </children>
                                                         </VBox>
-                                                        <VBox fx:id="inputFields" layoutX="177.0" layoutY="5.0" prefHeight="711.0" prefWidth="100.0" spacing="15.0">
+                                                        <VBox fx:id="inputFields" layoutX="177.0" layoutY="3.0" prefHeight="711.0" prefWidth="100.0" spacing="15.0">
                                                             <children>
                                                                 <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="100.0">
                                                                     <font>
@@ -312,11 +312,6 @@
                                     <children>
                                         <ComboBox fx:id="locations" layoutX="58.0" layoutY="32.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
                                         <ComboBox fx:id="employees" layoutX="58.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                                        <Text fx:id="requestText" fill="WHITE" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
-                                            <font>
-                                                <Font size="16.0" />
-                                            </font>
-                                        </Text>
                               <Label layoutX="51.0" layoutY="1.0" prefHeight="26.0" prefWidth="135.0" styleClass="menu" text="Choose Destination:" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -352,6 +347,11 @@
                                         </Button>
                                     </children>
                                 </HBox>
+                                  <Text fx:id="requestText" fill="WHITE" layoutX="345.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                                      <font>
+                                          <Font size="16.0" />
+                                      </font>
+                                  </Text>
                             </children>
                         </Pane>
                         <Pane fx:id="allMedPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
