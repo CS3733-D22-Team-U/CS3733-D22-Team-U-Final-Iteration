@@ -56,17 +56,6 @@ public class TranslatorRequestController extends ServiceController {
   @FXML Button clearButton;
   @FXML Button submitButton;
 
-  @FXML TableColumn<TranslatorRequestUI, String> activeReqID;
-  @FXML TableColumn<TranslatorRequest, String> activeReqPatientName;
-  @FXML TableColumn<TranslatorRequest, Integer> activeReqToLang;
-  @FXML TableColumn<TranslatorRequest, String> activeReqStatus;
-  @FXML TableColumn<TranslatorRequest, String> activeReqEmployee;
-  @FXML TableColumn<TranslatorRequest, String> activeReqDestination;
-  @FXML TableColumn<TranslatorRequest, String> activeDate;
-  @FXML TableColumn<TranslatorRequest, String> activeTime;
-
-  @FXML TableView<TranslatorRequest> activeRequestTable;
-
   @FXML VBox inputFields;
 
   @FXML StackPane requestsStack;
@@ -77,13 +66,11 @@ public class TranslatorRequestController extends ServiceController {
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Button allEquipButton;
-  @FXML Text time;
-  @FXML TextArea inputField;
+   @FXML TextArea inputLanguage;
+  @FXML TextArea inputPatient;
 
 
   ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
-  ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
-  ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
@@ -96,7 +83,8 @@ public class TranslatorRequestController extends ServiceController {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
     setUpAllTranslatorReq();
-    setUpActiveRequests();
+
+    // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
@@ -105,6 +93,7 @@ public class TranslatorRequestController extends ServiceController {
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
+    // Displays EMployess in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
@@ -113,38 +102,6 @@ public class TranslatorRequestController extends ServiceController {
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<String>(employees, 675, 380);
 
-    for (Node checkBox : requestHolder.getChildren()) {
-      checkBoxes.add((JFXCheckBox) checkBox);
-    }
-    for (Node textArea : inputFields.getChildren()) {
-      checkBoxesInput.add((JFXTextArea) textArea);
-    }
-
-    for (int i = 0; i < checkBoxesInput.size(); i++) {
-      int finalI = i;
-      checkBoxesInput
-          .get(i)
-          .disableProperty()
-          .bind(
-              Bindings.createBooleanBinding(
-                  () -> !checkBoxes.get(finalI).isSelected(),
-                  checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
-    }
-    clearButton
-        .disableProperty()
-        .bind(
-            Bindings.createBooleanBinding(
-                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
-
-    // BooleanBinding submit =locations.idProperty().isEmpty().and(
-    // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
-    submitButton
-        .disableProperty()
-        .bind(
-            Bindings.createBooleanBinding(
-                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
     handleTime();
   }
 
@@ -162,7 +119,7 @@ public class TranslatorRequestController extends ServiceController {
   }
 
   private void setUpAllTranslatorReq() throws SQLException, IOException {
-    nameID.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("ID"));
+    nameID.setCellValueFactory(new PropertyValueFactory("ID"));
     patientName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("patientName"));
     toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
@@ -171,18 +128,6 @@ public class TranslatorRequestController extends ServiceController {
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
     time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
-  }
-
-  private void setUpActiveRequests() throws SQLException, IOException {
-    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
-    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
-    activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
-    activeRequestTable.setItems(getActiveRequestList());
   }
 
   private ObservableList<TranslatorRequest> newRequest(
@@ -215,94 +160,45 @@ public class TranslatorRequestController extends ServiceController {
     return translatorUI;
   }
 
-  private ObservableList<TranslatorRequest> getActiveRequestList() throws SQLException, IOException {
-    for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
-      translatorUIRequests.add(
-              (
-                      new TranslatorRequest(
-                              request.getID(),
-                              request.getPatientName(),
-                              request.getToLang(),
-                              request.getStatus(),
-                              request.getEmployee(),
-                              request.getDestination(),
-                              request.getDate(),
-                              request.getTime()));
-    }
-    return translatorUIRequests;
-  }
-
   @Override
   public void addRequest() {
-    StringBuilder startRequestString = new StringBuilder("Your request for : ");
+    StringBuilder startRequestString = new StringBuilder("Your request for: ");
 
-    String endRequest = " has been placed successfully";
+    String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    String room = locations.getValue().toString();
 
-    int requestAmount = 0;
-    for (int i = 0; i < checkBoxes.size(); i++) {
-      if (checkBoxes.get(i).isSelected()) {
-        String inputString = "";
-
-        if (checkBoxesInput.get(i).getText().trim().equals("")) {
-          inputString = "0";
-        } else {
-          inputString = checkBoxesInput.get(i).getText().trim();
-        }
-        String room = locations.getValue().toString();
-
-        requestAmount = Integer.parseInt(inputString);
-
-        startRequestString
-            .append(requestAmount)
-            .append(" ")
-            .append(checkBoxes.get(i).getText())
-            .append("(s) to room ")
-            .append(room)
-            .append(", ");
-
+        Employee empty = new Employee("N/A");
         double rand = Math.random() * 10000;
 
-        EquipmentUI request =
-            new EquipmentUI(
-                (int) rand + "",
-                checkBoxes.get(i).getText(),
-                requestAmount,
-                room,
-                sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11),
-                1);
+        TranslatorRequest request = new TranslatorRequest(
+            (int) rand + "",
+            "Patient",
+            inputLanguage.getText().trim(),
+            "Pending",
+                empty,
+            room,
+            sdf3.format(timestamp).substring(0, 10),
+            sdf3.format(timestamp).substring(11));
 
-        activeRequestTable.setItems(
+        table.setItems(
             newRequest(
-                request.getId(),
-                request.getEquipmentName(),
-                request.getRequestAmount(),
+                request.getID(),
+                request.getPatientName(),
+                request.getToLang(),
+                request.getStatus(),
+                request.getEmployee(),
                 request.getDestination(),
-                request.getRequestDate(),
-                request.getRequestTime(),
-                1));
+                request.getDate(),
+                request.getTime()));
         try {
           Udb.getInstance()
-              .add( // TODO Have random ID and enter Room Destination
-                  new EquipRequest(
-                      request.getId(),
-                      request.getEquipmentName(),
-                      request.getRequestAmount(),
-                      request.getType(),
-                      checkEmployee(employees.getValue().toString()),
-                      request.getDestination(),
-                      request.getRequestDate(),
-                      request.getRequestTime(),
-                      1));
-
+              .add(request);
         } catch (IOException e) {
           e.printStackTrace();
         } catch (SQLException e) {
           e.printStackTrace();
         }
-      }
-    }
 
     requestText.setText(startRequestString + endRequest);
     requestText.setVisible(true);
@@ -327,10 +223,6 @@ public class TranslatorRequestController extends ServiceController {
   public void updateRequest() {}
 
   public void clearRequest() {
-    for (int i = 0; i < checkBoxes.size(); i++) {
-      checkBoxes.get(i).setSelected(false);
-      checkBoxesInput.get(i).clear();
-    }
     requestText.setText("Cleared Requests!");
     requestText.setVisible(true);
     new Thread(

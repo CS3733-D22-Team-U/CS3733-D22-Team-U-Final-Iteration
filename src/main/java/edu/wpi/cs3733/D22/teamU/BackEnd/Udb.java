@@ -30,7 +30,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousReques
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
-
 import java.io.*;
 import java.sql.*;
 

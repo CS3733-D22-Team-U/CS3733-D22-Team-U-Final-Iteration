@@ -78,14 +78,11 @@ public class DBController {
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerMealRequests.csv");
     String mealRequest = copyFile(csvMealRequest, "csvTables/TowerMealRequests.csv");
 
-
     InputStream csvReligousRequest =
-            Main.class
-                    .getClassLoader()
-                    .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReligousRequests.csv");
-    String religousRequest =
-            copyFile(csvReligousRequest, "csvTables/TowerReligousRequests.csv");
-
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReligousRequests.csv");
+    String religousRequest = copyFile(csvReligousRequest, "csvTables/TowerReligousRequests.csv");
 
     InputStream csvTranslatorRequest =
         Main.class
