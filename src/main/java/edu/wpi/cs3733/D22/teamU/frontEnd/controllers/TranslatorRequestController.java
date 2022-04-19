@@ -47,8 +47,8 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TableColumn<TranslatorRequest, String> status;
   @FXML TableColumn<TranslatorRequest, String> employeeName; // really its the ID, our employee's don't have names
   @FXML TableColumn<TranslatorRequest, String> destination;
-  @FXML TableColumn<TranslatorRequest, String> date;
-  @FXML TableColumn<TranslatorRequest, String> time;
+  @FXML TableColumn<TranslatorRequest, String> tdate;
+  @FXML TableColumn<TranslatorRequest, String> ttime;
   @FXML TableView<TranslatorRequest> table;
 
   @FXML VBox requestHolder;
@@ -112,12 +112,13 @@ public class TranslatorRequestController extends ServiceController {
               while (Uapp.running) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String timeStampTime = sdf3.format(timestamp).substring(11);
-                time.setText(timeStampTime);
+                ttime.setText(timeStampTime);
               }
             });
     timeThread.start();
   }
 
+  //
   private void setUpAllTranslatorReq() throws SQLException, IOException {
     nameID.setCellValueFactory(new PropertyValueFactory("ID"));
     patientName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("patientName"));
@@ -125,8 +126,8 @@ public class TranslatorRequestController extends ServiceController {
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
     //employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employee"));
     destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
-    date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    tdate.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
+    ttime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
   }
 
