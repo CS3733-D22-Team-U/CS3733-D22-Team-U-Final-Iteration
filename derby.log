@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Tue Apr 19 11:37:17 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-4278-8a04-00000bcfefb0 
-on database directory C:\Users\kodyd\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
-Loaded from file:/C:/Users/kodyd/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Microsoft
-java.runtime.version=11.0.14.1+1-LTS
-user.dir=C:\Users\kodyd\IdeaProjects\CS3733-D22-Team-U-Prototype-3
-os.name=Windows 11
-os.arch=amd64
-os.version=10.0
+Tue Apr 19 12:45:45 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-42b7-38ff-00000d49d200 
+on database directory /Users/krob/IdeaProjects/CS3733-D22-Team-U-Prototype-3/UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6a6824be 
+Loaded from file:/Users/krob/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Amazon.com Inc.
+java.runtime.version=11.0.14.1+10-LTS
+user.dir=/Users/krob/IdeaProjects/CS3733-D22-Team-U-Prototype-3
+os.name=Mac OS X
+os.arch=x86_64
+os.version=11.6
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

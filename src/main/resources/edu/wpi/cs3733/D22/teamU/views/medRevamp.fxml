@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MedicineDeliveryController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
@@ -35,7 +46,7 @@
                                         <Insets right="-15.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Equipment" textFill="#044e9a">
+                                <Button fx:id="allMedButton" mnemonicParsing="false" onAction="#switchToMedicine" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Medicine" textFill="#044e9a">
                                     <font>
                                         <Font name="System Bold" size="12.0" />
                                     </font>
@@ -349,7 +360,7 @@
                                 </HBox>
                             </children>
                         </Pane>
-                        <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                        <Pane fx:id="allMedPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                             <children>
                                 <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
