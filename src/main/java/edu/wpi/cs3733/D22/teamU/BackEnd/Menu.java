@@ -668,19 +668,19 @@ public class Menu {
                     + "6 - Return to Main Menu\n");
     switch (employeeInput.nextInt()) {
       case 1:
-        Udb.getInstance().compservRequestImpl.printTable();
+        Udb.getInstance().compServRequestImpl.printTable();
         compservRequestMenu();
         break;
       case 2:
-        Udb.getInstance().edit(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().edit(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 3:
-        Udb.getInstance().add(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().add(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 4:
-        Udb.getInstance().remove(Udb.getInstance().compservRequestImpl.askUser());
+        Udb.getInstance().remove(Udb.getInstance().compServRequestImpl.askUser());
         compservRequestMenu();
         break;
       case 5:
