@@ -92,6 +92,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TableColumn<MedicineRequest, Integer> available;
   @FXML TableColumn<MedicineRequest, Integer> total;
   @FXML TableColumn<MedicineRequest, String> location;
+
   @FXML TableView<MedicineRequest> table;
 
   @FXML Text requestText;
