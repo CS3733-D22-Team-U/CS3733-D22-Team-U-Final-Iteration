@@ -8,7 +8,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
-import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.lab.LabUI;
 import java.io.IOException;
@@ -41,8 +40,6 @@ public class labRequestServices extends ServiceController {
   public Button clear;
   public Label submission;
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
   @FXML TableColumn<EquipmentUI, String> nameCol;
   @FXML TableColumn<EquipmentUI, Integer> inUse;
   @FXML TableColumn<EquipmentUI, Integer> available;
@@ -102,17 +99,11 @@ public class labRequestServices extends ServiceController {
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
     }
-    locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
     }
-    employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
