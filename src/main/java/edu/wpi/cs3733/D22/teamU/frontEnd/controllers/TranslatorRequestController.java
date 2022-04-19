@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
@@ -39,26 +40,33 @@ public class TranslatorRequestController extends ServiceController {
 
   public ComboBox<String> locations;
   public ComboBox<String> employees;
-  @FXML TableColumn<EquipmentUI, String> nameCol;
-  @FXML TableColumn<EquipmentUI, Integer> inUse;
-  @FXML TableColumn<EquipmentUI, Integer> available;
-  @FXML TableColumn<EquipmentUI, Integer> total;
-  @FXML TableColumn<EquipmentUI, String> location;
-  @FXML TableView<EquipmentUI> table;
+
+  @FXML TableColumn<TranslatorRequest, String> nameID;
+  @FXML TableColumn<TranslatorRequest, String> patientName;
+  @FXML TableColumn<TranslatorRequest, String> toLang;
+  @FXML TableColumn<TranslatorRequest, String> status;
+  @FXML TableColumn<TranslatorRequest, String> employeeName; // really its the ID, our employee's don't have names
+  @FXML TableColumn<TranslatorRequest, String> destination;
+  @FXML TableColumn<TranslatorRequest, String> date;
+  @FXML TableColumn<TranslatorRequest, String> time;
+  @FXML TableView<TranslatorRequest> table;
+
   @FXML VBox requestHolder;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
-  @FXML TableColumn<EquipmentUI, String> activeReqID;
-  @FXML TableColumn<EquipmentUI, String> activeReqName;
-  @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
-  @FXML TableColumn<EquipmentUI, String> activeReqType;
-  @FXML TableColumn<EquipmentUI, String> activeReqDestination;
-  @FXML TableColumn<EquipmentUI, String> activeDate;
-  @FXML TableColumn<EquipmentUI, String> activeTime;
-  @FXML TableColumn<EquipmentUI, Integer> activePriority;
 
-  @FXML TableView<EquipmentUI> activeRequestTable;
+  @FXML TableColumn<TranslatorRequestUI, String> activeReqID;
+  @FXML TableColumn<TranslatorRequest, String> activeReqPatientName;
+  @FXML TableColumn<TranslatorRequest, Integer> activeReqToLang;
+  @FXML TableColumn<TranslatorRequest, String> activeReqStatus;
+  @FXML TableColumn<TranslatorRequest, String> activeReqEmployee;
+  @FXML TableColumn<TranslatorRequest, String> activeReqDestination;
+  @FXML TableColumn<TranslatorRequest, String> activeDate;
+  @FXML TableColumn<TranslatorRequest, String> activeTime;
+
+  @FXML TableView<TranslatorRequest> activeRequestTable;
+
   @FXML VBox inputFields;
 
   @FXML StackPane requestsStack;
@@ -70,11 +78,13 @@ public class TranslatorRequestController extends ServiceController {
   @FXML Button activeReqButton;
   @FXML Button allEquipButton;
   @FXML Text time;
+  @FXML TextArea inputField;
 
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+
+  ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
+  ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
@@ -85,7 +95,7 @@ public class TranslatorRequestController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllEquipment();
+    setUpAllTranslatorReq();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
@@ -151,14 +161,16 @@ public class TranslatorRequestController extends ServiceController {
     timeThread.start();
   }
 
-  private void setUpAllEquipment() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
-    available.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUI, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    table.setItems(getEquipmentList());
+  private void setUpAllTranslatorReq() throws SQLException, IOException {
+    nameID.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("ID"));
+    patientName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("patientName"));
+    toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
+    status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
+    //employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employee"));
+    destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
+    date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
+    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    table.setItems(getTranslatorList());
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -173,46 +185,51 @@ public class TranslatorRequestController extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<EquipmentUI> newRequest(
+  private ObservableList<TranslatorRequest> newRequest(
       String id,
-      String name,
-      int amount,
+      String patientName,
+      String toLang,
+      String status,
+      Employee employee,
       String destination,
       String date,
-      String time,
-      int priority) {
-    equipmentUIRequests.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
-    return equipmentUIRequests;
+      String time) {
+    translatorUIRequests.add(new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time));
+    return translatorUIRequests;
   }
 
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    equipmentUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      equipmentUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
+  private ObservableList<TranslatorRequest> getTranslatorList() throws SQLException, IOException {
+    translatorUI.clear();
+    for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
+      translatorUI.add(
+              new TranslatorRequest(
+                      request.getID(),
+                      request.getPatientName(),
+                      request.getToLang(),
+                      request.getStatus(),
+                      request.getEmployee(),
+                      request.getDestination(),
+                      request.getDate(),
+                      request.getTime()));
     }
-
-    return equipmentUI;
+    return translatorUI;
   }
 
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
-    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
-      equipmentUIRequests.add(
-          new EquipmentUI(
-              equipRequest.getID(),
-              equipRequest.getName(),
-              equipRequest.getAmount(),
-              equipRequest.getDestination(),
-              equipRequest.getDate(),
-              equipRequest.getTime(),
-              equipRequest.getPri()));
+  private ObservableList<TranslatorRequest> getActiveRequestList() throws SQLException, IOException {
+    for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
+      translatorUIRequests.add(
+              (
+                      new TranslatorRequest(
+                              request.getID(),
+                              request.getPatientName(),
+                              request.getToLang(),
+                              request.getStatus(),
+                              request.getEmployee(),
+                              request.getDestination(),
+                              request.getDate(),
+                              request.getTime()));
     }
-    return equipmentUIRequests;
+    return translatorUIRequests;
   }
 
   @Override
