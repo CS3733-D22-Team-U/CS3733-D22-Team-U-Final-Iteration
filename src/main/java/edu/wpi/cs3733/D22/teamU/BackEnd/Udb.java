@@ -10,6 +10,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.EquipmentDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
@@ -18,13 +20,20 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
 import java.io.*;
 import java.sql.*;
-import java.util.Scanner;
 
 public final class Udb {
 
@@ -49,6 +58,11 @@ public final class Udb {
   public MedicineRequestDaoImpl medicineRequestImpl;
   public MealRequestDaoImpl mealRequestImpl;
   public GiftRequestDaoImpl giftRequestImpl;
+  public ReligiousRequestDaoImpl religiousRequestImpl;
+  public TranslatorRequestDaoImpl translatorRequestImpl;
+  public MaintenanceRequestDaoImpl maintenanceRequestImpl;
+  public SecurityRequestDaoImpl securityRequestImpl;
+  public CompServRequestDaoImpl compServRequestImpl;
 
   public static boolean admin;
 
@@ -185,6 +199,11 @@ public final class Udb {
     medicineRequestImpl = new MedicineRequestDaoImpl(statement, CSVfiles[6]);
     giftRequestImpl = new GiftRequestDaoImpl(statement, CSVfiles[7]);
     mealRequestImpl = new MealRequestDaoImpl(statement, CSVfiles[8]);
+    religiousRequestImpl = new ReligiousRequestDaoImpl(statement, CSVfiles[9]);
+    translatorRequestImpl = new TranslatorRequestDaoImpl(statement, CSVfiles[10]);
+    maintenanceRequestImpl = new MaintenanceRequestDaoImpl(statement, CSVfiles[11]);
+    securityRequestImpl = new SecurityRequestDaoImpl(statement, CSVfiles[12]);
+    compServRequestImpl = new CompServRequestDaoImpl(statement, CSVfiles[13]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -212,6 +231,21 @@ public final class Udb {
 
     mealRequestImpl.CSVToJava(locationImpl.list());
     mealRequestImpl.JavaToSQL();
+
+    religiousRequestImpl.CSVToJava(locationImpl.list());
+    religiousRequestImpl.JavaToSQL();
+
+    translatorRequestImpl.CSVToJava(locationImpl.list());
+    translatorRequestImpl.JavaToSQL();
+
+    maintenanceRequestImpl.CSVToJava(locationImpl.list());
+    maintenanceRequestImpl.JavaToSQL();
+
+    securityRequestImpl.CSVToJava(locationImpl.list());
+    securityRequestImpl.JavaToSQL();
+
+    compServRequestImpl.CSVToJava(locationImpl.list());
+    compServRequestImpl.JavaToSQL();
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
@@ -262,6 +296,26 @@ public final class Udb {
         mealRequestImpl.edit((MealRequest) thingToAdd);
         break;
 
+      case "ReligiousRequest":
+        religiousRequestImpl.edit((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.edit((TranslatorRequest) thingToAdd);
+        break;
+
+      case "MaintenanceRequest":
+        maintenanceRequestImpl.edit((MaintenanceRequest) thingToAdd);
+        break;
+
+      case "SecurityRequest":
+        securityRequestImpl.edit((SecurityRequest) thingToAdd);
+        break;
+
+      case "CompServRequest":
+        compServRequestImpl.edit((CompServRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.edit()");
         break;
@@ -307,6 +361,26 @@ public final class Udb {
         mealRequestImpl.add((MealRequest) thingToAdd);
         break;
 
+      case "ReligiousRequest":
+        religiousRequestImpl.add((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.add((TranslatorRequest) thingToAdd);
+        break;
+
+      case "MaintenanceRequest":
+        maintenanceRequestImpl.add((MaintenanceRequest) thingToAdd);
+        break;
+
+      case "SecurityRequest":
+        securityRequestImpl.add((SecurityRequest) thingToAdd);
+        break;
+
+      case "CompServRequest":
+        compServRequestImpl.add((CompServRequest) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.add()");
         break;
@@ -350,6 +424,26 @@ public final class Udb {
 
       case "MealRequest":
         mealRequestImpl.remove((MealRequest) thingToAdd);
+        break;
+
+      case "ReligiousRequest":
+        religiousRequestImpl.remove((ReligiousRequest) thingToAdd);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.remove((TranslatorRequest) thingToAdd);
+        break;
+
+      case "MaintenanceRequest":
+        maintenanceRequestImpl.remove((MaintenanceRequest) thingToAdd);
+        break;
+
+      case "SecurityRequest":
+        securityRequestImpl.remove((SecurityRequest) thingToAdd);
+        break;
+
+      case "CompServRequest":
+        compServRequestImpl.remove((CompServRequest) thingToAdd);
         break;
 
       default:
@@ -398,6 +492,26 @@ public final class Udb {
         mealRequestImpl.saveTableAsCSV(nameOfCSV);
         break;
 
+      case "ReligiousRequest":
+        religiousRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "TranslatorRequest":
+        translatorRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "MaintenanceRequest":
+        maintenanceRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "SecurityRequest":
+        securityRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "CompServRequest":
+        compServRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.saveTableAsCSV()");
         break;
@@ -408,499 +522,4 @@ public final class Udb {
   // data in our SQL data base
   // This calls all of our private functions
 
-  public void menu() throws IOException, SQLException {
-
-    Scanner userInput = new Scanner(System.in);
-
-    System.out.println(
-        "What database would you like to chose: \n"
-            + "1 - Locations\n"
-            + "2 - Employees\n"
-            + "3 - Equipment\n"
-            + "4 - Equipment Request\n"
-            + "5 - Lab Request\n"
-            + "6 - Laundry Request\n"
-            + "7 - Medicine Request\n"
-            + "8 - Gift Request\n"
-            + "9 - Meal Request\n"
-            + "10 - Change Server\n"
-            + "11 - Quit\n");
-
-    switch (userInput.nextInt()) {
-      case 1:
-        locationMenu();
-        break;
-      case 2:
-        employeesMenu();
-        break;
-      case 3:
-        equipmentMenu();
-        break;
-      case 4:
-        equipRequestMenu();
-        break;
-      case 5:
-        labRequestMenu();
-        break;
-
-      case 6:
-        laundryRequestMenu();
-        break;
-
-      case 7:
-        medicineRequestMenu();
-        break;
-
-      case 8:
-        giftRequestMenu();
-        break;
-
-      case 9:
-        mealRequestMenu();
-        break;
-
-      case 10:
-        serveChangeMenu();
-        break;
-
-      case 11:
-        // exits whole menu
-        break;
-    }
-  }
-
-  private void serveChangeMenu() throws SQLException, IOException {
-    Scanner changeInput = new Scanner(System.in);
-    System.out.println("Press 1 for Embedded Database\n" + "Press 2 for Client Server Database\n");
-
-    int a = changeInput.nextInt();
-
-    if (a == 1) {
-      this.changeDriver(true);
-    } else if (a == 2) {
-      this.changeDriver(false);
-    } else {
-      System.out.println("Not an option");
-    }
-    menu();
-  }
-
-  private void locationMenu() throws SQLException, IOException {
-    Scanner locationsInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Location Information\n"
-            + "2 - Change Location Floor and Type\n"
-            + "3 - Enter New Location\n"
-            + "4 - Delete Location \n"
-            + "5 - Save Location Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (locationsInput.nextInt()) {
-      case 1:
-        locationImpl.printTable();
-        locationMenu();
-        break;
-      case 2:
-        edit(locationImpl.askUser());
-        locationMenu();
-        break;
-      case 3:
-        add(locationImpl.askUser());
-        locationMenu();
-        break;
-      case 4:
-        remove(locationImpl.askUser());
-        locationMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("Locations", nameOfFile);
-        locationMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        System.out.println("Something went wrong");
-        break;
-    }
-  }
-
-  private void employeesMenu() throws SQLException, IOException {
-    Scanner employeeInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Employee Information\n"
-            + "2 - Edit Employee Information\n"
-            + "3 - Enter New Employee\n"
-            + "4 - Delete Employee\n"
-            + "5 - Save Employee Information to CSV\n"
-            + "6 - Return to Main Menu\n");
-    switch (employeeInput.nextInt()) {
-      case 1:
-        EmployeeImpl.printTable();
-        employeesMenu();
-        break;
-      case 2:
-        edit(EmployeeImpl.askUser());
-        employeesMenu();
-        break;
-      case 3:
-        add(EmployeeImpl.askUser());
-        employeesMenu();
-        break;
-      case 4:
-        remove(EmployeeImpl.askUser());
-        employeesMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("Employees", nameOfFile);
-        employeesMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-    }
-  }
-
-  private void equipmentMenu() throws SQLException, IOException {
-    Scanner equipmentInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Equipment Information\n"
-            + "2 - Edit Equipment Information\n"
-            + "3 - Enter New Equipment\n"
-            + "4 - Delete Equipment\n"
-            + "5 - Save Equipment Information to CSV\n"
-            + "6 - Return to Main Menu\n");
-    switch (equipmentInput.nextInt()) {
-      case 1:
-        EquipmentImpl.printTable();
-        equipmentMenu();
-        break;
-      case 2:
-        edit(EquipmentImpl.askUser());
-        equipmentMenu();
-        break;
-      case 3:
-        add(EquipmentImpl.askUser());
-        equipmentMenu();
-        break;
-      case 4:
-        remove(EquipmentImpl.askUser());
-        equipmentMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("Equipments", nameOfFile);
-        equipmentMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-    }
-  }
-
-  private void equipRequestMenu() throws IOException, SQLException {
-    Scanner requestInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Equipment Request Information\n"
-            + "2 - Edit Equipment Request Information\n"
-            + "3 - Enter New Equipment Request\n"
-            + "4 - Delete Equipment Request\n"
-            + "5 - Save Equipment Request Information to CSV\n"
-            + "6 - Return to Main Menu\n");
-    switch (requestInput.nextInt()) {
-      case 1:
-        equipRequestImpl.printTable();
-        equipRequestMenu();
-        break;
-      case 2:
-        edit(equipRequestImpl.askUser());
-        equipRequestMenu();
-        break;
-      case 3:
-        add(equipRequestImpl.askUser());
-        equipRequestMenu();
-        break;
-      case 4:
-        remove(equipRequestImpl.askUser());
-        equipRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("EquipRequests", nameOfFile);
-        equipRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        menu();
-        break;
-    }
-  }
-
-  private void labRequestMenu() throws SQLException, IOException {
-
-    Scanner labMenu = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Lab Request Information\n"
-            + "2 - Change Lab Request\n"
-            + "3 - Enter New Lab Request\n"
-            + "4 - Delete Lab Request\n"
-            + "5 - Save Lab Request Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (labMenu.nextInt()) {
-      case 1:
-        labRequestImpl.printTable();
-        labRequestMenu();
-        break;
-      case 2:
-        labRequestImpl.edit(labRequestImpl.askUser());
-        labRequestMenu();
-        break;
-      case 3:
-        add(labRequestImpl.askUser());
-        labRequestMenu();
-        break;
-      case 4:
-        labRequestImpl.remove(labRequestImpl.askUser());
-        labRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("LabRequests", nameOfFile);
-        labRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        labRequestMenu();
-        break;
-    }
-  }
-
-  private void laundryRequestMenu() throws SQLException, IOException {
-    Scanner laundryInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Laundry Request Information\n"
-            + "2 - Change Laundry Request\n"
-            + "3 - Enter New Laundry Request\n"
-            + "4 - Delete Laundry Request \n"
-            + "5 - Save Laundry Request Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (laundryInput.nextInt()) {
-      case 1:
-        laundryRequestImpl.printTable();
-        laundryRequestMenu();
-        break;
-      case 2:
-        edit(laundryRequestImpl.askUser());
-        laundryRequestMenu();
-        break;
-      case 3:
-        add(laundryRequestImpl.askUser());
-        laundryRequestMenu();
-        break;
-      case 4:
-        remove(laundryRequestImpl.askUser());
-        laundryRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("LaundryRequest", nameOfFile);
-        laundryRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        System.out.println("Something went wrong");
-        menu();
-        break;
-    }
-  }
-
-  private void medicineRequestMenu() throws SQLException, IOException {
-    Scanner medicineInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Medicine Request Information\n"
-            + "2 - Change Medicine Request\n"
-            + "3 - Enter New Medicine Request\n"
-            + "4 - Delete Medicine Request \n"
-            + "5 - Save Medicine Request Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (medicineInput.nextInt()) {
-      case 1:
-        medicineRequestImpl.printTable();
-        medicineRequestMenu();
-        break;
-      case 2:
-        edit(medicineRequestImpl.askUser());
-        medicineRequestMenu();
-        break;
-      case 3:
-        add(medicineRequestImpl.askUser());
-        medicineRequestMenu();
-        break;
-      case 4:
-        remove(medicineRequestImpl.askUser());
-        medicineRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("MedicineRequest", nameOfFile);
-        medicineRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        System.out.println("Something went wrong");
-        menu();
-        break;
-    }
-  }
-
-  private void giftRequestMenu() throws SQLException, IOException {
-    Scanner giftInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Gift Request Information\n"
-            + "2 - Change Gift Request\n"
-            + "3 - Enter New Gift Request\n"
-            + "4 - Delete Gift Request \n"
-            + "5 - Save Gift Request Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (giftInput.nextInt()) {
-      case 1:
-        giftRequestImpl.printTable();
-        giftRequestMenu();
-        break;
-      case 2:
-        edit(giftRequestImpl.askUser());
-        giftRequestMenu();
-        break;
-      case 3:
-        add(giftRequestImpl.askUser());
-        giftRequestMenu();
-        break;
-      case 4:
-        remove(giftRequestImpl.askUser());
-        giftRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("GiftRequest", nameOfFile);
-        giftRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        System.out.println("Something went wrong");
-        menu();
-        break;
-    }
-  }
-
-  private void mealRequestMenu() throws SQLException, IOException {
-    Scanner mealInput = new Scanner(System.in);
-
-    System.out.println(
-        "1 - List Meal Request Information\n"
-            + "2 - Change Meal Request\n"
-            + "3 - Enter New Meal Request\n"
-            + "4 - Delete Meal Request \n"
-            + "5 - Save Meal Request Information to CSV file\n"
-            + "6 - Return to Main Menu\n");
-
-    switch (mealInput.nextInt()) {
-      case 1:
-        mealRequestImpl.printTable();
-        mealRequestMenu();
-        break;
-      case 2:
-        edit(mealRequestImpl.askUser());
-        mealRequestMenu();
-        break;
-      case 3:
-        add(mealRequestImpl.askUser());
-        mealRequestMenu();
-        break;
-      case 4:
-        remove(mealRequestImpl.askUser());
-        mealRequestMenu();
-        break;
-      case 5:
-        Scanner justNeedCSVName = new Scanner(System.in);
-
-        System.out.println("Enter the name of the CSV file");
-        String nameOfFile = justNeedCSVName.nextLine();
-
-        saveTableAsCSV("MealRequest", nameOfFile);
-        mealRequestMenu();
-        break;
-      case 6:
-        // menu
-        menu();
-        break;
-      default:
-        System.out.println("Something went wrong");
-        menu();
-        break;
-    }
-  }
 }
