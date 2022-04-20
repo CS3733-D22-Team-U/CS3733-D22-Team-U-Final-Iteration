@@ -277,7 +277,6 @@ public class MaintenanceRequestController extends ServiceController {
             request.getTime()));
     try {
       Udb.getInstance().add(request);
-
     } catch (IOException e) {
       e.printStackTrace();
     } catch (SQLException e) {
