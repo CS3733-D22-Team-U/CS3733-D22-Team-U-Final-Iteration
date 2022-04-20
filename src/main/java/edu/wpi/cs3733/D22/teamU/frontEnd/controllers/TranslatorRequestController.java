@@ -37,9 +37,10 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TableColumn<TranslatorRequest, String> patientName;
   @FXML TableColumn<TranslatorRequest, String> toLang;
   @FXML TableColumn<TranslatorRequest, String> status;
+  @FXML TableColumn<TranslatorRequest, String> employeeName;
   @FXML TableColumn<TranslatorRequest, String> destination;
   @FXML TableColumn<TranslatorRequest, String> date;
-  @FXML TableColumn<TranslatorRequest, String> time;
+  @FXML TableColumn<TranslatorRequest, String> newTime;
   @FXML TableView<TranslatorRequest> table;
 
   @FXML Button clearButton;
@@ -54,12 +55,14 @@ public class TranslatorRequestController extends ServiceController {
   @FXML Button activeReqButton;
   @FXML TextArea inputLanguage;
   @FXML TextArea inputPatient;
+  @FXML Text time;
 
   ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
+
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -78,7 +81,7 @@ public class TranslatorRequestController extends ServiceController {
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
-    // Displays EMployess in Table View
+    // Displays Emloyee in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
@@ -110,12 +113,10 @@ public class TranslatorRequestController extends ServiceController {
         new PropertyValueFactory<TranslatorRequest, String>("patientName"));
     toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
-    // employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest,
-    // String>("employee"));
-    destination.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("destination"));
+    employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employeeName"));
+    destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
   }
 
@@ -156,9 +157,9 @@ public class TranslatorRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    String room = locations.getValue().toString();
+    String room = locations.getValue();
+    String employ = employees.getValue();
 
-    Employee empty = new Employee("N/A");
     double rand = Math.random() * 10000;
 
     TranslatorRequest request =
@@ -167,7 +168,7 @@ public class TranslatorRequestController extends ServiceController {
             "Patient",
             inputLanguage.getText().trim(),
             "Pending",
-            empty,
+            checkEmployee(employ),
             room,
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
@@ -186,9 +187,13 @@ public class TranslatorRequestController extends ServiceController {
       Udb.getInstance().add(request);
     } catch (IOException e) {
       e.printStackTrace();
+      System.out.println("i");
     } catch (SQLException e) {
       e.printStackTrace();
+      System.out.println("d");
     }
+    inputPatient.clear();
+    inputLanguage.clear();
   }
 
   @Override
@@ -200,6 +205,7 @@ public class TranslatorRequestController extends ServiceController {
   public void clearRequest() {
     requestText.setText("Cleared Requests!");
     requestText.setVisible(true);
+
     new Thread(
             () -> {
               try {
