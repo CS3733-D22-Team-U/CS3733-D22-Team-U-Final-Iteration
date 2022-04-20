@@ -20,8 +20,9 @@ public class LaundryRequest extends Request {
       String destination,
       String pickUpDate,
       String dropOffDate,
+      String time,
       String services,
-      String additionalNotes) {
+      String notes) {
     this.ID = ID;
     this.patientName = patientName;
     this.employee = employee;
@@ -30,8 +31,10 @@ public class LaundryRequest extends Request {
     this.pickUpDate = pickUpDate;
     this.dropOffDate = dropOffDate;
     this.services = services;
-    this.notes = additionalNotes;
+    this.notes = notes;
     employeeName = employee.getEmployeeID();
+    this.time = time;
+    this.notes = notes;
   }
 
   public String getPickUpDate() {

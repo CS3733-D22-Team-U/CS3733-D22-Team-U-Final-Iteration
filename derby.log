@@ -1,4 +1,5 @@
 ----------------------------------------------------------------
+<<<<<<< HEAD
 Tue Apr 19 22:38:03 EDT 2022:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-44d5-7a83-00000da615a0 
 on database directory C:\Users\Marko\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6fadae5d 
@@ -7,6 +8,16 @@ java.vendor=Microsoft
 java.runtime.version=11.0.14.1+1-LTS
 user.dir=C:\Users\Marko\IdeaProjects\CS3733-D22-Team-U-Prototype-3
 os.name=Windows 11
+=======
+Wed Apr 20 02:46:25 UTC 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-44dd-2256-0000076065a0 
+on database directory C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/belia/AppData/Roaming/JetBrains/IntelliJIdea2021.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=11.0.14.1+1-b1751.46
+user.dir=C:\Users\belia\IdeaProjects\CS3733-D22-Team-U-Prototype-3
+os.name=Windows 10
+>>>>>>> 9e7f89cb9ff48faf54d260284a71d67f12d7c6a6
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
