@@ -237,11 +237,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ButtonBar>
-            <ButtonBar fx:id="bottomRow" layoutX="160.0" layoutY="187.0" prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar fx:id="bottomRow" layoutX="40.0" layoutY="187.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
                   <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
                      <tooltip>
                         <Tooltip text="Deepti Gosukonda" />
+                     </tooltip></Button>
+                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toTranslatorRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
+                     <tooltip>
+                        <Tooltip text="Belisha Genin" />
                      </tooltip></Button>
                   <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
                      <tooltip>

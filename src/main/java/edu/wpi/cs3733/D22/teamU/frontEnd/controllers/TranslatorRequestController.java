@@ -1,17 +1,12 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +25,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
@@ -40,6 +32,7 @@ public class TranslatorRequestController extends ServiceController {
 
   public ComboBox<String> locations;
   public ComboBox<String> employees;
+  public ComboBox<String> requests;
 
   @FXML TableColumn<TranslatorRequest, String> nameID;
   @FXML TableColumn<TranslatorRequest, String> patientName;
@@ -47,13 +40,13 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TableColumn<TranslatorRequest, String> status;
   @FXML TableColumn<TranslatorRequest, String> destination;
   @FXML TableColumn<TranslatorRequest, String> date;
-  @FXML TableColumn<TranslatorRequest, String> time;
+  @FXML TableColumn<TranslatorRequest, String> newTime;
   @FXML TableView<TranslatorRequest> table;
 
   @FXML Button clearButton;
   @FXML Button submitButton;
 
-@FXML Text requestText;
+  @FXML Text requestText;
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allActiveRequestsPane;
@@ -63,12 +56,12 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TextArea inputLanguage;
   @FXML TextArea inputPatient;
 
-
   ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
+  ArrayList<String> trequests;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -87,7 +80,7 @@ public class TranslatorRequestController extends ServiceController {
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
-    // Displays EMployess in Table View
+    // Displays Employess in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
@@ -96,7 +89,15 @@ public class TranslatorRequestController extends ServiceController {
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<String>(employees, 675, 380);
 
-    handleTime();
+    // Displays Employess in Table View
+    trequests = new ArrayList<>();
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l.getEmployeeID());
+    }
+    requests.setTooltip(new Tooltip());
+    requests.getItems().addAll(trequests);
+    new ComboBoxAutoComplete<String>(requests, 675, 380);
+    //handleTime();
   }
 
   private void handleTime() {
@@ -106,7 +107,7 @@ public class TranslatorRequestController extends ServiceController {
               while (Uapp.running) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String timeStampTime = sdf3.format(timestamp).substring(11);
-                time.setText(timeStampTime);
+                newTime.setText(timeStampTime);
               }
             });
     timeThread.start();
@@ -115,13 +116,16 @@ public class TranslatorRequestController extends ServiceController {
   //
   private void setUpAllTranslatorReq() throws SQLException, IOException {
     nameID.setCellValueFactory(new PropertyValueFactory("ID"));
-    patientName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("patientName"));
+    patientName.setCellValueFactory(
+        new PropertyValueFactory<TranslatorRequest, String>("patientName"));
     toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
-    //employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employee"));
-    destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
+    // employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest,
+    // String>("employee"));
+    destination.setCellValueFactory(
+        new PropertyValueFactory<TranslatorRequest, String>("destination"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
   }
 
@@ -134,7 +138,8 @@ public class TranslatorRequestController extends ServiceController {
       String destination,
       String date,
       String time) {
-    translatorUIRequests.add(new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time));
+    translatorUIRequests.add(
+        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time));
     return translatorUIRequests;
   }
 
@@ -142,15 +147,15 @@ public class TranslatorRequestController extends ServiceController {
     translatorUI.clear();
     for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
       translatorUI.add(
-              new TranslatorRequest(
-                      request.getID(),
-                      request.getPatientName(),
-                      request.getToLang(),
-                      request.getStatus(),
-                      request.getEmployee(),
-                      request.getDestination(),
-                      request.getDate(),
-                      request.getTime()));
+          new TranslatorRequest(
+              request.getID(),
+              request.getPatientName(),
+              request.getToLang(),
+              request.getStatus(),
+              request.getEmployee(),
+              request.getDestination(),
+              request.getDate(),
+              request.getTime()));
     }
     return translatorUI;
   }
@@ -162,39 +167,39 @@ public class TranslatorRequestController extends ServiceController {
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     String room = locations.getValue().toString();
+    String employee = employees.getValue();
 
-        Employee empty = new Employee("N/A");
-        double rand = Math.random() * 10000;
+    Employee empty = new Employee(employee);
+    double rand = Math.random() * 10000;
 
-        TranslatorRequest request = new TranslatorRequest(
+    TranslatorRequest request =
+        new TranslatorRequest(
             (int) rand + "",
-            "Patient",
+            inputPatient.getText().trim(),
             inputLanguage.getText().trim(),
             "Pending",
-                empty,
+            empty,
             room,
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
 
-        table.setItems(
-            newRequest(
-                request.getID(),
-                request.getPatientName(),
-                request.getToLang(),
-                request.getStatus(),
-                request.getEmployee(),
-                request.getDestination(),
-                request.getDate(),
-                request.getTime()));
-        try {
-          Udb.getInstance()
-              .add(request);
-        } catch (IOException e) {
-          e.printStackTrace();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
-
+    table.setItems(
+        newRequest(
+            request.getID(),
+            request.getPatientName(),
+            request.getToLang(),
+            request.getStatus(),
+            request.getEmployee(),
+            request.getDestination(),
+            request.getDate(),
+            request.getTime()));
+    try {
+      Udb.getInstance().add(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -205,6 +210,8 @@ public class TranslatorRequestController extends ServiceController {
 
   public void clearRequest() {
     requestText.setText("Cleared Requests!");
+    inputLanguage.clear();
+    inputPatient.clear();
     requestText.setVisible(true);
     new Thread(
             () -> {
