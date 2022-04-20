@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,8 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.SecurityRequestController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
@@ -29,26 +29,17 @@
                 <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
                 <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                     <children>
-                        <HBox layoutX="865.0" layoutY="45.0" prefHeight="70.0" prefWidth="237.0">
-                            <children>
-                                <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets right="-15.0" />
-                                    </HBox.margin>
-                                </Button>
-                                <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets right="-15.0" />
-                                    </HBox.margin>
-                                </Button>
-                            </children>
-                        </HBox>
+                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
+                        <Button fx:id="newReqButton" layoutX="865.0" layoutY="45.0" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="activeReqButton" layoutX="975.0" layoutY="45.0" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
                     </children>
                 </Pane>
                 <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
@@ -59,125 +50,107 @@
                 </Pane>
                 <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
                     <children>
-                        <Text layoutX="88.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Laundry Service">
+                        <Text layoutX="88.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Security Request">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Text>
                     </children>
                 </Pane>
-                <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
+                <StackPane fx:id="requestsStack" layoutX="214.0" layoutY="116.0">
                     <children>
-                        <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
-                            <children>
-                                <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="253.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
-                           <children>
-                              <VBox fx:id="requestHolder" layoutX="11.0" layoutY="73.0" prefHeight="148.0" prefWidth="153.0" spacing="15.0">
-                                 <children>
-                                    <JFXCheckBox fx:id="top" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hang Dry">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Machine-Dry">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hypo-Allergenic">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                 </children>
-                              </VBox>
-                              <Text fill="#044e9a" layoutX="3.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service to Request">
-                                 <font>
-                                    <Font name="System Bold" size="27.0" />
-                                 </font>
-                              </Text>
-                           </children></Pane>
-                                <Pane layoutX="340.0" layoutY="7.0" prefHeight="519.0" prefWidth="275.0">
-                                    <children>
-                              <TextField fx:id="patientNameInput" layoutX="70.0" layoutY="53.0" prefHeight="25.0" prefWidth="174.0" promptText="Enter Patient Name" />
-                                        <ComboBox fx:id="locations" layoutX="67.0" layoutY="108.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Location" />
-                                        <ComboBox fx:id="employees" layoutX="69.0" layoutY="170.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Employee" />
-                                        <Text fx:id="requestText" fill="WHITE" layoutX="5.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
-                                            <font>
-                                                <Font size="16.0" />
-                                            </font>
-                                        </Text>
-                              <DatePicker fx:id="pickupDateInput" layoutX="69.0" layoutY="252.0" promptText="Select Pickup Date" />
-                              <DatePicker fx:id="dropOffDateInput" layoutX="69.0" layoutY="308.0" promptText="Select Drop Date" />
-                              <Text fill="WHITE" layoutX="106.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="118.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="115.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="110.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="WHITE" layoutX="112.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drop Date">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                                    </children>
-                                </Pane>
-                                <HBox layoutX="10.0" layoutY="498.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">
-                                    <children>
-                                        <Button fx:id="submitButton" alignment="CENTER" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#addRequest" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
-                                            <font>
-                                                <Font name="System Bold" size="12.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets left="45.0" />
-                                            </HBox.margin>
-                                        </Button>
-                                        <Button fx:id="clearButton" alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearRequest" prefHeight="56.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
-                                            <font>
-                                                <Font name="System Bold" size="12.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                        <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                             <children>
                                 <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
                                         <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="patientName" prefWidth="75.0" text="Patient" />
-                                        <TableColumn fx:id="staffName" prefWidth="75.0" text="Staff" />
-                                        <TableColumn fx:id="serviceType" prefWidth="75.0" text="Type" />
-                              <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
-                                        <TableColumn fx:id="pickUp" prefWidth="75.0" text="Pick Up" />
-                                        <TableColumn fx:id="dropOff" prefWidth="75.0" text="Drop Off" />
+                              <TableColumn fx:id="activename" prefWidth="75.0" text="Name" />
+                                        <TableColumn fx:id="activeReqStatus" prefWidth="75.0" text="Status" />
+                                        <TableColumn fx:id="activeStaff" prefWidth="75.0" text="Staff" />
+                                        <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />
+                                        <TableColumn fx:id="activeReqDescription" prefWidth="75.0" text="Description" />
+                              <TableColumn fx:id="activelethal" prefWidth="75.0" text="Lethal" />
+                                        <TableColumn fx:id="activeDate" prefWidth="75.0" text="Date" />
+                                        <TableColumn fx:id="activeTime" prefWidth="75.0" text="Time" />
                                     </columns>
-                                    <columnResizePolicy>
-                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                    </columnResizePolicy>
                                     <styleClass>
                                         <String fx:value="column-header" />
                                         <String fx:value="column-header-background" />
                                     </styleClass>
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                 </TableView>
+                            </children>
+                        </Pane>
+                        <Pane fx:id="newRequestPane" maxHeight="558.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="329.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                            <children>
+                                <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="453.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                                    <children>
+                                        <Text fx:id="requestText1" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" textAlignment="CENTER" wrappingWidth="219.0">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                        <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="348.0" prefWidth="277.0" />
+                                      <HBox layoutX="-21.0" layoutY="410.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">
+                                          <children>
+                                              <Button fx:id="submitButton" alignment="CENTER" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#addRequest" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
+                                                  <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                  </font>
+                                                  <HBox.margin>
+                                                      <Insets left="45.0" />
+                                                  </HBox.margin>
+                                              </Button>
+                                              <Button fx:id="clearButton" alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearRequest" prefHeight="56.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
+                                                  <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                  </font>
+                                                  <HBox.margin>
+                                                      <Insets left="35.0" />
+                                                  </HBox.margin>
+                                              </Button>
+                                          </children>
+                                      </HBox>
+                                    </children>
+                                </Pane>
+                                <Pane layoutX="340.0" layoutY="18.0" prefHeight="151.0" prefWidth="285.0">
+                                    <children>
+                                        <ComboBox fx:id="locations" layoutX="62.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
+                                        <Text fx:id="requestText" fill="WHITE" layoutX="48.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Pane>
+                                <ComboBox fx:id="staffDropDown" layoutX="401.0" layoutY="207.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
+                                <Text fx:id="requestText2" fill="WHITE" layoutX="387.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                    <font>
+                                        <Font name="System Bold" size="28.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="clearRequest" fill="WHITE" layoutX="404.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="missingDescription" fill="WHITE" layoutX="367.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                        <CheckBox fx:id="lethalForceButton" layoutX="115.0" layoutY="501.0" mnemonicParsing="false" text="Lethal Force?" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </CheckBox>
                             </children>
                         </Pane>
                     </children>
@@ -185,6 +158,7 @@
 
             </children>
         </Pane>
+        <TextFlow prefHeight="200.0" prefWidth="200.0" />
       <ScrollPane prefHeight="750.0" prefWidth="86.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">

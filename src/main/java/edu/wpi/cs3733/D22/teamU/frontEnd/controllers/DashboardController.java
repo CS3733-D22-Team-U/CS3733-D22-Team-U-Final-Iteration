@@ -18,11 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -30,11 +31,9 @@ public class DashboardController extends ServiceController {
 
   public Button logOutButton;
   @FXML Button navButton;
-  @FXML AnchorPane animatePane;
   @FXML ImageView navPaneArrow;
 
   @FXML Button clockButton;
-  @FXML AnchorPane clockPane;
   @FXML ImageView clockPaneArrow;
 
   @FXML AnchorPane anchor;
@@ -59,9 +58,33 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    this.anchor
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+              Math.min(yScale, xScale);
+              Scale scale = new Scale(xScale, yScale);
+              scale.setPivotX(0.0D);
+              scale.setPivotY(0.0D);
+              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+            });
+    this.anchor
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+              Math.min(yScale, xScale);
+              Scale scale = new Scale(xScale, yScale);
+              scale.setPivotX(0.0D);
+              scale.setPivotY(0.0D);
+              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+            });
+
     userName.setText("Dr." + "____");
-    handleNavPaneAnimation();
-    handleClockPaneAnimation();
+
     handleNavButtons();
     handeDateTime();
     handleTurtle();
@@ -136,26 +159,6 @@ public class DashboardController extends ServiceController {
     timeThread.start();
   }
 
-  private void handleNavPaneAnimation() {
-    TranslateTransition openNav = new TranslateTransition(new Duration(350), animatePane);
-    openNav.setToX(0);
-    TranslateTransition closeNav = new TranslateTransition(new Duration(350), animatePane);
-    navButton.setOnAction(
-        (ActionEvent evt) -> {
-          navPaneArrow.setRotate(navPaneArrow.getRotate() * -1);
-          if (animatePane.getTranslateX() != 0) {
-            openNav.play();
-          } else {
-            closeNav.setToX(846);
-            closeNav.play();
-            TranslateTransition closeOther = new TranslateTransition(new Duration(350), clockPane);
-            closeOther.setToX(0);
-            closeOther.play();
-            clockPaneArrow.setRotate(clockPaneArrow.getRotate() * -1);
-          }
-        });
-  }
-
   private void handleNavButtons() {
     for (Node node : topRow.getButtons()) {
       Button button = (Button) node;
@@ -171,28 +174,6 @@ public class DashboardController extends ServiceController {
       button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
       button.setOnMouseExited(e -> button.setStyle(initStyle));
     }
-  }
-
-  private void handleClockPaneAnimation() {
-    TranslateTransition openNav = new TranslateTransition(new Duration(350), clockPane);
-    openNav.setToX(-846);
-    TranslateTransition closeNav = new TranslateTransition(new Duration(350), clockPane);
-
-    clockButton.setOnAction(
-        (ActionEvent evt) -> {
-          clockPaneArrow.setRotate(clockPaneArrow.getRotate() * -1);
-          if (clockPane.getTranslateX() != -846) {
-            openNav.play();
-            TranslateTransition closeOther =
-                new TranslateTransition(new Duration(350), animatePane);
-            closeOther.setToX(0);
-            closeOther.play();
-            navPaneArrow.setRotate(navPaneArrow.getRotate() * -1);
-          } else {
-            closeNav.setToX(0);
-            closeNav.play();
-          }
-        });
   }
 
   public void toCloseApp(ActionEvent actionEvent) {
@@ -233,22 +214,4 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void updateRequest() {}
-
-  public void closeNavTabs(MouseEvent mouseEvent) {
-    if (mouseEvent.getY() < animatePane.getLayoutY()
-        || mouseEvent.getY() > animatePane.getLayoutY() + animatePane.getHeight()) {
-      if (animatePane.getTranslateX() != 0) {
-        TranslateTransition closeNav = new TranslateTransition(new Duration(350), animatePane);
-        closeNav.setToX(0);
-        closeNav.play();
-        navPaneArrow.setRotate(navPaneArrow.getRotate() * -1);
-      }
-      if (clockPane.getTranslateX() == -846) {
-        TranslateTransition closeNav = new TranslateTransition(new Duration(350), clockPane);
-        closeNav.setToX(0);
-        closeNav.play();
-        clockPaneArrow.setRotate(navPaneArrow.getRotate() * -1);
-      }
-    }
-  }
 }

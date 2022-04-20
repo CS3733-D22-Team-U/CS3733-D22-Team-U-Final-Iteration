@@ -7,6 +7,15 @@ public class SecurityRequest extends Request {
 
   public String descriptionOfThreat;
   public String leathalForcePermited;
+  private String employeeName;
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
+  }
 
   public SecurityRequest(
       String ID,
@@ -27,6 +36,7 @@ public class SecurityRequest extends Request {
     this.leathalForcePermited = lethal;
     this.date = date;
     this.time = time;
+    employeeName = employee.getEmployeeID();
   }
 
   public void setDescriptionOfThreat(String descriptionOfThreat) {

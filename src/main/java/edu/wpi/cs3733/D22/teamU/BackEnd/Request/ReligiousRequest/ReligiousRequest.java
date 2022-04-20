@@ -5,10 +5,11 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class ReligiousRequest extends Request {
 
-  private String patient;
   private String religion;
+  private String notes;
+  private String employeeName;
 
-  ReligiousRequest(
+  public ReligiousRequest(
       String ID,
       String name,
       String date,
@@ -17,25 +18,28 @@ public class ReligiousRequest extends Request {
       String religion,
       String status,
       String destination,
-      Employee employee) {
+      Employee employee,
+      String notes) {
 
     this.ID = ID;
     this.name = name;
     this.date = date;
     this.time = time;
-    this.patient = patient;
+    this.patientName = patient;
     this.religion = religion;
     this.status = status;
     this.destination = destination;
     this.employee = employee;
+    this.notes = notes;
+    this.employeeName = this.employee.getEmployeeID();
   }
 
   public String getPatient() {
-    return patient;
+    return patientName;
   }
 
   public void setPatient(String patient) {
-    this.patient = patient;
+    this.patientName = patient;
   }
 
   public String getReligion() {
@@ -44,5 +48,21 @@ public class ReligiousRequest extends Request {
 
   public void setReligion(String religion) {
     this.religion = religion;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
   }
 }
