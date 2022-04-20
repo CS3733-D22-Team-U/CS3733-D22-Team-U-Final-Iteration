@@ -66,7 +66,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 row[5],
                 row[6],
                 row[7],
-                row[8]);
+                row[8],
+                row[9]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -104,7 +105,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 row[5],
                 row[6],
                 row[7],
-                row[8]);
+                row[8],
+                row[9]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -138,6 +140,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + "location varchar(15) not null,"
               + "pickUp varchar(10) not null,"
               + "dropOff varchar(10) not null,"
+              + "time varchar(10) not null,"
               + "services varchar(50) not null,"
               + "notes varchar(50) not null)");
 
@@ -158,6 +161,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 + currLaud.getPickUpDate()
                 + "','"
                 + currLaud.getDropOffDate()
+                + "','"
+                + currLaud.getTime()
                 + "','"
                 + currLaud.getServices()
                 + "','"
@@ -185,6 +190,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         String location = results.getString("location");
         String pickUp = results.getString("pickUp");
         String dropOff = results.getString("dropOff");
+        String time = results.getString("time");
         String services = results.getString("services");
         String notes = results.getString("notes");
 
@@ -197,6 +203,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
                 location,
                 pickUp,
                 dropOff,
+                time,
                 services,
                 notes);
 
@@ -225,6 +232,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     fw.append(",");
     fw.append("Drop Off");
     fw.append(",");
+    fw.append("Time");
+    fw.append(",");
     fw.append("Services");
     fw.append(",");
     fw.append("Notes");
@@ -245,6 +254,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
       fw.append(",");
       fw.append(request.getDropOffDate());
       fw.append(",");
+      fw.append(request.getTime());
+      fw.append(",");
       fw.append(request.getServices());
       fw.append(",");
       fw.append(request.getNotes());
@@ -257,7 +268,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
   public void printTable() throws IOException {
     CSVToJava();
     System.out.println(
-        "ID |\t Patient Name |\t Staff |\t Status |\t Location |\t Pick Up |\t Drop Off |\t Services |\t Notes");
+        "ID |\t Patient Name |\t Staff |\t Status |\t Location |\t Pick Up |\t Drop Off \t Time |\t Services |\t Notes");
     for (LaundryRequest request : this.List.values()) {
       System.out.println(
           request.ID
@@ -273,6 +284,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + request.pickUpDate
               + " | \t"
               + request.dropOffDate
+              + " | \t"
+              + request.time
               + " | \t"
               + request.services
               + " | \t"
@@ -353,6 +366,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     String inputID = "None";
     String inputPatient = "N/A";
     String inputStaff = "N/A";
+    String inputTime = "N/A";
     String inputStatus = "N/A";
     String inputLocation = "FDEPT00101";
     String inputPick = "N/A";
@@ -376,6 +390,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         inputLocation,
         inputPick,
         inputDrop,
+        inputTime,
         inputServices,
         inputNotes);
   }
