@@ -10,6 +10,8 @@ public class LaundryRequest extends Request {
   String services;
   String notes;
 
+  String employeeName;
+
   public LaundryRequest(
       String ID,
       String patientName,
@@ -29,6 +31,7 @@ public class LaundryRequest extends Request {
     this.dropOffDate = dropOffDate;
     this.services = services;
     this.notes = additionalNotes;
+    employeeName = employee.getEmployeeID();
   }
 
   public String getPickUpDate() {
@@ -61,5 +64,13 @@ public class LaundryRequest extends Request {
 
   public void setNotes(String notes) {
     this.notes = notes;
+  }
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
   }
 }
