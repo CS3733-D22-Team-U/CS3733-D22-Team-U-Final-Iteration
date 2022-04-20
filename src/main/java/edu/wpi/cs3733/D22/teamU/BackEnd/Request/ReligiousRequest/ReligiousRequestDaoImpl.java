@@ -47,10 +47,12 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
-    br.readLine();
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == 8) {
+      if (row.length == columns) {
+
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
@@ -83,12 +85,12 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
   public void CSVToJava(ArrayList<Location> locations) throws IOException {
     List = new HashMap<String, ReligiousRequest>();
     String s;
-    File file = new File(csvFile);
+    File file = new File(this.csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == 8) {
+      if (row.length == 9) {
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
@@ -181,7 +183,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "employee varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
         statement.execute(
-            "INSERT INTO MedicineRequest VALUES("
+            "INSERT INTO ReligiousRequest VALUES("
                 + "'"
                 + currReq.getID()
                 + "','"
@@ -203,7 +205,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("Connection failed. Check output console. religious request");
     }
   }
 

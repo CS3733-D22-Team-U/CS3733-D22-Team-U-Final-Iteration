@@ -1,1 +1,2 @@
-ID,name,date,time,patient,religion,status,destination,employee
+ID,Name,Date,Time,Patient,Religion,Status,Location,Employee
+1,ja,n/a,n/a,joe,ha,n/a,FDEPT00101,00003
