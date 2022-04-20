@@ -111,8 +111,7 @@ public class CompServRequestController extends ServiceController {
         new PropertyValueFactory<CompServRequest, String>("destination"));
     reqMessage.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("message"));
     reqStatus.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("status"));
-    reqEmployee.setCellValueFactory(
-        new PropertyValueFactory<CompServRequest, String>("employeeName"));
+    reqEmployee.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("employee"));
     reqDate.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("date"));
     reqTime.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("time"));
     table.setItems(getCompServList());

@@ -123,7 +123,7 @@ public class MaintenanceRequestController extends ServiceController {
     activeReqDescription.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("description"));
     activeStaff.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("employeeName"));
+        new PropertyValueFactory<MaintenanceRequest, String>("employee"));
     activeDate.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
 

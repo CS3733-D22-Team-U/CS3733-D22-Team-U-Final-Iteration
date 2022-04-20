@@ -22,5 +22,4 @@ public class AboutController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
-
 }

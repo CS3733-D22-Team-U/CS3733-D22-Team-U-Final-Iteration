@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
@@ -19,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -78,6 +76,7 @@ public class sideViewController extends ServiceController {
     chooseFloor.setValue("Choose A Floor");
 
     setUpAllEquipment();
+    /*
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
     closeTransition.setRate(-1);
@@ -98,6 +97,8 @@ public class sideViewController extends ServiceController {
             assistPane.setDisable(false);
           }
         });
+
+     */
 
     popupBedAlert = new AnchorPane();
     try {
