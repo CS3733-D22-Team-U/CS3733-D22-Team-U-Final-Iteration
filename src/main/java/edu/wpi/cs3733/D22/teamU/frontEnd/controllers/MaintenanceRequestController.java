@@ -25,16 +25,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class MaintenanceRequestController extends ServiceController {
 
   public ComboBox<String> locations;
-  public ComboBox<String> employees;
-  @FXML TableView<MaintenanceRequest> table;
-  @FXML VBox requestHolder;
+  public ComboBox<String> staffDropDown;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
@@ -44,38 +41,31 @@ public class MaintenanceRequestController extends ServiceController {
   @FXML TableColumn<MaintenanceRequest, String> activeReqStatus;
   @FXML TableColumn<MaintenanceRequest, String> activeReqDestination;
   @FXML TableColumn<MaintenanceRequest, String> activeReqDescription;
+  @FXML TableColumn<MaintenanceRequest, String> activeStaff;
   @FXML TableColumn<MaintenanceRequest, String> activeDate;
   @FXML TableColumn<MaintenanceRequest, String> activeTime;
 
   @FXML TableView<MaintenanceRequest> activeRequestTable;
-  @FXML VBox inputFields;
 
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
   @FXML Pane activeRequestPane;
-
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
-  @FXML Button allEquipButton;
   @FXML Text time;
+  @FXML Text sucessRequest;
+  @FXML Text clearRequest;
+  @FXML Text missingDescription;
 
   @FXML TextArea textInput;
 
   ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
   ObservableList<MaintenanceRequest> maintenanceUIRequests = FXCollections.observableArrayList();
-  // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-  @SneakyThrows
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
-    // udb = Udb.getInstance();
-    setUpAllMaintenance();
-    // setUpActiveRequests();
+  public void fillDestinations() throws SQLException, IOException {
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
@@ -83,14 +73,30 @@ public class MaintenanceRequestController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
+  }
 
+  public void fillStaff() throws SQLException, IOException {
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
     }
-    employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+
+    staffDropDown.setTooltip(new Tooltip());
+    staffDropDown.getItems().addAll(staff);
+    new ComboBoxAutoComplete<String>(staffDropDown, 675, 400);
+  }
+
+  @SneakyThrows
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    sucessRequest.setVisible(false);
+    clearRequest.setVisible(false);
+    missingDescription.setVisible(false);
+
+    setUpAllMaintenance();
+
+    fillDestinations();
+    fillStaff();
 
     handleTime();
   }
@@ -116,6 +122,8 @@ public class MaintenanceRequestController extends ServiceController {
         new PropertyValueFactory<MaintenanceRequest, String>("destination"));
     activeReqDescription.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("description"));
+    activeStaff.setCellValueFactory(
+        new PropertyValueFactory<MaintenanceRequest, String>("employee"));
     activeDate.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
   }
@@ -183,14 +191,66 @@ public class MaintenanceRequestController extends ServiceController {
   }
 
   @Override
-  public void addRequest() {
-    StringBuilder startRequestString = new StringBuilder("Your request for : ");
+  public void addRequest() throws SQLException, IOException {
+    if (textInput.getText().equals("")) {
+      missingDescription.setVisible(true);
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(3500); // milliseconds
+                  Platform.runLater(
+                      () -> {
+                        missingDescription.setVisible(false);
+                      });
+                } catch (InterruptedException ie) {
+                }
+              })
+          .start();
+      return;
+    }
+    /*
+    else if (locations.getItems() == null) {
+      missingDescription.setVisible(true);
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(3500); // milliseconds
+                  Platform.runLater(
+                      () -> {
+                        missingDescription.setVisible(false);
+                      });
+                } catch (InterruptedException ie) {
+                }
+              })
+          .start();
+      fillDestinations();
+      fillStaff();
+      return;
+    } else if (staffDropDown.getItems() == null) {
+      missingDescription.setVisible(true);
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(3500); // milliseconds
+                  Platform.runLater(
+                      () -> {
+                        missingDescription.setVisible(false);
+                      });
+                } catch (InterruptedException ie) {
+                }
+              })
+          .start();
+      fillDestinations();
+      fillStaff();
+      return;
+    }
 
-    String endRequest = " has been placed successfully";
+     */
+    clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     double rand = Math.random() * 10000;
 
-    Employee empty = new Employee("N/A");
+    Employee empty = new Employee(activeStaff.getText());
 
     MaintenanceRequest request =
         new MaintenanceRequest(
@@ -224,15 +284,14 @@ public class MaintenanceRequestController extends ServiceController {
       e.printStackTrace();
     }
 
-    requestText.setText(startRequestString + endRequest);
-    requestText.setVisible(true);
+    sucessRequest.setVisible(true);
     new Thread(
             () -> {
               try {
                 Thread.sleep(3500); // milliseconds
                 Platform.runLater(
                     () -> {
-                      requestText.setVisible(false);
+                      sucessRequest.setVisible(false);
                     });
               } catch (InterruptedException ie) {
               }
@@ -247,15 +306,18 @@ public class MaintenanceRequestController extends ServiceController {
   public void updateRequest() {}
 
   public void clearRequest() {
-    requestText.setText("Cleared Requests!");
-    requestText.setVisible(true);
+    sucessRequest.setVisible(false);
+    clearRequest.setVisible(true);
+    textInput.setText("");
+    staffDropDown.getItems().clear();
+    locations.getItems().clear();
     new Thread(
             () -> {
               try {
                 Thread.sleep(1500); // milliseconds
                 Platform.runLater(
                     () -> {
-                      requestText.setVisible(false);
+                      clearRequest.setVisible(false);
                     });
               } catch (InterruptedException ie) {
               }
@@ -282,7 +344,6 @@ public class MaintenanceRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
-    allEquipButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -295,20 +356,6 @@ public class MaintenanceRequestController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToEquipment(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
