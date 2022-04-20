@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Mon Apr 18 19:17:37 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-3ef7-9f1a-00000eddaf98 
-on database directory /Users/krob/IdeaProjects/CS3733-D22-Team-U-Prototype-3/UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6a6824be 
-Loaded from file:/Users/krob/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Amazon.com Inc.
-java.runtime.version=11.0.14.1+10-LTS
-user.dir=/Users/krob/IdeaProjects/CS3733-D22-Team-U-Prototype-3
-os.name=Mac OS X
-os.arch=x86_64
-os.version=11.6
+Tue Apr 19 18:20:33 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-43e9-bc0a-00000bd24600 
+on database directory C:\Users\William\Documents\GitHub\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@c387f44 
+Loaded from file:/C:/Users/William/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=13.0.2+8
+user.dir=C:\Users\William\Documents\GitHub\CS3733-D22-Team-U-Prototype-3
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

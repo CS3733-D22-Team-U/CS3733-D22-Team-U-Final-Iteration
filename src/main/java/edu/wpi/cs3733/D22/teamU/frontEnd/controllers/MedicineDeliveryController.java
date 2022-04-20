@@ -4,9 +4,9 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.medicine.medicineUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -44,6 +44,7 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TextField staffName;
   @FXML TextField advilTxt;
   // @FXML TextField IDtxt;
+  // @FXML TextField amount;
   @FXML TextField alproTxt;
   @FXML TextField saltTxt;
   @FXML TextField atorvTxt;
@@ -62,19 +63,19 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TabPane tab;
   @FXML TextField destination;
 
-  @FXML TableColumn<medicineUI, String> reqID;
-  @FXML TableColumn<medicineUI, String> reqPatient;
-  @FXML TableColumn<medicineUI, String> reqStaff;
-  @FXML TableColumn<medicineUI, String> reqMed;
-  @FXML TableColumn<medicineUI, String> reqAmount;
-  @FXML TableColumn<medicineUI, String> reqDest;
-  @FXML TableColumn<medicineUI, String> reqDate;
-  @FXML TableColumn<medicineUI, String> reqTime;
+  @FXML TableColumn<MedicineRequest, String> reqID;
+  @FXML TableColumn<MedicineRequest, String> reqPatient;
+  @FXML TableColumn<MedicineRequest, String> reqStaff;
+  @FXML TableColumn<MedicineRequest, String> reqMed;
+  @FXML TableColumn<MedicineRequest, String> reqAmount;
+  @FXML TableColumn<MedicineRequest, String> reqDest;
+  @FXML TableColumn<MedicineRequest, String> reqDate;
+  @FXML TableColumn<MedicineRequest, String> reqTime;
 
-  @FXML TableView<medicineUI> activeRequestTable;
+  @FXML TableView<MedicineRequest> activeRequestTable;
   @FXML VBox requestHolder;
 
-  ObservableList<medicineUI> medUIRequests = FXCollections.observableArrayList();
+  ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<TextField> checkBoxInput = FXCollections.observableArrayList();
 
@@ -113,16 +114,17 @@ public class MedicineDeliveryController extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<medicineUI> getActiveRequestList() throws SQLException, IOException {
-    for (MedicineRequest request : Udb.getInstance().medicineRequestImpl.hList().values()) {
+  private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
+    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
-          new medicineUI(
+          new MedicineRequest(
               request.getID(),
               request.getName(),
+              request.getAmount(),
               request.getPatientName(),
-              request.getDestination(),
               request.getStatus(),
               request.getEmployee(),
+              request.getDestination(),
               request.getDate(),
               request.getTime()));
     }
@@ -144,6 +146,7 @@ public class MedicineDeliveryController extends ServiceController {
     String patientInput = patientName.getText().trim();
     String staffInput = staffName.getText().trim();
     String destinationInput = destination.getText().trim();
+    // String amountInput = amount.getText().trim();
 
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -152,35 +155,36 @@ public class MedicineDeliveryController extends ServiceController {
         double rand = Math.random() * 10000;
         // int amount = Integer.parseInt(checkBoxInput.get(i).toString().trim());
         int amount = 24;
-        medicineUI request =
-            new medicineUI(
+        MedicineRequest request =
+            new MedicineRequest(
                 (int) rand + "",
                 checkBoxes.get(i).getText(),
-                destinationInput,
-                "Ordered",
+                amount,
                 patientInput,
+                "Ordered",
                 checkEmployee(staffInput),
+                destinationInput,
                 sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11),
-                amount);
+                sdf3.format(timestamp).substring(11));
         activeRequestTable.setItems(
             newRequest(
-                request.getId(),
+                request.getID(),
                 request.getName(),
+                request.getAmount(),
                 request.getPatientName(),
-                request.getDestination(),
-                "Ordered",
+                request.getStatus(),
                 request.getEmployee(),
+                request.getDestination(),
                 request.getDate(),
-                request.getTime(),
-                amount));
+                request.getTime()));
         try {
           Udb.getInstance()
               .medicineRequestImpl
               .add(
                   new MedicineRequest(
-                      request.getId(),
+                      request.getID(),
                       request.getName(),
+                      request.getAmount(),
                       request.getPatientName(),
                       request.getStatus(),
                       request.getEmployee(),
@@ -342,18 +346,18 @@ public class MedicineDeliveryController extends ServiceController {
     appStage.show();
   }
 
-  private ObservableList<medicineUI> newRequest(
+  private ObservableList<MedicineRequest> newRequest(
       String id,
       String name,
+      int amount,
       String patientName,
-      String location,
       String status,
       Employee employee,
+      String location,
       String date,
-      String time,
-      int amount) {
+      String time) {
     medUIRequests.add(
-        new medicineUI(id, name, patientName, location, status, employee, date, time, amount));
+        new MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
     return medUIRequests;
   }
 
