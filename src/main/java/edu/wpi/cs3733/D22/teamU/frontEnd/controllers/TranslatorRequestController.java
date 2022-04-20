@@ -45,28 +45,22 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TableColumn<TranslatorRequest, String> patientName;
   @FXML TableColumn<TranslatorRequest, String> toLang;
   @FXML TableColumn<TranslatorRequest, String> status;
-  @FXML TableColumn<TranslatorRequest, String> employeeName; // really its the ID, our employee's don't have names
   @FXML TableColumn<TranslatorRequest, String> destination;
-  @FXML TableColumn<TranslatorRequest, String> tdate;
-  @FXML TableColumn<TranslatorRequest, String> ttime;
+  @FXML TableColumn<TranslatorRequest, String> date;
+  @FXML TableColumn<TranslatorRequest, String> time;
   @FXML TableView<TranslatorRequest> table;
 
-  @FXML VBox requestHolder;
-  @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
 
-  @FXML VBox inputFields;
-
+@FXML Text requestText;
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
-  @FXML Pane activeRequestPane;
+  @FXML Pane allActiveRequestsPane;
 
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
-  @FXML Button allEquipButton;
-   @FXML TextArea inputLanguage;
+  @FXML TextArea inputLanguage;
   @FXML TextArea inputPatient;
 
 
@@ -112,7 +106,7 @@ public class TranslatorRequestController extends ServiceController {
               while (Uapp.running) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String timeStampTime = sdf3.format(timestamp).substring(11);
-                ttime.setText(timeStampTime);
+                time.setText(timeStampTime);
               }
             });
     timeThread.start();
@@ -126,8 +120,8 @@ public class TranslatorRequestController extends ServiceController {
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
     //employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employee"));
     destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
-    tdate.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    ttime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
+    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
   }
 
@@ -201,20 +195,6 @@ public class TranslatorRequestController extends ServiceController {
           e.printStackTrace();
         }
 
-    requestText.setText(startRequestString + endRequest);
-    requestText.setVisible(true);
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(3500); // milliseconds
-                Platform.runLater(
-                    () -> {
-                      requestText.setVisible(false);
-                    });
-              } catch (InterruptedException ie) {
-              }
-            })
-        .start();
   }
 
   @Override
@@ -259,12 +239,11 @@ public class TranslatorRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
-    allEquipButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
+    Node active = stackNodes.get(stackNodes.indexOf(allActiveRequestsPane));
     for (Node node : stackNodes) {
       node.setVisible(false);
     }
@@ -272,20 +251,6 @@ public class TranslatorRequestController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToEquipment(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
