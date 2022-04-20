@@ -60,25 +60,17 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       String[] row = s.split(",");
       if (row.length == columns) {
         LabRequest r =
-            new LabRequest(
-                row[0],
-                row[1],
-                Integer.parseInt(row[2]),
-                row[3],
-                row[4],
-                checkEmployee(row[5]),
-                row[6],
-                row[7],
-                row[8]);
+                new LabRequest(
+                        row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l =
-              Udb.getInstance()
-                  .locationImpl
-                  .locations
-                  .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+                  Udb.getInstance()
+                          .locationImpl
+                          .locations
+                          .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -98,16 +90,8 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       String[] row = s.split(",");
       if (row.length == columns) {
         LabRequest r =
-            new LabRequest(
-                row[0],
-                row[1],
-                Integer.parseInt(row[2]),
-                row[3],
-                row[4],
-                checkEmployee(row[5]),
-                row[6],
-                row[7],
-                row[8]);
+                new LabRequest(
+                        row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -134,8 +118,6 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     fw.append(",");
     fw.append("Lab Type");
     fw.append(",");
-    fw.append("Amount");
-    fw.append(",");
     fw.append("Patient");
     fw.append(",");
     fw.append("Status");
@@ -153,8 +135,6 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       fw.append(request.getID());
       fw.append(",");
       fw.append(request.getName());
-      fw.append(",");
-      fw.append(Integer.toString(request.getAmount()));
       fw.append(",");
       fw.append(request.getPatientName());
       fw.append(",");
@@ -182,39 +162,36 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
 
     try {
       statement.execute(
-          "CREATE TABLE LabRequest("
-              + "ID varchar(10) not null,"
-              + "labType varchar(50) not null,"
-              + "amount int not null,"
-              + "patient varchar(50) not null, "
-              + "status varchar(15),"
-              + "staff varchar(50) not null,"
-              + "destination varchar(15),"
-              + "date varchar(10) not null,"
-              + "time varchar(10) not null)");
+              "CREATE TABLE LabRequest("
+                      + "ID varchar(10) not null,"
+                      + "labType varchar(50),"
+                      + "patient varchar(50) not null, "
+                      + "status varchar(15),"
+                      + "staff varchar(50) not null,"
+                      + "destination varchar(15),"
+                      + "date varchar(10) not null,"
+                      + "time varchar(10) not null)");
 
       for (LabRequest currLab : List.values()) {
         statement.execute(
-            "INSERT INTO LabRequest VALUES("
-                + "'"
-                + currLab.getID()
-                + "','"
-                + currLab.getName()
-                + "',"
-                + currLab.getAmount()
-                + ",'"
-                + currLab.getPatientName()
-                + "','"
-                + currLab.getStatus()
-                + "','"
-                + currLab.getEmployee().getEmployeeID()
-                + "','"
-                + currLab.getDestination()
-                + "','"
-                + currLab.getDate()
-                + "','"
-                + currLab.getTime()
-                + "')");
+                "INSERT INTO LabRequest VALUES("
+                        + "'"
+                        + currLab.getID()
+                        + "','"
+                        + currLab.getName()
+                        + "','"
+                        + currLab.getPatientName()
+                        + "','"
+                        + currLab.getStatus()
+                        + "','"
+                        + currLab.getEmployee().getEmployeeID()
+                        + "','"
+                        + currLab.getDestination()
+                        + "','"
+                        + currLab.getDate()
+                        + "','"
+                        + currLab.getTime()
+                        + "')");
       }
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in LabRequestImp");
@@ -230,7 +207,6 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       while (results.next()) {
         String id = results.getString("ID");
         String labType = results.getString("labType");
-        int amount = results.getInt("amount");
         String patient = results.getString("patient");
         String status = results.getString("status");
         String staff = results.getString("staff");
@@ -239,16 +215,8 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
         String time = results.getString("time");
 
         LabRequest SQLRow =
-            new LabRequest(
-                id,
-                labType,
-                amount,
-                patient,
-                status,
-                checkEmployee(staff),
-                destination,
-                date,
-                time);
+                new LabRequest(
+                        id, labType, patient, status, checkEmployee(staff), destination, date, time);
 
         List.put(id, SQLRow);
       }
@@ -262,26 +230,24 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     CSVToJava();
     // display locations and attributes
     System.out.println(
-        "ID |\t Lab Type \t Amount |\t Patient |\t Status |\t Staff |\t Destination |\t Date |\t Time");
+            "ID |\t Lab Type |\t Patient |\t Status |\t Staff |\t Destination |\t Date |\t Time");
     for (LabRequest request : this.List.values()) {
       System.out.println(
-          request.ID
-              + " | \t"
-              + request.name
-              + " | \t"
-              + request.amount
-              + " | \t"
-              + request.patientName
-              + " | \t"
-              + request.status
-              + " | \t"
-              + request.employee.getEmployeeID()
-              + " | \t"
-              + request.destination
-              + " | \t"
-              + request.date
-              + " | \t"
-              + request.time);
+              request.ID
+                      + " | \t"
+                      + " | \t"
+                      + request.name
+                      + request.patientName
+                      + " | \t"
+                      + " | \t"
+                      + request.status
+                      + request.employee.getEmployeeID()
+                      + " | \t"
+                      + request.destination
+                      + " | \t"
+                      + request.date
+                      + " | \t"
+                      + request.time);
     }
   }
 
@@ -381,7 +347,6 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     Scanner labInput = new Scanner(System.in);
 
     String inputID = "None";
-    int inputAmount = 0;
     String inputStatus = "N/A";
     String inputPatient = "N/A";
     String inputStaff = "N/A";
@@ -405,14 +370,13 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     Employee empty = new Employee(inputStaff);
 
     return new LabRequest(
-        inputID,
-        inputType,
-        inputAmount,
-        inputPatient,
-        inputStatus,
-        empty,
-        inputDestination,
-        inputDate,
-        inputTime);
+            inputID,
+            inputType,
+            inputPatient,
+            inputStatus,
+            empty,
+            inputDestination,
+            inputDate,
+            inputTime);
   }
 }
