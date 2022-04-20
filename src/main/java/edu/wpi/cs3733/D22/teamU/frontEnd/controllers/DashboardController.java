@@ -23,6 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -59,6 +61,31 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    this.anchor
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+              Math.min(yScale, xScale);
+              Scale scale = new Scale(xScale, yScale);
+              scale.setPivotX(0.0D);
+              scale.setPivotY(0.0D);
+              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+            });
+    this.anchor
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+              Math.min(yScale, xScale);
+              Scale scale = new Scale(xScale, yScale);
+              scale.setPivotX(0.0D);
+              scale.setPivotY(0.0D);
+              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+            });
+
     userName.setText("Dr." + "____");
     handleNavPaneAnimation();
     handleClockPaneAnimation();
