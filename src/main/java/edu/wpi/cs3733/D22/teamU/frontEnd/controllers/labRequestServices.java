@@ -17,10 +17,19 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class labRequestServices extends ServiceController {
 
+  @FXML StackPane requestsStack;
+  @FXML Pane newRequestPane;
+  @FXML Pane allEquipPane;
+  @FXML Pane activeRequestPane;
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+  @FXML Button allEquipButton;
   public Button toHelpPage;
   public Button clear;
   public Label submission;
@@ -193,5 +202,44 @@ public class labRequestServices extends ServiceController {
     patientNameField.setText("");
     otherField.setText("");
     staffMemberField.setText("");
+  }
+
+  public void switchToActive(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(true);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(false);
+  }
+
+  public void switchToEquipment(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    allEquipButton.setUnderline(true);
+  }
+
+  public void switchToNewRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(true);
+    allEquipButton.setUnderline(false);
   }
 }
