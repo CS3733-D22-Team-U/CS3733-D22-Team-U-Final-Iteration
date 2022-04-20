@@ -65,7 +65,6 @@ public class sideViewController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
     chooseFloor.setItems(FXCollections.observableArrayList(floors));
 
     setUpAllEquipment();
@@ -97,7 +96,7 @@ public class sideViewController extends ServiceController {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       String floor = chooseFloor.getValue();
-      if (floor == null)
+      try {
         equipmentUI.add(
             new EquipmentUI(
                 equipment.getLocationID(),
@@ -106,7 +105,10 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getShortName(),
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
-      else if (equipment.getLocation().getFloor().equals(floors))
+      } catch (Exception e) {
+      }
+      /*
+      if (equipment.getLocation().getFloor().equals(floors))
         equipmentUI.add(
             new EquipmentUI(
                 equipment.getLocationID(),
@@ -115,6 +117,8 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getShortName(),
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
+
+       */
     }
     return equipmentUI;
   }
@@ -175,6 +179,7 @@ public class sideViewController extends ServiceController {
     location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("id"));
     locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
     floor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
+
     try {
       equipFloor.setItems(getEquipmentList());
     } catch (Exception e) {
@@ -190,4 +195,24 @@ public class sideViewController extends ServiceController {
 
   @Override
   public void updateRequest() {}
+
+  public void updateList(ActionEvent actionEvent) throws SQLException, IOException {
+    equipmentUI.clear();
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+      String floor = chooseFloor.getValue();
+      try {
+        if (equipment.getLocation().getFloor().equals(floor))
+          equipmentUI.add(
+              new EquipmentUI(
+                  equipment.getLocationID(),
+                  equipment.getName(),
+                  equipment.getAmount(),
+                  equipment.getLocation().getShortName(),
+                  equipment.getLocation().getFloor(),
+                  equipment.getLocation().getNodeType()));
+      } catch (Exception e) {
+      }
+      equipFloor.setItems(equipmentUI);
+    }
+  }
 }

@@ -214,7 +214,7 @@
             </Text>
             <TextField fx:id="filterField" layoutX="721.0" layoutY="200.0" />
             <Button fx:id="lower1Button" layoutX="303.0" layoutY="146.0" mnemonicParsing="false" text="Floor1" />
-            <ComboBox fx:id="chooseFloor" layoutX="899.0" layoutY="201.0" prefWidth="150.0" />
+            <ComboBox fx:id="chooseFloor" layoutX="899.0" layoutY="201.0" onAction="#updateList" prefWidth="150.0" />
             </children>
         </Pane>
       <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" layoutX="34.0" layoutY="151.0" prefHeight="558.0" prefWidth="24.0">
