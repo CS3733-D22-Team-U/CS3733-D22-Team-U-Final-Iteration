@@ -47,6 +47,7 @@ public class DashboardController extends ServiceController {
   @FXML Text date;
 
   @FXML Text userName;
+  @FXML Button allRequestsButton;
 
   @FXML Pane turtlePane;
   @FXML Circle apple;
