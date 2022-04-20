@@ -100,26 +100,26 @@ public class EquipmentDeliverySystemController extends ServiceController {
     for (int i = 0; i < checkBoxesInput.size(); i++) {
       int finalI = i;
       checkBoxesInput
-              .get(i)
-              .disableProperty()
-              .bind(
-                      Bindings.createBooleanBinding(
-                              () -> !checkBoxes.get(finalI).isSelected(),
-                              checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+          .get(i)
+          .disableProperty()
+          .bind(
+              Bindings.createBooleanBinding(
+                  () -> !checkBoxes.get(finalI).isSelected(),
+                  checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
     }
     clearButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
 
     submitButton
-            .disableProperty()
-            .bind(
-                    Bindings.createBooleanBinding(
-                            () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
-                            checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(CheckBox::selectedProperty).toArray(Observable[]::new)));
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {
@@ -146,28 +146,28 @@ public class EquipmentDeliverySystemController extends ServiceController {
   }
 
   private ObservableList<EquipRequest> newRequest(
-          String id,
-          String name,
-          int amount,
-          String typeOfRequest,
-          String status,
-          String employee,
-          String destination,
-          String date,
-          String time,
-          int priority) {
+      String id,
+      String name,
+      int amount,
+      String typeOfRequest,
+      String status,
+      String employee,
+      String destination,
+      String date,
+      String time,
+      int priority) {
     equipmentUIRequests.add(
-            new EquipRequest(
-                    id,
-                    name,
-                    amount,
-                    typeOfRequest,
-                    status,
-                    checkEmployee(employee),
-                    destination,
-                    date,
-                    time,
-                    priority));
+        new EquipRequest(
+            id,
+            name,
+            amount,
+            typeOfRequest,
+            status,
+            checkEmployee(employee),
+            destination,
+            date,
+            time,
+            priority));
     return equipmentUIRequests;
   }
 
@@ -175,11 +175,11 @@ public class EquipmentDeliverySystemController extends ServiceController {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       equipmentUI.add(
-              new Equipment(
-                      equipment.getName(),
-                      equipment.getAmount(),
-                      equipment.getInUse(),
-                      equipment.getLocationID()));
+          new Equipment(
+              equipment.getName(),
+              equipment.getAmount(),
+              equipment.getInUse(),
+              equipment.getLocationID()));
     }
     return equipmentUI;
   }
@@ -187,17 +187,17 @@ public class EquipmentDeliverySystemController extends ServiceController {
   private ObservableList<EquipRequest> getActiveRequestList() throws SQLException, IOException {
     for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
       equipmentUIRequests.add(
-              new EquipRequest(
-                      equipRequest.getID(),
-                      equipRequest.getName(),
-                      equipRequest.getAmount(),
-                      equipRequest.getType(),
-                      equipRequest.getStatus(),
-                      equipRequest.getEmployee(),
-                      equipRequest.getDestination(),
-                      equipRequest.getDate(),
-                      equipRequest.getTime(),
-                      equipRequest.getPriority()));
+          new EquipRequest(
+              equipRequest.getID(),
+              equipRequest.getName(),
+              equipRequest.getAmount(),
+              equipRequest.getType(),
+              equipRequest.getStatus(),
+              equipRequest.getEmployee(),
+              equipRequest.getDestination(),
+              equipRequest.getDate(),
+              equipRequest.getTime(),
+              equipRequest.getPriority()));
     }
     return equipmentUIRequests;
   }
@@ -224,54 +224,54 @@ public class EquipmentDeliverySystemController extends ServiceController {
         requestAmount = Integer.parseInt(inputString);
 
         startRequestString
-                .append(requestAmount)
-                .append(" ")
-                .append(checkBoxes.get(i).getText())
-                .append("(s) to room ")
-                .append(room)
-                .append(", ");
+            .append(requestAmount)
+            .append(" ")
+            .append(checkBoxes.get(i).getText())
+            .append("(s) to room ")
+            .append(room)
+            .append(", ");
 
         double rand = Math.random() * 10000;
 
         EquipRequest request =
-                new EquipRequest(
-                        (int) rand + "",
-                        "equipment",
-                        requestAmount,
-                        checkBoxes.get(i).getText(),
-                        "in progress",
-                        new Employee("n/a"),
-                        room,
-                        sdf3.format(timestamp).substring(0, 10),
-                        sdf3.format(timestamp).substring(11),
-                        1);
+            new EquipRequest(
+                (int) rand + "",
+                "equipment",
+                requestAmount,
+                checkBoxes.get(i).getText(),
+                "in progress",
+                new Employee("n/a"),
+                room,
+                sdf3.format(timestamp).substring(0, 10),
+                sdf3.format(timestamp).substring(11),
+                1);
 
         activeRequestTable.setItems(
-                newRequest(
-                        request.getID(),
-                        request.getName(),
-                        request.getAmount(),
-                        request.getType(),
-                        request.getStatus(),
-                        request.getEmployee().getEmployeeID(),
-                        request.getDestination(),
-                        request.getDate(),
-                        request.getTime(),
-                        request.getPriority()));
+            newRequest(
+                request.getID(),
+                request.getName(),
+                request.getAmount(),
+                request.getType(),
+                request.getStatus(),
+                request.getEmployee().getEmployeeID(),
+                request.getDestination(),
+                request.getDate(),
+                request.getTime(),
+                request.getPriority()));
         try {
           Udb.getInstance()
-                  .add( // TODO Have random ID and enter Room Destination
-                          new EquipRequest(
-                                  request.getID(),
-                                  request.getName(),
-                                  request.getAmount(),
-                                  request.getType(),
-                                  request.getStatus(),
-                                  checkEmployee(employees.getValue().toString()),
-                                  request.getDestination(),
-                                  request.getDate(),
-                                  request.getTime(),
-                                  1));
+              .add( // TODO Have random ID and enter Room Destination
+                  new EquipRequest(
+                      request.getID(),
+                      request.getName(),
+                      request.getAmount(),
+                      request.getType(),
+                      request.getStatus(),
+                      checkEmployee(employees.getValue().toString()),
+                      request.getDestination(),
+                      request.getDate(),
+                      request.getTime(),
+                      1));
 
         } catch (IOException e) {
           e.printStackTrace();
@@ -288,13 +288,13 @@ public class EquipmentDeliverySystemController extends ServiceController {
               try {
                 Thread.sleep(3500); // milliseconds
                 Platform.runLater(
-                        () -> {
-                          requestText.setVisible(false);
-                        });
+                    () -> {
+                      requestText.setVisible(false);
+                    });
               } catch (InterruptedException ie) {
               }
             })
-            .start();
+        .start();
   }
 
   @Override
@@ -315,13 +315,13 @@ public class EquipmentDeliverySystemController extends ServiceController {
               try {
                 Thread.sleep(1500); // milliseconds
                 Platform.runLater(
-                        () -> {
-                          requestText.setVisible(false);
-                        });
+                    () -> {
+                      requestText.setVisible(false);
+                    });
               } catch (InterruptedException ie) {
               }
             })
-            .start();
+        .start();
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
