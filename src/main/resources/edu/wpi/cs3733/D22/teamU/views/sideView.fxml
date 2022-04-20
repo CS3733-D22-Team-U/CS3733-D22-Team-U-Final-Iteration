@@ -80,12 +80,14 @@
                   <DropShadow />
                </effect>
                 </SplitMenuButton>
-                <TableView fx:id="equipFloor" layoutX="553.0" layoutY="243.0" prefHeight="230.0" prefWidth="509.0">
+                <TableView fx:id="equipFloor" layoutX="553.0" layoutY="243.0" prefHeight="230.0" prefWidth="532.0">
                     <columns>
-                        <TableColumn fx:id="equipmentName" prefWidth="141.62213134765625" text="Equipment" />
-                        <TableColumn fx:id="location" prefWidth="150.5946044921875" text="Location" />
-                        <TableColumn fx:id="floor" prefWidth="94.4053955078125" text="Floor" />
-                  <TableColumn fx:id="locationType" prefWidth="121.2125244140625" text="Location Type" />
+                        <TableColumn fx:id="equipmentName" prefWidth="107.20001220703125" text="Equipment" />
+                  <TableColumn fx:id="dirty" minWidth="5.0" prefWidth="85.59991455078125" text="Dirty" />
+                  <TableColumn fx:id="clean" minWidth="5.0" prefWidth="87.2000732421875" text="Clean" />
+                        <TableColumn fx:id="location" prefWidth="86.66680908203125" text="Location" />
+                        <TableColumn fx:id="floor" prefWidth="53.599853515625" text="Floor" />
+                  <TableColumn fx:id="locationType" prefWidth="123.20013427734375" text="Location Type" />
                     </columns>
                <effect>
                   <DropShadow />

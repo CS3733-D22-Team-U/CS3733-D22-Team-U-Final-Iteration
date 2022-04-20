@@ -9,18 +9,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class sideViewController extends ServiceController {
@@ -57,6 +62,9 @@ public class sideViewController extends ServiceController {
   @FXML TableColumn<EquipmentUI, String> locationType;
   @FXML TableColumn<EquipmentUI, String> equipmentName;
   @FXML TableColumn<EquipmentUI, String> floor;
+  @FXML TableColumn<EquipmentUI, Integer> dirty;
+  @FXML TableColumn<EquipmentUI, Integer> clean;
+  AnchorPane popupBedAlert;
 
   String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
   // Udb udb = DBController.udb;
@@ -88,6 +96,24 @@ public class sideViewController extends ServiceController {
             assistPane.setDisable(false);
           }
         });
+
+    popupBedAlert = new AnchorPane();
+    try {
+      popupBedAlert
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResource("edu/wpi/cs3733/D22/teamU/views/alertBedPopUp.fxml"))));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    if (tooManyDirtyBeds() == true) {
+      popupBedAlert.getChildren();
+    }
   }
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
@@ -99,10 +125,10 @@ public class sideViewController extends ServiceController {
       try {
         equipmentUI.add(
             new EquipmentUI(
-                equipment.getLocationID(),
                 equipment.getName(),
-                equipment.getAmount(),
-                equipment.getLocation().getShortName(),
+                equipment.getInUse(),
+                equipment.getAvailable(),
+                equipment.getLocationID(),
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
       } catch (Exception e) {
@@ -121,6 +147,28 @@ public class sideViewController extends ServiceController {
        */
     }
     return equipmentUI;
+  }
+
+  private boolean tooManyDirtyBeds() throws SQLException, IOException {
+
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+      if (equipment.getName().equals("Beds") && equipment.getInUse() > 6) {
+        AnchorPane bedAP = (AnchorPane) popupBedAlert.getChildren().get(0);
+        for (Node n : bedAP.getChildren()) {
+          if (n instanceof Text) {
+            Text t1 = (Text) n;
+            t1.setText(equipment.getLocationID());
+          } else if (n instanceof Button) {
+            Button b1 = (Button) n;
+            if (b1.getId().equals("okWarn")) {
+              b1.setOnMouseClicked(this::clearWarning);
+            }
+          }
+        }
+        return true;
+      }
+    }
+    return false;
   }
 
   public void lower(ActionEvent actionEvent) {
@@ -176,9 +224,11 @@ public class sideViewController extends ServiceController {
   private void setUpAllEquipment() {
     equipmentName.setCellValueFactory(
         new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("id"));
-    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
+    dirty.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
+    clean.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountAvailable"));
+    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
     floor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
+    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
 
     try {
       equipFloor.setItems(getEquipmentList());
@@ -204,15 +254,19 @@ public class sideViewController extends ServiceController {
         if (equipment.getLocation().getFloor().equals(floor))
           equipmentUI.add(
               new EquipmentUI(
-                  equipment.getLocationID(),
                   equipment.getName(),
-                  equipment.getAmount(),
-                  equipment.getLocation().getShortName(),
+                  equipment.getInUse(),
+                  equipment.getAvailable(),
+                  equipment.getLocationID(),
                   equipment.getLocation().getFloor(),
                   equipment.getLocation().getNodeType()));
       } catch (Exception e) {
       }
       equipFloor.setItems(equipmentUI);
     }
+  }
+
+  private void clearWarning(MouseEvent mouseEvent) {
+    popupBedAlert.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 }
