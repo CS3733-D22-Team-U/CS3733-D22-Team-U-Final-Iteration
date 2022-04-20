@@ -65,12 +65,12 @@ public class MapController extends ServiceController {
   ComboBox addFloorCombo;
   Button addButton;
   ObservableList<String> nodeTypeList =
-          FXCollections.observableArrayList(
-                  "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
-                  "EXIT", "RETL", "SERV");
+      FXCollections.observableArrayList(
+          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
+          "EXIT", "RETL", "SERV");
   ObservableList<String> buildingList = FXCollections.observableArrayList("Tower");
   ObservableList<String> floorList =
-          FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
+      FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
   private final double imageX = 870, imageY = 870;
   // @FXML ScrollPane imagesPane;
   @FXML AnchorPane lowerLevel1Pane;
@@ -109,8 +109,6 @@ public class MapController extends ServiceController {
     imagesPane6.setPannable(true);
     imagesPane7.setPannable(true);
 
-
-
     addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
@@ -129,15 +127,15 @@ public class MapController extends ServiceController {
     try {
       for (Location loc : Udb.getInstance().locationImpl.locations) {
         mapUI.add(
-                new MapUI(
-                        loc.getNodeID(),
-                        loc.getXcoord(),
-                        loc.getYcoord(),
-                        loc.getFloor(),
-                        loc.getBuilding(),
-                        loc.getNodeType(),
-                        loc.getLongName(),
-                        loc.getShortName()));
+            new MapUI(
+                loc.getNodeID(),
+                loc.getXcoord(),
+                loc.getYcoord(),
+                loc.getFloor(),
+                loc.getBuilding(),
+                loc.getNodeType(),
+                loc.getLongName(),
+                loc.getShortName()));
 
         String s = loc.getFloor();
         LocationNode ln;
@@ -176,66 +174,66 @@ public class MapController extends ServiceController {
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
-                  new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                      // record a delta distance for the drag and drop operation.
-                      // setPaneOnMousePressedEventHandler(null);
-                      // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                  // record a delta distance for the drag and drop operation.
+                  // setPaneOnMousePressedEventHandler(null);
+                  // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-                      dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
-                      dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
-                      ln.setCursor(Cursor.MOVE);
-                    }
-                  });
+                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+                  ln.setCursor(Cursor.MOVE);
+                }
+              });
           ln.setOnMouseDragged(
-                  new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
 
-                      ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
-                      ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
-                      ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-                      ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                      imagesPane1.setPannable(false);
-                      imagesPane2.setPannable(false);
-                      imagesPane3.setPannable(false);
-                      imagesPane4.setPannable(false);
-                      imagesPane5.setPannable(false);
-                      imagesPane6.setPannable(false);
-                      imagesPane7.setPannable(false);
-                    }
-                  });
+                  ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+                  ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+                  ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+                  ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+                  imagesPane1.setPannable(false);
+                  imagesPane2.setPannable(false);
+                  imagesPane3.setPannable(false);
+                  imagesPane4.setPannable(false);
+                  imagesPane5.setPannable(false);
+                  imagesPane6.setPannable(false);
+                  imagesPane7.setPannable(false);
+                }
+              });
           ln.setOnMouseReleased(
-                  new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                      ln.setCursor(Cursor.HAND);
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                  ln.setCursor(Cursor.HAND);
 
-                      ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
-                      ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
-                      try {
-                        Udb.getInstance().edit(ln.getLocation());
-                      } catch (IOException e) {
-                        throw new RuntimeException(e);
-                      } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                      }
-                      imagesPane1.setPannable(true);
-                      imagesPane2.setPannable(true);
-                      imagesPane3.setPannable(true);
-                      imagesPane4.setPannable(true);
-                      imagesPane5.setPannable(true);
-                      imagesPane6.setPannable(true);
-                      imagesPane7.setPannable(true);
+                  ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+                  ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+                  try {
+                    Udb.getInstance().edit(ln.getLocation());
+                  } catch (IOException e) {
+                    throw new RuntimeException(e);
+                  } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                  }
+                  imagesPane1.setPannable(true);
+                  imagesPane2.setPannable(true);
+                  imagesPane3.setPannable(true);
+                  imagesPane4.setPannable(true);
+                  imagesPane5.setPannable(true);
+                  imagesPane6.setPannable(true);
+                  imagesPane7.setPannable(true);
 
-                      // popupXCoord.setText("ln.getLayoutX()");
-                      // popupYCoord.setText("ln.getLayoutY()");
+                  // popupXCoord.setText("ln.getLayoutX()");
+                  // popupYCoord.setText("ln.getLayoutY()");
 
-                      // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
-                      // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
-                    }
-                  });
+                  // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+                  // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
+                }
+              });
 
           ln.setOnMouseClicked(this::popupOpen);
 
@@ -255,12 +253,12 @@ public class MapController extends ServiceController {
     popupAddPane = new AnchorPane();
     try {
       popupAddPane
-              .getChildren()
-              .add(
-                      FXMLLoader.load(
-                              getClass()
-                                      .getClassLoader()
-                                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  getClass()
+                      .getClassLoader()
+                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
       popupAddPane.setLayoutX(100);
       popupAddPane.setLayoutY(200);
 
@@ -271,13 +269,13 @@ public class MapController extends ServiceController {
     popupEditPane = new AnchorPane();
     try {
       popupEditPane
-              .getChildren()
-              .add(
-                      FXMLLoader.load(
-                              Objects.requireNonNull(
-                                      getClass()
-                                              .getClassLoader()
-                                              .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -289,7 +287,7 @@ public class MapController extends ServiceController {
 
   private void setScroll(AnchorPane pane) {
     pane.setOnScroll(
-            event -> {
+        event -> {
           /*
           double zoom_fac = 1.05;
           if (event.getDeltaY() < 0) {
@@ -307,7 +305,7 @@ public class MapController extends ServiceController {
           event.consume();
 
            */
-            });
+        });
 
     // pane.setOnMousePressed(paneOnMousePressedEventHandler);
     // pane.setOnMouseDragged(paneOnMouseDraggedEventHandler);
@@ -522,7 +520,7 @@ public class MapController extends ServiceController {
       }
     }
     equipTable.setItems(
-            FXCollections.observableArrayList(locationNode.getLocation().getEquipment()));
+        FXCollections.observableArrayList(locationNode.getLocation().getEquipment()));
 
     Tab requestTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(2);
     AnchorPane reqAnchor = (AnchorPane) requestTab.getContent();
@@ -612,23 +610,23 @@ public class MapController extends ServiceController {
 
   public void popupEdit(MouseEvent actionEvent) {
     Location l =
-            new Location(
-                    popupNodeID.getText(),
-                    Integer.parseInt(popupXCoord.getText()),
-                    Integer.parseInt(popupYCoord.getText()),
-                    popupFloor.getText(),
-                    popupBuilding.getText(),
-                    popupNodeType.getText(),
-                    popupLongName.getText(),
-                    popupShortName.getText());
+        new Location(
+            popupNodeID.getText(),
+            Integer.parseInt(popupXCoord.getText()),
+            Integer.parseInt(popupYCoord.getText()),
+            popupFloor.getText(),
+            popupBuilding.getText(),
+            popupNodeType.getText(),
+            popupLongName.getText(),
+            popupShortName.getText());
 
     try {
 
       Location old =
-              Udb.getInstance()
-                      .locationImpl
-                      .list()
-                      .get(Udb.getInstance().locationImpl.list().indexOf(l));
+          Udb.getInstance()
+              .locationImpl
+              .list()
+              .get(Udb.getInstance().locationImpl.list().indexOf(l));
       l.setEquipment(old.getEquipment());
       l.setRequests(old.getRequests());
       Udb.getInstance().locationImpl.edit(l);
@@ -651,15 +649,15 @@ public class MapController extends ServiceController {
 
   public void popupRemove(MouseEvent actionEvent) {
     Location l =
-            new Location(
-                    popupNodeID.getText(),
-                    Integer.parseInt(popupXCoord.getText()),
-                    Integer.parseInt(popupYCoord.getText()),
-                    popupFloor.getText(),
-                    popupBuilding.getText(),
-                    popupNodeType.getText(),
-                    popupLongName.getText(),
-                    popupShortName.getText());
+        new Location(
+            popupNodeID.getText(),
+            Integer.parseInt(popupXCoord.getText()),
+            Integer.parseInt(popupYCoord.getText()),
+            popupFloor.getText(),
+            popupBuilding.getText(),
+            popupNodeType.getText(),
+            popupLongName.getText(),
+            popupShortName.getText());
 
     try {
       Udb.getInstance().locationImpl.remove(l);
@@ -677,15 +675,15 @@ public class MapController extends ServiceController {
   private void popupAddLocation(MouseEvent mouseEvent) {
     System.out.println("test");
     Location l =
-            new Location(
-                    addNodeID.getText(),
-                    Integer.parseInt(addXcoord.getText()),
-                    Integer.parseInt(addYcoord.getText()),
-                    addFloorCombo.getValue().toString(),
-                    addBuildingCombo.getValue().toString(),
-                    addNodeTypeCombo.getValue().toString(),
-                    addLongName.getText(),
-                    addShortName.getText());
+        new Location(
+            addNodeID.getText(),
+            Integer.parseInt(addXcoord.getText()),
+            Integer.parseInt(addYcoord.getText()),
+            addFloorCombo.getValue().toString(),
+            addBuildingCombo.getValue().toString(),
+            addNodeTypeCombo.getValue().toString(),
+            addLongName.getText(),
+            addShortName.getText());
     try {
       Udb.getInstance().locationImpl.add(l);
       String s = l.getFloor();
