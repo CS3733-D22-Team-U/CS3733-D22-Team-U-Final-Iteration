@@ -22,14 +22,12 @@ public class EquipmentUI {
       String name,
       int inUse,
       int available,
-      int total,
       String location,
       String floor,
       String nodeType) {
     equipmentName = name;
     amountInUse = inUse;
     amountAvailable = available;
-    totalAmount = total;
     this.location = location;
     this.floor = floor;
     this.nodeType = nodeType;

@@ -39,6 +39,8 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
+  public TextField equipName;
+  public TextField equipAmount;
   AnchorPane popupEditPane;
 
   /*Add Popup*/
@@ -51,6 +53,7 @@ public class MapController extends ServiceController {
   ComboBox addNodeTypeCombo;
   ComboBox addBuildingCombo;
   ComboBox addFloorCombo;
+  ComboBox equipCB;
   Button addButton;
   ObservableList<String> nodeTypeList =
       FXCollections.observableArrayList(
@@ -59,6 +62,7 @@ public class MapController extends ServiceController {
   ObservableList<String> buildingList = FXCollections.observableArrayList("Tower");
   ObservableList<String> floorList =
       FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
+  ObservableList<Equipment> allEquip;
   private final double imageX = 870, imageY = 870;
   // @FXML ScrollPane imagesPane;
   @FXML AnchorPane lowerLevel1Pane;
@@ -167,6 +171,7 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
+
     popupAddPane = new AnchorPane();
     try {
       popupAddPane
@@ -309,7 +314,10 @@ public class MapController extends ServiceController {
     popupEditPane.setLayoutX(locationNode.getX());
     popupEditPane.setLayoutY(locationNode.getY());
 
-    for (Node n : ((AnchorPane) popupEditPane.getChildren().get(0)).getChildren()) {
+    TabPane tp = (TabPane) popupEditPane.getChildren().get(0);
+    Tab t1 = tp.getTabs().get(0);
+    AnchorPane ap = (AnchorPane) t1.getContent();
+    for (Node n : ap.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
         if (b2.getId().equals("exit")) {
@@ -356,7 +364,96 @@ public class MapController extends ServiceController {
               default:
                 break;
             }
-          } else if (n2 instanceof ListView) {
+          } else if (n2 instanceof Button) {
+            Button b = (Button) n2;
+            try {
+              switch (b.getId()) {
+                case "edit":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupEdit);
+                  break;
+                case "remove":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupRemove);
+                  break;
+                default:
+                  break;
+              }
+            } catch (Exception e) {
+              System.out.println("map Controller line 400");
+            }
+          }
+        }
+      }
+    }
+
+    Tab t2 = tp.getTabs().get(1);
+    AnchorPane ap2 = (AnchorPane) t2.getContent();
+    for (Node n : ap2.getChildren()) {
+      if (n instanceof Button) {
+        Button b2 = (Button) n;
+        if (b2.getId().equals("exit1")) {
+          b2.setOnMouseClicked(this::Exit);
+        }
+      } else if (n instanceof GridPane) {
+        GridPane gp = (GridPane) n;
+        for (Node n2 : gp.getChildren()) {
+          if (n2 instanceof ListView) {
+            ListView<String> lv = (ListView<String>) n2;
+            lv.getItems().clear();
+            switch (lv.getId()) {
+              case "equipmentView":
+                equipmentView = lv;
+                for (Equipment e : location.getEquipment()) {
+                  equipmentView.getItems().add(e.getName() + ": " + e.getAmount());
+                }
+            }
+          }
+          //                    else if (n2 instanceof ComboBox) {
+          //                      ComboBox cb = (ComboBox) n2;
+          //                      switch (cb.getId()) {
+          //                        case "equipCB":
+          //                          equipCB = cb;
+          //                          allEquip =
+          // FXCollections.observableArrayList(location.getEquipment());
+          //                          equipCB.setItems(allEquip);
+          //                          break;
+          //                      }
+          //                    }
+          else if (n2 instanceof Button) {
+            Button b = (Button) n2;
+            try {
+              switch (b.getId()) {
+                case "editEquip":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupEdit);
+                  break;
+                case "removeEquip":
+                  b.setDisable(!Udb.getInstance().admin);
+                  b.setOnMouseClicked(this::popupRemove);
+                  break;
+                default:
+                  break;
+              }
+            } catch (Exception e) {
+              System.out.println("map Controller line 400");
+            }
+          }
+        }
+      }
+    }
+    Tab t3 = tp.getTabs().get(2);
+    AnchorPane ap3 = (AnchorPane) t3.getContent();
+    for (Node n : ap3.getChildren()) {
+      if (n instanceof Button) {
+        Button b2 = (Button) n;
+        if (b2.getId().equals("exit2")) {
+          b2.setOnMouseClicked(this::Exit);
+        }
+      } else if (n instanceof GridPane) {
+        GridPane gp = (GridPane) n;
+        for (Node n2 : gp.getChildren()) {
+          if (n2 instanceof ListView) {
             ListView<String> lv = (ListView<String>) n2;
             lv.getItems().clear();
             switch (lv.getId()) {
@@ -375,22 +472,16 @@ public class MapController extends ServiceController {
                               + r.getTime());
                 }
                 break;
-              case "equipmentView":
-                equipmentView = lv;
-                for (Equipment e : location.getEquipment()) {
-                  equipmentView.getItems().add(e.getName() + ": " + e.getAmount());
-                }
-                break;
             }
           } else if (n2 instanceof Button) {
             Button b = (Button) n2;
             try {
               switch (b.getId()) {
-                case "edit":
+                case "editServ":
                   b.setDisable(!Udb.getInstance().admin);
                   b.setOnMouseClicked(this::popupEdit);
                   break;
-                case "remove":
+                case "removeServ":
                   b.setDisable(!Udb.getInstance().admin);
                   b.setOnMouseClicked(this::popupRemove);
                   break;

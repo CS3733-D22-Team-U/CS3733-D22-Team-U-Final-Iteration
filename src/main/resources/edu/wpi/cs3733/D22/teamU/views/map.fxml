@@ -39,7 +39,7 @@
         </Pane>
         <Pane fx:id="backgroundPane" layoutX="105.0" layoutY="1.0" prefHeight="750.0" prefWidth="996.0">
             <children>
-                <TabPane layoutX="10.0" layoutY="140.0" prefHeight="552.0" prefWidth="841.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                <TabPane layoutX="10.0" layoutY="140.0" prefHeight="552.0" prefWidth="841.0" side="LEFT" stylesheets="@../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Map View">
                             <content>
@@ -53,11 +53,11 @@
                                                             <children>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="703.0">
                                                                     <children>
-                                                                        <ScrollPane fx:id="imagesPane1" layoutY="-3.0" onZoom="#test" prefHeight="524.0" prefWidth="808.0">
+                                                                        <ScrollPane fx:id="imagesPane1" fitToHeight="true" fitToWidth="true" layoutY="-3.0" onZoom="#test" prefHeight="524.0" prefWidth="808.0">
                                                                             <content>
                                                                                 <AnchorPane fx:id="lowerLevel1Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image1" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;">
+                                                                                        <ImageView fx:id="image1" fitHeight="1994.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2042.0">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
