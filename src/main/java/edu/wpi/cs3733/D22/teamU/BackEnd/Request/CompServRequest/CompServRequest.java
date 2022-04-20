@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class CompServRequest extends Request {
   public String device;
   public String message;
+  public String employeeName;
 
   public CompServRequest(
       String ID,
@@ -24,6 +25,7 @@ public class CompServRequest extends Request {
     this.date = date;
     this.time = time;
     this.device = device;
+    this.employeeName = this.employee.getEmployeeID();
   }
 
   public String getMessage() {
@@ -40,5 +42,13 @@ public class CompServRequest extends Request {
 
   public void setDevice(String device) {
     this.device = device;
+  }
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
   }
 }
