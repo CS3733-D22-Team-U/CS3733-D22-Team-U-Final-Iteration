@@ -1,0 +1,35 @@
+.background{
+    -fx-background-color: #e6f6f7;
+}
+
+.menu{
+
+}
+
+.mainHeading{
+    -fx-fill: #044E9A;
+    -fx-font-size: 36;
+    -fx-font-weight: bold;
+}
+
+.time{
+    -fx-fill: #044E9A;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
+.menuBarSmall{
+    -fx-background-color: #044E9A;
+    -fx-background-radius: 0 15 15 0;
+}
+
+.menuBarSmallButton{
+    -fx-background-color: transparent;
+    -fx-pref-height: 54;
+    -fx-pref-width: 70;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-border-radius: 15;
+}
