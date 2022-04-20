@@ -45,8 +45,9 @@ public abstract class ServiceController implements Initializable, Service {
     appStage.show();
   }
 
+  // testing religious request
   public void toGiftAndFloral(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/giftFloralService.fxml");
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/ReligiousRequest.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();

@@ -63,7 +63,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 row[5],
                 row[6],
                 row[7],
-                checkEmployee(row[8]));
+                checkEmployee(row[8]),
+                row[9]);
         List.put(row[0], r);
 
         try {
@@ -87,10 +88,11 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     String s;
     File file = new File(this.csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
-    br.readLine();
+    String[] header = br.readLine().split(",");
+    int columns = header.length;
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == 9) {
+      if (row.length == columns) {
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
@@ -101,7 +103,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 row[5],
                 row[6],
                 row[7],
-                checkEmployee(row[8]));
+                checkEmployee(row[8]),
+                row[9]);
         List.put(row[0], r);
 
         try {
@@ -136,6 +139,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     fw.append("Location");
     fw.append(",");
     fw.append("Employee");
+    fw.append(",");
+    fw.append("Notes");
     fw.append("\n");
 
     for (ReligiousRequest request : List.values()) {
@@ -156,6 +161,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
       fw.append(request.getDestination());
       fw.append(",");
       fw.append(request.getEmployee().getEmployeeID());
+      fw.append(",");
+      fw.append(request.getNotes());
       fw.append("\n");
     }
     fw.close();
@@ -180,7 +187,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "religion varchar(50) not null,"
               + "status varchar(50) not null,"
               + "destination varchar(50) not null,"
-              + "employee varchar(50) not null)");
+              + "employee varchar(50) not null,"
+              + "notes varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("
@@ -193,7 +201,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 + "','"
                 + currReq.getTime()
                 + "','"
-                + currReq.getPatient()
+                + currReq.getPatientName()
                 + "','"
                 + currReq.getReligion()
                 + "','"
@@ -202,6 +210,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 + currReq.getDestination()
                 + "','"
                 + currReq.getEmployee().getEmployeeID()
+                + "','"
+                + currReq.getNotes()
                 + "')");
       }
     } catch (SQLException e) {
@@ -225,6 +235,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
         String status = results.getString("status");
         String destination = results.getString("destination");
         String employee = results.getString("employee");
+        String notes = results.getString("notes");
 
         ReligiousRequest SQLRow =
             new ReligiousRequest(
@@ -236,7 +247,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
                 religion,
                 status,
                 destination,
-                checkEmployee(employee));
+                checkEmployee(employee),
+                notes);
 
         List.put(id, SQLRow);
       }
@@ -269,7 +281,9 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + " | \t"
               + request.getDestination()
               + " | \t"
-              + request.getEmployee().getEmployeeID());
+              + request.getEmployee().getEmployeeID()
+              + " | \t"
+              + request.getNotes());
     }
   }
 
@@ -352,6 +366,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     String inputStatus = "N/A";
     String inputDestination = "N/A";
     String inputEmployee = "N/A";
+    String inputNotes = "N/A";
 
     System.out.println("Input request ID: ");
     inputID = reqInput.nextLine();
@@ -376,6 +391,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
         inputReligion,
         inputStatus,
         inputDestination,
-        empty);
+        empty,
+        inputNotes);
   }
 }
