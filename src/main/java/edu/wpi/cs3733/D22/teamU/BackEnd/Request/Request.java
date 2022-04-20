@@ -4,7 +4,19 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import java.util.ArrayList;
 
-public abstract class Request {
+public class Request {
+  public Request(String ID, String name, String patientName, String date, String time, String status, String destination, Employee employee, Location location) {
+    this.ID = ID;
+    this.name = name;
+    this.patientName = patientName;
+    this.date = date;
+    this.time = time;
+    this.status = status;
+    this.destination = destination;
+    this.employee = employee;
+    this.location = location;
+  }
+
   public String ID;
   public String name; // or lab type
   public String patientName;
