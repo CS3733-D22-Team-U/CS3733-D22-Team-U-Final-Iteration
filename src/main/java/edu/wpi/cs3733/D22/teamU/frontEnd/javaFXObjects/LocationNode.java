@@ -25,6 +25,8 @@ public class LocationNode extends Group {
   private double x, y;
   private final double scale = 10;
 
+  public double tempx, tempy;
+
   public LocationNode(Location location, double x, double y, AnchorPane pane) throws IOException {
 
     super();
@@ -32,6 +34,8 @@ public class LocationNode extends Group {
     this.pane = pane;
     this.x = x;
     this.y = y;
+    tempx = x;
+    tempy = y;
     Color color;
 
     Circle c = new Circle();

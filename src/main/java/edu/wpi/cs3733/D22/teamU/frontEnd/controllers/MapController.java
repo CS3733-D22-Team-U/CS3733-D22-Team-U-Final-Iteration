@@ -192,6 +192,9 @@ public class MapController extends ServiceController {
               new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+
+                  ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+                  ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
                   ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
                   ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
                   imagesPane1.setPannable(false);
@@ -207,9 +210,17 @@ public class MapController extends ServiceController {
               new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                  LocationNode ln1 = (LocationNode) mouseEvent.getSource();
-                  System.out.println(ln1.getLayoutX());
                   ln.setCursor(Cursor.HAND);
+
+                  ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+                  ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+                  try {
+                    Udb.getInstance().edit(ln.getLocation());
+                  } catch (IOException e) {
+                    throw new RuntimeException(e);
+                  } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                  }
                   imagesPane1.setPannable(true);
                   imagesPane2.setPannable(true);
                   imagesPane3.setPannable(true);
@@ -217,8 +228,6 @@ public class MapController extends ServiceController {
                   imagesPane5.setPannable(true);
                   imagesPane6.setPannable(true);
                   imagesPane7.setPannable(true);
-                  System.out.println(ln.getLayoutX());
-                  System.out.println(ln.getLayoutY());
 
                   // popupXCoord.setText("ln.getLayoutX()");
                   // popupYCoord.setText("ln.getLayoutY()");
@@ -389,8 +398,8 @@ public class MapController extends ServiceController {
       pane.getChildren().remove(popupEditPane);
     }
 
-    popupEditPane.setLayoutX(locationNode.getX());
-    popupEditPane.setLayoutY(locationNode.getY());
+    popupEditPane.setLayoutX(locationNode.tempx);
+    popupEditPane.setLayoutY(locationNode.tempy);
 
     for (Node n : ((AnchorPane) popupEditPane.getChildren().get(0)).getChildren()) {
       if (n instanceof Button) {
