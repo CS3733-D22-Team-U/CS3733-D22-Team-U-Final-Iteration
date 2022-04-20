@@ -31,6 +31,7 @@ import lombok.SneakyThrows;
 public class sideViewController extends ServiceController {
 
   public MenuItem lower2;
+  public AnchorPane masterPane;
   @FXML JFXHamburger hamburger;
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
@@ -112,7 +113,7 @@ public class sideViewController extends ServiceController {
     }
 
     if (tooManyDirtyBeds() == true) {
-      popupBedAlert.getChildren();
+      masterPane.getChildren().add(popupBedAlert);
     }
   }
 
@@ -154,6 +155,7 @@ public class sideViewController extends ServiceController {
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       if (equipment.getName().equals("Beds") && equipment.getInUse() > 6) {
         AnchorPane bedAP = (AnchorPane) popupBedAlert.getChildren().get(0);
+        System.out.println(bedAP.getChildren().size());
         for (Node n : bedAP.getChildren()) {
           if (n instanceof Text) {
             Text t1 = (Text) n;

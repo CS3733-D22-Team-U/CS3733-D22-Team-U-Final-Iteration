@@ -147,11 +147,7 @@ public class DBController {
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
     Menu m = new Menu();
-<<<<<<< HEAD
     // m.menu(); // Uncomment this to start terminal menu
-=======
-    //m.menu(); // Uncomment this to start terminal menu
->>>>>>> origin/feature/equipmentRevamp
   }
 
   public static String copyFile(InputStream inputPath, String outputPath) throws IOException {

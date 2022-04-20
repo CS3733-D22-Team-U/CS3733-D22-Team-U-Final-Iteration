@@ -18,13 +18,16 @@ public class EquipmentUI {
 
   private int priority;
 
+  public EquipmentUI(String name, int inUse, int available, int total, String location) {
+    equipmentName = name;
+    amountInUse = inUse;
+    amountAvailable = available;
+    totalAmount = total;
+    this.location = location;
+  }
+
   public EquipmentUI(
-      String name,
-      int inUse,
-      int available,
-      String location,
-      String floor,
-      String nodeType) {
+      String name, int inUse, int available, String location, String floor, String nodeType) {
     equipmentName = name;
     amountInUse = inUse;
     amountAvailable = available;
@@ -50,26 +53,26 @@ public class EquipmentUI {
     this.priority = priority;
   }
 
-  public EquipmentUI(
-      String id,
-      String name,
-      int request,
-      String destination,
-      String date,
-      String timestamp,
-      int priority,
-      String floor,
-      String nodeType) {
-    this.id = id;
-    equipmentName = name;
-    requestAmount = request;
-    this.destination = destination;
-    requestDate = date;
-    requestTime = timestamp;
-    this.priority = priority;
-    this.floor = floor;
-    this.nodeType = nodeType;
-  }
+  //  public EquipmentUI(
+  //      String id,
+  //      String name,
+  //      int request,
+  //      String destination,
+  //      String date,
+  //      String timestamp,
+  //      int priority,
+  //      String floor,
+  //      String nodeType) {
+  //    this.id = id;
+  //    equipmentName = name;
+  //    requestAmount = request;
+  //    this.destination = destination;
+  //    requestDate = date;
+  //    requestTime = timestamp;
+  //    this.priority = priority;
+  //    this.floor = floor;
+  //    this.nodeType = nodeType;
+  //  }
 
   public EquipmentUI(
       String id, String name, int request, String destination, String floor, String nodeType) {
