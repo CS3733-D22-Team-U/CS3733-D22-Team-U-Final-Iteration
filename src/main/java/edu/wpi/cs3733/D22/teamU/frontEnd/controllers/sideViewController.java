@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class sideViewController extends ServiceController {
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
   @FXML Pane assistPane;
-  @FXML SplitMenuButton chooseFloor;
+  @FXML ComboBox<String> chooseFloor;
   @FXML Rectangle recLower2;
   @FXML Rectangle recLower1;
   @FXML Rectangle recLevel1;
@@ -57,15 +56,17 @@ public class sideViewController extends ServiceController {
   @FXML TableColumn<EquipmentUI, String> location;
   @FXML TableColumn<EquipmentUI, String> locationType;
   @FXML TableColumn<EquipmentUI, String> equipmentName;
+  @FXML TableColumn<EquipmentUI, String> floor;
 
-  ObservableList<EquipmentUI> equipment = FXCollections.observableArrayList();
+  String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
   // Udb udb = DBController.udb;
   ArrayList<String> nodeIDs;
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
+    chooseFloor.setItems(FXCollections.observableArrayList(floors));
+
     setUpAllEquipment();
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
@@ -87,6 +88,39 @@ public class sideViewController extends ServiceController {
             assistPane.setDisable(false);
           }
         });
+  }
+
+  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
+
+  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
+    equipmentUI.clear();
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+      String floor = chooseFloor.getValue();
+      try {
+        equipmentUI.add(
+            new EquipmentUI(
+                equipment.getLocationID(),
+                equipment.getName(),
+                equipment.getAmount(),
+                equipment.getLocation().getShortName(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+      } catch (Exception e) {
+      }
+      /*
+      if (equipment.getLocation().getFloor().equals(floors))
+        equipmentUI.add(
+            new EquipmentUI(
+                equipment.getLocationID(),
+                equipment.getName(),
+                equipment.getAmount(),
+                equipment.getLocation().getShortName(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+
+       */
+    }
+    return equipmentUI;
   }
 
   public void lower(ActionEvent actionEvent) {
@@ -139,81 +173,17 @@ public class sideViewController extends ServiceController {
     recLevel5.setVisible(false);
   }
 
-  public void showRooms(ActionEvent actionEvent) {
-    CheckBox ck = (CheckBox) actionEvent.getSource();
-    switch (ck.getId()) {
-      case "checked":
-        recLower2.setVisible(true);
-        recLower1.setVisible(true);
-        recLevel1.setVisible(true);
-        recLevel2.setVisible(true);
-        recLevel3.setVisible(true);
-        recLevel4.setVisible(true);
-        recLevel5.setVisible(true);
-        break;
-    }
-    disableRooms();
-  }
-
-  public void disableRooms() {
-    room1.setVisible(false);
-    room2.setVisible(false);
-    room3.setVisible(false);
-    room4.setVisible(false);
-    room5.setVisible(false);
-    room6.setVisible(false);
-    room7.setVisible(false);
-    room8.setVisible(false);
-    room9.setVisible(false);
-    room10.setVisible(false);
-    room11.setVisible(false);
-    room12.setVisible(false);
-    room13.setVisible(false);
-  }
-
-  ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
-
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    equipmentUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      equipmentUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
-    }
-
-    return equipmentUI;
-  }
-
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
-
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
-    for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
-      equipmentUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI(
-              equipRequest.getID(),
-              equipRequest.getName(),
-              equipRequest.getAmount(),
-              equipRequest.getDestination(),
-              equipRequest.getDate(),
-              equipRequest.getTime(),
-              equipRequest.getPriority()));
-    }
-    return equipmentUIRequests;
-  }
-
   private void setUpAllEquipment() {
     equipmentName.setCellValueFactory(
         new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
-    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
-    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("amountInUse"));
+    location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("id"));
+    locationType.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("nodeType"));
+    floor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
+
     try {
       equipFloor.setItems(getEquipmentList());
     } catch (Exception e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
@@ -225,4 +195,24 @@ public class sideViewController extends ServiceController {
 
   @Override
   public void updateRequest() {}
+
+  public void updateList(ActionEvent actionEvent) throws SQLException, IOException {
+    equipmentUI.clear();
+    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
+      String floor = chooseFloor.getValue();
+      try {
+        if (equipment.getLocation().getFloor().equals(floor))
+          equipmentUI.add(
+              new EquipmentUI(
+                  equipment.getLocationID(),
+                  equipment.getName(),
+                  equipment.getAmount(),
+                  equipment.getLocation().getShortName(),
+                  equipment.getLocation().getFloor(),
+                  equipment.getLocation().getNodeType()));
+      } catch (Exception e) {
+      }
+      equipFloor.setItems(equipmentUI);
+    }
+  }
 }

@@ -28,9 +28,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.transform.Scale;
+import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
+
   /*Edit Remove Popup*/
   public TextField popupNodeID;
   public TextField popupXCoord;
@@ -41,6 +42,7 @@ public class MapController extends ServiceController {
   public TextField popupLongName;
   public TextField popupShortName;
   AnchorPane popupEditPane;
+
   @FXML ScrollPane imagesPane1;
   @FXML ScrollPane imagesPane2;
   @FXML ScrollPane imagesPane3;
@@ -49,6 +51,7 @@ public class MapController extends ServiceController {
   @FXML ScrollPane imagesPane6;
   @FXML ScrollPane imagesPane7;
 
+  @FXML Pane pane;
 
   /*Add Popup*/
   AnchorPane popupAddPane;
@@ -97,7 +100,6 @@ public class MapController extends ServiceController {
 
   public MapController() throws IOException, SQLException {}
 
-  @Override
   public void initialize(URL location, ResourceBundle resources) {
     imagesPane1.setPannable(true);
     imagesPane2.setPannable(true);
@@ -106,7 +108,6 @@ public class MapController extends ServiceController {
     imagesPane5.setPannable(true);
     imagesPane6.setPannable(true);
     imagesPane7.setPannable(true);
-
 
     super.initialize(location, resources);
 
@@ -171,52 +172,73 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
+
+          // code to drag node around
           final Delta dragDelta = new Delta();
-          ln.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
-              // record a delta distance for the drag and drop operation.
-              dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
-              dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
-              ln.setCursor(Cursor.MOVE);
+          ln.setOnMousePressed(
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                  // record a delta distance for the drag and drop operation.
+                  // setPaneOnMousePressedEventHandler(null);
+                  // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-            }
-          });
-          ln.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
-              ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-              ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-              imagesPane1.setPannable(false);
-              imagesPane2.setPannable(false);
-              imagesPane3.setPannable(false);
-              imagesPane4.setPannable(false);
-              imagesPane5.setPannable(false);
-              imagesPane6.setPannable(false);
-              imagesPane7.setPannable(false);
+                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+                  ln.setCursor(Cursor.MOVE);
+                }
+              });
+          ln.setOnMouseDragged(
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
 
-            }
-          });
-          ln.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
-              ln.setCursor(Cursor.HAND);
-              imagesPane1.setPannable(true);
-              imagesPane2.setPannable(true);
-              imagesPane3.setPannable(true);
-              imagesPane4.setPannable(true);
-              imagesPane5.setPannable(true);
-              imagesPane6.setPannable(true);
-              imagesPane7.setPannable(true);
-              popupXCoord.setText("ln.getX()");
-              popupYCoord.setText("ln.getY()");
+                  ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+                  ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+                  ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+                  ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+                  imagesPane1.setPannable(false);
+                  imagesPane2.setPannable(false);
+                  imagesPane3.setPannable(false);
+                  imagesPane4.setPannable(false);
+                  imagesPane5.setPannable(false);
+                  imagesPane6.setPannable(false);
+                  imagesPane7.setPannable(false);
+                }
+              });
+          ln.setOnMouseReleased(
+              new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                  ln.setCursor(Cursor.HAND);
 
-            }
-          });
+                  ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+                  ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+                  try {
+                    Udb.getInstance().edit(ln.getLocation());
+                  } catch (IOException e) {
+                    throw new RuntimeException(e);
+                  } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                  }
+                  imagesPane1.setPannable(true);
+                  imagesPane2.setPannable(true);
+                  imagesPane3.setPannable(true);
+                  imagesPane4.setPannable(true);
+                  imagesPane5.setPannable(true);
+                  imagesPane6.setPannable(true);
+                  imagesPane7.setPannable(true);
 
-          ln.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
-              ln.setCursor(Cursor.HAND);
-            }
-          });
+                  // popupXCoord.setText("ln.getLayoutX()");
+                  // popupYCoord.setText("ln.getLayoutY()");
+
+                  // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+                  // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
+                }
+              });
+
           ln.setOnMouseClicked(this::popupOpen);
+
           locations.put(loc.getNodeID(), ln);
           temp.getChildren().add(ln);
 
@@ -261,11 +283,14 @@ public class MapController extends ServiceController {
     }
   }
 
-  class Delta { double x, y; }
+  class Delta {
+    double x, y;
+  }
 
   private void setScroll(AnchorPane pane) {
     pane.setOnScroll(
         event -> {
+          /*
           double zoom_fac = 1.05;
           if (event.getDeltaY() < 0) {
             zoom_fac = 2.0 - zoom_fac;
@@ -280,34 +305,12 @@ public class MapController extends ServiceController {
           pane.getTransforms().add(newScale);
 
           event.consume();
+
+           */
         });
-    EventHandler<MouseEvent> paneOnMousePressedEventHandler =
-            new EventHandler<MouseEvent>() {
 
-              @Override
-              public void handle(MouseEvent t) {
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-                orgTranslateX = ((AnchorPane) (t.getSource())).getTranslateX();
-                orgTranslateY = ((AnchorPane) (t.getSource())).getTranslateY();
-              }
-            };
-
-    EventHandler<MouseEvent> paneOnMouseDraggedEventHandler =
-            new EventHandler<MouseEvent>() {
-
-              @Override
-              public void handle(MouseEvent t) {
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
-                double newTranslateX = orgTranslateX + offsetX;
-                double newTranslateY = orgTranslateY + offsetY;
-
-                ((AnchorPane) (t.getSource())).setTranslateX(newTranslateX);
-                ((AnchorPane) (t.getSource())).setTranslateY(newTranslateY);
-              }
-            };
-
+    // pane.setOnMousePressed(paneOnMousePressedEventHandler);
+    // pane.setOnMouseDragged(paneOnMouseDraggedEventHandler);
   }
 
   public void setUpMap() {
@@ -395,8 +398,8 @@ public class MapController extends ServiceController {
       pane.getChildren().remove(popupEditPane);
     }
 
-    popupEditPane.setLayoutX(locationNode.getX());
-    popupEditPane.setLayoutY(locationNode.getY());
+    popupEditPane.setLayoutX(locationNode.tempx);
+    popupEditPane.setLayoutY(locationNode.tempy);
 
     for (Node n : ((AnchorPane) popupEditPane.getChildren().get(0)).getChildren()) {
       if (n instanceof Button) {
@@ -617,11 +620,6 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
   }
-
-  // Pan by Pressing and Dragging
-  double orgSceneX, orgSceneY;
-  double orgTranslateX, orgTranslateY;
-
 
   public void test(ZoomEvent zoomEvent) {}
 }

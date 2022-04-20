@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -18,6 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import com.jfoenix.controls.JFXHamburger?>
 <AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
     <children>
         <Pane prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
@@ -55,9 +55,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane1" layoutY="-3.0" onZoom="#test" prefHeight="524.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="lowerLevel1Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="lowerLevel1Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image1" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;">
+                                                                                        <ImageView fx:id="image1" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
@@ -80,9 +80,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane2" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="lowerLevel2Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="lowerLevel2Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image2" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image2" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
@@ -105,9 +105,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane3" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor1Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor1Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image3" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image3" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/01_thefirstfloor.png" />
                                                                                             </image>
@@ -130,9 +130,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane4" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor2Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor2Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image4" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image4" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/02_thesecondfloor.png" />
                                                                                             </image>
@@ -155,9 +155,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane5" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor3Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor3Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image5" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image5" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/03_thethirdfloor.png" />
                                                                                             </image>
@@ -180,9 +180,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane6" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor4Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor4Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image6" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image6" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/04_thefourthfloor.png" />
                                                                                             </image>
@@ -205,9 +205,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane7" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor5Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor5Pane" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image7" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image7" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/05_thefifthfloor.png" />
                                                                                             </image>
