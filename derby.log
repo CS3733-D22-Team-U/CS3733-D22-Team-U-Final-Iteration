@@ -5,9 +5,9 @@ on database directory C:\WPI\CS3733-D22-Team-U-Prototype-3\UDB with class loader
 Loaded from file:/C:/Users/deept/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
 java.vendor=Microsoft
 java.runtime.version=11.0.14.1+1-LTS
-user.dir=C:\WPI\CS3733-D22-Team-U-Prototype-3
-os.name=Windows 11
-os.arch=amd64
-os.version=10.0
+user.dir=/Users/student/IdeaProjects/CS3733-D22-Team-U-Prototype-3
+os.name=Mac OS X
+os.arch=x86_64
+os.version=11.6.2
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
