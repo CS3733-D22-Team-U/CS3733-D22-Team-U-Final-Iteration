@@ -6,6 +6,15 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class TranslatorRequest extends Request {
 
   public String toLang;
+  public String employeeName;
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
+  }
 
   public TranslatorRequest(
       String ID,
@@ -24,6 +33,7 @@ public class TranslatorRequest extends Request {
     this.destination = destination;
     this.date = date;
     this.time = time;
+    this.employeeName = employee.getEmployeeID();
   }
 
   public String getToLang() {

@@ -242,7 +242,6 @@ public class MaintenanceRequestController extends ServiceController {
     try {
 
       Udb.getInstance().add(request);
-
     } catch (IOException e) {
       e.printStackTrace();
       System.out.printf("print first catch");
