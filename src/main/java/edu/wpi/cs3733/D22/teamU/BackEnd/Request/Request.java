@@ -14,6 +14,7 @@ public abstract class Request {
   public String destination;
   public Employee employee;
   public Location location;
+  public String employeeName;
 
   public void setDestination(String destination) {
     this.destination = destination;
@@ -73,6 +74,14 @@ public abstract class Request {
 
   public String getDestination() {
     return destination;
+  }
+
+  public String getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(String employeeName) {
+    this.employeeName = employeeName;
   }
 
   public void updateLocation(String dest, ArrayList<Location> locations) {
