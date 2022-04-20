@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -45,7 +47,7 @@ public class LaundryController extends ServiceController {
   @FXML Text time;
   @FXML DatePicker pickupDateInput;
   @FXML DatePicker dropOffDateInput;
-
+  @FXML Text requestText;
   @FXML TableColumn<LaundryRequest, String> activeReqID;
   @FXML TableColumn<LaundryRequest, String> patientName;
   @FXML TableColumn<LaundryRequest, String> staffName;
@@ -56,6 +58,7 @@ public class LaundryController extends ServiceController {
 
   @FXML TableView<LaundryRequest> activeRequestTable;
 
+  @FXML TextField patientNameInput;
   ObservableList<LaundryRequest> laundryRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -157,7 +160,85 @@ public class LaundryController extends ServiceController {
   }
 
   @Override
-  public void addRequest() {}
+  public void addRequest() {
+    StringBuilder startRequestString = new StringBuilder("Your request for : ");
+
+    String endRequest = " has been placed successfully";
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+    for (int i = 0; i < checkBoxes.size(); i++) {
+      if (checkBoxes.get(i).isSelected()) {
+        String inputString = "";
+
+        String room = locations.getValue().toString();
+
+        startRequestString
+            .append(" ")
+            .append(checkBoxes.get(i).getText())
+            .append("(s) to room ")
+            .append(room)
+            .append(", ");
+
+        double rand = Math.random() * 10000;
+
+        LaundryRequest request =
+            new LaundryRequest(
+                (int) rand + "",
+                patientNameInput.getText().trim(),
+                checkEmployee(employees.getValue()),
+                "done",
+                locations.getValue(),
+                pickupDateInput.getValue().toString(),
+                dropOffDateInput.getValue().toString(),
+                sdf3.format(timestamp).substring(11),
+                checkBoxes.get(i).getText().trim(),
+                "N/A");
+        laundryRequests.add(request);
+        activeRequestTable.setItems(laundryRequests);
+        try {
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .list()
+                  .get(Udb.getInstance().locationImpl.search(request.getDestination()));
+          LaundryRequest e =
+              new LaundryRequest(
+                  request.getID(),
+                  request.getPatientName(),
+                  request.getEmployee(),
+                  request.getStatus(),
+                  request.getDestination(),
+                  request.getPickUpDate(),
+                  request.getDropOffDate(),
+                  request.getTime(),
+                  request.getServices(),
+                  request.getNotes());
+          e.setLocation(l);
+          Udb.getInstance().add(e);
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    requestText.setText(startRequestString + endRequest);
+    requestText.setVisible(true);
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(3500); // milliseconds
+                Platform.runLater(
+                    () -> {
+                      requestText.setVisible(false);
+                    });
+              } catch (InterruptedException ie) {
+              }
+            })
+        .start();
+  }
 
   @Override
   public void removeRequest() {}
@@ -197,6 +278,15 @@ public class LaundryController extends ServiceController {
   public void mouseExit(MouseEvent mouseEvent) {
     Button button = (Button) mouseEvent.getSource();
     button.setStyle("-fx-border-color: transparent");
+  }
+
+  public Employee checkEmployee(String employee) throws NullPointerException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
   }
 
   public void clearRequest(ActionEvent actionEvent) {}

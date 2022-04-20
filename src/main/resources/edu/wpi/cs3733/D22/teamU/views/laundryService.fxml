@@ -9,6 +9,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -98,17 +99,43 @@
                                  </font>
                               </Text>
                            </children></Pane>
-                                <Pane layoutX="340.0" layoutY="7.0" prefHeight="397.0" prefWidth="275.0">
+                                <Pane layoutX="340.0" layoutY="7.0" prefHeight="519.0" prefWidth="275.0">
                                     <children>
-                                        <ComboBox fx:id="locations" layoutX="62.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                                        <ComboBox fx:id="employees" layoutX="64.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                                        <Text fx:id="requestText" fill="WHITE" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                              <TextField fx:id="patientNameInput" layoutX="70.0" layoutY="53.0" prefHeight="25.0" prefWidth="174.0" promptText="Enter Patient Name" />
+                                        <ComboBox fx:id="locations" layoutX="67.0" layoutY="108.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Location" />
+                                        <ComboBox fx:id="employees" layoutX="69.0" layoutY="170.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Employee" />
+                                        <Text fx:id="requestText" fill="WHITE" layoutX="5.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
                                         </Text>
-                              <DatePicker fx:id="pickupDateInput" layoutX="64.0" layoutY="175.0" promptText="Select Pickup Date" />
-                              <DatePicker fx:id="dropOffDateInput" layoutX="64.0" layoutY="231.0" promptText="Select Drop Date" />
+                              <DatePicker fx:id="pickupDateInput" layoutX="69.0" layoutY="252.0" promptText="Select Pickup Date" />
+                              <DatePicker fx:id="dropOffDateInput" layoutX="69.0" layoutY="308.0" promptText="Select Drop Date" />
+                              <Text fill="WHITE" layoutX="106.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="118.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="115.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="110.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="112.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drop Date">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
                                     </children>
                                 </Pane>
                                 <HBox layoutX="10.0" layoutY="498.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">

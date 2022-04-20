@@ -145,6 +145,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + "notes varchar(50) not null)");
 
       for (LaundryRequest currLaud : List.values()) {
+
         statement.execute(
             "INSERT INTO LaundryRequest VALUES("
                 + "'"
