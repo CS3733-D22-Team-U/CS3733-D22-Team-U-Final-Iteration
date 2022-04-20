@@ -129,7 +129,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
                 + "','"
                 + currCSR.getStatus()
                 + "','"
-                + currCSR.getEmployee().getEmployeeID()
+                // + currCSR.getEmployee().getEmployeeID()
                 + "','"
                 + currCSR.getDestination()
                 + "','"
