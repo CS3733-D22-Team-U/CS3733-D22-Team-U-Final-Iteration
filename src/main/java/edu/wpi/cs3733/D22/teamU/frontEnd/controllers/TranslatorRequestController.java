@@ -113,8 +113,10 @@ public class TranslatorRequestController extends ServiceController {
         new PropertyValueFactory<TranslatorRequest, String>("patientName"));
     toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
     status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
-    employeeName.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("employeeName"));
-    destination.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("destination"));
+    employeeName.setCellValueFactory(
+        new PropertyValueFactory<TranslatorRequest, String>("employeeName"));
+    destination.setCellValueFactory(
+        new PropertyValueFactory<TranslatorRequest, String>("destination"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
     newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
