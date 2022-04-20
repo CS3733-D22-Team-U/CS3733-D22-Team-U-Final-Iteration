@@ -114,6 +114,7 @@ public class MaintenanceRequestController extends ServiceController {
   }
 
   private void setUpAllMaintenance() throws SQLException, IOException {
+
     activeReqID.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("ID"));
     activeReqStatus.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("status"));
@@ -125,6 +126,8 @@ public class MaintenanceRequestController extends ServiceController {
         new PropertyValueFactory<MaintenanceRequest, String>("employeeName"));
     activeDate.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
+
+    activeRequestTable.setItems(getMaintenanceRequestsList());
   }
 
   private ObservableList<MaintenanceRequest> newRequest(
