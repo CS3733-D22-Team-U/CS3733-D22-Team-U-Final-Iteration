@@ -21,7 +21,6 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
     this.statement = statement;
   }
 
-  @Override
   public ArrayList<Employee> list() {
     return null;
   }
@@ -92,7 +91,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("hsbd");
+      System.out.println("JavaToSQL error in EmployeeImp");
     }
   }
 
@@ -131,17 +130,17 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   public void JavaToCSV(String csvFile) throws IOException {
     PrintWriter fw = new PrintWriter(new File(csvFile));
 
-    fw.append("employeeID");
+    fw.append("Employee ID");
     fw.append(",");
-    fw.append("occupation");
+    fw.append("Occupation");
     fw.append(",");
-    fw.append("reports");
+    fw.append("Reports");
     fw.append(",");
-    fw.append("onDuty");
+    fw.append("On Duty");
     fw.append(",");
-    fw.append("username");
+    fw.append("Username");
     fw.append(",");
-    fw.append("password");
+    fw.append("Password");
     fw.append("\n");
 
     Set<String> keys = List.keySet();
@@ -255,7 +254,6 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
     this.JavaToCSV(CSVfile);
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }
