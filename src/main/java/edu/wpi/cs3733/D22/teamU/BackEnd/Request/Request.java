@@ -27,6 +27,9 @@ public class Request {
   public Employee employee;
   public Location location;
 
+  public Request() {
+  }
+
   public void setDestination(String destination) {
     this.destination = destination;
   }

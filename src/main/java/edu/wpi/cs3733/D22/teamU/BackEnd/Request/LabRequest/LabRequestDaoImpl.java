@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class LabRequestDaoImpl implements DataDao<LabRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, LabRequest> List = new HashMap<String, LabRequest>();
+  public static HashMap<String, LabRequest> List = new HashMap<String, LabRequest>();
   public ArrayList<LabRequest> list = new ArrayList<LabRequest>();
 
   public LabRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {

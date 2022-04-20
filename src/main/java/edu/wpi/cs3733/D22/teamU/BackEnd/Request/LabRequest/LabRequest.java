@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LabRequest extends Request {

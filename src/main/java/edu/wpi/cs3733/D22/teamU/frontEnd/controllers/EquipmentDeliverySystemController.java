@@ -86,7 +86,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
     setUpAllEquipment();
-    setUpActiveRequests();
+    //setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l.getNodeID());
@@ -160,6 +160,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
     location.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
     table.setItems(getEquipmentList());
   }
+/*
 
   private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -172,6 +173,8 @@ public class EquipmentDeliverySystemController extends ServiceController {
     activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
     activeRequestTable.setItems(getActiveRequestList());
   }
+
+ */
 
   private ObservableList<EquipmentUI> newRequest(
       String id,

@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
   public Statement statement;
-  public HashMap<String, EquipRequest> List = new HashMap<String, EquipRequest>();
+  public static HashMap<String, EquipRequest> List = new HashMap<String, EquipRequest>();
   public String csvFile;
   public ArrayList<EquipRequest> list = new ArrayList<EquipRequest>();
 
