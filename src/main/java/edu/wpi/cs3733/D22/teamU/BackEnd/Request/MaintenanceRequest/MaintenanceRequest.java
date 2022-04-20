@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class MaintenanceRequest extends Request {
-
   String typeOfMaintenance;
   String description;
 
@@ -27,6 +26,7 @@ public class MaintenanceRequest extends Request {
     this.description = description;
     this.date = date;
     this.time = time;
+    this.employeeName = employee.getEmployeeID();
   }
 
   public String getTypeOfMaintenance() {

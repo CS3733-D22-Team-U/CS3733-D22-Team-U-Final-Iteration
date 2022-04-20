@@ -60,7 +60,6 @@ public class MaintenanceRequestController extends ServiceController {
   @FXML TextArea textInput;
 
   ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
-  ObservableList<MaintenanceRequest> maintenanceUIRequests = FXCollections.observableArrayList();
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -123,7 +122,7 @@ public class MaintenanceRequestController extends ServiceController {
     activeReqDescription.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("description"));
     activeStaff.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("employee"));
+        new PropertyValueFactory<MaintenanceRequest, String>("employeeName"));
     activeDate.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
   }
@@ -138,7 +137,7 @@ public class MaintenanceRequestController extends ServiceController {
       String description,
       String date,
       String time) {
-    maintenanceUIRequests.add(
+    maintenanceRequests.add(
         new MaintenanceRequest(
             id,
             name,
@@ -149,13 +148,14 @@ public class MaintenanceRequestController extends ServiceController {
             description,
             date,
             time));
-    return maintenanceUIRequests;
+    return maintenanceRequests;
   }
 
   private ObservableList<MaintenanceRequest> getMaintenanceRequestsList()
       throws SQLException, IOException {
     maintenanceRequests.clear();
-    for (MaintenanceRequest maintenanceReq : Udb.getInstance().maintenanceRequestImpl.list) {
+    for (MaintenanceRequest maintenanceReq :
+        Udb.getInstance().maintenanceRequestImpl.List.values()) {
       maintenanceRequests.add(
           new MaintenanceRequest(
               maintenanceReq.getID(),
@@ -174,8 +174,9 @@ public class MaintenanceRequestController extends ServiceController {
 
   private ObservableList<MaintenanceRequest> getActiveMaintenanceRequestList()
       throws SQLException, IOException {
-    for (MaintenanceRequest maintenanceReq : Udb.getInstance().maintenanceRequestImpl.list) {
-      maintenanceUIRequests.add(
+    for (MaintenanceRequest maintenanceReq :
+        Udb.getInstance().maintenanceRequestImpl.List.values()) {
+      maintenanceRequests.add(
           new MaintenanceRequest(
               maintenanceReq.getID(),
               maintenanceReq.getName(),
@@ -187,7 +188,7 @@ public class MaintenanceRequestController extends ServiceController {
               maintenanceReq.getDate(),
               maintenanceReq.getTime()));
     }
-    return maintenanceUIRequests;
+    return maintenanceRequests;
   }
 
   @Override
@@ -208,49 +209,12 @@ public class MaintenanceRequestController extends ServiceController {
           .start();
       return;
     }
-    /*
-    else if (locations.getItems() == null) {
-      missingDescription.setVisible(true);
-      new Thread(
-              () -> {
-                try {
-                  Thread.sleep(3500); // milliseconds
-                  Platform.runLater(
-                      () -> {
-                        missingDescription.setVisible(false);
-                      });
-                } catch (InterruptedException ie) {
-                }
-              })
-          .start();
-      fillDestinations();
-      fillStaff();
-      return;
-    } else if (staffDropDown.getItems() == null) {
-      missingDescription.setVisible(true);
-      new Thread(
-              () -> {
-                try {
-                  Thread.sleep(3500); // milliseconds
-                  Platform.runLater(
-                      () -> {
-                        missingDescription.setVisible(false);
-                      });
-                } catch (InterruptedException ie) {
-                }
-              })
-          .start();
-      fillDestinations();
-      fillStaff();
-      return;
-    }
 
-     */
     clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     double rand = Math.random() * 10000;
 
-    Employee empty = new Employee(activeStaff.getText());
+    String empty = staffDropDown.getValue();
 
     MaintenanceRequest request =
         new MaintenanceRequest(
@@ -258,7 +222,7 @@ public class MaintenanceRequestController extends ServiceController {
             "N/A",
             "Pending",
             locations.getValue(),
-            empty,
+            checkEmployee(empty),
             "N/A",
             textInput.getText().trim(),
             sdf3.format(timestamp).substring(0, 10),
@@ -276,12 +240,15 @@ public class MaintenanceRequestController extends ServiceController {
             request.getDate(),
             request.getTime()));
     try {
+
       Udb.getInstance().add(request);
 
     } catch (IOException e) {
       e.printStackTrace();
+      System.out.printf("print first catch");
     } catch (SQLException e) {
       e.printStackTrace();
+      System.out.printf("print second catch");
     }
 
     sucessRequest.setVisible(true);
