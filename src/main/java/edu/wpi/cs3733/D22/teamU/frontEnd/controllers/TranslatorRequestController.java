@@ -32,7 +32,6 @@ public class TranslatorRequestController extends ServiceController {
 
   public ComboBox<String> locations;
   public ComboBox<String> employees;
-  public ComboBox<String> requests;
 
   @FXML TableColumn<TranslatorRequest, String> nameID;
   @FXML TableColumn<TranslatorRequest, String> patientName;
@@ -40,7 +39,7 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TableColumn<TranslatorRequest, String> status;
   @FXML TableColumn<TranslatorRequest, String> destination;
   @FXML TableColumn<TranslatorRequest, String> date;
-  @FXML TableColumn<TranslatorRequest, String> newTime;
+  @FXML TableColumn<TranslatorRequest, String> time;
   @FXML TableView<TranslatorRequest> table;
 
   @FXML Button clearButton;
@@ -61,7 +60,6 @@ public class TranslatorRequestController extends ServiceController {
   // Udb udb;
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
-  ArrayList<String> trequests;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -80,7 +78,7 @@ public class TranslatorRequestController extends ServiceController {
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
-    // Displays Employess in Table View
+    // Displays EMployess in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
       staff.add(l.getEmployeeID());
@@ -89,15 +87,7 @@ public class TranslatorRequestController extends ServiceController {
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<String>(employees, 675, 380);
 
-    // Displays Employess in Table View
-    trequests = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-    }
-    requests.setTooltip(new Tooltip());
-    requests.getItems().addAll(trequests);
-    new ComboBoxAutoComplete<String>(requests, 675, 380);
-    //handleTime();
+    handleTime();
   }
 
   private void handleTime() {
@@ -107,7 +97,7 @@ public class TranslatorRequestController extends ServiceController {
               while (Uapp.running) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String timeStampTime = sdf3.format(timestamp).substring(11);
-                newTime.setText(timeStampTime);
+                time.setText(timeStampTime);
               }
             });
     timeThread.start();
@@ -125,7 +115,7 @@ public class TranslatorRequestController extends ServiceController {
     destination.setCellValueFactory(
         new PropertyValueFactory<TranslatorRequest, String>("destination"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
+    time.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
   }
 
@@ -167,15 +157,14 @@ public class TranslatorRequestController extends ServiceController {
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     String room = locations.getValue().toString();
-    String employee = employees.getValue();
 
-    Employee empty = new Employee(employee);
+    Employee empty = new Employee("N/A");
     double rand = Math.random() * 10000;
 
     TranslatorRequest request =
         new TranslatorRequest(
             (int) rand + "",
-            inputPatient.getText().trim(),
+            "Patient",
             inputLanguage.getText().trim(),
             "Pending",
             empty,
@@ -210,8 +199,6 @@ public class TranslatorRequestController extends ServiceController {
 
   public void clearRequest() {
     requestText.setText("Cleared Requests!");
-    inputLanguage.clear();
-    inputPatient.clear();
     requestText.setVisible(true);
     new Thread(
             () -> {
