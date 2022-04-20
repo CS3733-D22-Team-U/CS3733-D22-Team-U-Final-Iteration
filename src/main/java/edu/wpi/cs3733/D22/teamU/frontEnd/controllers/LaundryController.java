@@ -1,107 +1,243 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
+import com.jfoenix.controls.JFXCheckBox;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import lombok.SneakyThrows;
 
 public class LaundryController extends ServiceController {
-  @FXML JFXHamburger hamburger;
-  @FXML VBox vBoxPane;
-  @FXML Text laundryStatus;
-  @FXML CheckBox hangCB;
-  @FXML CheckBox machineCB;
-  @FXML CheckBox hypoCB;
-  @FXML TextField requestID;
-  @FXML TextField patientNameLaundry;
-  @FXML TextField employeeNameLaundry;
-  @FXML TextField locationLaundry;
-  @FXML TextField dropOffTF;
-  @FXML TextField pickUpTF;
-  @FXML TextArea notesLaundryTA;
-  @FXML Pane assistPane;
-  @FXML Pane pane;
+  @FXML VBox requestHolder;
+  @FXML Pane activeRequestPane;
+  @FXML StackPane requestsStack;
+  @FXML Pane newRequestPane;
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+  @FXML ComboBox<String> locations;
+  @FXML ComboBox<String> employees;
+  @FXML Button submitButton;
+  @FXML Button clearButton;
+  @FXML Text time;
+  @FXML DatePicker pickupDateInput;
+  @FXML DatePicker dropOffDateInput;
+  @FXML Text requestText;
+  @FXML TableColumn<LaundryRequest, String> activeReqID;
+  @FXML TableColumn<LaundryRequest, String> patientName;
+  @FXML TableColumn<LaundryRequest, String> staffName;
+  @FXML TableColumn<LaundryRequest, String> serviceType;
+  @FXML TableColumn<LaundryRequest, String> location;
+  @FXML TableColumn<LaundryRequest, String> pickUp;
+  @FXML TableColumn<LaundryRequest, String> dropOff;
 
+  @FXML TableView<LaundryRequest> activeRequestTable;
+
+  @FXML TextField patientNameInput;
+  ObservableList<LaundryRequest> laundryRequests = FXCollections.observableArrayList();
+  ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+  ArrayList<String> nodeIDs;
+  ArrayList<String> staff;
+
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
-    closeTransition.setRate(-1);
-    hamburger.addEventHandler(
-        MouseEvent.MOUSE_CLICKED,
-        e -> {
-          closeTransition.setRate(closeTransition.getRate() * -1);
-          closeTransition.play();
-          vBoxPane.setVisible(!vBoxPane.isVisible());
-          pane.setDisable(!pane.isDisable());
-          if (pane.isDisable()) {
-            hamburger.setPrefWidth(200);
-            pane.setEffect(new GaussianBlur(10));
-            assistPane.setDisable(true);
-          } else {
-            pane.setEffect(null);
-            hamburger.setPrefWidth(77);
-            assistPane.setDisable(false);
-          }
-        });
+    setUpActiveRequests();
+    for (Node checkBox : requestHolder.getChildren()) {
+      checkBoxes.add((JFXCheckBox) checkBox);
+    }
+
+    nodeIDs = new ArrayList<>();
+    for (Location l : Udb.getInstance().locationImpl.list()) {
+      nodeIDs.add(l.getNodeID());
+    }
+    locations.setTooltip(new Tooltip());
+    locations.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
+
+    staff = new ArrayList<>();
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l.getEmployeeID());
+    }
+    employees.setTooltip(new Tooltip());
+    employees.getItems().addAll(staff);
+    new ComboBoxAutoComplete<String>(employees, 675, 380);
+
+    clearButton
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+    submitButton
+        .disableProperty()
+        .bind(
+            Bindings.createBooleanBinding(
+                () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
+                checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
+    handleTime();
+
+    pickupDateInput.setDayCellFactory(
+        picker ->
+            new DateCell() {
+              public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0);
+              }
+            });
+
+    dropOffDateInput.setDayCellFactory(
+        picker ->
+            new DateCell() {
+              public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0);
+              }
+            });
+  }
+
+  private void setUpActiveRequests() throws SQLException, IOException {
+    activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    staffName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
+    serviceType.setCellValueFactory(new PropertyValueFactory<>("services"));
+    location.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    pickUp.setCellValueFactory(new PropertyValueFactory<>("pickUpDate"));
+    dropOff.setCellValueFactory(new PropertyValueFactory<>("dropOffDate"));
+
+    activeRequestTable.setItems(getActiveRequestList());
+  }
+
+  @SneakyThrows
+  private ObservableList<LaundryRequest> getActiveRequestList() {
+    laundryRequests.addAll(Udb.getInstance().laundryRequestImpl.hList().values());
+    return laundryRequests;
+  }
+
+  private void handleTime() {
+    Thread timeThread =
+        new Thread(
+            () -> {
+              while (Uapp.running) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String timeStampTime = sdf3.format(timestamp).substring(11);
+                time.setText(timeStampTime);
+              }
+            });
+    timeThread.start();
   }
 
   @Override
   public void addRequest() {
-    laundryStatus.setText("Processing...");
-    laundryStatus.setVisible(true);
+    StringBuilder startRequestString = new StringBuilder("Your request for : ");
+
+    String endRequest = " has been placed successfully";
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+    for (int i = 0; i < checkBoxes.size(); i++) {
+      if (checkBoxes.get(i).isSelected()) {
+        String inputString = "";
+
+        String room = locations.getValue().toString();
+
+        startRequestString
+            .append(" ")
+            .append(checkBoxes.get(i).getText())
+            .append("(s) to room ")
+            .append(room)
+            .append(", ");
+
+        double rand = Math.random() * 10000;
+
+        LaundryRequest request =
+            new LaundryRequest(
+                (int) rand + "",
+                patientNameInput.getText().trim(),
+                checkEmployee(employees.getValue()),
+                "done",
+                locations.getValue(),
+                pickupDateInput.getValue().toString(),
+                dropOffDateInput.getValue().toString(),
+                sdf3.format(timestamp).substring(11),
+                checkBoxes.get(i).getText().trim(),
+                "N/A");
+        laundryRequests.add(request);
+        activeRequestTable.setItems(laundryRequests);
+        try {
+          Location l =
+              Udb.getInstance()
+                  .locationImpl
+                  .list()
+                  .get(Udb.getInstance().locationImpl.search(request.getDestination()));
+          LaundryRequest e =
+              new LaundryRequest(
+                  request.getID(),
+                  request.getPatientName(),
+                  request.getEmployee(),
+                  request.getStatus(),
+                  request.getDestination(),
+                  request.getPickUpDate(),
+                  request.getDropOffDate(),
+                  request.getTime(),
+                  request.getServices(),
+                  request.getNotes());
+          e.setLocation(l);
+          Udb.getInstance().add(e);
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    requestText.setText(startRequestString + endRequest);
+    requestText.setVisible(true);
     new Thread(
             () -> {
               try {
-                Thread.sleep(1500); // milliseconds
+                Thread.sleep(3500); // milliseconds
                 Platform.runLater(
                     () -> {
-                      laundryStatus.setText("Done");
+                      requestText.setVisible(false);
                     });
-                Thread.sleep(1500); // milliseconds
-                Platform.runLater(
-                    () -> {
-                      laundryStatus.setVisible(false);
-                      hangCB.setSelected(false);
-                      machineCB.setSelected(false);
-                      hypoCB.setSelected(false);
-                      requestID.setText("");
-                      patientNameLaundry.setText("");
-                      employeeNameLaundry.setText("");
-                      locationLaundry.setText("");
-                      dropOffTF.setText("");
-                      pickUpTF.setText("");
-                      notesLaundryTA.setText("");
-                    });
-
               } catch (InterruptedException ie) {
               }
             })
         .start();
-  }
-
-  public void clearLaundryRequest(ActionEvent actionEvent) {
-    hangCB.setSelected(false);
-    machineCB.setSelected(false);
-    hypoCB.setSelected(false);
-    requestID.setText("");
-    patientNameLaundry.setText("");
-    employeeNameLaundry.setText("");
-    locationLaundry.setText("");
-    dropOffTF.setText("");
-    pickUpTF.setText("");
-    notesLaundryTA.setText("");
   }
 
   @Override
@@ -109,4 +245,49 @@ public class LaundryController extends ServiceController {
 
   @Override
   public void updateRequest() {}
+
+  public void switchToNewRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(true);
+  }
+
+  public void switchToActive(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(activeRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(true);
+    newReqButton.setUnderline(false);
+  }
+
+  public void mouseHovered(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: #E6F6F7");
+  }
+
+  public void mouseExit(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: transparent");
+  }
+
+  public Employee checkEmployee(String employee) throws NullPointerException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
+  }
+
+  public void clearRequest(ActionEvent actionEvent) {}
 }
