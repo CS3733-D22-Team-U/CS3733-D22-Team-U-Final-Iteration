@@ -28,9 +28,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.transform.Scale;
+import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
+
   /*Edit Remove Popup*/
   public TextField popupNodeID;
   public TextField popupXCoord;
@@ -40,9 +41,8 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
-  public TextField equipName;
-  public TextField equipAmount;
   AnchorPane popupEditPane;
+
   @FXML ScrollPane imagesPane1;
   @FXML ScrollPane imagesPane2;
   @FXML ScrollPane imagesPane3;
@@ -50,6 +50,8 @@ public class MapController extends ServiceController {
   @FXML ScrollPane imagesPane5;
   @FXML ScrollPane imagesPane6;
   @FXML ScrollPane imagesPane7;
+
+  @FXML Pane pane;
 
   /*Add Popup*/
   AnchorPane popupAddPane;
@@ -61,16 +63,14 @@ public class MapController extends ServiceController {
   ComboBox addNodeTypeCombo;
   ComboBox addBuildingCombo;
   ComboBox addFloorCombo;
-  ComboBox equipCB;
   Button addButton;
   ObservableList<String> nodeTypeList =
-      FXCollections.observableArrayList(
-          "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
-          "EXIT", "RETL", "SERV");
+          FXCollections.observableArrayList(
+                  "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
+                  "EXIT", "RETL", "SERV");
   ObservableList<String> buildingList = FXCollections.observableArrayList("Tower");
   ObservableList<String> floorList =
-      FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
-  ObservableList<Equipment> allEquip;
+          FXCollections.observableArrayList("L1", "L2", "1", "2", "3", "4", "5");
   private final double imageX = 870, imageY = 870;
   // @FXML ScrollPane imagesPane;
   @FXML AnchorPane lowerLevel1Pane;
@@ -100,7 +100,6 @@ public class MapController extends ServiceController {
 
   public MapController() throws IOException, SQLException {}
 
-  @Override
   public void initialize(URL location, ResourceBundle resources) {
     imagesPane1.setPannable(true);
     imagesPane2.setPannable(true);
@@ -130,15 +129,15 @@ public class MapController extends ServiceController {
     try {
       for (Location loc : Udb.getInstance().locationImpl.locations) {
         mapUI.add(
-            new MapUI(
-                loc.getNodeID(),
-                loc.getXcoord(),
-                loc.getYcoord(),
-                loc.getFloor(),
-                loc.getBuilding(),
-                loc.getNodeType(),
-                loc.getLongName(),
-                loc.getShortName()));
+                new MapUI(
+                        loc.getNodeID(),
+                        loc.getXcoord(),
+                        loc.getYcoord(),
+                        loc.getFloor(),
+                        loc.getBuilding(),
+                        loc.getNodeType(),
+                        loc.getLongName(),
+                        loc.getShortName()));
 
         String s = loc.getFloor();
         LocationNode ln;
@@ -173,57 +172,73 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
+
+          // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  // record a delta distance for the drag and drop operation.
-                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
-                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
-                  ln.setCursor(Cursor.MOVE);
-                }
-              });
-          ln.setOnMouseDragged(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-                  ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                  imagesPane1.setPannable(false);
-                  imagesPane2.setPannable(false);
-                  imagesPane3.setPannable(false);
-                  imagesPane4.setPannable(false);
-                  imagesPane5.setPannable(false);
-                  imagesPane6.setPannable(false);
-                  imagesPane7.setPannable(false);
-                }
-              });
-          ln.setOnMouseReleased(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  ln.setCursor(Cursor.HAND);
-                  imagesPane1.setPannable(true);
-                  imagesPane2.setPannable(true);
-                  imagesPane3.setPannable(true);
-                  imagesPane4.setPannable(true);
-                  imagesPane5.setPannable(true);
-                  imagesPane6.setPannable(true);
-                  imagesPane7.setPannable(true);
-                  popupXCoord.setText("ln.getX()");
-                  popupYCoord.setText("ln.getY()");
-                }
-              });
+                  new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                      // record a delta distance for the drag and drop operation.
+                      // setPaneOnMousePressedEventHandler(null);
+                      // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-          ln.setOnMouseEntered(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  ln.setCursor(Cursor.HAND);
-                }
-              });
+                      dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+                      dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+                      ln.setCursor(Cursor.MOVE);
+                    }
+                  });
+          ln.setOnMouseDragged(
+                  new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+
+                      ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+                      ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+                      ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+                      ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+                      imagesPane1.setPannable(false);
+                      imagesPane2.setPannable(false);
+                      imagesPane3.setPannable(false);
+                      imagesPane4.setPannable(false);
+                      imagesPane5.setPannable(false);
+                      imagesPane6.setPannable(false);
+                      imagesPane7.setPannable(false);
+                    }
+                  });
+          ln.setOnMouseReleased(
+                  new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                      ln.setCursor(Cursor.HAND);
+
+                      ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+                      ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+                      try {
+                        Udb.getInstance().edit(ln.getLocation());
+                      } catch (IOException e) {
+                        throw new RuntimeException(e);
+                      } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                      }
+                      imagesPane1.setPannable(true);
+                      imagesPane2.setPannable(true);
+                      imagesPane3.setPannable(true);
+                      imagesPane4.setPannable(true);
+                      imagesPane5.setPannable(true);
+                      imagesPane6.setPannable(true);
+                      imagesPane7.setPannable(true);
+
+                      // popupXCoord.setText("ln.getLayoutX()");
+                      // popupYCoord.setText("ln.getLayoutY()");
+
+                      // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+                      // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
+                    }
+                  });
+
           ln.setOnMouseClicked(this::popupOpen);
+
           locations.put(loc.getNodeID(), ln);
           temp.getChildren().add(ln);
 
@@ -237,16 +252,15 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
-
     popupAddPane = new AnchorPane();
     try {
       popupAddPane
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  getClass()
-                      .getClassLoader()
-                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
+              .getChildren()
+              .add(
+                      FXMLLoader.load(
+                              getClass()
+                                      .getClassLoader()
+                                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
       popupAddPane.setLayoutX(100);
       popupAddPane.setLayoutY(200);
 
@@ -257,13 +271,13 @@ public class MapController extends ServiceController {
     popupEditPane = new AnchorPane();
     try {
       popupEditPane
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  Objects.requireNonNull(
-                      getClass()
-                          .getClassLoader()
-                          .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
+              .getChildren()
+              .add(
+                      FXMLLoader.load(
+                              Objects.requireNonNull(
+                                      getClass()
+                                              .getClassLoader()
+                                              .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -275,7 +289,8 @@ public class MapController extends ServiceController {
 
   private void setScroll(AnchorPane pane) {
     pane.setOnScroll(
-        event -> {
+            event -> {
+          /*
           double zoom_fac = 1.05;
           if (event.getDeltaY() < 0) {
             zoom_fac = 2.0 - zoom_fac;
@@ -290,33 +305,12 @@ public class MapController extends ServiceController {
           pane.getTransforms().add(newScale);
 
           event.consume();
-        });
-    EventHandler<MouseEvent> paneOnMousePressedEventHandler =
-        new EventHandler<MouseEvent>() {
 
-          @Override
-          public void handle(MouseEvent t) {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            orgTranslateX = ((AnchorPane) (t.getSource())).getTranslateX();
-            orgTranslateY = ((AnchorPane) (t.getSource())).getTranslateY();
-          }
-        };
+           */
+            });
 
-    EventHandler<MouseEvent> paneOnMouseDraggedEventHandler =
-        new EventHandler<MouseEvent>() {
-
-          @Override
-          public void handle(MouseEvent t) {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-            double newTranslateX = orgTranslateX + offsetX;
-            double newTranslateY = orgTranslateY + offsetY;
-
-            ((AnchorPane) (t.getSource())).setTranslateX(newTranslateX);
-            ((AnchorPane) (t.getSource())).setTranslateY(newTranslateY);
-          }
-        };
+    // pane.setOnMousePressed(paneOnMousePressedEventHandler);
+    // pane.setOnMouseDragged(paneOnMouseDraggedEventHandler);
   }
 
   public void setUpMap() {
@@ -404,13 +398,10 @@ public class MapController extends ServiceController {
       pane.getChildren().remove(popupEditPane);
     }
 
-    popupEditPane.setLayoutX(locationNode.getX());
-    popupEditPane.setLayoutY(locationNode.getY());
+    popupEditPane.setLayoutX(locationNode.tempx);
+    popupEditPane.setLayoutY(locationNode.tempy);
 
-    TabPane tp = (TabPane) popupEditPane.getChildren().get(0);
-    Tab t1 = tp.getTabs().get(0);
-    AnchorPane ap = (AnchorPane) t1.getContent();
-    for (Node n : ap.getChildren()) {
+    for (Node n : ((AnchorPane) popupEditPane.getChildren().get(0)).getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
         if (b2.getId().equals("exit")) {
@@ -457,6 +448,32 @@ public class MapController extends ServiceController {
               default:
                 break;
             }
+          } else if (n2 instanceof ListView) {
+            ListView<String> lv = (ListView<String>) n2;
+            lv.getItems().clear();
+            switch (lv.getId()) {
+              case "requestView":
+                requestView = lv;
+                for (Request r : location.getRequests()) {
+                  requestView
+                          .getItems()
+                          .add(
+                                  r.getID()
+                                          + ": "
+                                          + r.getEmployee().getEmployeeID()
+                                          + " "
+                                          + r.date
+                                          + " "
+                                          + r.getTime());
+                }
+                break;
+              case "equipmentView":
+                equipmentView = lv;
+                for (Equipment e : location.getEquipment()) {
+                  equipmentView.getItems().add(e.getName() + ": " + e.getAmount());
+                }
+                break;
+            }
           } else if (n2 instanceof Button) {
             Button b = (Button) n2;
             try {
@@ -479,115 +496,6 @@ public class MapController extends ServiceController {
         }
       }
     }
-
-    Tab t2 = tp.getTabs().get(1);
-    AnchorPane ap2 = (AnchorPane) t2.getContent();
-    for (Node n : ap2.getChildren()) {
-      if (n instanceof Button) {
-        Button b2 = (Button) n;
-        if (b2.getId().equals("exit1")) {
-          b2.setOnMouseClicked(this::Exit);
-        }
-      } else if (n instanceof GridPane) {
-        GridPane gp = (GridPane) n;
-        for (Node n2 : gp.getChildren()) {
-          if (n2 instanceof ListView) {
-            ListView<String> lv = (ListView<String>) n2;
-            lv.getItems().clear();
-            switch (lv.getId()) {
-              case "equipmentView":
-                equipmentView = lv;
-                for (Equipment e : location.getEquipment()) {
-                  equipmentView.getItems().add(e.getName() + ": " + e.getAmount());
-                }
-            }
-          }
-          //                    else if (n2 instanceof ComboBox) {
-          //                      ComboBox cb = (ComboBox) n2;
-          //                      switch (cb.getId()) {
-          //                        case "equipCB":
-          //                          equipCB = cb;
-          //                          allEquip =
-          // FXCollections.observableArrayList(location.getEquipment());
-          //                          equipCB.setItems(allEquip);
-          //                          break;
-          //                      }
-          //                    }
-          else if (n2 instanceof Button) {
-            Button b = (Button) n2;
-            try {
-              switch (b.getId()) {
-                case "editEquip":
-                  b.setDisable(!Udb.getInstance().admin);
-                  b.setOnMouseClicked(this::popupEdit);
-                  break;
-                case "removeEquip":
-                  b.setDisable(!Udb.getInstance().admin);
-                  b.setOnMouseClicked(this::popupRemove);
-                  break;
-                default:
-                  break;
-              }
-            } catch (Exception e) {
-              System.out.println("map Controller line 400");
-            }
-          }
-        }
-      }
-    }
-    Tab t3 = tp.getTabs().get(2);
-    AnchorPane ap3 = (AnchorPane) t3.getContent();
-    for (Node n : ap3.getChildren()) {
-      if (n instanceof Button) {
-        Button b2 = (Button) n;
-        if (b2.getId().equals("exit2")) {
-          b2.setOnMouseClicked(this::Exit);
-        }
-      } else if (n instanceof GridPane) {
-        GridPane gp = (GridPane) n;
-        for (Node n2 : gp.getChildren()) {
-          if (n2 instanceof ListView) {
-            ListView<String> lv = (ListView<String>) n2;
-            lv.getItems().clear();
-            switch (lv.getId()) {
-              case "requestView":
-                requestView = lv;
-                for (Request r : location.getRequests()) {
-                  requestView
-                      .getItems()
-                      .add(
-                          r.getID()
-                              + ": "
-                              + r.getEmployee().getEmployeeID()
-                              + " "
-                              + r.date
-                              + " "
-                              + r.getTime());
-                }
-                break;
-            }
-          } else if (n2 instanceof Button) {
-            Button b = (Button) n2;
-            try {
-              switch (b.getId()) {
-                case "editServ":
-                  b.setDisable(!Udb.getInstance().admin);
-                  b.setOnMouseClicked(this::popupEdit);
-                  break;
-                case "removeServ":
-                  b.setDisable(!Udb.getInstance().admin);
-                  b.setOnMouseClicked(this::popupRemove);
-                  break;
-                default:
-                  break;
-              }
-            } catch (Exception e) {
-              System.out.println("map Controller line 400");
-            }
-          }
-        }
-      }
-    }
     pane.getChildren().add(popupEditPane);
   }
 
@@ -597,23 +505,23 @@ public class MapController extends ServiceController {
 
   public void popupEdit(MouseEvent actionEvent) {
     Location l =
-        new Location(
-            popupNodeID.getText(),
-            Integer.parseInt(popupXCoord.getText()),
-            Integer.parseInt(popupYCoord.getText()),
-            popupFloor.getText(),
-            popupBuilding.getText(),
-            popupNodeType.getText(),
-            popupLongName.getText(),
-            popupShortName.getText());
+            new Location(
+                    popupNodeID.getText(),
+                    Integer.parseInt(popupXCoord.getText()),
+                    Integer.parseInt(popupYCoord.getText()),
+                    popupFloor.getText(),
+                    popupBuilding.getText(),
+                    popupNodeType.getText(),
+                    popupLongName.getText(),
+                    popupShortName.getText());
 
     try {
 
       Location old =
-          Udb.getInstance()
-              .locationImpl
-              .list()
-              .get(Udb.getInstance().locationImpl.list().indexOf(l));
+              Udb.getInstance()
+                      .locationImpl
+                      .list()
+                      .get(Udb.getInstance().locationImpl.list().indexOf(l));
       l.setEquipment(old.getEquipment());
       l.setRequests(old.getRequests());
       Udb.getInstance().locationImpl.edit(l);
@@ -636,15 +544,15 @@ public class MapController extends ServiceController {
 
   public void popupRemove(MouseEvent actionEvent) {
     Location l =
-        new Location(
-            popupNodeID.getText(),
-            Integer.parseInt(popupXCoord.getText()),
-            Integer.parseInt(popupYCoord.getText()),
-            popupFloor.getText(),
-            popupBuilding.getText(),
-            popupNodeType.getText(),
-            popupLongName.getText(),
-            popupShortName.getText());
+            new Location(
+                    popupNodeID.getText(),
+                    Integer.parseInt(popupXCoord.getText()),
+                    Integer.parseInt(popupYCoord.getText()),
+                    popupFloor.getText(),
+                    popupBuilding.getText(),
+                    popupNodeType.getText(),
+                    popupLongName.getText(),
+                    popupShortName.getText());
 
     try {
       Udb.getInstance().locationImpl.remove(l);
@@ -662,15 +570,15 @@ public class MapController extends ServiceController {
   private void popupAddLocation(MouseEvent mouseEvent) {
     System.out.println("test");
     Location l =
-        new Location(
-            addNodeID.getText(),
-            Integer.parseInt(addXcoord.getText()),
-            Integer.parseInt(addYcoord.getText()),
-            addFloorCombo.getValue().toString(),
-            addBuildingCombo.getValue().toString(),
-            addNodeTypeCombo.getValue().toString(),
-            addLongName.getText(),
-            addShortName.getText());
+            new Location(
+                    addNodeID.getText(),
+                    Integer.parseInt(addXcoord.getText()),
+                    Integer.parseInt(addYcoord.getText()),
+                    addFloorCombo.getValue().toString(),
+                    addBuildingCombo.getValue().toString(),
+                    addNodeTypeCombo.getValue().toString(),
+                    addLongName.getText(),
+                    addShortName.getText());
     try {
       Udb.getInstance().locationImpl.add(l);
       String s = l.getFloor();
@@ -712,10 +620,6 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
   }
-
-  // Pan by Pressing and Dragging
-  double orgSceneX, orgSceneY;
-  double orgTranslateX, orgTranslateY;
 
   public void test(ZoomEvent zoomEvent) {}
 }

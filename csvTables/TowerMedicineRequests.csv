@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ID,Name,Amount,Patient,Status,Employee,Destination,Date,Time
 testing,for real,1,N/A,N/A,N/A,uSTOR00101,N/A,N/A
 6356,Advil,71,Nick,sent,00010,FDEPT00501,2022-04-19,18:39:03
@@ -17,3 +16,4 @@ testing,for real,1,N/A,N/A,N/A,uSTOR00101,N/A,N/A
 9956,Advil,5,Kody,sent,00009,FDEPT00301,2022-04-19,18:38:18
 5217,Advil,78,Nick,sent,00002,CHALL007L2,2022-04-19,18:54:59
 3887,Advil,5,BRUH,sent,00010,FDEPT00401,2022-04-19,16:35:07
+4844,Advil,5,Kody,sent,00010,HBATH00103,2022-04-19,20:36:00
