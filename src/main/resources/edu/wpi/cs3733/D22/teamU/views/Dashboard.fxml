@@ -64,7 +64,6 @@
                      </image>
                   </ImageView>
                   <Text fx:id="headerText" layoutX="294.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham" wrappingWidth="511.65234375" />
-                  <Button layoutX="926.0" layoutY="37.0" mnemonicParsing="false" onAction="#toAllServices" text="Button" />
                </children>
             </Pane>
             <Pane layoutX="308.0" layoutY="132.0" prefHeight="63.0" prefWidth="485.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
@@ -169,6 +168,11 @@
                   </Button>
                </children>
             </Pane>
+            <Button layoutX="111.0" layoutY="9.0" mnemonicParsing="false" onAction="#toAllServices" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="-49.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">
