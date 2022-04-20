@@ -27,6 +27,8 @@ public class SecurityRequest extends Request {
     this.leathalForcePermited = lethal;
     this.date = date;
     this.time = time;
+
+    this.employeeName = employee.getEmployeeID();
   }
 
   public void setDescriptionOfThreat(String descriptionOfThreat) {
@@ -43,5 +45,9 @@ public class SecurityRequest extends Request {
 
   public String getDescriptionOfThreat() {
     return descriptionOfThreat;
+  }
+
+  public String getEmployeeName() {
+    return employeeName;
   }
 }
