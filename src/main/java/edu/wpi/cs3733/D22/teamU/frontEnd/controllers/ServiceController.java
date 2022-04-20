@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.Service;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -107,7 +108,7 @@ public abstract class ServiceController implements Initializable, Service {
   }
 
   @Override
-  public abstract void addRequest();
+  public abstract void addRequest() throws SQLException, IOException;
 
   @Override
   public abstract void removeRequest();

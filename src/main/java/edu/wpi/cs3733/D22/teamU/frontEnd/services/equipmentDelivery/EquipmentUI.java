@@ -27,7 +27,7 @@ public class EquipmentUI {
   }
 
   public EquipmentUI(
-          String name, int inUse, int available, String location, String floor, String nodeType) {
+      String name, int inUse, int available, String location, String floor, String nodeType) {
     equipmentName = name;
     amountInUse = inUse;
     amountAvailable = available;
@@ -37,13 +37,13 @@ public class EquipmentUI {
   }
 
   public EquipmentUI(
-          String id,
-          String name,
-          int request,
-          String destination,
-          String date,
-          String timestamp,
-          int priority) {
+      String id,
+      String name,
+      int request,
+      String destination,
+      String date,
+      String timestamp,
+      int priority) {
     this.id = id;
     equipmentName = name;
     requestAmount = request;
@@ -75,7 +75,7 @@ public class EquipmentUI {
   //  }
 
   public EquipmentUI(
-          String id, String name, int request, String destination, String floor, String nodeType) {
+      String id, String name, int request, String destination, String floor, String nodeType) {
     this.id = id;
     equipmentName = name;
     requestAmount = request;

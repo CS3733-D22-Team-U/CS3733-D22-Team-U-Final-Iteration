@@ -37,6 +37,14 @@ public class Equipment {
     this.locationID = locationID;
   }
 
+  public Equipment(String name, int amount, int inuse, int available, String locationID) {
+    this.Amount = amount;
+    this.Name = name;
+    this.InUse = inuse;
+    this.Available = available;
+    this.locationID = locationID;
+  }
+
   /**
    * Return Equipment name
    *

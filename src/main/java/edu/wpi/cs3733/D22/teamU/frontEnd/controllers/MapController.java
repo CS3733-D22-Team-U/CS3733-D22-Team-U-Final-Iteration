@@ -390,7 +390,17 @@ public class MapController extends ServiceController {
     }
   }
 
+  private TableView<Equipment> equipTable = new TableView();
+  private TableView<Request> reqTable = new TableView();
+
+  private Equipment equipment = null;
+  private Request request = null;
+
   public void popupOpen(MouseEvent mouseEvent) {
+    request = null;
+    equipment = null;
+    equipTable.getItems().clear();
+    reqTable.getItems().clear();
     LocationNode locationNode = (LocationNode) mouseEvent.getSource();
     Location location = locationNode.getLocation();
     AnchorPane pane = locationNode.getPane();
@@ -398,10 +408,15 @@ public class MapController extends ServiceController {
       pane.getChildren().remove(popupEditPane);
     }
 
-    popupEditPane.setLayoutX(locationNode.tempx);
-    popupEditPane.setLayoutY(locationNode.tempy);
+    if (locationNode.tempx + 468 <= 870) popupEditPane.setLayoutX(locationNode.tempx);
+    else popupEditPane.setLayoutX(locationNode.tempx - 458);
 
-    for (Node n : ((AnchorPane) popupEditPane.getChildren().get(0)).getChildren()) {
+    if (locationNode.tempy - 500 < 0) popupEditPane.setLayoutY(locationNode.tempy);
+    else popupEditPane.setLayoutY(locationNode.tempy - 500);
+
+    Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
+    AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
+    for (Node n : locAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
         if (b2.getId().equals("exit")) {
@@ -448,32 +463,6 @@ public class MapController extends ServiceController {
               default:
                 break;
             }
-          } else if (n2 instanceof ListView) {
-            ListView<String> lv = (ListView<String>) n2;
-            lv.getItems().clear();
-            switch (lv.getId()) {
-              case "requestView":
-                requestView = lv;
-                for (Request r : location.getRequests()) {
-                  requestView
-                      .getItems()
-                      .add(
-                          r.getID()
-                              + ": "
-                              + r.getEmployee().getEmployeeID()
-                              + " "
-                              + r.date
-                              + " "
-                              + r.getTime());
-                }
-                break;
-              case "equipmentView":
-                equipmentView = lv;
-                for (Equipment e : location.getEquipment()) {
-                  equipmentView.getItems().add(e.getName() + ": " + e.getAmount());
-                }
-                break;
-            }
           } else if (n2 instanceof Button) {
             Button b = (Button) n2;
             try {
@@ -496,7 +485,125 @@ public class MapController extends ServiceController {
         }
       }
     }
+
+    Tab equipTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(1);
+    AnchorPane equipAnchor = (AnchorPane) equipTab.getContent();
+
+    for (Node n : equipAnchor.getChildren()) {
+      if (n instanceof Button) {
+        Button b2 = (Button) n;
+        if (b2.getId().equals("exit1")) {
+          b2.setOnMouseClicked(this::Exit);
+        } else if (b2.getId().equals("removeEquip")) {
+          b2.setOnMouseClicked(this::deleteEquip);
+        }
+      } else if (n instanceof TableView) {
+        equipTable = (TableView) n;
+        equipTable.setOnMouseClicked(this::selectEquip);
+        for (Object tb : equipTable.getColumns()) {
+          if (tb instanceof TableColumn) {
+            TableColumn tc = (TableColumn) tb;
+            switch (tc.getId()) {
+              case "equipName":
+                tc.setCellValueFactory(new PropertyValueFactory<Equipment, String>("Name"));
+                break;
+              case "equipmentAmount":
+                tc.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Amount"));
+                break;
+              case "equipmentInUse":
+                tc.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("InUse"));
+                break;
+              case "equipmentAvailable":
+                tc.setCellValueFactory(new PropertyValueFactory<Equipment, Integer>("Available"));
+                break;
+            }
+          }
+        }
+      }
+    }
+    equipTable.setItems(
+        FXCollections.observableArrayList(locationNode.getLocation().getEquipment()));
+
+    Tab requestTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(2);
+    AnchorPane reqAnchor = (AnchorPane) requestTab.getContent();
+
+    for (Node n : reqAnchor.getChildren()) {
+      if (n instanceof Button) {
+        Button b2 = (Button) n;
+        if (b2.getId().equals("exit2")) {
+          b2.setOnMouseClicked(this::Exit);
+        } else if (b2.getId().equals("removeReq")) {
+          b2.setOnMouseClicked(this::deleteRequest);
+        }
+      } else if (n instanceof TableView) {
+        reqTable = (TableView) n;
+        reqTable.setOnMouseClicked(this::selectRequest);
+        for (Object tb : reqTable.getColumns()) {
+          if (tb instanceof TableColumn) {
+            TableColumn tc = (TableColumn) tb;
+            switch (tc.getId()) {
+              case "serviceName":
+                tc.setCellValueFactory(new PropertyValueFactory<Request, String>("name"));
+                break;
+              case "servicePatient":
+                tc.setCellValueFactory(new PropertyValueFactory<Request, String>("patientName"));
+                break;
+              case "requestDate":
+                tc.setCellValueFactory(new PropertyValueFactory<Request, String>("date"));
+                break;
+              case "requestTime":
+                tc.setCellValueFactory(new PropertyValueFactory<Request, String>("time"));
+                break;
+              case "requestStatus":
+                tc.setCellValueFactory(new PropertyValueFactory<Request, String>("status"));
+                break;
+            }
+          }
+        }
+      }
+    }
+
+    reqTable.setItems(FXCollections.observableArrayList(locationNode.getLocation().getRequests()));
+
     pane.getChildren().add(popupEditPane);
+  }
+
+  public void deleteRequest(MouseEvent mouseEvent) {
+    try {
+      if (request != null) {
+        Udb.getInstance().remove(request);
+        reqTable.getItems().remove(request);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void deleteEquip(MouseEvent mouseEvent) {
+    try {
+      if (equipment != null) {
+        Udb.getInstance().remove(equipment);
+        equipTable.getItems().remove(equipment);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void selectRequest(MouseEvent mouseEvent) {
+    if (reqTable.getSelectionModel().getSelectedItem() instanceof Request) {
+      request = (Request) reqTable.getSelectionModel().getSelectedItem();
+    }
+  }
+
+  public void selectEquip(MouseEvent mouseEvent) {
+    if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
+      equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+    }
   }
 
   public void Exit(MouseEvent actionEvent) {
