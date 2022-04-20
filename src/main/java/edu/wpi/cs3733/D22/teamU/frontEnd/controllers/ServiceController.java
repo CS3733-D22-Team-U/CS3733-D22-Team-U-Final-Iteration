@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.Service;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -32,6 +33,13 @@ public abstract class ServiceController implements Initializable, Service {
 
   public void toMealDelivery(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/mealDelivery.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
+  public void toMaintenanceRequest(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/maintenanceRequest.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
@@ -100,7 +108,7 @@ public abstract class ServiceController implements Initializable, Service {
   }
 
   @Override
-  public abstract void addRequest();
+  public abstract void addRequest() throws SQLException, IOException;
 
   @Override
   public abstract void removeRequest();
