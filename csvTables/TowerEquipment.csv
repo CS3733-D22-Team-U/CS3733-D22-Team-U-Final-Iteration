@@ -22,7 +22,7 @@ Infusion Pumps,4,2,2,uPATI04B32
 Beds,4,2,2,uPATI04B32
 Infusion Pumps,4,2,2,uPATI04B33
 Beds,2,2,0,uPATI04B34
-Infusion Pumps,3,2,1,uPATI04B34
+Infusion Pumps,5,2,3,uPATI04B34
 Recliners,2,0,2,uPATI04B35
 Recliners,2,1,1,uPATI04B36
 X-Ray Machine,1,0,1,uPATI05C3
@@ -32,6 +32,6 @@ Infusion Pumps,4,2,2,uPATI05B32
 Beds,12,10,2,uPATI05B32
 Infusion Pumps,4,2,2,uPATI05B33
 Beds,6,6,0,uPATI05B34
-Infusion Pumps,3,2,1,uPATI05B34
+Infusion Pumps,12,10,2,uPATI05B34
 Recliners,2,0,2,uPATI05B35
 Recliners,2,1,1,uPATI05B36

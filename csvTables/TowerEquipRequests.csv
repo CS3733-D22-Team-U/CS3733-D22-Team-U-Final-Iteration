@@ -18,6 +18,7 @@ ID,Name,Amount,Type,Status,Employee,Destination,Date,Time,Priority
 1432,Syringe,23,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:40:37,1
 513,Masks,78,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:13:37,1
 1012,First Aid Kit,1254,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:33:26,1
+6007,Body Bag,5,Equipment,sent,00010,HHALL00203,2022-04-20,03:58:01,1
 5678,Catheter,876,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:13:37,1
 7758,Catheter,7,Equipment,In Progress,N/A,FDEPT00201,2022-04-12,22:22:05,1
 3898,Body Bag,25,Equipment,In Progress,N/A,FDEPT00101,2022-04-12,22:21:21,1
