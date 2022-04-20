@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DraggableMaker;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +23,9 @@ public class LocationNode extends Group {
   private Location location;
   private AnchorPane pane;
   private double x, y;
-  private final double scale = 15;
+  private final double scale = 10;
+
+  public double tempx, tempy;
 
   public LocationNode(Location location, double x, double y, AnchorPane pane) throws IOException {
 
@@ -31,10 +34,14 @@ public class LocationNode extends Group {
     this.pane = pane;
     this.x = x;
     this.y = y;
+    tempx = x;
+    tempy = y;
     Color color;
 
     Circle c = new Circle();
     setLocationIcon(c);
+    DraggableMaker draggableMaker = new DraggableMaker();
+    draggableMaker.makeDraggable(c);
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
@@ -51,6 +58,8 @@ public class LocationNode extends Group {
     if (location.getRequests().size() > 0) {
       Rectangle r = new Rectangle();
       setRequest(r);
+      DraggableMaker draggableMaker2 = new DraggableMaker();
+      draggableMaker.makeDraggable(r);
     }
   }
 
@@ -200,5 +209,13 @@ public class LocationNode extends Group {
 
   public double getY() {
     return y;
+  }
+
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  public void setY(double y) {
+    this.y = y;
   }
 }
