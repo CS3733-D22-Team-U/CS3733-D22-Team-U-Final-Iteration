@@ -11,6 +11,7 @@
 
 <AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
 
+
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
          <children>
@@ -262,6 +263,11 @@
                   </ButtonBar>
                </children>
             </Pane>
+            <Button layoutX="111.0" layoutY="9.0" mnemonicParsing="false"  prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="-49.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">

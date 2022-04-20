@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, GiftRequest> List = new HashMap<String, GiftRequest>();
+  public static HashMap<String, GiftRequest> List = new HashMap<String, GiftRequest>();
   public ArrayList<GiftRequest> list = new ArrayList<GiftRequest>();
 
   public GiftRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {

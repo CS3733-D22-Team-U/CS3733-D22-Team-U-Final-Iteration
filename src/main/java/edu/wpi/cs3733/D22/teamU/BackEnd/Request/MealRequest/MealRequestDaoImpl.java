@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public Statement statement;
-  public HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
+  public static HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
   public String csvFile;
 
   public MealRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {

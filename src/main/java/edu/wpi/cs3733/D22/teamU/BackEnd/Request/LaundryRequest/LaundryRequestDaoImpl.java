@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, LaundryRequest> List = new HashMap<String, LaundryRequest>();
+  public static HashMap<String, LaundryRequest> List = new HashMap<String, LaundryRequest>();
   public ArrayList<LaundryRequest> list = new ArrayList<LaundryRequest>();
 
   public LaundryRequestDaoImpl(Statement statement, String csvFile)
