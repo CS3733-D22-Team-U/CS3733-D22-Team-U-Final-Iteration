@@ -1,22 +1,19 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.RequestUI;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +53,7 @@ public class AllRequestsController implements Initializable {
     ObservableList<RequestUI> MealRequests = FXCollections.observableArrayList();
     ObservableList<RequestUI> MedRequests = FXCollections.observableArrayList();
 
-    ObservableList<RequestUI> EquipRequests2 = FXCollections.observableArrayList();
+    ObservableList<RequestUI> allRequests = FXCollections.observableArrayList();
     ObservableList<RequestUI> GiftRequests2 = FXCollections.observableArrayList();
     ObservableList<RequestUI> LabRequests2 = FXCollections.observableArrayList();
     ObservableList<RequestUI> LaundryRequests2 = FXCollections.observableArrayList();
@@ -268,7 +265,7 @@ public class AllRequestsController implements Initializable {
 
         for (MedicineRequest request :
                 Udb.getInstance().medicineRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -284,7 +281,7 @@ public class AllRequestsController implements Initializable {
 
         for (EquipRequest request :
                 Udb.getInstance().equipRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -300,7 +297,7 @@ public class AllRequestsController implements Initializable {
 
         for (MealRequest request :
                 Udb.getInstance().mealRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -316,7 +313,7 @@ public class AllRequestsController implements Initializable {
 
         for (GiftRequest request :
                 Udb.getInstance().giftRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -332,7 +329,7 @@ public class AllRequestsController implements Initializable {
 
         for (LaundryRequest request :
                 Udb.getInstance().laundryRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -348,7 +345,7 @@ public class AllRequestsController implements Initializable {
 
         for (LabRequest request :
                 Udb.getInstance().labRequestImpl.hList().values()) {
-            EquipRequests2.add(
+            allRequests.add(
                     new RequestUI(
                             request.getID(),
                             request.getName(),
@@ -364,9 +361,117 @@ public class AllRequestsController implements Initializable {
 
         }
 
+        for(SecurityRequest request :
+                Udb.getInstance().securityRequestImpl.List.values()){
+            allRequests.add(
+                    new RequestUI(
+                            request.getID(),
+                            request.getName(),
+                            request.getPatientName(),
+                            request.getDate(),
+                            request.getTime(),
+                            request.getStatus(),
+                            request.getDestination(),
+                            request.getEmployee().getUsername()));
 
 
-        return EquipRequests2;
+        }
+
+        for(CompServRequest request :
+                Udb.getInstance().compServRequestImpl.List.values()){
+            allRequests.add(
+                    new RequestUI(
+                            request.getID(),
+                            request.getName(),
+                            request.getPatientName(),
+                            request.getDate(),
+                            request.getTime(),
+                            request.getStatus(),
+                            request.getDestination(),
+                            request.getEmployee().getUsername()));
+
+
+        }
+
+        for(MaintenanceRequest request :
+            Udb.getInstance().maintenanceRequestImpl.List.values()){
+            allRequests.add(
+                    new RequestUI(
+                            request.getID(),
+                            request.getName(),
+                            request.getPatientName(),
+                            request.getDate(),
+                            request.getTime(),
+                            request.getStatus(),
+                            request.getDestination(),
+                            request.getEmployee().getUsername()));
+
+
+
+        }
+
+        for(ReligiousRequest request :
+                Udb.getInstance().religiousRequestImpl.List.values()){
+                allRequests.add(
+                        new RequestUI(
+                                request.getID(),
+                                request.getName(),
+                                request.getPatientName(),
+                                request.getDate(),
+                                request.getTime(),
+                                request.getStatus(),
+                                request.getDestination(),
+                                request.getEmployee().getUsername()));
+        }
+
+        for(SecurityRequest request :
+            Udb.getInstance().securityRequestImpl.List.values()){
+            allRequests.add(
+                    new RequestUI(
+                            request.getID(),
+                            request.getName(),
+                            request.getPatientName(),
+                            request.getDate(),
+                            request.getTime(),
+                            request.getStatus(),
+                            request.getDestination(),
+                            request.getEmployee().getUsername()));
+
+        }
+
+        for(TranslatorRequest request :
+                Udb.getInstance().translatorRequestImpl.List.values()){
+            allRequests.add(
+                    new RequestUI(
+                            request.getID(),
+                            request.getName(),
+                            request.getPatientName(),
+                            request.getDate(),
+                            request.getTime(),
+                            request.getStatus(),
+                            request.getDestination(),
+                            request.getEmployee().getUsername()));
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return allRequests;
     }
 
     public void toAllServices(ActionEvent actionEvent) throws IOException {
