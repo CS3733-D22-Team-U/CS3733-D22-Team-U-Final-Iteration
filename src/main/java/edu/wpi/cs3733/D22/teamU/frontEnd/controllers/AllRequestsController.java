@@ -36,216 +36,36 @@ import lombok.SneakyThrows;
 
 public class AllRequestsController implements Initializable {
   @FXML TableColumn<RequestUI, String> allID;
-  @FXML TableColumn<RequestUI, String> allName;
+  @FXML TableColumn<RequestUI, String> allType;
+  @FXML TableColumn<RequestUI, String> allEmployee;
   @FXML TableColumn<RequestUI, String> allPatient;
+  @FXML TableColumn<RequestUI, String> allDestination;
+  @FXML TableColumn<RequestUI, String> allStatus;
   @FXML TableColumn<RequestUI, Integer> allDate;
   @FXML TableColumn<RequestUI, String> allTime;
-  @FXML TableColumn<RequestUI, String> allStatus;
-  @FXML TableColumn<RequestUI, String> allDestination;
-  @FXML TableColumn<RequestUI, String> allEmployee;
+
+
   @FXML TableColumn<RequestUI, String> everyStatus;
 
-  ObservableList<RequestUI> EquipRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> GiftRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> LabRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> LaundryRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> MealRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> MedRequests = FXCollections.observableArrayList();
-
   ObservableList<RequestUI> allRequests = FXCollections.observableArrayList();
-  ObservableList<RequestUI> GiftRequests2 = FXCollections.observableArrayList();
-  ObservableList<RequestUI> LabRequests2 = FXCollections.observableArrayList();
-  ObservableList<RequestUI> LaundryRequests2 = FXCollections.observableArrayList();
-  ObservableList<RequestUI> MealRequests2 = FXCollections.observableArrayList();
-  ObservableList<RequestUI> MedRequests2 = FXCollections.observableArrayList();
-
-  ArrayList<String> medicineTable = new ArrayList<String>();
-  ArrayList<String> equipTable = new ArrayList<String>();
-  ArrayList<String> giftTable = new ArrayList<String>();
-  ArrayList<String> labTable = new ArrayList<String>();
-  ArrayList<String> laundryTable = new ArrayList<String>();
-  ArrayList<String> mealTable = new ArrayList<String>();
-  ArrayList<String> requests = new ArrayList<String>();
 
   @FXML TableView<RequestUI> activeRequestTable;
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
     setUpActiveRequests();
-    System.out.println("we are here");
+    //testing... System.out.println("we are here");
   }
-  //      for (MedicineRequest medicineRequest :
-  // Udb.getInstance().medicineRequestImpl.hList().values()) {
-  //
-  //            MedRequests.add(
-  //                    new RequestUI(
-  //                           medicineRequest.getID(),
-  //                            medicineRequest.getName(),
-  //                            medicineRequest.getPatientName(),
-  //                            medicineRequest.getDate(),
-  //                            medicineRequest.getTime(),
-  //                            medicineRequest.getStatus(),
-  //                            medicineRequest.getDestination(),
-  //                            medicineRequest.getEmployee().getEmployeeID(),
-  //                            medicineRequest.getLocation().getNodeID())
-  //                    );
-  //
-  //
-  //
-  //            medicineTable.add(medicineRequest.getID());
-  //            medicineTable.add(medicineRequest.getName());
-  //            medicineTable.add(medicineRequest.getPatientName());
-  //            medicineTable.add(medicineRequest.getDate());
-  //            medicineTable.add(medicineRequest.getTime());
-  //            medicineTable.add(medicineRequest.getStatus());
-  //            medicineTable.add(medicineRequest.getDestination());
-  //            medicineTable.add(medicineRequest.employee.getEmployeeID());
-  //            medicineTable.add(medicineRequest.getStatus());
-  //        }
-  //
-  //        for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
-  //
-  //            EquipRequests.add(
-  //                    new RequestUI(
-  //                            equipRequest.getID(),
-  //                            equipRequest.getName(),
-  //                            equipRequest.getPatientName(),
-  //                            equipRequest.getDate(),
-  //                            equipRequest.getTime(),
-  //                            equipRequest.getStatus(),
-  //                            equipRequest.getDestination(),
-  //                            equipRequest.getEmployee().getEmployeeID(),
-  //                            equipRequest.getLocation().getNodeID())
-  //            );
-  //
-  //
-  //             equipTable.add(equipRequest.getID());
-  //             equipTable.add(equipRequest.getName());
-  //             equipTable.add(equipRequest.getPatientName());
-  //             equipTable.add(equipRequest.getDate());
-  //             equipTable.add(equipRequest.getTime());
-  //             equipTable.add(equipRequest.getStatus());
-  //             equipTable.add(equipRequest.getDestination());
-  //             equipTable.add(equipRequest.employee.getEmployeeID());
-  //             equipTable.add(equipRequest.getStatus());
-  //        }
-  //
-  //        for (GiftRequest giftRequest : Udb.getInstance().giftRequestImpl.hList().values()) {
-  //
-  //            GiftRequests.add(
-  //                    new RequestUI(
-  //                            giftRequest.getID(),
-  //                            giftRequest.getName(),
-  //                            giftRequest.getPatientName(),
-  //                            giftRequest.getDate(),
-  //                            giftRequest.getTime(),
-  //                            giftRequest.getStatus(),
-  //                            giftRequest.getDestination(),
-  //                            giftRequest.getEmployee().getEmployeeID(),
-  //                            giftRequest.getLocation().getNodeID())
-  //            );
-  //
-  //              giftTable.add(giftRequest.getID());
-  //              giftTable.add(giftRequest.getName());
-  //              giftTable.add(giftRequest.getPatientName());
-  //              giftTable.add(giftRequest.getDate());
-  //              giftTable.add(giftRequest.getTime());
-  //              giftTable.add(giftRequest.getStatus());
-  //              giftTable.add(giftRequest.getDestination());
-  //              giftTable.add(giftRequest.employee.getEmployeeID());
-  //              giftTable.add(giftRequest.getStatus());
-  //        }
-  //
-  //        for (LabRequest labRequest : Udb.getInstance().labRequestImpl.hList().values()) {
-  //
-  //            LabRequests.add(
-  //                    new RequestUI(
-  //                            labRequest.getID(),
-  //                            labRequest.getName(),
-  //                            labRequest.getPatientName(),
-  //                            labRequest.getDate(),
-  //                            labRequest.getTime(),
-  //                            labRequest.getStatus(),
-  //                            labRequest.getDestination(),
-  //                            labRequest.getEmployee().getEmployeeID(),
-  //                            labRequest.getLocation().getNodeID())
-  //            );
-  //
-  //               labTable.add(labRequest.getID());
-  //               labTable.add(labRequest.getName());
-  //               labTable.add(labRequest.getPatientName());
-  //               labTable.add(labRequest.getDate());
-  //               labTable.add(labRequest.getTime());
-  //               labTable.add(labRequest.getStatus());
-  //               labTable.add(labRequest.getDestination());
-  //               labTable.add(labRequest.getDestination());
-  //               labTable.add(labRequest.getStatus());
-  //        }
-  //
-  //        for (LaundryRequest laundryRequest :
-  // Udb.getInstance().laundryRequestImpl.hList().values()) {
-  //            LaundryRequests.add(
-  //                    new RequestUI(
-  //                            laundryRequest.getID(),
-  //                            laundryRequest.getName(),
-  //                            laundryRequest.getPatientName(),
-  //                            laundryRequest.getDate(),
-  //                            laundryRequest.getTime(),
-  //                            laundryRequest.getStatus(),
-  //                            laundryRequest.getDestination(),
-  //                            laundryRequest.getEmployee().getEmployeeID(),
-  //                            laundryRequest.getLocation().getNodeID())
-  //            );
-  //
-  //          laundryTable.add( laundryRequest.getID());
-  //          laundryTable.add(laundryRequest.getName());
-  //          laundryTable.add(laundryRequest.getPatientName());
-  //          laundryTable.add(laundryRequest.getDate());
-  //          laundryTable.add(laundryRequest.getTime());
-  //          laundryTable.add(laundryRequest.getStatus());
-  //          laundryTable.add(laundryRequest.getDestination());
-  //          laundryTable.add(laundryRequest.getEmployee().getEmployeeID());
-  //          laundryTable.add(laundryRequest.getStatus());
-  //        }
-  //
-  //        for (MealRequest mealRequest : Udb.getInstance().mealRequestImpl.hList().values()){
-  //
-  //            MealRequests.add(
-  //                    new RequestUI(
-  //                            mealRequest.getID(),
-  //                            mealRequest.getName(),
-  //                            mealRequest.getPatientName(),
-  //                            mealRequest.getDate(),
-  //                            mealRequest.getTime(),
-  //                            mealRequest.getStatus(),
-  //                            mealRequest.getDestination(),
-  //                            mealRequest.getEmployee().getEmployeeID(),
-  //                            mealRequest.getLocation().getNodeID())
-  //            );
-  //
-  //            mealTable.add(mealRequest.getID());
-  //            mealTable.add(mealRequest.getName());
-  //            mealTable.add(mealRequest.getPatientName());
-  //            mealTable.add(mealRequest.getDate());
-  //            mealTable.add(mealRequest.getTime());
-  //            mealTable.add(mealRequest.getStatus());
-  //            mealTable.add(mealRequest.getDestination());
-  //            mealTable.add(mealRequest.getEmployee().getEmployeeID());
-  //            mealTable.add(mealRequest.getStatus());
-  //        }
-  //
-  //    }
 
   private void setUpActiveRequests() throws SQLException, IOException {
     allID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-    allName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    allType.setCellValueFactory(new PropertyValueFactory<>("reqType"));
+    allEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
     allPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    allDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    allStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     allDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     allTime.setCellValueFactory(new PropertyValueFactory<>("time"));
-    allStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-    allDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    allEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
-    // everyStatus.setCellValueFactory(new PropertyValueFactory<>("location"));
     activeRequestTable.setItems(getActiveRequestList());
   }
 
@@ -255,156 +75,156 @@ public class AllRequestsController implements Initializable {
       allRequests.add(
           new RequestUI(
               request.getID(),
-              request.getName(),
+              "Medicine Delivery Request",
+              request.getEmployee(),
               request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
               request.getDestination(),
-              request.getEmployee().getUsername()));
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (EquipRequest request : Udb.getInstance().equipRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Equipment Delivery Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (MealRequest request : Udb.getInstance().mealRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Meal Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (GiftRequest request : Udb.getInstance().giftRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Gift Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (LaundryRequest request : Udb.getInstance().laundryRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Laundry Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (LabRequest request : Udb.getInstance().labRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Lab Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (SecurityRequest request : Udb.getInstance().securityRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Security Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (CompServRequest request : Udb.getInstance().compServRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Computer Service Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (MaintenanceRequest request : Udb.getInstance().maintenanceRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Maintenance Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Religious Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (SecurityRequest request : Udb.getInstance().securityRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Security Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-              request.getID(),
-              request.getName(),
-              request.getPatientName(),
-              request.getDate(),
-              request.getTime(),
-              request.getStatus(),
-              request.getDestination(),
-              request.getEmployee().getUsername()));
+                  request.getID(),
+                  "Translator Request",
+                  request.getEmployee(),
+                  request.getPatientName(),
+                  request.getDestination(),
+                  request.getStatus(),
+                  request.getDate(),
+                  request.getTime()));
     }
 
     return allRequests;
