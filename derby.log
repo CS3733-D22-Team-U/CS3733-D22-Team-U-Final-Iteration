@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Thu Apr 21 16:22:27 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-4dca-5352-000009221160 
-on database directory C:\Users\makst\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
-Loaded from file:/C:/Users/makst/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
-java.vendor=Amazon.com Inc.
-java.runtime.version=11.0.14.1+10-LTS
-user.dir=C:\Users\makst\IdeaProjects\CS3733-D22-Team-U-Prototype-3
+Thu Apr 21 18:00:50 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-4e24-6919-00000ec90a50 
+on database directory C:\Users\kodyd\IdeaProjects\CS3733-D22-Team-U-Prototype-3\UDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
+Loaded from file:/C:/Users/kodyd/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Microsoft
+java.runtime.version=11.0.14.1+1-LTS
+user.dir=C:\Users\kodyd\IdeaProjects\CS3733-D22-Team-U-Prototype-3
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0
