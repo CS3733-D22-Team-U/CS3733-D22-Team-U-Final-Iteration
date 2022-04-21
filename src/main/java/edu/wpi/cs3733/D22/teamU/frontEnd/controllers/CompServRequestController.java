@@ -46,7 +46,7 @@ public class CompServRequestController extends ServiceController {
   @FXML Button clearButton;
   @FXML Button submitButton;
 
-  @FXML Text requestText;
+  // @FXML Text requestText;
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allRequestPane;
@@ -151,17 +151,25 @@ public class CompServRequestController extends ServiceController {
   @Override
   public void addRequest() {
     if (locations.getValue() != null && locations.getValue() != null) {
-      StringBuilder startRequestString = new StringBuilder("Your request for ");
-      String endRequest = "has been placed successfully";
-
+      output.setText("Your computer service request has been made!");
+      output.setVisible(true);
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(1500); // milliseconds
+                  Platform.runLater(
+                      () -> {
+                        output.setVisible(false);
+                      });
+                } catch (InterruptedException ie) {
+                }
+              })
+          .start();
       Timestamp timestamp = new Timestamp(System.currentTimeMillis());
       String room = locations.getValue();
       String message = messageBox.getText().trim();
       String device = inputDevice.getText().trim();
       String employee = employees.getValue();
-
-      String result = startRequestString + device + " in room " + room + " " + endRequest;
-      output.setText(result);
 
       double rand = Math.random() * 10000;
 
@@ -196,15 +204,15 @@ public class CompServRequestController extends ServiceController {
   public void updateRequest() {}
 
   public void clearRequest() {
-    requestText.setText("Cleared Requests!");
-    requestText.setVisible(true);
+    output.setText("Cleared Requests!");
+    output.setVisible(true);
     new Thread(
             () -> {
               try {
                 Thread.sleep(1500); // milliseconds
                 Platform.runLater(
                     () -> {
-                      requestText.setVisible(false);
+                      output.setVisible(false);
                     });
               } catch (InterruptedException ie) {
               }
