@@ -28,6 +28,8 @@ public class GiftRequest extends Request {
     this.destination = destination;
     this.date = date;
     this.time = time;
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 
   public String getGifts() {

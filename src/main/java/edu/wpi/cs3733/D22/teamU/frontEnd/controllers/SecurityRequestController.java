@@ -30,8 +30,8 @@ import lombok.SneakyThrows;
 
 public class SecurityRequestController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> staffDropDown;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> staffDropDown;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
@@ -67,24 +67,16 @@ public class SecurityRequestController extends ServiceController {
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   public void fillDestinations() throws SQLException, IOException {
-    nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
-    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
   }
 
   public void fillStaff() throws SQLException, IOException {
-    staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-    }
 
     staffDropDown.setTooltip(new Tooltip());
-    staffDropDown.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(staffDropDown, 675, 400);
+    staffDropDown.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    new ComboBoxAutoComplete<Employee>(staffDropDown, 675, 400);
   }
 
   @SneakyThrows
@@ -210,7 +202,7 @@ public class SecurityRequestController extends ServiceController {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     double rand = Math.random() * 10000;
 
-    String employ = staffDropDown.getValue();
+    String employ = staffDropDown.getValue().getUsername();
 
     String lethal = "No";
 
@@ -224,7 +216,7 @@ public class SecurityRequestController extends ServiceController {
             "admin",
             "Pending",
             checkEmployee(employ),
-            locations.getValue(),
+            locations.getValue().getNodeID(),
             textInput.getText().trim(),
             lethal,
             sdf3.format(timestamp).substring(0, 10),

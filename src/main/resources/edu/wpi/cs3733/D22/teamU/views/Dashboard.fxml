@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
 
 
    <children>
@@ -79,6 +84,11 @@
                         </Button>
                      </children>
                   </Pane>
+                  <Button fx:id="allRequestsButton" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests" textFill="#2b3ba1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane layoutX="308.0" layoutY="132.0" prefHeight="63.0" prefWidth="485.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
@@ -166,22 +176,25 @@
                               <Font size="18.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Marko Vila" />
+                              <Tooltip text="Marko 'Polo' Vila" />
                            </tooltip>
                         </Button>
-                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map">
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map" textFill="#2a20ea">
                            <tooltip>
-                              <Tooltip text="Harsh Patel" />
+                              <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
                            </tooltip>
+                           <font>
+                              <Font name="System Bold" size="13.600000381469727" />
+                           </font>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
                            <tooltip>
-                              <Tooltip text="Nick Biliouris" />
+                              <Tooltip text="Demi-Human Queen Nick Biliouris" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
                            <tooltip>
-                              <Tooltip text="Kody Robinson" />
+                              <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
                            </tooltip>
                         </Button>
                      </buttons>
@@ -196,22 +209,22 @@
                      <buttons>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Deepti 'Loathsome Dung Eater' Gosukonda" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Maintenance">
                            <tooltip>
-                              <Tooltip text="Michael Akstin" />
+                              <Tooltip text="Michael 'I Can't Walk' Akstin" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
                            <tooltip>
-                              <Tooltip text="Joselin Barbosa" />
+                              <Tooltip text="Joselin 'Deathbed Companion' Barbosa" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Deepti 'Loatsome Dungeater' Gosukonda" />
                            </tooltip>
                         </Button>
                      </buttons>
@@ -226,23 +239,22 @@
                      <buttons>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toReligious" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Religious Service">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSeurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
                            <tooltip>
-                              <Tooltip text="Michael Akstin" />
+                              <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Computer Service">
                            <tooltip>
-                              <Tooltip text="Joselin Barbosa" />
+                              <Tooltip text="Iain McEwen" />
                            </tooltip>
                         </Button>
-                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate"
-                                style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />
                            </tooltip>
                         </Button>
                      </buttons>
@@ -263,11 +275,6 @@
                   </ButtonBar>
                </children>
             </Pane>
-            <Button layoutX="111.0" layoutY="9.0" mnemonicParsing="false"  prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
       <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="-49.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">

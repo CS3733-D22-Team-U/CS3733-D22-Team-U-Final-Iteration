@@ -52,7 +52,7 @@
                         </Text>
                     </children>
                 </Pane>
-                <StackPane fx:id="requestsStack" layoutX="110.0" layoutY="94.0" prefHeight="635.0" prefWidth="693.0">
+                <StackPane fx:id="requestsStack" layoutX="110.0" layoutY="121.0" prefHeight="589.0" prefWidth="724.0">
                     <children>
                         <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false" StackPane.alignment="TOP_LEFT">
                             <children>
@@ -332,19 +332,19 @@
                                 </TableView>
                             </children>
                         </Pane>
-                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="672.0" minWidth="415.0" prefHeight="521.0" prefWidth="672.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                        <Pane fx:id="activeRequestPane" maxHeight="678.0" maxWidth="751.0" minWidth="415.0" prefHeight="614.0" prefWidth="724.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                             <children>
-                                <TableView fx:id="activeRequestTable" layoutX="33.0" layoutY="69.0" prefHeight="476.0" prefWidth="607.0">
+                                <TableView fx:id="activeRequestTable" layoutX="22.0" layoutY="60.0" prefHeight="469.0" prefWidth="680.0">
                                     <columns>
                                         <TableColumn fx:id="allID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="allName" prefWidth="75.0" text="Name" />
+                                        <TableColumn fx:id="allType" prefWidth="75.0" text="Request Type" />
+                                        <TableColumn fx:id="allEmployeeF" prefWidth="75.0" text="First Name" />
+                              <TableColumn fx:id="allEmployeeL" prefWidth="75.0" text="Last Name" />
                                         <TableColumn fx:id="allPatient" prefWidth="75.0" text="Patient" />
+                                        <TableColumn fx:id="allDestination" prefWidth="75.0" text="Destination" />
+                                        <TableColumn fx:id="allStatus" prefWidth="75.0" text="Status" />
                                         <TableColumn fx:id="allDate" prefWidth="75.0" text="Date" />
                                         <TableColumn fx:id="allTime" prefWidth="75.0" text="Time" />
-                                        <TableColumn fx:id="allStatus" prefWidth="75.0" text="Status" />
-                                        <TableColumn fx:id="allDestination" prefWidth="75.0" text="Destination" />
-                                        <TableColumn fx:id="allEmployee" prefWidth="75.0" text="Employee" />
-                              <TableColumn fx:id="everyStatus" prefWidth="75.0" text="Status" visible="false" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -358,6 +358,11 @@
                         <Label layoutX="14.0" layoutY="3.0" text="Filter by Employee:" textFill="WHITE" visible="false">
                            <font>
                               <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="196.0" layoutY="15.0" text="List of Outstanding Requests:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
                             </children>

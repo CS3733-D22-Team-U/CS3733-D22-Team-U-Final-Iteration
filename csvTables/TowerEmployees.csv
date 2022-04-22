@@ -1,11 +1,14 @@
-Employee ID,Occupation,Reports,On Duty,Username,Password
-00001,Administrator,0,true,Dr.Kody,admin
-00002,Nurse,0,false,Dr.Marko,N/A
-00003,Nurse,0,false,Dr.Tim,N/A
-00004,Surgeon,3,true,Dr.Will,N/A
-00005,Family Physician,0,false,Dr.Joselin,hello
-00006,Surgeon,0,false,Dr.Deepti,N/A
-00007,Surgeon,0,false,Dr.Nick,joe
-00008,Nurse,0,false,Dr.Mike,N/A
-00009,Nurse,2,false,Dr.Iain,N/A
-00010,Janitor,0,false,Dr.Belisha,Will
+Employee ID,First Name,Last Name,Occupation,Reports,On Duty,Username,Password
+00000,Wong,Wilson,Nurse,0,false,admin,admin
+00001,Harsh,Patel,Administrator,0,true,Dr.Harsh,Patel
+00002,Timothy,Klein,Nurse,0,false,Dr.Timothy,Klein
+00003,Kody,Robinson,Chef,0,false,Dr.Kody,Robinson
+00004,Deepti,Gosukonda,Surgeon,3,true,Dr.Deepti,Gosukonda
+00005,Mike,Akstin,Family Physician,0,false,Dr.Mike,Akstin
+00006,William,Doyle,Surgeon,0,false,Dr.Will,Doyle
+00007,Marko,Villa,Surgeon,0,false,Dr.Marko,Villa
+00008,Joselin,Barbosa,Nurse,0,false,Dr.Joselin,Barbosa
+00009,Nick,Biliouris,Nurse,2,false,Dr.Nick,Biliouris
+00010,Belisha,Genin,Janitor,0,false,Dr.Belisha,Genin
+00011,Iain,McEwen,Nurse,0,false,Dr.Iain,McEwen
+00012,Staff,Staff,Nurse,0,false,staff,staff

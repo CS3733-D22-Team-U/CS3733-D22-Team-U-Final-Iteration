@@ -37,6 +37,8 @@ public class SecurityRequest extends Request {
     this.date = date;
     this.time = time;
     employeeName = employee.getEmployeeID();
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 
   public void setDescriptionOfThreat(String descriptionOfThreat) {

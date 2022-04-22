@@ -40,6 +40,7 @@ public class DashboardController extends ServiceController {
 
   @FXML ButtonBar topRow;
   @FXML ButtonBar bottomRow;
+  @FXML ButtonBar bottomRow1;
 
   @FXML Pane backgroundPane;
 
@@ -47,6 +48,7 @@ public class DashboardController extends ServiceController {
   @FXML Text date;
 
   @FXML Text userName;
+  @FXML Button allRequestsButton;
 
   @FXML Pane turtlePane;
   @FXML Circle apple;
@@ -168,6 +170,14 @@ public class DashboardController extends ServiceController {
       button.setOnMouseExited(e -> button.setStyle(initStyle));
     }
     for (Node node : bottomRow.getButtons()) {
+      Button button = (Button) node;
+      String initStyle = button.getStyle();
+      button.setStyle(initStyle);
+      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
+      button.setOnMouseExited(e -> button.setStyle(initStyle));
+    }
+
+    for (Node node : bottomRow1.getButtons()) {
       Button button = (Button) node;
       String initStyle = button.getStyle();
       button.setStyle(initStyle);
