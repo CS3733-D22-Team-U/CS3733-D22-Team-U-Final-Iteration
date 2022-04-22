@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.util.ArrayList;
 
-
 public class Request {
 
   public Request(
@@ -38,6 +37,7 @@ public class Request {
   public String destination;
   public Employee employee;
   public Location location;
+
   public Request() {}
 
   public void setDestination(String destination) {
@@ -128,4 +128,6 @@ public class Request {
       System.out.println("Security request on line 65");
     }
   }
+
+  public void settingTheRequests() {}
 }

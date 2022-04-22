@@ -57,7 +57,6 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TextArea inputPatient;
   @FXML Text time;
 
-  ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
   ArrayList<Location> nodeIDs;
@@ -116,7 +115,7 @@ public class TranslatorRequestController extends ServiceController {
     employeeName.setCellValueFactory(
         new PropertyValueFactory<TranslatorRequest, String>("employee"));
     destination.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("destination"));
+        new PropertyValueFactory<TranslatorRequest, String>("location"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
     newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
@@ -131,15 +130,17 @@ public class TranslatorRequestController extends ServiceController {
       String destination,
       String date,
       String time) {
-    translatorUIRequests.add(
-        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time));
+    TranslatorRequest r =
+        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time);
+    r.gettingTheLocation();
+    translatorUIRequests.add(r);
     return translatorUIRequests;
   }
 
   private ObservableList<TranslatorRequest> getTranslatorList() throws SQLException, IOException {
-    translatorUI.clear();
+    translatorUIRequests.clear();
     for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
-      translatorUI.add(
+      TranslatorRequest r =
           new TranslatorRequest(
               request.getID(),
               request.getPatientName(),
@@ -148,9 +149,11 @@ public class TranslatorRequestController extends ServiceController {
               request.getEmployee(),
               request.getDestination(),
               request.getDate(),
-              request.getTime()));
+              request.getTime());
+      r.gettingTheLocation();
+      translatorUIRequests.add(r);
     }
-    return translatorUI;
+    return translatorUIRequests;
   }
 
   @Override
@@ -174,6 +177,8 @@ public class TranslatorRequestController extends ServiceController {
             locations.getValue().getNodeID(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
+
+    request.gettingTheLocation();
 
     table.setItems(
         newRequest(

@@ -54,6 +54,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) {
+        Employee temporary = checkEmployee(row[5]);
         EquipRequest r =
             new EquipRequest(
                 row[0],
@@ -61,7 +62,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                 Integer.parseInt(row[2]),
                 row[3],
                 row[4],
-                checkEmployee(row[5]),
+                temporary,
                 row[6],
                 row[7],
                 row[8],
@@ -80,11 +81,22 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
           r.setLocation(l);
         } catch (Exception exception) {
         }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+        }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, EquipRequest>();
     String s;
     File file = new File(csvFile);
@@ -93,25 +105,32 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) {
-        EquipRequest e =
+        Employee temporary = checkEmployee(row[5]);
+        EquipRequest r =
             new EquipRequest(
                 row[0],
                 row[1],
                 Integer.parseInt(row[2]),
                 row[3],
                 row[4],
-                checkEmployee(row[5]),
+                temporary,
                 row[6],
                 row[7],
                 row[8],
                 Integer.parseInt(row[9]));
-        List.put(row[0], e);
+        List.put(row[0], r);
         try {
           Location temp = new Location();
-          temp.setNodeID(e.destination);
+          temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
-          l.addRequest(e);
-          e.setLocation(l);
+          l.addRequest(r);
+          r.setLocation(l);
+        } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(temporary.getEmployeeID());
+          e.addRequest(r);
+          r.setEmployee(e);
         } catch (Exception exception) {
         }
       }

@@ -45,18 +45,10 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+        Employee temporary = checkEmployee(row[6]);
         GiftRequest r =
             new GiftRequest(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                row[4],
-                row[5],
-                checkEmployee(row[6]),
-                row[7],
-                row[8],
-                row[9]);
+                row[0], row[1], row[2], row[3], row[4], row[5], temporary, row[7], row[8], row[9]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -70,11 +62,23 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
           r.setLocation(l);
         } catch (Exception exception) {
         }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "GIftRequest");
+        }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException, SQLException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException, SQLException {
     List = new HashMap<String, GiftRequest>();
     String s;
     File file = new File(csvFile);
@@ -84,18 +88,10 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+        Employee temporary = checkEmployee(row[6]);
         GiftRequest r =
             new GiftRequest(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                row[4],
-                row[5],
-                checkEmployee(row[6]),
-                row[7],
-                row[8],
-                row[9]);
+                row[0], row[1], row[2], row[3], row[4], row[5], temporary, row[7], row[8], row[9]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -103,6 +99,12 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
           Location l = locations.get(locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
+        } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(temporary.getEmployeeID());
+          e.addRequest(r);
+          r.setEmployee(e);
         } catch (Exception exception) {
         }
       }
