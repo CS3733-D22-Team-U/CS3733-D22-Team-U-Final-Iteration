@@ -52,6 +52,14 @@ public class Request {
     this.time = time;
   }
 
+  public String getReqType() {
+    return reqType;
+  }
+
+  public void setReqType(String reqType) {
+    this.reqType = reqType;
+  }
+
   public Request() {
 
   }

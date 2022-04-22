@@ -223,7 +223,7 @@ public class filterEmployeeController extends ServiceController implements Initi
             employeeRequestsList.add(
                     new Request(
                             request.getID(),
-                            "Medicine Delivery",
+                            "Medicine Request",
                             request.getEmployee(),
                             request.getPatientName(),
                             request.getDestination(),
