@@ -263,10 +263,9 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request :
-        MedicineRequestDaoImpl.List.values()) {
+    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
+          new MedicineRequest(
               request.getID(),
               request.getName(),
               request.getAmount(),
@@ -280,14 +279,7 @@ public class MedicineDeliveryController extends ServiceController {
     return medUIRequests;
   }
 
-  public Employee checkEmployee(String employee) throws NullPointerException {
-    if (EmployeeDaoImpl.List.get(employee) != null) {
-      return EmployeeDaoImpl.List.get(employee);
-    } else {
-      Employee empty = new Employee("N/A");
-      return empty;
-    }
-  }
+
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -326,6 +318,14 @@ public class MedicineDeliveryController extends ServiceController {
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(false);
     allEquipButton.setUnderline(true);
+  }
+  public Employee checkEmployee(String employee) throws NullPointerException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
