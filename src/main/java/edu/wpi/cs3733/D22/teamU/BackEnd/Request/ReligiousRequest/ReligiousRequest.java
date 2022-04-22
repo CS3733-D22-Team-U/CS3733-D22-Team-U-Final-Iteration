@@ -31,8 +31,6 @@ public class ReligiousRequest extends Request {
     this.destination = destination;
     this.employee = employee;
     this.notes = notes;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public String getPatient() {
