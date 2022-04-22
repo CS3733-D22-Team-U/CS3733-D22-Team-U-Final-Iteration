@@ -35,6 +35,8 @@ public class LaundryRequest extends Request {
     employeeName = employee.getEmployeeID();
     this.time = time;
     this.notes = notes;
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 
   public String getPickUpDate() {

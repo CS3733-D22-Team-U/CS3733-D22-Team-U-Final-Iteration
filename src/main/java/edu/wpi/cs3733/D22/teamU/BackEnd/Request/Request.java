@@ -35,6 +35,8 @@ public class Request {
   public String destination;
   public Employee employee;
   public Location location;
+  public String firstName;
+  public String lastName;
 
   public Request() {}
 

@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 public class Employee {
 
   String employeeID;
+  String firstName;
+  String lastName;
   String occupation;
   int reports;
   boolean onDuty;
@@ -20,12 +22,16 @@ public class Employee {
 
   public Employee(
       String employeeID,
+      String firstName,
+      String lastName,
       String occupation,
       int reports,
       boolean onDuty,
       String username,
       String password) {
     this.employeeID = employeeID;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.occupation = occupation;
     this.reports = reports;
     this.onDuty = onDuty;
@@ -88,5 +94,21 @@ public class Employee {
   @Override
   public String toString() {
     return username;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 }

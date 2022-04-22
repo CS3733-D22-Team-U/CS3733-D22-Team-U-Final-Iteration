@@ -24,6 +24,8 @@ public class CompServRequest extends Request {
     this.date = date;
     this.time = time;
     this.device = device;
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 
   public String getMessage() {

@@ -167,7 +167,7 @@ public class ReligiousRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    //String room = locations.getValue().toString();
+    // String room = locations.getValue().toString();
 
     // String employ = employees.getValue().toString();
 

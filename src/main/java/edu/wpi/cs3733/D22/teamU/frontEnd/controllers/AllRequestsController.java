@@ -36,7 +36,8 @@ import lombok.SneakyThrows;
 public class AllRequestsController implements Initializable {
   @FXML TableColumn<RequestUI, String> allID;
   @FXML TableColumn<RequestUI, String> allType;
-  @FXML TableColumn<RequestUI, String> allEmployee;
+  @FXML TableColumn<RequestUI, String> allEmployeeF;
+  @FXML TableColumn<RequestUI, String> allEmployeeL;
   @FXML TableColumn<RequestUI, String> allPatient;
   @FXML TableColumn<RequestUI, String> allDestination;
   @FXML TableColumn<RequestUI, String> allStatus;
@@ -58,7 +59,8 @@ public class AllRequestsController implements Initializable {
   private void setUpActiveRequests() throws SQLException, IOException {
     allID.setCellValueFactory(new PropertyValueFactory<>("ID"));
     allType.setCellValueFactory(new PropertyValueFactory<>("reqType"));
-    allEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
+    allEmployeeF.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+    allEmployeeL.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     allPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     allDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
     allStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -74,7 +76,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Medicine Delivery Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -87,7 +90,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Equipment Delivery Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -100,7 +104,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Meal Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -113,7 +118,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Gift Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -126,7 +132,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Laundry Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -139,7 +146,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Lab Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -152,7 +160,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Security Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -165,7 +174,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Computer Service Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -178,7 +188,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Maintenance Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -191,7 +202,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Religious Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -204,7 +216,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Security Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -217,7 +230,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Translator Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
