@@ -30,8 +30,8 @@ import lombok.SneakyThrows;
 
 public class TranslatorRequestController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
 
   @FXML TableColumn<TranslatorRequest, String> nameID;
   @FXML TableColumn<TranslatorRequest, String> patientName;
@@ -60,8 +60,8 @@ public class TranslatorRequestController extends ServiceController {
   ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -75,20 +75,20 @@ public class TranslatorRequestController extends ServiceController {
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     // Displays Emloyee in Table View
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(e);
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     handleTime();
   }
@@ -159,8 +159,8 @@ public class TranslatorRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    String room = locations.getValue();
-    String employ = employees.getValue();
+    // String room = locations.getValue().getNodeID();
+    // String employ = employees.getValue().getEmployeeID();
 
     double rand = Math.random() * 10000;
 
@@ -170,8 +170,8 @@ public class TranslatorRequestController extends ServiceController {
             "Patient",
             inputLanguage.getText().trim(),
             "Pending",
-            checkEmployee(employ),
-            room,
+            employees.getValue(),
+            locations.getValue().getNodeID(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
 

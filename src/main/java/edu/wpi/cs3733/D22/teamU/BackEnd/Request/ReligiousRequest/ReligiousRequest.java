@@ -7,7 +7,6 @@ public class ReligiousRequest extends Request {
 
   private String religion;
   private String notes;
-  private String employeeName;
 
   public ReligiousRequest(
       String ID,
@@ -31,8 +30,6 @@ public class ReligiousRequest extends Request {
     this.destination = destination;
     this.employee = employee;
     this.notes = notes;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public String getPatient() {
@@ -59,11 +56,4 @@ public class ReligiousRequest extends Request {
     this.notes = notes;
   }
 
-  public String getEmployeeName() {
-    return employeeName;
-  }
-
-  public void setEmployeeName(String employeeName) {
-    this.employeeName = employeeName;
-  }
 }

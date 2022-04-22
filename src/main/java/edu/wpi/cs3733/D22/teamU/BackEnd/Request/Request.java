@@ -4,7 +4,9 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import java.util.ArrayList;
 
+
 public class Request {
+
   public Request(
       String ID,
       String name,
@@ -35,9 +37,6 @@ public class Request {
   public String destination;
   public Employee employee;
   public Location location;
-  public String firstName;
-  public String lastName;
-
   public Request() {}
 
   public void setDestination(String destination) {

@@ -93,7 +93,7 @@ public class Employee {
 
   @Override
   public String toString() {
-    return username;
+    return firstName + ", " + lastName;
   }
 
   public String getFirstName() {
