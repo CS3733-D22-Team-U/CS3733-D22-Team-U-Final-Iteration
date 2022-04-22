@@ -224,4 +224,7 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void updateRequest() {}
+
+    public void reportEmployee(ActionEvent actionEvent) {
+    }
 }

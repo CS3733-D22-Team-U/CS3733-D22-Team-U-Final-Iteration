@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -275,6 +276,7 @@
                   </ButtonBar>
                </children>
             </Pane>
+            <JFXButton fx:id="reportBTN" layoutX="851.0" layoutY="257.0" onAction="#reportEmployee" style="-fx-background-color: #054f99;" text="Report Employee" textFill="WHITE" />
          </children>
       </Pane>
       <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="-49.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">
