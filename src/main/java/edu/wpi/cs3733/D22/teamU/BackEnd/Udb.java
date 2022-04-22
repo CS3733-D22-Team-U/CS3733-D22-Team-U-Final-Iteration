@@ -68,7 +68,6 @@ public final class Udb {
 
   private Udb(String username, String password, String[] CSVfiles)
       throws IOException, SQLException {
-    admin = true;
     this.username = username;
     this.password = password;
     this.CSVfiles = CSVfiles;

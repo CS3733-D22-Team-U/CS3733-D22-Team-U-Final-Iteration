@@ -51,9 +51,13 @@ public class loginPageController extends ServiceController {
                         boolean foundUser = false;
 
                         for (Employee a : Udb.getInstance().EmployeeImpl.hList().values()) {
-                          if (a.getUsername().equals(username.getText().trim())) {
-                            if (a.getPassword().equals(password.getText().trim())) {
-                              foundUser = true;
+                          if (a.getUsername().equals(username.getText().trim())
+                              && a.getPassword().equals(password.getText().trim())) {
+                            foundUser = true;
+                            if (a.getOccupation().equals("Administrator")) {
+                              Udb.admin = true;
+                            } else {
+                              Udb.admin = false;
                             }
                           }
                         }
