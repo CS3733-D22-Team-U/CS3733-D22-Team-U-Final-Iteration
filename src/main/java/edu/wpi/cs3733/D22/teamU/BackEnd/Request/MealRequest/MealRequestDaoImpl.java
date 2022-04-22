@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.*;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public Statement statement;
   public static HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
+  public ArrayList<MealRequest> list = new ArrayList<MealRequest>();
   public String csvFile;
 
   public MealRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {

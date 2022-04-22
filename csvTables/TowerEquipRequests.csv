@@ -13,6 +13,7 @@ ID,Name,Amount,Type,Status,Employee,Destination,Date,Time,Priority
 2964,Syringe,75,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:13:37,1
 1994,First Aid Kit,15,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:40:37,1
 1432,Syringe,23,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:40:37,1
+479,Body Bag,5,Equipment,sent,00002,CLABS002L1,2022-04-21,21:43:56,1
 513,Masks,78,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:13:37,1
 1012,First Aid Kit,1254,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:33:26,1
 5678,Catheter,876,Equipment,In Progress,N/A,uSTOR0L1,4/4/2022,23:13:37,1

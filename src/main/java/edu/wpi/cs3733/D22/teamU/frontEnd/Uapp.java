@@ -43,7 +43,7 @@ public class Uapp extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader();
     // InputStream is = AppController.class.getClassLoader().getResourceAsStream(pathFromResources);
 
-    Parent root = fxmlLoader.load(Uapp.class.getClassLoader().getResource(pathFromResources));
+    Parent root = FXMLLoader.load(Uapp.class.getClassLoader().getResource(pathFromResources));
     return new Scene(root);
   }
 }

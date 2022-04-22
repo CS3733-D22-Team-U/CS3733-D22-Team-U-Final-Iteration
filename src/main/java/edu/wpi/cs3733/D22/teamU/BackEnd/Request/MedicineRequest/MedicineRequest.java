@@ -7,15 +7,16 @@ public class MedicineRequest extends Request {
   int amount;
 
   public MedicineRequest(
-      String ID,
-      String name,
-      int amount,
-      String patientName,
-      String status,
-      Employee employee,
-      String destination,
-      String date,
-      String time) {
+          String ID,
+          String name,
+          int amount,
+          String patientName,
+          String status,
+          Employee employee,
+          String destination,
+          String date,
+          String time) {
+    super();
     this.ID = ID;
     this.name = name;
     this.amount = amount;
