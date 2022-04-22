@@ -89,8 +89,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
       if (row.length == columns) {
         Employee temporary = checkEmployee(row[3]);
         CompServRequest r =
-            new CompServRequest(
-                row[0], row[1], row[2], temporary, row[4], row[5], row[6], row[7]);
+            new CompServRequest(row[0], row[1], row[2], temporary, row[4], row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -101,7 +100,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
         } catch (Exception exception) {
         }
         try {
-          Employee e = employees.get(row[4]);
+          Employee e = employees.get(row[3]);
           e.addRequest(r);
           r.setEmployee(e);
         } catch (Exception exception) {
