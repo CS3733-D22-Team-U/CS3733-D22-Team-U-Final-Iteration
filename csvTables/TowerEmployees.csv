@@ -1,7 +1,7 @@
 Employee ID,First Name,Last Name,Occupation,Reports,On Duty,Username,Password
 00000,Wong,Wilson,Administrator,0,false,admin,admin
 00001,Harsh,Patel,Administrator,0,true,Dr.Harsh,Patel
-00002,Timothy,Klein,Nurse,0,false,Dr.Timothy,Klein
+00002,Timothy,Klein,Nurse,0,false,staff,staff
 00003,Kody,Robinson,Chef,0,false,Dr.Kody,Robinson
 00004,Deepti,Gosukonda,Surgeon,3,true,Dr.Deepti,Gosukonda
 00005,Mike,Akstin,Family Physician,0,false,Dr.Mike,Akstin
