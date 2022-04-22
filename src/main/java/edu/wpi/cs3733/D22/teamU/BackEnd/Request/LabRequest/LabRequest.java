@@ -4,24 +4,36 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 
 public class LabRequest extends Request {
+  int amount;
 
-  String patient;
+  public int getAmount() {
+    return amount;
+  }
+
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
 
   public LabRequest(
-      String ID, String patient, Employee employee, String labType, String date, String time) {
+      String ID,
+      String labType,
+      int amount,
+      String patientName,
+      String status,
+      Employee employee,
+      String destination,
+      String date,
+      String time) {
     this.ID = ID;
-    this.patient = patient;
+    this.name = labType;
+    this.amount = amount;
+    this.patientName = patientName;
+    this.status = status;
     this.employee = employee;
-    this.name = name;
+    this.destination = destination;
     this.date = date;
     this.time = time;
-  }
-
-  public String getPatient() {
-    return patient;
-  }
-
-  public void setPatient(String patient) {
-    this.patient = patient;
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 }

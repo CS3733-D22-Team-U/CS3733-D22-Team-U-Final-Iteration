@@ -76,30 +76,7 @@ public class Location {
    */
   @Override
   public String toString() {
-    return "edu.wpi.team_u.BackEnd.Location.Location{"
-        + "nodeID='"
-        + nodeID
-        + '\''
-        + ", xcoord="
-        + xcoord
-        + ", ycoord="
-        + ycoord
-        + ", floor='"
-        + floor
-        + '\''
-        + ", building='"
-        + building
-        + '\''
-        + ", nodeType='"
-        + nodeType
-        + '\''
-        + ", longName='"
-        + longName
-        + '\''
-        + ", shortName='"
-        + shortName
-        + '\''
-        + '}';
+    return longName;
   }
 
   public String getNodeID() {

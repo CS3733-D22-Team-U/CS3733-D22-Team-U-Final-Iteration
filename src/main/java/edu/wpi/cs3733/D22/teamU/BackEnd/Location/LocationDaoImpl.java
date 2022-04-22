@@ -117,7 +117,7 @@ public class LocationDaoImpl implements DataDao<Location> {
                 + "')");
       }
     } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
+      System.out.println("JavaToSQL error in LocationImp");
     }
   }
 

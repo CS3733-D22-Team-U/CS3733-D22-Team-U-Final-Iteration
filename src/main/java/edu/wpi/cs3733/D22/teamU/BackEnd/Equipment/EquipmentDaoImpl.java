@@ -13,7 +13,6 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public Statement statement;
   public ArrayList<Equipment> EquipmentList = new ArrayList<Equipment>();
   public String csvFile;
-  // private Udb udb = DBController.udb;
 
   /**
    * Constructor for EquipmentDaoImpl
@@ -22,7 +21,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
    */
   public EquipmentDaoImpl(Statement statement, String csvFile) {
     this.statement = statement;
-    this.csvFile = csvFile;
+    this.csvFile = csvFile; // private Udb udb = DBController.udb;
   }
 
   @Override
@@ -50,7 +49,12 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       String[] row = s.split(",");
       if (row.length == 5) {
         Equipment e =
-            new Equipment(row[0], Integer.parseInt(row[1]), Integer.parseInt(row[2]), row[4]);
+            new Equipment(
+                row[0],
+                Integer.parseInt(row[1]),
+                Integer.parseInt(row[2]),
+                Integer.parseInt(row[3]),
+                row[4]);
         try {
           Location temp = new Location();
           temp.setNodeID(e.locationID);
@@ -76,7 +80,12 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       String[] row = s.split(",");
       if (row.length == size) {
         Equipment e =
-            new Equipment(row[0], Integer.parseInt(row[1]), Integer.parseInt(row[2]), row[4]);
+            new Equipment(
+                row[0],
+                Integer.parseInt(row[1]),
+                Integer.parseInt(row[2]),
+                Integer.parseInt(row[3]),
+                row[4]);
         Location l =
             Udb.getInstance()
                 .locationImpl
@@ -146,17 +155,18 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       results = statement.executeQuery("SELECT * FROM EquipmentList");
 
       while (results.next()) {
-        String name = results.getString("Name");
-        int amount = results.getInt("Amount");
-        int inUse = results.getInt("InUse");
+        String name = results.getString("name");
+        int amount = results.getInt("amount");
+        int inUse = results.getInt("inUse");
+        int available = results.getInt("available");
         String locationID = results.getString("locationID");
 
-        Equipment SQLRow = new Equipment(name, amount, inUse, locationID);
+        Equipment SQLRow = new Equipment(name, amount, inUse, available, locationID);
 
         EquipmentList.add(SQLRow);
       }
     } catch (SQLException e) {
-      System.out.println(e);
+      System.out.println("JavaToSQL error in EquipmentImp");
     }
   }
 
@@ -176,6 +186,8 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
     fw.append("In Use");
     fw.append(",");
     fw.append("Available");
+    fw.append(",");
+    fw.append("Location");
     fw.append("\n");
 
     for (int i = 0;
@@ -188,6 +200,8 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       fw.append(Integer.toString(EquipmentList.get(i).getInUse()));
       fw.append(",");
       fw.append(Integer.toString(EquipmentList.get(i).getAvailable()));
+      fw.append(",");
+      fw.append(EquipmentList.get(i).getLocationID());
       fw.append("\n");
     }
     fw.close();
@@ -198,7 +212,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
     // csv to java
     CSVToJava();
     // display equipment and attributes
-    System.out.println("Name |\t Amount |\t In Use |\t Available");
+    System.out.println("Name |\t Amount |\t In Use |\t Available |\\t  Location ");
     for (Equipment equipment : this.EquipmentList) {
       System.out.println(
           equipment.getName()
@@ -208,6 +222,8 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
               + equipment.getInUse()
               + " | \t"
               + equipment.getAvailable()
+              + " | \t"
+              + equipment.getLocationID()
               + " | \t");
     }
   }

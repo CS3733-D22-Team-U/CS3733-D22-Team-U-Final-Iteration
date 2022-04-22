@@ -14,10 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
+
 
    <children>
-      <Pane fx:id="backgroundPane" onMousePressed="#closeNavTabs" prefHeight="750.0" prefWidth="1100.0">
+      <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
          <children>
             <ImageView fitHeight="750.0" fitWidth="1177.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,6 +65,30 @@
                      </image>
                   </ImageView>
                   <Text fx:id="headerText" layoutX="294.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham" wrappingWidth="511.65234375" />
+                  <Pane layoutX="844.0" layoutY="14.0" prefHeight="106.0" prefWidth="228.0" style="-fx-background-radius: 35;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
+                     <children>
+                        <Text fx:id="time" layoutX="34.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="hh:mm:ss" y="5.0">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="date" fill="#044e9a" layoutX="35.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy" y="5.0">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="clockButton" layoutX="22.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="51.0" style="-fx-background-color: transparent;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Button fx:id="allRequestsButton" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests" textFill="#2b3ba1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane layoutX="308.0" layoutY="132.0" prefHeight="63.0" prefWidth="485.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
@@ -138,128 +163,124 @@
                   </Pane>
                </children>
             </AnchorPane>
-         </children>
-      </Pane>
-      <AnchorPane fx:id="clockPane" layoutX="1010.0" layoutY="309.0" prefHeight="310.0" prefWidth="936.0" style="-fx-background-color: #efefef; -fx-background-radius: 35 0 0 35; -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);">
-         <children>
-            <Pane prefHeight="310.0" prefWidth="90.0" style="-fx-background-radius: 35 0 0 35;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
+            <Pane layoutX="140.0" layoutY="300.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
                <children>
-                  <Text fx:id="time" layoutX="-16.0" layoutY="175.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="hh:mm:ss" y="5.0">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="date" fill="#044e9a" layoutX="-44.0" layoutY="174.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy" y="5.0">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Text>
-                  <Button fx:id="clockButton" layoutX="22.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="51.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fx:id="clockPaneArrow" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                           <image>
-                              <Image url="@../icons/dashboardIcons/noun-arrow-download-4373766.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ButtonBar fx:id="topRow" layoutX="1.0" layoutY="11.0" prefHeight="40.0" prefWidth="200.0">
+                     <buttons>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Equipment Delivery" wrapText="true">
+                           <stylesheets>
+                              <URL value="@../css/buttons.css" />
+                              <URL value="@../css/headersAndLabels.css" />
+                           </stylesheets>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Marko 'Polo' Vila" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map" textFill="#2a20ea">
+                           <tooltip>
+                              <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
+                           </tooltip>
+                           <font>
+                              <Font name="System Bold" size="13.600000381469727" />
+                           </font>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
+                           <tooltip>
+                              <Tooltip text="Demi-Human Queen Nick Biliouris" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
+                           <tooltip>
+                              <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
+                           </tooltip>
+                        </Button>
+                     </buttons>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
+                  </ButtonBar>
+                  <ButtonBar fx:id="bottomRow" layoutX="3.0" layoutY="82.0" prefHeight="40.0" prefWidth="200.0">
+                     <buttons>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
+                           <tooltip>
+                              <Tooltip text="Deepti 'Loathsome Dung Eater' Gosukonda" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Maintenance">
+                           <tooltip>
+                              <Tooltip text="Michael 'I Can't Walk' Akstin" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
+                           <tooltip>
+                              <Tooltip text="Joselin 'Deathbed Companion' Barbosa" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
+                           <tooltip>
+                              <Tooltip text="Deepti 'Loatsome Dungeater' Gosukonda" />
+                           </tooltip>
+                        </Button>
+                     </buttons>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ButtonBar>
+                  <ButtonBar fx:id="bottomRow1" layoutX="3.0" layoutY="160.0" prefHeight="40.0" prefWidth="200.0">
+                     <buttons>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toReligious" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Religious Service">
+                           <tooltip>
+                              <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSeurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
+                           <tooltip>
+                              <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Computer Service">
+                           <tooltip>
+                              <Tooltip text="Iain McEwen" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
+                           <tooltip>
+                              <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />
+                           </tooltip>
+                        </Button>
+                     </buttons>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ButtonBar>
+                  <ButtonBar fx:id="bottomRow11" layoutX="311.0" layoutY="228.0" prefHeight="40.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ButtonBar>
                </children>
             </Pane>
          </children>
-      </AnchorPane>
+      </Pane>
       <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="-49.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/dashboardIcons/noun-about-2510068.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="animatePane" layoutX="-846.0" layoutY="309.0" prefHeight="310.0" prefWidth="936.0" style="-fx-background-color: #efefef; -fx-background-radius: 0 35 35 0; -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);">
-         <children>
-            <Pane layoutX="846.0" prefHeight="310.0" prefWidth="90.0" style="-fx-background-radius: 0 35 35 0;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
-               <children>
-                  <Text layoutX="-72.0" layoutY="172.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Service Pages" y="5.0">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Text>
-                  <Button fx:id="navButton" layoutX="22.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="51.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fx:id="navPaneArrow" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                           <image>
-                              <Image url="@../icons/dashboardIcons/noun-arrow-download-4373766.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </Pane>
-            <Pane prefHeight="68.0" prefWidth="238.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
-               <children>
-                  <Text layoutX="29.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Where To?" />
-               </children>
-            </Pane>
-            <ButtonBar fx:id="topRow" layoutX="14.0" layoutY="96.0" prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Equipment Delivery" wrapText="true">
-                     <stylesheets>
-                        <URL value="@../css/buttons.css" />
-                        <URL value="@../css/headersAndLabels.css" />
-                     </stylesheets>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <tooltip>
-                        <Tooltip text="Marko Vila" />
-                     </tooltip>
-                  </Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map">
-                     <tooltip>
-                        <Tooltip text="Harsh Patel" />
-                     </tooltip></Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
-                     <tooltip>
-                        <Tooltip text="Nick Biliouris" />
-                     </tooltip></Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
-                     <tooltip>
-                        <Tooltip text="Kody Robinson" />
-                     </tooltip></Button>
-               </buttons>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ButtonBar>
-            <ButtonBar fx:id="bottomRow" layoutX="160.0" layoutY="187.0" prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
-                     <tooltip>
-                        <Tooltip text="Deepti Gosukonda" />
-                     </tooltip></Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
-                     <tooltip>
-                        <Tooltip text="Joselin Barbosa" />
-                     </tooltip></Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
-                     <tooltip>
-                        <Tooltip text="Deepti Gosukonda" />
-                     </tooltip></Button>
-               </buttons>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ButtonBar>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

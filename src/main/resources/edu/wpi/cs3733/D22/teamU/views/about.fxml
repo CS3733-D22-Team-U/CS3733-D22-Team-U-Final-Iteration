@@ -1,233 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.effect.DropShadow?>
+<?import java.lang.String?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
     <children>
-        <Pane fx:id="pane" prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
-            <effect>
-                <DropShadow />
-            </effect>
-         <children>
-                <Text fill="WHITE" layoutX="410.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" wrappingWidth="266.0">
-                    <font>
-                        <Font name="System Bold" size="60.0" />
-                    </font>
-                </Text>
-                <ImageView fitHeight="80.0" fitWidth="99.0" layoutX="277.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/INFO-removebg-preview.png" />
-                    </image>
-                </ImageView>
-         </children>
-        </Pane>
-        <Pane fx:id="assistPane" layoutX="11.0" layoutY="219.0" prefHeight="534.0" prefWidth="93.0" />
-        <ImageView fitHeight="88.0" fitWidth="81.0" layoutX="998.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: .3;">
-            <image>
-                <Image url="@../icons/unicornLogo.png" />
-            </image>
-        </ImageView>
-      <ScrollPane layoutX="62.0" layoutY="127.0" prefHeight="511.0" prefWidth="1017.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="874.0" prefWidth="1089.0">
-               <children>
-                    <Pane fx:id="pane" prefHeight="744.0" prefWidth="1100.0">
-                        <children>
-                            <Group layoutX="148.0" layoutY="418.0" />
-                            <Group layoutX="744.0" layoutY="176.203125" />
-                        <VBox layoutX="80.0" layoutY="135.0" prefHeight="580.0" prefWidth="834.0" spacing="5.0">
-                           <children>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Who we are">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="We are a group of 11 students taking Software engineering at WPI, and are hoping to create a better application for the hospital." wrappingWidth="909.7500305175781">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Our School">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WPI Computer Science Department">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Class">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering - CS3733">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Professor">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wilson Wong">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team Coach">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Luke Deratzou">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel(Lead Software Engineer), Marko Vila(Assistant Lead Software Engineer), Timothy Klein(Assistant Lead Software Engineer), Joselin Barbosa(Scrum Master, Part-time Software Engineer), Nick Biliouris(Project Manager), Kody Robinson(Product Owner), Belisha Genin(Documentation Analyst), Michael Akstin(Full-Time Software Engineer), William Doyle(Full-Time Software Engineer), Deepti Gosukonda(Full-Time Software Engineer), Iain McEwen(Full-Time Software Engineer)      " wrappingWidth="864.241455078125">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                              <Text stroke="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Special Thanks">
-                                 <font>
-                                    <Font name="Georgia" size="24.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="We would like to give a special thanks to the Brigham and Women’s Hospital and their representative, Andrew Shinn, for their time and input. The entire staff was very cooperative in helping us with the progress of the application!" wrappingWidth="840.6068725585938">
-                                 <font>
-                                    <Font name="Cambay Devanagari Regular" size="20.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="957.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="214.0" fitWidth="421.0" layoutX="647.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+        <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
+            <children>
+                <Pane layoutY="508.0" prefHeight="242.0" prefWidth="219.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
+                <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
+                <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
+                    <children>
+                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
+                    </children>
+                </Pane>
+                <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
+                <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
+                    <children>
+                        <Text fx:id="time" layoutX="46.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
+                    </children>
+                </Pane>
+                <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
+                    <children>
+                        <Text layoutX="209.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="About Us">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </Pane>
+                <StackPane fx:id="requestsStack" layoutX="-106.0" layoutY="121.0" prefWidth="1400.0">
+                    <children>
+                        <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                            <children>
+                                <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
+                                    <columns>
+                                        <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="activeReqStatus" prefWidth="75.0" text="Status" />
+                                        <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />
+                                        <TableColumn fx:id="activeReqDescription" prefWidth="75.0" text="Description" />
+                                        <TableColumn fx:id="activeStaff" prefWidth="75.0" text="Staff" />
+                                        <TableColumn fx:id="activeDate" prefWidth="75.0" text="Date" />
+                                        <TableColumn fx:id="activeTime" prefWidth="75.0" text="Time" />
+                                    </columns>
+                                    <styleClass>
+                                        <String fx:value="column-header" />
+                                        <String fx:value="column-header-background" />
+                                    </styleClass>
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
+                                </TableView>
+                            </children>
+                        </Pane>
+                        <Pane fx:id="newRequestPane" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                            <children>
+                                <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="255.0" prefHeight="519.0" prefWidth="255.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                                    <children>
+                                        <Text fx:id="requestText1" layoutX="19.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who We Are:" textAlignment="CENTER" wrappingWidth="219.0">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                        <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are a group of 11 students working together with agile methodology creating an application for Mass Brigham Young" textAlignment="CENTER" wrappingWidth="254.79998779296875">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fx:id="requestText11" layoutX="18.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" textAlignment="CENTER" wrappingWidth="219.0">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fx:id="requestText111" layoutX="18.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Coach:" textAlignment="CENTER" wrappingWidth="219.0">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fx:id="requestText112" layoutX="18.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professor:" textAlignment="CENTER" wrappingWidth="219.0">
+                                            <font>
+                                                <Font name="System Bold" size="28.0" />
+                                            </font>
+                                        </Text>
+                                        <Text layoutX="9.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering - CS3733" textAlignment="CENTER" wrappingWidth="238.0">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Text>
+                                        <Text layoutX="76.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wilson Wong">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Text>
+                                        <Text layoutX="64.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luke Deratzou">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Pane>
+                                <HBox layoutX="-11.0" layoutY="490.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0" />
+                                <Text fx:id="requestText2" fill="WHITE" layoutX="269.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team:" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                    <font>
+                                        <Font name="System Bold" size="28.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="clearRequest" fill="WHITE" layoutX="404.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="missingDescription" fill="WHITE" layoutX="367.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="278.0" layoutY="169.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="We are comprised of undergraduate students ranging from freshman to juniors. Majors Include Computer Science, Robotics engineering, and IMGD" wrappingWidth="662.4000244140625">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="requestText21" fill="WHITE" layoutX="252.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                    <font>
+                                        <Font name="System Bold" size="28.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="378.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPI - Computer Science Department" textAlignment="CENTER" wrappingWidth="380.25384521484375">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Will Doyle (JR) -  Full Time Software Engineer (Back end)">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iain McEwen (JR) - Full Time Software Engineer (Back end)">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Michael Akstin (SO) - Full Time Software Engineer (Back end)">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deepti Gosukonda (SO) - Full Time Software Engineer (Front End)">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kody Robinson (SO) - Product Owner ">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belisha Genin (SO) - Documentation Analyist">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel (FR) - Lead Software Engineer">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joselin Barbosa (SO) - Scrum Master">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="276.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Biliouris (JR) - Product Manager">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Text>
+                        <ImageView fitHeight="216.0" fitWidth="226.0" layoutX="706.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/plsß.png" />
                            </image>
                         </ImageView>
-                        </children>
-                    </Pane>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" layoutX="24.0" layoutY="141.0" prefHeight="534.0" prefWidth="24.0">
-            <children>
-                <VBox fx:id="vBoxPane" prefHeight="462.0" prefWidth="232.0" visible="false">
-                    <children>
-                        <Button fx:id="home" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toHome" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Home" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="home2" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Equipment Request" textFill="WHITE">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Lab Request" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Medicine Delivery" textFill="WHITE">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Map" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="home1" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Meal Delivery" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Gift &amp; Floral" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #89D7BF;" text="Laundry" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
+                            </children>
+                        </Pane>
                     </children>
-                </VBox>
+                </StackPane>
+
             </children>
-        </JFXHamburger>
+        </Pane>
+        <TextFlow prefHeight="200.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

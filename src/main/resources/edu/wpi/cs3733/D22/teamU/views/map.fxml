@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
     <children>
         <Pane prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
             <children>
@@ -41,13 +30,13 @@
         </Pane>
         <Pane fx:id="backgroundPane" layoutX="105.0" layoutY="1.0" prefHeight="750.0" prefWidth="996.0">
             <children>
-                <TabPane layoutX="10.0" layoutY="140.0" prefHeight="552.0" prefWidth="841.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                <TabPane layoutX="-25.0" layoutY="140.0" prefHeight="552.0" prefWidth="847.0" side="LEFT" stylesheets="@../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Map View">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <TabPane layoutY="-2.0" prefHeight="552.0" prefWidth="849.0" tabClosingPolicy="UNAVAILABLE">
+                                        <TabPane layoutY="-2.0" prefHeight="552.0" prefWidth="849.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-36.0">
                                             <tabs>
                                                 <Tab text="Lower Level 1">
                                                     <content>
@@ -57,9 +46,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane1" layoutY="-3.0" onZoom="#test" prefHeight="524.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="lowerLevel1Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="lowerLevel1Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image1" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;">
+                                                                                        <ImageView fx:id="image1" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true" style="-fx-fill: #044e9aff;">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
@@ -82,9 +71,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane2" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="lowerLevel2Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="lowerLevel2Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image2" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image2" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
@@ -107,9 +96,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane3" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor1Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor1Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image3" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image3" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/01_thefirstfloor.png" />
                                                                                             </image>
@@ -132,9 +121,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane4" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor2Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor2Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image4" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image4" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/02_thesecondfloor.png" />
                                                                                             </image>
@@ -157,9 +146,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane5" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor3Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor3Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image5" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image5" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/03_thethirdfloor.png" />
                                                                                             </image>
@@ -182,9 +171,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane6" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor4Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor4Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image6" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image6" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/04_thefourthfloor.png" />
                                                                                             </image>
@@ -207,9 +196,9 @@
                                                                     <children>
                                                                         <ScrollPane fx:id="imagesPane7" layoutY="-1.0" onZoom="#test" prefHeight="522.0" prefWidth="808.0">
                                                                             <content>
-                                                                                <AnchorPane fx:id="floor5Pane" minHeight="0.0" minWidth="0.0" prefHeight="1944.0" prefWidth="2832.0">
+                                                                                <AnchorPane fx:id="floor5Pane" minHeight="0.0" minWidth="0.0" prefHeight="870.0" prefWidth="870.0">
                                                                                     <children>
-                                                                                        <ImageView fx:id="image7" fitHeight="1944.0" fitWidth="3384.0" pickOnBounds="true" preserveRatio="true">
+                                                                                        <ImageView fx:id="image7" fitHeight="870.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/05_thefifthfloor.png" />
                                                                                             </image>
@@ -261,278 +250,454 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Pane layoutX="855.0" layoutY="250.0" prefHeight="329.0" prefWidth="135.0" style="-fx-background-color: #b0e5e3ff;">
+            </children>
+        </Pane>
+        <Text fill="#044e9a" layoutX="965.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Text>
+        <ScrollPane fitToWidth="true" layoutX="930.0" layoutY="165.0" prefHeight="528.0" prefWidth="150.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="840.0" prefWidth="134.0">
                     <children>
-                        <Text fill="#044e9a" layoutX="34.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Text>
-                        <Group layoutY="50.0">
+                        <Pane layoutY="-42.0" prefHeight="950.0" prefWidth="110.0" style="-fx-background-color: WHITE;">
                             <children>
-                                <Group layoutX="1.0">
+                                <Group layoutX="-2.0" layoutY="152.0">
                                     <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Room">
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/pati.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="45.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Room">
                                             <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="RED" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutY="18.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Storage">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="ORANGE" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="38.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Dirty Equipment">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="YELLOW" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="56.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Hallway">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="GREEN" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="74.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Elevator">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="BLUE" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="90.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Restroom">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="BLUEVIOLET" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="106.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Staircase">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="PURPLE" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="122.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #044e9aff;" text="Department">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="ROSYBROWN" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="139.0">
-                                    <children>
-                                        <Text fill="#044e9a" layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Labs">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="SILVER" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="155.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="WHEAT" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="171.0">
-                                    <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="187.0">
-                                    <children>
-                                        <Text fill="#044e9a" layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit/Entrance">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="DARKRED" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="204.0">
-                                    <children>
-                                        <Text fill="#044e9a" layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retail">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="MAGENTA" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="220.0283203125">
-                                    <children>
-                                        <Text fill="#044e9a" layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service">
-                                            <font>
-                                                <Font size="13.0" />
-                                            </font>
-                                        </Text>
-                                        <Circle fill="INDIANRED" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </Group>
-                                <Group layoutX="1.0" layoutY="245.0">
-                                    <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="12.0" layoutY="5.0283203125" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-                                        <Text layoutX="18.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Stored">
-                                            <font>
-                                                <Font size="13.0" />
+                                                <Font size="14.0" />
                                             </font>
                                         </Text>
                                     </children>
                                 </Group>
-                                <Group layoutY="240.0283203125">
+                                <Group layoutX="-2.0" layoutY="196.0">
                                     <children>
-                                        <Text layoutX="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request">
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/stor.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="45.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Equip Storage">
                                             <font>
-                                                <Font size="13.0" />
+                                                <Font size="14.0" />
                                             </font>
                                         </Text>
-                                        <Circle fill="WHITE" layoutX="8.0" layoutY="-3.9716796875" radius="6.0" stroke="#daea00" strokeType="INSIDE" />
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="242.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-114.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/dirt.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="53.0" layoutY="-93.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty Equip ">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                        <Text layoutX="54.0" layoutY="-75.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Loc">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="286.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/hall.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="56.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Hallway">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="330.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/elev.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="56.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Elevator">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="375.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/elev.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="56.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Restroom">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="420.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/stairs.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="56.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Staircase">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="465.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/dept.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="56.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="510.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/lab3.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="60.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Labs">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="555.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/info.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Information">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="600.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/conf.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="645.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/exit.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="690.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/retail.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Retail">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="730.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/serv.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Service">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="770.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/beds.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Beds">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="810.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/infuPump.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Pumps">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="850.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/recliner.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Recliners">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="890.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/DefaultEquip.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="55.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Equip">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </Group>
+                                <Group layoutX="-2.0" layoutY="937.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../mapIcons/multiServ.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Text layoutX="50.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Services">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Text>
                                     </children>
                                 </Group>
                             </children>
-                        </Group>
+                        </Pane>
                     </children>
-                </Pane>
-            </children>
-        </Pane>
-        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" layoutX="24.0" layoutY="136.0" prefHeight="558.0" prefWidth="24.0">
-            <children>
-                <VBox fx:id="vBoxPane" prefHeight="462.0" prefWidth="232.0" visible="false">
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <ScrollPane prefHeight="750.0" prefWidth="86.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">
                     <children>
-                        <Button fx:id="home" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toHome" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Home" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="home2" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Equipment Request" textFill="WHITE">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Lab Request" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Medicine Delivery" textFill="WHITE">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toMap" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #029ca6ff;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Map" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="home1" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Meal Delivery" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="56.0" prefWidth="190.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" styleClass="hamburgerButton" stylesheets="@../css/buttons.css" text="Laundry" textFill="WHITE">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Button>
+                        <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/homeIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/equipmentIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toMap" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/mapIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toLabRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/labIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/medicineIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/foodIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/giftIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toLaundry" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/laundry.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/maintenance.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/religious.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/translate.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toSeurity" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/security.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#toCompService" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/menuBar/computerService.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT" />
+                            </cursor>
+                        </VBox>
                     </children>
-                </VBox>
-            </children>
-        </JFXHamburger>
-      <Pane fx:id="assistPane" layoutX="14.0" layoutY="175.0" prefHeight="563.0" prefWidth="93.0" />
+                </AnchorPane>
+            </content>
+        </ScrollPane>
 
     </children>
 </AnchorPane>

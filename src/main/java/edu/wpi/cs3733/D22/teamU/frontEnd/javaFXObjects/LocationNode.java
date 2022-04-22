@@ -1,8 +1,18 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DraggableMaker;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,88 +21,174 @@ import javafx.scene.shape.Shape;
 
 public class LocationNode extends Group {
   private Location location;
-  // private Udb udb = DBController.udb;
   private AnchorPane pane;
   private double x, y;
-  private final double scale = 15;
+  private final double scale = 10;
+
+  public double tempx, tempy;
 
   public LocationNode(Location location, double x, double y, AnchorPane pane) throws IOException {
+
     super();
     this.location = location;
     this.pane = pane;
     this.x = x;
     this.y = y;
+    tempx = x;
+    tempy = y;
     Color color;
-    if (location.getRequests().size() > 0) {
-      color = Color.YELLOW;
-    } else color = Color.BLACK;
+
+    Circle c = new Circle();
+    setLocationIcon(c);
+    DraggableMaker draggableMaker = new DraggableMaker();
+    draggableMaker.makeDraggable(c);
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
-      r.setX(x - scale);
-      r.setWidth(2 * scale);
-      r.setHeight(2 * scale);
-      r.setY(y - scale);
-      setColor(r);
-      r.setStroke(color);
-      r.setStrokeWidth(5);
-      getChildren().add(r);
-    } else {
-      Circle c = new Circle();
-      c.setCenterY(y);
-      c.setCenterX(x);
-      c.setRadius(scale);
-      setColor(c);
-      c.setStroke(color);
-      c.setStrokeWidth(5);
-      getChildren().add(c);
+      //      r.setX(x - scale);
+      //      r.setWidth(2 * scale);
+      //      r.setHeight(2 * scale);
+      //      r.setY(y - scale);
+      setEquip(r);
+      //      r.setStroke(color);
+      //      r.setStrokeWidth(5);
+      // getChildren().add(r);
+    }
+
+    if (location.getRequests().size() > 0) {
+      Rectangle r = new Rectangle();
+      setRequest(r);
+      DraggableMaker draggableMaker2 = new DraggableMaker();
+      draggableMaker.makeDraggable(r);
     }
   }
 
-  private void setColor(Shape s) {
+  private void addMapIcon(String resource) {
+    ImageView aView = new ImageView();
+    URL a = Uapp.class.getClassLoader().getResource(resource);
+    aView.setImage(new Image(String.valueOf(a)));
+    aView.setFitHeight(scale * 5);
+    aView.setFitWidth(scale * 5);
+    aView.setX(x - (aView.getFitWidth() / 2));
+    aView.setY(y - (aView.getFitHeight() / 2));
+    aView.setScaleX(.8);
+    aView.setScaleY(.8);
+    getChildren().add(aView);
+  }
+
+  //  private void setRequest(Shape s) {
+  //    for (int i = 0; i < location.getRequests().size(); i++) {
+  //      Request aRequest = location.getRequests().get(i);
+  //      if (location.getRequests().size() > 1) {
+  //        ImageView multi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
+  //        addMapIcon(multi);
+  //      } else if (aRequest instanceof EquipRequest) {
+  //        ImageView medEquip = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
+  //        addMapIcon(medEquip);
+  //      } else if (aRequest instanceof LabRequest) {
+  //        ImageView labServ = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
+  //        addMapIcon(labServ);
+  //      } else if (aRequest instanceof MedicineRequest) {
+  //        ImageView medi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+  //        addMapIcon(medi);
+  //      }
+  //    }
+  //  }
+
+  private void setRequest(Shape s) {
+    int dupes = 0;
+    boolean equipCheck = true;
+    boolean labCheck = true;
+    boolean medicineCheck = true;
+    for (Request request : location.getRequests()) {
+      if (request instanceof EquipRequest && equipCheck) {
+        dupes++;
+        equipCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
+        continue;
+      }
+      if (request instanceof LabRequest && labCheck) {
+        dupes++;
+        labCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
+        continue;
+      }
+      if (request instanceof MedicineRequest && medicineCheck) {
+        dupes++;
+        medicineCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (dupes > 1) {
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
+        break;
+      }
+    }
+  }
+
+  private void setEquip(Shape s) {
+    for (int i = 0; i < location.getEquipment().size(); i++) {
+      String name = location.getEquipment().get(i).getName();
+      switch (name) {
+        case "Beds":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
+          break;
+        case "Infusion Pumps":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
+          break;
+        case "Recliners":
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
+          break;
+        default:
+          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/DefaultEquip.png");
+      }
+    }
+  }
+
+  private void setLocationIcon(Shape s) {
 
     switch (location.getNodeType()) {
       case "PATI":
-        s.setFill(Color.RED);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
         break;
       case "STOR":
-        s.setFill(Color.ORANGE);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
         break;
       case "DIRT":
-        s.setFill(Color.YELLOW);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
         break;
       case "HALL":
-        s.setFill(Color.GREEN);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
         break;
       case "ELEV":
-        s.setFill(Color.BLUE);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
         break;
       case "REST":
-        s.setFill(Color.BLUEVIOLET);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
         break;
       case "STAI":
-        s.setFill(Color.PURPLE);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
         break;
       case "DEPT":
-        s.setFill(Color.ROSYBROWN);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
         break;
       case "LABS":
-        s.setFill(Color.SILVER);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
         break;
       case "INFO":
-        s.setFill(Color.WHEAT);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
         break;
       case "CONF":
-        s.setFill(Color.BLACK);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
         break;
       case "EXIT":
-        s.setFill(Color.DARKRED);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
         break;
       case "RETL":
-        s.setFill(Color.MAGENTA);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
         break;
       case "SERV":
-        s.setFill(Color.INDIANRED);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
         break;
       default:
         s.setFill(Color.YELLOWGREEN);
@@ -113,5 +209,13 @@ public class LocationNode extends Group {
 
   public double getY() {
     return y;
+  }
+
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  public void setY(double y) {
+    this.y = y;
   }
 }

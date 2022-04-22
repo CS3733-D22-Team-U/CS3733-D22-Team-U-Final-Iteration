@@ -1,10 +1,8 @@
-ID,Name,PatientName,Status,EmployeeName,Location,Date,Time
-6719,Lisinopril,test,Kody,test,Ordered,2022-04-13,12:57:07
-test,test,N/A,N/A,N/A,N/A,N/A,N/A
-9359,Advil,uPATI05C1,test1,test,Ordered,2022-04-12,23:44:19
-testing,for real,N/A,N/A,N/A,N/A,N/A,N/A
-2043,Advil,test,Kody,test,Ordered,2022-04-13,12:57:07
-3000,Alprozalam,test,Kody,test,Ordered,2022-04-13,12:57:07
-4655,Atorvastatin,test,Kody,test,Ordered,2022-04-13,12:57:07
-8812,Amphetamine Salt,test,Kody,test,Ordered,2022-04-13,12:57:07
-131,Metformin,test,Kody,test,Ordered,2022-04-13,12:57:07
+ID,Name,Amount,Patient,Status,Employee,Destination,Date,Time
+6719,Lisinopril,3,test,Kody,00001,uSTOR00101,2022-04-13,12:57:07
+test,test,3,N/A,N/A,00002,uSTOR00101,N/A,N/A
+9359,Advil,2,uPATI05C1,test1,00003,uSTOR00101,2022-04-12,23:44:19
+testing,for real,1,N/A,N/A,00004,uSTOR00101,N/A,N/A
+3000,Alprozalam,1,test,Kody,00005,uSTOR00101,2022-04-13,12:57:07
+4655,Atorvastatin,1,test,Kody,00006,uSTOR00101,2022-04-13,12:57:07
+8812,Amphetamine Salt,1,test,Kody,00007,uSTOR00101,2022-04-13,12:57:07
