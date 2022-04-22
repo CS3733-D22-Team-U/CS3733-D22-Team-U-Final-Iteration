@@ -21,8 +21,6 @@ public class RequestUI {
     this.reqType = reqType;
   }
 
-
-
   public String getID() {
     return ID;
   }
@@ -95,7 +93,7 @@ public class RequestUI {
       String destination,
       String status,
       String date,
-      String time){
+      String time) {
     this.ID = ID;
     this.reqType = reqType;
     this.employee = employee;
@@ -105,5 +103,4 @@ public class RequestUI {
     this.date = date;
     this.time = time;
   }
-
 }
