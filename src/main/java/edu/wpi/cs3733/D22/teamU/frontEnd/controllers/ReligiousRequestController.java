@@ -159,7 +159,6 @@ public class ReligiousRequestController extends ServiceController {
               request.getEmployee(),
               request.getNotes());
       r.gettingTheLocation();
-
       religiousUIRequests.add(r);
     }
     return religiousUIRequests;
