@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, SecurityRequest> List = new HashMap<String, SecurityRequest>();
+  public static HashMap<String, SecurityRequest> List = new HashMap<String, SecurityRequest>();
   public ArrayList<SecurityRequest> list = new ArrayList<SecurityRequest>();
 
   public SecurityRequestDaoImpl(Statement statement, String csvFile) {

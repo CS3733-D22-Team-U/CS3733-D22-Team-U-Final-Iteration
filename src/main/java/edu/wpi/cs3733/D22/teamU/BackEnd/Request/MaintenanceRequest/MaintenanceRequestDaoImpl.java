@@ -17,7 +17,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
 
   public Statement statement;
   public String csvFile;
-  public HashMap<String, MaintenanceRequest> List = new HashMap<String, MaintenanceRequest>();
+  public static HashMap<String, MaintenanceRequest> List = new HashMap<String, MaintenanceRequest>();
   public ArrayList<MaintenanceRequest> list = new ArrayList<MaintenanceRequest>();
 
   public MaintenanceRequestDaoImpl(Statement statement, String csvFile)

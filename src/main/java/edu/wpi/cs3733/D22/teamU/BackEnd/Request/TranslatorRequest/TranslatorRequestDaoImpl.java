@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, TranslatorRequest> List = new HashMap<String, TranslatorRequest>();
+  public static HashMap<String, TranslatorRequest> List = new HashMap<String, TranslatorRequest>();
   public ArrayList<TranslatorRequest> list = new ArrayList<TranslatorRequest>();
 
   public TranslatorRequestDaoImpl(Statement statement, String CSVfile) {

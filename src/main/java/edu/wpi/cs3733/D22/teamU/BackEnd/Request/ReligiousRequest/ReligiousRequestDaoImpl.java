@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, ReligiousRequest> List = new HashMap<String, ReligiousRequest>();
+  public static HashMap<String, ReligiousRequest> List = new HashMap<String, ReligiousRequest>();
 
   public ReligiousRequestDaoImpl(Statement statement, String csvfile) {
     this.csvFile = csvfile;

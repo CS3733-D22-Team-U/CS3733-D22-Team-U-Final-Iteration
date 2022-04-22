@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
   public Statement statement;
   public String csvFile;
-  public HashMap<String, CompServRequest> List = new HashMap<String, CompServRequest>();
+  public static HashMap<String, CompServRequest> List = new HashMap<String, CompServRequest>();
 
   public CompServRequestDaoImpl(Statement statement, String csvFile)
       throws SQLException, IOException {

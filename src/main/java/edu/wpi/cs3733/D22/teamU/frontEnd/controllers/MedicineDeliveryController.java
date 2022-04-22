@@ -263,10 +263,9 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request :
-        MedicineRequestDaoImpl.List.values()) {
+    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
+          new MedicineRequest(
               request.getID(),
               request.getName(),
               request.getAmount(),

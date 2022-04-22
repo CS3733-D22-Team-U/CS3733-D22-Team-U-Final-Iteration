@@ -27,6 +27,7 @@ public class Request {
   }
 
   public String ID;
+  public String reqType;
   public String name; // or lab type
   public String patientName;
   public String date;
@@ -38,8 +39,9 @@ public class Request {
   public String firstName;
   public String lastName;
 
-  public Request(String ID, Employee employee, String patientName, String destination, String status, String date, String time) {
+  public Request(String ID, String reqType, Employee employee, String patientName, String destination, String status, String date, String time) {
     this.ID = ID;
+    this.reqType = reqType;
     this.employee = employee;
     this.patientName = patientName;
     this.destination = destination;
