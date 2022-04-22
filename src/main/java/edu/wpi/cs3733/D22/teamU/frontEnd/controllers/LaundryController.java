@@ -75,9 +75,8 @@ public class LaundryController extends ServiceController {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
 
-    nodeIDs = new ArrayList<>();
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.hList().values());
+    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     employees.setTooltip(new Tooltip());
