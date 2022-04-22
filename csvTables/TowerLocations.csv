@@ -1,6 +1,6 @@
 nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
 HHALL00603,483,383,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
-CLABS002L1,498,548,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
+CLABS002L1,254,444,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
 HBATH00103,533,288,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
 CHALL007L2,478,467,L2,Tower,HALL,Hallway 7 Floor L2,Hallway C007L2
 CHALL007L1,860,503,L1,Tower,HALL,Hallway 7 Floor L1,Hallway C007L1
