@@ -112,10 +112,9 @@ public class SecurityRequestController extends ServiceController {
     activename.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("name"));
     activeReqStatus.setCellValueFactory(
         new PropertyValueFactory<SecurityRequest, String>("status"));
-    activeStaff.setCellValueFactory(
-        new PropertyValueFactory<SecurityRequest, String>("employeeName"));
+    activeStaff.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("employee"));
     activeReqDestination.setCellValueFactory(
-        new PropertyValueFactory<SecurityRequest, String>("destination"));
+        new PropertyValueFactory<SecurityRequest, String>("location"));
     activeReqDescription.setCellValueFactory(
         new PropertyValueFactory<SecurityRequest, String>("descriptionOfThreat"));
     activelethal.setCellValueFactory(
@@ -136,8 +135,10 @@ public class SecurityRequestController extends ServiceController {
       String lethal,
       String date,
       String time) {
-    securityUIRequests.add(
-        new SecurityRequest(id, name, status, employee, destination, descript, lethal, date, time));
+    SecurityRequest r =
+        new SecurityRequest(id, name, status, employee, destination, descript, lethal, date, time);
+    r.gettingTheLocation();
+    securityUIRequests.add(r);
     return securityUIRequests;
   }
 
@@ -145,7 +146,7 @@ public class SecurityRequestController extends ServiceController {
       throws SQLException, IOException {
     securityUIRequests.clear();
     for (SecurityRequest securityRequest : Udb.getInstance().securityRequestImpl.List.values()) {
-      securityUIRequests.add(
+      SecurityRequest r =
           new SecurityRequest(
               securityRequest.getID(),
               securityRequest.getName(),
@@ -155,7 +156,9 @@ public class SecurityRequestController extends ServiceController {
               securityRequest.getDescriptionOfThreat(),
               securityRequest.getLeathalForcePermited(),
               securityRequest.getDate(),
-              securityRequest.getTime()));
+              securityRequest.getTime());
+      r.gettingTheLocation();
+      securityUIRequests.add(r);
     }
 
     return securityUIRequests;
@@ -164,7 +167,7 @@ public class SecurityRequestController extends ServiceController {
   private ObservableList<SecurityRequest> getActiveSecurityRequestList()
       throws SQLException, IOException {
     for (SecurityRequest securityRequest : Udb.getInstance().securityRequestImpl.List.values()) {
-      securityUIRequests.add(
+      SecurityRequest r =
           new SecurityRequest(
               securityRequest.getID(),
               securityRequest.getName(),
@@ -174,7 +177,9 @@ public class SecurityRequestController extends ServiceController {
               securityRequest.getDescriptionOfThreat(),
               securityRequest.getLeathalForcePermited(),
               securityRequest.getDate(),
-              securityRequest.getTime()));
+              securityRequest.getTime());
+      r.gettingTheLocation();
+      securityUIRequests.add(r);
     }
     return securityUIRequests;
   }
@@ -202,7 +207,7 @@ public class SecurityRequestController extends ServiceController {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     double rand = Math.random() * 10000;
 
-    String employ = staffDropDown.getValue().getUsername();
+    String employ = staffDropDown.getValue().getEmployeeID();
 
     String lethal = "No";
 
@@ -221,6 +226,7 @@ public class SecurityRequestController extends ServiceController {
             lethal,
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
+    request.gettingTheLocation();
 
     activeRequestTable.setItems(
         newRequest(
