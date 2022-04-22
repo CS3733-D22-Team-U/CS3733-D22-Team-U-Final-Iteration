@@ -84,7 +84,7 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Button fx:id="allRequestsButton" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests" textFill="#2b3ba1">
+                  <Button fx:id="allRequestsButton" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="68.0" prefWidth="192.0" style="-fx-background-color: #b0e5e3 #b0e5e3;" styleClass="dashboardNavButton" text="All Requests" textFill="#2b3ba1">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -195,6 +195,18 @@
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
                            <tooltip>
                               <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
+                           </tooltip>
+                        </Button>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEmployeeReq" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Employee Info" wrapText="true">
+                           <stylesheets>
+                              <URL value="@../css/buttons.css" />
+                              <URL value="@../css/headersAndLabels.css" />
+                           </stylesheets>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Marko 'Polo' Vila" />
                            </tooltip>
                         </Button>
                      </buttons>

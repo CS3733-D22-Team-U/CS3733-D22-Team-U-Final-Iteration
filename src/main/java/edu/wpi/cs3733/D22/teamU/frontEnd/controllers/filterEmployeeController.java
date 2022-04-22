@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class filterEmployeeController implements Initializable{
+public class filterEmployeeController extends ServiceController implements Initializable {
     @FXML TextField IDTxt;
     @FXML TextField firstTxt;
     @FXML TextField lastTxt;
@@ -58,6 +58,21 @@ public class filterEmployeeController implements Initializable{
         employees.setTooltip(new Tooltip());
         employees.getItems().addAll(staff);
         new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    }
+
+    @Override
+    public void addRequest() throws SQLException, IOException {
+
+    }
+
+    @Override
+    public void removeRequest() {
+
+    }
+
+    @Override
+    public void updateRequest() {
+
     }
 
     private void setUpEmployeeRequests() throws SQLException, IOException {
@@ -97,6 +112,24 @@ public class filterEmployeeController implements Initializable{
     }
 
      */
+
+    public void displayInfo(ActionEvent actionEvent){
+
+        Employee employee =  employees.getValue();
+        int reports = employee.getReports();
+        boolean onDuty = employee.getOnDuty();
+
+
+        IDTxt.setText(employee.getEmployeeID());
+        firstTxt.setText(employee.getFirstName());
+        lastTxt.setText(employee.getLastName());
+        occupationTxt.setText(employee.getOccupation());
+        reportsTxt.setText(String.valueOf(reports));
+        dutyTxt.setText(String.valueOf(onDuty));
+        userTxt.setText(employee.getUsername());
+        passwordTxt.setText(employee.getPassword());
+
+    }
 
 
 
