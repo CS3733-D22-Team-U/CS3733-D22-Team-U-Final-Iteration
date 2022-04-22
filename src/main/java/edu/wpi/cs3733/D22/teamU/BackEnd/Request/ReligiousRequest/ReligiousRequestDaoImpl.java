@@ -54,19 +54,10 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-
+        Employee temporary = checkEmployee(row[8]);
         ReligiousRequest r =
             new ReligiousRequest(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                row[4],
-                row[5],
-                row[6],
-                row[7],
-                checkEmployee(row[8]),
-                row[9]);
+                row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], temporary, row[9]);
         List.put(row[0], r);
 
         try {
@@ -81,11 +72,24 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
           r.setLocation(l);
         } catch (Exception exception) {
         }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println(
+              "Employee Not Found" + r.employee.getEmployeeID() + "ReligiousRequest");
+        }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, ReligiousRequest>();
     String s;
     File file = new File(this.csvFile);
@@ -95,6 +99,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+        Employee temporary = checkEmployee(row[8]);
         ReligiousRequest r =
             new ReligiousRequest(
                 row[0],
@@ -115,6 +120,12 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
           Location l = locations.get(locations.indexOf(temp));
           l.addRequest(r);
           r.setLocation(l);
+        } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(temporary.getEmployeeID());
+          e.addRequest(r);
+          r.setEmployee(e);
         } catch (Exception exception) {
         }
       }

@@ -27,8 +27,6 @@ public class MaintenanceRequest extends Request {
     this.description = description;
     this.date = date;
     this.time = time;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public String getTypeOfMaintenance() {

@@ -33,8 +33,8 @@ import lombok.SneakyThrows;
 
 public class giftFloralController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
   @FXML Button clearButton;
   @FXML Button submitButton;
   @FXML VBox requestHolder;
@@ -62,8 +62,8 @@ public class giftFloralController extends ServiceController {
 
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -79,7 +79,7 @@ public class giftFloralController extends ServiceController {
     nodeIDs = new ArrayList<>();
     try {
       for (Location l : Udb.getInstance().locationImpl.list()) {
-        nodeIDs.add(l.getNodeID());
+        nodeIDs.add(l);
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -88,12 +88,12 @@ public class giftFloralController extends ServiceController {
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
     try {
       for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-        staff.add(l.getEmployeeID());
+        staff.add(l);
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -102,7 +102,7 @@ public class giftFloralController extends ServiceController {
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -135,7 +135,7 @@ public class giftFloralController extends ServiceController {
     activeMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
     activeStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     activeEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
-    activeDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    activeDestination.setCellValueFactory(new PropertyValueFactory<>("location"));
     activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     activeRequestTable.setItems(getActiveRequestList());
@@ -152,15 +152,19 @@ public class giftFloralController extends ServiceController {
       String destination,
       String date,
       String time) {
-    giftRequests.add(
+    GiftRequest r =
         new GiftRequest(
-            ID, name, patientName, gifts, message, status, employee, destination, date, time));
+            ID, name, patientName, gifts, message, status, employee, destination, date, time);
+
+    r.gettingTheLocation();
+    giftRequests.add(r);
+
     return giftRequests;
   }
 
   private ObservableList<GiftRequest> getActiveRequestList() throws SQLException, IOException {
     for (GiftRequest giftRequest : Udb.getInstance().giftRequestImpl.hList().values()) {
-      giftRequests.add(
+      GiftRequest r =
           new GiftRequest(
               giftRequest.ID,
               giftRequest.name,
@@ -171,7 +175,10 @@ public class giftFloralController extends ServiceController {
               giftRequest.employee,
               giftRequest.destination,
               giftRequest.date,
-              giftRequest.time));
+              giftRequest.time);
+
+      r.gettingTheLocation();
+      giftRequests.add(r);
     }
     return giftRequests;
   }
@@ -189,9 +196,6 @@ public class giftFloralController extends ServiceController {
         inputString += checkBoxes.get(i).getText() + ", ";
       }
     }
-    String room = locations.getValue().toString();
-
-    String em = (employees.getValue().toString());
 
     double rand = Math.random() * 10000;
 
@@ -203,10 +207,12 @@ public class giftFloralController extends ServiceController {
             message.getText(),
             inputString,
             "pending",
-            checkEmployee(em),
-            room,
+            employees.getValue(),
+            locations.getValue().getNodeID(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
+
+    request.gettingTheLocation();
 
     activeRequestTable.setItems(
         newRequest(

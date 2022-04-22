@@ -54,9 +54,10 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+        Employee temporary = checkEmployee(row[4]);
         TranslatorRequest r =
             new TranslatorRequest(
-                row[0], row[1], row[2], row[3], checkEmployee(row[4]), row[5], row[6], row[7]);
+                row[0], row[1], row[2], row[3], temporary, row[5], row[6], row[7]);
         List.put(row[0], r);
 
         try {
@@ -72,11 +73,22 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
         } catch (Exception exception) {
           System.out.println("Location Not Found" + r.destination);
         }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+        }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, TranslatorRequest>();
     String s;
     File file = new File(csvFile);
@@ -98,6 +110,17 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(row[4]);
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println(
+              "Employee Not Found "
+                  + r.getEmployee().getEmployeeID()
+                  + " Translator Request"
+                  + r.getID());
         }
       }
     }

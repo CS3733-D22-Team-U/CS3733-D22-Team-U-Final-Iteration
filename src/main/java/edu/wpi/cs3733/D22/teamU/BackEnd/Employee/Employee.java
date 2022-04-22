@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import java.util.ArrayList;
+
 public class Employee {
 
   String employeeID;
@@ -10,6 +13,20 @@ public class Employee {
   boolean onDuty;
   String username;
   String password;
+
+  public ArrayList<Request> getRequests() {
+    return requests;
+  }
+
+  public void setRequests(ArrayList<Request> requests) {
+    this.requests = requests;
+  }
+
+  public void addRequest(Request r) {
+    requests.add(r);
+  }
+
+  ArrayList<Request> requests = new ArrayList<Request>();
 
   public Employee(String employeeID) {
     this.employeeID = employeeID;
@@ -93,7 +110,7 @@ public class Employee {
 
   @Override
   public String toString() {
-    return firstName;
+    return firstName + ", " + lastName;
   }
 
   public String getFirstName() {
@@ -111,6 +128,4 @@ public class Employee {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-
-
 }

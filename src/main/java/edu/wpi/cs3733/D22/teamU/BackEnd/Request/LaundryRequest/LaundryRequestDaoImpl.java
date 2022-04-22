@@ -56,18 +56,10 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
+        Employee temporary = checkEmployee(row[2]);
         LaundryRequest r =
             new LaundryRequest(
-                row[0],
-                row[1],
-                checkEmployee(row[2]),
-                row[3],
-                row[4],
-                row[5],
-                row[6],
-                row[7],
-                row[8],
-                row[9]);
+                row[0], row[1], temporary, row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -81,11 +73,22 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
           r.setLocation(l);
         } catch (Exception exception) {
         }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+        }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, LaundryRequest>();
     String s;
     File file = new File(csvFile);
@@ -115,6 +118,17 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(row[2]);
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println(
+              "Employee Not Found "
+                  + r.getEmployee().getEmployeeID()
+                  + " Laundry Request"
+                  + r.getID());
         }
       }
     }

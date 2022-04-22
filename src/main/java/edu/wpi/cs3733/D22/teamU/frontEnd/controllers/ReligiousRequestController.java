@@ -118,8 +118,7 @@ public class ReligiousRequestController extends ServiceController {
         new PropertyValueFactory<ReligiousRequest, String>("patientName"));
     religion.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("religion"));
     status.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("status"));
-    destination.setCellValueFactory(
-        new PropertyValueFactory<ReligiousRequest, String>("destination"));
+    destination.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("location"));
     employee.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("employee"));
     notes.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("notes"));
     table.setItems(getReligiousList());
@@ -136,16 +135,18 @@ public class ReligiousRequestController extends ServiceController {
       String destination,
       Employee employee,
       String notes) {
-    religiousUIRequests.add(
+    ReligiousRequest r =
         new ReligiousRequest(
-            id, name, date, time, patientName, religion, status, destination, employee, notes));
+            id, name, date, time, patientName, religion, status, destination, employee, notes);
+    r.gettingTheLocation();
+    religiousUIRequests.add(r);
     return religiousUIRequests;
   }
 
   private ObservableList<ReligiousRequest> getReligiousList() throws SQLException, IOException {
     religiousUIRequests.clear();
     for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.List.values()) {
-      religiousUIRequests.add(
+      ReligiousRequest r =
           new ReligiousRequest(
               request.getID(),
               request.getName(),
@@ -156,7 +157,9 @@ public class ReligiousRequestController extends ServiceController {
               request.getStatus(),
               request.getDestination(),
               request.getEmployee(),
-              request.getNotes()));
+              request.getNotes());
+      r.gettingTheLocation();
+      religiousUIRequests.add(r);
     }
     return religiousUIRequests;
   }
@@ -182,13 +185,24 @@ public class ReligiousRequestController extends ServiceController {
             inputPatient.getText().trim(),
             inputReligion.getText().trim(),
             "Pending",
-            locations.getValue().toString(),
+            locations.getValue().getNodeID(),
             employees.getValue(),
             inputNotes.getText().trim());
 
-    religiousUIRequests.add(request);
+    request.gettingTheLocation();
 
-    table.setItems(religiousUIRequests);
+    table.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getDate(),
+            request.getTime(),
+            request.getPatientName(),
+            request.getReligion(),
+            request.getStatus(),
+            request.getDestination(),
+            request.getEmployee(),
+            request.getNotes()));
     try {
       Udb.getInstance().add(request);
     } catch (IOException e) {
