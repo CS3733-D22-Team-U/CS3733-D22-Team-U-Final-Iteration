@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd;
 
-import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-
 public class RequestUI {
   String ID;
   String name;
@@ -11,7 +9,8 @@ public class RequestUI {
   String status;
   String reqType;
   String destination;
-  Employee employee;
+  String firstName;
+  String lastName;
 
   public String getReqType() {
     return reqType;
@@ -20,8 +19,6 @@ public class RequestUI {
   public void setReqType(String reqType) {
     this.reqType = reqType;
   }
-
-
 
   public String getID() {
     return ID;
@@ -79,31 +76,40 @@ public class RequestUI {
     this.destination = destination;
   }
 
-  public Employee getEmployee() {
-    return employee;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setEmployee(Employee employee) {
-    this.employee = employee;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public RequestUI(
       String ID,
       String reqType,
-      Employee employee,
+      String firstName,
+      String lastName,
       String patientName,
       String destination,
       String status,
       String date,
-      String time){
+      String time) {
     this.ID = ID;
     this.reqType = reqType;
-    this.employee = employee;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.patientName = patientName;
     this.destination = destination;
     this.status = status;
     this.date = date;
     this.time = time;
   }
-
 }

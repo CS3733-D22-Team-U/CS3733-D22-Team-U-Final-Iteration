@@ -176,12 +176,12 @@
                               <Font size="18.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Marko Vila" />
+                              <Tooltip text="Marko 'Polo' Vila" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map" textFill="#2a20ea">
                            <tooltip>
-                              <Tooltip text="Harsh Patel" />
+                              <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
                            </tooltip>
                            <font>
                               <Font name="System Bold" size="13.600000381469727" />
@@ -189,12 +189,12 @@
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
                            <tooltip>
-                              <Tooltip text="Nick Biliouris" />
+                              <Tooltip text="Demi-Human Queen Nick Biliouris" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
                            <tooltip>
-                              <Tooltip text="Kody Robinson" />
+                              <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
                            </tooltip>
                         </Button>
                      </buttons>
@@ -209,22 +209,22 @@
                      <buttons>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Deepti 'Loathsome Dung Eater' Gosukonda" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Maintenance">
                            <tooltip>
-                              <Tooltip text="Michael Akstin" />
+                              <Tooltip text="Michael 'I Can't Walk' Akstin" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
                            <tooltip>
-                              <Tooltip text="Joselin Barbosa" />
+                              <Tooltip text="Joselin 'Deathbed Companion' Barbosa" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Deepti 'Loatsome Dungeater' Gosukonda" />
                            </tooltip>
                         </Button>
                      </buttons>
@@ -239,22 +239,22 @@
                      <buttons>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toReligious" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Religious Service">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSeurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
                            <tooltip>
-                              <Tooltip text="Michael Akstin" />
+                              <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Computer Service">
                            <tooltip>
-                              <Tooltip text="Joselin Barbosa" />
+                              <Tooltip text="Iain McEwen" />
                            </tooltip>
                         </Button>
                         <Button minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
                            <tooltip>
-                              <Tooltip text="Deepti Gosukonda" />
+                              <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />
                            </tooltip>
                         </Button>
                      </buttons>

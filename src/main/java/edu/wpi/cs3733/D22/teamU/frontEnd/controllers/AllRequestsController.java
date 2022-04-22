@@ -17,7 +17,6 @@ import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,13 +36,13 @@ import lombok.SneakyThrows;
 public class AllRequestsController implements Initializable {
   @FXML TableColumn<RequestUI, String> allID;
   @FXML TableColumn<RequestUI, String> allType;
-  @FXML TableColumn<RequestUI, String> allEmployee;
+  @FXML TableColumn<RequestUI, String> allEmployeeF;
+  @FXML TableColumn<RequestUI, String> allEmployeeL;
   @FXML TableColumn<RequestUI, String> allPatient;
   @FXML TableColumn<RequestUI, String> allDestination;
   @FXML TableColumn<RequestUI, String> allStatus;
   @FXML TableColumn<RequestUI, Integer> allDate;
   @FXML TableColumn<RequestUI, String> allTime;
-
 
   @FXML TableColumn<RequestUI, String> everyStatus;
 
@@ -54,13 +53,14 @@ public class AllRequestsController implements Initializable {
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
     setUpActiveRequests();
-    //testing... System.out.println("we are here");
+    // testing... System.out.println("we are here");
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
     allID.setCellValueFactory(new PropertyValueFactory<>("ID"));
     allType.setCellValueFactory(new PropertyValueFactory<>("reqType"));
-    allEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
+    allEmployeeF.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+    allEmployeeL.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     allPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     allDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
     allStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -76,7 +76,8 @@ public class AllRequestsController implements Initializable {
           new RequestUI(
               request.getID(),
               "Medicine Delivery Request",
-              request.getEmployee(),
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
               request.getPatientName(),
               request.getDestination(),
               request.getStatus(),
@@ -87,144 +88,155 @@ public class AllRequestsController implements Initializable {
     for (EquipRequest request : Udb.getInstance().equipRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Equipment Delivery Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Equipment Delivery Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (MealRequest request : Udb.getInstance().mealRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Meal Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Meal Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (GiftRequest request : Udb.getInstance().giftRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Gift Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Gift Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (LaundryRequest request : Udb.getInstance().laundryRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Laundry Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Laundry Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (LabRequest request : Udb.getInstance().labRequestImpl.hList().values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Lab Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Lab Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (SecurityRequest request : Udb.getInstance().securityRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Security Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Security Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (CompServRequest request : Udb.getInstance().compServRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Computer Service Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Computer Service Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (MaintenanceRequest request : Udb.getInstance().maintenanceRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Maintenance Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Maintenance Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Religious Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Religious Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (SecurityRequest request : Udb.getInstance().securityRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Security Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Security Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
       allRequests.add(
           new RequestUI(
-                  request.getID(),
-                  "Translator Request",
-                  request.getEmployee(),
-                  request.getPatientName(),
-                  request.getDestination(),
-                  request.getStatus(),
-                  request.getDate(),
-                  request.getTime()));
+              request.getID(),
+              "Translator Request",
+              request.getEmployee().getFirstName(),
+              request.getEmployee().getLastName(),
+              request.getPatientName(),
+              request.getDestination(),
+              request.getStatus(),
+              request.getDate(),
+              request.getTime()));
     }
 
     return allRequests;

@@ -29,6 +29,8 @@ public class EquipRequest extends Request {
     this.date = date;
     this.time = time;
     this.priority = priority;
+    this.firstName = employee.getFirstName();
+    this.lastName = employee.getLastName();
   }
 
   public int getAmount() {

@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import edu.wpi.cs3733.D22.teamU.DBController;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,26 @@ public class loginPageController extends ServiceController {
                 Platform.runLater(
                     () -> {
                       try {
-                        DBController.main(new String[] {username.getText(), password.getText()});
+                        // DBController.main(new String[] {username.getText(), password.getText()});
+                        boolean foundUser = false;
+
+                        for (Employee a : Udb.getInstance().EmployeeImpl.hList().values()) {
+                          if (a.getUsername().equals(username.getText().trim())
+                              && a.getPassword().equals(password.getText().trim())) {
+                            foundUser = true;
+                            if (a.getOccupation().equals("Administrator")) {
+                              Udb.admin = true;
+                            } else {
+                              Udb.admin = false;
+                            }
+                          }
+                        }
+
+                        if (foundUser) {
+                        } else {
+                          throw new IOException();
+                        }
+
                         Scene scene = null;
                         try {
                           scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/Dashboard.fxml");

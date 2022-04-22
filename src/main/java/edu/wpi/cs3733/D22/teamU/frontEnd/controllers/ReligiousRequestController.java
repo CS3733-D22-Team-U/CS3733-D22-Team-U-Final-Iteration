@@ -30,8 +30,8 @@ import lombok.SneakyThrows;
 
 public class ReligiousRequestController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
 
   @FXML TableColumn<ReligiousRequest, String> nameID;
   @FXML TableColumn<ReligiousRequest, String> name;
@@ -63,8 +63,8 @@ public class ReligiousRequestController extends ServiceController {
 
   ObservableList<ReligiousRequest> religiousUIRequests = FXCollections.observableArrayList();
   // Udb udb;
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodes;
+  ArrayList<Employee> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -75,22 +75,22 @@ public class ReligiousRequestController extends ServiceController {
 
     requestText.setVisible(false);
     // Displays Locations in Table View
-    nodeIDs = new ArrayList<>();
+    nodes = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodes.add(l);
     }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    locations.getItems().addAll(nodes);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     // Displays EMployess in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+      staff.add(l);
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     handleTime();
   }
@@ -118,10 +118,8 @@ public class ReligiousRequestController extends ServiceController {
         new PropertyValueFactory<ReligiousRequest, String>("patientName"));
     religion.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("religion"));
     status.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("status"));
-    destination.setCellValueFactory(
-        new PropertyValueFactory<ReligiousRequest, String>("destination"));
-    employee.setCellValueFactory(
-        new PropertyValueFactory<ReligiousRequest, String>("employeeName"));
+    destination.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("location"));
+    employee.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("employee"));
     notes.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("notes"));
     table.setItems(getReligiousList());
   }
@@ -137,16 +135,18 @@ public class ReligiousRequestController extends ServiceController {
       String destination,
       Employee employee,
       String notes) {
-    religiousUIRequests.add(
+    ReligiousRequest r =
         new ReligiousRequest(
-            id, name, date, time, patientName, religion, status, destination, employee, notes));
+            id, name, date, time, patientName, religion, status, destination, employee, notes);
+    r.gettingTheLocation();
+    religiousUIRequests.add(r);
     return religiousUIRequests;
   }
 
   private ObservableList<ReligiousRequest> getReligiousList() throws SQLException, IOException {
     religiousUIRequests.clear();
     for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.List.values()) {
-      religiousUIRequests.add(
+      ReligiousRequest r =
           new ReligiousRequest(
               request.getID(),
               request.getName(),
@@ -157,7 +157,10 @@ public class ReligiousRequestController extends ServiceController {
               request.getStatus(),
               request.getDestination(),
               request.getEmployee(),
-              request.getNotes()));
+              request.getNotes());
+      r.gettingTheLocation();
+
+      religiousUIRequests.add(r);
     }
     return religiousUIRequests;
   }
@@ -168,9 +171,9 @@ public class ReligiousRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    String room = locations.getValue().toString();
+    // String room = locations.getValue().toString();
 
-    String employ = employees.getValue().toString();
+    // String employ = employees.getValue().toString();
 
     double rand = Math.random() * 10000;
 
@@ -183,13 +186,24 @@ public class ReligiousRequestController extends ServiceController {
             inputPatient.getText().trim(),
             inputReligion.getText().trim(),
             "Pending",
-            room,
-            checkEmployee(employ),
+            locations.getValue().getNodeID(),
+            employees.getValue(),
             inputNotes.getText().trim());
 
-    religiousUIRequests.add(request);
+    request.gettingTheLocation();
 
-    table.setItems(religiousUIRequests);
+    table.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getDate(),
+            request.getTime(),
+            request.getPatientName(),
+            request.getReligion(),
+            request.getStatus(),
+            request.getDestination(),
+            request.getEmployee(),
+            request.getNotes()));
     try {
       Udb.getInstance().add(request);
     } catch (IOException e) {
