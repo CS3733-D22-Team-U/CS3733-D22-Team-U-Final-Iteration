@@ -154,7 +154,7 @@ public class filterEmployeeController extends ServiceController implements Initi
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("reqType")); //todo reqType
         employeeCol.setCellValueFactory(new PropertyValueFactory<>("employee"));
-        patientCol.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+        //patientCol.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         destinationCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -170,7 +170,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Computer Service",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -182,7 +181,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Equipment Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -194,7 +192,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Gift Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -206,7 +203,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Lab Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -218,7 +214,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Laundry Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -230,7 +225,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Maintenance Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -242,7 +236,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Meal Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -254,7 +247,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Medicine Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -266,7 +258,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Religious Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -278,7 +269,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Security Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -290,7 +280,6 @@ public class filterEmployeeController extends ServiceController implements Initi
                             request.getID(),
                             "Translator Request",
                             request.getEmployee(),
-                            request.getPatientName(),
                             request.getDestination(),
                             request.getStatus(),
                             request.getDate(),
@@ -298,6 +287,130 @@ public class filterEmployeeController extends ServiceController implements Initi
         }
         return employeeRequestsList;
 
+    }
+
+    public void showAllReq(ActionEvent actionEvent){
+        for(CompServRequest request : CompServRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Computer Service",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(EquipRequest request : EquipRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Equipment Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(GiftRequest request : GiftRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Gift Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(LabRequest request : LabRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Lab Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(LaundryRequest request : LaundryRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Laundry Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(MaintenanceRequest request : MaintenanceRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Maintenance Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(MealRequest request : MealRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Meal Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(MedicineRequest request : MedicineRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Medicine Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(ReligiousRequest request : ReligiousRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Religious Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(SecurityRequest request : SecurityRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Security Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
+        for(TranslatorRequest request : TranslatorRequestDaoImpl.List.values()){
+            employeeRequestsList.add(
+                    new Request(
+                            request.getID(),
+                            "Translator Request",
+                            request.getEmployee(),
+                            request.getDestination(),
+                            request.getStatus(),
+                            request.getDate(),
+                            request.getTime()));
+        }
     }
 
 

@@ -41,11 +41,10 @@ public class Request {
   public Employee employee;
   public Location location;
 
-  public Request(String ID, String reqType, Employee employee, String patientName, String destination, String status, String date, String time) {
+  public Request(String ID, String reqType, Employee employee, String destination, String status, String date, String time) {
     this.ID = ID;
     this.reqType = reqType;
     this.employee = employee;
-    this.patientName = patientName;
     this.destination = destination;
     this.status = status;
     this.date = date;
