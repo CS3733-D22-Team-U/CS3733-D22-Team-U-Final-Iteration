@@ -1,5 +1,5 @@
 Employee ID,First Name,Last Name,Occupation,Reports,On Duty,Username,Password
-00000,Wong,Wilson,Nurse,0,false,admin,admin
+00000,Wong,Wilson,Administrator,0,false,admin,admin
 00001,Harsh,Patel,Administrator,0,true,Dr.Harsh,Patel
 00002,Timothy,Klein,Nurse,0,false,Dr.Timothy,Klein
 00003,Kody,Robinson,Chef,0,false,Dr.Kody,Robinson
