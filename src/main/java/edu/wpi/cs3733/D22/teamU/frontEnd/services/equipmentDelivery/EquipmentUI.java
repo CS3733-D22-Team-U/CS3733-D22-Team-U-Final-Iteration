@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+
 public class EquipmentUI {
   private String id;
   private String equipmentName;
@@ -12,11 +14,11 @@ public class EquipmentUI {
   private int requestAmount;
   private String requestDate;
   private String requestTime;
-
+  private Employee employee;
+  private String patient;
   private String floor;
   private String nodeType;
 
-  private int priority;
 
   public EquipmentUI(String name, int inUse, int available, int total, String location) {
     equipmentName = name;
@@ -42,45 +44,24 @@ public class EquipmentUI {
       int request,
       String destination,
       String date,
-      String timestamp,
-      int priority) {
+      String timestamp) {
     this.id = id;
     equipmentName = name;
     requestAmount = request;
     this.destination = destination;
     requestDate = date;
     requestTime = timestamp;
-    this.priority = priority;
   }
 
-  //  public EquipmentUI(
-  //      String id,
-  //      String name,
-  //      int request,
-  //      String destination,
-  //      String date,
-  //      String timestamp,
-  //      int priority,
-  //      String floor,
-  //      String nodeType) {
-  //    this.id = id;
-  //    equipmentName = name;
-  //    requestAmount = request;
-  //    this.destination = destination;
-  //    requestDate = date;
-  //    requestTime = timestamp;
-  //    this.priority = priority;
-  //    this.floor = floor;
-  //    this.nodeType = nodeType;
-  //  }
 
   public EquipmentUI(
-      String id, String name, int request, String destination, String floor, String nodeType) {
+      String id, Employee employee, String patient, String name, int request, String destination, String floor, String nodeType) {
     this.id = id;
+    this.employee = employee;
+    this.patient = patient;
     equipmentName = name;
     requestAmount = request;
     this.destination = destination;
-    this.priority = priority;
     this.floor = floor;
     this.nodeType = nodeType;
   }
@@ -91,30 +72,6 @@ public class EquipmentUI {
 
   public String getEquipmentName() {
     return equipmentName;
-  }
-
-  public int getAmountInUse() {
-    return amountInUse;
-  }
-
-  public void setAmountInUse(int amountInUse) {
-    this.amountInUse = amountInUse;
-  }
-
-  public int getAmountAvailable() {
-    return amountAvailable;
-  }
-
-  public void setAmountAvailable(int amountAvailable) {
-    this.amountAvailable = amountAvailable;
-  }
-
-  public int getTotalAmount() {
-    return totalAmount;
-  }
-
-  public void setTotalAmount(int totalAmount) {
-    this.totalAmount = totalAmount;
   }
 
   public String getRequestDate() {
@@ -145,14 +102,6 @@ public class EquipmentUI {
     this.destination = destination;
   }
 
-  public int getPriority() {
-    return priority;
-  }
-
-  public void setPriority(int priority) {
-    this.priority = priority;
-  }
-
   public String getLocation() {
     return location;
   }
@@ -175,5 +124,61 @@ public class EquipmentUI {
 
   public void setNodeType(String nodeType) {
     this.nodeType = nodeType;
+  }
+
+  public void setEquipmentName(String equipmentName) {
+    this.equipmentName = equipmentName;
+  }
+
+  public int getAmountInUse() {
+    return amountInUse;
+  }
+
+  public void setAmountInUse(int amountInUse) {
+    this.amountInUse = amountInUse;
+  }
+
+  public int getAmountAvailable() {
+    return amountAvailable;
+  }
+
+  public void setAmountAvailable(int amountAvailable) {
+    this.amountAvailable = amountAvailable;
+  }
+
+  public int getTotalAmount() {
+    return totalAmount;
+  }
+
+  public void setTotalAmount(int totalAmount) {
+    this.totalAmount = totalAmount;
+  }
+
+  public void setRequestAmount(int requestAmount) {
+    this.requestAmount = requestAmount;
+  }
+
+  public void setRequestDate(String requestDate) {
+    this.requestDate = requestDate;
+  }
+
+  public void setRequestTime(String requestTime) {
+    this.requestTime = requestTime;
+  }
+
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
+  }
+
+  public String getPatient() {
+    return patient;
+  }
+
+  public void setPatient(String patient) {
+    this.patient = patient;
   }
 }

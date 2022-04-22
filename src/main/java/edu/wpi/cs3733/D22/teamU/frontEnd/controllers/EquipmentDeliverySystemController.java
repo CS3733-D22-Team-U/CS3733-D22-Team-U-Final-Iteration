@@ -40,6 +40,9 @@ public class EquipmentDeliverySystemController extends ServiceController {
   public ComboBox<String> locations;
 
   public ComboBox<String> employees;
+  public ComboBox<String> patients;
+
+  ArrayList<String> patientInput = new ArrayList<String>();
 
   @FXML TableColumn<EquipmentUI, String> nameCol;
 
@@ -125,28 +128,39 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     setUpActiveRequests();
 
-    nodeIDs = new ArrayList<>();
+    patientInput.add("Harsh");
+    patientInput.add("Marko");
+    patientInput.add("Marko");
+    patientInput.add("Nick");
+    patientInput.add("Kody");
+    patientInput.add("Deepti");
+    patientInput.add("Joselin");
+    patientInput.add("Tim");
+    patientInput.add("Will");
+    patientInput.add("Mike");
+    patientInput.add("Belisha");
+    patientInput.add("Iain");
 
+    patients.setTooltip(new Tooltip());
+    patients.getItems().addAll(patientInput);
+
+
+    nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
 
       nodeIDs.add(l.getNodeID());
     }
-
     locations.setTooltip(new Tooltip());
-
     locations.getItems().addAll(nodeIDs);
-
     new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
-
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
 
       staff.add(l.getEmployeeID());
     }
 
     employees.setTooltip(new Tooltip());
-
     employees.getItems().addAll(staff);
 
     new ComboBoxAutoComplete<String>(employees, 675, 380);
@@ -252,14 +266,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   private ObservableList<EquipmentUI> newRequest(
       String id,
+      Employee employee,
+      String patient,
       String name,
       int amount,
       String destination,
       String date,
-      String time,
-      int priority) {
+      String time) {
 
-    equipmentUIRequests.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
+    equipmentUIRequests.add(new EquipmentUI(id, employee, patient, name, amount, destination, date, time));
 
     return equipmentUIRequests;
   }
@@ -289,12 +304,13 @@ public class EquipmentDeliverySystemController extends ServiceController {
       equipmentUIRequests.add(
           new EquipmentUI(
               equipRequest.getID(),
+              equipRequest.getEmployee(),
+              equipRequest.getPatientName(),
               equipRequest.getName(),
               equipRequest.getAmount(),
               equipRequest.getDestination(),
               equipRequest.getDate(),
-              equipRequest.getTime(),
-              equipRequest.getPriority()));
+              equipRequest.getTime()));
     }
 
     return equipmentUIRequests;
@@ -343,22 +359,24 @@ public class EquipmentDeliverySystemController extends ServiceController {
         EquipmentUI request =
             new EquipmentUI(
                 (int) rand + "",
-                checkBoxes.get(i).getText(),
+              checkEmployee(employees.getValue().toString()),
+                patients.getValue().toString(),
+                    checkBoxes.get(i).getText(),
                 requestAmount,
                 room,
                 sdf3.format(timestamp).substring(0, 10),
-                sdf3.format(timestamp).substring(11),
-                1);
+                sdf3.format(timestamp).substring(11));
 
         activeRequestTable.setItems(
             newRequest(
                 request.getId(),
+                request.getEmployee(),
+                request.getPatient(),
                 request.getEquipmentName(),
                 request.getRequestAmount(),
                 request.getDestination(),
                 request.getRequestDate(),
-                request.getRequestTime(),
-                1));
+                request.getRequestTime()));
 
         try {
 
