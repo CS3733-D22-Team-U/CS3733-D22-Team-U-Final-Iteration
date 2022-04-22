@@ -135,10 +135,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
           r.setEmployee(e);
         } catch (Exception exception) {
           System.out.println(
-              "Employee Not Found "
-                  + r.getEmployee().getEmployeeID()
-                  + " Translator Request"
-                  + r.getID());
+              "Employee Not Found " + r.getEmployee().getEmployeeID() + " Lab Request" + r.getID());
         }
       }
     }

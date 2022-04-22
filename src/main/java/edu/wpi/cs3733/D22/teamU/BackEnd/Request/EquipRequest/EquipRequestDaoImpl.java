@@ -90,6 +90,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
           e.addRequest(r);
           r.setEmployee(e);
         } catch (Exception exception) {
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "Equip Request");
         }
       }
     }
@@ -132,6 +133,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
           e.addRequest(r);
           r.setEmployee(e);
         } catch (Exception exception) {
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "Equip Request");
         }
       }
     }

@@ -120,7 +120,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
           System.out.println(
               "Employee Not Found "
                   + r.getEmployee().getEmployeeID()
-                  + " Translator Request"
+                  + " Meal Request"
                   + r.getID());
         }
       }

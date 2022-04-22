@@ -126,7 +126,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
           System.out.println(
               "Employee Not Found "
                   + r.getEmployee().getEmployeeID()
-                  + " Translator Request"
+                  + " Maintenance Request"
                   + r.getID());
         }
       }

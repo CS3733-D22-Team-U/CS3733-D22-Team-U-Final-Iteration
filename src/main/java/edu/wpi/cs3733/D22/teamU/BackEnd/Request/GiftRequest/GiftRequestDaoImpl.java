@@ -106,6 +106,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
           e.addRequest(r);
           r.setEmployee(e);
         } catch (Exception exception) {
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "GIftRequest");
         }
       }
     }

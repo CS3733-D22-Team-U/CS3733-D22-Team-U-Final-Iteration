@@ -127,7 +127,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
           System.out.println(
               "Employee Not Found "
                   + r.getEmployee().getEmployeeID()
-                  + " Translator Request"
+                  + " Laundry Request"
                   + r.getID());
         }
       }

@@ -70,6 +70,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
           e.addRequest(r);
           r.setEmployee(e);
         } catch (Exception exception) {
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "Comp Request");
         }
       }
     }
@@ -89,7 +90,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
         Employee temporary = checkEmployee(row[3]);
         CompServRequest r =
             new CompServRequest(
-                row[0], row[1], row[2], checkEmployee(row[3]), row[4], row[5], row[6], row[7]);
+                row[0], row[1], row[2], temporary, row[4], row[5], row[6], row[7]);
         List.put(row[0], r);
         try {
           Location temp = new Location();
@@ -107,7 +108,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
           System.out.println(
               "Employee Not Found "
                   + r.getEmployee().getEmployeeID()
-                  + " Translator Request"
+                  + " CompServ Request"
                   + r.getID());
         }
       }
