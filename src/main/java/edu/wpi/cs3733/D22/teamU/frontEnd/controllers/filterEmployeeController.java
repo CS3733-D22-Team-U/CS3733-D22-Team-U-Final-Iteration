@@ -13,10 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lombok.SneakyThrows;
@@ -28,14 +25,14 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class filterEmployeeController implements Initializable{
-    @FXML Text IDTxt;
-    @FXML Text firstTxt;
-    @FXML Text lastTxt;
-    @FXML Text occupationTxt;
-    @FXML Text reportsTxt;
-    @FXML Text dutyTxt;
-    @FXML Text userTxt;
-    @FXML Text passwordTxt;
+    @FXML TextField IDTxt;
+    @FXML TextField firstTxt;
+    @FXML TextField lastTxt;
+    @FXML TextField occupationTxt;
+    @FXML TextField reportsTxt;
+    @FXML TextField dutyTxt;
+    @FXML TextField userTxt;
+    @FXML TextField passwordTxt;
     @FXML ComboBox<Employee> employees = new ComboBox<Employee>();
     @FXML Button submitButton;@FXML Button clearButton;
 
