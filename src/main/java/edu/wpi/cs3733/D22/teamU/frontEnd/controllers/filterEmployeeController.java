@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.RequestUI;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class filterEmployeeController implements Initializable{
@@ -45,10 +47,17 @@ public class filterEmployeeController implements Initializable{
     @FXML TableColumn<Request, String> timeCol;
     @FXML TableView<Request> employeeRequests;
 
+    ArrayList<Employee> staff = new ArrayList<Employee>();
+
     @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setUpEmployeeRequests();
+        staff = new ArrayList<>();
+        staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
+        employees.setTooltip(new Tooltip());
+        employees.getItems().addAll(staff);
+        new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     }
 
     private void setUpEmployeeRequests() throws SQLException, IOException {
@@ -62,6 +71,7 @@ public class filterEmployeeController implements Initializable{
         //employeeRequests.setItems(getActiveRequestList());
     }
 
+    /*
     ObservableList<Request> requests = FXCollections.observableArrayList();
     public void updateList(ActionEvent actionEvent) throws SQLException, IOException {
         requests.clear();
@@ -85,6 +95,10 @@ public class filterEmployeeController implements Initializable{
 
         }
     }
+
+     */
+
+
 
 
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Request {
   public Request(
-      int ID,
+      String ID,
       String name,
       String patientName,
       String date,
@@ -26,7 +26,7 @@ public class Request {
     this.location = location;
   }
 
-  public int ID;
+  public String ID;
   public String name; // or lab type
   public String patientName;
   public String date;
@@ -38,7 +38,7 @@ public class Request {
   public String firstName;
   public String lastName;
 
-  public Request(int ID, Employee employee, String patientName, String destination, String status, String date, String time) {
+  public Request(String ID, Employee employee, String patientName, String destination, String status, String date, String time) {
     this.ID = ID;
     this.employee = employee;
     this.patientName = patientName;
@@ -46,6 +46,10 @@ public class Request {
     this.status = status;
     this.date = date;
     this.time = time;
+  }
+
+  public Request() {
+
   }
 
   public void setDestination(String destination) {
@@ -60,11 +64,11 @@ public class Request {
     this.patientName = patientName;
   }
 
-  public int getID() {
+  public String getID() {
     return this.ID;
   }
 
-  public void setID(int ID) {
+  public void setID(String ID) {
     this.ID = ID;
   }
 
