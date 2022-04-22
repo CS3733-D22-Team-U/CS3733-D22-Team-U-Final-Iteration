@@ -43,6 +43,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
+import javax.script.Bindings;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -50,6 +51,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static javax.script.Bindings.*;
 
 public class filterEmployeeController extends ServiceController implements Initializable {
     @FXML TextField IDTxt;
@@ -61,7 +64,8 @@ public class filterEmployeeController extends ServiceController implements Initi
     @FXML TextField userTxt;
     @FXML TextField passwordTxt;
     @FXML ComboBox<Employee> employees = new ComboBox<Employee>();
-    @FXML Button submitButton;@FXML Button clearButton;
+    @FXML Button submitButton;
+    @FXML Button clearButton;
 
     @FXML TableColumn<Request, String> IDCol;
     @FXML TableColumn<Request, String> typeCol;
@@ -91,7 +95,32 @@ public class filterEmployeeController extends ServiceController implements Initi
         employees.getItems().addAll(staff);
         new ComboBoxAutoComplete<Employee>(employees, 675, 380);
         handleTime();
+
+
+
+
+
     }
+
+    public void clear(ActionEvent actionEvent){
+        employees.valueProperty().set(null);
+        employeeRequests.getItems().clear();
+        IDTxt.setText("");
+        firstTxt.setText("");
+        lastTxt.setText("");
+        occupationTxt.setText("");
+        reportsTxt.setText("");
+        dutyTxt.setText("");
+        userTxt.setText("");
+        passwordTxt.setText("");
+        employees.setPromptText("Choose Employee:");
+
+    }
+
+
+
+
+
 
     private void handleTime() {
         Thread timeThread =
