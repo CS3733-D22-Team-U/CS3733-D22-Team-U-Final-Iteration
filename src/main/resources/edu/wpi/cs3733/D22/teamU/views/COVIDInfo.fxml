@@ -3,6 +3,8 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -123,6 +125,11 @@
                         </Pane>
                     </children>
                 </StackPane>
+            <ImageView fitHeight="86.0" fitWidth="420.0" layoutX="122.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/hospitalName.png" />
+               </image>
+            </ImageView>
 
             </children>
         </Pane>
