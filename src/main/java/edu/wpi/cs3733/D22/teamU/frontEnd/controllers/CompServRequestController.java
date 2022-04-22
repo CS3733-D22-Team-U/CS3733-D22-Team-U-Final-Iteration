@@ -29,8 +29,8 @@ import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class CompServRequestController extends ServiceController {
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
 
   @FXML Text time;
   @FXML TableColumn<CompServRequest, String> reqID;
@@ -59,8 +59,8 @@ public class CompServRequestController extends ServiceController {
 
   ObservableList<CompServRequest> CompServUIRequests = FXCollections.observableArrayList();
   // Udb udb;
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -73,20 +73,20 @@ public class CompServRequestController extends ServiceController {
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 267, 347);
+    new ComboBoxAutoComplete<Location>(locations, 267, 347);
 
     // Displays Employees in Table View
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+      staff.add(l);
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 502, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 502, 380);
 
     handleTime();
   }
@@ -108,7 +108,7 @@ public class CompServRequestController extends ServiceController {
     reqID.setCellValueFactory(new PropertyValueFactory("ID"));
     reqDevice.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("device"));
     reqDestination.setCellValueFactory(
-        new PropertyValueFactory<CompServRequest, String>("destination"));
+        new PropertyValueFactory<CompServRequest, String>("location"));
     reqMessage.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("message"));
     reqStatus.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("status"));
     reqEmployee.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("employee"));
@@ -126,15 +126,18 @@ public class CompServRequestController extends ServiceController {
       Employee employee,
       String date,
       String time) {
-    CompServUIRequests.add(
-        new CompServRequest(id, message, status, employee, destination, date, time, device));
+    CompServRequest r =
+        new CompServRequest(id, message, status, employee, destination, date, time, device);
+
+    r.gettingTheLocation();
+    CompServUIRequests.add(r);
     return CompServUIRequests;
   }
 
   private ObservableList<CompServRequest> getCompServList() throws SQLException, IOException {
     CompServUIRequests.clear();
     for (CompServRequest request : Udb.getInstance().compServRequestImpl.List.values()) {
-      CompServUIRequests.add(
+      CompServRequest r =
           new CompServRequest(
               request.getID(),
               request.getMessage(),
@@ -143,8 +146,12 @@ public class CompServRequestController extends ServiceController {
               request.getDestination(),
               request.getDate(),
               request.getTime(),
-              request.getDevice()));
+              request.getDevice());
+      r.gettingTheLocation();
+
+      CompServUIRequests.add(r);
     }
+
     return CompServUIRequests;
   }
 
@@ -166,10 +173,10 @@ public class CompServRequestController extends ServiceController {
               })
           .start();
       Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-      String room = locations.getValue();
+      Location room = locations.getValue();
       String message = messageBox.getText().trim();
       String device = inputDevice.getText().trim();
-      String employee = employees.getValue();
+      Employee employee = employees.getValue();
 
       double rand = Math.random() * 10000;
 
@@ -178,12 +185,13 @@ public class CompServRequestController extends ServiceController {
               (int) rand + "",
               message,
               "Pending",
-              checkEmployee(employee),
-              room,
+              employee,
+              room.getNodeID(),
               sdf3.format(timestamp).substring(0, 10),
               sdf3.format(timestamp).substring(11),
               device);
 
+      request.gettingTheLocation();
       CompServUIRequests.add(request);
       table.setItems(CompServUIRequests);
       try {

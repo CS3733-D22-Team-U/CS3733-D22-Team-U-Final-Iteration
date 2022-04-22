@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
@@ -62,8 +63,17 @@ public class sideViewController extends ServiceController {
   @FXML TableColumn<EquipmentUI, String> floor;
   @FXML TableColumn<EquipmentUI, Integer> dirty;
   @FXML TableColumn<EquipmentUI, Integer> clean;
-  AnchorPane popupBedAlert;
-  AnchorPane popupPumpAlert;
+
+  @FXML TableView<EquipmentUI> alertTable;
+  @FXML TableColumn<EquipmentUI, String> dirtyItem;
+  @FXML TableColumn<EquipmentUI, Integer> numDirty;
+  @FXML TableColumn<EquipmentUI, String> dirtyLoc;
+  @FXML TableColumn<EquipmentUI, String> dirtyFloor;
+
+  @FXML Button alertInfo;
+  @FXML JFXTextArea alertInfoTextA;
+
+  AnchorPane popupAlert;
 
   String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
   // Udb udb = DBController.udb;
@@ -100,39 +110,26 @@ public class sideViewController extends ServiceController {
 
      */
 
-    popupBedAlert = new AnchorPane();
+    popupAlert = new AnchorPane();
     try {
-      popupBedAlert
+      popupAlert
           .getChildren()
           .add(
               FXMLLoader.load(
                   Objects.requireNonNull(
                       getClass()
                           .getClassLoader()
-                          .getResource("edu/wpi/cs3733/D22/teamU/views/alertBedPopUp.fxml"))));
+                          .getResource("edu/wpi/cs3733/D22/teamU/views/alertPopUp.fxml"))));
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    popupPumpAlert = new AnchorPane();
-    try {
-      popupPumpAlert
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  Objects.requireNonNull(
-                      getClass()
-                          .getClassLoader()
-                          .getResource("edu/wpi/cs3733/D22/teamU/views/alertPumpPopUp.fxml"))));
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (tooManyDirtyThings() == true) {
+      masterPane.getChildren().add(popupAlert);
+      popupAlert.setLayoutX(0);
+      popupAlert.setLayoutY(0);
     }
-
-    if (tooManyDirtyBeds() == true) {
-      masterPane.getChildren().add(popupBedAlert);
-      popupBedAlert.setLayoutX(20);
-      popupBedAlert.setLayoutY(90);
-    }
+    setUpDirtyEquipment();
   }
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
@@ -168,51 +165,65 @@ public class sideViewController extends ServiceController {
     return equipmentUI;
   }
 
-  private boolean tooManyDirtyBeds() throws SQLException, IOException {
+  ArrayList<EquipmentUI> dirtyEquip = new ArrayList<>();
 
+  private boolean tooManyDirtyThings() throws SQLException, IOException {
+    boolean temp = false;
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      if (equipment.getName().equals("Beds") && equipment.getInUse() > 6) {
-        AnchorPane bedAP = (AnchorPane) popupBedAlert.getChildren().get(0);
+      if ((equipment.getName().equals("Beds") && equipment.getInUse() >= 6)
+          || equipment.getName().equals("Infusion Pumps")
+              && (equipment.getInUse() >= 10 || equipment.getAvailable() < 5)) {
+        dirtyEquip.add(
+            new EquipmentUI(
+                equipment.getName(),
+                equipment.getInUse(),
+                equipment.getAvailable(),
+                equipment.getLocationID(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+        AnchorPane bedAP = (AnchorPane) popupAlert.getChildren().get(0);
         System.out.println(bedAP.getChildren().size());
         for (Node n : bedAP.getChildren()) {
-          if (n instanceof TextField) {
-            TextField t1 = (TextField) n;
-            t1.setText(equipment.getLocationID());
-          } else if (n instanceof Button) {
+          if (n instanceof Button) {
             Button b1 = (Button) n;
             if (b1.getId().equals("okWarn")) {
               b1.setOnMouseClicked(this::clearWarning);
             }
           }
         }
-        return true;
+        temp = true;
       }
     }
-    return false;
+    return temp;
   }
 
   private boolean tooManyDirtyPumps() throws SQLException, IOException {
-
+    boolean temp = false;
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       if (equipment.getName().equals("Infusion Pumps")
-          && (equipment.getInUse() > 10 || equipment.getAvailable() < 5)) {
-        AnchorPane pumpAP = (AnchorPane) popupPumpAlert.getChildren().get(0);
+          && (equipment.getInUse() >= 10 || equipment.getAvailable() < 5)) {
+        dirtyEquip.add(
+            new EquipmentUI(
+                equipment.getName(),
+                equipment.getInUse(),
+                equipment.getAvailable(),
+                equipment.getLocationID(),
+                equipment.getLocation().getFloor(),
+                equipment.getLocation().getNodeType()));
+        AnchorPane pumpAP = (AnchorPane) popupAlert.getChildren().get(0);
         System.out.println(pumpAP.getChildren().size());
         for (Node n : pumpAP.getChildren()) {
-          if (n instanceof TextField) {
-            TextField t1 = (TextField) n;
-            t1.setText(equipment.getLocationID());
-          } else if (n instanceof Button) {
+          if (n instanceof Button) {
             Button b1 = (Button) n;
             if (b1.getId().equals("okWarn")) {
-              b1.setOnMouseClicked(this::clearWarningP);
+              b1.setOnMouseClicked(this::clearWarning);
             }
           }
         }
-        return true;
+        temp = true;
       }
     }
-    return false;
+    return temp;
   }
 
   //  public void lower(ActionEvent actionEvent) {
@@ -281,6 +292,19 @@ public class sideViewController extends ServiceController {
     }
   }
 
+  private void setUpDirtyEquipment() {
+    dirtyItem.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("equipmentName"));
+    numDirty.setCellValueFactory(new PropertyValueFactory<EquipmentUI, Integer>("amountInUse"));
+    dirtyLoc.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("location"));
+    dirtyFloor.setCellValueFactory(new PropertyValueFactory<EquipmentUI, String>("floor"));
+
+    try {
+      alertTable.setItems(FXCollections.observableArrayList(dirtyEquip));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override
   public void addRequest() {}
 
@@ -307,19 +331,18 @@ public class sideViewController extends ServiceController {
       } catch (Exception e) {
       }
       equipFloor.setItems(equipmentUI);
-      //      if (tooManyDirtyPumps() == true) {
-      //        masterPane.getChildren().add(popupPumpAlert);
-      //        popupBedAlert.setLayoutX(20);
-      //        popupBedAlert.setLayoutY(90);
-      //      }
     }
   }
 
   private void clearWarning(MouseEvent mouseEvent) {
-    popupBedAlert.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
+    popupAlert.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 
-  private void clearWarningP(MouseEvent mouseEvent) {
-    popupPumpAlert.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
+  public void clickInfo(ActionEvent actionEvent) {
+    if (alertInfoTextA.isVisible() == false) {
+      alertInfoTextA.setVisible(true);
+    } else {
+      alertInfoTextA.setVisible(false);
+    }
   }
 }
