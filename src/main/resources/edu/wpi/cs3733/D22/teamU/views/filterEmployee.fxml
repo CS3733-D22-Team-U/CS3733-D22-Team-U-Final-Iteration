@@ -29,7 +29,7 @@
                 <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
                 <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
                     <children>
-                        <Text fx:id="time" layoutX="46.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
+                        <Text fx:id="time" layoutX="7.0" layoutY="45.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
                     </children>
                 </Pane>
                 <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
@@ -110,7 +110,7 @@
                                     <TextField fx:id="passwordTxt" />
                                  </children>
                               </VBox>
-                              <Button fx:id="submitButton" alignment="CENTER" layoutX="19.0" layoutY="59.0" lineSpacing="5.0" maxHeight="300.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#displayInfo" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
+                              <Button fx:id="submitButton" alignment="CENTER" layoutX="19.0" layoutY="59.0" lineSpacing="5.0" maxHeight="300.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#updateList" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -128,10 +128,11 @@
                               <Font name="System Bold" size="26.0" />
                            </font>
                         </Label>
-                        <TableView layoutX="276.0" layoutY="82.0" prefHeight="487.0" prefWidth="530.0">
+                        <TableView fx:id="employeeRequests" layoutX="276.0" layoutY="82.0" prefHeight="487.0" prefWidth="530.0">
                           <columns>
                             <TableColumn fx:id="IDCol" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="employeeCol" prefWidth="75.0" text="Employee" />
+                            <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="employeeCol" prefWidth="75.0" text="Employee" />
                               <TableColumn fx:id="patientCol" prefWidth="75.0" text="Patient" />
                               <TableColumn fx:id="destinationCol" prefWidth="75.0" text="Destination" />
                               <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />

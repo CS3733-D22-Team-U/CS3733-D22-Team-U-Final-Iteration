@@ -4,6 +4,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
   public Statement statement;
   public String csvFile;
   public static HashMap<String, ReligiousRequest> List = new HashMap<String, ReligiousRequest>();
+  public ArrayList<ReligiousRequest> list = new ArrayList<ReligiousRequest>();
 
   public ReligiousRequestDaoImpl(Statement statement, String csvfile) {
     this.csvFile = csvfile;

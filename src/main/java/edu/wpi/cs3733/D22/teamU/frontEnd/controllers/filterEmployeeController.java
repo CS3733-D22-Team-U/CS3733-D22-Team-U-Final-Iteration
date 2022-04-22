@@ -28,6 +28,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequ
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.RequestUI;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import javafx.beans.Observable;
@@ -39,12 +40,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import lombok.SneakyThrows;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -60,7 +63,8 @@ public class filterEmployeeController extends ServiceController implements Initi
     @FXML ComboBox<Employee> employees = new ComboBox<Employee>();
     @FXML Button submitButton;@FXML Button clearButton;
 
-    @FXML TableColumn<Request, Integer> IDCol;
+    @FXML TableColumn<Request, String> IDCol;
+    @FXML TableColumn<Request, String> typeCol;
     @FXML TableColumn<Request, String> employeeCol;
     @FXML TableColumn<Request, String> patientCol;
     @FXML TableColumn<Request, String> destinationCol;
@@ -68,6 +72,9 @@ public class filterEmployeeController extends ServiceController implements Initi
     @FXML TableColumn<Request, String> dateCol;
     @FXML TableColumn<Request, String> timeCol;
     @FXML TableView<Request> employeeRequests;
+    @FXML
+    Text time;
+    private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
     ObservableList<Request> employeeRequestsList = FXCollections.observableArrayList();
@@ -83,6 +90,20 @@ public class filterEmployeeController extends ServiceController implements Initi
         employees.setTooltip(new Tooltip());
         employees.getItems().addAll(staff);
         new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+        handleTime();
+    }
+
+    private void handleTime() {
+        Thread timeThread =
+                new Thread(
+                        () -> {
+                            while (Uapp.running) {
+                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                String timeStampTime = sdf3.format(timestamp).substring(11);
+                                time.setText(timeStampTime);
+                            }
+                        });
+        timeThread.start();
     }
 
     @Override
@@ -102,6 +123,7 @@ public class filterEmployeeController extends ServiceController implements Initi
 
     private void setUpEmployeeRequests() throws SQLException, IOException {
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("reqType")); //todo reqType
         employeeCol.setCellValueFactory(new PropertyValueFactory<>("employee"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         destinationCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
@@ -112,6 +134,7 @@ public class filterEmployeeController extends ServiceController implements Initi
     }
 
     private ObservableList <Request> getRequestList() throws SQLException, IOException{
+
         for(CompServRequest request : CompServRequestDaoImpl.List.values()){
             employeeRequestsList.add(
                     new Request(
@@ -249,258 +272,40 @@ public class filterEmployeeController extends ServiceController implements Initi
     }
 
 
-    ObservableList<Request> requests = FXCollections.observableArrayList();
+    //ObservableList<Request> requests = FXCollections.observableArrayList();
     public void updateList(ActionEvent actionEvent) throws SQLException, IOException {
-        requests.clear();
+        displayInfo();
 
-        for (CompServRequest request : Udb.getInstance().compServRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Computer Service",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
+        ArrayList<Request> requests = new ArrayList<>();
+        for(Request r: employeeRequestsList){
+            if(r.getEmployee().equals(employees.getValue()))
+                requests.add(r);
         }
 
-        for (EquipRequest request : Udb.getInstance().equipRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Equipment Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (GiftRequest request : Udb.getInstance().giftRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Gift Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (LabRequest request : Udb.getInstance().labRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Lab Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (LaundryRequest request : Udb.getInstance().laundryRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Laundry Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (MaintenanceRequest request : Udb.getInstance().maintenanceRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Maintenance Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (MealRequest  request : Udb.getInstance().mealRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Meal Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (MedicineRequest request : Udb.getInstance().medicineRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Medicine Delivery Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Religious Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (SecurityRequest request : Udb.getInstance().securityRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Security Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
-
-        for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.list()) {
-            //TODO: get value from employee comboBox
-            String employee = employees.getValue().toString();
-            try {
-                if (request.getEmployee().getFirstName().equals(employee))
-                    requests.add(
-                            new Request(
-                                    request.getID(),
-                                    "Translator Request",
-                                    request.getEmployee(),
-                                    request.getPatientName(),
-                                    request.getDestination(),
-                                    request.getStatus(),
-                                    request.getDate(),
-                                    request.getTime()));
-            } catch (Exception e) {
-            }
-            employeeRequests.setItems(requests);
-
-        }
+        employeeRequests.setItems(FXCollections.observableArrayList(requests));
 
     }
 
 
 
-    public void displayInfo(ActionEvent actionEvent){
+    public void displayInfo(){
 
         Employee employee =  employees.getValue();
+
         int reports = employee.getReports();
         boolean onDuty = employee.getOnDuty();
+
+
+
+
 
 
         IDTxt.setText(employee.getEmployeeID());
         firstTxt.setText(employee.getFirstName());
         lastTxt.setText(employee.getLastName());
         occupationTxt.setText(employee.getOccupation());
-        reportsTxt.setText(String.valueOf(reports));
-        dutyTxt.setText(String.valueOf(onDuty));
+        reportsTxt.setText( String.valueOf(reports));
+        dutyTxt.setText( String.valueOf(onDuty));
         userTxt.setText(employee.getUsername());
         passwordTxt.setText(employee.getPassword());
 

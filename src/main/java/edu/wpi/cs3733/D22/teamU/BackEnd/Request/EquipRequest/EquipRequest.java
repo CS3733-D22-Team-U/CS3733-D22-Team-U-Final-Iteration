@@ -19,6 +19,7 @@ public class EquipRequest extends Request {
       String date,
       String time,
       int priority) {
+    super();
     this.ID = ID;
     this.name = name;
     this.amount = amount;
