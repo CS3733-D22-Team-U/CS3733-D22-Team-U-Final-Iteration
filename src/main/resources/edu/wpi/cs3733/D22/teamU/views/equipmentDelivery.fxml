@@ -76,18 +76,18 @@
             </Pane>
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
-                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="517.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                      <children>
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
                               <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="activeReqName" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="activeReqAmount" prefWidth="75.0" text="Amount Requested" />
-                              <TableColumn fx:id="activeReqType" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="activeReqEmployee" prefWidth="75.0" text="Employee" />
+                              <TableColumn fx:id="activeReqPatient" prefWidth="75.0" text="Patient" />
+                              <TableColumn fx:id="activeReqName" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="activeReqAmount" prefWidth="75.0" text="Amount" />
                               <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />
                               <TableColumn fx:id="activeDate" prefWidth="75.0" text="Date" />
                               <TableColumn fx:id="activeTime" prefWidth="75.0" text="Time" />
-                              <TableColumn fx:id="activePriority" prefWidth="75.0" text="Priority" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -363,11 +363,6 @@
                            <children>
                               <ComboBox fx:id="locations" layoutX="64.0" layoutY="194.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
                               <ComboBox fx:id="employees" layoutX="64.0" layoutY="44.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <Text fx:id="requestText" fill="WHITE" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
                               <ComboBox fx:id="patients" layoutX="64.0" layoutY="119.0" prefWidth="150.0" />
                               <Label layoutX="64.0" layoutY="168.0" text="Location:" textFill="WHITE">
                                  <font>
@@ -403,11 +398,16 @@
                               </Button>
                            </children>
                         </HBox>
+                        <Text fx:id="requestText" fill="WHITE" layoutX="345.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
                      </children>
                   </Pane>
-                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="552.0" prefWidth="542.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                      <children>
-                        <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
+                        <TableView fx:id="table" editable="true" layoutX="45.0" layoutY="30.0" prefHeight="493.0" prefWidth="526.0">
                            <columns>
                               <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
                               <TableColumn fx:id="inUse" prefWidth="75.0" text="In Use" />

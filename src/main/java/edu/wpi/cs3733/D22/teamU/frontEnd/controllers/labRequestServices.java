@@ -76,7 +76,7 @@ public class labRequestServices extends ServiceController {
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
   ObservableList<EquipmentUI> labRequestUI = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> labUIRequestss = FXCollections.observableArrayList();
+  ObservableList<LabUI> labUIRequestss = FXCollections.observableArrayList();
 
   // Udb udb = DBController.udb;
   ArrayList<String> nodeIDs;
@@ -163,17 +163,7 @@ public class labRequestServices extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<LabUI> newRequest(
-      String id,
-      String name,
-      int amount,
-      String destination,
-      String date,
-      String time,
-      int priority) {
-    labUIRequestss.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
-    return labUIRequests;
-  }
+
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     labRequestUI.clear();

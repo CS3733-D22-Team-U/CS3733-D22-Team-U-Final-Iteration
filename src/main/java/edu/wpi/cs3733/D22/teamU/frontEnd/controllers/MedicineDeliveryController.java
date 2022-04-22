@@ -369,7 +369,7 @@ public class MedicineDeliveryController extends ServiceController {
             .append(", ");
 
         double rand = Math.random() * 10000;
-        // String patient = "BRUH";
+
 
         MedicineRequest request =
             new MedicineRequest(

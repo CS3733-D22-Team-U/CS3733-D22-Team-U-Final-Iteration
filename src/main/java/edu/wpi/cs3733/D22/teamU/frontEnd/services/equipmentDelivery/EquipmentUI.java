@@ -18,6 +18,7 @@ public class EquipmentUI {
   private String patient;
   private String floor;
   private String nodeType;
+  String status;
 
 
   public EquipmentUI(String name, int inUse, int available, int total, String location) {

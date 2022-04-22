@@ -65,12 +65,14 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @FXML Button submitButton;
 
   @FXML TableColumn<EquipmentUI, String> activeReqID;
+  @FXML TableColumn<EquipmentUI, String> activeReqEmployee;
+  @FXML TableColumn<EquipmentUI, String> activeReqPatient;
 
   @FXML TableColumn<EquipmentUI, String> activeReqName;
 
   @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
 
-  @FXML TableColumn<EquipmentUI, String> activeReqType;
+
 
   @FXML TableColumn<EquipmentUI, String> activeReqDestination;
 
@@ -246,20 +248,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
   private void setUpActiveRequests() throws SQLException, IOException {
 
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-
+    activeReqEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
+    activeReqPatient.setCellValueFactory(new PropertyValueFactory<>("patient"));
     activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
-
     activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
-
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
-
     activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-
     activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
-
     activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
 
-    activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
+
 
     activeRequestTable.setItems(getActiveRequestList());
   }
@@ -382,17 +379,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
           Udb.getInstance()
               .add( // TODO Have random ID and enter Room Destination
-                  new EquipRequest(
+                  new EquipmentUI(
                       request.getId(),
-                      request.getEquipmentName(),
+                      request.getEmployee(),
+                      request.getPatient(),
+                          request.getType(),
                       request.getRequestAmount(),
-                      request.getType(),
-                      "sent",
-                      checkEmployee(employees.getValue()),
                       request.getDestination(),
                       request.getRequestDate(),
-                      request.getRequestTime(),
-                      1));
+                      request.getRequestTime()));
 
         } catch (IOException e) {
 
