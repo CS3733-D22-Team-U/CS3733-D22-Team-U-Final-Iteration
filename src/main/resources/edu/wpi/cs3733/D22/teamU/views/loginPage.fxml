@@ -21,6 +21,11 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #c9c9c9;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.loginPageController">
 <children>
+      <ImageView fitHeight="750.0" fitWidth="1100.0" layoutY="108.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/Healthcare_Building.jpg" />
+         </image>
+      </ImageView>
       <StackPane layoutX="451.0" layoutY="418.0" prefHeight="166.0" prefWidth="200.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Circle fx:id="loadingCircle" fill="#1f93ff00" radius="100.0" strokeType="INSIDE" strokeWidth="15.0">
