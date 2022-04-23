@@ -33,25 +33,20 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving." wrappingWidth="370.904296875">
+                        <Text layoutX="4.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving, and the destination." wrappingWidth="433.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="8.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient." wrappingWidth="424.3310546875">
+                        <Text layoutX="8.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient, as well as pickup date and drop date." wrappingWidth="424.3310546875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the lab request services needed for the patient.">
+                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the laundry request services needed for the patient.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the service you need is not listed, please select &quot;Other&quot; and write the name of the service in the text area labeled &quot;Other&quot;" wrappingWidth="300.904296875">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
                         <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="209.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow-png-download.png" />
@@ -76,11 +71,26 @@
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+                  <ImageView fitHeight="338.0" fitWidth="223.0" layoutX="-10.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/laundryserv1.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="157.0" fitWidth="254.0" layoutX="284.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/laundryserv2.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="77.0" fitWidth="295.0" layoutX="612.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv3.PNG" />
+                     </image>
+                  </ImageView>
                     </children></Pane>
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="291.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Text fill="WHITE" layoutX="138.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                <Text fill="WHITE" layoutX="139.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="247.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="302.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Text fill="WHITE" layoutX="138.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                <Text fill="WHITE" layoutX="139.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
             </children>
         </Pane>
         <Pane fx:id="assistPane" layoutX="11.0" layoutY="190.0" prefHeight="563.0" prefWidth="93.0" />

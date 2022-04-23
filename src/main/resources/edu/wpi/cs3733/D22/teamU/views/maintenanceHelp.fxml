@@ -28,30 +28,25 @@
                                 <Font name="System Bold" size="30.0" />
                             </font>
                         </Text>
-                        <Text layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use Meal Request Services:">
+                        <Text layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use Maintenance Request Services:">
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving." wrappingWidth="370.904296875">
+                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input destination of the patient you're serving." wrappingWidth="370.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="8.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient." wrappingWidth="424.3310546875">
+                        <Text layoutX="8.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient." wrappingWidth="424.3310546875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the lab request services needed for the patient.">
+                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the maintenance request services needed for the patient.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the service you need is not listed, please select &quot;Other&quot; and write the name of the service in the text area labeled &quot;Other&quot;" wrappingWidth="300.904296875">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
                         <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="209.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow-png-download.png" />
@@ -76,17 +71,32 @@
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+                  <ImageView fitHeight="175.0" fitWidth="245.0" layoutX="-25.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/equipserv11.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="228.0" fitWidth="279.0" layoutX="276.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/maintserv1.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="77.0" fitWidth="258.0" layoutX="624.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv3.PNG" />
+                     </image>
+                  </ImageView>
                     </children></Pane>
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="291.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="308.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                 <Text fill="WHITE" layoutX="138.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                <Text fill="WHITE" layoutX="139.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+                <Text fill="WHITE" layoutX="139.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
             </children>
         </Pane>
         <Pane fx:id="assistPane" layoutX="11.0" layoutY="190.0" prefHeight="563.0" prefWidth="93.0" />
         <Pane prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
             <children>
-                <Text fill="WHITE" layoutX="275.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Request Help" wrappingWidth="756.65234375">
+                <Text fill="WHITE" layoutX="186.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance Request Help" wrappingWidth="777.65234375">
                     <font>
                         <Font name="System Bold" size="60.0" />
                     </font>

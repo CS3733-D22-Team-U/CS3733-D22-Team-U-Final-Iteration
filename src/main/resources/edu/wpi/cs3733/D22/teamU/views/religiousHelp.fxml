@@ -28,26 +28,26 @@
                                 <Font name="System Bold" size="30.0" />
                             </font>
                         </Text>
-                        <Text layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use Secuirty Request Services:">
+                        <Text layoutX="13.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use Religious Request Services:">
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving." wrappingWidth="370.904296875">
+                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving, and the destination of the request.." wrappingWidth="370.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="8.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient." wrappingWidth="424.3310546875">
+                        <Text layoutX="8.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient." wrappingWidth="424.3310546875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the lab request services needed for the patient.">
+                        <Text layoutX="275.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Describe the religion, as well as the specific request.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the service you need is not listed, please select &quot;Other&quot; and write the name of the service in the text area labeled &quot;Other&quot;" wrappingWidth="300.904296875">
+                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you have additional requests, please fill them in in the &quot;Additional Notes&quot; section." wrappingWidth="300.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -76,17 +76,32 @@
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+                  <ImageView fitHeight="227.0" fitWidth="203.0" layoutX="-11.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/religiousserv1.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="218.0" fitWidth="239.0" layoutX="294.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/religiousserv2.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="104.0" fitWidth="275.0" layoutX="603.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv3.PNG" />
+                     </image>
+                  </ImageView>
                     </children></Pane>
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="291.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="319.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                 <Text fill="WHITE" layoutX="138.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                <Text fill="WHITE" layoutX="139.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+                <Text fill="WHITE" layoutX="139.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
             </children>
         </Pane>
         <Pane fx:id="assistPane" layoutX="11.0" layoutY="190.0" prefHeight="563.0" prefWidth="93.0" />
         <Pane prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
             <children>
-                <Text fill="WHITE" layoutX="229.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security Request Help" wrappingWidth="756.65234375">
+                <Text fill="WHITE" layoutX="229.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religious Request Help" wrappingWidth="756.65234375">
                     <font>
                         <Font name="System Bold" size="60.0" />
                     </font>

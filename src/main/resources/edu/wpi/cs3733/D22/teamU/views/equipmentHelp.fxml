@@ -33,7 +33,7 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving." wrappingWidth="370.904296875">
+                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input destination of the patient you're serving." wrappingWidth="370.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -43,15 +43,10 @@
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the lab request services needed for the patient.">
+                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the equipment request services needed for the patient.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the service you need is not listed, please select &quot;Other&quot; and write the name of the service in the text area labeled &quot;Other&quot;" wrappingWidth="300.904296875">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
                         <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="209.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow-png-download.png" />
@@ -78,7 +73,17 @@
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
                   <ImageView fitHeight="206.0" fitWidth="259.0" layoutX="-31.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/equipserv1.PNG" />
+                        <Image url="@../images/equipserv11.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="353.0" fitWidth="292.0" layoutX="283.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/equipserv2.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="95.0" fitWidth="283.0" layoutX="607.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv3.PNG" />
                      </image>
                   </ImageView>
                     </children></Pane>
