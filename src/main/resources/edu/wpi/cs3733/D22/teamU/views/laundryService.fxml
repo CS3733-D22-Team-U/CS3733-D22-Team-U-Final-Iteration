@@ -70,11 +70,11 @@
                     <children>
                         <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                             <children>
-                                <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="253.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                                <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <VBox fx:id="requestHolder" layoutX="11.0" layoutY="73.0" prefHeight="148.0" prefWidth="153.0" spacing="15.0">
+                              <VBox fx:id="requestHolder" layoutX="14.0" layoutY="73.0" prefHeight="148.0" prefWidth="285.0" spacing="15.0">
                                  <children>
-                                    <JFXCheckBox fx:id="top" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hang Dry">
+                                    <JFXCheckBox fx:id="top" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hang Dry" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -82,59 +82,59 @@
                                           <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
-                                    <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Machine-Dry">
+                                    <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Machine-Dry" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
-                                    <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hypo-Allergenic">
+                                    <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Regular Wash/Hypo-Allergenic" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                  </children>
                               </VBox>
-                              <Text fill="#044e9a" layoutX="3.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service to Request">
+                              <Text fill="#044e9a" layoutX="55.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service to Request">
                                  <font>
-                                    <Font name="System Bold" size="27.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
                            </children></Pane>
                                 <Pane layoutX="340.0" layoutY="7.0" prefHeight="519.0" prefWidth="275.0">
                                     <children>
-                              <TextField fx:id="patientNameInput" layoutX="70.0" layoutY="53.0" prefHeight="25.0" prefWidth="174.0" promptText="Enter Patient Name" />
-                                        <ComboBox fx:id="locations" layoutX="67.0" layoutY="108.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Location" />
-                                        <ComboBox fx:id="employees" layoutX="69.0" layoutY="170.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="174.0" promptText="Select Employee" />
-                                        <Text fx:id="requestText" fill="WHITE" layoutX="5.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                              <TextField fx:id="patientNameInput" layoutX="42.0" layoutY="52.0" prefHeight="30.0" prefWidth="190.0" />
+                                        <ComboBox fx:id="locations" layoutX="42.0" layoutY="118.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                                        <ComboBox fx:id="employees" layoutX="42.0" layoutY="189.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                                        <Text fx:id="requestText" fill="WHITE" layoutX="5.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0" y="50.0">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
                                         </Text>
-                              <DatePicker fx:id="pickupDateInput" layoutX="69.0" layoutY="252.0" promptText="Select Pickup Date" />
-                              <DatePicker fx:id="dropOffDateInput" layoutX="69.0" layoutY="308.0" promptText="Select Drop Date" />
-                              <Text fill="WHITE" layoutX="106.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
+                              <DatePicker fx:id="pickupDateInput" layoutX="42.0" layoutY="264.0" prefHeight="30.0" prefWidth="190.0" promptText="Select Pickup Date" />
+                              <DatePicker fx:id="dropOffDateInput" layoutX="42.0" layoutY="332.0" prefHeight="30.0" prefWidth="190.0" promptText="Select Drop Date" />
+                              <Text fill="WHITE" layoutX="82.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="118.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+                              <Text fill="WHITE" layoutX="100.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="115.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee">
+                              <Text fill="WHITE" layoutX="81.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="110.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date">
+                              <Text fill="WHITE" layoutX="87.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="112.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drop Date">
+                              <Text fill="WHITE" layoutX="94.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drop Date">
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                                     </children>

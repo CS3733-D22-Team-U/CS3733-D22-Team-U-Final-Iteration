@@ -186,7 +186,7 @@ public class giftFloralController extends ServiceController {
     String inputString = "";
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        inputString += checkBoxes.get(i).getText() + ", ";
+        inputString += checkBoxes.get(i).getText() + ": ";
       }
     }
     String room = locations.getValue().toString();

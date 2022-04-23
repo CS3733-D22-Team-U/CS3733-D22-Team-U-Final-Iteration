@@ -6,7 +6,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -109,29 +108,35 @@
                                                 <Insets />
                                              </VBox.margin>
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font size="20.0" />
                                              </font>
                                           </JFXCheckBox>
                                           <JFXCheckBox fx:id="plantBox" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Chocolate" textFill="#044e9a" unCheckedColor="#044e9a">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font size="20.0" />
                                              </font>
                                           </JFXCheckBox>
                                           <JFXCheckBox fx:id="flowerBox" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Flowers" textFill="#044e9a" unCheckedColor="#044e9a">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font size="20.0" />
                                              </font>
                                           </JFXCheckBox>
                                           <JFXCheckBox fx:id="basketBox" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Gift Basket" textFill="#044e9a" unCheckedColor="#044e9a">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font size="20.0" />
                                              </font>
                                           </JFXCheckBox>
                                        </children>
                                     </VBox>
-                                    <Text fill="#044e9a" layoutX="50.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a gift">
+                                    <Text fill="#044e9a" layoutX="102.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a gift">
                                        <font>
-                                          <Font size="36.0" />
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <TextArea fx:id="message" layoutX="22.0" layoutY="290.0" prefHeight="127.0" prefWidth="275.0" promptText="Insert a Gift Message" />
+                                    <Text fill="#044e9a" layoutX="99.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift Message">
+                                       <font>
+                                          <Font size="20.0" />
                                        </font>
                                     </Text>
                                  </children>
@@ -140,39 +145,33 @@
                         </Pane>
                         <Pane layoutX="340.0" layoutY="18.0" prefHeight="289.0" prefWidth="275.0">
                            <children>
-                              <ComboBox fx:id="locations" layoutX="62.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <ComboBox fx:id="employees" layoutX="64.0" layoutY="89.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <Text fx:id="requestText" fill="WHITE" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                              <ComboBox fx:id="locations" layoutX="49.0" layoutY="38.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <ComboBox fx:id="employees" layoutX="49.0" layoutY="106.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <Text fx:id="requestText" fill="WHITE" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <TextArea fx:id="message" layoutX="16.0" layoutY="274.0" prefHeight="160.0" prefWidth="248.0" />
-                              <Text fill="WHITE" layoutX="62.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert a gift message">
+                              <Text fill="WHITE" layoutX="85.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="64.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff Member">
+                              <Text fill="WHITE" layoutX="93.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="93.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination">
+                              <Text fill="WHITE" layoutX="87.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="86.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
+                              <TextField fx:id="patientName" layoutX="49.0" layoutY="174.0" prefHeight="30.0" prefWidth="190.0" />
+                              <TextField fx:id="senderName" layoutX="49.0" layoutY="241.0" prefHeight="30.0" prefWidth="190.0" />
+                              <Text fill="WHITE" layoutX="90.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sender Name">
                                  <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="patientName" layoutX="63.0" layoutY="147.0" />
-                              <TextField fx:id="senderName" layoutX="65.0" layoutY="207.0" />
-                              <Text fill="WHITE" layoutX="95.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sender Name">
-                                 <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -192,157 +191,103 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toHelp" prefHeight="56.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
                            </children>
                         </HBox>
+                        <Button alignment="CENTER" layoutX="435.0" layoutY="496.0" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toHelp" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                </children>
             </StackPane>
          </children>
       </Pane>
-      <ScrollPane prefHeight="750.0" prefWidth="86.0">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0"
-                                styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/homeIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/equipmentIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMap" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/mapIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLabRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/labIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/medicineIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/foodIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/giftIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLaundry" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/laundry.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/maintenance.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/religious.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/translate.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toSeurity" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/security.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toCompService" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/computerService.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+      <VBox fx:id="sideBar" alignment="TOP_CENTER" layoutX="-2.0" layoutY="-1.0" prefHeight="763.0" prefWidth="82.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
+         <children>
+            <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/homeIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/equipmentIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toMap" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/mapIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toLabRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/labIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/medicineIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/foodIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/giftIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toLaundry" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/laundry.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </VBox>
     </children>
 </AnchorPane>

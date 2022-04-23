@@ -95,78 +95,83 @@
                      <children>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <VBox fx:id="requestHolder" layoutX="19.0" layoutY="67.0" prefHeight="243.0" prefWidth="198.0">
+                              <VBox fx:id="requestHolder" layoutX="19.0" layoutY="61.0" prefHeight="249.0" prefWidth="242.0">
                                  <children>
                                     <JFXCheckBox fx:id="veganCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Vegan" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="vegCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Vegetarian" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="glutenCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Gluten-Free" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="kosherCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Kosher" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="halalCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Halal" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="lactoseCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="Lactose-intolerant" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="nutsCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="No Nuts" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                     <JFXCheckBox fx:id="shellfishCheckbox" checkedColor="#044e9a" prefWidth="143.0" text="No Shellfish" textFill="#044e9a" unCheckedColor="#044e9a">
                                        <font>
-                                          <Font size="28.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </JFXCheckBox>
                                  </children>
                               </VBox>
-                              <Text fill="#044e9a" layoutX="15.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dietary Restrictions ">
+                              <Text fill="#044e9a" layoutX="81.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dietary Restrictions ">
                                  <font>
-                                    <Font name="System Bold" size="30.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
                            </children>
                         </Pane>
                         <Pane layoutX="340.0" layoutY="18.0" prefHeight="289.0" prefWidth="275.0">
                            <children>
-                              <ComboBox fx:id="locations" layoutX="121.0" layoutY="15.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="135.0" />
-                              <ComboBox fx:id="employees" layoutX="120.0" layoutY="90.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="134.0" />
+                              <ComboBox fx:id="locations" layoutX="43.0" layoutY="37.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <ComboBox fx:id="employees" layoutX="44.0" layoutY="173.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
                               <Text fx:id="requestText" fill="WHITE" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Text>
-                              <ComboBox fx:id="patients" layoutX="120.0" layoutY="52.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="135.0" />
-                              <Text fill="WHITE" layoutX="40.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location: ">
+                              <ComboBox fx:id="patients" layoutX="44.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <Text fill="WHITE" layoutX="99.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="4.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name:">
+                              <Text fill="WHITE" layoutX="77.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" layoutX="32.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee:">
+                              <Text fill="WHITE" layoutX="79.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="77.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Notes">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -190,12 +195,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <JFXTextArea fx:id="notesMeal" layoutX="362.0" layoutY="225.0" prefHeight="306.0" prefWidth="233.0" style="-fx-background-color: WHITE; -fx-border-color: BLACK;" />
-                        <Text fill="WHITE" layoutX="366.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Notes:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
+                        <JFXTextArea fx:id="notesMeal" layoutX="361.0" layoutY="278.0" prefHeight="194.0" prefWidth="233.0" style="-fx-background-color: WHITE;" />
                      </children>
                   </Pane>
                   <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
