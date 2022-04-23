@@ -5,7 +5,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -228,6 +227,37 @@
                   </ButtonBar>
                </children>
             </Pane>
+            <ButtonBar fx:id="bottomRow11" layoutX="306.0" layoutY="537.0" prefHeight="59.0" prefWidth="499.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <buttons>
+                  <ButtonBar prefHeight="59.0" prefWidth="294.0">
+                    <buttons>
+                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Employee Info" wrapText="true">
+                           <stylesheets>
+                              <URL value="@../css/buttons.css" />
+                              <URL value="@../css/headersAndLabels.css" />
+                           </stylesheets>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Marko 'Polo' Vila" />
+                           </tooltip>
+                        </Button>
+                    </buttons>
+                  </ButtonBar>
+                  <Button fx:id="allRequestsButton" minHeight="190.0" mnemonicParsing="false" onAction="#toAllRequests" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="All Requests">
+                     <tooltip>
+                        <Tooltip text="Iain McEwen" />
+                     </tooltip>
+                  </Button>
+               </buttons>
+            </ButtonBar>
             <AnchorPane fx:id="turtAnchor" layoutX="308.0" layoutY="687.0" prefHeight="477.0" prefWidth="485.0" style="-fx-background-color: #efefef; -fx-background-radius: 35 35 0 0; -fx-effect: dropshadow(gaussian, #000000,25,0,0,0);">
                <children>
                   <Pane fx:id="turtlePond" layoutX="19.0" layoutY="86.0" prefHeight="364.0" prefWidth="447.0" style="-fx-background-color: blue;">
@@ -264,39 +294,7 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <ButtonBar fx:id="bottomRow11" layoutX="306.0" layoutY="537.0" prefHeight="59.0" prefWidth="499.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <buttons>
-                  <ButtonBar prefHeight="59.0" prefWidth="294.0">
-                    <buttons>
-                        <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Employee Info" wrapText="true">
-                           <stylesheets>
-                              <URL value="@../css/buttons.css" />
-                              <URL value="@../css/headersAndLabels.css" />
-                           </stylesheets>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="Marko 'Polo' Vila" />
-                           </tooltip>
-                        </Button>
-                    </buttons>
-                  </ButtonBar>
-                  <Button fx:id="allRequestsButton" minHeight="190.0" mnemonicParsing="false" onAction="#toAllRequests" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="All Requests">
-                     <tooltip>
-                        <Tooltip text="Iain McEwen" />
-                     </tooltip>
-                  </Button>
-               </buttons>
-            </ButtonBar>
             <VBox fx:id="menuVB" layoutX="843.0" layoutY="263.0" />
-            <MenuButton fx:id="reportMenuBTN" layoutX="826.0" layoutY="262.0" mnemonicParsing="false" style="-fx-background-color: #054f99;" text="Report An Employee" textFill="WHITE" />
             <Button layoutX="819.0" layoutY="547.0" minHeight="190.0" mnemonicParsing="false" onAction="#toReport" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Report">
                <tooltip>
                   <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />

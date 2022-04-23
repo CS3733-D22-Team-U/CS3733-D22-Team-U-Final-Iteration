@@ -13,6 +13,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tooltip;
@@ -26,6 +30,7 @@ public class ReportController extends ServiceController {
   @FXML Button clearButton;
   @FXML Button submitButton;
   @FXML JFXTextArea reportDescrip;
+  @FXML BarChart reportBarChart;
 
   ArrayList<Employee> staff;
   ObservableList<String> typeList =
@@ -43,6 +48,11 @@ public class ReportController extends ServiceController {
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     typeOfReport.setItems(typeList);
+    if (Udb.admin) {
+      setUpGraph();
+    } else {
+      reportBarChart.setVisible(false);
+    }
   }
 
   @Override
@@ -81,4 +91,26 @@ public class ReportController extends ServiceController {
   public void mouseHovered(MouseEvent mouseEvent) {}
 
   public void mouseExit(MouseEvent mouseEvent) {}
+
+  public void setUpGraph() throws SQLException, IOException {
+    CategoryAxis xAxis = new CategoryAxis();
+
+    NumberAxis yAxis = new NumberAxis();
+
+    reportBarChart.getXAxis().setLabel("Name of Employee");
+    reportBarChart.getYAxis().setLabel("Number of Reports");
+
+    XYChart.Series data = new XYChart.Series();
+    data.setName("Reports Greater than 1");
+    for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
+      if (employee.getReports() >= 1) {
+        data.getData()
+            .add(
+                new XYChart.Data<>(
+                    employee.getFirstName() + " " + employee.getLastName(), employee.getReports()));
+      }
+    }
+
+    reportBarChart.getData().add(data);
+  }
 }
