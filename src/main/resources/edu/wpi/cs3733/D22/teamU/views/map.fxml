@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,7 +39,7 @@
                 <DropShadow />
             </effect>
         </Pane>
-        <Pane fx:id="backgroundPane" layoutX="111.0" layoutY="11.0" prefHeight="740.0" prefWidth="990.0">
+        <Pane fx:id="backgroundPane" layoutX="105.0" layoutY="1.0" prefHeight="750.0" prefWidth="996.0">
             <children>
                 <TabPane layoutX="-25.0" layoutY="140.0" prefHeight="552.0" prefWidth="847.0" side="LEFT" stylesheets="@../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -46,7 +47,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <TabPane layoutY="-2.0" prefHeight="552.0" prefWidth="826.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0">
+                                        <TabPane layoutY="-2.0" prefHeight="552.0" prefWidth="849.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-36.0">
                                             <tabs>
                                                 <Tab text="Lower Level 1">
                                                     <content>
@@ -62,6 +63,9 @@
                                                                                             <image>
                                                                                                 <Image url="@../hospitalFloors/00_thelowerlevel1.png" />
                                                                                             </image>
+                                                                     <effect>
+                                                                        <Blend />
+                                                                     </effect>
                                                                                         </ImageView>
                                                                                     </children>
                                                                                 </AnchorPane>
@@ -267,21 +271,21 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <ScrollPane fitToWidth="true" layoutX="930.0" layoutY="165.0" prefHeight="528.0" prefWidth="150.0" stylesheets="@../css/scrollPane.css">
+        <ScrollPane fitToWidth="true" layoutX="930.0" layoutY="165.0" prefHeight="850.0" prefWidth="162.0">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="840.0" prefWidth="134.0">
                     <children>
-                        <Pane layoutY="-42.0" prefHeight="950.0" prefWidth="110.0" style="-fx-background-color: WHITE;">
+                        <Pane fx:id="Legend" layoutY="-43.0" onMouseDragged="#dispAll" prefHeight="951.0" prefWidth="149.0" style="-fx-background-color: WHITE;">
                             <children>
                                 <Group layoutX="-2.0" layoutY="152.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="PatientRoom" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispPatientRoom" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/pati.png" />
                                             </image>
                                         </ImageView>
-                                        <Text layoutX="45.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Room">
+                                        <Text layoutX="52.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Room">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -290,13 +294,13 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="196.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
-                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
+                                        <Rectangle fx:id="EquipStorage" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispEquipStorage" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
+                                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="6.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/stor.png" />
                                             </image>
                                         </ImageView>
-                                        <Text layoutX="45.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Equip Storage">
+                                        <Text layoutX="52.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Equip Storage">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -305,7 +309,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="242.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-114.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="DirtyEquipPickup" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-114.0" onMouseClicked="#dispDirtyEquipPickup" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/dirt.png" />
@@ -316,7 +320,7 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </Text>
-                                        <Text layoutX="54.0" layoutY="-75.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Loc">
+                                        <Text layoutX="54.0" layoutY="-75.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -325,7 +329,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="286.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Hallway" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispHallway" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/hall.png" />
@@ -340,7 +344,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="330.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Elevator" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispElevator" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/elev.png" />
@@ -355,7 +359,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="375.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Restroom" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispRestroom" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/elev.png" />
@@ -370,7 +374,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="420.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Staircase" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispStaircase" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/stairs.png" />
@@ -385,7 +389,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="465.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Department" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispDepartment" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/dept.png" />
@@ -400,13 +404,13 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="510.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Labs" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispLab" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/lab3.png" />
                                             </image>
                                         </ImageView>
-                                        <Text layoutX="60.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Labs">
+                                        <Text layoutX="57.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Labs">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -415,7 +419,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="555.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Information" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispInfo" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/info.png" />
@@ -430,7 +434,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="600.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Conference" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispConference" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/conf.png" />
@@ -445,7 +449,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="645.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Exit" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispExit" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/exit.png" />
@@ -460,7 +464,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="690.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Retail" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispRetail" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/retail.png" />
@@ -475,7 +479,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="730.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Service" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispService" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/serv.png" />
@@ -490,7 +494,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="770.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Beds" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutY="-113.0" onMouseClicked="#dispBed" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/beds.png" />
@@ -505,7 +509,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="810.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Pumps" arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" onMouseClicked="#dispPump" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/infuPump.png" />
@@ -520,7 +524,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="850.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="Recliners" arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" onMouseClicked="#dispRecliner" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/recliner.png" />
@@ -535,7 +539,7 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="890.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="OtherEquip" arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" onMouseClicked="#dispOtherEquip" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/DefaultEquip.png" />
@@ -550,13 +554,13 @@
                                 </Group>
                                 <Group layoutX="-2.0" layoutY="937.0">
                                     <children>
-                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="138.0" />
+                                        <Rectangle fx:id="MultiServices" arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="45.0" layoutY="-115.0" onMouseClicked="#dispMultiServices" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
                                         <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="5.0" layoutY="-106.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../mapIcons/multiServ.png" />
                                             </image>
                                         </ImageView>
-                                        <Text layoutX="50.0" layoutY="-84.107421875" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Services">
+                                        <Text layoutX="50.0" layoutY="-84.107421875" onMouseClicked="#dispMultiService" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Services">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
@@ -569,7 +573,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <ScrollPane prefHeight="750.0" prefWidth="86.0" stylesheets="@../css/scrollPane.css">
+        <ScrollPane prefHeight="750.0" prefWidth="86.0">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">
                     <children>

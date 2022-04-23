@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
@@ -770,10 +771,8 @@ public class MapController extends ServiceController {
 
   public void test(ZoomEvent zoomEvent) {}
 
-  public void dispAll(MouseEvent mouseevent)
-  {
+  public void dispAll(MouseEvent mouseevent) {}
 
-  }
   public void dispElevators(MouseEvent mouseevent) {
     if (EVicon != true) {
       for (LocationNode locationNode : locations.values()) {
@@ -792,6 +791,7 @@ public class MapController extends ServiceController {
       }
     }
   }
+
   public void dispDepartment(MouseEvent mouseEvent) {}
 
   public void dispStaircase(MouseEvent mouseEvent) {}
@@ -802,11 +802,11 @@ public class MapController extends ServiceController {
 
   public void dispOtherEquip(MouseEvent mouseEvent) {}
 
-  public void dispRecliners(MouseEvent mouseEvent) {}
+  public void dispRecliner(MouseEvent mouseEvent) {}
 
-  public void dispPumps(MouseEvent mouseEvent) {}
+  public void dispPump(MouseEvent mouseEvent) {}
 
-  public void dispBeds(MouseEvent mouseEvent) {}
+  public void dispBed(MouseEvent mouseEvent) {}
 
   public void dispService(MouseEvent mouseEvent) {}
 
@@ -814,13 +814,13 @@ public class MapController extends ServiceController {
 
   public void dispExit(MouseEvent mouseEvent) {}
 
-  public void dispConfrence(MouseEvent mouseEvent) {}
+  public void dispConference(MouseEvent mouseEvent) {}
 
-  public void dispInformation(MouseDragEvent mouseDragEvent) {}
+  public void dispInfo(MouseEvent mouseEvent) {}
 
-  public void dispLabs(MouseEvent mouseEvent) {}
+  public void dispLab(MouseEvent mouseEvent) {}
 
-  public void dispEquipPickup(MouseEvent mouseEvent) {}
+  public void dispDirtyEquipPickup(MouseEvent mouseEvent) {}
 
   public void dispEquipStorage(MouseEvent mouseEvent) {}
 
