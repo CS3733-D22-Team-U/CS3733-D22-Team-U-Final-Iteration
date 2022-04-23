@@ -105,92 +105,104 @@
                      <children>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <ScrollPane layoutY="35.0" prefHeight="433.0" prefWidth="304.0" style="-fx-background-radius: 15;">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="277.0" style="-fx-background-radius: 15;">
+                              <AnchorPane layoutX="7.0" layoutY="34.0" minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="310.0" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF;">
+                                 <children>
+                                    <VBox fx:id="requestHolder" layoutX="17.0" layoutY="11.0" prefHeight="318.0" prefWidth="160.0" spacing="15.0" style="-fx-background-color: #ffffff;">
                                        <children>
-                                          <VBox fx:id="requestHolder" layoutX="17.0" layoutY="11.0" prefHeight="630.0" prefWidth="153.0" spacing="15.0">
-                                             <children>
-                                                <JFXCheckBox fx:id="top7" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="COVID-19 Test">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top8" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Blood Test">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top9" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Urine Test">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top10" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Drug Screen">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top11" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Pregnancy Test">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top12" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Other">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </JFXCheckBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox fx:id="inputFields" layoutX="177.0" layoutY="5.0" prefHeight="711.0" prefWidth="100.0" spacing="15.0">
-                                             <children>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="100.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="-20.0" left="21.0" right="-5.0" />
-                                                   </padding>
-                                                </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="-20.0" left="21.0" right="-5.0" />
-                                                   </padding>
-                                                </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="-20.0" left="21.0" right="-5.0" />
-                                                   </padding>
-                                                </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="-20.0" left="21.0" right="-5.0" />
-                                                   </padding>
-                                                </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="-20.0" left="21.0" right="-5.0" />
-                                                   </padding>
-                                                </JFXTextArea>
-                                             </children>
-                                          </VBox>
+                                          <JFXCheckBox fx:id="top7" alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="160.0" text="COVID-19 Test" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="top8" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="160.0" text="Blood Test" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="top9" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Urine Test" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="top10" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Drug Screen" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="top11" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Pregnancy Test" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="top12" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Other" textFill="#044e9a" unCheckedColor="#044e9a">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </JFXCheckBox>
                                        </children>
-                                    </AnchorPane>
-                                 </content>
-                              </ScrollPane>
+                                    </VBox>
+                                    <VBox fx:id="inputFields" layoutX="177.0" layoutY="5.0" prefHeight="318.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: #FFFFFF;">
+                                       <children>
+                                          <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="100.0" unFocusColor="#044a9a">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="-20.0" left="21.0" right="-5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044a9a">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="-20.0" left="21.0" right="-5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044a9a">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="-20.0" left="21.0" right="-5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044a9a">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="-20.0" left="21.0" right="-5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044a9a">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets bottom="-20.0" left="21.0" right="-5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <Text fill="#044e9a" layoutX="101.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Request" wrappingWidth="131.13671875">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <TextArea layoutX="19.0" layoutY="332.0" prefHeight="127.0" prefWidth="285.0" promptText="Describe Other Request" />
+                              <Text fill="#044e9a" layoutX="64.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Test" wrappingWidth="76.13671875">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#044e9a" layoutX="197.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specify Amount" wrappingWidth="106.13671875">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
                            </children></Pane>
                         <HBox layoutX="10.0" layoutY="498.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">
                            <children>
@@ -209,25 +221,24 @@
                               </Button>
                            </children>
                         </HBox>
-                        <TextArea layoutX="368.0" layoutY="278.0" prefHeight="159.0" prefWidth="200.0" />
-                        <Text fill="WHITE" layoutX="368.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Other Request:" wrappingWidth="178.13671875">
+                        <Text fill="WHITE" layoutX="421.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="178.13671875">
                            <font>
-                              <Font name="System Bold" size="17.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="368.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Patient Name:" wrappingWidth="178.13671875">
+                        <Text fill="WHITE" layoutX="424.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="178.13671875">
                            <font>
-                              <Font name="System Bold" size="17.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="368.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Assigned Staff:" wrappingWidth="178.13671875">
+                        <TextField fx:id="patientNameField" layoutX="383.0" layoutY="75.0" prefHeight="30.0" prefWidth="190.0" />
+                        <TextField fx:id="staffMemberField" layoutX="384.0" layoutY="143.0" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox fx:id="locations" layoutX="384.0" layoutY="213.0" prefHeight="30.0" prefWidth="190.0" />
+                        <Text fill="WHITE" layoutX="428.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="178.13671875">
                            <font>
-                              <Font name="System Bold" size="17.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="patientNameField" layoutX="368.0" layoutY="75.0" />
-                        <TextField fx:id="staffMemberField" layoutX="368.0" layoutY="137.0" />
-                        <ComboBox fx:id="locations" layoutX="368.0" layoutY="202.0" prefWidth="150.0" promptText="Location" />
                      </children>
                   </Pane>
                   <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
@@ -257,7 +268,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#toHome"  prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                        <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

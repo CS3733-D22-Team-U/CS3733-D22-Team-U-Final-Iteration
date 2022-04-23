@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -313,12 +312,11 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   }*/
 
   // put in a try catch so when it fails to find the ID/username it throws an error
-  public void changePassword (String ID, String username, String password) throws SQLException, IOException {
+  public void changePassword(String ID, String username, String password)
+      throws SQLException, IOException {
     Employee selected = Udb.getInstance().EmployeeImpl.hList().get(ID);
-    if (selected.getUsername().equals(username))
-      selected.setPassword(password);
-    else
-      throw new SQLException();
+    if (selected.getUsername().equals(username)) selected.setPassword(password);
+    else throw new SQLException();
   }
 
   public Employee askUser() {

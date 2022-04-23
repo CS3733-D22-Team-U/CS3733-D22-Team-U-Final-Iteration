@@ -100,15 +100,30 @@
                   </Pane>
                   <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
+                        <Button alignment="CENTER" layoutX="435.0" layoutY="496.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3 #B0E5E3;" text="Help" textFill="#044e9a">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <ScrollPane layoutY="35.0" prefHeight="433.0" prefWidth="304.0" style="-fx-background-radius: 15;">
+                              <Text fill="#044e9a" layoutX="68.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#044e9a" layoutX="191.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specify Amount">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <ScrollPane layoutX="10.0" layoutY="33.0" prefHeight="433.0" prefWidth="303.0" style="-fx-background-color: #FFFFFF;">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="277.0" style="-fx-background-radius: 15;">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="277.0" style="-fx-background-color: #FFFFFF;">
                                        <children>
                                           <VBox fx:id="requestHolder" layoutX="17.0" layoutY="11.0" prefHeight="630.0" prefWidth="153.0" spacing="15.0">
                                              <children>
-                                                <JFXCheckBox fx:id="top" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Body Bag">
+                                                <JFXCheckBox fx:id="top" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Body Bag" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <VBox.margin>
                                                       <Insets />
                                                    </VBox.margin>
@@ -116,87 +131,87 @@
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Catheter">
+                                                <JFXCheckBox fx:id="top1" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Catheter" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Dressing">
+                                                <JFXCheckBox fx:id="top2" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Dressing" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top3" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Glove">
+                                                <JFXCheckBox fx:id="top3" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Glove" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top4" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Glucometer">
+                                                <JFXCheckBox fx:id="top4" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Glucometer" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top5" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Oximeter">
+                                                <JFXCheckBox fx:id="top5" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Oximeter" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top6" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Oxygen Mask">
+                                                <JFXCheckBox fx:id="top6" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Oxygen Mask" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top7" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Saline Bag">
+                                                <JFXCheckBox fx:id="top7" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Saline Bag" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top8" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Scapel">
+                                                <JFXCheckBox fx:id="top8" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Scapel" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top9" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Scissors">
+                                                <JFXCheckBox fx:id="top9" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Scissors" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top10" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Stethoscope">
+                                                <JFXCheckBox fx:id="top10" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Stethoscope" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top11" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Surgical Mask">
+                                                <JFXCheckBox fx:id="top11" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Surgical Mask" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top12" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Syringe">
+                                                <JFXCheckBox fx:id="top12" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Syringe" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top13" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Wheelchair">
+                                                <JFXCheckBox fx:id="top13" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Wheelchair" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top14" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Ventilator">
+                                                <JFXCheckBox fx:id="top14" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Ventilator" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top15" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Wheelchair">
+                                                <JFXCheckBox fx:id="top15" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Wheelchair" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top16" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Beds">
+                                                <JFXCheckBox fx:id="top16" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Beds" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="top17" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Infusion Pumps">
+                                                <JFXCheckBox fx:id="top17" alignment="TOP_LEFT" contentDisplay="RIGHT" prefWidth="169.0" text="Infusion Pumps" textFill="#044e9a" unCheckedColor="#044e9a">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -205,7 +220,7 @@
                                           </VBox>
                                           <VBox fx:id="inputFields" layoutX="177.0" layoutY="5.0" prefHeight="711.0" prefWidth="100.0" spacing="15.0">
                                              <children>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="100.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="11.0" prefWidth="100.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -213,7 +228,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -221,7 +236,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -229,7 +244,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -237,7 +252,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -245,7 +260,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -253,7 +268,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -261,7 +276,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -269,7 +284,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -277,7 +292,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -285,7 +300,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -293,7 +308,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -301,7 +316,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -309,7 +324,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -317,7 +332,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -325,7 +340,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -333,7 +348,7 @@
                                                       <Insets bottom="-20.0" left="21.0" right="-5.0" />
                                                    </padding>
                                                 </JFXTextArea>
-                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0">
+                                                <JFXTextArea nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="52.0" unFocusColor="#044e9a">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -350,9 +365,19 @@
                            </children></Pane>
                         <Pane layoutX="340.0" layoutY="18.0" prefHeight="289.0" prefWidth="275.0">
                            <children>
-                              <ComboBox fx:id="locations" layoutX="62.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <ComboBox fx:id="employees" layoutX="64.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <Text fx:id="requestText" fill="WHITE" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
+                              <Text fill="WHITE" layoutX="83.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="89.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <ComboBox fx:id="locations" layoutX="43.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <ComboBox fx:id="employees" layoutX="43.0" layoutY="142.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <Text fx:id="requestText" fill="WHITE" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -501,8 +526,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0"
-                                styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                        <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -511,8 +535,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#toSeurity" prefHeight="53.0" prefWidth="70.0"
-                                styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                        <Button mnemonicParsing="false" onAction="#toSeurity" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
