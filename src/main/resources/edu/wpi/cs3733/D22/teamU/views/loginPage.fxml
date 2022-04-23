@@ -103,7 +103,7 @@
          <children>
             <Group fx:id="loginGroup">
                <children>
-                  <Text fill="#044e9a" layoutX="-1.0" layoutY="-1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
+                  <Text fill="#044e9a" layoutX="-1.0" layoutY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
