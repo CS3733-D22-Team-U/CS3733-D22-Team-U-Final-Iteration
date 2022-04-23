@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>
@@ -145,57 +138,57 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Will Doyle (JR) -  Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Will Doyle (JR) -  Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iain McEwen (JR) - Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iain McEwen (JR) - Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Michael Akstin (SO) - Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Michael Akstin (SO) - Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deepti Gosukonda (SO) - Full Time Software Engineer (Front End)">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deepti Gosukonda (SO) - Full Time Software Engineer (Front End)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kody Robinson (SO) - Product Owner ">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kody Robinson (SO) - Product Owner ">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belisha Genin (SO) - Documentation Analyist">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belisha Genin (SO) - Documentation Analyist">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel (FR) - Lead Software Engineer">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel (FR) - Lead Software Engineer">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joselin Barbosa (SO) - Scrum Master">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joselin Barbosa (SO) - Scrum Master">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Biliouris (JR) - Product Manager">
+                                <Text fill="WHITE" layoutX="276.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Biliouris (JR) - Product Manager">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
