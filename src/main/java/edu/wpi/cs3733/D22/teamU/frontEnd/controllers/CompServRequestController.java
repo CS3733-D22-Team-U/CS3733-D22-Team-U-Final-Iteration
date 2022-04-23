@@ -242,6 +242,7 @@ public class CompServRequestController extends ServiceController {
       } catch (SQLException e) {
         e.printStackTrace();
       }
+      clearRequest();
     }
   }
 
@@ -287,6 +288,7 @@ public class CompServRequestController extends ServiceController {
       } catch (SQLException e) {
         e.printStackTrace();
       }
+      clearUpdate();
     }
   }
 
@@ -298,6 +300,15 @@ public class CompServRequestController extends ServiceController {
     editStatus.setText(temp.getStatus());
     locations1.setValue(temp.getLocation());
     employees1.setValue(temp.getEmployee());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editMessage.setText("");
+    editDevice.setText("");
+    editStatus.setText("");
+    employees1.setValue(null);
+    locations1.setValue(null);
   }
 
   @Override
@@ -323,11 +334,10 @@ public class CompServRequestController extends ServiceController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    clearUpdate();
   }
 
   public void clearRequest() {
-    output.setText("Cleared Requests!");
-    output.setVisible(true);
     new Thread(
             () -> {
               try {
@@ -340,6 +350,10 @@ public class CompServRequestController extends ServiceController {
               }
             })
         .start();
+    employees.setValue(null);
+    locations.setValue(null);
+    messageBox.setText("");
+    inputDevice.setText("");
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
