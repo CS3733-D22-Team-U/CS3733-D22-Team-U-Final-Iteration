@@ -165,11 +165,26 @@ public class TranslatorRequestController extends ServiceController {
     // String room = locations.getValue().getNodeID();
     // String employ = employees.getValue().getEmployeeID();
 
-    double rand = Math.random() * 10000;
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("TRA" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in translation service request controller");
+      }
+
+      serviceID = "TRA" + (int) rand;
+    }
 
     TranslatorRequest request =
         new TranslatorRequest(
-            (int) rand + "",
+            serviceID,
             "Patient",
             inputLanguage.getText().trim(),
             "Pending",

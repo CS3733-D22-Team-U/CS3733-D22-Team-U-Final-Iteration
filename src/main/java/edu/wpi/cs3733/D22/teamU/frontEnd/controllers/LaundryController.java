@@ -174,11 +174,27 @@ public class LaundryController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("LAU" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in laundry service request controller");
+          }
+
+          serviceID = "LAU" + (int) rand;
+        }
 
         LaundryRequest request =
             new LaundryRequest(
-                (int) rand + "",
+                serviceID,
                 patientNameInput.getText().trim(),
                 employees.getValue(),
                 "done",

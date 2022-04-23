@@ -215,12 +215,29 @@ public class labRequestServices extends ServiceController {
 
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        double rand = Math.random() * 10000;
+
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("LAB" + (int) rand);
+          } catch (Exception e) {
+            System.out.println("alreadyHere variable messed up in lab service request controller");
+          }
+
+          serviceID = "LAB" + (int) rand;
+        }
+
         String inputString = checkBoxesInput.get(i).getText().trim();
         String room = locations.getValue().toString();
         LabUI request =
             new LabUI(
-                (int) rand + "",
+                serviceID,
                 patientInput,
                 staffInput,
                 Integer.parseInt(inputString),

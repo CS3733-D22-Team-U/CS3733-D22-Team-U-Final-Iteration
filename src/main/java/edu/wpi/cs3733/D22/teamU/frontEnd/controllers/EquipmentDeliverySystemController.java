@@ -338,11 +338,26 @@ public class EquipmentDeliverySystemController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("EQU" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in equip service request controller");
+          }
+
+          serviceID = "EQU" + (int) rand;
+        }
 
         EquipmentUI request =
             new EquipmentUI(
-                (int) rand + "",
+                serviceID,
                 checkBoxes.get(i).getText(),
                 requestAmount,
                 room,

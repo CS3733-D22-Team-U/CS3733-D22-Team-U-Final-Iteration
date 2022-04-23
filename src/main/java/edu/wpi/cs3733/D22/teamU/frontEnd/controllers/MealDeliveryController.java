@@ -189,11 +189,26 @@ public class MealDeliveryController extends ServiceController {
     String room = locations.getValue();
     String em = employees.getValue();
     // Employee empty = new Employee(employees.getValue());
-    double rand = Math.random() * 10000;
+
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("MEA" + (int) rand);
+      } catch (Exception e) {
+        System.out.println("alreadyHere variable messed up in meal service request controller");
+      }
+
+      serviceID = "MEA" + (int) rand;
+    }
 
     MealRequest request =
         new MealRequest(
-            (int) rand + "",
+            serviceID,
             patients.getValue(),
             inputString,
             "Ordered",

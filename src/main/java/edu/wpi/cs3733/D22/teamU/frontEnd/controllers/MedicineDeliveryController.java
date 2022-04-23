@@ -367,12 +367,28 @@ public class MedicineDeliveryController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("MED" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in Medicine service request controller");
+          }
+
+          serviceID = "MED" + (int) rand;
+        }
         // String patient = "BRUH";
 
         MedicineRequest request =
             new MedicineRequest(
-                (int) rand + "",
+                serviceID,
                 checkBoxes.get(i).getText(),
                 requestAmount,
                 patients.getValue().toString(),
