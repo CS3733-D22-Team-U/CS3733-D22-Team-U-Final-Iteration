@@ -42,6 +42,48 @@ public class MapController extends ServiceController {
   public TextField popupLongName;
   public TextField popupShortName;
   AnchorPane popupEditPane;
+  /* Rectangle Icons */
+  @FXML Rectangle PatientRoom;
+  @FXML Rectangle EquipStorage;
+  @FXML Rectangle DirtyEquipPickup;
+  @FXML Rectangle Hallway;
+  @FXML Rectangle Elevator;
+  @FXML Rectangle Restroom;
+  @FXML Rectangle Staircase;
+  @FXML Rectangle Department;
+  @FXML Rectangle Labs;
+  @FXML Rectangle Information;
+  @FXML Rectangle Conference;
+  @FXML Rectangle Exit;
+  @FXML Rectangle Retail;
+  @FXML Rectangle Service;
+  @FXML Rectangle Beds;
+  @FXML Rectangle Pumps;
+  @FXML Rectangle Recliners;
+  @FXML Rectangle OtherEquip;
+  @FXML Rectangle MultiServices;
+
+  /* Map Icons State */
+  public boolean PRicon = true;
+  public boolean ESicon = true;
+  public boolean DEicon = true;
+  public boolean HWicon = true;
+  public boolean EVicon = true;
+  public boolean RRicon = true;
+  public boolean SCicon = true;
+  public boolean DPicon = true;
+  public boolean LBicon = true;
+  public boolean INicon = true;
+  public boolean CFicon = true;
+  public boolean EXicon = true;
+  public boolean RTicon = true;
+  public boolean SVicon = true;
+  public boolean BDicon = true;
+  public boolean PMicon = true;
+  public boolean RCicon = true;
+  public boolean OEicon = true;
+  public boolean MSicon = true;
+  public boolean ALLicon = true;
 
   @FXML ScrollPane imagesPane1;
   @FXML ScrollPane imagesPane2;
@@ -727,4 +769,60 @@ public class MapController extends ServiceController {
   }
 
   public void test(ZoomEvent zoomEvent) {}
+
+  public void dispAll(MouseEvent mouseevent)
+  {
+
+  }
+  public void dispElevators(MouseEvent mouseevent) {
+    if (EVicon != true) {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
+          locationNode.setVisible(false);
+          // set color of rectangle
+          EVicon = false;
+        }
+      }
+    } else {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
+          locationNode.setVisible(true);
+          EVicon = true;
+        }
+      }
+    }
+  }
+  public void dispDepartment(MouseEvent mouseEvent) {}
+
+  public void dispStaircase(MouseEvent mouseEvent) {}
+
+  public void dispRestroom(MouseEvent mouseEvent) {}
+
+  public void dispHallway(MouseEvent mouseEvent) {}
+
+  public void dispOtherEquip(MouseEvent mouseEvent) {}
+
+  public void dispRecliners(MouseEvent mouseEvent) {}
+
+  public void dispPumps(MouseEvent mouseEvent) {}
+
+  public void dispBeds(MouseEvent mouseEvent) {}
+
+  public void dispService(MouseEvent mouseEvent) {}
+
+  public void dispRetail(MouseEvent mouseEvent) {}
+
+  public void dispExit(MouseEvent mouseEvent) {}
+
+  public void dispConfrence(MouseEvent mouseEvent) {}
+
+  public void dispInformation(MouseDragEvent mouseDragEvent) {}
+
+  public void dispLabs(MouseEvent mouseEvent) {}
+
+  public void dispEquipPickup(MouseEvent mouseEvent) {}
+
+  public void dispEquipStorage(MouseEvent mouseEvent) {}
+
+  public void dispPatientRoom(MouseEvent mouseEvent) {}
 }
