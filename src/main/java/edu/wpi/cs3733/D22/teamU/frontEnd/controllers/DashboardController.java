@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
@@ -10,12 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -54,12 +56,23 @@ public class DashboardController extends ServiceController {
   @FXML Circle apple;
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
+
+  @FXML Button reportEmployeeBTN;
+  @FXML MenuButton reportMenuBTN;
+
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    try {
+      listofEmployees();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     this.anchor
         .heightProperty()
         .addListener(
@@ -91,6 +104,10 @@ public class DashboardController extends ServiceController {
     handeDateTime();
     handleTurtle();
     playTurtle();
+
+    for (MenuItem menuItem : menuItemsList) {
+      reportMenuBTN.getItems().add(menuItem);
+    }
   }
 
   private void handleTurtle() {
@@ -208,12 +225,12 @@ public class DashboardController extends ServiceController {
     appStage.show();
   }
 
-    public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
-        Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
-        Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        appStage.setScene(scene);
-        appStage.show();
-    }
+  public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
 
   public void toSettings(ActionEvent actionEvent) {
     System.out.println("Going to settings");
@@ -232,6 +249,12 @@ public class DashboardController extends ServiceController {
   @Override
   public void updateRequest() {}
 
-    public void reportEmployee(ActionEvent actionEvent) {
+  ObservableList<MenuItem> menuItemsList = FXCollections.observableArrayList();
+
+  public ObservableList<MenuItem> listofEmployees() throws SQLException, IOException {
+    for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
+      menuItemsList.add(new MenuItem(employee.toString()));
     }
+    return menuItemsList;
+  }
 }
