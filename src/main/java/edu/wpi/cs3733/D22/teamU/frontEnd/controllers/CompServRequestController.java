@@ -29,10 +29,28 @@ import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class CompServRequestController extends ServiceController {
-  public ComboBox<Location> locations;
-  public ComboBox<Employee> employees;
-
+  // global
   @FXML Text time;
+  @FXML Button editButton;
+  @FXML Button newReqButton;
+  @FXML Button activeReqButton;
+
+  // edit
+  @FXML TextArea editID;
+  @FXML TextArea editMessage;
+  @FXML TextArea editDevice;
+  @FXML TextArea editStatus;
+  public ComboBox<Location> locations1;
+  public ComboBox<Employee> employees1;
+  @FXML Button submitButtonEdit;
+  @FXML TableColumn<CompServRequest, String> disEID;
+  @FXML TableColumn<CompServRequest, String> disEDev;
+  @FXML TableColumn<CompServRequest, String> disEDest;
+  @FXML TableColumn<CompServRequest, String> disEEmployee;
+  @FXML TableColumn<CompServRequest, String> disEStatus;
+  @FXML TableView<CompServRequest> editTable;
+
+  // display
   @FXML TableColumn<CompServRequest, String> reqID;
   @FXML TableColumn<CompServRequest, String> reqDevice;
   @FXML TableColumn<CompServRequest, String> reqDestination;
@@ -43,6 +61,11 @@ public class CompServRequestController extends ServiceController {
   @FXML TableColumn<CompServRequest, String> reqTime;
   @FXML TableView<CompServRequest> table;
 
+  // new
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
+  @FXML TextArea messageBox;
+  @FXML TextArea inputDevice;
   @FXML Button clearButton;
   @FXML Button submitButton;
 
@@ -50,12 +73,8 @@ public class CompServRequestController extends ServiceController {
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allRequestPane;
+  @FXML Pane editRequestPane;
   @FXML Text output;
-
-  @FXML Button newReqButton;
-  @FXML Button activeReqButton;
-  @FXML TextArea messageBox;
-  @FXML TextArea inputDevice;
 
   ObservableList<CompServRequest> CompServUIRequests = FXCollections.observableArrayList();
   // Udb udb;
@@ -68,7 +87,13 @@ public class CompServRequestController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
     setUpAllCompServReq();
+    setUpEditCompServReq();
 
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
@@ -78,6 +103,9 @@ public class CompServRequestController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 267, 347);
+    locations1.setTooltip(new Tooltip());
+    locations1.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(locations1, 24, 518);
 
     // Displays Employees in Table View
     staff = new ArrayList<>();
@@ -87,6 +115,9 @@ public class CompServRequestController extends ServiceController {
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 502, 380);
+    employees1.setTooltip(new Tooltip());
+    employees1.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(employees1, 159, 518);
 
     handleTime();
   }
@@ -115,6 +146,15 @@ public class CompServRequestController extends ServiceController {
     reqDate.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("date"));
     reqTime.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("time"));
     table.setItems(getCompServList());
+  }
+
+  private void setUpEditCompServReq() throws SQLException, IOException {
+    disEID.setCellValueFactory(new PropertyValueFactory("ID"));
+    disEDev.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("device"));
+    disEDest.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("location"));
+    disEStatus.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("status"));
+    disEEmployee.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("employee"));
+    editTable.setItems(getCompServList());
   }
 
   private ObservableList<CompServRequest> newRequest(
@@ -157,7 +197,7 @@ public class CompServRequestController extends ServiceController {
 
   @Override
   public void addRequest() {
-    if (locations.getValue() != null && locations.getValue() != null) {
+    if (locations.getValue() != null && employees.getValue() != null) {
       output.setText("Your computer service request has been made!");
       output.setVisible(true);
       new Thread(
@@ -206,10 +246,84 @@ public class CompServRequestController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void updateRequest() {
+    if (locations1.getValue() != null && employees1.getValue() != null) {
+      new Thread(
+              () -> {
+                try {
+                  Thread.sleep(1500); // milliseconds
+                  Platform.runLater(
+                      () -> {
+                        output.setVisible(false);
+                      });
+                } catch (InterruptedException ie) {
+                }
+              })
+          .start();
+
+      CompServRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+      String oldDate = oldRequest.getDate();
+      String oldTime = oldRequest.getTime();
+      CompServUIRequests.remove(oldRequest);
+      String ID = editID.getText();
+      Location room = locations1.getValue();
+      String message = editMessage.getText().trim();
+      String device = editDevice.getText().trim();
+      Employee employee = employees1.getValue();
+      String status = editStatus.getText().trim();
+
+      CompServRequest request =
+          new CompServRequest(
+              ID, message, status, employee, room.getNodeID(), oldDate, oldTime, device);
+
+      request.gettingTheLocation();
+      CompServUIRequests.add(request);
+      table.setItems(CompServUIRequests);
+      try {
+        Udb.getInstance().remove(oldRequest);
+        Udb.getInstance().add(request);
+      } catch (IOException e) {
+        e.printStackTrace();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void updateFields() {
+    CompServRequest temp = editTable.getSelectionModel().getSelectedItem();
+    editID.setText(temp.getID());
+    editMessage.setText(temp.getMessage());
+    editDevice.setText(temp.getDevice());
+    editStatus.setText(temp.getStatus());
+    locations1.setValue(temp.getLocation());
+    employees1.setValue(temp.getEmployee());
+  }
 
   @Override
-  public void updateRequest() {}
+  public void removeRequest() {
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(1500); // milliseconds
+                Platform.runLater(
+                    () -> {
+                      output.setVisible(false);
+                    });
+              } catch (InterruptedException ie) {
+              }
+            })
+        .start();
+    CompServRequest request = editTable.getSelectionModel().getSelectedItem();
+    CompServUIRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void clearRequest() {
     output.setText("Cleared Requests!");
@@ -245,6 +359,7 @@ public class CompServRequestController extends ServiceController {
     }
     newReq.setVisible(true);
     newReq.toBack();
+    editButton.setUnderline(false);
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
   }
@@ -257,7 +372,21 @@ public class CompServRequestController extends ServiceController {
     }
     active.setVisible(true);
     active.toBack();
+    editButton.setUnderline(false);
     activeReqButton.setUnderline(true);
+    newReqButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node editReq = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    editReq.setVisible(true);
+    editReq.toBack();
+    editButton.setUnderline(true);
+    activeReqButton.setUnderline(false);
     newReqButton.setUnderline(false);
   }
 
