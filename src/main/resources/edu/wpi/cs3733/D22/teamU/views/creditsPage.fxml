@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -13,6 +14,29 @@
                 <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                     <children>
                         <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
+                        <Button layoutX="243.0" layoutY="67.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect></Button>
+                        <Button layoutX="404.0" layoutY="67.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits" textFill="#044e9a">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
+                        <Button layoutX="565.0" layoutY="67.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Button>
                     </children>
                 </Pane>
                 <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
