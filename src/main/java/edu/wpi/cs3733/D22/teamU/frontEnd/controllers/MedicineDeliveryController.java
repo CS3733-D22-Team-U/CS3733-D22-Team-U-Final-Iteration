@@ -279,8 +279,6 @@ public class MedicineDeliveryController extends ServiceController {
     return medUIRequests;
   }
 
-
-
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
     Node newReq = stackNodes.get(stackNodes.indexOf(newRequestPane));
@@ -319,6 +317,7 @@ public class MedicineDeliveryController extends ServiceController {
     newReqButton.setUnderline(false);
     allEquipButton.setUnderline(true);
   }
+
   public Employee checkEmployee(String employee) throws NullPointerException {
     if (EmployeeDaoImpl.List.get(employee) != null) {
       return EmployeeDaoImpl.List.get(employee);

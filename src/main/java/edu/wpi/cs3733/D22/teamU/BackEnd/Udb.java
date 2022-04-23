@@ -28,7 +28,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequestDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
@@ -247,10 +246,10 @@ public final class Udb {
     compServRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     compServRequestImpl.JavaToSQL();
 
-    for (Employee e : EmployeeImpl.hList().values()) {
-      for (Request r : e.getRequests())
-        System.out.println(r.getClass().getSimpleName() + ": " + r.getID());
-    }
+    //    for (Employee e : EmployeeImpl.hList().values()) {
+    //      for (Request r : e.getRequests())
+    //        System.out.println(r.getClass().getSimpleName() + ": " + r.getID());
+    //    }
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON

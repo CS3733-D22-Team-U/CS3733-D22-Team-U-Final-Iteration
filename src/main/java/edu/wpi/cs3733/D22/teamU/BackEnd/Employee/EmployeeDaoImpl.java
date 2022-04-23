@@ -315,8 +315,10 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   public void changePassword(String ID, String username, String password)
       throws SQLException, IOException {
     Employee selected = Udb.getInstance().EmployeeImpl.hList().get(ID);
-    if (selected.getUsername().equals(username)) selected.setPassword(password);
-    else throw new SQLException();
+    if (selected.getUsername().equals(username)) {
+      selected.setPassword(password);
+      Udb.getInstance().EmployeeImpl.edit(selected);
+    } else throw new SQLException();
   }
 
   public Employee askUser() {

@@ -250,4 +250,6 @@ public class DashboardController extends ServiceController {
     }
     return menuItemsList;
   }
+
+  public void toReport(ActionEvent actionEvent) {}
 }

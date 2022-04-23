@@ -3,7 +3,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -103,7 +102,7 @@
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Text>
-                  <Pane layoutX="-51.0" layoutY="66.0" prefHeight="219.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
+                  <Pane layoutX="-51.0" layoutY="66.0" prefHeight="222.0" prefWidth="349.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
                      <effect>
                         <DropShadow />
                      </effect>
@@ -114,7 +113,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <Button layoutX="143.0" layoutY="173.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
+                        <Button layoutX="149.0" layoutY="175.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -142,7 +141,11 @@
                               <Image url="@../icons/keyLogo.png" />
                            </image>
                         </ImageView>
-                        <Hyperlink layoutX="117.0" layoutY="143.0" text="Forgot ID/Password?" textFill="#044e9a" />
+                        <Button layoutX="114.0" layoutY="138.0" mnemonicParsing="false" onAction="#goToChangePassword" prefHeight="31.0" prefWidth="133.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #FFFFFF;" text="Change Password" textFill="#044e9a" underline="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </Pane>
                 <Button alignment="CENTER" layoutX="21.0" layoutY="318.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Exit" textFill="WHITE">
@@ -157,6 +160,81 @@
                      </cursor>
                 </Button>
                   <Text fx:id="feedback" fill="#991505" layoutX="-12.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group fx:id="passwordGroup" visible="false">
+               <children>
+                  <Text fill="#044e9a" layoutX="-64.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter ID and Username in to Change Password" textAlignment="CENTER" wrappingWidth="378.24609375">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="-51.0" layoutY="66.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <TextField fx:id="activeUsername" layoutX="80.0" layoutY="70.0" prefHeight="46.0" prefWidth="209.0" promptText="Username" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <Button fx:id="changeButton" layoutX="143.0" layoutY="196.0" mnemonicParsing="false" onAction="#callChangePasswordFunction" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Change" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="RED" layoutX="52.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed. Account locked for 5 minutes." visible="false">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="41.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/userLogo.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="41.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/keyLogo.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="activeID" layoutX="80.0" layoutY="14.0" prefHeight="46.0" prefWidth="209.0" promptText="ID" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                        <TextField fx:id="newPassword" layoutX="80.0" layoutY="123.0" prefHeight="46.0" prefWidth="209.0" promptText="New Password" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                     </children>
+                  </Pane>
+                  <Button fx:id="backButton" alignment="CENTER" layoutX="21.0" layoutY="335.0" mnemonicParsing="false" onAction="#goBackToLogIn" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Text fx:id="feedback1" fill="#991505" layoutX="-12.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
