@@ -286,8 +286,8 @@ public class MaintenanceRequestController extends ServiceController {
     sucessRequest.setVisible(false);
     clearRequest.setVisible(true);
     textInput.setText("");
-    staffDropDown.getItems().clear();
-    locations.getItems().clear();
+    staffDropDown.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
     new Thread(
             () -> {
               try {
