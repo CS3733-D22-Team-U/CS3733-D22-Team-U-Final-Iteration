@@ -31,7 +31,7 @@
             <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
             <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
                <children>
-                  <Text fx:id="time" layoutX="40.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
+                  <Text fx:id="time" layoutX="40.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm:ss" />
                </children>
             </Pane>
             <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">

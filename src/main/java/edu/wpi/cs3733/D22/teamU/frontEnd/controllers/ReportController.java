@@ -3,10 +3,13 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,13 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class ReportController extends ServiceController {
@@ -31,11 +33,14 @@ public class ReportController extends ServiceController {
   @FXML Button submitButton;
   @FXML JFXTextArea reportDescrip;
   @FXML BarChart reportBarChart;
+  @FXML Text time;
 
   ArrayList<Employee> staff;
   ObservableList<String> typeList =
       FXCollections.observableArrayList(
           "Sexual Harassment", "Patient Mistreatment", "Medical Misconduct", "Other");
+
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +58,25 @@ public class ReportController extends ServiceController {
     } else {
       reportBarChart.setVisible(false);
     }
+    handleTime();
+  }
+
+  private void handleTime() {
+
+    Thread timeThread =
+        new Thread(
+            () -> {
+              while (Uapp.running) {
+
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+                String timeStampTime = sdf3.format(timestamp).substring(11);
+
+                time.setText(timeStampTime);
+              }
+            });
+
+    timeThread.start();
   }
 
   @Override
@@ -88,14 +112,17 @@ public class ReportController extends ServiceController {
     reportDescrip.clear();
   }
 
-  public void mouseHovered(MouseEvent mouseEvent) {}
+  public void mouseHovered(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: #E6F6F7");
+  }
 
-  public void mouseExit(MouseEvent mouseEvent) {}
+  public void mouseExit(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-border-color: transparent");
+  }
 
   public void setUpGraph() throws SQLException, IOException {
-    CategoryAxis xAxis = new CategoryAxis();
-
-    NumberAxis yAxis = new NumberAxis();
 
     reportBarChart.getXAxis().setLabel("Name of Employee");
     reportBarChart.getYAxis().setLabel("Number of Reports");
