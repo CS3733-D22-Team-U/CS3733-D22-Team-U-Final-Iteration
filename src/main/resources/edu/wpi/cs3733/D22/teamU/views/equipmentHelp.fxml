@@ -76,6 +76,11 @@
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+                  <ImageView fitHeight="206.0" fitWidth="259.0" layoutX="-31.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/equipserv1.PNG" />
+                     </image>
+                  </ImageView>
                     </children></Pane>
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="291.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />

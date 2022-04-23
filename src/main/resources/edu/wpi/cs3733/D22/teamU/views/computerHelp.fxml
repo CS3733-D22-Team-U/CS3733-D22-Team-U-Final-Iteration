@@ -33,7 +33,7 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving." wrappingWidth="370.904296875">
+                        <Text layoutX="4.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input the destination you're serving." wrappingWidth="370.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -43,15 +43,10 @@
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the lab request services needed for the patient.">
+                        <Text layoutX="254.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Describe the computer issue of the patient.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <Text layoutX="265.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the service you need is not listed, please select &quot;Other&quot; and write the name of the service in the text area labeled &quot;Other&quot;" wrappingWidth="300.904296875">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Text>
                         <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="209.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow-png-download.png" />
@@ -72,10 +67,25 @@
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor></Button>
-                        <Circle fill="#029ca6" layoutX="254.0" layoutY="212.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                        <Circle fill="#029ca6" layoutX="254.0" layoutY="192.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+                  <ImageView fitHeight="202.0" fitWidth="200.0" layoutX="-10.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/test.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="361.0" fitWidth="279.0" layoutX="288.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv2.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="95.0" fitWidth="307.0" layoutX="600.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/compserv3.PNG" />
+                     </image>
+                  </ImageView>
                     </children></Pane>
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                 <Circle fill="#029ca6" layoutX="142.0" layoutY="291.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
