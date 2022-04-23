@@ -57,8 +57,6 @@ public class DashboardController extends ServiceController {
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
 
-  @FXML Button reportEmployeeBTN;
-  @FXML MenuButton reportMenuBTN;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -105,9 +103,6 @@ public class DashboardController extends ServiceController {
     handleTurtle();
     playTurtle();
 
-    for (MenuItem menuItem : menuItemsList) {
-      reportMenuBTN.getItems().add(menuItem);
-    }
   }
 
   private void handleTurtle() {
