@@ -169,8 +169,8 @@ public class giftFloralController extends ServiceController {
               giftRequest.ID,
               giftRequest.name,
               giftRequest.patientName,
-              giftRequest.getGifts(),
-              giftRequest.getMessage(),
+              giftRequest.gifts,
+              giftRequest.message,
               giftRequest.status,
               giftRequest.employee,
               giftRequest.destination,
@@ -193,7 +193,7 @@ public class giftFloralController extends ServiceController {
     String inputString = "";
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        inputString += checkBoxes.get(i).getText() + ", ";
+        inputString += checkBoxes.get(i).getText() + ":";
       }
     }
 
@@ -218,9 +218,9 @@ public class giftFloralController extends ServiceController {
             serviceID,
             senderName.getText(),
             patientName.getText(),
-            message.getText(),
             inputString,
-            "pending",
+            message.getText(),
+            "In Progress",
             employees.getValue(),
             locations.getValue().getNodeID(),
             sdf3.format(timestamp).substring(0, 10),
@@ -241,20 +241,7 @@ public class giftFloralController extends ServiceController {
             request.getDate(),
             request.getTime()));
     try {
-      Udb.getInstance()
-          .add( // TODO Have random ID and enter Room Destination
-              new GiftRequest(
-                  request.getID(),
-                  request.getName(),
-                  request.getPatientName(),
-                  request.getGifts(),
-                  request.getMessage(),
-                  request.getStatus(),
-                  checkEmployee(employees.getValue().toString()),
-                  request.getDestination(),
-                  request.getDate(),
-                  request.getTime()));
-
+      Udb.getInstance().add(request);
     } catch (IOException e) {
       e.printStackTrace();
     } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.Report;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import java.util.ArrayList;
 
@@ -14,17 +15,7 @@ public class Employee {
   String username;
   String password;
 
-  public ArrayList<Request> getRequests() {
-    return requests;
-  }
-
-  public void setRequests(ArrayList<Request> requests) {
-    this.requests = requests;
-  }
-
-  public void addRequest(Request r) {
-    requests.add(r);
-  }
+  ArrayList<Report> reportList = new ArrayList<>();
 
   ArrayList<Request> requests = new ArrayList<Request>();
 
@@ -54,6 +45,30 @@ public class Employee {
     this.onDuty = onDuty;
     this.username = username;
     this.password = password;
+  }
+
+  public ArrayList<Report> getReportList() {
+    return reportList;
+  }
+
+  public void setReportList(ArrayList<Report> reportList) {
+    this.reportList = reportList;
+  }
+
+  public void addReport(Report r) {
+    reportList.add(r);
+  }
+
+  public ArrayList<Request> getRequests() {
+    return requests;
+  }
+
+  public void setRequests(ArrayList<Request> requests) {
+    this.requests = requests;
+  }
+
+  public void addRequest(Request r) {
+    requests.add(r);
   }
 
   public String getEmployeeID() {
