@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestPageController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestPageController">
 
 
     <children>
@@ -26,12 +21,12 @@
                 </ImageView>
                 <Pane prefHeight="132.0" prefWidth="1100.0" styleClass="header" stylesheets="@../css/headersAndLabels.css">
                     <children>
-                        <ImageView fitHeight="156.0" fitWidth="184.0" layoutX="208.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="156.0" fitWidth="184.0" layoutX="236.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../icons/med2-removebg-preview.png" />
+                                <Image url="@../icons/hospitalIcon.png" />
                             </image>
                         </ImageView>
-                        <Text fx:id="headerText" layoutX="373.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Service Requests" wrappingWidth="353.65234375" />
+                        <Text fx:id="headerText" layoutX="364.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Service Requests" wrappingWidth="414.65234375" />
                         <Pane layoutX="844.0" layoutY="14.0" prefHeight="106.0" prefWidth="228.0" style="-fx-background-radius: 35;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
                             <children>
                                 <Text fx:id="time" layoutX="34.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="hh:mm:ss" y="5.0">
@@ -68,119 +63,105 @@
                 <Button layoutX="283.0" layoutY="298.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;" />
                 <Button layoutX="644.0" layoutY="307.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;" />
                 <Button layoutX="477.0" layoutY="499.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-              <Pane layoutX="135.0" layoutY="304.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
-                  <children>
-                      <ButtonBar fx:id="topRow" layoutX="1.0" layoutY="11.0" prefHeight="40.0" prefWidth="200.0">
-                          <buttons>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Equipment Delivery" wrapText="true">
-                                  <stylesheets>
-                                      <URL value="@../css/buttons.css" />
-                                      <URL value="@../css/headersAndLabels.css" />
-                                  </stylesheets>
-                                  <font>
-                                      <Font size="18.0" />
-                                  </font>
-                                  <tooltip>
-                                      <Tooltip text="Marko 'Polo' Vila" />
-                                  </tooltip>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Map" textFill="#2a20ea">
-                                  <tooltip>
-                                      <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
-                                  </tooltip>
-                                  <font>
-                                      <Font name="System Bold" size="13.600000381469727" />
-                                  </font>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
-                                  <tooltip>
-                                      <Tooltip text="Demi-Human Queen Nick Biliouris" />
-                                  </tooltip>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
-                                  <tooltip>
-                                      <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
-                                  </tooltip>
-                              </Button>
-                          </buttons>
-                          <opaqueInsets>
-                              <Insets />
-                          </opaqueInsets>
-                          <cursor>
-                              <Cursor fx:constant="HAND" />
-                          </cursor>
-                      </ButtonBar>
-                      <ButtonBar fx:id="bottomRow" layoutX="3.0" layoutY="82.0" prefHeight="40.0" prefWidth="200.0">
-                          <buttons>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
-                                  <tooltip>
-                                      <Tooltip text="Deepti 'Loathsome Dung Eater' Gosukonda" />
-                                  </tooltip>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Maintenance">
-                                  <tooltip>
-                                      <Tooltip text="Michael 'I Can't Walk' Akstin" />
-                                  </tooltip>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
-                                  <tooltip>
-                                      <Tooltip text="Joselin 'Deathbed Companion' Barbosa" />
-                                  </tooltip>
-                              </Button>
-                              <Button minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
-                                  <tooltip>
-                                      <Tooltip text="Deepti 'Loatsome Dungeater' Gosukonda" />
-                                  </tooltip>
-                              </Button>
-                          </buttons>
-                          <opaqueInsets>
-                              <Insets />
-                          </opaqueInsets>
-                          <cursor>
-                              <Cursor fx:constant="HAND" />
-                          </cursor>
-                      </ButtonBar>
-                      <ButtonBar fx:id="bottomRow11" layoutX="311.0" layoutY="228.0" prefHeight="40.0" prefWidth="200.0">
-                          <opaqueInsets>
-                              <Insets />
-                          </opaqueInsets>
-                          <cursor>
-                              <Cursor fx:constant="HAND" />
-                          </cursor>
-                      </ButtonBar>
-                      <ButtonBar fx:id="bottomRow1" layoutX="6.0" layoutY="154.0" prefHeight="40.0" prefWidth="200.0">
-                          <opaqueInsets>
-                              <Insets />
-                          </opaqueInsets>
-                          <cursor>
-                              <Cursor fx:constant="HAND" />
-                          </cursor>
-                     <buttons>
-                              <Button minHeight="190.0" minWidth="180.0" mnemonicParsing="false" onAction="#toSeurity" prefHeight="59.0" prefWidth="180.0" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
-                                  <tooltip>
-                                      <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
-                                  </tooltip>
-                              </Button>
-                     </buttons>
-                      </ButtonBar>
-                        <Button layoutX="629.0" layoutY="154.0" minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
-                            <tooltip>
-                                <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />
-                            </tooltip>
-                        </Button>
-                        <Button layoutX="426.0" layoutY="154.0" minHeight="190.0" mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Computer Service">
-                            <tooltip>
-                                <Tooltip text="Iain McEwen" />
-                            </tooltip>
-                        </Button>
-                        <Button layoutX="223.0" layoutY="154.0" minHeight="190.0" mnemonicParsing="false" onAction="#toReligious" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Religious Service">
-                            <tooltip>
-                                <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
-                            </tooltip>
-                        </Button>
-                  </children>
-              </Pane>
+                  <Button layoutX="187.0" layoutY="470.0" minHeight="190.0" mnemonicParsing="false" onAction="#toMealDelivery" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Meal Delivery">
+                      <tooltip>
+                          <Tooltip text="Deepti 'Loathsome Dung Eater' Gosukonda" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="454.0" layoutY="476.0" minHeight="190.0" mnemonicParsing="false" onAction="#toGiftAndFloral" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Gift &amp; Floral Request">
+                      <tooltip>
+                          <Tooltip text="Joselin 'Deathbed Companion' Barbosa" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="715.0" layoutY="470.0" minHeight="190.0" mnemonicParsing="false" onAction="#toLaundry" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Laundry Service">
+                      <tooltip>
+                          <Tooltip text="Deepti 'Loatsome Dungeater' Gosukonda" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="454.0" layoutY="335.0" minHeight="190.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Maintenance">
+                      <tooltip>
+                          <Tooltip text="Michael 'I Can't Walk' Akstin" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="187.0" layoutY="335.0" minHeight="190.0" minWidth="180.0" mnemonicParsing="false" onAction="#toSeurity" prefHeight="59.0" prefWidth="180.0" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
+                      <tooltip>
+                          <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="301.0" layoutY="592.0" minHeight="190.0" mnemonicParsing="false" onAction="#toReligious" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Religious Service">
+                      <tooltip>
+                          <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="715.0" layoutY="335.0" minHeight="190.0" mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Computer Service">
+                      <tooltip>
+                          <Tooltip text="Iain McEwen" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="593.0" layoutY="592.0" minHeight="190.0" mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Translator Request">
+                      <tooltip>
+                          <Tooltip text="Belisha Genin (owes 50,000,000,000 lambos to Team U)" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="715.0" layoutY="196.0" minHeight="190.0" mnemonicParsing="false" onAction="#toMedicineDelivery" style="-fx-background-color: #b0e5e3;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Medicine Request">
+                      <tooltip>
+                          <Tooltip text="Kody 'Imma Put My Dick In My Macbook' Robinson" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="454.0" layoutY="196.0" minHeight="190.0" mnemonicParsing="false" onAction="#toLabRequest" style="-fx-background-color: #c9edeb;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Lab Request">
+                      <tooltip>
+                          <Tooltip text="Demi-Human Queen Nick Biliouris" />
+                      </tooltip>
+                  </Button>
+                  <Button layoutX="187.0" layoutY="196.0" minHeight="190.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" style="-fx-background-color: #e6f6f7;" styleClass="dashboardNavButton" text="Equipment Delivery" wrapText="true">
+                      <stylesheets>
+                          <URL value="@../css/buttons.css" />
+                          <URL value="@../css/headersAndLabels.css" />
+                      </stylesheets>
+                      <font>
+                          <Font size="18.0" />
+                      </font>
+                      <tooltip>
+                          <Tooltip text="Marko 'Polo' Vila" />
+                      </tooltip>
+                  </Button>
             </children>
         </Pane>
+        <Pane layoutX="-14.0" layoutY="789.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
+            <children>
+                <ButtonBar fx:id="bottomRow" layoutX="3.0" layoutY="82.0" prefHeight="40.0" prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ButtonBar>
+                <ButtonBar fx:id="bottomRow11" layoutX="311.0" layoutY="228.0" prefHeight="40.0" prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ButtonBar>
+                <ButtonBar fx:id="bottomRow1" layoutX="6.0" layoutY="154.0" prefHeight="40.0" prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ButtonBar>
+            </children>
+        </Pane>
+          <ButtonBar fx:id="topRow" layoutX="134.0" layoutY="-116.0" prefHeight="40.0" prefWidth="200.0">
+              <opaqueInsets>
+                  <Insets />
+              </opaqueInsets>
+              <cursor>
+                  <Cursor fx:constant="HAND" />
+              </cursor>
+          </ButtonBar>
     </children>
 </AnchorPane>
