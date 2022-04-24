@@ -214,8 +214,10 @@ public class TranslatorRequestController extends ServiceController {
       e.printStackTrace();
       System.out.println("d");
     }
-    inputPatient.clear();
-    inputLanguage.clear();
+    inputPatient.setText("");
+    inputLanguage.setText("");
+    employees.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
   }
 
   @Override
@@ -228,6 +230,10 @@ public class TranslatorRequestController extends ServiceController {
     requestText.setText("Cleared Requests!");
     requestText.setVisible(true);
 
+    inputPatient.setText("");
+    inputLanguage.setText("");
+    employees.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
     new Thread(
             () -> {
               try {
