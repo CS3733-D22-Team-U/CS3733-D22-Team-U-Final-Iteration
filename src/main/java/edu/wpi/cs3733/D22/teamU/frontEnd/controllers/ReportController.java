@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.Report;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
@@ -79,21 +81,37 @@ public class ReportController extends ServiceController {
     timeThread.start();
   }
 
+  private Employee checkEmployee(String employee) {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("00000");
+      return empty;
+    }
+  }
   @Override
   public void addRequest() throws SQLException, IOException {
-    Employee temp = employees.getValue();
-    Employee employee =
-        new Employee(
-            temp.getEmployeeID(),
-            temp.getFirstName(),
-            temp.getLastName(),
-            temp.getOccupation(),
-            temp.getReports() + 1,
-            temp.getOnDuty(),
-            temp.getUsername(),
-            temp.getPassword());
+    Employee temp_employee = employees.getValue();
+    String inputType = typeOfReport.getValue();
+    String inputDesc = reportDescrip.getText().trim();
+    boolean alreadyHere = true;
+    String reportID = "notWork";
+
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("GIF" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in gift and floral service request controller");
+      }
+      reportID = "REP" + (int) rand;
+    }
+        Report r = new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
+    // Report r = new Report(
     try {
-      Udb.getInstance().edit(employee);
+      Udb.getInstance().add(r);
     } catch (Exception e) {
       System.out.println("Line 66 ReportController");
     }

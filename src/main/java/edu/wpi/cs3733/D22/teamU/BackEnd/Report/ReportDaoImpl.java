@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
@@ -83,7 +82,7 @@ public class ReportDaoImpl implements DataDao<Report> {
   }
 
   public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
-          throws IOException, SQLException {
+      throws IOException, SQLException {
     List = new HashMap<String, Report>();
     String s;
     File file = new File(csvFile);
@@ -93,26 +92,26 @@ public class ReportDaoImpl implements DataDao<Report> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == columns) {
-        Employee emp =  checkEmployee(row[1].trim());
+        Employee emp = checkEmployee(row[1].trim());
         Report r =
-                new Report(
-                        row[0].trim(),
-                        emp,
-                        row[2].trim(),
-                        row[3].trim(),
-                        Boolean.parseBoolean(row[4].trim()),
-                        row[5].trim(),
-                        row[6].trim());
+            new Report(
+                row[0].trim(),
+                emp,
+                row[2].trim(),
+                row[3].trim(),
+                Boolean.parseBoolean(row[4].trim()),
+                row[5].trim(),
+                row[6].trim());
         List.put(row[0].trim(), r);
         try {
           emp.addReport(r);
           r.setEmployee(emp);
         } catch (Exception exception) {
           System.out.println(
-                  "Employee Not Found "
-                          + r.getEmployee().getEmployeeID()
-                          + " Report Request"
-                          + r.getId());
+              "Employee Not Found "
+                  + r.getEmployee().getEmployeeID()
+                  + " Report Request"
+                  + r.getId());
         }
       }
     }
