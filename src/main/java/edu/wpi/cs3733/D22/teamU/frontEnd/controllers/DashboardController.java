@@ -57,7 +57,6 @@ public class DashboardController extends ServiceController {
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
 
-
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -102,7 +101,6 @@ public class DashboardController extends ServiceController {
     handeDateTime();
     handleTurtle();
     playTurtle();
-
   }
 
   private void handleTurtle() {
@@ -252,4 +250,6 @@ public class DashboardController extends ServiceController {
     }
     return menuItemsList;
   }
+
+  public void toReport(ActionEvent actionEvent) {}
 }

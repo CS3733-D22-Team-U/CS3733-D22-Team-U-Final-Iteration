@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
@@ -26,8 +27,14 @@ public class loginPageController extends ServiceController {
   public PasswordField password;
   public TextField username;
   public Text feedback;
+  public TextField activeID;
+  public TextField activeUsername;
+  public TextField newPassword;
+  @FXML Button changeButton;
+  @FXML Button backButton;
   @FXML Circle loadingCircle;
   @FXML Group loginGroup;
+  @FXML Group passwordGroup;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -88,6 +95,29 @@ public class loginPageController extends ServiceController {
               }
             })
         .start();
+  }
+
+  public void callChangePasswordFunction(ActionEvent actionEvent) {
+    try {
+      Udb.getInstance()
+          .EmployeeImpl
+          .changePassword(activeID.getText(), activeUsername.getText(), newPassword.getText());
+    } catch (Exception e) {
+
+    }
+    activeID.setText("");
+    activeUsername.setText("");
+    newPassword.setText("");
+  }
+
+  public void goBackToLogIn(ActionEvent actionEvent) {
+    loginGroup.setVisible(true);
+    passwordGroup.setVisible(false);
+  }
+
+  public void goToChangePassword(ActionEvent actionEvent) {
+    loginGroup.setVisible(false);
+    passwordGroup.setVisible(true);
   }
 
   @Override

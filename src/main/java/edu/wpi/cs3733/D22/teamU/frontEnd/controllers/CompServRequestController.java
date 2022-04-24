@@ -178,11 +178,25 @@ public class CompServRequestController extends ServiceController {
       String device = inputDevice.getText().trim();
       Employee employee = employees.getValue();
 
-      double rand = Math.random() * 10000;
+      boolean alreadyHere = true;
+      String serviceID = "notWork";
+
+      while (alreadyHere) {
+        double rand = Math.random() * 10000;
+
+        try {
+          alreadyHere =
+              Udb.getInstance().compServRequestImpl.hList().containsKey("COM" + (int) rand);
+        } catch (Exception e) {
+          System.out.println("alreadyHere variable messed up in comp service request");
+        }
+
+        serviceID = "COM" + (int) rand;
+      }
 
       CompServRequest request =
           new CompServRequest(
-              (int) rand + "",
+              serviceID,
               message,
               "Pending",
               employee,

@@ -205,7 +205,23 @@ public class SecurityRequestController extends ServiceController {
 
     clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    double rand = Math.random() * 10000;
+
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("SEC" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in sercurity service request controller");
+      }
+
+      serviceID = "SEC" + (int) rand;
+    }
 
     String employ = staffDropDown.getValue().getEmployeeID();
 
@@ -217,7 +233,7 @@ public class SecurityRequestController extends ServiceController {
 
     SecurityRequest request =
         new SecurityRequest(
-            (int) rand + "",
+            serviceID,
             "admin",
             "Pending",
             checkEmployee(employ),
