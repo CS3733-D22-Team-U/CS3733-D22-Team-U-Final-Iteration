@@ -79,7 +79,8 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
 
       for (Employee currEmp : List.values()) {
         statement.execute(
-            "INSERT INTO Employees VALUES('"
+            "INSERT INTO Employees VALUES("
+                + "'"
                 + currEmp.employeeID
                 + "','"
                 + currEmp.firstName
