@@ -30,7 +30,7 @@
             <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
             <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                <children>
-                  <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="342.0">
+                  <HBox layoutX="866.0" layoutY="46.0" prefHeight="70.0" prefWidth="234.0">
                      <children>
                         <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
                            <font>
@@ -46,14 +46,6 @@
                            </font>
                            <HBox.margin>
                               <Insets right="-15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Requests" textFill="#044e9a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -101,7 +93,7 @@
                         </TableView>
                      </children>
                   </Pane>
-                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false" StackPane.alignment="TOP_LEFT">
+                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
@@ -228,22 +220,6 @@
                         <TextField fx:id="patientNameField" layoutX="368.0" layoutY="75.0" />
                         <ComboBox fx:id="locations" layoutX="368.0" layoutY="202.0" prefWidth="150.0" promptText="Location" />
                         <ComboBox fx:id="employees" layoutX="367.0" layoutY="143.0" prefWidth="150.0" promptText="Staff" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
-                     <children>
-                        <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
-                           <columns>
-                              <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="inUse" prefWidth="75.0" text="In Use" />
-                              <TableColumn fx:id="available" prefWidth="75.0" text="Available" />
-                              <TableColumn fx:id="total" prefWidth="75.0" text="Total Amount" />
-                              <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
                      </children>
                   </Pane>
                </children>
