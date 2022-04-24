@@ -12,17 +12,14 @@ import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -38,9 +35,6 @@ public class loginPageController extends ServiceController {
   @FXML Circle loadingCircle;
   @FXML Group loginGroup;
   @FXML Group passwordGroup;
-
-
-
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

@@ -15,7 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -23,7 +22,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
@@ -65,7 +63,7 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    
+
     try {
       listofEmployees();
     } catch (SQLException e) {
@@ -213,8 +211,6 @@ public class DashboardController extends ServiceController {
     appStage.setScene(scene);
     appStage.show();
   }
-
-
 
   public void toSettingsPage(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
