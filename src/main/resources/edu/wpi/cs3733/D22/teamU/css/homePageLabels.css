@@ -26,3 +26,17 @@
     -fx-font-size: 36;
     -fx-font-weight: bold;
 }
+
+.descriptionHeaderText{
+    -fx-fill: #044E9A;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+.description{
+    -fx-fill: #044E9A;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+}
+
+

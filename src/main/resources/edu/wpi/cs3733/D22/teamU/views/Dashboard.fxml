@@ -170,9 +170,9 @@
                   <DropShadow spread="0.28" />
                </effect>
             </Pane>
-            <Button layoutX="480.0" layoutY="394.0" mnemonicParsing="false" onAction="#toMapPage" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;">
+            <Button layoutX="452.0" layoutY="392.0" mnemonicParsing="false" onAction="#toMapPage" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="95.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/mapBLUE.png" />
                      </image>
@@ -186,18 +186,18 @@
                   <DropShadow spread="0.28" />
                </effect>
             </Pane>
-            <Button layoutX="864.0" layoutY="406.0" mnemonicParsing="false" onAction="#toEmployeePage" style="-fx-background-color: transparent;">
+            <Button layoutX="823.0" layoutY="390.0" mnemonicParsing="false" onAction="#toEmployeePage" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="106.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/doctorBLUE.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="122.0" layoutY="392.0" mnemonicParsing="false" onAction="#toRequestsPage" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+            <Button layoutX="92.0" layoutY="375.0" mnemonicParsing="false" onAction="#toRequestsPage" prefHeight="190.0" prefWidth="207.0" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="124.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/requestBLUE2.0.png" />
                      </image>
