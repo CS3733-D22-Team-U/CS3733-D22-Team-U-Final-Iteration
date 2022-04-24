@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
 
 
    <children>
@@ -180,7 +180,7 @@
                </graphic></Button>
             <Pane layoutX="772.0" layoutY="334.0" prefHeight="57.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
                <children>
-                  <Text fx:id="userName12" layoutX="27.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Employee Info" />
+                  <Text fx:id="userName12" layoutX="42.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Employee Info" />
                </children>
                <effect>
                   <DropShadow spread="0.28" />
