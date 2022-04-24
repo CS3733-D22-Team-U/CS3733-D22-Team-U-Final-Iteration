@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class MealRequestDaoImpl implements DataDao<MealRequest> {
   public Statement statement;
   public static HashMap<String, MealRequest> List = new HashMap<String, MealRequest>();
+  public ArrayList<MealRequest> list = new ArrayList<MealRequest>();
   public String csvFile;
 
   public MealRequestDaoImpl(Statement statement, String csvFile) throws SQLException, IOException {
@@ -49,17 +50,10 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) {
+        Employee temporary = checkEmployee(row[4]);
         MealRequest r =
             new MealRequest(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                checkEmployee(row[4]),
-                row[5],
-                row[6],
-                row[7],
-                row[8]);
+                row[0], row[1], row[2], row[3], temporary, row[5], row[6], row[7], row[8]);
         List.put(row[0], r);
 
         try {
@@ -70,15 +64,27 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
+        } catch (Exception exception) {
+        }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
         } catch (Exception exception) {
         }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, MealRequest>();
     String s;
     File file = new File(csvFile);
@@ -104,9 +110,21 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(row[4]);
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println(
+              "Employee Not Found "
+                  + r.getEmployee().getEmployeeID()
+                  + " Meal Request"
+                  + r.getID());
         }
       }
     }

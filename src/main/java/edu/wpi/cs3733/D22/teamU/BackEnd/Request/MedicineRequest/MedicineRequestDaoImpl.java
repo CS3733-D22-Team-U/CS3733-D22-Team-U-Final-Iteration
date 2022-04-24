@@ -56,6 +56,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) { // or change to 9 if no work
+        Employee temporary = checkEmployee(row[4]);
         MedicineRequest r =
             new MedicineRequest(
                 row[0],
@@ -63,7 +64,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
                 Integer.parseInt(row[2]),
                 row[3],
                 row[4],
-                checkEmployee(row[5]),
+                temporary,
                 row[6],
                 row[7],
                 row[8]);
@@ -77,15 +78,27 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
+        } catch (Exception exception) {
+        }
+        try {
+          Employee e =
+              Udb.getInstance()
+                  .EmployeeImpl
+                  .List
+                  .get(Udb.getInstance().EmployeeImpl.List.get(temporary.getEmployeeID()));
+          e.addRequest(r);
+          r.setEmployee(e);
         } catch (Exception exception) {
         }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations) throws IOException {
+  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
+      throws IOException {
     List = new HashMap<String, MedicineRequest>();
     String s;
     File file = new File(csvFile);
@@ -112,9 +125,21 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
+        }
+        try {
+          Employee e = employees.get(row[5]);
+          e.addRequest(r);
+          r.setEmployee(e);
+        } catch (Exception exception) {
+          System.out.println(
+              "Employee Not Found "
+                  + r.getEmployee().getEmployeeID()
+                  + " Medicine Request"
+                  + r.getID());
         }
       }
     }

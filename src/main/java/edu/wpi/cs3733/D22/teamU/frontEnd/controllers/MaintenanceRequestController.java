@@ -30,8 +30,8 @@ import lombok.SneakyThrows;
 
 public class MaintenanceRequestController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> staffDropDown;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> staffDropDown;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
@@ -60,29 +60,29 @@ public class MaintenanceRequestController extends ServiceController {
   @FXML TextArea textInput;
 
   ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   public void fillDestinations() throws SQLException, IOException {
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
   }
 
   public void fillStaff() throws SQLException, IOException {
     staff = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+      staff.add(l);
     }
 
     staffDropDown.setTooltip(new Tooltip());
     staffDropDown.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(staffDropDown, 675, 400);
+    new ComboBoxAutoComplete<Employee>(staffDropDown, 675, 400);
   }
 
   @SneakyThrows
@@ -119,7 +119,7 @@ public class MaintenanceRequestController extends ServiceController {
     activeReqStatus.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("status"));
     activeReqDestination.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("destination"));
+        new PropertyValueFactory<MaintenanceRequest, String>("location"));
     activeReqDescription.setCellValueFactory(
         new PropertyValueFactory<MaintenanceRequest, String>("description"));
     activeStaff.setCellValueFactory(
@@ -140,7 +140,7 @@ public class MaintenanceRequestController extends ServiceController {
       String description,
       String date,
       String time) {
-    maintenanceRequests.add(
+    MaintenanceRequest r =
         new MaintenanceRequest(
             id,
             name,
@@ -150,7 +150,10 @@ public class MaintenanceRequestController extends ServiceController {
             typeOfMaintenanceRequest,
             description,
             date,
-            time));
+            time);
+    r.gettingTheLocation();
+    maintenanceRequests.add(r);
+
     return maintenanceRequests;
   }
 
@@ -159,7 +162,8 @@ public class MaintenanceRequestController extends ServiceController {
     maintenanceRequests.clear();
     for (MaintenanceRequest maintenanceReq :
         Udb.getInstance().maintenanceRequestImpl.List.values()) {
-      maintenanceRequests.add(
+
+      MaintenanceRequest r =
           new MaintenanceRequest(
               maintenanceReq.getID(),
               maintenanceReq.getName(),
@@ -169,7 +173,10 @@ public class MaintenanceRequestController extends ServiceController {
               maintenanceReq.getTypeOfMaintenance(),
               maintenanceReq.getDescription(),
               maintenanceReq.getDate(),
-              maintenanceReq.getTime()));
+              maintenanceReq.getTime());
+
+      r.gettingTheLocation();
+      maintenanceRequests.add(r);
     }
 
     return maintenanceRequests;
@@ -215,22 +222,39 @@ public class MaintenanceRequestController extends ServiceController {
 
     clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    double rand = Math.random() * 10000;
 
-    String empty = staffDropDown.getValue();
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("MAI" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in maintenance service request controller");
+      }
+
+      serviceID = "MAI" + (int) rand;
+    }
+
+    // String empty = staffDropDown.getValue();
 
     MaintenanceRequest request =
         new MaintenanceRequest(
-            (int) rand + "",
+            serviceID,
             "N/A",
             "Pending",
-            locations.getValue(),
-            checkEmployee(empty),
+            locations.getValue().getNodeID(),
+            staffDropDown.getValue(),
             "N/A",
             textInput.getText().trim(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
 
+    request.gettingTheLocation();
     activeRequestTable.setItems(
         newRequest(
             request.getID(),
@@ -278,8 +302,8 @@ public class MaintenanceRequestController extends ServiceController {
     sucessRequest.setVisible(false);
     clearRequest.setVisible(true);
     textInput.setText("");
-    staffDropDown.getItems().clear();
-    locations.getItems().clear();
+    staffDropDown.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
     new Thread(
             () -> {
               try {

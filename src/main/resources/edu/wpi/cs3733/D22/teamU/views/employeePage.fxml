@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EmployeeInfoController">
+
+
+    <children>
+        <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
+            <children>
+                <ImageView fitHeight="750.0" fitWidth="1177.0" layoutX="1.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/hospitalBuilding.jpg" />
+                    </image>
+                </ImageView>
+                <Pane prefHeight="132.0" prefWidth="1100.0" styleClass="header" stylesheets="@../css/headersAndLabels.css">
+                    <children>
+                        <Text fx:id="headerText" layoutX="385.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Employee Info" wrappingWidth="329.65234375" />
+                        <Pane layoutX="844.0" layoutY="14.0" prefHeight="106.0" prefWidth="228.0" style="-fx-background-radius: 35;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
+                            <children>
+                                <Text fx:id="time" layoutX="34.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="hh:mm:ss" y="5.0">
+                                    <font>
+                                        <Font name="System Bold" size="36.0" />
+                                    </font>
+                                </Text>
+                                <Text fx:id="date" fill="#044e9a" layoutX="35.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy" y="5.0">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="clockButton" layoutX="22.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="51.0" style="-fx-background-color: transparent;">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </Pane>
+                  <Button layoutX="-59.0" layoutY="73.0" minHeight="190.0" mnemonicParsing="false" onAction="#toHome" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="             Home" textFill="#2a20ea">
+                     <tooltip>
+                        <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
+                     </tooltip>
+                     <font>
+                        <Font name="System Bold" size="13.600000381469727" />
+                     </font>
+                  </Button>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.0" layoutX="247.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="126.0" />
+                  <ImageView fitHeight="115.0" fitWidth="126.0" layoutX="247.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/doctorBLUE.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </Pane>
+            <Label layoutX="146.0" layoutY="281.0" stylesheets="@../css/homePageLabels.css" text="Label" />
+            <Pane layoutX="17.0" layoutY="274.0" prefHeight="132.0" prefWidth="315.0" style="-fx-background-color: #d9f0f1;" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
+               <children>
+                  <Text fill="#2a20ea" layoutX="20.0" layoutY="31.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptionHeaderText" text="Employee Information Page:" underline="true" wrappingWidth="274.13671875">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="description" text="This page grants access to any employee's information, including ID, full name, reports, etc. Also, allows the user to view all requests for any given employee." wrappingWidth="274.13671875" />
+               </children>
+            </Pane>
+                <Button layoutX="59.0" layoutY="416.0" minHeight="190.0" mnemonicParsing="false" onAction="#toEmployeeReq" style="-fx-background-color: transparent;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" textFill="#2a20ea">
+                    <tooltip>
+                        <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
+                    </tooltip>
+                    <font>
+                        <Font name="System Bold" size="13.600000381469727" />
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/doctorBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+                </Button>
+            <Pane layoutX="393.0" layoutY="274.0" prefHeight="132.0" prefWidth="315.0" style="-fx-background-color: #d9f0f1;" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
+               <children>
+                  <Text fill="#2a20ea" layoutX="70.0" layoutY="29.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptionHeaderText" text="All Requests Page:" underline="true" wrappingWidth="174.13671875">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="description" text="This page grants access to view all requests for all employees at once." wrappingWidth="274.13671875" />
+               </children>
+            </Pane>
+            <Pane layoutX="771.0" layoutY="274.0" prefHeight="132.0" prefWidth="315.0" style="-fx-background-color: #d9f0f1;" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
+               <children>
+                  <Text fill="#2a20ea" layoutX="26.0" layoutY="30.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptionHeaderText" text="Employee Report Page:" underline="true" wrappingWidth="274.13671875">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="26.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="description" text="This page grants access to any employee to report any other employee, by giving a reasonable description. Also, their is a displayed graph on the right which displays analytics of reports." wrappingWidth="274.13671875" />
+               </children>
+            </Pane>
+            <Button layoutX="459.0" layoutY="426.0" mnemonicParsing="false" onAction="#toAllRequests" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/allRequests.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="833.0" layoutY="418.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/requestBLUE2.0.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

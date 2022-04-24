@@ -68,7 +68,6 @@ public final class Udb {
 
   private Udb(String username, String password, String[] CSVfiles)
       throws IOException, SQLException {
-    admin = true;
     this.username = username;
     this.password = password;
     this.CSVfiles = CSVfiles;
@@ -215,38 +214,43 @@ public final class Udb {
     EquipmentImpl.CSVToJava(locationImpl.list());
     EquipmentImpl.JavaToSQL();
 
-    equipRequestImpl.CSVToJava(locationImpl.list());
+    equipRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     equipRequestImpl.JavaToSQL();
 
-    labRequestImpl.CSVToJava(locationImpl.list());
+    labRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     labRequestImpl.JavaToSQL();
 
-    laundryRequestImpl.CSVToJava(locationImpl.list());
+    laundryRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     laundryRequestImpl.JavaToSQL();
 
-    medicineRequestImpl.CSVToJava(locationImpl.list());
+    medicineRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     medicineRequestImpl.JavaToSQL();
 
-    giftRequestImpl.CSVToJava(locationImpl.list());
+    giftRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     giftRequestImpl.JavaToSQL();
 
-    mealRequestImpl.CSVToJava(locationImpl.list());
+    mealRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     mealRequestImpl.JavaToSQL();
 
-    religiousRequestImpl.CSVToJava(locationImpl.list());
+    religiousRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     religiousRequestImpl.JavaToSQL();
 
-    translatorRequestImpl.CSVToJava(locationImpl.list());
+    translatorRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     translatorRequestImpl.JavaToSQL();
 
-    maintenanceRequestImpl.CSVToJava(locationImpl.list());
+    maintenanceRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     maintenanceRequestImpl.JavaToSQL();
 
-    securityRequestImpl.CSVToJava(locationImpl.list());
+    securityRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     securityRequestImpl.JavaToSQL();
 
-    compServRequestImpl.CSVToJava(locationImpl.list());
+    compServRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     compServRequestImpl.JavaToSQL();
+
+    //    for (Employee e : EmployeeImpl.hList().values()) {
+    //      for (Request r : e.getRequests())
+    //        System.out.println(r.getClass().getSimpleName() + ": " + r.getID());
+    //    }
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON

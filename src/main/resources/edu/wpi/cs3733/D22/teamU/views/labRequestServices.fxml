@@ -30,7 +30,7 @@
             <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
             <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                <children>
-                  <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="342.0">
+                  <HBox layoutX="866.0" layoutY="46.0" prefHeight="70.0" prefWidth="234.0">
                      <children>
                         <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
                            <font>
@@ -46,14 +46,6 @@
                            </font>
                            <HBox.margin>
                               <Insets right="-15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Requests" textFill="#044e9a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -82,14 +74,14 @@
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
                               <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="activeReqStaff" prefWidth="75.0" text="Staff" />
-                              <TableColumn fx:id="patientNameReq" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="activeReqAmount" prefWidth="75.0" text="Amount Requested" />
                               <TableColumn fx:id="activeReqType" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="activeReqAmount" prefWidth="75.0" text="Amount" />
+                              <TableColumn fx:id="patientNameReq" prefWidth="75.0" text="PatientName" />
+                              <TableColumn fx:id="activeReqStatus" prefWidth="75.0" text="Status" />
+                              <TableColumn fx:id="activeReqStaff" prefWidth="75.0" text="Staff" />
                               <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />
                               <TableColumn fx:id="activeDate" prefWidth="75.0" text="Date" />
                               <TableColumn fx:id="activeTime" prefWidth="75.0" text="Time" />
-                              <TableColumn fx:id="activePriority" prefWidth="75.0" text="Priority" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -226,24 +218,8 @@
                            </font>
                         </Text>
                         <TextField fx:id="patientNameField" layoutX="368.0" layoutY="75.0" />
-                        <TextField fx:id="staffMemberField" layoutX="368.0" layoutY="137.0" />
                         <ComboBox fx:id="locations" layoutX="368.0" layoutY="202.0" prefWidth="150.0" promptText="Location" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
-                     <children>
-                        <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
-                           <columns>
-                              <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="inUse" prefWidth="75.0" text="In Use" />
-                              <TableColumn fx:id="available" prefWidth="75.0" text="Available" />
-                              <TableColumn fx:id="total" prefWidth="75.0" text="Total Amount" />
-                              <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
+                        <ComboBox fx:id="employees" layoutX="367.0" layoutY="143.0" prefWidth="150.0" promptText="Staff" />
                      </children>
                   </Pane>
                </children>
@@ -257,7 +233,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#toHome"  prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                        <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

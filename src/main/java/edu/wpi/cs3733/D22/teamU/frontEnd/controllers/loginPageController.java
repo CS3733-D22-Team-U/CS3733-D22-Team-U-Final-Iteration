@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
-import edu.wpi.cs3733.D22.teamU.DBController;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
@@ -25,8 +27,14 @@ public class loginPageController extends ServiceController {
   public PasswordField password;
   public TextField username;
   public Text feedback;
+  public TextField activeID;
+  public TextField activeUsername;
+  public TextField newPassword;
+  @FXML Button changeButton;
+  @FXML Button backButton;
   @FXML Circle loadingCircle;
   @FXML Group loginGroup;
+  @FXML Group passwordGroup;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -46,7 +54,26 @@ public class loginPageController extends ServiceController {
                 Platform.runLater(
                     () -> {
                       try {
-                        DBController.main(new String[] {username.getText(), password.getText()});
+                        // DBController.main(new String[] {username.getText(), password.getText()});
+                        boolean foundUser = false;
+
+                        for (Employee a : Udb.getInstance().EmployeeImpl.hList().values()) {
+                          if (a.getUsername().equals(username.getText().trim())
+                              && a.getPassword().equals(password.getText().trim())) {
+                            foundUser = true;
+                            if (a.getOccupation().equals("Administrator")) {
+                              Udb.admin = true;
+                            } else {
+                              Udb.admin = false;
+                            }
+                          }
+                        }
+
+                        if (foundUser) {
+                        } else {
+                          throw new IOException();
+                        }
+
                         Scene scene = null;
                         try {
                           scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/Dashboard.fxml");
@@ -68,6 +95,29 @@ public class loginPageController extends ServiceController {
               }
             })
         .start();
+  }
+
+  public void callChangePasswordFunction(ActionEvent actionEvent) {
+    try {
+      Udb.getInstance()
+          .EmployeeImpl
+          .changePassword(activeID.getText(), activeUsername.getText(), newPassword.getText());
+    } catch (Exception e) {
+
+    }
+    activeID.setText("");
+    activeUsername.setText("");
+    newPassword.setText("");
+  }
+
+  public void goBackToLogIn(ActionEvent actionEvent) {
+    loginGroup.setVisible(true);
+    passwordGroup.setVisible(false);
+  }
+
+  public void goToChangePassword(ActionEvent actionEvent) {
+    loginGroup.setVisible(false);
+    passwordGroup.setVisible(true);
   }
 
   @Override

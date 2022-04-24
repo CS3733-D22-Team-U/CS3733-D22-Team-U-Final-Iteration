@@ -27,8 +27,6 @@ public class MealRequest extends Request {
     this.addNotes = addNotes;
     this.date = date;
     this.time = time;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public String getDietRest() {

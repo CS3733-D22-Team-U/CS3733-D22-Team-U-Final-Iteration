@@ -263,10 +263,9 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest request :
-        MedicineRequestDaoImpl.List.values()) {
+    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
       medUIRequests.add(
-          new edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest(
+          new MedicineRequest(
               request.getID(),
               request.getName(),
               request.getAmount(),
@@ -278,15 +277,6 @@ public class MedicineDeliveryController extends ServiceController {
               request.getTime()));
     }
     return medUIRequests;
-  }
-
-  public Employee checkEmployee(String employee) throws NullPointerException {
-    if (EmployeeDaoImpl.List.get(employee) != null) {
-      return EmployeeDaoImpl.List.get(employee);
-    } else {
-      Employee empty = new Employee("N/A");
-      return empty;
-    }
   }
 
   public void switchToNewRequest(ActionEvent actionEvent) {
@@ -326,6 +316,15 @@ public class MedicineDeliveryController extends ServiceController {
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(false);
     allEquipButton.setUnderline(true);
+  }
+
+  public Employee checkEmployee(String employee) throws NullPointerException {
+    if (EmployeeDaoImpl.List.get(employee) != null) {
+      return EmployeeDaoImpl.List.get(employee);
+    } else {
+      Employee empty = new Employee("N/A");
+      return empty;
+    }
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
@@ -368,12 +367,28 @@ public class MedicineDeliveryController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("MED" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in Medicine service request controller");
+          }
+
+          serviceID = "MED" + (int) rand;
+        }
         // String patient = "BRUH";
 
         MedicineRequest request =
             new MedicineRequest(
-                (int) rand + "",
+                serviceID,
                 checkBoxes.get(i).getText(),
                 requestAmount,
                 patients.getValue().toString(),

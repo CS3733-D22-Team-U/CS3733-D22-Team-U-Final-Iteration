@@ -2,9 +2,11 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.util.ArrayList;
 
 public class Request {
+
   public Request(
       String ID,
       String name,
@@ -27,6 +29,7 @@ public class Request {
   }
 
   public String ID;
+  public String reqType;
   public String name; // or lab type
   public String patientName;
   public String date;
@@ -35,8 +38,31 @@ public class Request {
   public String destination;
   public Employee employee;
   public Location location;
-  public String firstName;
-  public String lastName;
+
+  public Request(
+      String ID,
+      String reqType,
+      Employee employee,
+      String destination,
+      String status,
+      String date,
+      String time) {
+    this.ID = ID;
+    this.reqType = reqType;
+    this.employee = employee;
+    this.destination = destination;
+    this.status = status;
+    this.date = date;
+    this.time = time;
+  }
+
+  public String getReqType() {
+    return reqType;
+  }
+
+  public void setReqType(String reqType) {
+    this.reqType = reqType;
+  }
 
   public Request() {}
 
@@ -119,4 +145,15 @@ public class Request {
   public void setStatus(String status) {
     this.status = status;
   }
+
+  public void gettingTheLocation() {
+    try {
+      int index = Udb.getInstance().locationImpl.search(destination);
+      this.location = Udb.getInstance().locationImpl.locations.get(index);
+    } catch (Exception e) {
+      System.out.println("Security request on line 65");
+    }
+  }
+
+  public void settingTheRequests() {}
 }

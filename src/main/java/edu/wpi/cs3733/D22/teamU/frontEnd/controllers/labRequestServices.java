@@ -3,14 +3,11 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.lab.LabUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,13 +30,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
-import org.w3c.dom.Text;
 
 public class labRequestServices extends ServiceController {
 
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
   @FXML Pane activeRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
@@ -47,40 +42,36 @@ public class labRequestServices extends ServiceController {
   public Button toHelpPage;
   public Button clear;
   public Label submission;
-  public ComboBox<String> locations;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
 
-  @FXML TextArea otherField;
   @FXML TextField patientNameField;
-  @FXML TextField staffMemberField;
 
-  @FXML TableColumn<LabUI, String> activeReqID;
-  @FXML TableColumn<LabUI, String> patientNameReq;
-  @FXML TableColumn<LabUI, String> activeReqStaff;
-  @FXML TableColumn<LabUI, String> activeReqType;
-  @FXML TableColumn<LabUI, String> activeDate;
-  @FXML TableColumn<LabUI, String> activeTime;
-  @FXML TableColumn<LabUI, Integer> activeReqAmount;
-  @FXML TableColumn<LabUI, Integer> activeReqDestination;
+  @FXML TableColumn<LabRequest, String> activeReqID;
+  @FXML TableColumn<LabRequest, String> activeReqType;
+  @FXML TableColumn<LabRequest, Integer> activeReqAmount;
+  @FXML TableColumn<LabRequest, String> patientNameReq;
+  @FXML TableColumn<LabRequest, String> activeReqStatus;
+  @FXML TableColumn<LabRequest, String> activeReqStaff;
+  @FXML TableColumn<LabRequest, String> activeReqDestination;
+  @FXML TableColumn<LabRequest, String> activeDate;
+  @FXML TableColumn<LabRequest, String> activeTime;
 
-  @FXML TableView<LabUI> activeRequestTable;
+  @FXML TableView<LabRequest> activeRequestTable;
   @FXML VBox requestHolder;
-  @FXML Text requestText;
+
   // Testing below
   @FXML javafx.scene.text.Text time;
   @FXML VBox inputFields;
-  @FXML TableView<EquipmentUI> table;
   @FXML Button clearButton;
   @FXML Button submitButton;
 
-  ObservableList<LabUI> labUIRequests = FXCollections.observableArrayList();
+  ObservableList<LabRequest> labUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> labRequestUI = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> labUIRequestss = FXCollections.observableArrayList();
-
   // Udb udb = DBController.udb;
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -92,16 +83,19 @@ public class labRequestServices extends ServiceController {
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(e);
     }
+    employees.setTooltip(new Tooltip());
+    employees.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(employees, 367, 243);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -152,56 +146,53 @@ public class labRequestServices extends ServiceController {
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
-    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
-    patientNameReq.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    activeReqStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("activeReqAmount"));
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("labType"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
-    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("location"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    activeReqType.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("name"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<LabRequest, Integer>("amount"));
+    patientNameReq.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("patientName"));
+    activeReqStatus.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("status"));
+    activeReqStaff.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("employee"));
+    activeReqDestination.setCellValueFactory(
+        new PropertyValueFactory<LabRequest, String>("location"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("date"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<LabRequest, String>("time"));
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<LabUI> newRequest(
+  private ObservableList<LabRequest> newRequest(
       String id,
       String name,
       int amount,
+      String patient,
+      String status,
+      Employee employee,
       String destination,
       String date,
-      String time,
-      int priority) {
-    labUIRequestss.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
+      String time) {
+
+    LabRequest r =
+        new LabRequest(id, name, amount, patient, status, employee, destination, date, time);
+    r.gettingTheLocation();
+    labUIRequests.add(r);
     return labUIRequests;
   }
 
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    labRequestUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      labRequestUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
-    }
-
-    return labRequestUI;
-  }
-
-  private ObservableList<LabUI> getActiveRequestList() throws SQLException, IOException {
+  private ObservableList<LabRequest> getActiveRequestList() throws SQLException, IOException {
     for (LabRequest request : Udb.getInstance().labRequestImpl.hList().values()) {
-      labUIRequests.add(
-          new LabUI(
+      LabRequest r =
+          new LabRequest(
               request.getID(),
-              request.getPatientName(),
-              request.getEmployee().getEmployeeID(),
-              request.getAmount(),
               request.getName(),
+              request.getAmount(),
+              request.getPatientName(),
+              request.getStatus(),
+              request.getEmployee(),
               request.getDestination(),
               request.getDate(),
-              request.getTime()));
+              request.getTime());
+
+      r.gettingTheLocation();
+      labUIRequests.add(r);
     }
     return labUIRequests;
   }
@@ -210,48 +201,72 @@ public class labRequestServices extends ServiceController {
   public void addRequest() {
 
     String patientInput = patientNameField.getText().trim();
-    String staffInput = staffMemberField.getText().trim();
+    // String staffInput = staffMemberField.getText().trim();
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        double rand = Math.random() * 10000;
+
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("LAB" + (int) rand);
+          } catch (Exception e) {
+            System.out.println("alreadyHere variable messed up in lab service request controller");
+          }
+
+          serviceID = "LAB" + (int) rand;
+        }
+
         String inputString = checkBoxesInput.get(i).getText().trim();
-        String room = locations.getValue().toString();
-        LabUI request =
-            new LabUI(
-                (int) rand + "",
-                patientInput,
-                staffInput,
-                Integer.parseInt(inputString),
+        String room = locations.getValue().getNodeID();
+        Employee staffInput = employees.getValue();
+        LabRequest request =
+            new LabRequest(
+                serviceID,
                 checkBoxes.get(i).getText().trim(),
+                Integer.parseInt(inputString),
+                patientInput,
+                "Pending",
+                staffInput,
                 room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11));
+
+        request.gettingTheLocation();
+
         activeRequestTable.setItems(
             newRequest(
-                request.getId(),
+                request.getID(),
                 request.getPatientName(),
-                request.getStaffName(),
-                request.getActiveReqAmount(),
-                request.getLabType(),
-                request.getLocation(),
-                request.getRequestDate(),
-                request.getRequestTime()));
+                request.getAmount(),
+                request.getPatientName(),
+                request.getStatus(),
+                request.getEmployee(),
+                request.getLocation().getNodeID(),
+                request.getDate(),
+                request.getTime()));
         try {
+          request.gettingTheLocation();
           Udb.getInstance()
               .labRequestImpl
               .add(
                   new LabRequest(
-                      request.getId(),
-                      request.getLabType(),
-                      request.getActiveReqAmount(),
+                      request.getID(),
+                      request.getName(),
+                      request.getAmount(),
                       request.getPatientName(),
-                      "Sent",
-                      new Employee(request.getId()),
-                      request.getLocation(),
-                      request.getRequestDate(),
-                      request.getRequestTime()));
+                      request.getStatus(),
+                      request.getEmployee(),
+                      request.getDestination(),
+                      request.getDate(),
+                      request.getTime()));
           //          submission.setText("Request for " + checkBoxes.get(i).getText() + "
           // successfully sent.");
         } catch (IOException e) {
@@ -265,7 +280,7 @@ public class labRequestServices extends ServiceController {
     clear();
   }
 
-  private ObservableList<LabUI> newRequest(
+  /*private ObservableList<LabUI> newRequest(
       String id,
       String patientName,
       String staffName,
@@ -276,7 +291,7 @@ public class labRequestServices extends ServiceController {
       String time) {
     labUIRequests.add(new LabUI(id, patientName, staffName, amount, labType, location, date, time));
     return labUIRequests;
-  }
+  }*/
 
   @Override
   public void removeRequest() {}
@@ -294,7 +309,7 @@ public class labRequestServices extends ServiceController {
       checkBoxes.get(i).setSelected(false);
     }
     patientNameField.setText("");
-    staffMemberField.setText("");
+    // staffMemberField.setText("");
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
@@ -338,20 +353,6 @@ public class labRequestServices extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToEquipment(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
   }
 
   public void switchToNewRequest(ActionEvent actionEvent) {
@@ -364,6 +365,5 @@ public class labRequestServices extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
-    allEquipButton.setUnderline(false);
   }
 }
