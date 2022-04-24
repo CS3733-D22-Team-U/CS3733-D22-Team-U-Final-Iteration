@@ -3,13 +3,11 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -32,13 +30,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
-import org.w3c.dom.Text;
 
 public class labRequestServices extends ServiceController {
 
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
   @FXML Pane activeRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
@@ -49,9 +45,7 @@ public class labRequestServices extends ServiceController {
   public ComboBox<Location> locations;
   public ComboBox<Employee> employees;
 
-  @FXML TextArea otherField;
   @FXML TextField patientNameField;
-  @FXML TextField staffMemberField;
 
   @FXML TableColumn<LabRequest, String> activeReqID;
   @FXML TableColumn<LabRequest, String> activeReqType;
@@ -65,21 +59,16 @@ public class labRequestServices extends ServiceController {
 
   @FXML TableView<LabRequest> activeRequestTable;
   @FXML VBox requestHolder;
-  @FXML Text requestText;
+
   // Testing below
   @FXML javafx.scene.text.Text time;
   @FXML VBox inputFields;
-  @FXML TableView<EquipmentUI> table;
   @FXML Button clearButton;
   @FXML Button submitButton;
 
   ObservableList<LabRequest> labUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
-  ObservableList<EquipmentUI> labRequestUI = FXCollections.observableArrayList();
-  // ObservableList<EquipmentUI> labUIRequestss = FXCollections.observableArrayList();
-  // ObservableList<ReligiousRequest> religiousUIRequests = FXCollections.observableArrayList();
-
   // Udb udb = DBController.udb;
   ArrayList<Location> nodeIDs;
   ArrayList<Employee> staff;
@@ -183,23 +172,9 @@ public class labRequestServices extends ServiceController {
 
     LabRequest r =
         new LabRequest(id, name, amount, patient, status, employee, destination, date, time);
+    r.gettingTheLocation();
     labUIRequests.add(r);
     return labUIRequests;
-  }
-
-  private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
-    labRequestUI.clear();
-    for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      labRequestUI.add(
-          new EquipmentUI(
-              equipment.getName(),
-              equipment.getInUse(),
-              equipment.getAvailable(),
-              equipment.getAmount(),
-              equipment.getLocationID()));
-    }
-
-    return labRequestUI;
   }
 
   private ObservableList<LabRequest> getActiveRequestList() throws SQLException, IOException {
@@ -274,7 +249,7 @@ public class labRequestServices extends ServiceController {
                 request.getPatientName(),
                 request.getStatus(),
                 request.getEmployee(),
-                request.getDestination(),
+                request.getLocation().getNodeID(),
                 request.getDate(),
                 request.getTime()));
         try {
@@ -334,7 +309,7 @@ public class labRequestServices extends ServiceController {
       checkBoxes.get(i).setSelected(false);
     }
     patientNameField.setText("");
-    staffMemberField.setText("");
+    // staffMemberField.setText("");
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
@@ -378,20 +353,6 @@ public class labRequestServices extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(false);
-  }
-
-  public void switchToEquipment(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
   }
 
   public void switchToNewRequest(ActionEvent actionEvent) {
@@ -404,6 +365,5 @@ public class labRequestServices extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
-    allEquipButton.setUnderline(false);
   }
 }

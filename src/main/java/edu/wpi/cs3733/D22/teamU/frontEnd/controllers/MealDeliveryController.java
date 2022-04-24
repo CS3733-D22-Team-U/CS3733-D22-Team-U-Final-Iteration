@@ -32,9 +32,9 @@ import lombok.SneakyThrows;
 
 public class MealDeliveryController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
-  public ComboBox<String> patients;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
+  public TextField patients;
 
   @FXML CheckBox veganCheckbox;
   @FXML CheckBox vegCheckbox;
@@ -67,9 +67,7 @@ public class MealDeliveryController extends ServiceController {
   @FXML Text time;
   ObservableList<MealRequest> meals = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
-  ObservableList<MealRequest> MealRequests = FXCollections.observableArrayList();
-  ObservableList<String> patientList =
-      FXCollections.observableArrayList("Deepti", "Kody", "Joselin");
+
   ObservableList<String> StatusList = FXCollections.observableArrayList("Processing", "Done");
 
   @FXML TextArea notesMeal;
@@ -83,28 +81,18 @@ public class MealDeliveryController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     setUpActiveRequests();
-    nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
-    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
-    staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-    }
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(staff);
+    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
 
-    patients.getItems().addAll(patientList);
-
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
   }
 
@@ -136,7 +124,7 @@ public class MealDeliveryController extends ServiceController {
     activeReqDiet.setCellValueFactory(new PropertyValueFactory<>("dietRest"));
     activeStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     activeReqEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
-    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("location"));
     activeNotes.setCellValueFactory(new PropertyValueFactory<>("addNotes"));
     activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -153,15 +141,17 @@ public class MealDeliveryController extends ServiceController {
       String addNotes,
       String date,
       String time) {
-    meals.add(
+    MealRequest r =
         new MealRequest(
-            ID, patientName, dietRest, status, employee, destination, addNotes, date, time));
+            ID, patientName, dietRest, status, employee, destination, addNotes, date, time);
+    r.gettingTheLocation();
+    meals.add(r);
     return meals;
   }
 
   private ObservableList<MealRequest> getActiveRequestList() throws SQLException, IOException {
     for (MealRequest aMeal : Udb.getInstance().mealRequestImpl.hList().values()) {
-      MealRequests.add(
+      MealRequest r =
           new MealRequest(
               aMeal.getID(),
               aMeal.getPatientName(),
@@ -171,9 +161,11 @@ public class MealDeliveryController extends ServiceController {
               aMeal.getDestination(),
               aMeal.getAddNotes(),
               aMeal.getDate(),
-              aMeal.getTime()));
+              aMeal.getTime());
+      r.gettingTheLocation();
+      meals.add(r);
     }
-    return MealRequests;
+    return meals;
   }
 
   @Override
@@ -182,12 +174,10 @@ public class MealDeliveryController extends ServiceController {
     String inputString = "";
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        inputString += checkBoxes.get(i).getText().trim() + ", ";
+        inputString += checkBoxes.get(i).getText().trim() + ":";
       }
     }
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    String room = locations.getValue();
-    String em = employees.getValue();
     // Employee empty = new Employee(employees.getValue());
 
     boolean alreadyHere = true;
@@ -209,14 +199,15 @@ public class MealDeliveryController extends ServiceController {
     MealRequest request =
         new MealRequest(
             serviceID,
-            patients.getValue(),
+            patients.getText().trim(),
             inputString,
-            "Ordered",
-            checkEmployee(em),
-            room,
+            "In Progress",
+            employees.getValue(),
+            locations.getValue().getNodeID(),
             notesMeal.getText(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
+    request.gettingTheLocation();
 
     activeRequestTable.setItems(
         newRequest(
@@ -230,18 +221,19 @@ public class MealDeliveryController extends ServiceController {
             request.getDate(),
             request.getTime()));
     try {
-      Udb.getInstance()
-          .add( // TODO Have random ID and enter Room Destination
-              new MealRequest(
-                  request.getID(),
-                  request.getPatientName(),
-                  request.getDietRest(),
-                  "sent",
-                  checkEmployee(employees.getValue()),
-                  request.getDestination(),
-                  request.getAddNotes(),
-                  request.getDate(),
-                  request.getTime()));
+      MealRequest r =
+          new MealRequest(
+              request.getID(),
+              request.getPatientName(),
+              request.getDietRest(),
+              "In Progress",
+              request.employee,
+              request.getDestination(),
+              request.getAddNotes(),
+              request.getDate(),
+              request.getTime());
+      r.gettingTheLocation();
+      Udb.getInstance().add(r);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -290,9 +282,9 @@ public class MealDeliveryController extends ServiceController {
     nutsCheckbox.setSelected(false);
     shellfishCheckbox.setSelected(false);
     notesMeal.clear();
-    locations.setValue("");
-    patients.setValue("");
-    employees.setValue("");
+    locations.getSelectionModel().clearSelection();
+    patients.setText("");
+    employees.getSelectionModel().clearSelection();
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
