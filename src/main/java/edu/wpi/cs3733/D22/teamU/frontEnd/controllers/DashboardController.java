@@ -63,6 +63,7 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     try {
       listofEmployees();
     } catch (SQLException e) {
@@ -220,6 +221,13 @@ public class DashboardController extends ServiceController {
 
   public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
+  public void toRequestsPage(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/requestsPage.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
