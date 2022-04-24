@@ -183,6 +183,7 @@ public class labRequestServices extends ServiceController {
 
     LabRequest r =
         new LabRequest(id, name, amount, patient, status, employee, destination, date, time);
+    r.gettingTheLocation();
     labUIRequests.add(r);
     return labUIRequests;
   }
@@ -274,7 +275,7 @@ public class labRequestServices extends ServiceController {
                 request.getPatientName(),
                 request.getStatus(),
                 request.getEmployee(),
-                request.getDestination(),
+                request.getLocation().getNodeID(),
                 request.getDate(),
                 request.getTime()));
         try {
@@ -334,7 +335,7 @@ public class labRequestServices extends ServiceController {
       checkBoxes.get(i).setSelected(false);
     }
     patientNameField.setText("");
-    staffMemberField.setText("");
+    // staffMemberField.setText("");
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
