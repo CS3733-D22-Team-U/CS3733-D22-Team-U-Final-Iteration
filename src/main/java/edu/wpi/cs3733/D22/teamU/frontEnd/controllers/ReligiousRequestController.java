@@ -182,7 +182,8 @@ public class ReligiousRequestController extends ServiceController {
       double rand = Math.random() * 10000;
 
       try {
-        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("REL" + (int) rand);
+        alreadyHere =
+            Udb.getInstance().religiousRequestImpl.hList().containsKey("REL" + (int) rand);
       } catch (Exception e) {
         System.out.println(
             "alreadyHere variable messed up in religious service request controller");
