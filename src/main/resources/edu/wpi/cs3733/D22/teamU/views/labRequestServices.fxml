@@ -101,7 +101,7 @@
                         </TableView>
                      </children>
                   </Pane>
-                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
+                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false" StackPane.alignment="TOP_LEFT">
                      <children>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
