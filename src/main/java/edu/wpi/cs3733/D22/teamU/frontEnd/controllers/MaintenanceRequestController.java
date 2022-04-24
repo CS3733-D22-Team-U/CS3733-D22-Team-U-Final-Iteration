@@ -222,13 +222,29 @@ public class MaintenanceRequestController extends ServiceController {
 
     clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    double rand = Math.random() * 10000;
+
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("MAI" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in maintenance service request controller");
+      }
+
+      serviceID = "MAI" + (int) rand;
+    }
 
     // String empty = staffDropDown.getValue();
 
     MaintenanceRequest request =
         new MaintenanceRequest(
-            (int) rand + "",
+            serviceID,
             "N/A",
             "Pending",
             locations.getValue().getNodeID(),

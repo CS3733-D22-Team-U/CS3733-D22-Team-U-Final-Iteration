@@ -1,7 +1,6 @@
 ID,Name,Status,Staff,Destination,Description,Lethal,Date,Time
-9861,admin,Pending,00003,HBATH00103,adf,No,2022-04-22,00:03:41
-meme,N/A,N/A,00001,FHALL00801,N/A,absolutely,N/A,N/A
-9324,admin,Pending,00002,CHALL007L1,test,No,2022-04-21,22:50:51
-testing,N/A,N/A,00003,FHALL00801,N/A,absolutely,N/A,N/A
-5852,admin,Pending,00002,CLABS002L1,sadfa,No,2022-04-21,22:25:27
-7018,admin,Pending,00009,HBATH00103,test,No,2022-04-22,00:30:42
+SEC9324,admin,Pending,00002,CHALL007L1,test,No,2022-04-21,22:50:51
+SEC9861,admin,Pending,00003,HBATH00103,adf,No,2022-04-22,00:03:41
+SEC3363,admin,Pending,00009,HHALL00603,adfadsafafd,Yes,2022-04-23,17:32:08
+SEC7018,admin,Pending,00009,HBATH00103,test,No,2022-04-22,00:30:42
+SEC5852,admin,Pending,00002,CLABS002L1,sadfa,No,2022-04-21,22:25:27

@@ -197,11 +197,25 @@ public class giftFloralController extends ServiceController {
       }
     }
 
-    double rand = Math.random() * 10000;
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("GIF" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in gift and floral service request controller");
+      }
+
+      serviceID = "GIF" + (int) rand;
+    }
 
     GiftRequest request =
         new GiftRequest(
-            (int) rand + "",
+            serviceID,
             senderName.getText(),
             patientName.getText(),
             message.getText(),
