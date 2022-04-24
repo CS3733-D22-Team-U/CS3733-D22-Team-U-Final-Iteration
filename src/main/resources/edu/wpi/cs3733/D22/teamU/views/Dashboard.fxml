@@ -154,15 +154,15 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <Pane layoutX="45.0" layoutY="283.0" prefHeight="59.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
+            <Pane layoutX="46.0" layoutY="333.0" prefHeight="59.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
                <effect>
                   <DropShadow spread="0.28" />
                </effect>
                <children>
-                  <Text fx:id="userName1" layoutX="8.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Service Requests" />
+                  <Text fx:id="userName1" layoutX="8.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Service Requests" />
                </children>
             </Pane>
-            <Pane layoutX="401.0" layoutY="279.0" prefHeight="57.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
+            <Pane layoutX="401.0" layoutY="334.0" prefHeight="57.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
                <children>
                   <Text fx:id="userName11" layoutX="61.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Map Editor" />
                </children>
@@ -170,7 +170,7 @@
                   <DropShadow spread="0.28" />
                </effect>
             </Pane>
-            <Button layoutX="480.0" layoutY="336.0" mnemonicParsing="false" onAction="#toMapPage" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;">
+            <Button layoutX="480.0" layoutY="394.0" mnemonicParsing="false" onAction="#toMapPage" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="95.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -178,15 +178,15 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Pane layoutX="772.0" layoutY="279.0" prefHeight="57.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/headersAndLabels.css">
+            <Pane layoutX="772.0" layoutY="334.0" prefHeight="57.0" prefWidth="298.0" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
                <children>
-                  <Text fx:id="userName12" layoutX="42.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Employee Info" />
+                  <Text fx:id="userName12" layoutX="27.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="Employee Info" />
                </children>
                <effect>
                   <DropShadow spread="0.28" />
                </effect>
             </Pane>
-            <Button layoutX="866.0" layoutY="336.0" mnemonicParsing="false" onAction="#toEmployeePage" style="-fx-background-color: transparent;">
+            <Button layoutX="864.0" layoutY="406.0" mnemonicParsing="false" onAction="#toEmployeePage" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="106.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -195,7 +195,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="102.0" layoutY="336.0" mnemonicParsing="false" onAction="#toRequestsPage" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+            <Button layoutX="122.0" layoutY="392.0" mnemonicParsing="false" onAction="#toRequestsPage" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="124.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                      <image>
