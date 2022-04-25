@@ -77,6 +77,12 @@ public class sideViewController extends ServiceController {
   @FXML PieChart pumpPie;
   @FXML PieChart bedPie;
   @FXML PieChart reclinerPie;
+  int pumpTotal;
+  int reclTotal;
+  int bedsTotal;
+  int pumpInUse;
+  int reclInUse;
+  int bedsInUse;
 
   AnchorPane popupAlert;
 
@@ -232,6 +238,37 @@ public class sideViewController extends ServiceController {
     return temp;
   }
 
+  private void retrieveEquipmentInfo(String floor) {
+    try {
+      for (Equipment equipment : Udb.getInstance().EquipmentImpl.list()) {
+        /* pumps */
+        if (equipment.getName().trim().equals("Infusion Pumps")) {
+          if (equipment.getLocation().getFloor().trim().equals(floor)) {
+            pumpTotal += equipment.getAmount();
+            pumpInUse += equipment.getInUse();
+          }
+        }
+        /* recliners */
+        if (equipment.getName().trim().equals("Recliners")) {
+          if (equipment.getLocation().getFloor().equals(floor)) {
+            reclTotal += equipment.getAmount();
+            reclInUse += equipment.getInUse();
+          }
+        }
+        /* beds */
+        if (equipment.getName().trim().equals("Beds")) {
+          if (equipment.getLocation().getFloor().equals(floor)) {
+            bedsTotal += equipment.getAmount();
+            bedsInUse += equipment.getInUse();
+          }
+        }
+      }
+    } catch(Exception e)
+    {
+      System.out.println("Error in sideViewController.retrieveEquipmentInfo");
+    }
+
+  }
   //  public void lower(ActionEvent actionEvent) {
   //    disable();
   //    MenuItem mi = (MenuItem) actionEvent.getSource();
