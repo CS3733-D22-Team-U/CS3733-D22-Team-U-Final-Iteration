@@ -233,7 +233,7 @@ public class labRequestServices extends ServiceController {
                 checkBoxes.get(i).getText().trim(),
                 Integer.parseInt(inputString),
                 patientInput,
-                "Pending",
+                "In progress",
                 staffInput,
                 room,
                 sdf3.format(timestamp).substring(0, 10),
@@ -255,7 +255,6 @@ public class labRequestServices extends ServiceController {
         try {
           request.gettingTheLocation();
           Udb.getInstance()
-              .labRequestImpl
               .add(
                   new LabRequest(
                       request.getID(),

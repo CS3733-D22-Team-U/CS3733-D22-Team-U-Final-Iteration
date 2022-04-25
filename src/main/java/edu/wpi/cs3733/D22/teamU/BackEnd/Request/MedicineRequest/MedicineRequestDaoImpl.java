@@ -52,7 +52,6 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     int size = br.readLine().split(",").length;
-    br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) { // or change to 9 if no work
@@ -104,7 +103,6 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     int size = br.readLine().split(",").length;
-    br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
       if (row.length == size) { // or change to 9 if no work

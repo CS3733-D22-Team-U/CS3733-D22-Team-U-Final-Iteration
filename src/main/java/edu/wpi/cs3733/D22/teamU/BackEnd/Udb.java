@@ -10,6 +10,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.EquipmentDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.Report;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.ReportDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
@@ -63,6 +65,7 @@ public final class Udb {
   public MaintenanceRequestDaoImpl maintenanceRequestImpl;
   public SecurityRequestDaoImpl securityRequestImpl;
   public CompServRequestDaoImpl compServRequestImpl;
+  public ReportDaoImpl reportImpl;
 
   public static boolean admin;
 
@@ -203,6 +206,7 @@ public final class Udb {
     maintenanceRequestImpl = new MaintenanceRequestDaoImpl(statement, CSVfiles[11]);
     securityRequestImpl = new SecurityRequestDaoImpl(statement, CSVfiles[12]);
     compServRequestImpl = new CompServRequestDaoImpl(statement, CSVfiles[13]);
+    reportImpl = new ReportDaoImpl(statement, CSVfiles[14]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -245,6 +249,9 @@ public final class Udb {
 
     compServRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     compServRequestImpl.JavaToSQL();
+
+    reportImpl.CSVToJava(EmployeeImpl.hList());
+    reportImpl.JavaToSQL();
 
     //    for (Employee e : EmployeeImpl.hList().values()) {
     //      for (Request r : e.getRequests())
@@ -320,6 +327,10 @@ public final class Udb {
         compServRequestImpl.edit((CompServRequest) thingToAdd);
         break;
 
+      case "Report":
+        reportImpl.edit((Report) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.edit()");
         break;
@@ -383,6 +394,10 @@ public final class Udb {
 
       case "CompServRequest":
         compServRequestImpl.add((CompServRequest) thingToAdd);
+        break;
+
+      case "Report":
+        reportImpl.add((Report) thingToAdd);
         break;
 
       default:
@@ -450,6 +465,10 @@ public final class Udb {
         compServRequestImpl.remove((CompServRequest) thingToAdd);
         break;
 
+      case "Report":
+        reportImpl.remove((Report) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.remove()");
         break;
@@ -514,6 +533,10 @@ public final class Udb {
 
       case "CompServRequest":
         compServRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "ReportRequest":
+        reportImpl.saveTableAsCSV(nameOfCSV);
         break;
 
       default:

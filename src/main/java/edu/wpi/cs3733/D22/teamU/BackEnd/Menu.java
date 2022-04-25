@@ -27,8 +27,9 @@ public class Menu {
             + "12 -  Maintenance Request\n"
             + "13 - Computer Service Request\n"
             + "14 - Security Request \n"
-            + "15 - Change Server\n"
-            + "16 - Quit\n");
+            + "15 - Reports \n"
+            + "16 - Change Server\n"
+            + "17 - Quit\n");
 
     switch (userInput.nextInt()) {
       case 1:
@@ -81,9 +82,12 @@ public class Menu {
         securityRequestMenu();
         break;
       case 15:
-        serveChangeMenu();
+        reportRequestMenu();
         break;
       case 16:
+        serveChangeMenu();
+        break;
+      case 17:
         // exit whole menu
         break;
     }
@@ -736,6 +740,49 @@ public class Menu {
 
         Udb.getInstance().saveTableAsCSV("SecurityRequest", nameOfFile);
         securityRequestMenu();
+        break;
+      case 6:
+        // menu
+        menu();
+        break;
+    }
+  }
+
+  private void reportRequestMenu() throws SQLException, IOException {
+    Scanner reportInput = new Scanner(System.in);
+
+    System.out.println(
+        "1 - List Reports Information\n"
+            + "2 - Change Reports\n"
+            + "3 - Enter New Reports\n"
+            + "4 - Delete Reports\n"
+            + "5 - Save Report Information to CSV file\n"
+            + "6 - Return to Main Menu\n");
+    switch (reportInput.nextInt()) {
+      case 1:
+        Udb.getInstance().reportImpl.printTable();
+        reportRequestMenu();
+        break;
+      case 2:
+        Udb.getInstance().edit(Udb.getInstance().reportImpl.askUser());
+        reportRequestMenu();
+        break;
+      case 3:
+        Udb.getInstance().add(Udb.getInstance().reportImpl.askUser());
+        reportRequestMenu();
+        break;
+      case 4:
+        Udb.getInstance().remove(Udb.getInstance().reportImpl.askUser());
+        reportRequestMenu();
+        break;
+      case 5:
+        Scanner justNeedCSVName = new Scanner(System.in);
+
+        System.out.println("Enter the name of the CSV file");
+        String nameOfFile = justNeedCSVName.nextLine();
+
+        Udb.getInstance().saveTableAsCSV("ReportRequest", nameOfFile);
+        reportRequestMenu();
         break;
       case 6:
         // menu

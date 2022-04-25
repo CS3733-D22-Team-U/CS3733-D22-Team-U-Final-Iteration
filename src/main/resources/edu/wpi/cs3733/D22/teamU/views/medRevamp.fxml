@@ -11,6 +11,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,7 +30,7 @@
                 <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
                 <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                     <children>
-                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="342.0">
+                        <HBox layoutX="864.0" layoutY="46.0" prefHeight="70.0" prefWidth="342.0">
                             <children>
                                 <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
                                     <font>
@@ -47,14 +48,6 @@
                                         <Insets right="-15.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="allMedButton" mnemonicParsing="false" onAction="#switchToMedicine" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Medicine" textFill="#044e9a">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </Button>
                             </children>
                         </HBox>
                     </children>
@@ -67,7 +60,7 @@
                 </Pane>
                 <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
                     <children>
-                        <Text layoutX="77.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Medicine Delivery Request">
+                        <Text layoutX="41.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Medicine Delivery Request">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -78,7 +71,7 @@
                     <children>
                         <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                             <children>
-                                <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                                <Pane layoutX="14.0" layoutY="14.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                                     <children>
                                         <ScrollPane layoutY="35.0" prefHeight="433.0" prefWidth="304.0" style="-fx-background-radius: 15;">
                                             <content>
@@ -322,12 +315,12 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="patients" layoutX="58.0" layoutY="173.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
                               <Label layoutX="51.0" layoutY="145.0" prefHeight="26.0" prefWidth="150.0" styleClass="menu" text="Choose Patient:" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
+                              <TextField fx:id="patientName" layoutX="57.0" layoutY="175.0" />
                                     </children>
                                 </Pane>
                                 <HBox layoutX="10.0" layoutY="498.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">

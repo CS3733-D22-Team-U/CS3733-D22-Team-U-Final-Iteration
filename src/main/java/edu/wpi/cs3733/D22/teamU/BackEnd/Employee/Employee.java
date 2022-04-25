@@ -15,7 +15,7 @@ public class Employee {
   String username;
   String password;
 
-  ArrayList<Report> reportList = new ArrayList<>();
+  ArrayList<Report> reportList = new ArrayList<Report>();
 
   ArrayList<Request> requests = new ArrayList<Request>();
 

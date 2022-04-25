@@ -71,7 +71,7 @@ public class loginPageController extends ServiceController {
 
                         if (foundUser) {
                         } else {
-                          throw new IOException();
+                          throw new SQLException();
                         }
 
                         Scene scene = null;
