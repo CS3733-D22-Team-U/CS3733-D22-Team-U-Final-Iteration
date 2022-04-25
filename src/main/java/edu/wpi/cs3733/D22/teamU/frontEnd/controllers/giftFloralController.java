@@ -59,6 +59,10 @@ public class giftFloralController extends ServiceController {
   @FXML TextField patientName;
   @FXML TextField senderName;
   @FXML TextArea message;
+  @FXML ScrollPane miniView;
+  @FXML ScrollPane expandedView;
+  @FXML Button arrow;
+  @FXML Button pushButton;
 
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
@@ -307,6 +311,16 @@ public class giftFloralController extends ServiceController {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+  }
+
+  public void pushBack(ActionEvent actionEvent) {
+    miniView.setVisible(false);
+    expandedView.setVisible(true);
+  }
+
+  public void pushOut(ActionEvent actionEvent) {
+    miniView.setVisible(true);
+    expandedView.setVisible(false);
   }
 
   @Override
