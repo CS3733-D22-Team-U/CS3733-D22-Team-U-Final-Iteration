@@ -253,10 +253,12 @@ public final class Udb {
     reportImpl.CSVToJava(EmployeeImpl.hList());
     reportImpl.JavaToSQL();
 
-    //    for (Employee e : EmployeeImpl.hList().values()) {
-    //      for (Request r : e.getRequests())
-    //        System.out.println(r.getClass().getSimpleName() + ": " + r.getID());
-    //    }
+    for (Employee e : EmployeeImpl.hList().values())
+    {
+      for (Report r : e.getReportList()) {
+        System.out.println(r.getClass().getSimpleName() + ": " + r.getId());
+      }
+    }
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
