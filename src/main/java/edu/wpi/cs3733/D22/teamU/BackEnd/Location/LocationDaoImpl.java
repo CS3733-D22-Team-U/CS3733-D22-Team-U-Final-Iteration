@@ -1,6 +1,10 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Location;
 
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.EventListener;
+import com.google.cloud.firestore.FirestoreException;
+import com.google.firebase.database.annotations.Nullable;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
@@ -138,34 +142,34 @@ public class LocationDaoImpl implements DataDao<Location> {
     data.put("longName", loc.longName);
     data.put("shortName", loc.shortName);
     docRef.set(data);
+
     /*
-     docRef.addSnapshotListener(
-         new EventListener<DocumentSnapshot>() {
-           @Override
-           public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException e) {
-             if (e != null) {
-               System.err.println("Listen failed: " + e);
-               return;
-             }
+    docRef.addSnapshotListener(
+        new EventListener<DocumentSnapshot>() {
+          @Override
+          public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException e) {
+            if (e != null) {
+              System.err.println("Listen failed: " + e);
+              return;
+            }
 
-             if (snapshot != null && snapshot.exists()) {
-               Map<String, Object> data = snapshot.getData();
-               System.out.println(data);
-               loc.setNodeID(snapshot.getId());
-               loc.setXcoord(Integer.parseInt(data.get("xcoord").toString()));
-               loc.setYcoord(Integer.parseInt(data.get("ycoord").toString()));
-               loc.setFloor((String) data.get("floor"));
-               loc.setBuilding((String) data.get("building"));
-               loc.setNodeType((String) data.get("nodeType"));
-               loc.setLongName((String) data.get("longName"));
-               loc.setShortName((String) data.get("shortName"));
-             } else {
-               System.out.print("Current data: null");
-             }
-           }
-         });
-
-    */
+            if (snapshot != null && snapshot.exists()) {
+              Map<String, Object> data = snapshot.getData();
+              System.out.println(data);
+              loc.setNodeID(snapshot.getId());
+              loc.setXcoord(Integer.parseInt(data.get("xcoord").toString()));
+              loc.setYcoord(Integer.parseInt(data.get("ycoord").toString()));
+              loc.setFloor((String) data.get("floor"));
+              loc.setBuilding((String) data.get("building"));
+              loc.setNodeType((String) data.get("nodeType"));
+              loc.setLongName((String) data.get("longName"));
+              loc.setShortName((String) data.get("shortName"));
+            } else {
+              System.out.print("Current data: null");
+            }
+          }
+        });
+     */
   }
   // This function takes all of the SQL database information into java objects
 
