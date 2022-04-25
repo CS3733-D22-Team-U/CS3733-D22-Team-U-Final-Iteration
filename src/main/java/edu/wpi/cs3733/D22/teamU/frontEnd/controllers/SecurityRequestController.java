@@ -38,7 +38,6 @@ public class SecurityRequestController extends ServiceController {
   @FXML CheckBox lethalForceButton;
   // these are for the table attributes shown to the user
   @FXML TableColumn<SecurityRequest, String> activeReqID;
-  @FXML TableColumn<SecurityRequest, String> activename;
   @FXML TableColumn<SecurityRequest, String> activeReqStatus;
   @FXML TableColumn<SecurityRequest, String> activeStaff;
   @FXML TableColumn<SecurityRequest, String> activeReqDestination;
@@ -109,7 +108,6 @@ public class SecurityRequestController extends ServiceController {
 
   private void setUpAllMaintenance() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("ID"));
-    activename.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("name"));
     activeReqStatus.setCellValueFactory(
         new PropertyValueFactory<SecurityRequest, String>("status"));
     activeStaff.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("employee"));

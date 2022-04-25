@@ -253,8 +253,7 @@ public final class Udb {
     reportImpl.CSVToJava(EmployeeImpl.hList());
     reportImpl.JavaToSQL();
 
-    for (Employee e : EmployeeImpl.hList().values())
-    {
+    for (Employee e : EmployeeImpl.hList().values()) {
       for (Report r : e.getReportList()) {
         System.out.println(r.getClass().getSimpleName() + ": " + r.getId());
       }

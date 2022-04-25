@@ -244,7 +244,7 @@ public class labRequestServices extends ServiceController {
         activeRequestTable.setItems(
             newRequest(
                 request.getID(),
-                request.getPatientName(),
+                request.getName(),
                 request.getAmount(),
                 request.getPatientName(),
                 request.getStatus(),

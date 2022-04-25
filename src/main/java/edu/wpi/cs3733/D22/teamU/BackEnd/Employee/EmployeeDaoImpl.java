@@ -77,7 +77,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
 
       for (Employee currEmp : List.values()) {
         // db.collection("employee").add(currEmp.employeeID);
-        firebaseUpdate(currEmp);
+        //firebaseUpdate(currEmp);
 
         statement.execute(
             "INSERT INTO Employees VALUES("
@@ -370,6 +370,4 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
         inputUsername,
         inputPassword);
   }
-
-
 }
