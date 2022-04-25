@@ -132,7 +132,7 @@ public class giftFloralController extends ServiceController {
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
             (ActionEvent evt) -> {
-              if (turtAnchor.getTranslateY() != -415) {
+              if (sideBarAnchor.getTranslateY() != -415) {
                 openNav.play();
               } else {
                 closeNav.setToY(0);
