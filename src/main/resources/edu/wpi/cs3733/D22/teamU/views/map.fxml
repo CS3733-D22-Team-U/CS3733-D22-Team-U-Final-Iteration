@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -264,6 +265,8 @@
                         </Tab>
                     </tabs>
                 </TabPane>
+            <ComboBox fx:id="From" layoutX="14.0" layoutY="110.0" prefWidth="150.0" />
+            <ComboBox fx:id="To" layoutX="175.0" layoutY="110.0" prefWidth="150.0" />
             </children>
         </Pane>
         <Text fill="#044e9a" layoutX="965.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend">
@@ -271,9 +274,9 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <ScrollPane fitToWidth="true" layoutX="930.0" layoutY="165.0" prefHeight="850.0" prefWidth="162.0">
+        <ScrollPane fitToWidth="true" layoutX="930.0" layoutY="165.0" prefHeight="533.0" prefWidth="162.0">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="840.0" prefWidth="134.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="161.0">
                     <children>
                         <Pane fx:id="Legend" layoutY="-43.0" onMouseDragged="#dispAll" prefHeight="951.0" prefWidth="149.0" style="-fx-background-color: WHITE;">
                             <children>

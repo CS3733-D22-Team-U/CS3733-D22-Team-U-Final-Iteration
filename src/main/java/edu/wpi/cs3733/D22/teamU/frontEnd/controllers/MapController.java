@@ -1,15 +1,18 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -32,6 +35,11 @@ import javafx.scene.shape.Rectangle;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
+
+
+
+  public ComboBox<Location> To;
+  public ComboBox<Location> From;
 
   /*Edit Remove Popup*/
   public TextField popupNodeID;
@@ -140,6 +148,8 @@ public class MapController extends ServiceController {
   // Udb udb;
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
+  ArrayList<Location> fromLocation;
+  ArrayList<Location> toLocation;
 
   public MapController() throws IOException, SQLException {}
 
@@ -151,6 +161,22 @@ public class MapController extends ServiceController {
     imagesPane5.setPannable(true);
     imagesPane6.setPannable(true);
     imagesPane7.setPannable(true);
+
+    fromLocation = new ArrayList<>();
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        fromLocation.add(l);
+        toLocation.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    From.setTooltip(new Tooltip());
+    From.getItems().addAll(fromLocation);
+    To.setTooltip(new Tooltip());
+    To.getItems().addAll(toLocation);
 
     addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
