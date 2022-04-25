@@ -103,24 +103,43 @@ public class MedicineDeliveryController extends ServiceController {
 
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
-  @FXML Pane allEquipPane;
+  @FXML Pane allMedPane;
   @FXML Pane activeRequestPane;
+  @FXML Pane editRequestPane;
 
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Button allEquipButton;
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
   public ComboBox<String> patients;
-  ArrayList<String> nodeIDs;
+  ArrayList<Location> nodeIDs;
   @FXML VBox inputFields;
 
-  ArrayList<String> staff;
-  ArrayList<String> staffID;
-  ArrayList<String> staffUSER;
-  ArrayList<String> patientInput = new ArrayList<String>();
+  // edit page
+  @FXML Button editMedButton;
 
-  ObservableList<MedicineRequest> medicineRequests = FXCollections.observableArrayList();
+  @FXML TableColumn<MedicineRequest, String> ETabMed;
+  @FXML TableColumn<MedicineRequest, Integer> ETabAmount;
+  @FXML TableColumn<MedicineRequest, String> ETabPatient;
+  @FXML TableColumn<MedicineRequest, String> ETabStat;
+  @FXML TableView<MedicineRequest> editTable;
+
+  @FXML TextField editID;
+  @FXML TextField editMed;
+  @FXML TextField editAmount;
+  @FXML ComboBox<String> editPatient;
+  @FXML TextField editStat;
+  public ComboBox<Location> editDest;
+  public ComboBox<Employee> editEmployee;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
+
+  ArrayList<Employee> staff;
+  ArrayList<String> staffID;
+  ArrayList<Employee> staffUSER;
+  ArrayList<String> patientInput = new ArrayList<String>();
 
   ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
@@ -133,6 +152,12 @@ public class MedicineDeliveryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editMedButton.setVisible(true);
+    } else {
+      editMedButton.setVisible(false);
+    }
+
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
     patientInput.add("Harsh");
@@ -150,27 +175,36 @@ public class MedicineDeliveryController extends ServiceController {
 
     patients.setTooltip(new Tooltip());
     patients.getItems().addAll(patientInput);
+    editPatient.setTooltip(new Tooltip());
+    editPatient.getItems().addAll(patientInput);
 
     setUpAllMed();
     setUpActiveRequests();
+    setUpEditTable();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(editDest, 151, 387);
 
     staff = new ArrayList<>();
     staffUSER = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-      staffUSER.add(l.getUsername());
+      staff.add(l);
+      staffUSER.add(l);
     }
 
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(editEmployee, 151, 437);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -235,6 +269,15 @@ public class MedicineDeliveryController extends ServiceController {
     activeRequestTable.setItems(getActiveRequestList());
   }
 
+  private void setUpEditTable() throws SQLException, IOException {
+    ETabMed.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("name"));
+    ETabAmount.setCellValueFactory(new PropertyValueFactory<MedicineRequest, Integer>("amount"));
+    ETabPatient.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, String>("patientName"));
+    ETabStat.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("status"));
+    editTable.setItems(getActiveRequestList());
+  }
+
   private ObservableList<MedicineRequest> newRequest(
       String id,
       String name,
@@ -246,10 +289,10 @@ public class MedicineDeliveryController extends ServiceController {
       String date,
       String time,
       int priority) {
-    medicineRequests.add(
+    medUIRequests.add(
         new MedicineRequest(
             id, name, amount, patientName, status, employee, destination, date, time));
-    return medicineRequests;
+    return medUIRequests;
   }
 
   private void setUpAllMed() throws SQLException, IOException {
@@ -290,6 +333,7 @@ public class MedicineDeliveryController extends ServiceController {
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
     allMedButton.setUnderline(false);
+    editMedButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -303,11 +347,12 @@ public class MedicineDeliveryController extends ServiceController {
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
     allMedButton.setUnderline(false);
+    editMedButton.setUnderline(false);
   }
 
   public void switchToMedicine(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
+    Node active = stackNodes.get(stackNodes.indexOf(allMedPane));
     for (Node node : stackNodes) {
       node.setVisible(false);
     }
@@ -315,7 +360,22 @@ public class MedicineDeliveryController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
+    allMedButton.setUnderline(true);
+    editMedButton.setUnderline(false);
+  }
+
+  public void switchToEdit(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    allMedButton.setUnderline(false);
+    editMedButton.setUnderline(true);
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
@@ -354,8 +414,8 @@ public class MedicineDeliveryController extends ServiceController {
         } else {
           inputString = checkBoxesInput.get(i).getText().trim();
         }
-        String room = locations.getValue().toString();
-        String staff = employees.getValue();
+        String room = locations.getValue().getNodeID();
+        String staff = employees.getValue().getEmployeeID();
 
         requestAmount = Integer.parseInt(inputString);
 
@@ -488,6 +548,7 @@ public class MedicineDeliveryController extends ServiceController {
             })
         .start();
   }
+
   //    lisinTxt.equals("") && metTxt.equals("") && specialReqTxt.equals(""))
   public void reqFields() {
     if (staffName.getText().equals("")
@@ -592,10 +653,88 @@ public class MedicineDeliveryController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    MedicineRequest request = editTable.getSelectionModel().getSelectedItem();
+    medUIRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    MedicineRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    medUIRequests.remove(oldRequest);
+    String ID = oldRequest.getID();
+    String prescription = editMed.getText().trim();
+    String patient = editPatient.getValue();
+    String oldDate = oldRequest.getDate();
+    String oldTime = oldRequest.getTime();
+    int requestAmount = Integer.parseInt(editAmount.getText().trim());
+    String status = editStat.getText().trim();
+    String room = editDest.getValue().getNodeID();
+    String staff = editEmployee.getValue().getEmployeeID();
+
+    MedicineRequest request =
+        new MedicineRequest(
+            ID,
+            prescription,
+            requestAmount,
+            patient,
+            status,
+            checkEmployee(staff),
+            room,
+            oldDate,
+            oldTime);
+
+    activeRequestTable.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getAmount(),
+            request.getPatientName(),
+            request.getStatus(),
+            request.getEmployee(),
+            request.getDestination(),
+            request.getDate(),
+            request.getTime()));
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
+
+  public void updateFields() {
+    MedicineRequest temp = editTable.getSelectionModel().getSelectedItem();
+    String amount = String.valueOf(temp.getAmount());
+    editID.setText(temp.getID());
+    editMed.setText(temp.getName());
+    editAmount.setText(amount);
+    editPatient.setValue(temp.getPatientName());
+    editStat.setText(temp.getStatus());
+    editEmployee.setValue(temp.getEmployee());
+    editDest.setValue(temp.getLocation());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editMed.setText("");
+    editAmount.setText("");
+    editPatient.setValue(null);
+    editStat.setText("");
+    editEmployee.setValue(null);
+    editDest.setValue(null);
+  }
 
   public void clearRequest() {
     for (int i = 0; i < checkBoxes.size(); i++) {

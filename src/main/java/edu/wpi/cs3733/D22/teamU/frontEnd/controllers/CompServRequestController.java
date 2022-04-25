@@ -43,7 +43,6 @@ public class CompServRequestController extends ServiceController {
   public ComboBox<Location> locations1;
   public ComboBox<Employee> employees1;
   @FXML Button submitButtonEdit;
-  @FXML TableColumn<CompServRequest, String> disEID;
   @FXML TableColumn<CompServRequest, String> disEDev;
   @FXML TableColumn<CompServRequest, String> disEDest;
   @FXML TableColumn<CompServRequest, String> disEEmployee;
@@ -149,7 +148,6 @@ public class CompServRequestController extends ServiceController {
   }
 
   private void setUpEditCompServReq() throws SQLException, IOException {
-    disEID.setCellValueFactory(new PropertyValueFactory("ID"));
     disEDev.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("device"));
     disEDest.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("location"));
     disEStatus.setCellValueFactory(new PropertyValueFactory<CompServRequest, String>("status"));
