@@ -204,7 +204,6 @@ public final class Udb {
     securityRequestImpl = new SecurityRequestDaoImpl(statement, CSVfiles[12]);
     compServRequestImpl = new CompServRequestDaoImpl(statement, CSVfiles[13]);
 
-
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
 

@@ -324,6 +324,16 @@ public class MapController extends ServiceController {
     }
   }
 
+  public void PathFind(Location loc1, Location loc2){
+
+  }
+
+  public void dispMultiService(MouseEvent mouseEvent) {}
+
+  public void dispMultiServices(MouseEvent mouseEvent) {}
+
+  public void dispElevator(MouseEvent mouseEvent) {}
+
   class Delta {
     double x, y;
   }
