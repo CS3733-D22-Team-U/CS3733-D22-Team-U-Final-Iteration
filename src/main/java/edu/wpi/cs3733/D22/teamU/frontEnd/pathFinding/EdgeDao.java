@@ -42,9 +42,7 @@ public class EdgeDao implements DataDao<Edge> {
   public void edit(Edge data) throws IOException, SQLException {}
 
   @Override
-  public void add(Edge data) throws IOException, SQLException {
-
-  }
+  public void add(Edge data) throws IOException, SQLException {}
 
   @Override
   public void remove(Edge data) throws IOException {}

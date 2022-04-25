@@ -324,9 +324,7 @@ public class MapController extends ServiceController {
     }
   }
 
-  public void PathFind(Location loc1, Location loc2){
-
-  }
+  public void PathFind(Location loc1, Location loc2) {}
 
   public void dispMultiService(MouseEvent mouseEvent) {}
 
@@ -443,6 +441,76 @@ public class MapController extends ServiceController {
 
   private TableView<Equipment> equipTable = new TableView();
   private TableView<Request> reqTable = new TableView();
+
+  private void enableDrag(LocationNode ln) {
+    final Delta dragDelta = new Delta();
+    AnchorPane temp = ln.getPane();
+    Location loc = ln.getLocation();
+    double scale = Double.min(temp.getPrefHeight(), temp.getPrefWidth());
+    double x = scale / imageX * loc.getXcoord();
+    double y = scale / imageY * loc.getYcoord();
+    ln.setOnMousePressed(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            // record a delta distance for the drag and drop operation.
+            // setPaneOnMousePressedEventHandler(null);
+            // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+
+            dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+            dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+            ln.setCursor(Cursor.MOVE);
+          }
+        });
+    ln.setOnMouseDragged(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+
+            ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+            ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+            ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+            ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+            imagesPane1.setPannable(false);
+            imagesPane2.setPannable(false);
+            imagesPane3.setPannable(false);
+            imagesPane4.setPannable(false);
+            imagesPane5.setPannable(false);
+            imagesPane6.setPannable(false);
+            imagesPane7.setPannable(false);
+          }
+        });
+    ln.setOnMouseReleased(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            ln.setCursor(Cursor.HAND);
+
+            ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+            ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+            try {
+              Udb.getInstance().edit(ln.getLocation());
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            } catch (SQLException e) {
+              throw new RuntimeException(e);
+            }
+            imagesPane1.setPannable(true);
+            imagesPane2.setPannable(true);
+            imagesPane3.setPannable(true);
+            imagesPane4.setPannable(true);
+            imagesPane5.setPannable(true);
+            imagesPane6.setPannable(true);
+            imagesPane7.setPannable(true);
+
+            // popupXCoord.setText("ln.getLayoutX()");
+            // popupYCoord.setText("ln.getLayoutY()");
+
+            // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+            // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
+          }
+        });
+  }
 
   private Equipment equipment = null;
   private Request request = null;
@@ -691,6 +759,7 @@ public class MapController extends ServiceController {
       LocationNode lnNew = new LocationNode(l, x, y, lnOld.getPane());
       locations.put(l.getNodeID(), lnNew);
       lnNew.setOnMouseClicked(this::popupOpen);
+      enableDrag(lnNew);
       Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
       lnNew.getPane().getChildren().add(lnNew);
@@ -769,6 +838,7 @@ public class MapController extends ServiceController {
       double y = scale / imageY * l.getYcoord();
       LocationNode ln = new LocationNode(l, x, y, temp);
       ln.setOnMouseClicked(this::popupOpen);
+      enableDrag(ln);
       locations.put(l.getNodeID(), ln);
       temp.getChildren().add(ln);
       popUpAdd(mouseEvent);
