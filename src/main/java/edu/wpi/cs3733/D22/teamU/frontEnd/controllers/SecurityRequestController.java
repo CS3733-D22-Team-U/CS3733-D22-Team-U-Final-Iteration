@@ -52,14 +52,33 @@ public class SecurityRequestController extends ServiceController {
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane activeRequestPane;
+  @FXML Pane editRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
+  @FXML Button editButton;
   @FXML Text time;
   @FXML Text sucessRequest;
   @FXML Text clearRequest;
   @FXML Text missingDescription;
 
   @FXML TextArea textInput;
+
+  // edit
+  @FXML TableView<SecurityRequest> editTable;
+  @FXML TableColumn<SecurityRequest, String> ETabID;
+  @FXML TableColumn<SecurityRequest, String> ETabRoom;
+  @FXML TableColumn<SecurityRequest, String> ETabDesc;
+
+  @FXML TextField editID;
+  @FXML TextField editName;
+  @FXML ComboBox<Location> editDest;
+  @FXML ComboBox<Employee> editEmployee;
+  @FXML TextField editStat;
+  @FXML TextField editLethal;
+  @FXML TextArea editDesc;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
 
   ObservableList<SecurityRequest> securityUIRequests = FXCollections.observableArrayList();
   ArrayList<String> nodeIDs;
@@ -70,6 +89,9 @@ public class SecurityRequestController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    new ComboBoxAutoComplete<Location>(editDest, 650, 290);
   }
 
   public void fillStaff() throws SQLException, IOException {
@@ -77,16 +99,25 @@ public class SecurityRequestController extends ServiceController {
     staffDropDown.setTooltip(new Tooltip());
     staffDropDown.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
     new ComboBoxAutoComplete<Employee>(staffDropDown, 675, 400);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    new ComboBoxAutoComplete<Employee>(editEmployee, 675, 400);
   }
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
     sucessRequest.setVisible(false);
     clearRequest.setVisible(false);
     missingDescription.setVisible(false);
 
     setUpAllMaintenance();
+    setUpEditMaintenance();
 
     fillDestinations();
     fillStaff();
@@ -123,6 +154,14 @@ public class SecurityRequestController extends ServiceController {
     activeTime.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("time"));
 
     activeRequestTable.setItems(getSecurityRequestsList());
+  }
+
+  private void setUpEditMaintenance() throws SQLException, IOException {
+    ETabID.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("ID"));
+    ETabRoom.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("location"));
+    ETabDesc.setCellValueFactory(
+        new PropertyValueFactory<SecurityRequest, String>("descriptionOfThreat"));
+    editTable.setItems(getSecurityRequestsList());
   }
 
   private ObservableList<SecurityRequest> newRequest(
@@ -265,10 +304,91 @@ public class SecurityRequestController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    SecurityRequest request = editTable.getSelectionModel().getSelectedItem();
+    securityUIRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    SecurityRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    securityUIRequests.remove(oldRequest);
+
+    String ID = oldRequest.getID();
+    String Name = oldRequest.getName();
+    Location destination = editDest.getValue();
+    Employee employee = editEmployee.getValue();
+    String status = editStat.getText().trim();
+    String lethal = editLethal.getText().trim();
+    String description = editDesc.getText().trim();
+    String oldDate = oldRequest.getDate();
+    String oldTime = oldRequest.getTime();
+
+    SecurityRequest request =
+        new SecurityRequest(
+            ID,
+            Name,
+            status,
+            checkEmployee(employee.getEmployeeID()),
+            destination.getNodeID(),
+            description,
+            lethal,
+            oldDate,
+            oldTime);
+    request.gettingTheLocation();
+
+    activeRequestTable.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getStatus(),
+            request.getEmployee(),
+            request.getDestination(),
+            request.getDescriptionOfThreat(),
+            request.getLeathalForcePermited(),
+            request.getDate(),
+            request.getTime()));
+
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
+
+  public void updateFields() {
+    SecurityRequest temp = editTable.getSelectionModel().getSelectedItem();
+    editID.setText(temp.getID());
+    editName.setText(temp.getName());
+    editDest.setValue(temp.getLocation());
+    editEmployee.setValue(temp.getEmployee());
+    editStat.setText(temp.getStatus());
+    editLethal.setText(temp.getLeathalForcePermited());
+    editDesc.setText(temp.getDescriptionOfThreat());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editName.setText("");
+    editDest.setValue(null);
+    editEmployee.setValue(null);
+    editStat.setText("");
+    editLethal.setText("");
+    editDesc.setText("");
+  }
 
   public void clearRequest() {
     sucessRequest.setVisible(false);
@@ -309,6 +429,7 @@ public class SecurityRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+    editButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -321,6 +442,20 @@ public class SecurityRequestController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+    editButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    editButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
