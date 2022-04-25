@@ -1,13 +1,16 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd;
 
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DataDao<T> {
-  String csvFile = null;
   // ArrayList<T> list;
+  Firestore db = FirestoreClient.getFirestore();
+
   ArrayList<T> list();
 
   HashMap<String, T> hList();

@@ -16,6 +16,7 @@ public class MedicineRequest extends Request {
       String destination,
       String date,
       String time) {
+    super();
     this.ID = ID;
     this.name = name;
     this.amount = amount;
@@ -25,8 +26,6 @@ public class MedicineRequest extends Request {
     this.destination = destination;
     this.date = date;
     this.time = time;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public int getAmount() {

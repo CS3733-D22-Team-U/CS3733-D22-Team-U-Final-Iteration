@@ -6,14 +6,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 public class LabRequest extends Request {
   int amount;
 
-  public int getAmount() {
-    return amount;
-  }
-
-  public void setAmount(int amount) {
-    this.amount = amount;
-  }
-
   public LabRequest(
       String ID,
       String labType,
@@ -33,7 +25,13 @@ public class LabRequest extends Request {
     this.destination = destination;
     this.date = date;
     this.time = time;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
+  }
+
+  public int getAmount() {
+    return amount;
+  }
+
+  public void setAmount(int amount) {
+    this.amount = amount;
   }
 }

@@ -111,6 +111,12 @@ public class DBController {
     String compServiceRequest =
         copyFile(csvCompServiceRequest, "csvTables/TowerCompServiceRequest.csv");
 
+    InputStream csvReportRequest =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReports.csv");
+    String reportRequest = copyFile(csvReportRequest, "csvTables/TowerReports.csv");
+
     // -----------------------Test Files----------------------
     InputStream csvLocationFileTest =
         Main.class
@@ -137,7 +143,8 @@ public class DBController {
       translateRequest, // 10
       maintenanceRequest, // 11
       securityRequest,
-      compServiceRequest
+      compServiceRequest,
+      reportRequest
     };
     Udb.username = username;
     Udb.password = password;

@@ -1,6 +1,6 @@
 nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
 HHALL00603,483,383,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
-CLABS002L1,498,548,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
+CLABS002L1,254,444,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
 HBATH00103,533,288,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
 CHALL007L2,478,467,L2,Tower,HALL,Hallway 7 Floor L2,Hallway C007L2
 CHALL007L1,860,503,L1,Tower,HALL,Hallway 7 Floor L1,Hallway C007L1
@@ -162,7 +162,7 @@ HHALL00102,623,383,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
 WELEV00M02,573,738,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
 HHALL00103,73,113,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
 WELEV00M03,563,748,3,Tower,ELEV,Elevator M Floor 3,Elevator M3
-CDEPT003L1,299,151,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
+CDEPT003L1,287,100,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
 FINFO00101,448,684,1,Tower,INFO,75 Lobby Information Desk,Lobby Info Desk
 HHALL00502,573,483,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
 HHALL00503,428,748,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
