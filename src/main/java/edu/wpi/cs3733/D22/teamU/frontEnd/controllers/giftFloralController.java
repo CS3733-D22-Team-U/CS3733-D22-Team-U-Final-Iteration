@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -69,7 +68,6 @@ public class giftFloralController extends ServiceController {
   @FXML Button pushButton;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
-
 
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
@@ -126,19 +124,19 @@ public class giftFloralController extends ServiceController {
     handleBar();
   }
 
-  private void handleBar(){
+  private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     openNav.setToY(-415);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
-            (ActionEvent evt) -> {
-              if (sideBarAnchor.getTranslateY() != -415) {
-                openNav.play();
-              } else {
-                closeNav.setToY(0);
-                closeNav.play();
-              }
-            });
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != -415) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {
