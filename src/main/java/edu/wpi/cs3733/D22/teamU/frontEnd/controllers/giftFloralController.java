@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,17 +25,19 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class giftFloralController extends ServiceController {
 
-  public ComboBox<Location> locations;
-  public ComboBox<Employee> employees;
+  public ComboBox<String> locations;
+  public ComboBox<String> employees;
   @FXML Button clearButton;
   @FXML Button submitButton;
   @FXML VBox requestHolder;
@@ -59,11 +62,17 @@ public class giftFloralController extends ServiceController {
   @FXML TextField patientName;
   @FXML TextField senderName;
   @FXML TextArea message;
+  @FXML ScrollPane miniView;
+  @FXML ScrollPane expandedView;
+  @FXML Button arrow;
+  @FXML Button pushButton;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
-  ArrayList<Location> nodeIDs;
-  ArrayList<Employee> staff;
+  ArrayList<String> nodeIDs;
+  ArrayList<String> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
@@ -79,7 +88,7 @@ public class giftFloralController extends ServiceController {
     nodeIDs = new ArrayList<>();
     try {
       for (Location l : Udb.getInstance().locationImpl.list()) {
-        nodeIDs.add(l);
+        nodeIDs.add(l.getNodeID());
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -88,12 +97,12 @@ public class giftFloralController extends ServiceController {
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    new ComboBoxAutoComplete<String>(locations, 650, 290);
 
     staff = new ArrayList<>();
     try {
       for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-        staff.add(l);
+        staff.add(l.getEmployeeID());
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -102,7 +111,7 @@ public class giftFloralController extends ServiceController {
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    new ComboBoxAutoComplete<String>(employees, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -112,6 +121,22 @@ public class giftFloralController extends ServiceController {
     // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
 
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(-415);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != -415) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {
@@ -135,7 +160,7 @@ public class giftFloralController extends ServiceController {
     activeMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
     activeStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     activeEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
-    activeDestination.setCellValueFactory(new PropertyValueFactory<>("location"));
+    activeDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
     activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     activeRequestTable.setItems(getActiveRequestList());
@@ -152,33 +177,26 @@ public class giftFloralController extends ServiceController {
       String destination,
       String date,
       String time) {
-    GiftRequest r =
+    giftRequests.add(
         new GiftRequest(
-            ID, name, patientName, gifts, message, status, employee, destination, date, time);
-
-    r.gettingTheLocation();
-    giftRequests.add(r);
-
+            ID, name, patientName, gifts, message, status, employee, destination, date, time));
     return giftRequests;
   }
 
   private ObservableList<GiftRequest> getActiveRequestList() throws SQLException, IOException {
     for (GiftRequest giftRequest : Udb.getInstance().giftRequestImpl.hList().values()) {
-      GiftRequest r =
+      giftRequests.add(
           new GiftRequest(
               giftRequest.ID,
               giftRequest.name,
               giftRequest.patientName,
-              giftRequest.gifts,
-              giftRequest.message,
+              giftRequest.getGifts(),
+              giftRequest.getMessage(),
               giftRequest.status,
               giftRequest.employee,
               giftRequest.destination,
               giftRequest.date,
-              giftRequest.time);
-
-      r.gettingTheLocation();
-      giftRequests.add(r);
+              giftRequest.time));
     }
     return giftRequests;
   }
@@ -193,40 +211,27 @@ public class giftFloralController extends ServiceController {
     String inputString = "";
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
-        inputString += checkBoxes.get(i).getText() + ":";
+        inputString += checkBoxes.get(i).getText() + ": ";
       }
     }
+    String room = locations.getValue().toString();
 
-    boolean alreadyHere = true;
-    String serviceID = "notWork";
+    String em = (employees.getValue().toString());
 
-    while (alreadyHere) {
-      double rand = Math.random() * 10000;
-
-      try {
-        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("GIF" + (int) rand);
-      } catch (Exception e) {
-        System.out.println(
-            "alreadyHere variable messed up in gift and floral service request controller");
-      }
-
-      serviceID = "GIF" + (int) rand;
-    }
+    double rand = Math.random() * 10000;
 
     GiftRequest request =
         new GiftRequest(
-            serviceID,
+            (int) rand + "",
             senderName.getText(),
             patientName.getText(),
-            inputString,
             message.getText(),
-            "In Progress",
-            employees.getValue(),
-            locations.getValue().getNodeID(),
+            inputString,
+            "pending",
+            checkEmployee(em),
+            room,
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
-
-    request.gettingTheLocation();
 
     activeRequestTable.setItems(
         newRequest(
@@ -241,7 +246,20 @@ public class giftFloralController extends ServiceController {
             request.getDate(),
             request.getTime()));
     try {
-      Udb.getInstance().add(request);
+      Udb.getInstance()
+          .add( // TODO Have random ID and enter Room Destination
+              new GiftRequest(
+                  request.getID(),
+                  request.getName(),
+                  request.getPatientName(),
+                  request.getGifts(),
+                  request.getMessage(),
+                  request.getStatus(),
+                  checkEmployee(employees.getValue().toString()),
+                  request.getDestination(),
+                  request.getDate(),
+                  request.getTime()));
+
     } catch (IOException e) {
       e.printStackTrace();
     } catch (SQLException e) {
@@ -314,6 +332,16 @@ public class giftFloralController extends ServiceController {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+  }
+
+  public void pushBack(ActionEvent actionEvent) {
+    miniView.setVisible(false);
+    expandedView.setVisible(true);
+  }
+
+  public void pushOut(ActionEvent actionEvent) {
+    miniView.setVisible(true);
+    expandedView.setVisible(false);
   }
 
   @Override

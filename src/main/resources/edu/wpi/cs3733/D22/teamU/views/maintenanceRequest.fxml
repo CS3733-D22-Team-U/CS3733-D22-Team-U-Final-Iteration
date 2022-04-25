@@ -84,20 +84,20 @@
                      <children>
                         <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="519.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <Text fx:id="requestText1" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" textAlignment="CENTER" wrappingWidth="219.0">
+                              <Text fx:id="requestText1" fill="#044e9a" layoutX="53.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="28.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
-                              <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="400.0" prefWidth="277.0" />
+                              <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="374.0" prefWidth="277.0" promptText="Insert a Description of the Maintenance Request" />
                            </children>
                         </Pane>
                         <Pane layoutX="340.0" layoutY="18.0" prefHeight="151.0" prefWidth="285.0">
                            <children>
-                              <ComboBox fx:id="locations" layoutX="62.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                              <Text fx:id="requestText" fill="WHITE" layoutX="48.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                              <ComboBox fx:id="locations" layoutX="44.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <Text fx:id="requestText" fill="WHITE" layoutX="52.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
                                  <font>
-                                    <Font name="System Bold" size="28.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -122,10 +122,10 @@
                               </Button>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="staffDropDown" layoutX="401.0" layoutY="207.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                        <Text fx:id="requestText2" fill="WHITE" layoutX="387.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                        <ComboBox fx:id="staffDropDown" layoutX="385.0" layoutY="152.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <Text fx:id="requestText2" fill="WHITE" layoutX="390.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" textAlignment="CENTER" wrappingWidth="177.199951171875">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                         <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">

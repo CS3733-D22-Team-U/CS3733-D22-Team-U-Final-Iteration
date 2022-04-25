@@ -82,16 +82,16 @@
                                 </TableView>
                             </children>
                         </Pane>
-                        <Pane fx:id="newRequestPane" maxHeight="558.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="329.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                        <Pane fx:id="newRequestPane" maxHeight="500.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="500.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                             <children>
                                 <Pane layoutX="17.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="453.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                                     <children>
-                                        <Text fx:id="requestText1" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" textAlignment="CENTER" wrappingWidth="219.0">
+                                        <Text fx:id="requestText1" fill="#044e9a" layoutX="53.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
                                             <font>
-                                                <Font name="System Bold" size="28.0" />
+                                                <Font name="System Bold" size="20.0" />
                                             </font>
                                         </Text>
-                                        <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="348.0" prefWidth="277.0" />
+                                        <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="274.0" prefWidth="277.0" promptText="Describe the request" />
                                       <HBox layoutX="-21.0" layoutY="410.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">
                                           <children>
                                               <Button fx:id="submitButton" alignment="CENTER" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#addRequest" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
@@ -112,22 +112,27 @@
                                               </Button>
                                           </children>
                                       </HBox>
+                              <CheckBox fx:id="lethalForceButton" layoutX="104.0" layoutY="351.0" mnemonicParsing="false" text="Lethal Force?" textFill="#044e9a">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </CheckBox>
                                     </children>
                                 </Pane>
                                 <Pane layoutX="340.0" layoutY="18.0" prefHeight="151.0" prefWidth="285.0">
                                     <children>
-                                        <ComboBox fx:id="locations" layoutX="62.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                                        <Text fx:id="requestText" fill="WHITE" layoutX="48.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                        <ComboBox fx:id="locations" layoutX="45.0" layoutY="61.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                                        <Text fx:id="requestText" fill="WHITE" layoutX="54.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
                                             <font>
-                                                <Font name="System Bold" size="28.0" />
+                                                <Font name="System Bold" size="20.0" />
                                             </font>
                                         </Text>
                                     </children>
                                 </Pane>
-                                <ComboBox fx:id="staffDropDown" layoutX="401.0" layoutY="207.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" />
-                                <Text fx:id="requestText2" fill="WHITE" layoutX="387.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                <ComboBox fx:id="staffDropDown" layoutX="387.0" layoutY="154.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                                <Text fx:id="requestText2" fill="WHITE" layoutX="393.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" textAlignment="CENTER" wrappingWidth="177.199951171875">
                                     <font>
-                                        <Font name="System Bold" size="28.0" />
+                                        <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Text>
                                 <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
@@ -145,11 +150,6 @@
                                         <Font name="System Bold" size="24.0" />
                                     </font>
                                 </Text>
-                        <CheckBox fx:id="lethalForceButton" layoutX="115.0" layoutY="501.0" mnemonicParsing="false" text="Lethal Force?" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </CheckBox>
                             </children>
                         </Pane>
                     </children>
