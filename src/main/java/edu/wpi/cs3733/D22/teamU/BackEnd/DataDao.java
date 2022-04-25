@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DataDao<T> {
-  String csvFile = null;
   // ArrayList<T> list;
   ArrayList<T> list();
 

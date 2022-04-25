@@ -89,6 +89,7 @@ public class ReportController extends ServiceController {
       return empty;
     }
   }
+
   @Override
   public void addRequest() throws SQLException, IOException {
     Employee temp_employee = employees.getValue();
@@ -108,7 +109,8 @@ public class ReportController extends ServiceController {
       }
       reportID = "REP" + (int) rand;
     }
-        Report r = new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
+    Report r =
+        new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
     // Report r = new Report(
     try {
       Udb.getInstance().add(r);

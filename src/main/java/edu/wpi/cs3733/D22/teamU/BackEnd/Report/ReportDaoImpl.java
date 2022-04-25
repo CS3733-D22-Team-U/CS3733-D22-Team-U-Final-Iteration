@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Report;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
@@ -50,7 +49,6 @@ public class ReportDaoImpl implements DataDao<Report> {
     String s;
     File file = new File(CSVfile);
     BufferedReader br = new BufferedReader(new FileReader(file));
-    br.readLine();
     String[] header = br.readLine().split(",");
     int columns = header.length;
     while ((s = br.readLine()) != null) {
@@ -75,17 +73,16 @@ public class ReportDaoImpl implements DataDao<Report> {
           e.addReport(r);
           r.setEmployee(e);
         } catch (Exception exception) {
-          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "Comp Request");
+          System.out.println("Employee Not Found" + r.employee.getEmployeeID() + "report Request");
         }
       }
     }
   }
 
-  public void CSVToJava(ArrayList<Location> locations, HashMap<String, Employee> employees)
-      throws IOException, SQLException {
+  public void CSVToJava(HashMap<String, Employee> employees) throws IOException, SQLException {
     List = new HashMap<String, Report>();
     String s;
-    File file = new File(csvFile);
+    File file = new File(CSVfile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     String[] header = br.readLine().split(",");
     int columns = header.length;
@@ -196,8 +193,6 @@ public class ReportDaoImpl implements DataDao<Report> {
     fw.append(",");
     fw.append("Description");
     fw.append(",");
-    fw.append("Reports");
-    fw.append(",");
     fw.append("Status");
     fw.append(",");
     fw.append("Date");
@@ -230,7 +225,7 @@ public class ReportDaoImpl implements DataDao<Report> {
     // display locations and attributes
     System.out.println(
         "Report ID |\t Employee |\t Type |\t Description |\t Status |\t Date |\t Time");
-    for (Report report : List.values()) {
+    for (Report report : this.List.values()) {
       System.out.println(
           report.id
               + " | \t"
@@ -324,7 +319,7 @@ public class ReportDaoImpl implements DataDao<Report> {
     System.out.println("Input Employee ID: ");
     inputID = reportInput.nextLine();
 
-    System.out.println("Input Employee Username: ");
+    System.out.println("Input type: ");
     inputType = reportInput.nextLine();
     //
     System.out.println("Input Status (true/false): ");
