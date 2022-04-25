@@ -370,6 +370,4 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
         inputUsername,
         inputPassword);
   }
-
-
 }
