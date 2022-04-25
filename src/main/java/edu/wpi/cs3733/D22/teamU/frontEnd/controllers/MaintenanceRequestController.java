@@ -59,6 +59,27 @@ public class MaintenanceRequestController extends ServiceController {
 
   @FXML TextArea textInput;
 
+  // edit page
+  @FXML Pane editRequestPane;
+  @FXML Button editButton;
+
+  @FXML TableView<MaintenanceRequest> editTable;
+  @FXML TableColumn<MaintenanceRequest, String> ETabID;
+  @FXML TableColumn<MaintenanceRequest, String> ETabDest;
+  @FXML TableColumn<MaintenanceRequest, String> ETabEmployee;
+  @FXML TableColumn<MaintenanceRequest, String> ETabStat;
+
+  @FXML TextField editID;
+  @FXML TextField editName;
+  @FXML TextField editStat;
+  @FXML ComboBox<Location> editDest;
+  @FXML ComboBox<Employee> editEmployee;
+  @FXML TextField editType;
+  @FXML TextArea editDesc;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
+
   ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
   ArrayList<Location> nodeIDs;
   ArrayList<Employee> staff;
@@ -72,6 +93,9 @@ public class MaintenanceRequestController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(editDest, 650, 290);
   }
 
   public void fillStaff() throws SQLException, IOException {
@@ -83,16 +107,26 @@ public class MaintenanceRequestController extends ServiceController {
     staffDropDown.setTooltip(new Tooltip());
     staffDropDown.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(staffDropDown, 675, 400);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(editEmployee, 675, 400);
   }
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
+
     sucessRequest.setVisible(false);
     clearRequest.setVisible(false);
     missingDescription.setVisible(false);
 
     setUpAllMaintenance();
+    setUpEditMaintenance();
 
     fillDestinations();
     fillStaff();
@@ -128,6 +162,17 @@ public class MaintenanceRequestController extends ServiceController {
     activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
 
     activeRequestTable.setItems(getMaintenanceRequestsList());
+  }
+
+  private void setUpEditMaintenance() throws SQLException, IOException {
+
+    ETabID.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("ID"));
+    ETabDest.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("location"));
+    ETabEmployee.setCellValueFactory(
+        new PropertyValueFactory<MaintenanceRequest, String>("employee"));
+    ETabStat.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("status"));
+
+    editTable.setItems(getMaintenanceRequestsList());
   }
 
   private ObservableList<MaintenanceRequest> newRequest(
@@ -277,10 +322,94 @@ public class MaintenanceRequestController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    new Thread(
+            () -> {
+              try {
+                Thread.sleep(1500); // milliseconds
+                Platform.runLater(
+                    () -> {
+                      clearRequest.setVisible(false);
+                    });
+              } catch (InterruptedException ie) {
+              }
+            })
+        .start();
+    MaintenanceRequest request = editTable.getSelectionModel().getSelectedItem();
+    maintenanceRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    MaintenanceRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    maintenanceRequests.remove(oldRequest);
+    String oldDate = oldRequest.getDate();
+    String oldTime = oldRequest.getTime();
+    String ID = editID.getText().trim();
+    String name = editName.getText().trim();
+    String status = editStat.getText().trim();
+    Location dest = editDest.getValue();
+    Employee employee = editEmployee.getValue();
+    String type = editType.getText().trim();
+    String description = editDesc.getText().trim();
+
+    MaintenanceRequest request =
+        new MaintenanceRequest(
+            ID, name, status, dest.getNodeID(), employee, type, description, oldDate, oldTime);
+
+    request.gettingTheLocation();
+    activeRequestTable.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getStatus(),
+            request.getDestination(),
+            request.getEmployee(),
+            request.getTypeOfMaintenance(),
+            request.getDescription(),
+            request.getDate(),
+            request.getTime()));
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.printf("print first catch");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.printf("print second catch");
+    }
+    clearUpdate();
+  }
+
+  public void updateFields() {
+    MaintenanceRequest temp = editTable.getSelectionModel().getSelectedItem();
+    editID.setText(temp.getID());
+    editName.setText(temp.getName());
+    editStat.setText(temp.getStatus());
+    editDest.setValue(temp.getLocation());
+    editEmployee.setValue(temp.getEmployee());
+    editType.setText(temp.getTypeOfMaintenance());
+    editDesc.setText(temp.getDescription());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editName.setText("");
+    editStat.setText("");
+    editDest.setValue(null);
+    editEmployee.setValue(null);
+    editType.setText("");
+    editDesc.setText("");
+  }
 
   public void clearRequest() {
     sucessRequest.setVisible(false);
@@ -321,6 +450,7 @@ public class MaintenanceRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+    editButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -333,6 +463,20 @@ public class MaintenanceRequestController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+    editButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    editButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {

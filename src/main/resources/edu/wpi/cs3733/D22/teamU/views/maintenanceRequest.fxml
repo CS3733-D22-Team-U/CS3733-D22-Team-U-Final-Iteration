@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MaintenanceRequestController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MaintenanceRequestController">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -28,17 +29,34 @@
             <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
             <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
                <children>
-                  <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
-                  <Button fx:id="newReqButton" layoutX="865.0" layoutY="45.0" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="activeReqButton" layoutX="975.0" layoutY="45.0" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
+                  <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="342.0">
+                     <children>
+                        <Button fx:id="editButton" mnemonicParsing="false" onAction="#switchToEditRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="Edit Requests" textFill="#044e9a">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="-15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="New Request" textFill="#044e9a" underline="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="-15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="Active Request" textFill="#044e9a">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </Pane>
             <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
@@ -58,7 +76,96 @@
             </Pane>
             <StackPane fx:id="requestsStack" layoutX="214.0" layoutY="116.0">
                <children>
-                  <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="editRequestPane" layoutX="10.0" layoutY="10.0" maxHeight="558.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="329.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                     <children>
+                        <HBox layoutX="-11.0" layoutY="490.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Button fx:id="submitEdit" alignment="CENTER" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#updateRequest" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="45.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="removeButton" alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#removeRequest" prefHeight="56.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="35.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="editEmployee" layoutX="50.0" layoutY="288.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fx:id="requestText21" fill="WHITE" layoutX="62.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="sucessRequest1" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="clearRequest1" fill="WHITE" layoutX="404.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="missingDescription1" fill="WHITE" layoutX="367.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="editDest" layoutX="50.0" layoutY="227.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fx:id="requestText1" fill="WHITE" layoutX="64.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="142.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editID" editable="false" layoutX="50.0" layoutY="50.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fill="WHITE" layoutX="119.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name?">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editName" layoutX="50.0" layoutY="109.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fill="WHITE" layoutX="123.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editStat" layoutX="50.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fill="WHITE" layoutX="66.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance type">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editType" editable="false" layoutX="50.0" layoutY="341.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Text fill="WHITE" layoutX="96.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="editDesc" layoutX="53.0" layoutY="392.0" prefHeight="83.0" prefWidth="200.0" />
+                        <TableView fx:id="editTable" layoutX="293.0" layoutY="14.0" onMouseClicked="#updateFields" prefHeight="527.0" prefWidth="301.0">
+                          <columns>
+                            <TableColumn fx:id="ETabID" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="ETabDest" prefWidth="75.0" text="Room" />
+                              <TableColumn fx:id="ETabEmployee" prefWidth="75.0" text="Staff" />
+                              <TableColumn fx:id="ETabStat" prefWidth="75.0" text="Status" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                      <children>
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
