@@ -42,8 +42,10 @@ public class giftFloralController extends ServiceController {
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane activeRequestPane;
+  @FXML Pane editRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
+  @FXML Button editButton;
   @FXML Text time;
   @FXML TableView<GiftRequest> activeRequestTable;
   @FXML TableColumn<GiftRequest, String> activeReqID;
@@ -60,6 +62,24 @@ public class giftFloralController extends ServiceController {
   @FXML TextField senderName;
   @FXML TextArea message;
 
+  // edit
+  @FXML TableView<GiftRequest> editTable;
+  @FXML TableColumn<GiftRequest, String> ETabID;
+  @FXML TableColumn<GiftRequest, String> ETabPatient;
+  @FXML TableColumn<GiftRequest, String> ETabGifts;
+
+  @FXML TextField editID;
+  @FXML TextField editStatus;
+  @FXML TextArea editGifts;
+  @FXML ComboBox<Location> editDest;
+  @FXML ComboBox<Employee> editEmployee;
+  @FXML TextField editPatient;
+  @FXML TextField editSender;
+  @FXML TextArea editMessage;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
+
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
   ArrayList<Location> nodeIDs;
@@ -69,8 +89,14 @@ public class giftFloralController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
     try {
       setUpActiveRequests();
+      setUpEditRequests();
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     } catch (IOException e) {
@@ -89,6 +115,9 @@ public class giftFloralController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(editDest, 650, 290);
 
     staff = new ArrayList<>();
     try {
@@ -103,6 +132,9 @@ public class giftFloralController extends ServiceController {
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(editEmployee, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -139,6 +171,13 @@ public class giftFloralController extends ServiceController {
     activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     activeRequestTable.setItems(getActiveRequestList());
+  }
+
+  private void setUpEditRequests() throws SQLException, IOException {
+    ETabID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    ETabPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    ETabGifts.setCellValueFactory(new PropertyValueFactory<>("gifts"));
+    editTable.setItems(getActiveRequestList());
   }
 
   private ObservableList<GiftRequest> newRequest(
@@ -204,8 +243,8 @@ public class giftFloralController extends ServiceController {
             (int) rand + "",
             senderName.getText(),
             patientName.getText(),
-            message.getText(),
             inputString,
+            message.getText(),
             "pending",
             employees.getValue(),
             locations.getValue().getNodeID(),
@@ -294,6 +333,7 @@ public class giftFloralController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+    editButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -306,6 +346,20 @@ public class giftFloralController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+    editButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    editButton.setUnderline(true);
   }
 
   public void toHelp(ActionEvent actionEvent) throws IOException {
@@ -316,8 +370,103 @@ public class giftFloralController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    GiftRequest request = editTable.getSelectionModel().getSelectedItem();
+    giftRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    GiftRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    giftRequests.remove(oldRequest);
+    String ID = oldRequest.getID();
+    String name = editSender.getText().trim();
+    String patient = editPatient.getText().trim();
+    String gifts = editGifts.getText().trim();
+    String message = editMessage.getText().trim();
+    String status = editStatus.getText().trim();
+    Employee employee = editEmployee.getValue();
+    Location dest = editDest.getValue();
+    String oldDate = oldRequest.getDate();
+    String oldTime = oldRequest.getTime();
+
+    GiftRequest request =
+        new GiftRequest(
+            ID,
+            name,
+            patient,
+            gifts,
+            message,
+            status,
+            employee,
+            dest.getNodeID(),
+            oldDate,
+            oldTime);
+
+    request.gettingTheLocation();
+
+    activeRequestTable.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getPatientName(),
+            request.getGifts(),
+            request.getMessage(),
+            request.getStatus(),
+            request.getEmployee(),
+            request.getDestination(),
+            request.getDate(),
+            request.getTime()));
+    try {
+      Udb.getInstance()
+          .add( // TODO Have random ID and enter Room Destination
+              new GiftRequest(
+                  request.getID(),
+                  request.getName(),
+                  request.getPatientName(),
+                  request.getGifts(),
+                  request.getMessage(),
+                  request.getStatus(),
+                  checkEmployee(employees.getValue().toString()),
+                  request.getDestination(),
+                  request.getDate(),
+                  request.getTime()));
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void updateFields() {
+    GiftRequest temp = editTable.getSelectionModel().getSelectedItem();
+    editID.setText(temp.getID());
+    editStatus.setText(temp.getStatus());
+    editGifts.setText(temp.getGifts());
+    editDest.setValue(temp.getLocation());
+    editEmployee.setValue(temp.getEmployee());
+    editPatient.setText(temp.getPatientName());
+    editSender.setText(temp.getName());
+    editMessage.setText(temp.getMessage());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editStatus.setText("");
+    editGifts.setText("");
+    editDest.setValue(null);
+    editEmployee.setValue(null);
+    editPatient.setText("");
+    editSender.setText("");
+    editMessage.setText("");
+  }
 }

@@ -278,6 +278,8 @@ public class LaundryController extends ServiceController {
         .start();
   }
 
+  // TODO bring to UI
+  // removes request from database
   @Override
   public void removeRequest() {
     LaundryRequest request = editTable.getSelectionModel().getSelectedItem();
@@ -292,6 +294,8 @@ public class LaundryController extends ServiceController {
     clearUpdate();
   }
 
+  // TODO bring to UI
+  // updates the request
   @Override
   public void updateRequest() {
     LaundryRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
@@ -325,6 +329,8 @@ public class LaundryController extends ServiceController {
     clearUpdate();
   }
 
+  // TODO Bring to Ui
+  // Set fields to edit or remove
   public void updateFields() {
     LaundryRequest temp = editTable.getSelectionModel().getSelectedItem();
     LocalDate pick = LocalDate.parse(temp.getPickUpDate());
@@ -340,6 +346,8 @@ public class LaundryController extends ServiceController {
     editNotes.setText(temp.getNotes());
   }
 
+  // TODO  bring to ui
+  // clears the text fields from the edit
   public void clearUpdate() {
     editID.setText("");
     editDest.setValue(null);
