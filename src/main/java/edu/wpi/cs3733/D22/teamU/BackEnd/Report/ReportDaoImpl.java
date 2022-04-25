@@ -65,11 +65,7 @@ public class ReportDaoImpl implements DataDao<Report> {
                 row[6].trim());
         List.put(row[0].trim(), r);
         try {
-          Employee e =
-              Udb.getInstance()
-                  .EmployeeImpl
-                  .List
-                  .get(Udb.getInstance().EmployeeImpl.List.get(row[1].trim()));
+          Employee e = Udb.getInstance().EmployeeImpl.List.get(Udb.getInstance().EmployeeImpl.List.get(row[1].trim()));
           e.addReport(r);
           r.setEmployee(e);
         } catch (Exception exception) {
@@ -88,10 +84,10 @@ public class ReportDaoImpl implements DataDao<Report> {
     int columns = header.length;
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == columns) {
+      if (row.length == columns)
+      {
         Employee emp = checkEmployee(row[1].trim());
-        Report r =
-            new Report(
+        Report r = new Report(
                 row[0].trim(),
                 emp,
                 row[2].trim(),
@@ -246,16 +242,22 @@ public class ReportDaoImpl implements DataDao<Report> {
 
   @Override
   public void edit(Report data) throws IOException, SQLException {
-    CSVToJava(); // t
-    Set<String> keys = List.keySet();
+    if (List.containsKey(data.id)) {
 
-    if (List.containsKey(data.getId())) {
-      List.replace(data.getId(), data);
-    } else {
+      if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID()))
+      {
+
+        data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
+        this.List.replace(data.id, data);
+        data.getEmployee().addReport(data);
+        this.JavaToSQL();
+        this.JavaToCSV(CSVfile);
+      } else {
+        System.out.println("No Such Employee in Database");
+      }
+    } else{
       System.out.println("Doesn't Exist");
     }
-    this.JavaToSQL(); // t
-    this.JavaToCSV(CSVfile); // t
   }
 
   @Override
@@ -265,9 +267,10 @@ public class ReportDaoImpl implements DataDao<Report> {
 
     // Employee newEmployee = new Employee(data.getEmployeeID());
     if (List.containsKey(data.getId())) {
-      System.out.println("An Employee With This ID Already Exists");
+      System.out.println("A Report With This ID Already Exists");
     } else {
       List.put(data.id, data);
+      data.getEmployee().addReport(data);
       this.JavaToSQL();
       this.JavaToCSV(CSVfile);
     }
@@ -278,11 +281,22 @@ public class ReportDaoImpl implements DataDao<Report> {
 
     if (this.List.containsKey(data.getId())) {
       this.List.remove(data.getId());
+      String emp = data.getEmployee().getEmployeeID();
+      if (EmployeeDaoImpl.List.containsKey(emp))
+      {
+        Employee employee = EmployeeDaoImpl.List.get(emp);
+        for (Report report : employee.getReportList())
+        {
+          if (report.getId() == data.id)
+          {
+            employee.getReportList().remove(report);
+          }
+        }
+      }
     } else {
       System.out.println("Doesn't exist");
     }
     this.JavaToSQL();
-    ;
     this.JavaToCSV(CSVfile);
   }
 
