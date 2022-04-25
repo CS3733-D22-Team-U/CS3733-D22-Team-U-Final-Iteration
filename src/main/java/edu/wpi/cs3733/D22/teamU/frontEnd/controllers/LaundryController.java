@@ -38,8 +38,10 @@ public class LaundryController extends ServiceController {
   @FXML Pane activeRequestPane;
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
+  @FXML Pane editRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
+  @FXML Button editButton;
   @FXML ComboBox<Location> locations;
   @FXML ComboBox<Employee> employees;
   @FXML Button submitButton;
@@ -55,8 +57,27 @@ public class LaundryController extends ServiceController {
   @FXML TableColumn<LaundryRequest, String> location;
   @FXML TableColumn<LaundryRequest, String> pickUp;
   @FXML TableColumn<LaundryRequest, String> dropOff;
-
   @FXML TableView<LaundryRequest> activeRequestTable;
+
+  // edit
+  @FXML TableView<LaundryRequest> editTable;
+  @FXML TableColumn<LaundryRequest, String> ETabID;
+  @FXML TableColumn<LaundryRequest, String> ETabRoom;
+  @FXML TableColumn<LaundryRequest, String> ETabPatient;
+  @FXML TableColumn<LaundryRequest, String> ETabStat;
+
+  @FXML TextField editID;
+  @FXML TextField editPatient;
+  @FXML ComboBox<Location> editDest;
+  @FXML ComboBox<Employee> editEmployee;
+  @FXML DatePicker editPick;
+  @FXML DatePicker editDrop;
+  @FXML TextField editStat;
+  @FXML TextField editService;
+  @FXML TextArea editNotes;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
 
   @FXML TextField patientNameInput;
   ObservableList<LaundryRequest> laundryRequests = FXCollections.observableArrayList();
@@ -69,8 +90,14 @@ public class LaundryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
 
     setUpActiveRequests();
+    setUpEditRequests();
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
@@ -78,10 +105,16 @@ public class LaundryController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    new ComboBoxAutoComplete<Location>(editDest, 650, 290);
 
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    new ComboBoxAutoComplete<Employee>(editEmployee, 675, 380);
 
     clearButton
         .disableProperty()
@@ -130,6 +163,15 @@ public class LaundryController extends ServiceController {
     dropOff.setCellValueFactory(new PropertyValueFactory<>("dropOffDate"));
 
     activeRequestTable.setItems(getActiveRequestList());
+  }
+
+  private void setUpEditRequests() throws SQLException, IOException {
+    ETabID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    ETabPatient.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+    ETabRoom.setCellValueFactory(new PropertyValueFactory<>("location"));
+    ETabStat.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+    editTable.setItems(getActiveRequestList());
   }
 
   @SneakyThrows
@@ -237,10 +279,78 @@ public class LaundryController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    LaundryRequest request = editTable.getSelectionModel().getSelectedItem();
+    laundryRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    LaundryRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    String ID = oldRequest.getID();
+    String room = editDest.getValue().getNodeID();
+    String patient = editPatient.getText();
+    Employee employee = editEmployee.getValue();
+    String pickUp = editPick.getValue().toString();
+    String dropOff = editDrop.getValue().toString();
+    String status = editStat.getText();
+    String service = editService.getText();
+    String time = oldRequest.getTime();
+    String notes = editNotes.getText();
+
+    LaundryRequest request =
+        new LaundryRequest(
+            ID, patient, employee, status, room, pickUp, dropOff, time, service, notes);
+    request.gettingTheLocation();
+    laundryRequests.remove(oldRequest);
+    laundryRequests.add(request);
+    activeRequestTable.setItems(laundryRequests);
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
+
+  public void updateFields() {
+    LaundryRequest temp = editTable.getSelectionModel().getSelectedItem();
+    LocalDate pick = LocalDate.parse(temp.getPickUpDate());
+    LocalDate drop = LocalDate.parse(temp.getDropOffDate());
+    editID.setText(temp.getID());
+    editDest.setValue(temp.getLocation());
+    editPatient.setText(temp.getPatientName());
+    editEmployee.setValue(temp.getEmployee());
+    editPick.setValue(pick);
+    editDrop.setValue(drop);
+    editStat.setText(temp.getStatus());
+    editService.setText(temp.getServices());
+    editNotes.setText(temp.getNotes());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editDest.setValue(null);
+    editPatient.setText("");
+    editEmployee.setValue(null);
+    editPick.setValue(null);
+    editDrop.setValue(null);
+    editStat.setText("");
+    editService.setText("");
+    editNotes.setText("");
+  }
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -252,6 +362,7 @@ public class LaundryController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+    editButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -264,6 +375,20 @@ public class LaundryController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+    editButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
+    active.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    editButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
