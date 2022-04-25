@@ -52,14 +52,34 @@ public class ReligiousRequestController extends ServiceController {
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
   @FXML Pane allActiveRequestsPane;
+  @FXML Pane editRequestPane;
 
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
+  @FXML Button editButton;
   @FXML TextArea inputName;
   @FXML TextArea inputPatient;
   @FXML TextArea inputReligion;
   @FXML TextArea inputNotes;
   @FXML Text time;
+
+  // edit
+  @FXML TableView<ReligiousRequest> editTable;
+  @FXML TableColumn<ReligiousRequest, String> ETabID;
+  @FXML TableColumn<ReligiousRequest, String> ETabPatient;
+  @FXML TableColumn<ReligiousRequest, String> ETabName;
+
+  @FXML TextField editID;
+  @FXML TextField editPatient;
+  @FXML TextField editName;
+  @FXML TextField editReligion;
+  @FXML ComboBox<Location> editDest;
+  @FXML ComboBox<Employee> editEmployee;
+  @FXML TextField editStat;
+  @FXML TextArea editNotes;
+
+  @FXML Button submitEdit;
+  @FXML Button removeButton;
 
   ObservableList<ReligiousRequest> religiousUIRequests = FXCollections.observableArrayList();
   // Udb udb;
@@ -70,8 +90,14 @@ public class ReligiousRequestController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Udb.admin) {
+      editButton.setVisible(true);
+    } else {
+      editButton.setVisible(false);
+    }
 
     setUpAllReligiousReq();
+    setUpEditReligiousReq();
 
     requestText.setVisible(false);
     // Displays Locations in Table View
@@ -82,6 +108,9 @@ public class ReligiousRequestController extends ServiceController {
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodes);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
+    editDest.setTooltip(new Tooltip());
+    editDest.getItems().addAll(nodes);
+    new ComboBoxAutoComplete<Location>(editDest, 650, 290);
 
     // Displays EMployess in Table View
     staff = new ArrayList<>();
@@ -91,6 +120,9 @@ public class ReligiousRequestController extends ServiceController {
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    editEmployee.setTooltip(new Tooltip());
+    editEmployee.getItems().addAll(staff);
+    new ComboBoxAutoComplete<Employee>(editEmployee, 675, 380);
 
     handleTime();
   }
@@ -122,6 +154,14 @@ public class ReligiousRequestController extends ServiceController {
     employee.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("employee"));
     notes.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("notes"));
     table.setItems(getReligiousList());
+  }
+
+  private void setUpEditReligiousReq() throws SQLException, IOException {
+    ETabID.setCellValueFactory(new PropertyValueFactory("ID"));
+    ETabName.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("name"));
+    ETabPatient.setCellValueFactory(
+        new PropertyValueFactory<ReligiousRequest, String>("patientName"));
+    editTable.setItems(getReligiousList());
   }
 
   private ObservableList<ReligiousRequest> newRequest(
@@ -213,10 +253,92 @@ public class ReligiousRequestController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    ReligiousRequest request = editTable.getSelectionModel().getSelectedItem();
+    religiousUIRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    clearUpdate();
+  }
 
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    ReligiousRequest oldRequest = editTable.getSelectionModel().getSelectedItem();
+    religiousUIRequests.remove(oldRequest);
+    String ID = oldRequest.getID();
+    String name = editName.getText().trim();
+    String oldDate = oldRequest.getDate();
+    String oldTime = oldRequest.getTime();
+    String patient = editPatient.getText().trim();
+    String religion = editReligion.getText().trim();
+    Location destination = editDest.getValue();
+    Employee employee = editEmployee.getValue();
+    String notes = editNotes.getText().trim();
+
+    ReligiousRequest request =
+        new ReligiousRequest(
+            ID,
+            name,
+            oldDate,
+            oldTime,
+            patient,
+            religion,
+            "Pending",
+            destination.getNodeID(),
+            employee,
+            notes);
+
+    request.gettingTheLocation();
+
+    table.setItems(
+        newRequest(
+            request.getID(),
+            request.getName(),
+            request.getDate(),
+            request.getTime(),
+            request.getPatientName(),
+            request.getReligion(),
+            request.getStatus(),
+            request.getDestination(),
+            request.getEmployee(),
+            request.getNotes()));
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void updateFields() {
+    ReligiousRequest temp = editTable.getSelectionModel().getSelectedItem();
+    editID.setText(temp.getID());
+    editPatient.setText(temp.getPatient());
+    editName.setText(temp.getName());
+    editReligion.setText(temp.getReligion());
+    editDest.setValue(temp.getLocation());
+    editEmployee.setValue(temp.getEmployee());
+    editStat.setText(temp.getStatus());
+    editNotes.setText(temp.getNotes());
+  }
+
+  public void clearUpdate() {
+    editID.setText("");
+    editPatient.setText("");
+    editName.setText("");
+    editReligion.setText("");
+    editDest.setValue(null);
+    editEmployee.setValue(null);
+    editStat.setText("");
+    editNotes.setText("");
+  }
 
   public void clearRequest() {
     requestText.setVisible(true);
@@ -253,6 +375,7 @@ public class ReligiousRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+    editButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -264,8 +387,21 @@ public class ReligiousRequestController extends ServiceController {
     active.setVisible(true);
     active.toBack();
     activeReqButton.setUnderline(true);
-
+    editButton.setUnderline(false);
     newReqButton.setUnderline(false);
+  }
+
+  public void switchToEditRequest(ActionEvent actionEvent) {
+    ObservableList<Node> stackNodes = requestsStack.getChildren();
+    Node newReq = stackNodes.get(stackNodes.indexOf(editRequestPane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    newReq.setVisible(true);
+    newReq.toBack();
+    activeReqButton.setUnderline(false);
+    newReqButton.setUnderline(false);
+    editButton.setUnderline(true);
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {

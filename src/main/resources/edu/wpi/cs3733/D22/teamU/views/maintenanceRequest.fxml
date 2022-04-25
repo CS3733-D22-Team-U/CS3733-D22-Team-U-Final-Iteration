@@ -163,7 +163,7 @@
                         </Text>
                      </children>
                   </Pane>
-                  <Pane fx:id="editRequestPane" layoutX="10.0" layoutY="10.0" maxHeight="558.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="329.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                  <Pane fx:id="editRequestPane" layoutX="10.0" layoutY="10.0" maxHeight="558.0" maxWidth="623.0" minHeight="-Infinity" minWidth="415.0" prefHeight="329.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                      <children>
                         <HBox layoutX="-11.0" layoutY="490.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="5.0">
                            <children>
