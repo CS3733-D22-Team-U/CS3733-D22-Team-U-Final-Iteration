@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -73,6 +74,10 @@ public class sideViewController extends ServiceController {
   @FXML Button alertInfo;
   @FXML JFXTextArea alertInfoTextA;
 
+  @FXML PieChart pumpPie;
+  @FXML PieChart bedPie;
+  @FXML PieChart reclinerPie;
+
   AnchorPane popupAlert;
 
   String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
@@ -86,6 +91,7 @@ public class sideViewController extends ServiceController {
     chooseFloor.setValue("Choose A Floor");
 
     setUpAllEquipment();
+    setUpPieChart();
     /*
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
@@ -344,5 +350,29 @@ public class sideViewController extends ServiceController {
     } else {
       alertInfoTextA.setVisible(false);
     }
+  }
+
+  public void setUpPieChart() {
+    ObservableList<PieChart.Data> pieChartData1 =
+        FXCollections.observableArrayList(
+            new PieChart.Data("Clean", 20), new PieChart.Data("Dirty", 80));
+    ObservableList<PieChart.Data> pieChartData2 =
+        FXCollections.observableArrayList(
+            new PieChart.Data("Clean", 60), new PieChart.Data("Dirty", 40));
+    ObservableList<PieChart.Data> pieChartData3 =
+        FXCollections.observableArrayList(
+            new PieChart.Data("Clean", 50), new PieChart.Data("Dirty", 50));
+
+    pumpPie.setData(pieChartData1);
+    pumpPie.setLegendVisible(false);
+    pumpPie.setLabelsVisible(false);
+
+    bedPie.setData(pieChartData2);
+    bedPie.setLegendVisible(false);
+    bedPie.setLabelsVisible(false);
+
+    reclinerPie.setData(pieChartData3);
+    reclinerPie.setLegendVisible(false);
+    reclinerPie.setLabelsVisible(false);
   }
 }

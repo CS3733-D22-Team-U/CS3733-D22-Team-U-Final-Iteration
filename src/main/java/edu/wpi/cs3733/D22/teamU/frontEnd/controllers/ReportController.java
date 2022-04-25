@@ -128,7 +128,7 @@ public class ReportController extends ServiceController {
     reportBarChart.getYAxis().setLabel("Number of Reports");
 
     XYChart.Series data = new XYChart.Series();
-    data.setName("Reports Greater than 1");
+    data.setName("Reports Greater Than 1");
     for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
       if (employee.getReports() >= 1) {
         data.getData()
