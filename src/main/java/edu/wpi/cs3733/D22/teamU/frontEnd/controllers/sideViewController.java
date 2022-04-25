@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
 public class sideViewController extends ServiceController {
@@ -35,7 +36,6 @@ public class sideViewController extends ServiceController {
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
   @FXML Pane assistPane;
-  @FXML ComboBox<String> chooseFloor;
   @FXML Rectangle recLower2;
   @FXML Rectangle recLower1;
   @FXML Rectangle recLevel1;
@@ -77,6 +77,13 @@ public class sideViewController extends ServiceController {
   @FXML PieChart pumpPie;
   @FXML PieChart bedPie;
   @FXML PieChart reclinerPie;
+  @FXML Text dirtyPumpTXT;
+  @FXML Text pumpTotalTXT;
+  @FXML Text dirtyBedTXT;
+  @FXML Text bedTotalTXT;
+  @FXML Text dirtyRecTXT;
+  @FXML Text recTotalTXT;
+
   int pumpTotal;
   int reclTotal;
   int bedsTotal;
@@ -93,11 +100,10 @@ public class sideViewController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    chooseFloor.setItems(FXCollections.observableArrayList(floors));
-    chooseFloor.setValue("Choose A Floor");
 
     setUpAllEquipment();
-    setUpPieChart();
+    setUpPieChart("4");
+
     /*
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
@@ -149,7 +155,7 @@ public class sideViewController extends ServiceController {
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      String floor = chooseFloor.getValue();
+      // String floor = chooseFloor.getValue();
       try {
         equipmentUI.add(
             new EquipmentUI(
@@ -239,9 +245,17 @@ public class sideViewController extends ServiceController {
   }
 
   private void retrieveEquipmentInfo(String floor) {
+    reclTotal = 0;
+    pumpTotal = 0;
+    bedsTotal = 0;
+    reclInUse = 0;
+    pumpInUse = 0;
+    bedsInUse = 0;
+
     try {
       for (Equipment equipment : Udb.getInstance().EquipmentImpl.list()) {
         /* pumps */
+        System.out.println(equipment.getName());
         if (equipment.getName().trim().equals("Infusion Pumps")) {
           if (equipment.getLocation().getFloor().trim().equals(floor)) {
             pumpTotal += equipment.getAmount();
@@ -263,11 +277,9 @@ public class sideViewController extends ServiceController {
           }
         }
       }
-    } catch(Exception e)
-    {
+    } catch (Exception e) {
       System.out.println("Error in sideViewController.retrieveEquipmentInfo");
     }
-
   }
   //  public void lower(ActionEvent actionEvent) {
   //    disable();
@@ -357,10 +369,9 @@ public class sideViewController extends ServiceController {
   @Override
   public void updateRequest() {}
 
-  public void updateList(ActionEvent actionEvent) throws SQLException, IOException {
+  public void updateList(String floor) throws SQLException, IOException {
     equipmentUI.clear();
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
-      String floor = chooseFloor.getValue();
       try {
         if (equipment.getLocation().getFloor().equals(floor))
           equipmentUI.add(
@@ -389,16 +400,29 @@ public class sideViewController extends ServiceController {
     }
   }
 
-  public void setUpPieChart() {
+  private void applyCustomColorSequence(
+      ObservableList<PieChart.Data> pieChartData, String... pieColors) {
+    int i = 0;
+    for (PieChart.Data data : pieChartData) {
+      data.getNode().setStyle("-fx-pie-color: " + pieColors[i % pieColors.length] + ";");
+      i++;
+    }
+  }
+
+  public void setUpPieChart(String floor) {
+    retrieveEquipmentInfo(floor);
     ObservableList<PieChart.Data> pieChartData1 =
         FXCollections.observableArrayList(
-            new PieChart.Data("Clean", 20), new PieChart.Data("Dirty", 80));
+            new PieChart.Data("Clean", pumpTotal - pumpInUse),
+            new PieChart.Data("Dirty", pumpInUse));
     ObservableList<PieChart.Data> pieChartData2 =
         FXCollections.observableArrayList(
-            new PieChart.Data("Clean", 60), new PieChart.Data("Dirty", 40));
+            new PieChart.Data("Clean", bedsTotal - bedsInUse),
+            new PieChart.Data("Dirty", bedsInUse));
     ObservableList<PieChart.Data> pieChartData3 =
         FXCollections.observableArrayList(
-            new PieChart.Data("Clean", 50), new PieChart.Data("Dirty", 50));
+            new PieChart.Data("Clean", reclTotal - reclInUse),
+            new PieChart.Data("Dirty", reclInUse));
 
     pumpPie.setData(pieChartData1);
     pumpPie.setLegendVisible(false);
@@ -411,5 +435,60 @@ public class sideViewController extends ServiceController {
     reclinerPie.setData(pieChartData3);
     reclinerPie.setLegendVisible(false);
     reclinerPie.setLabelsVisible(false);
+
+    applyCustomColorSequence(pieChartData1, "#2EB872", "#FA4659");
+
+    applyCustomColorSequence(pieChartData2, "#2EB872", "#FA4659");
+
+    applyCustomColorSequence(pieChartData3, "#2EB872", "#FA4659");
+
+    dirtyPumpTXT.setText(Integer.toString(pumpInUse));
+    pumpTotalTXT.setText(Integer.toString(pumpTotal));
+    dirtyBedTXT.setText(Integer.toString(bedsInUse));
+    bedTotalTXT.setText(Integer.toString(bedsTotal));
+    dirtyRecTXT.setText(Integer.toString(reclInUse));
+    recTotalTXT.setText(Integer.toString(reclTotal));
+  }
+
+  public void mouseHovered(MouseEvent mouseEvent) {
+    Button button = (Button) mouseEvent.getSource();
+    button.setStyle("-fx-background-color: transparent");
+    button.setStyle("-fx-border-color:  #029ca6");
+    button.setStyle("-fx-border-width: 2");
+  }
+
+  public void setFloorLL1(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("L1");
+    updateList("L1");
+  }
+
+  public void setFloorLL2(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("L2");
+    updateList("L2");
+  }
+
+  public void setFloorL1(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("1");
+    updateList("1");
+  }
+
+  public void setFloorL2(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("2");
+    updateList("2");
+  }
+
+  public void setFloorL4(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("4");
+    updateList("4");
+  }
+
+  public void setFloorL5(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("5");
+    updateList("5");
+  }
+
+  public void setFloorL3(ActionEvent actionEvent) throws SQLException, IOException {
+    setUpPieChart("3");
+    updateList("3");
   }
 }

@@ -102,7 +102,7 @@ public class ReportController extends ServiceController {
       double rand = Math.random() * 10000;
 
       try {
-        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("GIF" + (int) rand);
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("REP" + (int) rand);
       } catch (Exception e) {
         System.out.println(
             "alreadyHere variable messed up in gift and floral service request controller");
@@ -118,6 +118,7 @@ public class ReportController extends ServiceController {
       System.out.println("Line 66 ReportController");
     }
     employees.getSelectionModel().clearSelection();
+    typeOfReport.getSelectionModel().clearSelection();
   }
 
   @Override
@@ -147,14 +148,18 @@ public class ReportController extends ServiceController {
     reportBarChart.getXAxis().setLabel("Name of Employee");
     reportBarChart.getYAxis().setLabel("Number of Reports");
 
+    reportBarChart.getYAxis().setTickLabelGap(1.0);
+    reportBarChart.setLegendVisible(false);
+
     XYChart.Series data = new XYChart.Series();
-    data.setName("Reports Greater Than 1");
+
     for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
-      if (employee.getReports() >= 1) {
+      if (employee.getReportList().size() >= 1) {
         data.getData()
             .add(
                 new XYChart.Data<>(
-                    employee.getFirstName() + " " + employee.getLastName(), employee.getReports()));
+                    employee.getFirstName() + " " + employee.getLastName(),
+                    employee.getReportList().size()));
       }
     }
 
