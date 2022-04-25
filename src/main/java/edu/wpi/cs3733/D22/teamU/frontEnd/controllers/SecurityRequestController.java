@@ -38,7 +38,6 @@ public class SecurityRequestController extends ServiceController {
   @FXML CheckBox lethalForceButton;
   // these are for the table attributes shown to the user
   @FXML TableColumn<SecurityRequest, String> activeReqID;
-  @FXML TableColumn<SecurityRequest, String> activename;
   @FXML TableColumn<SecurityRequest, String> activeReqStatus;
   @FXML TableColumn<SecurityRequest, String> activeStaff;
   @FXML TableColumn<SecurityRequest, String> activeReqDestination;
@@ -109,7 +108,6 @@ public class SecurityRequestController extends ServiceController {
 
   private void setUpAllMaintenance() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("ID"));
-    activename.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("name"));
     activeReqStatus.setCellValueFactory(
         new PropertyValueFactory<SecurityRequest, String>("status"));
     activeStaff.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("employee"));
@@ -205,7 +203,23 @@ public class SecurityRequestController extends ServiceController {
 
     clearRequest.setVisible(false);
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    double rand = Math.random() * 10000;
+
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("SEC" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in sercurity service request controller");
+      }
+
+      serviceID = "SEC" + (int) rand;
+    }
 
     String employ = staffDropDown.getValue().getEmployeeID();
 
@@ -217,7 +231,7 @@ public class SecurityRequestController extends ServiceController {
 
     SecurityRequest request =
         new SecurityRequest(
-            (int) rand + "",
+            serviceID,
             "admin",
             "Pending",
             checkEmployee(employ),

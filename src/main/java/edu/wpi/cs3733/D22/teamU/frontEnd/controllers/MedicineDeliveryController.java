@@ -7,7 +7,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
@@ -49,8 +48,6 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML JFXCheckBox specialCheck;
   @FXML Button clearButton;
   @FXML Button submitButton;
-  @FXML TextArea specialReq;
-  @FXML Button allMedButton;
   @FXML TextField patientName;
   @FXML TextField staffName;
   @FXML TextField advilTxt;
@@ -79,22 +76,19 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML TableColumn<MedicineRequest, String> activeReqID;
   @FXML TableColumn<MedicineRequest, String> activeReqName;
   @FXML TableColumn<MedicineRequest, Integer> activeReqAmount;
-  @FXML TableColumn<MedicineRequest, Integer> activeReqPatientName;
+  @FXML TableColumn<MedicineRequest, String> activeReqPatientName;
   @FXML TableColumn<MedicineRequest, String> activeReqType;
   @FXML TableColumn<MedicineRequest, String> activeReqDestination;
   @FXML TableColumn<MedicineRequest, String> activeDate;
   @FXML TableColumn<MedicineRequest, String> activeReqStatus;
   @FXML TableColumn<MedicineRequest, String> activeReqEmployee;
   @FXML TableColumn<MedicineRequest, String> activeTime;
-  @FXML TableColumn<MedicineRequest, Integer> activePriority;
 
   @FXML TableColumn<MedicineRequest, String> nameCol;
   @FXML TableColumn<MedicineRequest, Integer> inUse;
   @FXML TableColumn<MedicineRequest, Integer> available;
   @FXML TableColumn<MedicineRequest, Integer> total;
   @FXML TableColumn<MedicineRequest, String> location;
-
-  @FXML TableView<MedicineRequest> table;
 
   @FXML Text requestText;
 
@@ -108,21 +102,16 @@ public class MedicineDeliveryController extends ServiceController {
 
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
-  @FXML Button allEquipButton;
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
-  public ComboBox<String> patients;
-  ArrayList<String> nodeIDs;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
+  ArrayList<Location> nodeIDs;
   @FXML VBox inputFields;
 
-  ArrayList<String> staff;
-  ArrayList<String> staffID;
-  ArrayList<String> staffUSER;
-  ArrayList<String> patientInput = new ArrayList<String>();
+  ArrayList<Employee> staff;
 
   ObservableList<MedicineRequest> medicineRequests = FXCollections.observableArrayList();
 
-  ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
+  // ObservableList<MedicineRequest> medUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
 
@@ -135,42 +124,24 @@ public class MedicineDeliveryController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    patientInput.add("Harsh");
-    patientInput.add("Marko");
-    patientInput.add("Marko");
-    patientInput.add("Nick");
-    patientInput.add("Kody");
-    patientInput.add("Deepti");
-    patientInput.add("Joselin");
-    patientInput.add("Tim");
-    patientInput.add("Will");
-    patientInput.add("Mike");
-    patientInput.add("Belisha");
-    patientInput.add("Iain");
 
-    patients.setTooltip(new Tooltip());
-    patients.getItems().addAll(patientInput);
-
-    setUpAllMed();
     setUpActiveRequests();
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    staffUSER = new ArrayList<>();
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-      staffUSER.add(l.getUsername());
+      staff.add(l);
     }
 
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
@@ -224,14 +195,19 @@ public class MedicineDeliveryController extends ServiceController {
 
   private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-    activeReqName.setCellValueFactory(new PropertyValueFactory<>("name"));
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-    activeReqPatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    activeReqStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-    activeReqEmployee.setCellValueFactory(new PropertyValueFactory<>("employee"));
-    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+    activeReqName.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("name"));
+    activeReqAmount.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, Integer>("amount"));
+    activeReqPatientName.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, String>("patientName"));
+    activeReqStatus.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, String>("status"));
+    activeReqEmployee.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, String>("employee"));
+    activeReqDestination.setCellValueFactory(
+        new PropertyValueFactory<MedicineRequest, String>("location"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("date"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("time"));
     activeRequestTable.setItems(getActiveRequestList());
   }
 
@@ -244,27 +220,24 @@ public class MedicineDeliveryController extends ServiceController {
       Employee employee,
       String destination,
       String date,
-      String time,
-      int priority) {
-    medicineRequests.add(
+      String time) {
+    MedicineRequest r =
         new MedicineRequest(
-            id, name, amount, patientName, status, employee, destination, date, time));
+            id, name, amount, patientName, status, employee, destination, date, time);
+    r.gettingTheLocation();
+    System.out.println("YOOOO");
+    medicineRequests.add(r);
     return medicineRequests;
   }
 
-  private void setUpAllMed() throws SQLException, IOException {
-    nameCol.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("medicineName"));
-    inUse.setCellValueFactory(new PropertyValueFactory<MedicineRequest, Integer>("amountInUse"));
-    available.setCellValueFactory(
-        new PropertyValueFactory<MedicineRequest, Integer>("amountAvailable"));
-    total.setCellValueFactory(new PropertyValueFactory<MedicineRequest, Integer>("totalAmount"));
-    location.setCellValueFactory(new PropertyValueFactory<MedicineRequest, String>("location"));
-    // table.setItems(getEquipmentList());
-  }
-
   private ObservableList<MedicineRequest> getActiveRequestList() throws SQLException, IOException {
-    for (MedicineRequest request : MedicineRequestDaoImpl.List.values()) {
-      medUIRequests.add(
+    medicineRequests.clear();
+    for (MedicineRequest y : Udb.getInstance().medicineRequestImpl.List.values()) {
+      System.out.println(y.getID() + " ");
+    }
+
+    for (MedicineRequest request : Udb.getInstance().medicineRequestImpl.List.values()) {
+      MedicineRequest r =
           new MedicineRequest(
               request.getID(),
               request.getName(),
@@ -274,12 +247,14 @@ public class MedicineDeliveryController extends ServiceController {
               request.getEmployee(),
               request.getDestination(),
               request.getDate(),
-              request.getTime()));
+              request.getTime());
+
+      r.gettingTheLocation();
+      medicineRequests.add(r);
     }
-    return medUIRequests;
+
+    return medicineRequests;
   }
-
-
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -291,7 +266,6 @@ public class MedicineDeliveryController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
-    allMedButton.setUnderline(false);
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -304,21 +278,8 @@ public class MedicineDeliveryController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
-    allMedButton.setUnderline(false);
   }
 
-  public void switchToMedicine(ActionEvent actionEvent) {
-    ObservableList<Node> stackNodes = requestsStack.getChildren();
-    Node active = stackNodes.get(stackNodes.indexOf(allEquipPane));
-    for (Node node : stackNodes) {
-      node.setVisible(false);
-    }
-    active.setVisible(true);
-    active.toBack();
-    activeReqButton.setUnderline(false);
-    newReqButton.setUnderline(false);
-    allEquipButton.setUnderline(true);
-  }
   public Employee checkEmployee(String employee) throws NullPointerException {
     if (EmployeeDaoImpl.List.get(employee) != null) {
       return EmployeeDaoImpl.List.get(employee);
@@ -345,7 +306,11 @@ public class MedicineDeliveryController extends ServiceController {
     String endRequest = " has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
+    String patientInput = patientName.getText().trim();
+    String room = locations.getValue().getNodeID();
+    Employee staff = employees.getValue();
     int requestAmount = 0;
+
     for (int i = 0; i < checkBoxes.size(); i++) {
       if (checkBoxes.get(i).isSelected()) {
         String inputString = "";
@@ -355,9 +320,6 @@ public class MedicineDeliveryController extends ServiceController {
         } else {
           inputString = checkBoxesInput.get(i).getText().trim();
         }
-        String room = locations.getValue().toString();
-        String staff = employees.getValue();
-
         requestAmount = Integer.parseInt(inputString);
 
         startRequestString
@@ -368,20 +330,38 @@ public class MedicineDeliveryController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("MED" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in Medicine service request controller");
+          }
+
+          serviceID = "MED" + (int) rand;
+        }
         // String patient = "BRUH";
 
         MedicineRequest request =
             new MedicineRequest(
-                (int) rand + "",
+                serviceID,
                 checkBoxes.get(i).getText(),
                 requestAmount,
-                patients.getValue().toString(),
-                "Ordered",
-                checkEmployee(employees.getValue().toString()),
+                patientInput,
+                "In progress",
+                staff,
                 room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11));
+
+        request.gettingTheLocation();
 
         activeRequestTable.setItems(
             newRequest(
@@ -395,18 +375,7 @@ public class MedicineDeliveryController extends ServiceController {
                 request.getDate(),
                 request.getTime()));
         try {
-          Udb.getInstance()
-              .add( // TODO Have random ID and enter Room Destination
-                  new MedicineRequest(
-                      request.getID(),
-                      request.getName(),
-                      request.getAmount(),
-                      request.getPatientName(),
-                      "sent",
-                      checkEmployee(staff),
-                      request.getDestination(),
-                      request.getDate(),
-                      request.getTime()));
+          Udb.getInstance().add(request);
 
         } catch (IOException e) {
           e.printStackTrace();
@@ -575,21 +544,6 @@ public class MedicineDeliveryController extends ServiceController {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
-  }
-
-  private ObservableList<MedicineRequest> newRequest(
-      String id,
-      String name,
-      int amount,
-      String patientName,
-      String status,
-      Employee employee,
-      String location,
-      String date,
-      String time) {
-    medUIRequests.add(
-        new MedicineRequest(id, name, amount, patientName, status, employee, location, date, time));
-    return medUIRequests;
   }
 
   @Override

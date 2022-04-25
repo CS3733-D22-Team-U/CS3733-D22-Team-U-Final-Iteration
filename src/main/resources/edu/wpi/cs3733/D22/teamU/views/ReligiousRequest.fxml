@@ -126,7 +126,7 @@
                         <Text fx:id="requestText" layoutX="439.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cleared!" visible="false" wrappingWidth="85.336669921875" />
                      </children>
                   </Pane>
-                  <Pane fx:id="allActiveRequestsPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="530.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                  <Pane fx:id="allActiveRequestsPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="530.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                      <children>
                         <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>

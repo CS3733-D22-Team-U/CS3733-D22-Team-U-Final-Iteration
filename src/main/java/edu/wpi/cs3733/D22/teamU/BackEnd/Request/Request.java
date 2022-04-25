@@ -28,8 +28,6 @@ public class Request {
     this.location = location;
   }
 
-
-
   public String ID;
   public String reqType;
   public String name; // or lab type
@@ -41,7 +39,14 @@ public class Request {
   public Employee employee;
   public Location location;
 
-  public Request(String ID, String reqType, Employee employee, String destination, String status, String date, String time) {
+  public Request(
+      String ID,
+      String reqType,
+      Employee employee,
+      String destination,
+      String status,
+      String date,
+      String time) {
     this.ID = ID;
     this.reqType = reqType;
     this.employee = employee;
@@ -59,10 +64,7 @@ public class Request {
     this.reqType = reqType;
   }
 
-  public Request() {
-
-  }
-
+  public Request() {}
 
   public void setDestination(String destination) {
     this.destination = destination;

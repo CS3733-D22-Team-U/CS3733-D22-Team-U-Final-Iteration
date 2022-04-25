@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
@@ -42,6 +43,48 @@ public class MapController extends ServiceController {
   public TextField popupLongName;
   public TextField popupShortName;
   AnchorPane popupEditPane;
+  /* Rectangle Icons */
+  @FXML Rectangle PatientRoom;
+  @FXML Rectangle EquipStorage;
+  @FXML Rectangle DirtyEquipPickup;
+  @FXML Rectangle Hallway;
+  @FXML Rectangle Elevator;
+  @FXML Rectangle Restroom;
+  @FXML Rectangle Staircase;
+  @FXML Rectangle Department;
+  @FXML Rectangle Labs;
+  @FXML Rectangle Information;
+  @FXML Rectangle Conference;
+  @FXML Rectangle Exit;
+  @FXML Rectangle Retail;
+  @FXML Rectangle Service;
+  @FXML Rectangle Beds;
+  @FXML Rectangle Pumps;
+  @FXML Rectangle Recliners;
+  @FXML Rectangle OtherEquip;
+  @FXML Rectangle MultiServices;
+
+  /* Map Icons State */
+  public boolean PRicon = true;
+  public boolean ESicon = true;
+  public boolean DEicon = true;
+  public boolean HWicon = true;
+  public boolean EVicon = true;
+  public boolean RRicon = true;
+  public boolean SCicon = true;
+  public boolean DPicon = true;
+  public boolean LBicon = true;
+  public boolean INicon = true;
+  public boolean CFicon = true;
+  public boolean EXicon = true;
+  public boolean RTicon = true;
+  public boolean SVicon = true;
+  public boolean BDicon = true;
+  public boolean PMicon = true;
+  public boolean RCicon = true;
+  public boolean OEicon = true;
+  public boolean MSicon = true;
+  public boolean ALLicon = true;
 
   @FXML ScrollPane imagesPane1;
   @FXML ScrollPane imagesPane2;
@@ -281,6 +324,14 @@ public class MapController extends ServiceController {
     }
   }
 
+  public void PathFind(Location loc1, Location loc2) {}
+
+  public void dispMultiService(MouseEvent mouseEvent) {}
+
+  public void dispMultiServices(MouseEvent mouseEvent) {}
+
+  public void dispElevator(MouseEvent mouseEvent) {}
+
   class Delta {
     double x, y;
   }
@@ -390,6 +441,76 @@ public class MapController extends ServiceController {
 
   private TableView<Equipment> equipTable = new TableView();
   private TableView<Request> reqTable = new TableView();
+
+  private void enableDrag(LocationNode ln) {
+    final Delta dragDelta = new Delta();
+    AnchorPane temp = ln.getPane();
+    Location loc = ln.getLocation();
+    double scale = Double.min(temp.getPrefHeight(), temp.getPrefWidth());
+    double x = scale / imageX * loc.getXcoord();
+    double y = scale / imageY * loc.getYcoord();
+    ln.setOnMousePressed(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            // record a delta distance for the drag and drop operation.
+            // setPaneOnMousePressedEventHandler(null);
+            // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+
+            dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+            dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+            ln.setCursor(Cursor.MOVE);
+          }
+        });
+    ln.setOnMouseDragged(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+
+            ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+            ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+            ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+            ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+            imagesPane1.setPannable(false);
+            imagesPane2.setPannable(false);
+            imagesPane3.setPannable(false);
+            imagesPane4.setPannable(false);
+            imagesPane5.setPannable(false);
+            imagesPane6.setPannable(false);
+            imagesPane7.setPannable(false);
+          }
+        });
+    ln.setOnMouseReleased(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            ln.setCursor(Cursor.HAND);
+
+            ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
+            ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+            try {
+              Udb.getInstance().edit(ln.getLocation());
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            } catch (SQLException e) {
+              throw new RuntimeException(e);
+            }
+            imagesPane1.setPannable(true);
+            imagesPane2.setPannable(true);
+            imagesPane3.setPannable(true);
+            imagesPane4.setPannable(true);
+            imagesPane5.setPannable(true);
+            imagesPane6.setPannable(true);
+            imagesPane7.setPannable(true);
+
+            // popupXCoord.setText("ln.getLayoutX()");
+            // popupYCoord.setText("ln.getLayoutY()");
+
+            // setPaneOnMousePressedEventHandler(paneOnMouseDraggedEventHandler);
+            // setPaneOnMouseDraggedEventHandlerEventHandler(paneOnMouseDraggedEventHandler);
+          }
+        });
+  }
 
   private Equipment equipment = null;
   private Request request = null;
@@ -638,6 +759,7 @@ public class MapController extends ServiceController {
       LocationNode lnNew = new LocationNode(l, x, y, lnOld.getPane());
       locations.put(l.getNodeID(), lnNew);
       lnNew.setOnMouseClicked(this::popupOpen);
+      enableDrag(lnNew);
       Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
       lnNew.getPane().getChildren().add(lnNew);
@@ -716,6 +838,7 @@ public class MapController extends ServiceController {
       double y = scale / imageY * l.getYcoord();
       LocationNode ln = new LocationNode(l, x, y, temp);
       ln.setOnMouseClicked(this::popupOpen);
+      enableDrag(ln);
       locations.put(l.getNodeID(), ln);
       temp.getChildren().add(ln);
       popUpAdd(mouseEvent);
@@ -727,4 +850,59 @@ public class MapController extends ServiceController {
   }
 
   public void test(ZoomEvent zoomEvent) {}
+
+  public void dispAll(MouseEvent mouseevent) {}
+
+  public void dispElevators(MouseEvent mouseevent) {
+    if (EVicon != true) {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
+          locationNode.setVisible(false);
+          // set color of rectangle
+          EVicon = false;
+        }
+      }
+    } else {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
+          locationNode.setVisible(true);
+          EVicon = true;
+        }
+      }
+    }
+  }
+
+  public void dispDepartment(MouseEvent mouseEvent) {}
+
+  public void dispStaircase(MouseEvent mouseEvent) {}
+
+  public void dispRestroom(MouseEvent mouseEvent) {}
+
+  public void dispHallway(MouseEvent mouseEvent) {}
+
+  public void dispOtherEquip(MouseEvent mouseEvent) {}
+
+  public void dispRecliner(MouseEvent mouseEvent) {}
+
+  public void dispPump(MouseEvent mouseEvent) {}
+
+  public void dispBed(MouseEvent mouseEvent) {}
+
+  public void dispService(MouseEvent mouseEvent) {}
+
+  public void dispRetail(MouseEvent mouseEvent) {}
+
+  public void dispExit(MouseEvent mouseEvent) {}
+
+  public void dispConference(MouseEvent mouseEvent) {}
+
+  public void dispInfo(MouseEvent mouseEvent) {}
+
+  public void dispLab(MouseEvent mouseEvent) {}
+
+  public void dispDirtyEquipPickup(MouseEvent mouseEvent) {}
+
+  public void dispEquipStorage(MouseEvent mouseEvent) {}
+
+  public void dispPatientRoom(MouseEvent mouseEvent) {}
 }

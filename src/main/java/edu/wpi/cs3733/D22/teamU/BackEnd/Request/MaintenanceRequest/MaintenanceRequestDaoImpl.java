@@ -17,7 +17,8 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
 
   public Statement statement;
   public String csvFile;
-  public static HashMap<String, MaintenanceRequest> List = new HashMap<String, MaintenanceRequest>();
+  public static HashMap<String, MaintenanceRequest> List =
+      new HashMap<String, MaintenanceRequest>();
   public ArrayList<MaintenanceRequest> list = new ArrayList<MaintenanceRequest>();
 
   public MaintenanceRequestDaoImpl(Statement statement, String csvFile)
@@ -69,6 +70,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -114,6 +116,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

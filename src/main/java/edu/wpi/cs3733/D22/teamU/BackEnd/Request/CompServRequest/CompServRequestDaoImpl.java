@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.ResultSet;
@@ -20,7 +19,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
   public static HashMap<String, CompServRequest> List = new HashMap<String, CompServRequest>();
   public ArrayList<CompServRequest> list = new ArrayList<CompServRequest>();
 
-    public CompServRequestDaoImpl(Statement statement, String csvFile)
+  public CompServRequestDaoImpl(Statement statement, String csvFile)
       throws SQLException, IOException {
     this.statement = statement;
     this.csvFile = csvFile;
@@ -59,6 +58,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -97,6 +97,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
+          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {

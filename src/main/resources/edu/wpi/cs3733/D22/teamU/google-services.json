@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "824007940718",
+    "firebase_url": "https://ultra-unicorn-default-rtdb.firebaseio.com",
+    "project_id": "ultra-unicorn",
+    "storage_bucket": "ultra-unicorn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824007940718:android:721b3e998256c1d293a47f",
+        "android_client_info": {
+          "package_name": "edu.wpi.cs3733.D22.teamU"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824007940718-mqv8u12gjhj9md5rjb766442huo3mbkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA_ASgmQAPq725pvpvNAPmcroMTjRmfwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824007940718-mqv8u12gjhj9md5rjb766442huo3mbkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
