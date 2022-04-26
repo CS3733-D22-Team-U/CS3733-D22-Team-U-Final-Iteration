@@ -32,6 +32,9 @@ import javafx.util.Duration;
 public class HomePageController extends ServiceController {
 
   public Button logOutButton;
+  public Text headerText;
+  public Pane turtlePond;
+  public ImageView turtle;
   @FXML Button navButton;
   @FXML ImageView navPaneArrow;
 
@@ -98,14 +101,14 @@ public class HomePageController extends ServiceController {
               this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
             });
 
-    userName.setText("Dr." + "____");
+    //userName.setText("Dr." + "____");
 
     handleNavButtons();
     handeDateTime();
-    handleTurtle();
-    playTurtle();
+    //handleTurtle();
+    //playTurtle();
   }
-
+/*
   private void handleTurtle() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
     openNav.setToY(-415);
@@ -158,6 +161,8 @@ public class HomePageController extends ServiceController {
           }
         });
   }
+
+ */
 
   private void handeDateTime() {
     Thread timeThread =
