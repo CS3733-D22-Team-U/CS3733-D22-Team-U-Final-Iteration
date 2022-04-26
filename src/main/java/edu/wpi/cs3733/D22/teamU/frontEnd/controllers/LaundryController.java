@@ -80,6 +80,8 @@ public class LaundryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
 
     setUpActiveRequests();
     for (Node checkBox : requestHolder.getChildren()) {
@@ -313,7 +315,18 @@ public class LaundryController extends ServiceController {
 
   //======remove edit request=============
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    LaundryRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
+    laundryRequests.remove(request);
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeEdit();
+  }
   //====================================
 
   public void switchToNewRequest(ActionEvent actionEvent) {
@@ -344,6 +357,7 @@ public class LaundryController extends ServiceController {
     }
     active.setVisible(true);
     active.toBack();
+
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
 
@@ -377,6 +391,7 @@ public class LaundryController extends ServiceController {
   //==========edit button==========================
   public void editClick(MouseEvent event) {
     if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+
       submitEditButton.setVisible(true);
       closeButton.setVisible(true);
       EditRequestPopUp.setVisible(true);
