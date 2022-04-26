@@ -103,6 +103,8 @@ public class TranslatorRequestController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   //

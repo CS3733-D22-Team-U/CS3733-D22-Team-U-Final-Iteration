@@ -111,6 +111,8 @@ public class MaintenanceRequestController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   private void setUpAllMaintenance() throws SQLException, IOException {

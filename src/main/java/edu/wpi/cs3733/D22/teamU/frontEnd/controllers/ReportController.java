@@ -79,6 +79,8 @@ public class ReportController extends ServiceController {
             });
 
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   private Employee checkEmployee(String employee) {
