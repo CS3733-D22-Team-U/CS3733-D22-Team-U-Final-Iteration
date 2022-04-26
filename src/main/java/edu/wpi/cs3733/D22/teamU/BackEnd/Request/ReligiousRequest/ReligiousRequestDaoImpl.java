@@ -206,7 +206,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "employee varchar(50) not null,"
               + "notes varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
-        //firebaseUpdate(currReq);
+        // firebaseUpdate(currReq);
 
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("

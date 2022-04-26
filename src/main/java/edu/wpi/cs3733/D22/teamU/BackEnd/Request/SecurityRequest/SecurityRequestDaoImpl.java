@@ -146,7 +146,7 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
               + "time varchar (10) not null)");
 
       for (SecurityRequest currSecurity : List.values()) {
-        //firebaseUpdate(currSecurity);
+        // firebaseUpdate(currSecurity);
 
         statement.execute(
             "INSERT INTO SecurityRequest VALUES("

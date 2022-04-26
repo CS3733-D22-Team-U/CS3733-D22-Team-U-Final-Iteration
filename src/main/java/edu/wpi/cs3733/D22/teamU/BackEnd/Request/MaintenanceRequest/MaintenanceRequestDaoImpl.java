@@ -160,7 +160,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
               + "time varchar(10) not null)");
 
       for (MaintenanceRequest currMainReq : List.values()) {
-        //firebaseUpdate(currMainReq);
+        // firebaseUpdate(currMainReq);
         statement.execute(
             "INSERT INTO MaintenanceRequest VALUES("
                 + "'"
