@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -206,7 +208,18 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "employee varchar(50) not null,"
               + "notes varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
-        //firebaseUpdate(currReq);
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("religRequests").document(currReq.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            firebaseUpdate(currReq);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql religous requests");
+        }
+
 
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("
@@ -329,6 +342,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

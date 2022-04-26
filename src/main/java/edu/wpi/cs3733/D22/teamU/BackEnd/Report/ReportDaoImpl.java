@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Report;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -134,7 +136,19 @@ public class ReportDaoImpl implements DataDao<Report> {
               + "time varchar(10) not null)");
       for (Report currReport : List.values()) {
         // db.collection("employee").add(currEmp.employeeID);
-        // firebaseUpdate(currReport);
+
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("reports").document(currReport.getId());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            firebaseUpdate(currReport);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
 
         statement.execute(
             "INSERT INTO Reports VALUES("
@@ -270,6 +284,7 @@ public class ReportDaoImpl implements DataDao<Report> {
         this.List.replace(data.id, data);
         data.getEmployee().addReport(data);
         this.JavaToSQL();
+        firebaseUpdate(data);
         this.JavaToCSV(CSVfile);
       } else {
         System.out.println("No Such Employee in Database");
