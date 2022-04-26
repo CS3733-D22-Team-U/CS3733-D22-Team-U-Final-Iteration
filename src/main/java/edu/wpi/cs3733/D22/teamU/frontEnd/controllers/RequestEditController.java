@@ -5,12 +5,10 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -24,81 +22,45 @@ public class RequestEditController {
   private ArrayList<String> fields;
   private Pane activePane;
 
-  @FXML
-  TextField ID;
-  @FXML
-  TextField name;
-  @FXML
-  TextField patientName;
-  @FXML
-  TextField status;
-  @FXML
-  ComboBox<Location> locations;
-  @FXML
-  ComboBox<Employee> employees;
+  @FXML TextField ID;
+  @FXML TextField name;
+  @FXML TextField patientName;
+  @FXML TextField status;
+  @FXML ComboBox<Location> locations;
+  @FXML ComboBox<Employee> employees;
 
-  @FXML
-  TextField service;
-  @FXML
-  TextField notes;
-  @FXML
-  DatePicker pickUp;
-  @FXML
-  DatePicker dropOff;
+  @FXML TextField service;
+  @FXML TextField notes;
+  @FXML DatePicker pickUp;
+  @FXML DatePicker dropOff;
 
-  @FXML
-  TextField amount;
-  @FXML
-  TextField typeOfRequest;
-  @FXML
-  TextField priority;
-  @FXML
-  TextField labType;
-  @FXML
-  TextField description;
-  @FXML
-  TextField lethalForce;
-  @FXML
-  TextField typeOfMain;
-  @FXML
-  TextField message;
-  @FXML
-  TextField device;
-  @FXML
-  TextField dietRest;
-  @FXML
-  TextField addNotes;
-  @FXML
-  TextField gifts;
-  @FXML
-  TextField religion;
-  @FXML
-  TextField toLang;
+  @FXML TextField amount;
+  @FXML TextField typeOfRequest;
+  @FXML TextField priority;
+  @FXML TextField labType;
+  @FXML TextField description;
+  @FXML TextField lethalForce;
+  @FXML TextField typeOfMain;
+  @FXML TextField message;
+  @FXML TextField device;
+  @FXML TextField dietRest;
+  @FXML TextField addNotes;
+  @FXML TextField gifts;
+  @FXML TextField religion;
+  @FXML TextField toLang;
 
-  @FXML
-  StackPane specialFields;
-  @FXML
-  Pane religiousFields;
-  @FXML
-  Pane medicineFields;
-  @FXML
-  Pane labFields;
-  @FXML
-  Pane laundryFields;
-  @FXML
-  Pane giftFields;
-  @FXML
-  Pane equipmentFields;
-  @FXML
-  Pane securityFields;
-  @FXML
-  Pane compServFields;
-  @FXML
-  Pane mealFields;
-  @FXML
-  Pane translatorFields;
-  @FXML
-  Pane maintenanceFields;
+  @FXML StackPane specialFields;
+  @FXML Pane religiousFields;
+  @FXML Pane medicineFields;
+  @FXML Pane labFields;
+  @FXML Pane laundryFields;
+  @FXML Pane giftFields;
+  @FXML Pane equipmentFields;
+  @FXML Pane securityFields;
+  @FXML Pane compServFields;
+  @FXML Pane mealFields;
+  @FXML Pane translatorFields;
+  @FXML Pane maintenanceFields;
 
   public void setUp(Request request) {
     this.request = request;
@@ -261,7 +223,6 @@ public class RequestEditController {
         activePane = compServFields;
         break;
     }
-
 
     switchPane();
 

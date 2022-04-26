@@ -56,18 +56,6 @@
                   <Text layoutX="282.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" wrappingWidth="53.529296875" />
                </children>
             </Pane>
-            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Blue;" visible="false">
-               <children>
-                  <TextField fx:id="notes" layoutX="42.0" layoutY="41.0" prefHeight="25.0" prefWidth="149.0" />
-                  <DatePicker fx:id="pickUp" layoutX="312.0" layoutY="41.0" />
-                  <DatePicker fx:id="dropOff" layoutX="312.0" layoutY="105.0" />
-                  <Text layoutX="97.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="38.93670654296875" />
-                  <Text layoutX="351.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Pickup" wrappingWidth="82.13671875" />
-                  <Text layoutX="351.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Drop off" wrappingWidth="82.13671875" />
-                  <Text layoutX="90.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="53.529296875" />
-                  <TextField fx:id="service" layoutX="42.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
-               </children>
-            </Pane>
             <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="518.0" style="-fx-background-color: GREEN;" visible="false">
                <children>
                   <TextField fx:id="gift" layoutX="43.0" layoutY="75.0" />
@@ -122,6 +110,18 @@
                   <TextField fx:id="description" layoutX="234.0" layoutY="75.0" />
                   <Text layoutX="40.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Maintenance" />
                   <Text layoutX="278.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+               </children>
+            </Pane>
+            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Blue;">
+               <children>
+                  <TextField fx:id="notes" layoutX="42.0" layoutY="41.0" prefHeight="25.0" prefWidth="149.0" />
+                  <DatePicker fx:id="pickUp" layoutX="225.0" layoutY="41.0" />
+                  <DatePicker fx:id="dropOff" layoutX="225.0" layoutY="105.0" />
+                  <Text layoutX="97.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="38.93670654296875" />
+                  <Text layoutX="271.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Pickup" wrappingWidth="82.13671875" />
+                  <Text layoutX="271.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Drop off" wrappingWidth="82.13671875" />
+                  <Text layoutX="90.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="53.529296875" />
+                  <TextField fx:id="service" layoutX="42.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
                </children>
             </Pane>
          </children></StackPane>
