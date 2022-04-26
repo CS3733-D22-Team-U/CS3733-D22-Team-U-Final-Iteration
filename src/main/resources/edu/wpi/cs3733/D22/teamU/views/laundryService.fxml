@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
@@ -158,7 +158,7 @@
                                 </HBox>
                             </children>
                         </Pane>
-                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
                             <children>
                                 <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
