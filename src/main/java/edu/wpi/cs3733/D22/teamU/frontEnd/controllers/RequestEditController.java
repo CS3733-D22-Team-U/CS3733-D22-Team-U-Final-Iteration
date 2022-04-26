@@ -23,75 +23,71 @@ public class RequestEditController {
   private ArrayList<String> fields;
   private Pane activePane;
 
-  @FXML TextField ID;
-  @FXML TextField name;
-  @FXML TextField patientName;
-  @FXML TextField status;
-  @FXML ComboBox<Location> locations;
-  @FXML ComboBox<Employee> employees;
+	@FXML
+	TextField ID;
+	@FXML
+	TextField name;
+	@FXML
+	TextField patientName;
+	@FXML
+	TextField status;
+	@FXML
+	ComboBox<Location> locations;
+	@FXML
+	ComboBox<Employee> employees;
 
-  @FXML TextField service;
-  @FXML TextField notes;
-  @FXML DatePicker pickUp;
-  @FXML DatePicker dropOff;
-  @FXML TextField amount;
-  @FXML TextField typeOfRequest;
-  @FXML TextField priority;
-  @FXML TextField labType;
-  @FXML TextField descript;
-  @FXML TextField lethal;
-  @FXML TextField typeOfMaintenance;
-  @FXML TextField description;
-  @FXML TextField message;
-  @FXML TextField device;
-  @FXML TextField dietRest;
-  @FXML TextField addNotes;
-  @FXML TextField gifts;
-  @FXML TextField religion;
-  @FXML TextField toLang;
+	@FXML
+	TextField service;
+	@FXML
+	TextField notes;
+	@FXML
+	DatePicker pickUp;
+	@FXML
+	DatePicker dropOff;
+	@FXML
+	TextField amount;
+	@FXML
+	TextField typeOfRequest;
+	@FXML
+	TextField priority;
+	@FXML
+	TextField labType;
+	@FXML
+	TextField description;
+	@FXML
+	TextField lethalForce;
+	@FXML
+	TextField typeOfMain;
+	@FXML
+	TextField message;
+	@FXML
+	TextField device;
+	@FXML
+	TextField dietRest;
+	@FXML
+	TextField addNotes;
+	@FXML
+	TextField gifts;
+	@FXML
+	TextField religion;
+	@FXML
+	TextField toLang;
 
-  @FXML StackPane specialFields;
-  @FXML Pane religiousFields;
-  @FXML Pane medicineFields;
-  @FXML Pane labFields;
-  @FXML Pane laundryFields;
-  @FXML Pane giftFields;
-  @FXML Pane equipmentFields;
-  @FXML Pane securityFields;
-  @FXML Pane compServFields;
-  @FXML Pane mealFields;
-  @FXML Pane translatorFields;
-  @FXML Pane maintenanceFields;
+	public void setUp(Request request) {
+		this.request = request;
+		this.requests = new ArrayList<>(); // initialize this to something diff in future
+		this.fields = new ArrayList<>();
+		try {
+			locations.setTooltip(new Tooltip());
+			locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+			new ComboBoxAutoComplete<Location>(locations, 650, 290);
+			employees.setTooltip(new Tooltip());
+			employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+			new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-  public void setUp(Request request) {
-    this.request = request;
-    this.fields = new ArrayList<>();
-    try {
-      locations.setTooltip(new Tooltip());
-      locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
-      new ComboBoxAutoComplete<Location>(locations, 650, 290);
-      employees.setTooltip(new Tooltip());
-      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
-      new ComboBoxAutoComplete<Employee>(employees, 675, 380);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    switch (request.getClass().getSimpleName()) {
-      case "LaundryRequest":
-        fields.add("patientName");
-        fields.add("ID");
-        fields.add("employee");
-        fields.add("status");
-        fields.add("destination");
-        fields.add("pickUpDate");
-        fields.add("dropOffDate");
-        fields.add("services");
-        fields.add("time");
-        fields.add("notes");
-        activePane = laundryFields;
-        break;
-    }
 		switch (request.getClass().getSimpleName()) {
 			case "LaundryRequest":
 				fields.add("patientName");
@@ -213,13 +209,13 @@ public class RequestEditController {
 					newRequest.setLabType(labType.getText().trim());
 					break;
 				case "descript":
-					newRequest.setDescript(descript.getText().trim());
+					newRequest.setDescript(description.getText().trim());
 					break;
 				case "lethal":
-					newRequest.setLethal(lethal.getText().trim());
+					newRequest.setLethal(lethalForce.getText().trim());
 					break;
 				case "typeOfMaintenance":
-					newRequest.setTypeOfMaintenance(typeOfMaintenance.getText().trim());
+					newRequest.setTypeOfMaintenance(typeOfMain.getText().trim());
 					break;
 				case "description":
 					newRequest.setDescription(description.getText().trim());
@@ -297,13 +293,13 @@ public class RequestEditController {
 					labType.setText(request.getLabType());
 					break;
 				case "descript":
-					descript.setText(request.getDescript());
+					description.setText(request.getDescript());
 					break;
 				case "lethal":
-					lethal.setText(request.getLethal());
+					lethalForce.setText(request.getLethal());
 					break;
 				case "typeOfMaintenance":
-					typeOfMaintenance.setText(request.getTypeOfMaintenance());
+					typeOfMain.setText(request.getTypeOfMaintenance());
 					break;
 				case "description":
 					description.setText(request.getDescription());
