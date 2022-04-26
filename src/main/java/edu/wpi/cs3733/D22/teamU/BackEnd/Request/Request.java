@@ -211,8 +211,6 @@ public class Request {
   String religion;
   String toLang;
 
-
-
   public Request(
       String ID,
       String reqType,
