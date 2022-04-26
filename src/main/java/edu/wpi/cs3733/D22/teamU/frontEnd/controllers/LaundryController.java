@@ -66,6 +66,9 @@ public class LaundryController extends ServiceController {
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
 
+  //TODO fix naming=======================================================================================================
+  @FXML Pane editPane;
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -253,10 +256,10 @@ public class LaundryController extends ServiceController {
   }
 
   @Override
-  public void removeRequest() {}
+  public void updateRequest(){}
 
   @Override
-  public void updateRequest() {}
+  public void removeRequest(){}
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
