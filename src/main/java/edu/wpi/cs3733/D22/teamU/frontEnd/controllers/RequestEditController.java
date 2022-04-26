@@ -122,33 +122,82 @@ public class RequestEditController {
 		Request newRequest = request;
 		for (String field : fields) {
 			switch (field) {
-				case "patientName" -> newRequest.setPatientName(patientName.getText().trim());
-				case "employee" -> newRequest.setEmployee(employees.getValue());
-				case "status" -> newRequest.setStatus(status.getText().trim());
-				case "destination" -> newRequest.setDestination(locations.getValue().getNodeID());
-				case "pickUpDate" -> newRequest.setPickUpDate(pickUp.getValue().toString());
-				case "dropOffDate" -> newRequest.setDropOffDate(dropOff.getValue().toString());
-				case "services" -> newRequest.setServices(service.getText().trim());
-				case "notes" -> newRequest.setNotes(notes.getText().trim());
-				case "name" -> newRequest.setName(name.getText().trim());
-				case "location" -> newRequest.setLocation(locations.getValue());
-				case "amount" -> newRequest.setAmount(Integer.parseInt(amount.getText().trim()));
-				case "typeOfRequest" -> newRequest.setTypeOfRequest(typeOfRequest.getText().trim());
-				case "priority" -> newRequest.setPriority(Integer.parseInt(priority.getText().trim()));
-				case "labType" -> newRequest.setLabType(labType.getText().trim());
-				case "descript" -> newRequest.setDescript(descript.getText().trim());
-				case "lethal" -> newRequest.setLethal(lethal.getText().trim());
-				case "typeOfMaintenance" -> newRequest.setTypeOfMaintenance(typeOfMaintenance.getText().trim());
-				case "description" -> newRequest.setDescription(description.getText().trim());
-				case "message" -> newRequest.setMessage(message.getText().trim());
-				case "device" -> newRequest.setDevice(device.getText().trim());
-				case "dietRest" -> newRequest.setDietRest(dietRest.getText().trim());
-				case "addNotes" -> newRequest.setAddNotes(addNotes.getText().trim());
-				case "gifts" -> newRequest.setGifts(gifts.getText().trim());
-				case "religion" -> newRequest.setReligion(religion.getText().trim());
-				case "toLang" -> newRequest.setToLang(toLang.getText().trim());
-				default -> {
-				}
+				case "patientName":
+					newRequest.setPatientName(patientName.getText().trim());
+					break;
+				case "employee":
+					newRequest.setEmployee(employees.getValue());
+					break;
+				case "status":
+					newRequest.setStatus(status.getText().trim());
+					break;
+				case "destination":
+					newRequest.setDestination(locations.getValue().getNodeID());
+					break;
+				case "pickUpDate":
+					newRequest.setPickUpDate(pickUp.getValue().toString());
+					break;
+				case "dropOffDate":
+					newRequest.setDropOffDate(dropOff.getValue().toString());
+					break;
+				case "services":
+					newRequest.setServices(service.getText().trim());
+					break;
+				case "notes":
+					newRequest.setNotes(notes.getText().trim());
+					break;
+				case "name":
+					newRequest.setName(name.getText().trim());
+					break;
+				case "location":
+					newRequest.setLocation(locations.getValue());
+					break;
+				case "amount":
+					newRequest.setAmount(Integer.parseInt(amount.getText().trim()));
+					break;
+				case "typeOfRequest":
+					newRequest.setTypeOfRequest(typeOfRequest.getText().trim());
+					break;
+				case "priority":
+					newRequest.setPriority(Integer.parseInt(priority.getText().trim()));
+					break;
+				case "labType":
+					newRequest.setLabType(labType.getText().trim());
+					break;
+				case "descript":
+					newRequest.setDescript(descript.getText().trim());
+					break;
+				case "lethal":
+					newRequest.setLethal(lethal.getText().trim());
+					break;
+				case "typeOfMaintenance":
+					newRequest.setTypeOfMaintenance(typeOfMaintenance.getText().trim());
+					break;
+				case "description":
+					newRequest.setDescription(description.getText().trim());
+					break;
+				case "message":
+					newRequest.setMessage(message.getText().trim());
+					break;
+				case "device":
+					newRequest.setDevice(device.getText().trim());
+					break;
+				case "dietRest":
+					newRequest.setDietRest(dietRest.getText().trim());
+					break;
+				case "addNotes":
+					newRequest.setAddNotes(addNotes.getText().trim());
+					break;
+				case "gifts":
+					newRequest.setGifts(gifts.getText().trim());
+				case "religion":
+					newRequest.setReligion(religion.getText().trim());
+					break;
+				case "toLang":
+					newRequest.setToLang(toLang.getText().trim());
+					break;
+				default:
+					break;
 			}
 		}
 		System.out.println(request);
@@ -160,32 +209,80 @@ public class RequestEditController {
 	public void updateFields() {
 		for (String field : fields) {
 			switch (field) {
-				case "ID" -> ID.setText(request.getID());
-				case "patientName" -> patientName.setText(request.getPatientName());
-				case "employee" -> employees.setValue(request.getEmployee());
-				case "status" -> status.setText(request.getStatus());
-				case "destination" -> locations.setValue(request.getLocation());
-				case "pickUpDate" -> pickUp.setValue(LocalDate.parse(request.getPickUpDate()));
-				case "dropOffDate" -> dropOff.setValue(LocalDate.parse(request.getDropOffDate()));
-				case "services" -> service.setText(request.getServices());
-				case "notes" -> notes.setText(request.getNotes());
-				case "amount" -> amount.setText(String.valueOf(request.getAmount()));
-				case "typeOfRequest" -> typeOfRequest.setText(request.getTypeOfRequest());
-				case "priority" -> priority.setText(String.valueOf(request.getPriority()));
-				case "labType" -> labType.setText(request.getLabType());
-				case "descript" -> descript.setText(request.getDescript());
-				case "lethal" -> lethal.setText(request.getLethal());
-				case "typeOfMaintenance" -> typeOfMaintenance.setText(request.getTypeOfMaintenance());
-				case "description" -> description.setText(request.getDescription());
-				case "message" -> message.setText(request.getMessage());
-				case "device" -> device.setText(request.getDevice());
-				case "dietRest" -> dietRest.setText(request.getDietRest());
-				case "addNotes" -> addNotes.setText(request.getAddNotes());
-				case "gifts" -> gifts.setText(request.getGifts());
-				case "religion" -> religion.setText(request.getReligion());
-				case "toLang" -> toLang.setText(request.getToLang());
-				default -> {
-				}
+				case "ID":
+					ID.setText(request.getID());
+					break;
+				case "patientName":
+					patientName.setText(request.getPatientName());
+					break;
+				case "employee":
+					employees.setValue(request.getEmployee());
+					break;
+				case "status":
+					status.setText(request.getStatus());
+					break;
+				case "destination":
+					locations.setValue(request.getLocation());
+					break;
+				case "pickUpDate":
+					pickUp.setValue(LocalDate.parse(request.getPickUpDate()));
+					break;
+				case "dropOffDate":
+					dropOff.setValue(LocalDate.parse(request.getDropOffDate()));
+					break;
+				case "services":
+					service.setText(request.getServices());
+					break;
+				case "notes":
+					notes.setText(request.getNotes());
+					break;
+				case "amount":
+					amount.setText(String.valueOf(request.getAmount()));
+					break;
+				case "typeOfRequest":
+					typeOfRequest.setText(request.getTypeOfRequest());
+					break;
+				case "priority":
+					priority.setText(String.valueOf(request.getPriority()));
+					break;
+				case "labType":
+					labType.setText(request.getLabType());
+					break;
+				case "descript":
+					descript.setText(request.getDescript());
+					break;
+				case "lethal":
+					lethal.setText(request.getLethal());
+					break;
+				case "typeOfMaintenance":
+					typeOfMaintenance.setText(request.getTypeOfMaintenance());
+					break;
+				case "description":
+					description.setText(request.getDescription());
+					break;
+				case "message":
+					message.setText(request.getMessage());
+					break;
+				case "device":
+					device.setText(request.getDevice());
+					break;
+				case "dietRest":
+					dietRest.setText(request.getDietRest());
+					break;
+				case "addNotes":
+					addNotes.setText(request.getAddNotes());
+					break;
+				case "gifts":
+					gifts.setText(request.getGifts());
+					break;
+				case "religion":
+					religion.setText(request.getReligion());
+					break;
+				case "toLang":
+					toLang.setText(request.getToLang());
+					break;
+				default:
+					break;
 			}
 		}
 	}
