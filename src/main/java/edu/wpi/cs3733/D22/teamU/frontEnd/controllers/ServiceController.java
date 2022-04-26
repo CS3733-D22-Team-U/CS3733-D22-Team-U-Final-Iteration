@@ -145,7 +145,7 @@ public abstract class ServiceController implements Initializable, Service {
     masterThread.stop();
   }
 
-  public void toSeurity(ActionEvent actionEvent) throws IOException {
+  public void toSecurity(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/securityRequestUI.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
