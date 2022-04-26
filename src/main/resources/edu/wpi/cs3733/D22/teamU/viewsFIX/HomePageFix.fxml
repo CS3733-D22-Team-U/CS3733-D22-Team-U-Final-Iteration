@@ -111,13 +111,30 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Text fill="#044e9a" layoutX="350.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request A Service">
+            <Text fill="#044e9a" layoutX="350.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request A Service(make icons blue)">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <ButtonBar layoutX="450.0" layoutY="622.0" prefHeight="40.0" prefWidth="200.0" />
             <Text layoutX="112.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*look into calendarFX" />
+            <ScrollPane layoutX="385.0" layoutY="597.0" prefHeight="117.0" prefWidth="552.0">
+               <content>
+                  <ButtonBar prefHeight="83.0" prefWidth="520.0">
+                    <buttons>
+                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="105.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/computerService.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                    </buttons>
+                  </ButtonBar>
+               </content>
+            </ScrollPane>
+            <Text layoutX="902.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="simplify settings icon(just use gear)" />
          </children>
       </Pane>
       <Pane layoutX="-116.0" layoutY="-256.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
