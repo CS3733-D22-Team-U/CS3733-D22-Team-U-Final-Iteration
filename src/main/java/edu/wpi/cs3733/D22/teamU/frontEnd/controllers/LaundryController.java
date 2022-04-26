@@ -68,6 +68,9 @@ public class LaundryController extends ServiceController {
   RequestEditController newCon;
   AnchorPane EditRequestPopUp;
   @FXML Button editButton;
+  @FXML Button closeButton;
+  @FXML Button submitEditButton;
+  @FXML Button removeButton;
 
   @SneakyThrows
   @Override
@@ -350,10 +353,11 @@ public class LaundryController extends ServiceController {
   // edit button
   public void editClick(MouseEvent event) {
     if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+      submitEditButton.setVisible(true);
+      closeButton.setVisible(true);
+      EditRequestPopUp.setVisible(true);
       Pane pane = (Pane) editButton.getParent();
-      if (pane.getChildren().contains(EditRequestPopUp)) {
-        pane.getChildren().remove(EditRequestPopUp);
-      } else {
+      if (!pane.getChildren().contains(EditRequestPopUp)) {
         pane.getChildren().add(EditRequestPopUp);
       }
       newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
@@ -363,5 +367,13 @@ public class LaundryController extends ServiceController {
   // submit edit button
   public void submitEdit(MouseEvent event) {
     this.updateRequest();
+    closeEdit();
+  }
+
+  public void closeEdit() {
+    activeRequestTable.getSelectionModel().clearSelection();
+    EditRequestPopUp.setVisible(false);
+    submitEditButton.setVisible(false);
+    closeButton.setVisible(false);
   }
 }
