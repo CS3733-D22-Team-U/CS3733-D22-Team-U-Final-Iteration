@@ -108,7 +108,6 @@ public class MealDeliveryController extends ServiceController {
             });
     timeThread.start();
     masterThread = timeThread;
-
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {

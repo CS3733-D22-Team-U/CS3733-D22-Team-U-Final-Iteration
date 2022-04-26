@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D22.teamU;
 
+import edu.wpi.cs3733.D22.teamD.API.StartAPI;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Menu;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamZ.api.API;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +11,9 @@ import java.nio.file.Files;
 import java.sql.SQLException;
 
 public class DBController {
+
+  public static API transportApi;
+  public static StartAPI sanitationAPI;
 
   public static void main(String[] args) throws IOException, SQLException {
 
@@ -117,18 +122,6 @@ public class DBController {
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReports.csv");
     String reportRequest = copyFile(csvReportRequest, "csvTables/TowerReports.csv");
 
-    // -----------------------Test Files----------------------
-    InputStream csvLocationFileTest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerLocations.csv");
-    String locationTest = copyFile(csvLocationFileTest, "csvTables/TESTTowerLocations.csv");
-    InputStream csvEquipmentTest =
-        Main.class
-            .getClassLoader()
-            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TESTTowerEquipment.csv");
-    String equipmentTest = copyFile(csvEquipmentTest, "csvTables/TESTTowerEquipment.csv");
-
     String[] CSVfiles = {
       location, // 0
       employee,
@@ -150,11 +143,13 @@ public class DBController {
     Udb.password = password;
     Udb.CSVfiles = CSVfiles;
     Udb.getInstance();
-
+    transportApi = new API();
+    sanitationAPI = new StartAPI();
     // Testing testing = new Testing(CSVfiles, udb);
     // Testing testing = new Testing(CSVfiles, udb);
     Menu m = new Menu();
     // m.menu(); // Uncomment this to start terminal menu
+
   }
 
   public static String copyFile(InputStream inputPath, String outputPath) throws IOException {
