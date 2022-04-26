@@ -138,6 +138,67 @@ public class RequestEditController {
         fields.add("time");
         activePane = securityFields;
         break;
+
+		case "MealRequest":
+			fields.add("ID");
+			fields.add("patientName");
+			fields.add("dietRest");
+			fields.add("status");
+			fields.add("employee");
+			fields.add("destination");
+			fields.add("addNotes");
+			fields.add("date");
+			fields.add("time");
+			break;
+
+		case "GiftRequest":
+			fields.add("ID");
+			fields.add("name");
+			fields.add("patientName");
+			fields.add("gifts");
+			fields.add("message");
+			fields.add("status");
+			fields.add("employee");
+			fields.add("destination");
+			fields.add("date");
+			fields.add("time");
+			break;
+
+		case "ReligiousRequest":
+			fields.add("ID");
+			fields.add("name");
+			fields.add("date");
+			fields.add("time");
+			fields.add("patient");
+			fields.add("religion");
+			fields.add("status");
+			fields.add("destination");
+			fields.add("employee");
+			fields.add("notes");
+			break;
+
+		case "TranslatorRequest":
+			fields.add("ID");
+			fields.add("patientName");
+			fields.add("toLang");
+			fields.add("status");
+			fields.add("employee");
+			fields.add("destination");
+			fields.add("date");
+			fields.add("time");
+			break;
+
+		case "MaintenanceRequest":
+			fields.add("ID");
+			fields.add("name");
+			fields.add("status");
+			fields.add("destination");
+			fields.add("employee");
+			fields.add("typeOfMaintenance");
+			fields.add("description");
+			fields.add("date");
+			fields.add("time");
+			break;
     }
 
     switchPane();
