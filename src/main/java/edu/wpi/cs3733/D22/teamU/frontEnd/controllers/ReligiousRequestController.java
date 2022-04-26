@@ -106,6 +106,8 @@ public class ReligiousRequestController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   //

@@ -152,6 +152,8 @@ public class LaundryController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   @Override

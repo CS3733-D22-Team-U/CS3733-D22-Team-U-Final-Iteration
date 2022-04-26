@@ -36,6 +36,7 @@ public class EmployeeInfoController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
   }
 
   public void toSettings(ActionEvent actionEvent) {
