@@ -291,6 +291,7 @@ public class LaundryController extends ServiceController {
   // =============Update the request from edit======================
   @Override
   public void updateRequest() {
+    // -----change------------
     LaundryRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
     newCon.updateRequest();
     LaundryRequest request = (LaundryRequest) newCon.getRequest();
@@ -298,6 +299,7 @@ public class LaundryController extends ServiceController {
     laundryRequests.remove(oldRequest);
     laundryRequests.add(request);
     activeRequestTable.setItems(laundryRequests);
+    // ----------------------------------------------
     try {
       Udb.getInstance().remove(oldRequest);
       Udb.getInstance().add(request);
@@ -313,8 +315,10 @@ public class LaundryController extends ServiceController {
   // ======remove edit request=============
   @Override
   public void removeRequest() {
+    // ---CHANGE---
     LaundryRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
     laundryRequests.remove(request);
+    // -----------
     try {
       Udb.getInstance().remove(request);
     } catch (IOException e) {
@@ -417,7 +421,9 @@ public class LaundryController extends ServiceController {
   }
   // ======================================
 
+  // ====remove req ======
   public void editRemoveReq() {
     removeRequest();
   }
+  // =========================
 }
