@@ -35,6 +35,8 @@ public class MealDeliveryController extends ServiceController {
   public ComboBox<Location> locations;
   public ComboBox<Employee> employees;
   public TextField patients;
+  public ComboBox patientComboBox;
+  public Text requestText;
 
   @FXML CheckBox veganCheckbox;
   @FXML CheckBox vegCheckbox;

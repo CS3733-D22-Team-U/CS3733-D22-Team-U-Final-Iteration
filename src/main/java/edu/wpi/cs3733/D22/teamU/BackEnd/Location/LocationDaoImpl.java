@@ -98,7 +98,7 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
-        //firebaseUpdate(currLoc);
+        // firebaseUpdate(currLoc);
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
