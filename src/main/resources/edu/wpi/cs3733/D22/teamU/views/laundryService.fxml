@@ -158,7 +158,7 @@
                                 </HBox>
                             </children>
                         </Pane>
-                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                             <children>
                                 <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
@@ -182,6 +182,11 @@
                         </Pane>
                     </children>
                 </StackPane>
+            <Button fx:id="editButton" layoutX="919.0" layoutY="591.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" text="Edit">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
 
             </children>
         </Pane>

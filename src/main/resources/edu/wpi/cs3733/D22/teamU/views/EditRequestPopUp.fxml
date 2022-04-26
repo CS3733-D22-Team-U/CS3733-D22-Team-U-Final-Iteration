@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="490.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
+   <children>
+      <StackPane prefHeight="492.0" prefWidth="518.0">
+         <children>
+            <Pane prefHeight="511.0" prefWidth="518.0" style="-fx-background-color: BLUE;">
+               <children>
+                  <Text layoutX="167.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry Edit Request" wrappingWidth="183.63708543777466">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="patientName" layoutX="46.0" layoutY="96.0" />
+                  <ComboBox fx:id="location" layoutX="45.0" layoutY="179.0" prefWidth="150.0" />
+                  <ComboBox fx:id="employee" layoutX="45.0" layoutY="259.0" prefWidth="150.0" />
+                  <TextField fx:id="status" layoutX="46.0" layoutY="337.0" />
+                  <TextField fx:id="service" layoutX="321.0" layoutY="96.0" />
+                  <DatePicker fx:id="pickUp" layoutX="309.0" layoutY="179.0" />
+                  <DatePicker fx:id="dropOff" layoutX="309.0" layoutY="259.0" />
+                  <TextField fx:id="notes" layoutX="322.0" layoutY="337.0" />
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
