@@ -291,7 +291,7 @@
                         <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
                      </tooltip>
                   </Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSeurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
+                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
                      <tooltip>
                         <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
                      </tooltip>
