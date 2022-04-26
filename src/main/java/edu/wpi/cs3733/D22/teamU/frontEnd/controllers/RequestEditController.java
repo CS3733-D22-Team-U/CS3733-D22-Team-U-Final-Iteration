@@ -199,7 +199,19 @@ public class RequestEditController {
 			fields.add("date");
 			fields.add("time");
 			break;
+
+		case "CompServRequest":
+			fields.add("ID");
+			fields.add("message");
+			fields.add("status");
+			fields.add("employee");
+			fields.add("destination");
+			fields.add("date");
+			fields.add("time");
+			fields.add("device");
+			break;
     }
+
 
     switchPane();
 
