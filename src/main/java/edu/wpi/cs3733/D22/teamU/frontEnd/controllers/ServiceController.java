@@ -223,6 +223,13 @@ public abstract class ServiceController implements Initializable, Service {
     appStage.show();
   }
 
+  public void toAPI(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/APILandingPage.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
   @Override
   public abstract void addRequest() throws SQLException, IOException;
 
