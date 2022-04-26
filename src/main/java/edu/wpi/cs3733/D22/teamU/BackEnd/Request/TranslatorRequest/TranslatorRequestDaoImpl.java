@@ -150,7 +150,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (TranslatorRequest currReq : List.values()) {
-        //firebaseUpdate(currReq);
+        // firebaseUpdate(currReq);
         statement.execute(
             "INSERT INTO TranslatorRequest VALUES("
                 + "'"

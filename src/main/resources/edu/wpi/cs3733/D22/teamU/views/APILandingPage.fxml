@@ -1,14 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.cs3733.D22.teamU.views.APILandingPage"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.APIPageController">
 
+
+    <children>
+        <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
+            <children>
+                <ImageView fitHeight="750.0" fitWidth="1177.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/hospitalBuilding.jpg" />
+                    </image>
+                </ImageView>
+                <Pane prefHeight="132.0" prefWidth="1100.0" styleClass="header" stylesheets="@../css/headersAndLabels.css">
+                    <children>
+                        <ImageView fitHeight="106.0" fitWidth="74.0" layoutX="451.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/hospitalIcon.png" />
+                            </image>
+                        </ImageView>
+                        <Text fx:id="headerText" layoutX="539.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="APIs" wrappingWidth="141.0000000000001">
+                     <font>
+                        <Font size="83.0" />
+                     </font></Text>
+                    </children>
+                </Pane>
+                <Button layoutX="283.0" layoutY="298.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;" />
+                <Button layoutX="644.0" layoutY="307.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;" />
+                <Button layoutX="477.0" layoutY="499.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+            <Pane layoutX="165.0" layoutY="358.0" prefHeight="115.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" />
+                <Button layoutX="187.0" layoutY="372.0" minHeight="84.0" mnemonicParsing="false" onAction="#openTransport" prefHeight="84.0" prefWidth="200.0" style="-fx-background-color: #84C7C4; -fx-background-radius: 15;" stylesheets="@../css/buttons.css" text="Transport API&#10;Team Z" textAlignment="CENTER" textFill="WHITE">
+                    <tooltip>
+                        <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
+                    </tooltip>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+                </Button>
+                <Button layoutX="454.0" layoutY="372.0" minHeight="84.0" mnemonicParsing="false" onAction="#toSanitation" prefHeight="84.0" prefWidth="200.0" style="-fx-background-color: #84C7C4; -fx-background-radius: 15;" stylesheets="@../css/buttons.css" text="Sanitation API&#10;Team D" textAlignment="CENTER" textFill="WHITE">
+                    <tooltip>
+                        <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
+                    </tooltip>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+                </Button>
+                <Button layoutX="715.0" layoutY="372.0" minHeight="84.0" mnemonicParsing="false" onAction="#toMedicine" prefHeight="84.0" prefWidth="200.0" style="-fx-background-color: #84C7C4; -fx-background-radius: 15;" stylesheets="@../css/buttons.css" text="Medicine API&#10;Team U" textAlignment="CENTER" textFill="WHITE">
+                    <tooltip>
+                        <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
+                    </tooltip>
+                    <font>
+                        <Font name="System Bold" size="23.0" />
+                    </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+                </Button>
+                  <Button layoutX="497.0" layoutY="644.0" minHeight="55.0" minWidth="112.0" mnemonicParsing="false" onAction="#toHome" prefHeight="55.0" prefWidth="112.0" style="-fx-background-color: #84C7C4; -fx-background-radius: 15;" text="Home" textFill="WHITE" wrapText="true">
+                      <stylesheets>
+                          <URL value="@../css/buttons.css" />
+                          <URL value="@../css/headersAndLabels.css" />
+                      </stylesheets>
+                      <font>
+                          <Font name="System Bold" size="18.0" />
+                      </font>
+                      <tooltip>
+                          <Tooltip text="Marko 'Polo' Vila" />
+                      </tooltip>
+                  </Button>
+                  <Pane layoutX="446.0" layoutY="132.0" prefHeight="106.0" prefWidth="214.0" style="-fx-background-radius: 0 0 35 35;" styleClass="verticalLabel" stylesheets="@../css/headersAndLabels.css">
+                      <children>
+                          <Text fx:id="time" layoutX="34.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelText" text="hh:mm:ss" textAlignment="CENTER" y="5.0">
+                              <font>
+                                  <Font name="System Bold" size="36.0" />
+                              </font>
+                          </Text>
+                          <Text fx:id="date" fill="#044e9a" layoutX="35.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy" textAlignment="CENTER" y="5.0">
+                              <font>
+                                  <Font size="28.0" />
+                              </font>
+                          </Text>
+                          <Button fx:id="clockButton" layoutX="22.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="51.0" style="-fx-background-color: transparent;">
+                              <cursor>
+                                  <Cursor fx:constant="HAND" />
+                              </cursor>
+                          </Button>
+                      </children>
+                  </Pane>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

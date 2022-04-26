@@ -221,7 +221,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
               + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
-        //firebaseUpdate(currReq);
+        // firebaseUpdate(currReq);
         statement.execute(
             "INSERT INTO EquipRequest VALUES("
                 + "'"

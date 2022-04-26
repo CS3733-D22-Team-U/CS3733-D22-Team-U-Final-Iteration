@@ -218,7 +218,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
               + "time varchar(10) not null)");
 
       for (LabRequest currLab : List.values()) {
-        //firebaseUpdate(currLab);
+        // firebaseUpdate(currLab);
         statement.execute(
             "INSERT INTO LabRequest VALUES("
                 + "'"

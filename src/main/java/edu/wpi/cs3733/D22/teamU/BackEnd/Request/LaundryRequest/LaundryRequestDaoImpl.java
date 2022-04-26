@@ -163,7 +163,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + "notes varchar(50) not null)");
 
       for (LaundryRequest currLaud : List.values()) {
-        //firebaseUpdate(currLaud);
+        // firebaseUpdate(currLaud);
 
         statement.execute(
             "INSERT INTO LaundryRequest VALUES("
