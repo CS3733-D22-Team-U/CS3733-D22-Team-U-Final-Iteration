@@ -73,20 +73,32 @@ public class RequestEditController {
 	@FXML
 	TextField toLang;
 
-	public void setUp(Request request) {
-		this.request = request;
-		this.requests = new ArrayList<>(); // initialize this to something diff in future
-		this.fields = new ArrayList<>();
-		try {
-			locations.setTooltip(new Tooltip());
-			locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
-			new ComboBoxAutoComplete<Location>(locations, 650, 290);
-			employees.setTooltip(new Tooltip());
-			employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
-			new ComboBoxAutoComplete<Employee>(employees, 675, 380);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@FXML StackPane specialFields;
+	@FXML Pane religiousFields;
+	@FXML Pane medicineFields;
+	@FXML Pane labFields;
+	@FXML Pane laundryFields;
+	@FXML Pane giftFields;
+	@FXML Pane equipmentFields;
+	@FXML Pane securityFields;
+	@FXML Pane compServFields;
+	@FXML Pane mealFields;
+	@FXML Pane translatorFields;
+	@FXML Pane maintenanceFields;
+
+  public void setUp(Request request) {
+    this.request = request;
+    this.fields = new ArrayList<>();
+    try {
+      locations.setTooltip(new Tooltip());
+      locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+      new ComboBoxAutoComplete<Location>(locations, 650, 290);
+      employees.setTooltip(new Tooltip());
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+      new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
 		switch (request.getClass().getSimpleName()) {
 			case "LaundryRequest":
@@ -117,31 +129,33 @@ public class RequestEditController {
 
 			case "LabRequest":
 
-			case "MedicineRequest":
-				fields.add("ID");
-				fields.add("name");
-				fields.add("amount");
-				fields.add("patientName");
-				fields.add("status");
-				fields.add("employee");
-				fields.add("destination");
-				fields.add("date");
-				fields.add("time");
-				break;
+      case "MedicineRequest":
+        fields.add("ID");
+        fields.add("name");
+        fields.add("amount");
+        fields.add("patientName");
+        fields.add("status");
+        fields.add("employee");
+        fields.add("destination");
+        fields.add("date");
+        fields.add("time");
+        activePane = medicineFields;
+        break;
 
-			case "SecurityRequest":
-				fields.add("ID");
-				fields.add("name");
-				fields.add("status");
-				fields.add("employee");
-				fields.add("destination");
-				fields.add("employee");
-				fields.add("descriptionOfThreat");
-				fields.add("leathalForcePermited");
-				fields.add("dates");
-				fields.add("time");
-				break;
-		}
+      case "SecurityRequest":
+        fields.add("ID");
+        fields.add("name");
+        fields.add("status");
+        fields.add("employee");
+        fields.add("destination");
+        fields.add("employee");
+        fields.add("descriptionOfThreat");
+        fields.add("leathalForcePermited");
+        fields.add("dates");
+        fields.add("time");
+        activePane = securityFields;
+        break;
+    }
 
     switchPane();
 
