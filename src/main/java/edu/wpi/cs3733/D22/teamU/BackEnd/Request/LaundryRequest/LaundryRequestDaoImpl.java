@@ -166,8 +166,6 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
 
       for (LaundryRequest currLaud : List.values()) {
 
-
-
         // checking if the data already exists
         DocumentReference docRef = db.collection("laundryRequests").document(currLaud.getID());
         ApiFuture<DocumentSnapshot> ds = docRef.get();

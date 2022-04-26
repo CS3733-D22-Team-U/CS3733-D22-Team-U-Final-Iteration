@@ -137,7 +137,6 @@ public class ReportDaoImpl implements DataDao<Report> {
       for (Report currReport : List.values()) {
         // db.collection("employee").add(currEmp.employeeID);
 
-
         // checking if the data already exists
         DocumentReference docRef = db.collection("reports").document(currReport.getId());
         ApiFuture<DocumentSnapshot> ds = docRef.get();
@@ -148,7 +147,6 @@ public class ReportDaoImpl implements DataDao<Report> {
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
         }
-
 
         statement.execute(
             "INSERT INTO Reports VALUES("

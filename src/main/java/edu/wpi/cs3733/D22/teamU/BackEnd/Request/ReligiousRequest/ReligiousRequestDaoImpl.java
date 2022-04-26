@@ -220,7 +220,6 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
           System.out.println("firebase error in java to sql religous requests");
         }
 
-
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("
                 + "'"

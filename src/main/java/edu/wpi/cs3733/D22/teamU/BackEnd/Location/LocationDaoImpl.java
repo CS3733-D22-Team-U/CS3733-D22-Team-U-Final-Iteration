@@ -106,7 +106,7 @@ public class LocationDaoImpl implements DataDao<Location> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            //firebaseUpdate(currLoc);
+            firebaseUpdate(currLoc);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
@@ -287,7 +287,7 @@ public class LocationDaoImpl implements DataDao<Location> {
     try {
       list().set(search(data.nodeID), data);
       this.JavaToSQL(); // t
-      //firebaseUpdate(data);
+      firebaseUpdate(data);
       this.JavaToCSV(csvFile); // t
     } catch (Exception e) {
       System.out.println("This Object Does Not Exist");
