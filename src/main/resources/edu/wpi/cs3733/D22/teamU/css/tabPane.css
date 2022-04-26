@@ -19,6 +19,7 @@
 .tab-pane .tab:selected
 {
     -fx-background-color: #054f99;
+
 }
 
 .tab .tab-label {
@@ -37,4 +38,5 @@
     -fx-background-insets: 0, 0 0 1 0;
     /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+
 }
