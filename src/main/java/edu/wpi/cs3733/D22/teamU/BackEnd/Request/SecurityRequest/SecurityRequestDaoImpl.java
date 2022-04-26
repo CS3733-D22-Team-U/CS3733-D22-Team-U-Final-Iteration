@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
@@ -144,6 +146,8 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
               + "time varchar (10) not null)");
 
       for (SecurityRequest currSecurity : List.values()) {
+        firebaseUpdate(currSecurity);
+
         statement.execute(
             "INSERT INTO SecurityRequest VALUES("
                 + "'"
@@ -170,6 +174,21 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
       System.out.println("JavaToSQL error in SecurityRequestImp");
       System.out.println(e);
     }
+  }
+
+
+  public void firebaseUpdate(SecurityRequest currSecReq) {
+    DocumentReference docRef = db.collection("securityRequests").document(currSecReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", currSecReq.getName());
+    data.put("status", currSecReq.getStatus());
+    data.put("employeeID", currSecReq.getEmployee().getEmployeeID());
+    data.put("destination", currSecReq.getDestination());
+    data.put("descript", currSecReq.getDescriptionOfThreat());
+    data.put("lethal", currSecReq.getLeathalForcePermited());
+    data.put("date", currSecReq.getDate());
+    data.put("time", currSecReq.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -321,6 +340,8 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("securityRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

@@ -134,7 +134,7 @@ public class ReportDaoImpl implements DataDao<Report> {
               + "time varchar(10) not null)");
       for (Report currReport : List.values()) {
         // db.collection("employee").add(currEmp.employeeID);
-        //firebaseUpdate(currReport);
+        // firebaseUpdate(currReport);
 
         statement.execute(
             "INSERT INTO Reports VALUES("

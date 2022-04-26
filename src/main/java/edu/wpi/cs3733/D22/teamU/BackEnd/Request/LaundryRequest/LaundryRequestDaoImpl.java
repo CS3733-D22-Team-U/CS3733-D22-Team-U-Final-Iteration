@@ -1,14 +1,17 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
@@ -161,6 +164,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + "notes varchar(50) not null)");
 
       for (LaundryRequest currLaud : List.values()) {
+        firebaseUpdate(currLaud);
 
         statement.execute(
             "INSERT INTO LaundryRequest VALUES("
@@ -190,6 +194,21 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
       System.out.println("JavaToSQL error in LaundryRequestImp");
       e.printStackTrace();
     }
+  }
+
+  public void firebaseUpdate(LaundryRequest currLaundReq) {
+    DocumentReference docRef = db.collection("laundryRequests").document(currLaundReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("patientName", currLaundReq.getPatientName());
+    data.put("employeeID", currLaundReq.getEmployee().getEmployeeID());
+    data.put("status", currLaundReq.getStatus());
+    data.put("destination", currLaundReq.getDestination());
+    data.put("pickUpDate", currLaundReq.getPickUpDate());
+    data.put("dropOffDate", currLaundReq.getDropOffDate());
+    data.put("time", currLaundReq.getTime());
+    data.put("services", currLaundReq.getServices());
+    data.put("notes", currLaundReq.getNotes());
+    docRef.set(data);
   }
 
   @Override
@@ -350,6 +369,8 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("laundryRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

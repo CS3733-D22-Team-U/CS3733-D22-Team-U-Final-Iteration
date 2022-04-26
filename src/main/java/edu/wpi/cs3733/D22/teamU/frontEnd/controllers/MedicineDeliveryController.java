@@ -192,7 +192,6 @@ public class MedicineDeliveryController extends ServiceController {
             });
     timeThread.start();
     masterThread = timeThread;
-
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {

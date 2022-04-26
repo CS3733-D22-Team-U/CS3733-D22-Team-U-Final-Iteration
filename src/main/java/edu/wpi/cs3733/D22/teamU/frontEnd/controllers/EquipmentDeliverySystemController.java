@@ -212,7 +212,6 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     timeThread.start();
     masterThread = timeThread;
-
   }
 
   private void setUpAllEquipment() throws SQLException, IOException {

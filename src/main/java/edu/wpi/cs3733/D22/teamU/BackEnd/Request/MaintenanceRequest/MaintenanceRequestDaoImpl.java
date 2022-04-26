@@ -1,8 +1,10 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
@@ -158,6 +161,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
               + "time varchar(10) not null)");
 
       for (MaintenanceRequest currMainReq : List.values()) {
+        firebaseUpdate(currMainReq);
         statement.execute(
             "INSERT INTO MaintenanceRequest VALUES("
                 + "'"
@@ -184,6 +188,20 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
       System.out.println("JavaToSQL error in MaintenanceRequestImp");
       e.printStackTrace();
     }
+  }
+
+  public void firebaseUpdate(MaintenanceRequest currMainReq) {
+    DocumentReference docRef = db.collection("maintenanceRequests").document(currMainReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", currMainReq.getName());
+    data.put("status", currMainReq.getStatus());
+    data.put("destination", currMainReq.getDestination());
+    data.put("employeeID", currMainReq.getEmployee().getEmployeeID());
+    data.put("typeOfMaintenance", currMainReq.getTypeOfMaintenance());
+    data.put("description", currMainReq.getDescription());
+    data.put("date", currMainReq.getDate());
+    data.put("time", currMainReq.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -336,6 +354,9 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("maintenanceRequests").document(data.getID()).delete();
+
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
