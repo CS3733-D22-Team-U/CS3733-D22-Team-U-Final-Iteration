@@ -572,4 +572,7 @@ public class MedicineDeliveryController extends ServiceController {
             })
         .start();
   }
+
+  public void switchToMedicine(ActionEvent actionEvent) { // Todo
+  }
 }
