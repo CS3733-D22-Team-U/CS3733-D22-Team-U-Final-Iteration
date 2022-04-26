@@ -86,30 +86,6 @@ public class sideViewController extends ServiceController {
     chooseFloor.setValue("Choose A Floor");
 
     setUpAllEquipment();
-    /*
-    HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
-
-    closeTransition.setRate(-1);
-    hamburger.addEventHandler(
-        MouseEvent.MOUSE_CLICKED,
-        e -> {
-          closeTransition.setRate(closeTransition.getRate() * -1);
-          closeTransition.play();
-          vBoxPane.setVisible(!vBoxPane.isVisible());
-          backgroundPane.setDisable(!backgroundPane.isDisable());
-          if (backgroundPane.isDisable()) {
-            hamburger.setPrefWidth(200);
-            backgroundPane.setEffect(new GaussianBlur(10));
-            assistPane.setDisable(true);
-          } else {
-            backgroundPane.setEffect(null);
-            hamburger.setPrefWidth(77);
-            assistPane.setDisable(false);
-          }
-        });
-
-     */
-
     popupAlert = new AnchorPane();
     try {
       popupAlert
@@ -148,6 +124,7 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
       } catch (Exception e) {
+        e.printStackTrace();
       }
       /*
       if (equipment.getLocation().getFloor().equals(floors))
