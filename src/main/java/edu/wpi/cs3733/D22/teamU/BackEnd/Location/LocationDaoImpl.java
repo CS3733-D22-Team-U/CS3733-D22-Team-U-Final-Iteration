@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Location;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
@@ -98,7 +100,18 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
-        // firebaseUpdate(currLoc);
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("locations").document(currLoc.getNodeID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            firebaseUpdate(currLoc);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -274,6 +287,7 @@ public class LocationDaoImpl implements DataDao<Location> {
     try {
       list().set(search(data.nodeID), data);
       this.JavaToSQL(); // t
+      firebaseUpdate(data);
       this.JavaToCSV(csvFile); // t
     } catch (Exception e) {
       System.out.println("This Object Does Not Exist");
