@@ -1,13 +1,11 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class EmployeeDaoImpl implements DataDao<Employee> {
 
@@ -78,8 +76,12 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
               + "password varchar(20) not null)");
 
       for (Employee currEmp : List.values()) {
+        // db.collection("employee").add(currEmp.employeeID);
+        //firebaseUpdate(currEmp);
+
         statement.execute(
-            "INSERT INTO Employees VALUES('"
+            "INSERT INTO Employees VALUES("
+                + "'"
                 + currEmp.employeeID
                 + "','"
                 + currEmp.firstName
@@ -100,6 +102,19 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in EmployeeImp");
     }
+  }
+
+  public void firebaseUpdate(Employee currEmp) {
+    DocumentReference docRef = db.collection("employees").document(currEmp.employeeID);
+    Map<String, Object> data = new HashMap<>();
+    data.put("firstName", currEmp.firstName);
+    data.put("lastName", currEmp.lastName);
+    data.put("occupation", currEmp.occupation);
+    data.put("reports", currEmp.reports);
+    data.put("onDuty", currEmp.onDuty);
+    data.put("username", currEmp.username);
+    data.put("password", currEmp.password);
+    docRef.set(data);
   }
 
   /** SQLToJava: takes the SQL database and overwrites the global list of Java objects */
@@ -267,11 +282,11 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
 
     if (this.List.containsKey(data.getEmployeeID())) {
       this.List.remove(data.getEmployeeID());
+      db.collection("employees").document(data.getEmployeeID()).delete();
     } else {
       System.out.println("Doesn't exist");
     }
     this.JavaToSQL();
-    ;
     this.JavaToCSV(CSVfile);
   }
 
@@ -315,8 +330,10 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
   public void changePassword(String ID, String username, String password)
       throws SQLException, IOException {
     Employee selected = Udb.getInstance().EmployeeImpl.hList().get(ID);
-    if (selected.getUsername().equals(username)) selected.setPassword(password);
-    else throw new SQLException();
+    if (selected.getUsername().equals(username)) {
+      selected.setPassword(password);
+      Udb.getInstance().EmployeeImpl.edit(selected);
+    } else throw new SQLException();
   }
 
   public Employee askUser() {

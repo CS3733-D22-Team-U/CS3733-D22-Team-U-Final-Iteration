@@ -10,6 +10,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.EquipmentDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.LocationDaoImpl;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.Report;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Report.ReportDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
@@ -63,6 +65,7 @@ public final class Udb {
   public MaintenanceRequestDaoImpl maintenanceRequestImpl;
   public SecurityRequestDaoImpl securityRequestImpl;
   public CompServRequestDaoImpl compServRequestImpl;
+  public ReportDaoImpl reportImpl;
 
   public static boolean admin;
 
@@ -203,6 +206,7 @@ public final class Udb {
     maintenanceRequestImpl = new MaintenanceRequestDaoImpl(statement, CSVfiles[11]);
     securityRequestImpl = new SecurityRequestDaoImpl(statement, CSVfiles[12]);
     compServRequestImpl = new CompServRequestDaoImpl(statement, CSVfiles[13]);
+    reportImpl = new ReportDaoImpl(statement, CSVfiles[14]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -213,38 +217,47 @@ public final class Udb {
     EquipmentImpl.CSVToJava(locationImpl.list());
     EquipmentImpl.JavaToSQL();
 
-    equipRequestImpl.CSVToJava(locationImpl.list());
+    equipRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     equipRequestImpl.JavaToSQL();
 
-    labRequestImpl.CSVToJava(locationImpl.list());
+    labRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     labRequestImpl.JavaToSQL();
 
-    laundryRequestImpl.CSVToJava(locationImpl.list());
+    laundryRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     laundryRequestImpl.JavaToSQL();
 
-    medicineRequestImpl.CSVToJava(locationImpl.list());
+    medicineRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     medicineRequestImpl.JavaToSQL();
 
-    giftRequestImpl.CSVToJava(locationImpl.list());
+    giftRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     giftRequestImpl.JavaToSQL();
 
-    mealRequestImpl.CSVToJava(locationImpl.list());
+    mealRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     mealRequestImpl.JavaToSQL();
 
-    religiousRequestImpl.CSVToJava(locationImpl.list());
+    religiousRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     religiousRequestImpl.JavaToSQL();
 
-    translatorRequestImpl.CSVToJava(locationImpl.list());
+    translatorRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     translatorRequestImpl.JavaToSQL();
 
-    maintenanceRequestImpl.CSVToJava(locationImpl.list());
+    maintenanceRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     maintenanceRequestImpl.JavaToSQL();
 
-    securityRequestImpl.CSVToJava(locationImpl.list());
+    securityRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     securityRequestImpl.JavaToSQL();
 
-    compServRequestImpl.CSVToJava(locationImpl.list());
+    compServRequestImpl.CSVToJava(locationImpl.list(), EmployeeImpl.hList());
     compServRequestImpl.JavaToSQL();
+
+    reportImpl.CSVToJava(EmployeeImpl.hList());
+    reportImpl.JavaToSQL();
+
+    for (Employee e : EmployeeImpl.hList().values()) {
+      for (Report r : e.getReportList()) {
+        System.out.println(r.getClass().getSimpleName() + ": " + r.getId());
+      }
+    }
   }
 
   // Function for closing global connection FRONT END MUST CALL THIS WHEN USER HITS THE EXIT BUTTON
@@ -315,6 +328,10 @@ public final class Udb {
         compServRequestImpl.edit((CompServRequest) thingToAdd);
         break;
 
+      case "Report":
+        reportImpl.edit((Report) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.edit()");
         break;
@@ -378,6 +395,10 @@ public final class Udb {
 
       case "CompServRequest":
         compServRequestImpl.add((CompServRequest) thingToAdd);
+        break;
+
+      case "Report":
+        reportImpl.add((Report) thingToAdd);
         break;
 
       default:
@@ -445,6 +466,10 @@ public final class Udb {
         compServRequestImpl.remove((CompServRequest) thingToAdd);
         break;
 
+      case "Report":
+        reportImpl.remove((Report) thingToAdd);
+        break;
+
       default:
         System.out.println("Object not in switch case for udb.remove()");
         break;
@@ -509,6 +534,10 @@ public final class Udb {
 
       case "CompServRequest":
         compServRequestImpl.saveTableAsCSV(nameOfCSV);
+        break;
+
+      case "ReportRequest":
+        reportImpl.saveTableAsCSV(nameOfCSV);
         break;
 
       default:

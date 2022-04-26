@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,11 +25,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class giftFloralController extends ServiceController {
@@ -59,6 +62,12 @@ public class giftFloralController extends ServiceController {
   @FXML TextField patientName;
   @FXML TextField senderName;
   @FXML TextArea message;
+  @FXML ScrollPane miniView;
+  @FXML ScrollPane expandedView;
+  @FXML Button arrow;
+  @FXML Button pushButton;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
   ObservableList<GiftRequest> giftRequests = FXCollections.observableArrayList();
@@ -112,6 +121,22 @@ public class giftFloralController extends ServiceController {
     // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
 
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(-415);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != -415) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {
@@ -307,6 +332,16 @@ public class giftFloralController extends ServiceController {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+  }
+
+  public void pushBack(ActionEvent actionEvent) {
+    miniView.setVisible(false);
+    expandedView.setVisible(true);
+  }
+
+  public void pushOut(ActionEvent actionEvent) {
+    miniView.setVisible(true);
+    expandedView.setVisible(false);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Location;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
@@ -8,6 +9,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LocationDaoImpl implements DataDao<Location> {
@@ -96,6 +98,7 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
+        //firebaseUpdate(currLoc);
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -121,6 +124,18 @@ public class LocationDaoImpl implements DataDao<Location> {
     }
   }
 
+  public void firebaseUpdate(Location loc) {
+    DocumentReference docRef = db.collection("locations").document(loc.nodeID);
+    Map<String, Object> data = new HashMap<>();
+    data.put("xcoord", loc.xcoord);
+    data.put("ycoord", loc.ycoord);
+    data.put("floor", loc.floor);
+    data.put("building", loc.building);
+    data.put("nodeType", loc.nodeType);
+    data.put("longName", loc.longName);
+    data.put("shortName", loc.shortName);
+    docRef.set(data);
+  }
   // This function takes all of the SQL database information into java objects
 
   /**
@@ -298,13 +313,13 @@ public class LocationDaoImpl implements DataDao<Location> {
     // Udb udb = DBController.udb;
     try {
       Location temp = locations.get(search(data.nodeID));
-      System.out.println(data.getRequests().size());
       for (Request e : temp.getRequests()) {
         if (e instanceof EquipRequest) Udb.getInstance().equipRequestImpl.hList().remove(e.getID());
       }
       Udb.getInstance().equipRequestImpl.JavaToCSV(Udb.getInstance().equipRequestImpl.csvFile);
       Udb.getInstance().equipRequestImpl.JavaToSQL();
       this.locations.remove(search(data.nodeID));
+      db.collection("locations").document(data.nodeID).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

@@ -19,6 +19,7 @@ public class EquipRequest extends Request {
       String date,
       String time,
       int priority) {
+    super();
     this.ID = ID;
     this.name = name;
     this.amount = amount;
@@ -29,8 +30,6 @@ public class EquipRequest extends Request {
     this.date = date;
     this.time = time;
     this.priority = priority;
-    this.firstName = employee.getFirstName();
-    this.lastName = employee.getLastName();
   }
 
   public int getAmount() {

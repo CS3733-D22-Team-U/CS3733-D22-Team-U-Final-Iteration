@@ -64,7 +64,6 @@
                                 <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
                                         <TableColumn fx:id="activeReqID" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="activename" prefWidth="75.0" text="Name" />
                                         <TableColumn fx:id="activeReqStatus" prefWidth="75.0" text="Status" />
                                         <TableColumn fx:id="activeStaff" prefWidth="75.0" text="Staff" />
                                         <TableColumn fx:id="activeReqDestination" prefWidth="75.0" text="Destination" />

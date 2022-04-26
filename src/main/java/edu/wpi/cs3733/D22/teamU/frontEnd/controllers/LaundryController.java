@@ -40,8 +40,8 @@ public class LaundryController extends ServiceController {
   @FXML Pane newRequestPane;
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
-  @FXML ComboBox<String> locations;
-  @FXML ComboBox<String> employees;
+  @FXML ComboBox<Location> locations;
+  @FXML ComboBox<Employee> employees;
   @FXML Button submitButton;
   @FXML Button clearButton;
   @FXML Text time;
@@ -75,21 +75,13 @@ public class LaundryController extends ServiceController {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
 
-    nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
-    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
-    staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
-    }
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     clearButton
         .disableProperty()
@@ -131,9 +123,9 @@ public class LaundryController extends ServiceController {
   private void setUpActiveRequests() throws SQLException, IOException {
     activeReqID.setCellValueFactory(new PropertyValueFactory<>("ID"));
     patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
-    staffName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
+    staffName.setCellValueFactory(new PropertyValueFactory<>("employee"));
     serviceType.setCellValueFactory(new PropertyValueFactory<>("services"));
-    location.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    location.setCellValueFactory(new PropertyValueFactory<>("location"));
     pickUp.setCellValueFactory(new PropertyValueFactory<>("pickUpDate"));
     dropOff.setCellValueFactory(new PropertyValueFactory<>("dropOffDate"));
 
@@ -142,6 +134,9 @@ public class LaundryController extends ServiceController {
 
   @SneakyThrows
   private ObservableList<LaundryRequest> getActiveRequestList() {
+    for (LaundryRequest e : Udb.getInstance().laundryRequestImpl.hList().values()) {
+      e.gettingTheLocation();
+    }
     laundryRequests.addAll(Udb.getInstance().laundryRequestImpl.hList().values());
     return laundryRequests;
   }
@@ -179,20 +174,37 @@ public class LaundryController extends ServiceController {
             .append(room)
             .append(", ");
 
-        double rand = Math.random() * 10000;
+        boolean alreadyHere = true;
+        String serviceID = "notWork";
+
+        // makes the id
+        while (alreadyHere) {
+          double rand = Math.random() * 10000;
+
+          try {
+            alreadyHere =
+                Udb.getInstance().compServRequestImpl.hList().containsKey("LAU" + (int) rand);
+          } catch (Exception e) {
+            System.out.println(
+                "alreadyHere variable messed up in laundry service request controller");
+          }
+
+          serviceID = "LAU" + (int) rand;
+        }
 
         LaundryRequest request =
             new LaundryRequest(
-                (int) rand + "",
+                serviceID,
                 patientNameInput.getText().trim(),
-                checkEmployee(employees.getValue()),
+                employees.getValue(),
                 "done",
-                locations.getValue(),
+                locations.getValue().getNodeID(),
                 pickupDateInput.getValue().toString(),
                 dropOffDateInput.getValue().toString(),
                 sdf3.format(timestamp).substring(11),
                 checkBoxes.get(i).getText().trim(),
                 "N/A");
+        request.gettingTheLocation();
         laundryRequests.add(request);
         activeRequestTable.setItems(laundryRequests);
         try {

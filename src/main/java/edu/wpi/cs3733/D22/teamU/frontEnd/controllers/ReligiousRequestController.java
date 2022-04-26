@@ -159,7 +159,6 @@ public class ReligiousRequestController extends ServiceController {
               request.getEmployee(),
               request.getNotes());
       r.gettingTheLocation();
-
       religiousUIRequests.add(r);
     }
     return religiousUIRequests;
@@ -175,11 +174,27 @@ public class ReligiousRequestController extends ServiceController {
 
     // String employ = employees.getValue().toString();
 
-    double rand = Math.random() * 10000;
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere =
+            Udb.getInstance().religiousRequestImpl.hList().containsKey("REL" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in religious service request controller");
+      }
+
+      serviceID = "REL" + (int) rand;
+    }
 
     ReligiousRequest request =
         new ReligiousRequest(
-            (int) rand + "",
+            serviceID,
             inputName.getText().trim(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11),

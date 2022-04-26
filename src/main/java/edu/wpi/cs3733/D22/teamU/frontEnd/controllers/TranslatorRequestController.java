@@ -30,8 +30,8 @@ import lombok.SneakyThrows;
 
 public class TranslatorRequestController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
 
   @FXML TableColumn<TranslatorRequest, String> nameID;
   @FXML TableColumn<TranslatorRequest, String> patientName;
@@ -57,11 +57,10 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TextArea inputPatient;
   @FXML Text time;
 
-  ObservableList<TranslatorRequest> translatorUI = FXCollections.observableArrayList();
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
-  ArrayList<String> nodeIDs;
-  ArrayList<String> staff;
+  ArrayList<Location> nodeIDs;
+  ArrayList<Employee> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -75,20 +74,20 @@ public class TranslatorRequestController extends ServiceController {
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l.getNodeID());
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     // Displays Emloyee in Table View
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l.getEmployeeID());
+    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(e);
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     handleTime();
   }
@@ -116,7 +115,7 @@ public class TranslatorRequestController extends ServiceController {
     employeeName.setCellValueFactory(
         new PropertyValueFactory<TranslatorRequest, String>("employee"));
     destination.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("destination"));
+        new PropertyValueFactory<TranslatorRequest, String>("location"));
     date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
     newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
     table.setItems(getTranslatorList());
@@ -131,15 +130,17 @@ public class TranslatorRequestController extends ServiceController {
       String destination,
       String date,
       String time) {
-    translatorUIRequests.add(
-        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time));
+    TranslatorRequest r =
+        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time);
+    r.gettingTheLocation();
+    translatorUIRequests.add(r);
     return translatorUIRequests;
   }
 
   private ObservableList<TranslatorRequest> getTranslatorList() throws SQLException, IOException {
-    translatorUI.clear();
+    translatorUIRequests.clear();
     for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
-      translatorUI.add(
+      TranslatorRequest r =
           new TranslatorRequest(
               request.getID(),
               request.getPatientName(),
@@ -148,9 +149,11 @@ public class TranslatorRequestController extends ServiceController {
               request.getEmployee(),
               request.getDestination(),
               request.getDate(),
-              request.getTime()));
+              request.getTime());
+      r.gettingTheLocation();
+      translatorUIRequests.add(r);
     }
-    return translatorUI;
+    return translatorUIRequests;
   }
 
   @Override
@@ -159,21 +162,38 @@ public class TranslatorRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    String room = locations.getValue();
-    String employ = employees.getValue();
+    // String room = locations.getValue().getNodeID();
+    // String employ = employees.getValue().getEmployeeID();
 
-    double rand = Math.random() * 10000;
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("TRA" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in translation service request controller");
+      }
+
+      serviceID = "TRA" + (int) rand;
+    }
 
     TranslatorRequest request =
         new TranslatorRequest(
-            (int) rand + "",
+            serviceID,
             "Patient",
             inputLanguage.getText().trim(),
             "Pending",
-            checkEmployee(employ),
-            room,
+            employees.getValue(),
+            locations.getValue().getNodeID(),
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
+
+    request.gettingTheLocation();
 
     table.setItems(
         newRequest(
@@ -194,8 +214,10 @@ public class TranslatorRequestController extends ServiceController {
       e.printStackTrace();
       System.out.println("d");
     }
-    inputPatient.clear();
-    inputLanguage.clear();
+    inputPatient.setText("");
+    inputLanguage.setText("");
+    employees.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
   }
 
   @Override
@@ -208,6 +230,10 @@ public class TranslatorRequestController extends ServiceController {
     requestText.setText("Cleared Requests!");
     requestText.setVisible(true);
 
+    inputPatient.setText("");
+    inputLanguage.setText("");
+    employees.getSelectionModel().clearSelection();
+    locations.getSelectionModel().clearSelection();
     new Thread(
             () -> {
               try {
