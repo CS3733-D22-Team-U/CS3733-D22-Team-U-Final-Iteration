@@ -39,6 +39,43 @@ public class Request {
   public Employee employee;
   public Location location;
 
+  public String getPickUpDate() {
+    return pickUpDate;
+  }
+
+  public void setPickUpDate(String pickUpDate) {
+    this.pickUpDate = pickUpDate;
+  }
+
+  public String getDropOffDate() {
+    return dropOffDate;
+  }
+
+  public void setDropOffDate(String dropOffDate) {
+    this.dropOffDate = dropOffDate;
+  }
+
+  public String getServices() {
+    return services;
+  }
+
+  public void setServices(String services) {
+    this.services = services;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  String pickUpDate;
+  String dropOffDate;
+  String services;
+  String notes;
+
   public Request(
       String ID,
       String reqType,

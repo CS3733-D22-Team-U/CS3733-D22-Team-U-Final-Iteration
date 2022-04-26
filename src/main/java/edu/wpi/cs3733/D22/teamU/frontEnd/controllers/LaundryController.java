@@ -23,13 +23,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
@@ -66,8 +65,9 @@ public class LaundryController extends ServiceController {
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
 
-  //TODO fix naming=======================================================================================================
-  @FXML Pane editPane;
+  RequestEditController newCon;
+  AnchorPane EditRequestPopUp;
+  @FXML Button editButton;
 
   @SneakyThrows
   @Override
@@ -121,6 +121,28 @@ public class LaundryController extends ServiceController {
                 setDisable(empty || date.compareTo(today) < 0);
               }
             });
+
+    EditRequestPopUp = new AnchorPane();
+    try {
+      /*EditRequestPopUp.getChildren()
+          .add(
+              FXMLLoader.load(
+                  getClass()
+                      .getClassLoader()
+                      .getResource("edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml")));
+      */
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
+      EditRequestPopUp = loader.load();
+      newCon = (RequestEditController) loader.getController();
+
+      EditRequestPopUp.setLayoutX(100);
+      EditRequestPopUp.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -256,10 +278,27 @@ public class LaundryController extends ServiceController {
   }
 
   @Override
-  public void updateRequest(){}
+  public void updateRequest() {
+    LaundryRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
+    newCon.updateRequest();
+    LaundryRequest request = (LaundryRequest) newCon.submitClick();
+    request.gettingTheLocation();
+    laundryRequests.remove(oldRequest);
+    laundryRequests.add(request);
+    activeRequestTable.setItems(laundryRequests);
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   @Override
-  public void removeRequest(){}
+  public void removeRequest() {}
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -305,4 +344,16 @@ public class LaundryController extends ServiceController {
   }
 
   public void clearRequest(ActionEvent actionEvent) {}
+
+  public void editClick(MouseEvent event) {
+    if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+      Pane pane = (Pane) editButton.getParent();
+      if (pane.getChildren().contains(EditRequestPopUp)) {
+        pane.getChildren().remove(EditRequestPopUp);
+      } else {
+        pane.getChildren().add(EditRequestPopUp);
+      }
+      newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
+    }
+  }
 }

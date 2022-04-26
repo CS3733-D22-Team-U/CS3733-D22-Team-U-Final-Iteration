@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
@@ -182,7 +182,7 @@
                         </Pane>
                     </children>
                 </StackPane>
-            <Button fx:id="editButton" layoutX="919.0" layoutY="591.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="106.0" text="Edit">
+            <Button fx:id="editButton" layoutX="919.0" layoutY="591.0" mnemonicParsing="false" onMouseClicked="#editClick" prefHeight="43.0" prefWidth="106.0" text="Edit">
                <font>
                   <Font size="20.0" />
                </font>
