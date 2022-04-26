@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
@@ -146,6 +148,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
               + "device varchar(20) not null)");
 
       for (CompServRequest currCSR : List.values()) {
+        //firebaseUpdate(currCSR);
         statement.execute(
             "INSERT INTO CompServRequest VALUES("
                 + "'"
@@ -170,6 +173,19 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
       System.out.println("JavaToSQL error in CompServRequestImp");
       System.out.println(e);
     }
+  }
+
+  public void firebaseUpdate(CompServRequest comser) {
+    DocumentReference docRef = db.collection("compServRequests").document(comser.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("message", comser.getMessage());
+    data.put("status", comser.getStatus());
+    data.put("employeeID", comser.getEmployee().getEmployeeID());
+    data.put("destination", comser.getDestination());
+    data.put("date", comser.getDate());
+    data.put("time", comser.getTime());
+    data.put("device", comser.getDevice());
+    docRef.set(data);
   }
 
   @Override
@@ -305,6 +321,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("compServRequests").document(data.getID()).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

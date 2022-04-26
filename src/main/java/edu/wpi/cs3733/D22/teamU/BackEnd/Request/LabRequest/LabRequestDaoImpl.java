@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -9,6 +10,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LabRequestDaoImpl implements DataDao<LabRequest> {
@@ -216,6 +218,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
               + "time varchar(10) not null)");
 
       for (LabRequest currLab : List.values()) {
+        //firebaseUpdate(currLab);
         statement.execute(
             "INSERT INTO LabRequest VALUES("
                 + "'"
@@ -241,6 +244,20 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in LabRequestImp");
     }
+  }
+
+  public void firebaseUpdate(LabRequest labr) {
+    DocumentReference docRef = db.collection("LabRequests").document(labr.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("labType", labr.getName());
+    data.put("amount", labr.getAmount());
+    data.put("patientName", labr.getPatientName());
+    data.put("status", labr.getStatus());
+    data.put("employeeID", labr.getEmployee().getEmployeeID());
+    data.put("destination", labr.getDestination());
+    data.put("date", labr.getDate());
+    data.put("time", labr.getTime());
+    docRef.set(data);
   }
 
   public void SQLToJava() {
@@ -359,6 +376,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("LabRequests").document(data.getID()).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
