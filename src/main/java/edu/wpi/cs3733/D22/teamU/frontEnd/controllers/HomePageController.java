@@ -103,7 +103,7 @@ public class HomePageController extends ServiceController {
 
     //userName.setText("Dr." + "____");
 
-    handleNavButtons();
+    //handleNavButtons();
     handeDateTime();
     //handleTurtle();
     //playTurtle();
@@ -180,6 +180,7 @@ public class HomePageController extends ServiceController {
     masterThread = timeThread;
   }
 
+  /*
   private void handleNavButtons() {
     for (Node node : topRow.getButtons()) {
       Button button = (Button) node;
@@ -204,6 +205,8 @@ public class HomePageController extends ServiceController {
       button.setOnMouseExited(e -> button.setStyle(initStyle));
     }
   }
+
+   */
 
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
