@@ -25,12 +25,12 @@
          <children>
             <Pane prefHeight="132.0" prefWidth="1100.0" styleClass="header" stylesheets="@../css/headersAndLabels.css">
                <children>
-                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="52.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="118.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/hospitalIcon.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="headerText" layoutX="135.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's" wrappingWidth="830.0" />
+                  <Text fx:id="headerText" layoutX="218.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's" wrappingWidth="830.0" />
                </children>
             </Pane>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="940.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
@@ -43,7 +43,7 @@
                   <Image url="@../images/hospitalBuilding.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="75.0" layoutY="171.0" text="Good Morning Dr.Patel" textFill="#044e9a">
+            <Label layoutX="57.0" layoutY="182.0" text="Good Morning Dr.Patel" textFill="#044e9a">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -242,6 +242,7 @@
                   <Image url="@../icons/menuBar/APIpls.png" />
                </image>
             </ImageView>
+            <Button layoutX="659.0" layoutY="664.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="82.0" prefWidth="71.0" style="-fx-background-color: transparent;" />
          </children>
       </Pane>
       <Pane layoutX="-116.0" layoutY="-256.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
