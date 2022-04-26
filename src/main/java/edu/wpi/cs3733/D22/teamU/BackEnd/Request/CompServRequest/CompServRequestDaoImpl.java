@@ -148,7 +148,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
               + "device varchar(20) not null)");
 
       for (CompServRequest currCSR : List.values()) {
-        //firebaseUpdate(currCSR);
+        // firebaseUpdate(currCSR);
         statement.execute(
             "INSERT INTO CompServRequest VALUES("
                 + "'"

@@ -147,7 +147,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
               + "time varchar (10) not null)");
 
       for (GiftRequest currGift : List.values()) {
-        //firebaseUpdate(currGift);
+        // firebaseUpdate(currGift);
         statement.execute(
             "INSERT INTO GiftRequest VALUES("
                 + "'"
