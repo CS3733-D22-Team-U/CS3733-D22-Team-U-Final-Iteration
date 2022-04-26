@@ -20,70 +20,70 @@ import javafx.scene.text.Text;
 
 public class APIPageController extends ServiceController {
 
-    @FXML Text time;
-    @FXML Text date;
+  @FXML Text time;
+  @FXML Text date;
 
-    private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        handeDateTime();
-    }
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    handeDateTime();
+  }
 
-    private void handeDateTime() {
-        Thread timeThread =
-                new Thread(
-                        () -> {
-                            while (Uapp.running) {
-                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                                String timeStampdate = sdf3.format(timestamp).substring(0, 10);
-                                String timeStampTime = sdf3.format(timestamp).substring(11);
-                                time.setText(timeStampTime);
-                                date.setText(timeStampdate);
-                            }
-                        });
-        timeThread.start();
-        masterThread = timeThread;
-    }
+  private void handeDateTime() {
+    Thread timeThread =
+        new Thread(
+            () -> {
+              while (Uapp.running) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String timeStampdate = sdf3.format(timestamp).substring(0, 10);
+                String timeStampTime = sdf3.format(timestamp).substring(11);
+                time.setText(timeStampTime);
+                date.setText(timeStampdate);
+              }
+            });
+    timeThread.start();
+    masterThread = timeThread;
+  }
 
-    public void toSettings(ActionEvent actionEvent) {
-        System.out.println("Going to settings");
-    }
+  public void toSettings(ActionEvent actionEvent) {
+    System.out.println("Going to settings");
+  }
 
-    public void logOut(ActionEvent actionEvent) {
-        System.out.println("Logging out");
-    }
+  public void logOut(ActionEvent actionEvent) {
+    System.out.println("Logging out");
+  }
 
-    @Override
-    public void addRequest() throws SQLException, IOException {}
+  @Override
+  public void addRequest() throws SQLException, IOException {}
 
-    @Override
-    public void removeRequest() {}
+  @Override
+  public void removeRequest() {}
 
-    @Override
-    public void updateRequest() {}
+  @Override
+  public void updateRequest() {}
 
-    public void openTransport(ActionEvent actionEvent) throws ServiceException {
-        DBController.transportApi.run(0, 0, 1920, 1080, "", "CHALL007L2", "CHALL007L2");
-    }
+  public void openTransport(ActionEvent actionEvent) throws ServiceException {
+    DBController.transportApi.run(0, 0, 1920, 1080, "", "CHALL007L2", "CHALL007L2");
+  }
 
-    public void toSanitation(ActionEvent actionEvent)
-            throws edu.wpi.cs3733.D22.teamD.API.ServiceException {
-        DBController.sanitationAPI.run(0, 0, 1920, 1080, "", "CHALL007L2");
-    }
+  public void toSanitation(ActionEvent actionEvent)
+      throws edu.wpi.cs3733.D22.teamD.API.ServiceException {
+    DBController.sanitationAPI.run(0, 0, 1920, 1080, "", "CHALL007L2");
+  }
 
-    public void toMedicine(ActionEvent actionEvent)
-            throws SQLException, IOException, edu.wpi.cs3733.D22.teamU.Exception.ServiceException {
-        ArrayList<String> locs = new ArrayList<>();
-        for (Location l : Udb.getInstance().locationImpl.locations) locs.add(l.getNodeID());
-        MedicineRequest.addLocationIDs(locs);
+  public void toMedicine(ActionEvent actionEvent)
+      throws SQLException, IOException, edu.wpi.cs3733.D22.teamU.Exception.ServiceException {
+    ArrayList<String> locs = new ArrayList<>();
+    for (Location l : Udb.getInstance().locationImpl.locations) locs.add(l.getNodeID());
+    MedicineRequest.addLocationIDs(locs);
 
-        Employee test = new Employee("test");
-        MedicineRequest.addAuthorizedEmployee("test");
-        for (Employee l : Udb.getInstance().EmployeeImpl.hList().values())
-            MedicineRequest.addAuthorizedEmployee(l.getEmployeeID());
-        MedicineRequest.setCurrentEmployee("test");
+    Employee test = new Employee("test");
+    MedicineRequest.addAuthorizedEmployee("test");
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values())
+      MedicineRequest.addAuthorizedEmployee(l.getEmployeeID());
+    MedicineRequest.setCurrentEmployee("test");
 
-        MedicineRequest.run(0, 0, 1920, 1080, "", "CHALL007L2");
-    }
+    MedicineRequest.run(0, 0, 1920, 1080, "", "CHALL007L2");
+  }
 }

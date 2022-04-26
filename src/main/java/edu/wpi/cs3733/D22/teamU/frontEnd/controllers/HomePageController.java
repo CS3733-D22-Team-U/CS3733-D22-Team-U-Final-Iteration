@@ -19,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -27,7 +26,6 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class HomePageController extends ServiceController {
 
@@ -68,7 +66,6 @@ public class HomePageController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-
     try {
       listofEmployees();
     } catch (SQLException e) {
@@ -101,68 +98,68 @@ public class HomePageController extends ServiceController {
               this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
             });
 
-    //userName.setText("Dr." + "____");
+    // userName.setText("Dr." + "____");
 
     handleNavButtons();
     handeDateTime();
-    //handleTurtle();
-    //playTurtle();
+    // handleTurtle();
+    // playTurtle();
   }
-/*
-  private void handleTurtle() {
-    TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
-    openNav.setToY(-415);
-    TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
-    turtButton.setOnAction(
-        (ActionEvent evt) -> {
-          if (turtAnchor.getTranslateY() != -415) {
-            openNav.play();
-          } else {
-            closeNav.setToY(0);
-            closeNav.play();
-          }
-        });
-  }
+  /*
+   private void handleTurtle() {
+     TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
+     openNav.setToY(-415);
+     TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
+     turtButton.setOnAction(
+         (ActionEvent evt) -> {
+           if (turtAnchor.getTranslateY() != -415) {
+             openNav.play();
+           } else {
+             closeNav.setToY(0);
+             closeNav.play();
+           }
+         });
+   }
 
-  public void playTurtle() {
-    anchor.setOnKeyPressed(
-        e -> {
-          double nextX;
-          double nextY;
+   public void playTurtle() {
+     anchor.setOnKeyPressed(
+         e -> {
+           double nextX;
+           double nextY;
 
-          if (e.getCode() == KeyCode.D) {
-            nextX = turtlePane.getLayoutX() + 10;
-            if (nextX >= 0 && nextX <= 363) {
-              turtlePane.setLayoutX(nextX);
-              turtlePane.setRotate(90);
-            }
-          }
+           if (e.getCode() == KeyCode.D) {
+             nextX = turtlePane.getLayoutX() + 10;
+             if (nextX >= 0 && nextX <= 363) {
+               turtlePane.setLayoutX(nextX);
+               turtlePane.setRotate(90);
+             }
+           }
 
-          if (e.getCode() == KeyCode.A) {
-            nextX = turtlePane.getLayoutX() - 10;
-            if (nextX >= 0 && nextX <= 363) {
-              turtlePane.setLayoutX(nextX);
-              turtlePane.setRotate(-90);
-            }
-          }
-          if (e.getCode() == KeyCode.W) {
-            nextY = turtlePane.getLayoutY() - 10;
-            if (nextY >= 0 && nextY <= 271) {
-              turtlePane.setLayoutY(nextY);
-              turtlePane.setRotate(0);
-            }
-          }
-          if (e.getCode() == KeyCode.S) {
-            nextY = turtlePane.getLayoutY() + 10;
-            if (nextY >= 0 && nextY <= 271) {
-              turtlePane.setLayoutY(nextY);
-              turtlePane.setRotate(180);
-            }
-          }
-        });
-  }
+           if (e.getCode() == KeyCode.A) {
+             nextX = turtlePane.getLayoutX() - 10;
+             if (nextX >= 0 && nextX <= 363) {
+               turtlePane.setLayoutX(nextX);
+               turtlePane.setRotate(-90);
+             }
+           }
+           if (e.getCode() == KeyCode.W) {
+             nextY = turtlePane.getLayoutY() - 10;
+             if (nextY >= 0 && nextY <= 271) {
+               turtlePane.setLayoutY(nextY);
+               turtlePane.setRotate(0);
+             }
+           }
+           if (e.getCode() == KeyCode.S) {
+             nextY = turtlePane.getLayoutY() + 10;
+             if (nextY >= 0 && nextY <= 271) {
+               turtlePane.setLayoutY(nextY);
+               turtlePane.setRotate(180);
+             }
+           }
+         });
+   }
 
- */
+  */
 
   private void handeDateTime() {
     Thread timeThread =

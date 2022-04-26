@@ -337,7 +337,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#toSeurity" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                        <Button mnemonicParsing="false" onAction="#toSecurity" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
