@@ -10,14 +10,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public class RequestEditController {
   private Request request;
   private ArrayList<Request> requests;
   private ArrayList<String> fields;
+  private Pane activePane;
 
 	@FXML
 	TextField ID;
@@ -52,9 +56,21 @@ public class RequestEditController {
   @FXML TextField religion;
   @FXML TextField toLang;
 
+	@FXML StackPane specialFields;
+	@FXML Pane religiousFields;
+	@FXML Pane medicineFields;
+	@FXML Pane labFields;
+	@FXML Pane laundryFields;
+	@FXML Pane giftFields;
+	@FXML Pane equipmentFields;
+	@FXML Pane securityFields;
+	@FXML Pane compServFields;
+	@FXML Pane mealFields;
+	@FXML Pane translatorFields;
+	@FXML Pane maintenanceFields;
+
   public void setUp(Request request) {
     this.request = request;
-    this.requests = new ArrayList<>(); // initialize this to something diff in future
     this.fields = new ArrayList<>();
     try {
       locations.setTooltip(new Tooltip());
@@ -96,17 +112,18 @@ public class RequestEditController {
 
 			case "LabRequest":
 
-			case "MedicineRequest":
-				fields.add("ID");
-				fields.add("name");
-				fields.add("amount");
-				fields.add("patientName");
-				fields.add("status");
-				fields.add("employee");
-				fields.add("destination");
-				fields.add("date");
-				fields.add("time");
-				break;
+      case "MedicineRequest":
+        fields.add("ID");
+        fields.add("name");
+        fields.add("amount");
+        fields.add("patientName");
+        fields.add("status");
+        fields.add("employee");
+        fields.add("destination");
+        fields.add("date");
+        fields.add("time");
+        activePane = medicineFields;
+        break;
 
       case "SecurityRequest":
         fields.add("ID");
@@ -119,80 +136,11 @@ public class RequestEditController {
         fields.add("leathalForcePermited");
         fields.add("dates");
         fields.add("time");
-        break;
-
-      case "CompServRequest":
-        fields.add("ID");
-        fields.add("message");
-        fields.add("status");
-        fields.add("employee");
-        fields.add("destination");
-        fields.add("date");
-        fields.add("time");
-        fields.add("device");
-        break;
-
-      case "MealRequest":
-        fields.add("ID");
-        fields.add("patientName");
-        fields.add("dietRest");
-        fields.add("status");
-        fields.add("employee");
-        fields.add("destination");
-        fields.add("addNotes");
-        fields.add("date");
-        fields.add("time");
-        break;
-
-      case "GiftRequest":
-        fields.add("ID");
-        fields.add("name");
-        fields.add("patientName");
-        fields.add("gifts");
-        fields.add("message");
-        fields.add("status");
-        fields.add("employee");
-        fields.add("destination");
-        fields.add("date");
-        fields.add("time");
-        break;
-
-      case "ReligiousRequest":
-        fields.add("ID");
-        fields.add("name");
-        fields.add("date");
-        fields.add("time");
-        fields.add("patient");
-        fields.add("religion");
-        fields.add("status");
-        fields.add("destination");
-        fields.add("employee");
-        fields.add("notes");
-        break;
-
-      case "TranslatorRequest":
-        fields.add("ID");
-        fields.add("patientName");
-        fields.add("toLang");
-        fields.add("status");
-        fields.add("employee");
-        fields.add("destination");
-        fields.add("date");
-        fields.add("time");
-        break;
-
-      case "MaintenanceRequest":
-        fields.add("ID");
-        fields.add("name");
-        fields.add("status");
-        fields.add("destination");
-        fields.add("employee");
-        fields.add("typeOfMaintenance");
-        fields.add("description");
-        fields.add("date");
-        fields.add("time");
+        activePane = securityFields;
         break;
     }
+
+    switchPane();
 
     updateFields();
   }
@@ -382,5 +330,14 @@ public class RequestEditController {
 
   public Request getRequest() {
     return request;
+  }
+
+  public void switchPane() {
+    ObservableList<Node> stackNodes = specialFields.getChildren();
+    Node active = stackNodes.get(stackNodes.indexOf(activePane));
+    for (Node node : stackNodes) {
+      node.setVisible(false);
+    }
+    active.setVisible(true);
   }
 }
