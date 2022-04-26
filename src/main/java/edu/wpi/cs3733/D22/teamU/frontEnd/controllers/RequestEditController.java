@@ -99,6 +99,46 @@ public class RequestEditController {
 				fields.add("time");
 				fields.add("notes");
 				break;
+
+            case "EquipRequest":
+                fields.add("ID");
+                fields.add("name");
+                fields.add("amount");
+                fields.add("typeOfRequest");
+                fields.add("status");
+                fields.add("employee");
+                fields.add("destination");
+                fields.add("date");
+                fields.add("time");
+				fields.add("priority");
+                break;
+
+			case "LabRequest":
+
+			case "MedicineRequest":
+				fields.add("ID");
+				fields.add("name");
+				fields.add("amount");
+				fields.add("patientName");
+				fields.add("status");
+				fields.add("employee");
+				fields.add("destination");
+				fields.add("date");
+				fields.add("time");
+				break;
+
+			case "SecurityRequest":
+				fields.add("ID");
+				fields.add("name");
+				fields.add("status");
+				fields.add("employee");
+				fields.add("destination");
+				fields.add("employee");
+				fields.add("descriptionOfThreat");
+				fields.add("leathalForcePermited");
+				fields.add("dates");
+				fields.add("time");
+				break;
 		}
 
 		updateFields();
