@@ -117,6 +117,8 @@ public class filterEmployeeController extends ServiceController implements Initi
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   @Override

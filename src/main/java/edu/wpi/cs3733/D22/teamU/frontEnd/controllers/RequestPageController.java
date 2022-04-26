@@ -43,6 +43,8 @@ public class RequestPageController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   public void toSettings(ActionEvent actionEvent) {

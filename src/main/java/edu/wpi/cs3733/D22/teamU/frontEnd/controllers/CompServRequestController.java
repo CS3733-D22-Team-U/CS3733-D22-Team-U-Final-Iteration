@@ -102,6 +102,8 @@ public class CompServRequestController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
+
   }
 
   private void setUpAllCompServReq() throws SQLException, IOException {
