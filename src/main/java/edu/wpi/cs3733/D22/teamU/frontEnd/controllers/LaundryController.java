@@ -131,6 +131,7 @@ public class LaundryController extends ServiceController {
                       .getClassLoader()
                       .getResource("edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml")));
       */
+      // SETup FXML file and controller for edit popup
       FXMLLoader loader =
           new FXMLLoader(
               getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
@@ -277,11 +278,12 @@ public class LaundryController extends ServiceController {
         .start();
   }
 
+  // Update the request from edit
   @Override
   public void updateRequest() {
     LaundryRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
     newCon.updateRequest();
-    LaundryRequest request = (LaundryRequest) newCon.submitClick();
+    LaundryRequest request = (LaundryRequest) newCon.getRequest();
     request.gettingTheLocation();
     laundryRequests.remove(oldRequest);
     laundryRequests.add(request);
@@ -345,6 +347,7 @@ public class LaundryController extends ServiceController {
 
   public void clearRequest(ActionEvent actionEvent) {}
 
+  // edit button
   public void editClick(MouseEvent event) {
     if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
       Pane pane = (Pane) editButton.getParent();
@@ -355,5 +358,10 @@ public class LaundryController extends ServiceController {
       }
       newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
     }
+  }
+
+  // submit edit button
+  public void submitEdit(MouseEvent event) {
+    this.updateRequest();
   }
 }

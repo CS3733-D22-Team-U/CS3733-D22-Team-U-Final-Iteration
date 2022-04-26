@@ -29,8 +29,6 @@ public class RequestEditController {
   @FXML DatePicker pickUp;
   @FXML DatePicker dropOff;
 
-  @FXML Button submit;
-
   public void setUp(Request request) {
     this.request = request;
     this.requests = new ArrayList<>(); // initialize this to something diff in future
@@ -150,7 +148,7 @@ public class RequestEditController {
     }
   }
 
-  public Request submitClick() {
+  public Request getRequest() {
     return request;
   }
 }
