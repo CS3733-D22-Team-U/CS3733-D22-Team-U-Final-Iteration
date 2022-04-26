@@ -4,7 +4,6 @@ import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
@@ -161,7 +160,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
               + "time varchar(10) not null)");
 
       for (MaintenanceRequest currMainReq : List.values()) {
-        firebaseUpdate(currMainReq);
+        //firebaseUpdate(currMainReq);
         statement.execute(
             "INSERT INTO MaintenanceRequest VALUES("
                 + "'"
@@ -355,7 +354,6 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
     try {
       this.List.remove(data.ID);
       db.collection("maintenanceRequests").document(data.getID()).delete();
-
 
       this.JavaToSQL();
       this.JavaToCSV(csvFile);

@@ -4,7 +4,6 @@ import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
@@ -164,7 +163,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
               + "notes varchar(50) not null)");
 
       for (LaundryRequest currLaud : List.values()) {
-        firebaseUpdate(currLaud);
+        //firebaseUpdate(currLaud);
 
         statement.execute(
             "INSERT INTO LaundryRequest VALUES("

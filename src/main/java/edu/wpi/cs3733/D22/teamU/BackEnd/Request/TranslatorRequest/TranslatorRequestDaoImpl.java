@@ -150,7 +150,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (TranslatorRequest currReq : List.values()) {
-        firebaseUpdate(currReq);
+        //firebaseUpdate(currReq);
         statement.execute(
             "INSERT INTO TranslatorRequest VALUES("
                 + "'"
@@ -177,7 +177,8 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
   }
 
   public void firebaseUpdate(TranslatorRequest currTranslatorReq) {
-    DocumentReference docRef = db.collection("translatorRequests").document(currTranslatorReq.getID());
+    DocumentReference docRef =
+        db.collection("translatorRequests").document(currTranslatorReq.getID());
     Map<String, Object> data = new HashMap<>();
     data.put("patientName", currTranslatorReq.getPatientName());
     data.put("toLang", currTranslatorReq.getToLang());
@@ -327,8 +328,6 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     try {
       this.List.remove(data.ID);
       db.collection("translatorRequests").document(data.getID()).delete();
-
-
 
       this.JavaToSQL();
       this.JavaToCSV(csvFile);

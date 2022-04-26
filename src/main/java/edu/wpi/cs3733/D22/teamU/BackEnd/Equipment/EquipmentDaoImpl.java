@@ -123,7 +123,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
 
       for (int j = 0; j < EquipmentList.size(); j++) {
         Equipment currLoc = EquipmentList.get(j);
-        firebaseUpdate(currLoc);
+        //firebaseUpdate(currLoc);
         statement.execute(
             "INSERT INTO EquipmentList VALUES("
                 + "'"

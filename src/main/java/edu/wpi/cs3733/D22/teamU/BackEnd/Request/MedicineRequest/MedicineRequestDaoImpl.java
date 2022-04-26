@@ -211,7 +211,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (MedicineRequest currReq : List.values()) {
-        firebaseUpdate(currReq);
+        //firebaseUpdate(currReq);
 
         statement.execute(
             "INSERT INTO MedicineRequest VALUES("
@@ -351,7 +351,6 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     try {
       this.List.remove(data.ID);
       db.collection("medRequests").document(data.getID()).delete();
-
 
       this.JavaToSQL();
       this.JavaToCSV(csvFile);

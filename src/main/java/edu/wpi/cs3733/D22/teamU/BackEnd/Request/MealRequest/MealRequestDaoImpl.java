@@ -153,7 +153,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (MealRequest currMeal : List.values()) {
-        //firebaseUpdate(currMeal);
+        // firebaseUpdate(currMeal);
 
         statement.execute(
             "INSERT INTO MealRequest VALUES("

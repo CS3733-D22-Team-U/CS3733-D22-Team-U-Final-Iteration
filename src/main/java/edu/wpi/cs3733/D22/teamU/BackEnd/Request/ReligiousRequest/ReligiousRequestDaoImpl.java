@@ -206,7 +206,7 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "employee varchar(50) not null,"
               + "notes varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
-        firebaseUpdate(currReq);
+        //firebaseUpdate(currReq);
 
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("
@@ -251,7 +251,6 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     data.put("notes", currReligReq.getNotes());
     docRef.set(data);
   }
-
 
   public void SQLToJava() {
     List = new HashMap<String, ReligiousRequest>();
@@ -362,7 +361,6 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     try {
       this.List.remove(data.ID);
       db.collection("religRequests").document(data.getID()).delete();
-
 
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
