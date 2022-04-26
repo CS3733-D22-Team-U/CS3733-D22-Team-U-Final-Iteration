@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
+package edu.wpi.cs3733.D22.teamU.frontEnd.controllerFixes;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -6,6 +6,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.ServiceController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
@@ -103,8 +104,6 @@ public class TranslatorRequestController extends ServiceController {
               }
             });
     timeThread.start();
-    masterThread = timeThread;
-
   }
 
   //

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class ServiceController implements Initializable, Service {
+  public Thread masterThread;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
@@ -29,6 +30,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMealDelivery(ActionEvent actionEvent) throws IOException {
@@ -36,6 +38,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMaintenanceRequest(ActionEvent actionEvent) throws IOException {
@@ -43,6 +46,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   // testing religious request
@@ -51,12 +55,14 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMedicineDelivery(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/medRevamp.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
+    masterThread.stop();
   }
 
   public void toLabRequest(ActionEvent actionEvent) throws IOException {
@@ -64,6 +70,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toLaundry(ActionEvent actionEvent) throws IOException {
@@ -71,6 +78,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toSideView(ActionEvent actionEvent) throws IOException {
@@ -78,6 +86,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toLabRequestHelp(ActionEvent actionEvent) throws IOException {
@@ -85,6 +94,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toAbout(ActionEvent actionEvent) throws IOException {
@@ -92,6 +102,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toAllRequests(ActionEvent actionEvent) throws IOException {
@@ -99,6 +110,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMedHelp(ActionEvent actionEvent) throws IOException {
@@ -106,6 +118,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMap(ActionEvent actionEvent) throws IOException {
@@ -113,6 +126,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toCompService(ActionEvent actionEvent) throws IOException {
@@ -120,6 +134,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toReligious(ActionEvent actionEvent) throws IOException {
@@ -127,6 +142,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toSeurity(ActionEvent actionEvent) throws IOException {
@@ -134,6 +150,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toTranslate(ActionEvent actionEvent) throws IOException {
@@ -141,6 +158,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toCredits(ActionEvent actionEvent) throws IOException {
@@ -148,6 +166,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toCovidInfo(ActionEvent actionEvent) throws IOException {
@@ -155,6 +174,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toReport(ActionEvent actionEvent) throws IOException {
@@ -162,6 +182,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
@@ -169,6 +190,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toRequestsPage(ActionEvent actionEvent) throws IOException {
@@ -176,6 +198,7 @@ public abstract class ServiceController implements Initializable, Service {
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+    masterThread.stop();
   }
 
   public void toMapPage(ActionEvent actionEvent) throws IOException {

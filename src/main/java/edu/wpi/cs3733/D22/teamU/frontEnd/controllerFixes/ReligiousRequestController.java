@@ -1,11 +1,12 @@
-package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
+package edu.wpi.cs3733.D22.teamU.frontEnd.controllerFixes;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.ServiceController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
@@ -28,20 +29,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
-public class TranslatorRequestController extends ServiceController {
+public class ReligiousRequestController extends ServiceController {
 
   public ComboBox<Location> locations;
   public ComboBox<Employee> employees;
 
-  @FXML TableColumn<TranslatorRequest, String> nameID;
-  @FXML TableColumn<TranslatorRequest, String> patientName;
-  @FXML TableColumn<TranslatorRequest, String> toLang;
-  @FXML TableColumn<TranslatorRequest, String> status;
-  @FXML TableColumn<TranslatorRequest, String> employeeName;
-  @FXML TableColumn<TranslatorRequest, String> destination;
-  @FXML TableColumn<TranslatorRequest, String> date;
-  @FXML TableColumn<TranslatorRequest, String> newTime;
-  @FXML TableView<TranslatorRequest> table;
+  @FXML TableColumn<ReligiousRequest, String> nameID;
+  @FXML TableColumn<ReligiousRequest, String> name;
+  @FXML TableColumn<ReligiousRequest, String> date;
+  @FXML TableColumn<ReligiousRequest, String> newTime;
+  @FXML TableColumn<ReligiousRequest, String> patientName;
+  @FXML TableColumn<ReligiousRequest, String> religion;
+  @FXML TableColumn<ReligiousRequest, String> status;
+  @FXML TableColumn<ReligiousRequest, String> destination;
+  @FXML TableColumn<ReligiousRequest, String> employee;
+  @FXML TableColumn<ReligiousRequest, String> notes;
+  @FXML TableView<ReligiousRequest> table;
 
   @FXML Button clearButton;
   @FXML Button submitButton;
@@ -53,37 +56,38 @@ public class TranslatorRequestController extends ServiceController {
 
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
-  @FXML TextArea inputLanguage;
+  @FXML TextArea inputName;
   @FXML TextArea inputPatient;
+  @FXML TextArea inputReligion;
+  @FXML TextArea inputNotes;
   @FXML Text time;
 
-  ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
+  ObservableList<ReligiousRequest> religiousUIRequests = FXCollections.observableArrayList();
   // Udb udb;
-  ArrayList<Location> nodeIDs;
+  ArrayList<Location> nodes;
   ArrayList<Employee> staff;
-
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
-    // udb = Udb.getInstance();
-    setUpAllTranslatorReq();
 
+    setUpAllReligiousReq();
+
+    requestText.setVisible(false);
     // Displays Locations in Table View
-    nodeIDs = new ArrayList<>();
+    nodes = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
+      nodes.add(l);
     }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
+    locations.getItems().addAll(nodes);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
-    // Displays Emloyee in Table View
+    // Displays EMployess in Table View
     staff = new ArrayList<>();
-    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(e);
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l);
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -103,59 +107,62 @@ public class TranslatorRequestController extends ServiceController {
               }
             });
     timeThread.start();
-    masterThread = timeThread;
-
   }
 
   //
-  private void setUpAllTranslatorReq() throws SQLException, IOException {
+  private void setUpAllReligiousReq() throws SQLException, IOException {
     nameID.setCellValueFactory(new PropertyValueFactory("ID"));
+    name.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("name"));
+    date.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("date"));
+    newTime.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("time"));
     patientName.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("patientName"));
-    toLang.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("toLang"));
-    status.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("status"));
-    employeeName.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("employee"));
-    destination.setCellValueFactory(
-        new PropertyValueFactory<TranslatorRequest, String>("location"));
-    date.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("date"));
-    newTime.setCellValueFactory(new PropertyValueFactory<TranslatorRequest, String>("time"));
-    table.setItems(getTranslatorList());
+        new PropertyValueFactory<ReligiousRequest, String>("patientName"));
+    religion.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("religion"));
+    status.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("status"));
+    destination.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("location"));
+    employee.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("employee"));
+    notes.setCellValueFactory(new PropertyValueFactory<ReligiousRequest, String>("notes"));
+    table.setItems(getReligiousList());
   }
 
-  private ObservableList<TranslatorRequest> newRequest(
+  private ObservableList<ReligiousRequest> newRequest(
       String id,
-      String patientName,
-      String toLang,
-      String status,
-      Employee employee,
-      String destination,
+      String name,
       String date,
-      String time) {
-    TranslatorRequest r =
-        new TranslatorRequest(id, patientName, toLang, status, employee, destination, date, time);
+      String time,
+      String patientName,
+      String religion,
+      String status,
+      String destination,
+      Employee employee,
+      String notes) {
+    ReligiousRequest r =
+        new ReligiousRequest(
+            id, name, date, time, patientName, religion, status, destination, employee, notes);
     r.gettingTheLocation();
-    translatorUIRequests.add(r);
-    return translatorUIRequests;
+    religiousUIRequests.add(r);
+    return religiousUIRequests;
   }
 
-  private ObservableList<TranslatorRequest> getTranslatorList() throws SQLException, IOException {
-    translatorUIRequests.clear();
-    for (TranslatorRequest request : Udb.getInstance().translatorRequestImpl.List.values()) {
-      TranslatorRequest r =
-          new TranslatorRequest(
+  private ObservableList<ReligiousRequest> getReligiousList() throws SQLException, IOException {
+    religiousUIRequests.clear();
+    for (ReligiousRequest request : Udb.getInstance().religiousRequestImpl.List.values()) {
+      ReligiousRequest r =
+          new ReligiousRequest(
               request.getID(),
-              request.getPatientName(),
-              request.getToLang(),
-              request.getStatus(),
-              request.getEmployee(),
-              request.getDestination(),
+              request.getName(),
               request.getDate(),
-              request.getTime());
+              request.getTime(),
+              request.getPatientName(),
+              request.getReligion(),
+              request.getStatus(),
+              request.getDestination(),
+              request.getEmployee(),
+              request.getNotes());
       r.gettingTheLocation();
-      translatorUIRequests.add(r);
+      religiousUIRequests.add(r);
     }
-    return translatorUIRequests;
+    return religiousUIRequests;
   }
 
   @Override
@@ -164,8 +171,9 @@ public class TranslatorRequestController extends ServiceController {
 
     String endRequest = "Has been placed successfully";
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    // String room = locations.getValue().getNodeID();
-    // String employ = employees.getValue().getEmployeeID();
+    // String room = locations.getValue().toString();
+
+    // String employ = employees.getValue().toString();
 
     boolean alreadyHere = true;
     String serviceID = "notWork";
@@ -175,51 +183,50 @@ public class TranslatorRequestController extends ServiceController {
       double rand = Math.random() * 10000;
 
       try {
-        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("TRA" + (int) rand);
+        alreadyHere =
+            Udb.getInstance().religiousRequestImpl.hList().containsKey("REL" + (int) rand);
       } catch (Exception e) {
         System.out.println(
-            "alreadyHere variable messed up in translation service request controller");
+            "alreadyHere variable messed up in religious service request controller");
       }
 
-      serviceID = "TRA" + (int) rand;
+      serviceID = "REL" + (int) rand;
     }
 
-    TranslatorRequest request =
-        new TranslatorRequest(
+    ReligiousRequest request =
+        new ReligiousRequest(
             serviceID,
-            "Patient",
-            inputLanguage.getText().trim(),
-            "Pending",
-            employees.getValue(),
-            locations.getValue().getNodeID(),
+            inputName.getText().trim(),
             sdf3.format(timestamp).substring(0, 10),
-            sdf3.format(timestamp).substring(11));
+            sdf3.format(timestamp).substring(11),
+            inputPatient.getText().trim(),
+            inputReligion.getText().trim(),
+            "Pending",
+            locations.getValue().getNodeID(),
+            employees.getValue(),
+            inputNotes.getText().trim());
 
     request.gettingTheLocation();
 
     table.setItems(
         newRequest(
             request.getID(),
-            request.getPatientName(),
-            request.getToLang(),
-            request.getStatus(),
-            request.getEmployee(),
-            request.getDestination(),
+            request.getName(),
             request.getDate(),
-            request.getTime()));
+            request.getTime(),
+            request.getPatientName(),
+            request.getReligion(),
+            request.getStatus(),
+            request.getDestination(),
+            request.getEmployee(),
+            request.getNotes()));
     try {
       Udb.getInstance().add(request);
     } catch (IOException e) {
       e.printStackTrace();
-      System.out.println("i");
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("d");
     }
-    inputPatient.setText("");
-    inputLanguage.setText("");
-    employees.getSelectionModel().clearSelection();
-    locations.getSelectionModel().clearSelection();
   }
 
   @Override
@@ -229,13 +236,7 @@ public class TranslatorRequestController extends ServiceController {
   public void updateRequest() {}
 
   public void clearRequest() {
-    requestText.setText("Cleared Requests!");
     requestText.setVisible(true);
-
-    inputPatient.setText("");
-    inputLanguage.setText("");
-    employees.getSelectionModel().clearSelection();
-    locations.getSelectionModel().clearSelection();
     new Thread(
             () -> {
               try {
@@ -280,6 +281,7 @@ public class TranslatorRequestController extends ServiceController {
     active.setVisible(true);
     active.toBack();
     activeReqButton.setUnderline(true);
+
     newReqButton.setUnderline(false);
   }
 

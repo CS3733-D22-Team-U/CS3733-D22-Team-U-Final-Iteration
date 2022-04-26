@@ -1,11 +1,12 @@
-package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
+package edu.wpi.cs3733.D22.teamU.frontEnd.controllerFixes;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.ServiceController;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import java.io.IOException;
 import java.net.URL;
@@ -28,24 +29,25 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
-public class MaintenanceRequestController extends ServiceController {
+public class SecurityRequestController extends ServiceController {
 
   public ComboBox<Location> locations;
   public ComboBox<Employee> staffDropDown;
   @FXML Text requestText;
   @FXML Button clearButton;
   @FXML Button submitButton;
-
+  @FXML CheckBox lethalForceButton;
   // these are for the table attributes shown to the user
-  @FXML TableColumn<MaintenanceRequest, String> activeReqID;
-  @FXML TableColumn<MaintenanceRequest, String> activeReqStatus;
-  @FXML TableColumn<MaintenanceRequest, String> activeReqDestination;
-  @FXML TableColumn<MaintenanceRequest, String> activeReqDescription;
-  @FXML TableColumn<MaintenanceRequest, String> activeStaff;
-  @FXML TableColumn<MaintenanceRequest, String> activeDate;
-  @FXML TableColumn<MaintenanceRequest, String> activeTime;
+  @FXML TableColumn<SecurityRequest, String> activeReqID;
+  @FXML TableColumn<SecurityRequest, String> activeReqStatus;
+  @FXML TableColumn<SecurityRequest, String> activeStaff;
+  @FXML TableColumn<SecurityRequest, String> activeReqDestination;
+  @FXML TableColumn<SecurityRequest, String> activeReqDescription;
+  @FXML TableColumn<SecurityRequest, String> activelethal;
+  @FXML TableColumn<SecurityRequest, String> activeDate;
+  @FXML TableColumn<SecurityRequest, String> activeTime;
 
-  @FXML TableView<MaintenanceRequest> activeRequestTable;
+  @FXML TableView<SecurityRequest> activeRequestTable;
 
   @FXML StackPane requestsStack;
   @FXML Pane newRequestPane;
@@ -59,29 +61,21 @@ public class MaintenanceRequestController extends ServiceController {
 
   @FXML TextArea textInput;
 
-  ObservableList<MaintenanceRequest> maintenanceRequests = FXCollections.observableArrayList();
-  ArrayList<Location> nodeIDs;
-  ArrayList<Employee> staff;
+  ObservableList<SecurityRequest> securityUIRequests = FXCollections.observableArrayList();
+  ArrayList<String> nodeIDs;
+  ArrayList<String> staff;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   public void fillDestinations() throws SQLException, IOException {
-    nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
-    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(nodeIDs);
+    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
   }
 
   public void fillStaff() throws SQLException, IOException {
-    staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l);
-    }
 
     staffDropDown.setTooltip(new Tooltip());
-    staffDropDown.getItems().addAll(staff);
+    staffDropDown.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
     new ComboBoxAutoComplete<Employee>(staffDropDown, 675, 400);
   }
 
@@ -111,96 +105,82 @@ public class MaintenanceRequestController extends ServiceController {
               }
             });
     timeThread.start();
-    masterThread = timeThread;
-
   }
 
   private void setUpAllMaintenance() throws SQLException, IOException {
-
-    activeReqID.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("ID"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("ID"));
     activeReqStatus.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("status"));
+        new PropertyValueFactory<SecurityRequest, String>("status"));
+    activeStaff.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("employee"));
     activeReqDestination.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("location"));
+        new PropertyValueFactory<SecurityRequest, String>("location"));
     activeReqDescription.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("description"));
-    activeStaff.setCellValueFactory(
-        new PropertyValueFactory<MaintenanceRequest, String>("employee"));
-    activeDate.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("date"));
-    activeTime.setCellValueFactory(new PropertyValueFactory<MaintenanceRequest, String>("time"));
+        new PropertyValueFactory<SecurityRequest, String>("descriptionOfThreat"));
+    activelethal.setCellValueFactory(
+        new PropertyValueFactory<SecurityRequest, String>("leathalForcePermited"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("date"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<SecurityRequest, String>("time"));
 
-    activeRequestTable.setItems(getMaintenanceRequestsList());
+    activeRequestTable.setItems(getSecurityRequestsList());
   }
 
-  private ObservableList<MaintenanceRequest> newRequest(
+  private ObservableList<SecurityRequest> newRequest(
       String id,
       String name,
       String status,
-      String destination,
       Employee employee,
-      String typeOfMaintenanceRequest,
-      String description,
+      String destination,
+      String descript,
+      String lethal,
       String date,
       String time) {
-    MaintenanceRequest r =
-        new MaintenanceRequest(
-            id,
-            name,
-            status,
-            destination,
-            employee,
-            typeOfMaintenanceRequest,
-            description,
-            date,
-            time);
+    SecurityRequest r =
+        new SecurityRequest(id, name, status, employee, destination, descript, lethal, date, time);
     r.gettingTheLocation();
-    maintenanceRequests.add(r);
-
-    return maintenanceRequests;
+    securityUIRequests.add(r);
+    return securityUIRequests;
   }
 
-  private ObservableList<MaintenanceRequest> getMaintenanceRequestsList()
+  private ObservableList<SecurityRequest> getSecurityRequestsList()
       throws SQLException, IOException {
-    maintenanceRequests.clear();
-    for (MaintenanceRequest maintenanceReq :
-        Udb.getInstance().maintenanceRequestImpl.List.values()) {
-
-      MaintenanceRequest r =
-          new MaintenanceRequest(
-              maintenanceReq.getID(),
-              maintenanceReq.getName(),
-              maintenanceReq.getStatus(),
-              maintenanceReq.getDestination(),
-              maintenanceReq.getEmployee(),
-              maintenanceReq.getTypeOfMaintenance(),
-              maintenanceReq.getDescription(),
-              maintenanceReq.getDate(),
-              maintenanceReq.getTime());
-
+    securityUIRequests.clear();
+    for (SecurityRequest securityRequest : Udb.getInstance().securityRequestImpl.List.values()) {
+      SecurityRequest r =
+          new SecurityRequest(
+              securityRequest.getID(),
+              securityRequest.getName(),
+              securityRequest.getStatus(),
+              securityRequest.getEmployee(),
+              securityRequest.getDestination(),
+              securityRequest.getDescriptionOfThreat(),
+              securityRequest.getLeathalForcePermited(),
+              securityRequest.getDate(),
+              securityRequest.getTime());
       r.gettingTheLocation();
-      maintenanceRequests.add(r);
+      securityUIRequests.add(r);
     }
 
-    return maintenanceRequests;
+    return securityUIRequests;
   }
 
-  private ObservableList<MaintenanceRequest> getActiveMaintenanceRequestList()
+  private ObservableList<SecurityRequest> getActiveSecurityRequestList()
       throws SQLException, IOException {
-    for (MaintenanceRequest maintenanceReq :
-        Udb.getInstance().maintenanceRequestImpl.List.values()) {
-      maintenanceRequests.add(
-          new MaintenanceRequest(
-              maintenanceReq.getID(),
-              maintenanceReq.getName(),
-              maintenanceReq.getStatus(),
-              maintenanceReq.getDestination(),
-              maintenanceReq.getEmployee(),
-              maintenanceReq.getTypeOfMaintenance(),
-              maintenanceReq.getDescription(),
-              maintenanceReq.getDate(),
-              maintenanceReq.getTime()));
+    for (SecurityRequest securityRequest : Udb.getInstance().securityRequestImpl.List.values()) {
+      SecurityRequest r =
+          new SecurityRequest(
+              securityRequest.getID(),
+              securityRequest.getName(),
+              securityRequest.getStatus(),
+              securityRequest.getEmployee(),
+              securityRequest.getDestination(),
+              securityRequest.getDescriptionOfThreat(),
+              securityRequest.getLeathalForcePermited(),
+              securityRequest.getDate(),
+              securityRequest.getTime());
+      r.gettingTheLocation();
+      securityUIRequests.add(r);
     }
-    return maintenanceRequests;
+    return securityUIRequests;
   }
 
   @Override
@@ -233,50 +213,55 @@ public class MaintenanceRequestController extends ServiceController {
       double rand = Math.random() * 10000;
 
       try {
-        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("MAI" + (int) rand);
+        alreadyHere = Udb.getInstance().compServRequestImpl.hList().containsKey("SEC" + (int) rand);
       } catch (Exception e) {
         System.out.println(
-            "alreadyHere variable messed up in maintenance service request controller");
+            "alreadyHere variable messed up in sercurity service request controller");
       }
 
-      serviceID = "MAI" + (int) rand;
+      serviceID = "SEC" + (int) rand;
     }
 
-    // String empty = staffDropDown.getValue();
+    String employ = staffDropDown.getValue().getEmployeeID();
 
-    MaintenanceRequest request =
-        new MaintenanceRequest(
+    String lethal = "No";
+
+    if (lethalForceButton.isSelected()) {
+      lethal = "Yes";
+    }
+
+    SecurityRequest request =
+        new SecurityRequest(
             serviceID,
-            "N/A",
+            "admin",
             "Pending",
+            checkEmployee(employ),
             locations.getValue().getNodeID(),
-            staffDropDown.getValue(),
-            "N/A",
             textInput.getText().trim(),
+            lethal,
             sdf3.format(timestamp).substring(0, 10),
             sdf3.format(timestamp).substring(11));
-
     request.gettingTheLocation();
+
     activeRequestTable.setItems(
         newRequest(
             request.getID(),
             request.getName(),
             request.getStatus(),
-            request.getDestination(),
             request.getEmployee(),
-            request.getTypeOfMaintenance(),
-            request.getDescription(),
+            request.getDestination(),
+            request.getDescriptionOfThreat(),
+            request.getLeathalForcePermited(),
             request.getDate(),
             request.getTime()));
-    try {
 
+    try {
       Udb.getInstance().add(request);
+
     } catch (IOException e) {
       e.printStackTrace();
-      System.out.printf("print first catch");
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.printf("print second catch");
     }
 
     sucessRequest.setVisible(true);
