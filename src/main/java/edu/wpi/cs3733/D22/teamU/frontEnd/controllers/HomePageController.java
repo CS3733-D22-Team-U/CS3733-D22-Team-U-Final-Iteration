@@ -241,6 +241,14 @@ public class HomePageController extends ServiceController {
     appStage.show();
   }
 
+  public void toCovidInfo(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/COVIDInfo.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+    masterThread.stop();
+  }
+
   public void toSettings(ActionEvent actionEvent) {
     System.out.println("Going to settings");
   }
