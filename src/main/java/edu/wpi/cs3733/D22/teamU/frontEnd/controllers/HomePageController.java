@@ -29,7 +29,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class DashboardController extends ServiceController {
+public class HomePageController extends ServiceController {
 
   public Button logOutButton;
   @FXML Button navButton;
@@ -56,6 +56,7 @@ public class DashboardController extends ServiceController {
   @FXML Circle apple;
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
+  @FXML Text message;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -63,6 +64,7 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
 
     try {
       listofEmployees();
