@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -9,6 +10,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
@@ -219,6 +221,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
               + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
+        //firebaseUpdate(currReq);
         statement.execute(
             "INSERT INTO EquipRequest VALUES("
                 + "'"
@@ -246,6 +249,20 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in EquipRequestImp");
     }
+  }
+
+  public void firebaseUpdate(EquipRequest equipReq) {
+    DocumentReference docRef = db.collection("equipRequests").document(equipReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", equipReq.getName());
+    data.put("amount", equipReq.getAmount());
+    data.put("status", equipReq.getStatus());
+    data.put("employeeID", equipReq.getEmployee().getEmployeeID());
+    data.put("destination", equipReq.getDestination());
+    data.put("date", equipReq.getDate());
+    data.put("time", equipReq.getTime());
+    data.put("priority", equipReq.getPriority());
+    docRef.set(data);
   }
 
   public void SQLToJava() {
@@ -361,6 +378,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     try {
       data.location.getRequests().remove(data);
       List.remove(data.ID);
+      db.collection("equipRequests").document(data.getID()).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -9,6 +10,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MealRequestDaoImpl implements DataDao<MealRequest> {
@@ -151,6 +153,8 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (MealRequest currMeal : List.values()) {
+        // firebaseUpdate(currMeal);
+
         statement.execute(
             "INSERT INTO MealRequest VALUES("
                 + "'"
@@ -176,6 +180,20 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in MealRequestImp");
     }
+  }
+
+  public void firebaseUpdate(MealRequest currMeal) {
+    DocumentReference docRef = db.collection("mealRequests").document(currMeal.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("patientName", currMeal.getPatientName());
+    data.put("dietRest", currMeal.getDietRest());
+    data.put("status", currMeal.getStatus());
+    data.put("employeeID", currMeal.getEmployee().getEmployeeID());
+    data.put("destination", currMeal.getDestination());
+    data.put("addNotes", currMeal.getAddNotes());
+    data.put("date", currMeal.getDate());
+    data.put("time", currMeal.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -328,6 +346,8 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
 
     try {
       this.List.remove(data.ID);
+      db.collection("mealRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

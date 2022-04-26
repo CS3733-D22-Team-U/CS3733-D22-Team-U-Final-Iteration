@@ -169,6 +169,7 @@ public class DashboardController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
   }
 
   private void handleNavButtons() {

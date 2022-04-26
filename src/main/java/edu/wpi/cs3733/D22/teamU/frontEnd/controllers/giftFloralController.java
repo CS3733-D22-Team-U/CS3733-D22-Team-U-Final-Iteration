@@ -125,6 +125,7 @@ public class giftFloralController extends ServiceController {
               }
             });
     timeThread.start();
+    masterThread = timeThread;
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {

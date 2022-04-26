@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest;
 
+import com.google.cloud.firestore.DocumentReference;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
@@ -204,6 +206,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
               + "employee varchar(50) not null,"
               + "notes varchar(50) not null)");
       for (ReligiousRequest currReq : List.values()) {
+        //firebaseUpdate(currReq);
+
         statement.execute(
             "INSERT INTO ReligiousRequest VALUES("
                 + "'"
@@ -231,6 +235,21 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console. religious request");
     }
+  }
+
+  public void firebaseUpdate(ReligiousRequest currReligReq) {
+    DocumentReference docRef = db.collection("religRequests").document(currReligReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", currReligReq.getName());
+    data.put("date", currReligReq.getDate());
+    data.put("time", currReligReq.getTime());
+    data.put("patient", currReligReq.getPatient());
+    data.put("religion", currReligReq.getReligion());
+    data.put("status", currReligReq.getStatus());
+    data.put("destination", currReligReq.getDestination());
+    data.put("employeeID", currReligReq.getEmployee().getEmployeeID());
+    data.put("notes", currReligReq.getNotes());
+    docRef.set(data);
   }
 
   public void SQLToJava() {
@@ -341,6 +360,8 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("religRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
