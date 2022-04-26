@@ -49,13 +49,11 @@ public class RequestEditController {
 	@FXML
 	TextField labType;
 	@FXML
-	TextField descript;
-	@FXML
-	TextField lethal;
-	@FXML
-	TextField typeOfMaintenance;
-	@FXML
 	TextField description;
+	@FXML
+	TextField lethalForce;
+	@FXML
+	TextField typeOfMain;
 	@FXML
 	TextField message;
 	@FXML
@@ -205,13 +203,13 @@ public class RequestEditController {
 					newRequest.setLabType(labType.getText().trim());
 					break;
 				case "descript":
-					newRequest.setDescript(descript.getText().trim());
+					newRequest.setDescript(description.getText().trim());
 					break;
 				case "lethal":
-					newRequest.setLethal(lethal.getText().trim());
+					newRequest.setLethal(lethalForce.getText().trim());
 					break;
 				case "typeOfMaintenance":
-					newRequest.setTypeOfMaintenance(typeOfMaintenance.getText().trim());
+					newRequest.setTypeOfMaintenance(typeOfMain.getText().trim());
 					break;
 				case "description":
 					newRequest.setDescription(description.getText().trim());
@@ -289,13 +287,13 @@ public class RequestEditController {
 					labType.setText(request.getLabType());
 					break;
 				case "descript":
-					descript.setText(request.getDescript());
+					description.setText(request.getDescript());
 					break;
 				case "lethal":
-					lethal.setText(request.getLethal());
+					lethalForce.setText(request.getLethal());
 					break;
 				case "typeOfMaintenance":
-					typeOfMaintenance.setText(request.getTypeOfMaintenance());
+					typeOfMain.setText(request.getTypeOfMaintenance());
 					break;
 				case "description":
 					description.setText(request.getDescription());
