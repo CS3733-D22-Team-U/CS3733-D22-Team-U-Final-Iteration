@@ -343,8 +343,8 @@ public class MedicineDeliveryController extends ServiceController {
     newReqButton.setUnderline(false);
 
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 

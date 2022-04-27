@@ -646,8 +646,8 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     allEquipButton.setUnderline(false);
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 
@@ -671,6 +671,14 @@ public class EquipmentDeliverySystemController extends ServiceController {
     newReqButton.setUnderline(false);
 
     allEquipButton.setUnderline(true);
+
+    // =========edit and remove buttons========
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    EditRequestPopUp.setVisible(false);
+    // =====================================
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
