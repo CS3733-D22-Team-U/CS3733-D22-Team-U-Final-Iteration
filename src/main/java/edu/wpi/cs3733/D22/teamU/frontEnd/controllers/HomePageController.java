@@ -100,7 +100,7 @@ public class HomePageController extends ServiceController {
 
     // userName.setText("Dr." + "____");
 
-    //handleNavButtons();
+    // handleNavButtons();
     handeDateTime();
     // handleTurtle();
     // playTurtle();
@@ -227,20 +227,6 @@ public class HomePageController extends ServiceController {
     appStage.show();
   }
 
-  public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toRequestsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/requestsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
   public void toSettings(ActionEvent actionEvent) {
     System.out.println("Going to settings");
   }
@@ -266,6 +252,4 @@ public class HomePageController extends ServiceController {
     }
     return menuItemsList;
   }
-
-  public void toReport(ActionEvent actionEvent) {}
 }

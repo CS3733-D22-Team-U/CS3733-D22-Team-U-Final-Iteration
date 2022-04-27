@@ -76,12 +76,12 @@
                   </Pane>
                </children>
             </Pane>
-            <Button layoutX="350.0" layoutY="461.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Employees" textFill="WHITE">
+            <Button layoutX="350.0" layoutY="461.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Employees" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="350.0" layoutY="375.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
+            <Button layoutX="350.0" layoutY="375.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -94,7 +94,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toMap" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
+            <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -218,14 +218,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="891.0" layoutY="163.0" mnemonicParsing="false" onAction="#toReport" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/menuBar/cautionIconBLUE.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
             <Button layoutX="984.0" layoutY="173.0" mnemonicParsing="false" onAction="#toSettingsPage" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="48.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -241,6 +233,7 @@
                </image>
             </ImageView>
             <Button layoutX="659.0" layoutY="664.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="82.0" prefWidth="71.0" style="-fx-background-color: transparent;" />
+            <Button layoutX="695.0" layoutY="192.0" mnemonicParsing="false" onAction="#toReport" text="Button" />
          </children>
       </Pane>
    </children>
