@@ -22,7 +22,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -76,9 +75,8 @@ public class HomePageController extends ServiceController {
     datePickerSkin.getPopupContent();
     datePickerSkin.show();
     Node popupContent = datePickerSkin.getPopupContent();
-//[...]
+    // [...]
     LocalDate selectedDate = datePicker.getValue();
-
 
     try {
       listofEmployees();
