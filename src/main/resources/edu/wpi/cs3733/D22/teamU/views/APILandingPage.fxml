@@ -38,19 +38,6 @@
                         <Image url="@../images/hospitalBuilding.jpg" />
                     </image>
                 </ImageView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="61.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
-                <Text fill="#044e9a" layoutX="149.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
-                    <font>
-                        <Font name="Calibri Bold" size="32.0" />
-                    </font>
-                </Text>
-                <Text fill="#044e9a" layoutX="160.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
-                    <font>
-                        <Font size="24.0" />
-                    </font>
-                </Text>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="250.0" layoutX="63.0" layoutY="431.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="251.0" />
-                <DatePicker layoutX="98.0" layoutY="502.0" />
                 <Button layoutX="67.0" layoutY="196.0" mnemonicParsing="false" onAction="#toHome" prefHeight="45.0" prefWidth="166.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Return" textFill="WHITE">
                     <font>
                         <Font name="Calibri Bold" size="20.0" />
@@ -89,7 +76,6 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Text layoutX="98.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*look into calendarFX" />
             <Button layoutX="855.0" layoutY="426.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Medicine API" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -113,6 +99,23 @@
             <Button layoutX="815.0" layoutY="170.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             <Button layoutX="903.0" layoutY="171.0" mnemonicParsing="false" onAction="#toReport" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             <Button layoutX="987.0" layoutY="170.0" mnemonicParsing="false" onAction="#toSettings" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="53.0" layoutY="301.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="50.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
+            <Pane fx:id="datePickerPane" layoutX="61.0" layoutY="444.0" prefHeight="193.0" prefWidth="125.0">
+               <children>
+                  <DatePicker fx:id="datePicker" layoutY="1.0" prefHeight="26.0" prefWidth="0.0" />
+               </children>
+            </Pane>
+            <Text fx:id="time" fill="#044e9a" layoutX="112.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="date" fill="#044e9a" layoutX="108.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
       <ButtonBar buttonMinWidth="64.0" layoutX="283.0" layoutY="576.0" prefHeight="106.0" prefWidth="770.0">
