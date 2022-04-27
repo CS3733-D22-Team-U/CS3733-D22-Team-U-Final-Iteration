@@ -247,7 +247,7 @@
                         </Button>
                      </children>
                   </GridPane>
-                        <TableView fx:id="equipTable" layoutX="13.0" layoutY="181.0" prefHeight="172.0" prefWidth="376.0">
+                        <TableView fx:id="equipTable" layoutX="13.0" layoutY="181.0" prefHeight="172.0" prefWidth="376.0" stylesheets="@../css/tableViewPopUp.css">
                             <columns>
                                 <TableColumn fx:id="equipName" prefWidth="90.0" text="Name" />
                                 <TableColumn fx:id="equipmentAmount" prefWidth="90.0" text="Amount" />
