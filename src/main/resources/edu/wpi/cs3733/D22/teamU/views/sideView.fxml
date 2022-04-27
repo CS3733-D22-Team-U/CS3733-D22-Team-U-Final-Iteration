@@ -224,7 +224,7 @@
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/dashboardIcon.png" />
+                        <Image url="@../icons/newdash.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -242,7 +242,7 @@
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/dashboardIcons/gear-solid.png" />
+                        <Image url="@../icons/dashboardIcons/newgear.png" />
                      </image>
                   </ImageView>
                </graphic>
