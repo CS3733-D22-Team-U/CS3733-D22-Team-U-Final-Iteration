@@ -38,8 +38,8 @@ import lombok.SneakyThrows;
 
 public class giftFloralController extends ServiceController {
 
-  public ComboBox<String> locations;
-  public ComboBox<String> employees;
+  public ComboBox<Location> locations;
+  public ComboBox<Employee> employees;
   @FXML Button clearButton;
   @FXML Button submitButton;
   @FXML VBox requestHolder;

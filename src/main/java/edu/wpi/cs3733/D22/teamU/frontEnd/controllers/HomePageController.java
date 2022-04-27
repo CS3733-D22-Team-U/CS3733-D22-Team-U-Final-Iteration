@@ -114,7 +114,7 @@ public class HomePageController extends ServiceController {
     // userName.setText("Dr." + "____");
 
     // handleNavButtons();
-    userName.setText("Dr." + "____");
+    // userName.setText("Dr." + "____");
     // handleNavButtons();
     handeDateTime();
     // handleTurtle();
