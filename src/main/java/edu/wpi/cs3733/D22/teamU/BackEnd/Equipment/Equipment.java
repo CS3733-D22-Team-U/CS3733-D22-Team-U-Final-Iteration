@@ -110,4 +110,8 @@ public class Equipment {
   public void setLocation(Location location) {
     this.location = location;
   }
+
+  public void setLocationID(String locationID) {
+    this.locationID = locationID;
+  }
 }

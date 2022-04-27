@@ -772,6 +772,36 @@ public class MapController extends ServiceController {
     }
   }
 
+  public void moveEquip(MouseEvent mouseEvent) {
+    try {
+      if (equipment != null) {
+        Equipment newEquip = equipTable.getSelectionModel().getSelectedItem();
+        newEquip.gettingTheLocation(); // init the location for the equipment
+        Equipment copy = newEquip;
+        copy.gettingTheLocation();
+
+        // todo: this were you put the function to return the nearest location x and y coor
+
+        // this is actually changing the location
+        copy.getLocation().setXcoord();
+        copy.getLocation().setYcoord();
+        copy.setLocationID();
+        copy.gettingTheLocation(); // init the copies location
+
+        // this is editing the back end and map to display equip prop
+        Udb.getInstance().edit(copy);
+        equipTable.getItems().remove(newEquip);
+        equipTable.getItems().add(copy);
+        newEquip.getLocation().getEquipment().remove(newEquip);
+        copy.getLocation().getEquipment().add(copy);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public void selectRequest(MouseEvent mouseEvent) {
     if (reqTable.getSelectionModel().getSelectedItem() instanceof Request) {
       request = (Request) reqTable.getSelectionModel().getSelectedItem();
