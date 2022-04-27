@@ -31,8 +31,6 @@ public interface DataDao<T> {
 
   void remove(T data) throws IOException;
 
-  int search(String id);
-
   void saveTableAsCSV(String nameOfCSV) throws SQLException;
 
   T askUser();

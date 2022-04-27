@@ -177,7 +177,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="equipName" layoutX="116.0" layoutY="9.0" prefHeight="31.0" prefWidth="274.0">
+                  <TextField fx:id="equipNameTF" layoutX="116.0" layoutY="9.0" prefHeight="31.0" prefWidth="274.0">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -207,7 +207,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                        <TableView fx:id="equipTable" layoutX="14.0" layoutY="176.0" prefHeight="164.0" prefWidth="379.0">
+                        <TableView fx:id="equipTable" layoutX="14.0" layoutY="176.0" prefHeight="164.0" prefWidth="379.0" stylesheets="@../css/tableViewPopUp.css">
                             <columns>
                                 <TableColumn fx:id="equipName" prefWidth="77.60000896453857" text="Name" />
                                 <TableColumn fx:id="equipmentAmount" prefWidth="80.79998779296875" text="Amount" />
@@ -224,7 +224,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="395.0">
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3bafb4f2" height="472.0" stroke="#044e9a" strokeType="INSIDE" width="468.0" />
-                        <TableView layoutX="15.0" layoutY="17.0" prefHeight="314.0" prefWidth="377.0">
+                        <TableView layoutX="15.0" layoutY="17.0" prefHeight="314.0" prefWidth="377.0" stylesheets="@../css/tableViewPopUp.css">
                             <columns>
                                 <TableColumn fx:id="serviceName" prefWidth="70.0" text="Name" />
                                 <TableColumn fx:id="servicePatient" prefWidth="70.0" text="Patient" />

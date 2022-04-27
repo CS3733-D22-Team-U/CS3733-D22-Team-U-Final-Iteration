@@ -398,7 +398,6 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

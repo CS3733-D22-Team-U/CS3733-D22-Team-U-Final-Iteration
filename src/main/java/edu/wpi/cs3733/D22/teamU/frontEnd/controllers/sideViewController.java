@@ -36,8 +36,8 @@ public class sideViewController extends ServiceController {
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
   @FXML Pane assistPane;
-  @FXML Rectangle recLower2;
-  @FXML Rectangle recLower1;
+  @FXML Rectangle recLowerL2;
+  @FXML Rectangle recLowerL1;
   @FXML Rectangle recLevel1;
   @FXML Rectangle recLevel2;
   @FXML Rectangle recLevel3;
@@ -436,11 +436,11 @@ public class sideViewController extends ServiceController {
     reclinerPie.setLegendVisible(false);
     reclinerPie.setLabelsVisible(false);
 
-    applyCustomColorSequence(pieChartData1, "#2EB872", "#FA4659");
+    applyCustomColorSequence(pieChartData1, "#5CBD6F", "#FC5368"); // old: #53FC7D #FC5368
 
-    applyCustomColorSequence(pieChartData2, "#2EB872", "#FA4659");
+    applyCustomColorSequence(pieChartData2, "#5CBD6F", "#FC5368");
 
-    applyCustomColorSequence(pieChartData3, "#2EB872", "#FA4659");
+    applyCustomColorSequence(pieChartData3, "#5CBD6F", "#FC5368");
 
     dirtyPumpTXT.setText(Integer.toString(pumpInUse));
     pumpTotalTXT.setText(Integer.toString(pumpTotal));
@@ -457,38 +457,87 @@ public class sideViewController extends ServiceController {
     button.setStyle("-fx-border-width: 2");
   }
 
-  public void setFloorLL1(ActionEvent actionEvent) throws SQLException, IOException {
+  public void setFloorLL1(MouseEvent mouseEvent) throws SQLException, IOException {
     setUpPieChart("L1");
     updateList("L1");
+    recLowerL1.setOpacity(1.0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(0);
   }
 
-  public void setFloorLL2(ActionEvent actionEvent) throws SQLException, IOException {
+  public void setFloorLL2(MouseEvent mouseEvent) throws SQLException, IOException {
     setUpPieChart("L2");
     updateList("L2");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(1.0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(0);
   }
 
-  public void setFloorL1(ActionEvent actionEvent) throws SQLException, IOException {
+  public void setFloorL1(MouseEvent mouseEvent) throws SQLException, IOException {
     setUpPieChart("1");
     updateList("1");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(1.0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(0);
   }
 
-  public void setFloorL2(ActionEvent actionEvent) throws SQLException, IOException {
+  public void setFloorL2(MouseEvent mouseEvent) throws SQLException, IOException {
     setUpPieChart("2");
     updateList("2");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(1.0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(0);
   }
 
-  public void setFloorL4(ActionEvent actionEvent) throws SQLException, IOException {
-    setUpPieChart("4");
-    updateList("4");
-  }
-
-  public void setFloorL5(ActionEvent actionEvent) throws SQLException, IOException {
-    setUpPieChart("5");
-    updateList("5");
-  }
-
-  public void setFloorL3(ActionEvent actionEvent) throws SQLException, IOException {
+  public void setFloorL3(MouseEvent mouseEvent) throws SQLException, IOException {
     setUpPieChart("3");
     updateList("3");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(1.0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(0);
+  }
+
+  public void setFloorL4(MouseEvent mouseEvent) throws SQLException, IOException {
+    setUpPieChart("4");
+    updateList("4");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(1.0);
+    recLevel5.setOpacity(0);
+  }
+
+  public void setFloorL5(MouseEvent mouseEvent) throws SQLException, IOException {
+    setUpPieChart("5");
+    updateList("5");
+    recLowerL1.setOpacity(0);
+    recLowerL2.setOpacity(0);
+    recLevel1.setOpacity(0);
+    recLevel2.setOpacity(0);
+    recLevel3.setOpacity(0);
+    recLevel4.setOpacity(0);
+    recLevel5.setOpacity(1.0);
   }
 }

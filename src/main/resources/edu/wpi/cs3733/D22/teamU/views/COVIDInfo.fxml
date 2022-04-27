@@ -1,120 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.COVIDInfoController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.COVIDInfoController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>
-                <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
-                    <children>
-                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
-                        <Button layoutX="243.0" layoutY="67.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect></Button>
-                        <Button layoutX="404.0" layoutY="67.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                        </Button>
-                        <Button layoutX="565.0" layoutY="67.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information" textFill="#044e9a">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                        </Button>
-                    </children>
-                </Pane>
-                <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
-                    <children>
-                        <Text layoutX="131.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
-                            <font>
-                                <Font name="System Bold" size="36.0" />
-                            </font>
-                        </Text>
-                    </children>
-                </Pane>
-                <StackPane fx:id="requestsStack" layoutX="-106.0" layoutY="121.0" prefWidth="1400.0">
-                    <children>
-                        <Pane fx:id="newRequestPane" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
-                     <children>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brigham Women's COVID Guidelines:">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Vaccine:">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham is offering appointments for first-dose vaccine for patients 5 years and older. We also offer COVID-19 booster shots to patients 12 years and older." wrappingWidth="740.78125">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Testing:">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you have symptoms or have been in close contact with someone who has COVID-19, testing is an important way to protect your family, friends, and community." wrappingWidth="728.009765625">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mask Policy:">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="As part of our continued efforts to protect our patients, visitors, staff, and the community, facility-issued face masks are required in all Mass General Brigham locations, including in inpatient areas, emergency departments, outpatient settings, and peri-procedural areas." wrappingWidth="747.009765625">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We screen to protect you, your families, and our staff" wrappingWidth="740.78125">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="34.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We clean our hands and spaces and make it easy for you to do the same" wrappingWidth="740.78125">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We protect everyone in our environment" wrappingWidth="740.78125">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visitor Policy:">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham understands that visitors and support persons are valuable parts of your health and well-being. The safety of our patients, staff, and community is very important to us. Our updated visitor policy went into effect March 14, 2022." wrappingWidth="747.009765625">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                     </children>
-                        </Pane>
-                    </children>
-                </StackPane>
+            <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+                  <Button layoutX="243.0" layoutY="701.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
+                      <font>
+                          <Font name="System Bold" size="18.0" />
+                      </font>
+                      <effect>
+                          <DropShadow />
+                      </effect>
+            </Button>
+                  <Button layoutX="404.0" layoutY="701.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                      <font>
+                          <Font name="System Bold" size="18.0" />
+                      </font>
+                      <effect>
+                          <DropShadow />
+                      </effect>
+                  </Button>
+                  <Button layoutX="565.0" layoutY="701.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information" textFill="#044e9a">
+                      <font>
+                          <Font name="System Bold" size="18.0" />
+                      </font>
+                      <effect>
+                          <DropShadow />
+                      </effect>
+                  </Button>
+                  <Text layoutX="725.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
+                      <font>
+                          <Font name="System Bold" size="36.0" />
+                      </font>
+                  </Text>
+                  <Pane fx:id="newRequestPane" layoutX="127.0" layoutY="121.0" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+               <children>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brigham Women's COVID Guidelines:">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Vaccine:">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham is offering appointments for first-dose vaccine for patients 5 years and older. We also offer COVID-19 booster shots to patients 12 years and older." wrappingWidth="740.78125">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 Testing:">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you have symptoms or have been in close contact with someone who has COVID-19, testing is an important way to protect your family, friends, and community." wrappingWidth="728.009765625">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mask Policy:">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="As part of our continued efforts to protect our patients, visitors, staff, and the community, facility-issued face masks are required in all Mass General Brigham locations, including in inpatient areas, emergency departments, outpatient settings, and peri-procedural areas." wrappingWidth="747.009765625">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We screen to protect you, your families, and our staff" wrappingWidth="740.78125">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="34.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We clean our hands and spaces and make it easy for you to do the same" wrappingWidth="740.78125">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We protect everyone in our environment" wrappingWidth="740.78125">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visitor Policy:">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham understands that visitors and support persons are valuable parts of your health and well-being. The safety of our patients, staff, and community is very important to us. Our updated visitor policy went into effect March 14, 2022." wrappingWidth="747.009765625">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+                  </Pane>
             <ImageView fitHeight="86.0" fitWidth="420.0" layoutX="122.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/hospitalName.png" />
