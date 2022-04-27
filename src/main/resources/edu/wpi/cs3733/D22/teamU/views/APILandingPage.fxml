@@ -108,7 +108,7 @@
             <Button layoutX="987.0" layoutY="170.0" mnemonicParsing="false" onAction="#toSettings" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="53.0" layoutY="301.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="50.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
-            <Pane fx:id="datePickerPane" layoutX="61.0" layoutY="444.0" prefHeight="193.0" prefWidth="125.0">
+            <Pane fx:id="datePickerPane" layoutX="66.0" layoutY="439.0" prefHeight="193.0" prefWidth="125.0">
                <children>
                   <DatePicker fx:id="datePicker" layoutY="1.0" prefHeight="26.0" prefWidth="0.0" />
                </children>
