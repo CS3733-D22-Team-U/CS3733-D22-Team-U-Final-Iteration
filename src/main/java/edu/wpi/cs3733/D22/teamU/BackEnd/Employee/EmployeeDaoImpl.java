@@ -84,7 +84,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currEmp);
+            // firebaseUpdate(currEmp);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql employee");
@@ -252,7 +252,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
 
     if (List.containsKey(data.getEmployeeID())) {
       List.replace(data.getEmployeeID(), data);
-      firebaseUpdate(data);
+      // firebaseUpdate(data);
     } else {
       System.out.println("Doesn't Exist");
     }

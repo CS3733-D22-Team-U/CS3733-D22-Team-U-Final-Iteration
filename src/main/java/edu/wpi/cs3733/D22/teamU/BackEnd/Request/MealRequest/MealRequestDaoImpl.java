@@ -161,7 +161,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currMeal);
+            // firebaseUpdate(currMeal);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql meal requests");
@@ -326,7 +326,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
         data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        firebaseUpdate(data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

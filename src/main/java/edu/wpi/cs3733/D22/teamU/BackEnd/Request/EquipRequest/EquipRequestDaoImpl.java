@@ -227,7 +227,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currReq);
+            // firebaseUpdate(currReq);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql equip requests");
@@ -344,7 +344,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        firebaseUpdate(data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

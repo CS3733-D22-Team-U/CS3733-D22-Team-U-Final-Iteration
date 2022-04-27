@@ -226,7 +226,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currLab);
+            // firebaseUpdate(currLab);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
@@ -346,7 +346,7 @@ public class LabRequestDaoImpl implements DataDao<LabRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        firebaseUpdate(data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

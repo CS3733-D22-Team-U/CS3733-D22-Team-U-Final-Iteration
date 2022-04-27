@@ -154,7 +154,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currGift);
+            // firebaseUpdate(currGift);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql gift requests");
@@ -331,7 +331,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
           data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        firebaseUpdate(data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

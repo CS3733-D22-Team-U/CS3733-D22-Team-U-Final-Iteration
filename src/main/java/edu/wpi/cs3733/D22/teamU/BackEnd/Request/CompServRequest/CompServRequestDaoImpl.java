@@ -154,7 +154,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currCSR);
+            // firebaseUpdate(currCSR);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql comp serv");
@@ -302,7 +302,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
-        firebaseUpdate(data);
+        // firebaseUpdate(data);
         this.JavaToCSV(csvFile);
       } else {
         System.out.println("No Such Employee Exists in Database");

@@ -131,7 +131,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currLoc);
+            // firebaseUpdate(currLoc);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql equipment");
@@ -308,7 +308,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
     // takes entries from SQL table that match input node and updates it amount and it's use
     try {
       list().set(search(data.Name), data);
-      firebaseUpdate(data);
+      // firebaseUpdate(data);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
