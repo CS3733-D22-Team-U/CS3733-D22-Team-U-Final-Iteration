@@ -37,6 +37,8 @@ import org.assertj.core.util.diff.Delta;
 public class MapController extends ServiceController {
 
   /*Edit Remove Popup*/
+  public ComboBox<Location> To;
+  public ComboBox<Location> From;
   public TextField popupNodeID;
   public TextField popupXCoord;
   public TextField popupFloor;
@@ -132,7 +134,6 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> nodeType;
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
-
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
