@@ -96,9 +96,21 @@ public class MealDeliveryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    try {
+      locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     for (Node checkBox : requestHolder.getChildren()) {
@@ -106,7 +118,13 @@ public class MealDeliveryController extends ServiceController {
     }
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    try {
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
 
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
@@ -140,11 +158,11 @@ public class MealDeliveryController extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);
