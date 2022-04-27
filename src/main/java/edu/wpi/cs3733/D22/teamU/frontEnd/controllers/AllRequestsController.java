@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,10 +31,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
-public class AllRequestsController implements Initializable {
+public class AllRequestsController extends ServiceController implements Initializable {
   @FXML TableColumn<RequestUI, String> allID;
   @FXML TableColumn<RequestUI, String> allType;
   @FXML TableColumn<RequestUI, String> allEmployeeF;
@@ -49,6 +52,8 @@ public class AllRequestsController implements Initializable {
   ObservableList<RequestUI> allRequests = FXCollections.observableArrayList();
 
   @FXML TableView<RequestUI> activeRequestTable;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +65,22 @@ public class AllRequestsController implements Initializable {
       e.printStackTrace();
     }
     // testing... System.out.println("we are here");
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -354,4 +375,13 @@ public class AllRequestsController implements Initializable {
     Button button = (Button) mouseEvent.getSource();
     button.setStyle("-fx-border-color: transparent");
   }
+
+  @Override
+  public void addRequest() throws SQLException, IOException {}
+
+  @Override
+  public void removeRequest() {}
+
+  @Override
+  public void updateRequest() {}
 }
