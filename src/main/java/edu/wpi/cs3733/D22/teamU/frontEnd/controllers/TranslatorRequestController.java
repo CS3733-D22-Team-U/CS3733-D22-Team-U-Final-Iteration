@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +30,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class TranslatorRequestController extends ServiceController {
@@ -58,6 +62,8 @@ public class TranslatorRequestController extends ServiceController {
   @FXML TextArea inputLanguage;
   @FXML TextArea inputPatient;
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   ObservableList<TranslatorRequest> translatorUIRequests = FXCollections.observableArrayList();
   // Udb udb;
@@ -78,14 +84,27 @@ public class TranslatorRequestController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllTranslatorReq();
+    try {
+      setUpAllTranslatorReq();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
@@ -93,14 +112,43 @@ public class TranslatorRequestController extends ServiceController {
 
     // Displays Emloyee in Table View
     staff = new ArrayList<>();
-    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(e);
+    try {
+      for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(e);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     handleTime();
+    handleBar();
+  }
+
+  public void toTranslateHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/translationHelp.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {
@@ -361,8 +409,8 @@ public class TranslatorRequestController extends ServiceController {
     newReqButton.setUnderline(false);
 
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 

@@ -18,8 +18,16 @@ public abstract class ServiceController implements Initializable, Service {
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
+  public void toSettingsPage(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
   public void toHome(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/Dashboard.fxml");
+
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
@@ -82,15 +90,7 @@ public abstract class ServiceController implements Initializable, Service {
   }
 
   public void toSideView(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/map.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-    masterThread.stop();
-  }
-
-  public void toLabRequestHelp(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/labRequestHelpPage.fxml");
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/sideView.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
@@ -122,7 +122,15 @@ public abstract class ServiceController implements Initializable, Service {
   }
 
   public void toMap(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/sideView.fxml");
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/map.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+    masterThread.stop();
+  }
+
+  public void toMapEditor(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/map.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
@@ -145,7 +153,7 @@ public abstract class ServiceController implements Initializable, Service {
     masterThread.stop();
   }
 
-  public void toSeurity(ActionEvent actionEvent) throws IOException {
+  public void toSecurity(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/securityRequestUI.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
@@ -210,6 +218,13 @@ public abstract class ServiceController implements Initializable, Service {
 
   public void toEmployeePage(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/employeePage.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
+
+  public void toAPI(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/APILandingPage.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();

@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -36,6 +37,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class MedicineDeliveryController extends ServiceController {
@@ -71,6 +73,8 @@ public class MedicineDeliveryController extends ServiceController {
   @FXML AnchorPane bigPane;
   @FXML TabPane tab;
   @FXML TextField destination;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   @FXML Text time;
 
@@ -188,6 +192,22 @@ public class MedicineDeliveryController extends ServiceController {
     // BooleanBinding submit =locations.idProperty().isEmpty().and(
     // Bindings.createBooleanBinding(checkBoxes.stream().noneMatch(JFXCheckBox::isSelected)));
     // handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
     // =============initialize fxml and controller=============================
     EditRequestPopUp = new AnchorPane();
     try {
@@ -212,6 +232,13 @@ public class MedicineDeliveryController extends ServiceController {
     submitEditButton.setVisible(false);
     // =========================================
 
+  }
+
+  public void toMedicineHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/medHelp.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
   }
 
   private void handleTime() {
@@ -323,8 +350,8 @@ public class MedicineDeliveryController extends ServiceController {
     newReqButton.setUnderline(false);
 
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 

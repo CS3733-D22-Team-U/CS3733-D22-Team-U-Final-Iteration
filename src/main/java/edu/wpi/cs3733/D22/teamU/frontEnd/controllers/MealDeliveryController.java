@@ -15,12 +15,14 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +31,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class MealDeliveryController extends ServiceController {
@@ -66,6 +70,8 @@ public class MealDeliveryController extends ServiceController {
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
   ObservableList<MealRequest> meals = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
 
@@ -129,6 +135,22 @@ public class MealDeliveryController extends ServiceController {
     submitEditButton.setVisible(false);
     // =========================================
 
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {
@@ -152,6 +174,13 @@ public class MealDeliveryController extends ServiceController {
       Employee empty = new Employee("N/A");
       return empty;
     }
+  }
+
+  public void toMealHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/MealHelp.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -351,8 +380,8 @@ public class MealDeliveryController extends ServiceController {
     newReqButton.setUnderline(false);
 
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 
