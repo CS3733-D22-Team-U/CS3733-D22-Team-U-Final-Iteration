@@ -23,13 +23,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import lombok.SneakyThrows;
 
@@ -42,8 +41,7 @@ public class LaundryController extends ServiceController {
   @FXML Button activeReqButton;
   @FXML ComboBox<Location> locations;
   @FXML ComboBox<Employee> employees;
-  @FXML Button submitButton;
-  @FXML Button clearButton;
+
   @FXML Text time;
   @FXML DatePicker pickupDateInput;
   @FXML DatePicker dropOffDateInput;
@@ -66,9 +64,23 @@ public class LaundryController extends ServiceController {
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
 
+  // =========declare buttons, popup pane and controller===========
+  RequestEditController newCon;
+  AnchorPane EditRequestPopUp;
+  @FXML Button editButton;
+  @FXML Button closeButton;
+  @FXML Button submitEditButton;
+  @FXML Button removeButton;
+  // ================================================
+
+  @FXML Button submitButton;
+  @FXML Button clearButton;
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
 
     setUpActiveRequests();
     for (Node checkBox : requestHolder.getChildren()) {
@@ -118,6 +130,30 @@ public class LaundryController extends ServiceController {
                 setDisable(empty || date.compareTo(today) < 0);
               }
             });
+
+    // =============initialize fxml and controller=============================
+    EditRequestPopUp = new AnchorPane();
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
+      EditRequestPopUp = loader.load();
+      newCon = (RequestEditController) loader.getController();
+
+      EditRequestPopUp.setLayoutX(100);
+      EditRequestPopUp.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    // =====================================================================
+
+    // ==============initialize edit stuff visibility ================
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    // =========================================
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -253,11 +289,47 @@ public class LaundryController extends ServiceController {
         .start();
   }
 
+  // =============Update the request from edit======================
   @Override
-  public void removeRequest() {}
+  public void updateRequest() {
+    // -----change------------
+    LaundryRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
+    newCon.updateRequest();
+    LaundryRequest request = (LaundryRequest) newCon.getRequest();
+    request.gettingTheLocation();
+    laundryRequests.remove(oldRequest);
+    laundryRequests.add(request);
+    activeRequestTable.setItems(laundryRequests);
+    // ----------------------------------------------
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
 
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  // ====================================================
+
+  // ======remove edit request=============
   @Override
-  public void updateRequest() {}
+  public void removeRequest() {
+    // ---CHANGE---
+    LaundryRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
+    laundryRequests.remove(request);
+    // -----------
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeEdit();
+  }
+  // ====================================
 
   public void switchToNewRequest(ActionEvent actionEvent) {
     ObservableList<Node> stackNodes = requestsStack.getChildren();
@@ -269,6 +341,14 @@ public class LaundryController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+
+    // =========edit and remove buttons========
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    EditRequestPopUp.setVisible(false);
+    // =====================================
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -279,8 +359,14 @@ public class LaundryController extends ServiceController {
     }
     active.setVisible(true);
     active.toBack();
+
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+
+    // =====edit and remove buttons=====
+    editButton.setVisible(true);
+    removeButton.setVisible(true);
+    // ====================================
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
@@ -303,4 +389,42 @@ public class LaundryController extends ServiceController {
   }
 
   public void clearRequest(ActionEvent actionEvent) {}
+
+  // ==========edit button==========================
+  public void editClick(MouseEvent event) {
+    if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+
+      submitEditButton.setVisible(true);
+      closeButton.setVisible(true);
+      EditRequestPopUp.setVisible(true);
+      Pane pane = (Pane) editButton.getParent();
+      if (!pane.getChildren().contains(EditRequestPopUp)) {
+        pane.getChildren().add(EditRequestPopUp);
+      }
+      newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
+    }
+  }
+  // ==============================================
+
+  // =======submit edit button===========
+  public void submitEdit(MouseEvent event) {
+    this.updateRequest();
+    closeEdit();
+  }
+  // =====================================
+
+  // =====close edit pane===================
+  public void closeEdit() {
+    activeRequestTable.getSelectionModel().clearSelection();
+    EditRequestPopUp.setVisible(false);
+    submitEditButton.setVisible(false);
+    closeButton.setVisible(false);
+  }
+  // ======================================
+
+  // ====remove req ======
+  public void editRemoveReq() {
+    removeRequest();
+  }
+  // =========================
 }
