@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.equipSim;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.Edge;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.PathFinding;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
@@ -1008,5 +1009,19 @@ public class MapController extends ServiceController {
       }
       SRVicon = true;
     }
+  }
+
+  public void simulate(MouseEvent mouseevent)
+  {
+    double time = 10; // in hours
+    String equip = "PUMPS"; // equipment to be simulate
+    //ArrayList<equipSim> myEquip =
+    // Toggle Icons Off
+    if (LOCicon != false)
+    {
+      dispALL(mouseevent);
+    }
+
+    //
   }
 }
