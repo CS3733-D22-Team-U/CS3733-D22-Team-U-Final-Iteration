@@ -97,7 +97,6 @@ public class DashboardController extends ServiceController {
             });
 
     userName.setText("Dr." + "____");
-
     handleNavButtons();
     handeDateTime();
     handleTurtle();
