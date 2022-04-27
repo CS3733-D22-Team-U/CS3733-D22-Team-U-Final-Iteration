@@ -132,15 +132,19 @@ public class LocationNode extends Group {
       switch (name) {
         case "Beds":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
+          location.getEquipment().get(i).getLocation().setNodeType("BEDS");
           break;
         case "Infusion Pumps":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
+          location.getEquipment().get(i).getLocation().setNodeType("PUMP");
           break;
         case "Recliners":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
+          location.getEquipment().get(i).getLocation().setNodeType("RECL");
           break;
         default:
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/DefaultEquip.png");
+          location.getEquipment().get(i).getLocation().setNodeType("EQUP");
       }
     }
   }
@@ -155,7 +159,23 @@ public class LocationNode extends Group {
         addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
         break;
       case "DIRT":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
+        for (int i = 0; i < location.getEquipment().size(); i++) {
+          String currE = location.getEquipment().get(i).getName().trim();
+          if (currE.equals("Recliners")) {
+            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
+            location.getEquipment().get(i).getLocation().setNodeType("RECL");
+          }
+          if (currE.equals("Beds")) {
+            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
+            location.getEquipment().get(i).getLocation().setNodeType("BEDS");
+          }
+          if (currE.equals("Infusion Pumps")) {
+            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
+            location.getEquipment().get(i).getLocation().setNodeType("PUMP");
+          } else {
+            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
+          }
+        }
         break;
       case "HALL":
         addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");

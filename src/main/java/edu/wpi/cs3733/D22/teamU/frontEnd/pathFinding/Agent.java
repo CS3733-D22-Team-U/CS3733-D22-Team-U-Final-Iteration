@@ -12,6 +12,14 @@ public class Agent implements Comparable<Agent>, Cloneable {
     this.current = current;
     this.goal = goal;
     this.distance = 0;
+    edges = new ArrayList<>();
+  }
+
+  private Agent(Location current, Location goal, ArrayList<Edge> edges, double distance) {
+    this.current = current;
+    this.goal = goal;
+    this.distance = distance;
+    this.edges = edges;
   }
 
   public void move(Edge moved, Location current) {
@@ -42,6 +50,6 @@ public class Agent implements Comparable<Agent>, Cloneable {
 
   @Override
   public Object clone() throws CloneNotSupportedException {
-    return super.clone();
+    return new Agent(current, goal, (ArrayList<Edge>) edges.clone(), distance);
   }
 }
