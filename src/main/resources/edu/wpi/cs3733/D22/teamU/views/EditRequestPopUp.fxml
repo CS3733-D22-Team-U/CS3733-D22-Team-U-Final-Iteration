@@ -44,14 +44,14 @@
             </Pane>
             <Pane fx:id="medicineFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: RED;" visible="false">
                <children>
-                  <TextField fx:id="amount" layoutX="14.0" layoutY="75.0" />
+                  <TextField fx:id="amountMed" layoutX="14.0" layoutY="75.0" />
                   <Text layoutX="66.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
                </children>
             </Pane>
             <Pane fx:id="labFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Orange;" visible="false">
                <children>
                   <TextField fx:id="labType" layoutX="14.0" layoutY="75.0" />
-                  <TextField fx:id="amount" layoutX="235.0" layoutY="75.0" />
+                  <TextField fx:id="amountLab" layoutX="235.0" layoutY="75.0" />
                   <Text layoutX="61.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Type" wrappingWidth="53.529296875" />
                   <Text layoutX="282.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" wrappingWidth="53.529296875" />
                </children>
@@ -68,7 +68,7 @@
             </Pane>
             <Pane fx:id="securityFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: GREY;" visible="false">
                <children>
-                  <TextField fx:id="description" layoutX="14.0" layoutY="75.0" />
+                  <TextField fx:id="descriptionSec" layoutX="14.0" layoutY="75.0" />
                   <Text layoutX="58.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                   <TextField fx:id="lethalForce" layoutX="235.0" layoutY="75.0" />
                   <Text layoutX="279.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lethal Force" />
@@ -77,7 +77,7 @@
             <Pane fx:id="compServFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: PINK;" visible="false">
                <children>
                   <TextField fx:id="device" layoutX="14.0" layoutY="75.0" />
-                  <TextField fx:id="message" layoutX="233.0" layoutY="75.0" />
+                  <TextField fx:id="messageCom" layoutX="233.0" layoutY="75.0" />
                   <Text layoutX="66.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Device" />
                   <Text layoutX="284.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" />
                </children>

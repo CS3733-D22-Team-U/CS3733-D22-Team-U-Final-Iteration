@@ -40,15 +40,19 @@ public class RequestEditController {
   @FXML TextField priority;
   @FXML TextField labType;
   @FXML TextField description;
+  @FXML TextField descriptionSec;
   @FXML TextField lethalForce;
   @FXML TextField typeOfMain;
   @FXML TextField message;
+  @FXML TextField messageCom;
   @FXML TextField device;
   @FXML TextField dietRest;
   @FXML TextField addNotes;
   @FXML TextField gifts;
   @FXML TextField religion;
   @FXML TextField toLang;
+  @FXML TextField amountMed;
+  @FXML TextField amountLab;
 
   @FXML StackPane specialFields;
   @FXML Pane religiousFields;
@@ -109,7 +113,7 @@ public class RequestEditController {
       case "LabRequest":
         fields.add("ID");
         fields.add("name");
-        fields.add("amount");
+        fields.add("amountLab");
         fields.add("patientName");
         fields.add("status");
         fields.add("employee");
@@ -122,7 +126,7 @@ public class RequestEditController {
       case "MedicineRequest":
         fields.add("ID");
         fields.add("name");
-        fields.add("amount");
+        fields.add("amountMed");
         fields.add("patientName");
         fields.add("status");
         fields.add("employee");
@@ -214,7 +218,7 @@ public class RequestEditController {
 
       case "CompServRequest":
         fields.add("ID");
-        fields.add("message");
+        fields.add("messageCom");
         fields.add("status");
         fields.add("employee");
         fields.add("destination");
@@ -284,6 +288,12 @@ public class RequestEditController {
         case "amount":
           newRequest.setAmount(Integer.parseInt(amount.getText().trim()));
           break;
+        case "amountMed":
+          newRequest.setAmount(Integer.parseInt(amountMed.getText().trim()));
+          break;
+        case "amountLab":
+          newRequest.setAmount(Integer.parseInt(amountLab.getText().trim()));
+          break;
         case "typeOfRequest":
           newRequest.setTypeOfRequest(typeOfRequest.getText().trim());
           break;
@@ -291,10 +301,10 @@ public class RequestEditController {
           newRequest.setPriority(Integer.parseInt(priority.getText().trim()));
           break;
         case "descriptionOfThreat":
-          newRequest.setDescript(description.getText().trim());
+          newRequest.setDescriptionOfThreat(descriptionSec.getText().trim());
           break;
-        case "leathalForcePermitted":
-          newRequest.setLethal(lethalForce.getText().trim());
+        case "leathalForcePermited":
+          newRequest.setLeathalForcePermited(lethalForce.getText().trim());
           break;
         case "typeOfMaintenance":
           newRequest.setTypeOfMaintenance(typeOfMain.getText().trim());
@@ -304,6 +314,9 @@ public class RequestEditController {
           break;
         case "message":
           newRequest.setMessage(message.getText().trim());
+          break;
+        case "messageCom":
+          newRequest.setMessage(messageCom.getText().trim());
           break;
         case "device":
           newRequest.setDevice(device.getText().trim());
@@ -353,6 +366,7 @@ public class RequestEditController {
         case "destination":
           locations.setValue(request.getLocation());
           break;
+
         case "pickUpDate":
           pickUp.setValue(LocalDate.parse(request.getPickUpDate()));
           break;
@@ -371,29 +385,32 @@ public class RequestEditController {
         case "amount":
           amount.setText(String.valueOf(request.getAmount()));
           break;
+        case "amountMed":
+          amountMed.setText(String.valueOf(request.getAmount()));
+          break;
+        case "amountLab":
+          amountLab.setText(String.valueOf(request.getAmount()));
+          break;
         case "typeOfRequest":
           typeOfRequest.setText(request.getTypeOfRequest());
           break;
         case "priority":
           priority.setText(String.valueOf(request.getPriority()));
           break;
-        case "labType":
-          labType.setText(request.getLabType());
-          break;
-        case "descript":
-          description.setText(request.getDescript());
-          break;
-        case "lethal":
-          lethalForce.setText(request.getLethal());
+        case "leathalForcePermited":
+          lethalForce.setText(request.getLeathalForcePermited());
           break;
         case "typeOfMaintenance":
           typeOfMain.setText(request.getTypeOfMaintenance());
           break;
-        case "description":
-          description.setText(request.getDescription());
+        case "descriptionOfThreat":
+          descriptionSec.setText(request.getDescriptionOfThreat());
           break;
         case "message":
           message.setText(request.getMessage());
+          break;
+        case "messageCom":
+          messageCom.setText(request.getMessage());
           break;
         case "device":
           device.setText(request.getDevice());

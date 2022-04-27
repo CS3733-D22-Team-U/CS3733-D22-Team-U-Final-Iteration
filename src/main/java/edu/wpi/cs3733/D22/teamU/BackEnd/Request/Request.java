@@ -95,28 +95,20 @@ public class Request {
     this.priority = priority;
   }
 
-  public String getLabType() {
-    return labType;
+  public String getDescriptionOfThreat() {
+    return this.descriptionOfThreat;
   }
 
-  public void setLabType(String labType) {
-    this.labType = labType;
+  public void setDescriptionOfThreat(String descriptionOfThreat) {
+    this.descriptionOfThreat = descriptionOfThreat;
   }
 
-  public String getDescript() {
-    return descript;
+  public String getLeathalForcePermited() {
+    return this.leathalForcePermited;
   }
 
-  public void setDescript(String descript) {
-    this.descript = descript;
-  }
-
-  public String getLethal() {
-    return lethal;
-  }
-
-  public void setLethal(String lethal) {
-    this.lethal = lethal;
+  public void setLeathalForcePermited(String leathalForcePermited) {
+    this.leathalForcePermited = leathalForcePermited;
   }
 
   public String getTypeOfMaintenance() {
@@ -198,9 +190,8 @@ public class Request {
   Integer amount;
   String typeOfRequest;
   Integer priority;
-  String labType;
-  String descript;
-  String lethal;
+  String descriptionOfThreat;
+  String leathalForcePermited;
   String typeOfMaintenance;
   String description;
   String message;
