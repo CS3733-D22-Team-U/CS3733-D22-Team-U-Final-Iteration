@@ -61,12 +61,12 @@
                         <Image url="@../icons/menuBar/cautionIconBLUE.png" />
                     </image>
                 </ImageView>
-                <Button layoutX="349.0" layoutY="426.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Transportation API" textFill="WHITE">
+                <Button layoutX="350.0" layoutY="379.0" mnemonicParsing="false" onAction="#openTransport" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Transportation API" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Button>
-                <Button layoutX="604.0" layoutY="426.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Sanitation API" textFill="WHITE">
+                <Button layoutX="605.0" layoutY="379.0" mnemonicParsing="false" onAction="#toSanitation" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Sanitation API" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
@@ -76,22 +76,22 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-            <Button layoutX="855.0" layoutY="426.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Medicine API" textFill="WHITE">
+            <Button layoutX="856.0" layoutY="379.0" mnemonicParsing="false" onAction="#toMedicine" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Medicine API" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Text fill="#044e9a" layoutX="430.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z">
+            <Text fill="#044e9a" layoutX="431.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="685.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D">
+            <Text fill="#044e9a" layoutX="686.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="930.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team U">
+            <Text fill="#044e9a" layoutX="931.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team U">
                <font>
                   <Font size="20.0" />
                </font>

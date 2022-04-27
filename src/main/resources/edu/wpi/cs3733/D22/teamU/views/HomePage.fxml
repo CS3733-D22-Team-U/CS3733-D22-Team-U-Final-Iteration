@@ -93,7 +93,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
+            <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toMap" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
