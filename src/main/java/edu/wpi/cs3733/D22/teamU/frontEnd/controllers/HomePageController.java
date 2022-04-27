@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -18,8 +19,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -58,6 +61,7 @@ public class HomePageController extends ServiceController {
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
   @FXML Text message;
+  @FXML DatePicker datePicker;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -65,6 +69,16 @@ public class HomePageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    datePicker = new DatePicker(LocalDate.now());
+    DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+    datePickerSkin.getDisplayNode().setLayoutY(datePicker.getLayoutY());
+    datePickerSkin.getDisplayNode().setLayoutX(datePicker.getLayoutX());
+    datePickerSkin.getPopupContent();
+    datePickerSkin.show();
+    Node popupContent = datePickerSkin.getPopupContent();
+//[...]
+    LocalDate selectedDate = datePicker.getValue();
+
 
     try {
       listofEmployees();
