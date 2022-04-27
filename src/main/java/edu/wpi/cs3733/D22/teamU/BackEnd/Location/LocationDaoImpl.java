@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Location;
 
-import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
@@ -13,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class LocationDaoImpl implements DataDao<Location> {
 
@@ -100,18 +99,13 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
-
-        // checking if the data already exists
-        DocumentReference docRef = db.collection("locations").document(currLoc.getNodeID());
-        ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
-          if (!ds.get().exists() || ds.get() == null) {
-            firebaseUpdate(currLoc);
-          }
-        } catch (Exception e) {
-          System.out.println("firebase error in java to sql locations");
+          firebaseUpdate(currLoc);
+        } catch (ExecutionException e) {
+          throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
         }
-
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -137,8 +131,15 @@ public class LocationDaoImpl implements DataDao<Location> {
     }
   }
 
-  public void firebaseUpdate(Location loc) {
+  public void firebaseUpdate(Location loc) throws ExecutionException, InterruptedException {
     DocumentReference docRef = db.collection("locations").document(loc.nodeID);
+    // ApiFuture<DocumentSnapshot> ds = docRef.get();
+    // if (!ds.get().exists() || ds == null) {
+    firebaseAdd(loc, docRef);
+    // }
+  }
+
+  public void firebaseAdd(Location loc, DocumentReference docRef) {
     Map<String, Object> data = new HashMap<>();
     data.put("xcoord", loc.xcoord);
     data.put("ycoord", loc.ycoord);
@@ -286,8 +287,8 @@ public class LocationDaoImpl implements DataDao<Location> {
     // input ID
     try {
       list().set(search(data.nodeID), data);
+      firebaseAdd(data, db.collection("locations").document(data.nodeID));
       this.JavaToSQL(); // t
-      firebaseUpdate(data);
       this.JavaToCSV(csvFile); // t
     } catch (Exception e) {
       System.out.println("This Object Does Not Exist");
