@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="752.0" fitWidth="1135.0">
                <image>
-                  <Image url="@../../../../../../../../../../../Downloads/background.png" />
+                  <Image url="@background.png" />
                </image>
             </ImageView>
             <Pane layoutX="954.0" layoutY="2.0" prefHeight="751.0" prefWidth="168.0">
@@ -43,26 +43,6 @@
                   <children>
                       <TabPane layoutX="-25.0" layoutY="140.0" prefHeight="552.0" prefWidth="847.0" side="LEFT" stylesheets="@../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                              <Tab text="Table View">
-                                  <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="872.0">
-                                          <children>
-                                              <TableView fx:id="mapTable" layoutX="3.0" layoutY="-27.0" prefHeight="534.0" prefWidth="1010.0">
-                                                  <columns>
-                                                      <TableColumn fx:id="nodeID" prefWidth="117.0" text="NodeId" />
-                                                      <TableColumn prefWidth="88.0" text="xCoord" fx:id="x" />
-                                                      <TableColumn fx:id="y" prefWidth="88.0" text="yCoord" />
-                                                      <TableColumn fx:id="floor" prefWidth="61.0" text="Floor" />
-                                                      <TableColumn fx:id="building" prefWidth="86.933349609375" text="Building" />
-                                                      <TableColumn fx:id="nodeType" prefWidth="78.66665649414062" text="Node Type" />
-                                                      <TableColumn fx:id="longName" prefWidth="198.0" text="Long Name" />
-                                                      <TableColumn fx:id="shortName" minWidth="0.0" prefWidth="147.0" text="Short Name" />
-                                                  </columns>
-                                              </TableView>
-                                          </children>
-                                      </AnchorPane>
-                                  </content>
-                              </Tab>
                               <Tab text="Map View">
                                   <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -225,6 +205,26 @@
                                       </AnchorPane>
                                   </content>
                               </Tab>
+                              <Tab text="Table View">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="872.0">
+                                          <children>
+                                              <TableView fx:id="mapTable" layoutX="3.0" layoutY="-27.0" prefHeight="534.0" prefWidth="1010.0">
+                                                  <columns>
+                                                      <TableColumn fx:id="nodeID" prefWidth="117.0" text="NodeId" />
+                                                      <TableColumn prefWidth="88.0" text="xCoord" fx:id="x" />
+                                                      <TableColumn fx:id="y" prefWidth="88.0" text="yCoord" />
+                                                      <TableColumn fx:id="floor" prefWidth="61.0" text="Floor" />
+                                                      <TableColumn fx:id="building" prefWidth="86.933349609375" text="Building" />
+                                                      <TableColumn fx:id="nodeType" prefWidth="78.66665649414062" text="Node Type" />
+                                                      <TableColumn fx:id="longName" prefWidth="198.0" text="Long Name" />
+                                                      <TableColumn fx:id="shortName" minWidth="0.0" prefWidth="147.0" text="Short Name" />
+                                                  </columns>
+                                              </TableView>
+                                          </children>
+                                      </AnchorPane>
+                                  </content>
+                              </Tab>
                           </tabs>
                       </TabPane>
                   <Group>
@@ -240,7 +240,7 @@
       </Group>
       <Group>
          <children>
-            <Button fx:id="Go" layoutX="465.0" layoutY="114.0" mnemonicParsing="false" text="Go" />
+            <Button fx:id="Go" layoutX="465.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#findPath" text="Go" />
             <Pane layoutX="121.0" layoutY="665.0" prefHeight="82.0" prefWidth="600.0">
                <children>
                   <Circle fx:id="add" fill="#3bafb4" layoutX="47.0" layoutY="47.0" onMouseClicked="#popUpAdd" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />

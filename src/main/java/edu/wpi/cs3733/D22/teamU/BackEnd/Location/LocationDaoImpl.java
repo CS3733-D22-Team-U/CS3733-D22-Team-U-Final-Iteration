@@ -18,6 +18,7 @@ public class LocationDaoImpl implements DataDao<Location> {
   // make constant in locationDao
   public Statement statement;
   public ArrayList<Location> locations = new ArrayList<Location>();
+  public HashMap<String, Location> hashLocations = new HashMap<>();
   public String csvFile;
 
   /**
@@ -40,14 +41,15 @@ public class LocationDaoImpl implements DataDao<Location> {
   @Override
   public void CSVToJava() throws IOException {
     locations = new ArrayList<Location>();
+    hashLocations = new HashMap<>();
     String s;
     File file = new File(csvFile);
     BufferedReader br = new BufferedReader(new FileReader(file));
     br.readLine();
     while ((s = br.readLine()) != null) {
       String[] row = s.split(",");
-      if (row.length == 8)
-        locations.add(
+      if (row.length == 8) {
+        Location temp =
             new Location(
                 row[0],
                 Integer.parseInt(row[1]),
@@ -56,7 +58,10 @@ public class LocationDaoImpl implements DataDao<Location> {
                 row[4],
                 row[5],
                 row[6],
-                row[7]));
+                row[7]);
+        locations.add(temp);
+        hashLocations.put(temp.nodeID, temp);
+      }
     }
   }
 
@@ -70,7 +75,7 @@ public class LocationDaoImpl implements DataDao<Location> {
 
   @Override
   public HashMap<String, Location> hList() {
-    return null;
+    return hashLocations;
   }
 
   /**
@@ -161,7 +166,7 @@ public class LocationDaoImpl implements DataDao<Location> {
   @Override
   public void SQLToJava() {
     locations = new ArrayList<Location>();
-
+    hashLocations = new HashMap<>();
     try {
       ResultSet results;
       results = statement.executeQuery("SELECT * FROM Locations");
@@ -187,6 +192,7 @@ public class LocationDaoImpl implements DataDao<Location> {
         SQLRow.shortName = shortName;
 
         locations.add(SQLRow);
+        hashLocations.put(SQLRow.nodeID, SQLRow);
       }
     } catch (SQLException e) {
       System.out.println("location does not exist.");

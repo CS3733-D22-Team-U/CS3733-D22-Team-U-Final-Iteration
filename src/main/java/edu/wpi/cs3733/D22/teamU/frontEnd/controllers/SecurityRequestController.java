@@ -19,10 +19,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -60,6 +62,15 @@ public class SecurityRequestController extends ServiceController {
 
   @FXML TextArea textInput;
 
+  // =========declare buttons, popup pane and controller===========
+  RequestEditController newCon;
+  AnchorPane EditRequestPopUp;
+  @FXML Button editButton;
+  @FXML Button closeButton;
+  @FXML Button submitEditButton;
+  @FXML Button removeButton;
+  // ================================================
+
   ObservableList<SecurityRequest> securityUIRequests = FXCollections.observableArrayList();
   ArrayList<String> nodeIDs;
   ArrayList<String> staff;
@@ -91,6 +102,30 @@ public class SecurityRequestController extends ServiceController {
     fillStaff();
 
     handleTime();
+
+    // =============initialize fxml and controller=============================
+    EditRequestPopUp = new AnchorPane();
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
+      EditRequestPopUp = loader.load();
+      newCon = (RequestEditController) loader.getController();
+
+      EditRequestPopUp.setLayoutX(100);
+      EditRequestPopUp.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    // =====================================================================
+
+    // ==============initialize edit stuff visibility ================
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    // =========================================
   }
 
   private void handleTime() {
@@ -279,11 +314,47 @@ public class SecurityRequestController extends ServiceController {
         .start();
   }
 
+  // ======remove edit request=============
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    // ---CHANGE---
+    SecurityRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
+    securityUIRequests.remove(request);
+    // -----------
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeEdit();
+  }
+  // ====================================
 
+  // =============Update the request from edit======================
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    // -----change------------
+    SecurityRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
+    newCon.updateRequest();
+    SecurityRequest request = (SecurityRequest) newCon.getRequest();
+    request.gettingTheLocation();
+    securityUIRequests.remove(oldRequest);
+    securityUIRequests.add(request);
+    activeRequestTable.setItems(securityUIRequests);
+    // ----------------------------------------------
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  // ====================================================
 
   public void clearRequest() {
     sucessRequest.setVisible(false);
@@ -324,6 +395,14 @@ public class SecurityRequestController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+
+    // =========edit and remove buttons========
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    EditRequestPopUp.setVisible(false);
+    // =====================================
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -336,6 +415,11 @@ public class SecurityRequestController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+
+    // =====edit and remove buttons=====
+    editButton.setVisible(true);
+    removeButton.setVisible(true);
+    // ====================================
   }
 
   public void mouseHovered(MouseEvent mouseEvent) {
@@ -347,4 +431,42 @@ public class SecurityRequestController extends ServiceController {
     Button button = (Button) mouseEvent.getSource();
     button.setStyle("-fx-border-color: transparent");
   }
+
+  // ==========edit button==========================
+  public void editClick(MouseEvent event) {
+    if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+
+      submitEditButton.setVisible(true);
+      closeButton.setVisible(true);
+      EditRequestPopUp.setVisible(true);
+      Pane pane = (Pane) editButton.getParent();
+      if (!pane.getChildren().contains(EditRequestPopUp)) {
+        pane.getChildren().add(EditRequestPopUp);
+      }
+      newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
+    }
+  }
+  // ==============================================
+
+  // =======submit edit button===========
+  public void submitEdit(MouseEvent event) {
+    this.updateRequest();
+    closeEdit();
+  }
+  // =====================================
+
+  // =====close edit pane===================
+  public void closeEdit() {
+    activeRequestTable.getSelectionModel().clearSelection();
+    EditRequestPopUp.setVisible(false);
+    submitEditButton.setVisible(false);
+    closeButton.setVisible(false);
+  }
+  // ======================================
+
+  // ====remove req ======
+  public void editRemoveReq() {
+    removeRequest();
+  }
+  // =========================
 }
