@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="477.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
+<AnchorPane prefHeight="477.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
    <children>
       <Pane prefHeight="327.0" prefWidth="427.0" style="-fx-background-color: BLUE;">
          <children>
@@ -54,14 +54,6 @@
                   <TextField fx:id="amount" layoutX="235.0" layoutY="75.0" />
                   <Text layoutX="61.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Type" wrappingWidth="53.529296875" />
                   <Text layoutX="282.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" wrappingWidth="53.529296875" />
-               </children>
-            </Pane>
-            <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="518.0" style="-fx-background-color: GREEN;" visible="false">
-               <children>
-                  <TextField fx:id="gift" layoutX="43.0" layoutY="75.0" />
-                  <TextField fx:id="message" layoutX="314.0" layoutY="75.0" />
-                  <Text layoutX="90.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift" wrappingWidth="53.529296875" />
-                  <Text layoutX="361.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="53.529296875" />
                </children>
             </Pane>
             <Pane fx:id="equipmentFields" prefHeight="150.0" prefWidth="467.0" style="-fx-background-color: Yellow;" visible="false">
@@ -122,6 +114,14 @@
                   <Text layoutX="271.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Drop off" wrappingWidth="82.13671875" />
                   <Text layoutX="90.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="53.529296875" />
                   <TextField fx:id="service" layoutX="42.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
+               </children>
+            </Pane>
+            <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="518.0" style="-fx-background-color: GREEN;">
+               <children>
+                  <TextField fx:id="gifts" layoutX="43.0" layoutY="75.0" />
+                  <TextField fx:id="message" layoutX="314.0" layoutY="75.0" />
+                  <Text layoutX="90.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift" wrappingWidth="53.529296875" />
+                  <Text layoutX="361.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="53.529296875" />
                </children>
             </Pane>
          </children></StackPane>

@@ -337,6 +337,9 @@ public class RequestEditController {
         case "patientName":
           patientName.setText(request.getPatientName());
           break;
+        case "name":
+          name.setText(request.getName());
+          break;
         case "employee":
           employees.setValue(request.getEmployee());
           break;
