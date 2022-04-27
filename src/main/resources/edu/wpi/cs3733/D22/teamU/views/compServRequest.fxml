@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -48,11 +49,6 @@
                </children>
             </HBox>
             <Text fx:id="time" layoutX="957.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-            <Text layoutX="631.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Computer Service Request">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Text>
             <StackPane fx:id="requestsStack" layoutX="219.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
                   <Pane fx:id="allRequestPane" maxHeight="559.0" maxWidth="756.0" minWidth="415.0" prefHeight="552.0" prefWidth="610.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
@@ -78,63 +74,54 @@
                         </TableView>
                      </children>
                   </Pane>
-                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="758.0" minWidth="415.0" prefHeight="552.0" prefWidth="648.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
+                  <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="758.0" minWidth="415.0" prefHeight="552.0" prefWidth="648.0" style="-fx-background-color: #A5D6D8 #A5D6D8; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
                         <HBox layoutX="174.0" layoutY="480.0" maxHeight="43.0" maxWidth="492.0" minHeight="25.0" minWidth="100.0" prefHeight="43.0" prefWidth="342.0" spacing="51.0" />
-                        <ComboBox id="destination" fx:id="locations" layoutX="375.0" layoutY="136.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                        <ComboBox id="destination" fx:id="employees" layoutX="375.0" layoutY="246.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                        <Pane layoutX="13.0" layoutY="16.0" maxHeight="530.0" maxWidth="384.0" minWidth="323.0" prefHeight="520.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                        <ComboBox id="destination" fx:id="locations" layoutX="385.0" layoutY="151.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox id="destination" fx:id="employees" layoutX="386.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <Pane layoutX="17.0" layoutY="114.0" maxHeight="530.0" maxWidth="384.0" minWidth="320.0" prefHeight="423.0" prefWidth="320.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
-                              <Text fx:id="textFromLanguage" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
+                              <Text fx:id="textFromLanguage" fill="#044e9a" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="28.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
-                              <HBox layoutX="-27.0" layoutY="480.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0">
-                                 <children>
-                                    <Button fx:id="submitButton" alignment="CENTER" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#addRequest" prefHeight="30.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="45.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="clearButton" alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearRequest" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="35.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <Text fx:id="textPatientName" layoutX="51.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Device" textAlignment="CENTER" wrappingWidth="219.0">
+                              <HBox layoutX="-27.0" layoutY="480.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0" />
+                              <Text fx:id="textPatientName" fill="#044e9a" layoutX="51.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Device" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="28.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
-                              <TextArea id="message" fx:id="messageBox" layoutX="27.0" layoutY="40.0" prefHeight="242.0" prefWidth="266.0" promptText="Description of Issue" wrapText="true">
+                              <TextArea id="message" fx:id="messageBox" layoutX="27.0" layoutY="40.0" prefHeight="198.0" prefWidth="266.0" promptText="Description of Issue" wrapText="true">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </TextArea>
-                              <TextArea id="device" fx:id="inputDevice" layoutX="10.0" layoutY="344.0" prefHeight="116.0" prefWidth="300.0" promptText="Troublesome Device">
+                              <TextArea id="device" fx:id="inputDevice" layoutX="26.0" layoutY="291.0" prefHeight="56.0" prefWidth="270.0" promptText="Troublesome Device">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </TextArea>
+                              <Button fx:id="submitButton" alignment="CENTER" layoutX="39.0" layoutY="370.0" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#addRequest" prefHeight="30.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="clearButton" alignment="CENTER" layoutX="183.0" layoutY="370.0" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearRequest" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </Pane>
-                        <Text fill="WHITE" layoutX="388.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER">
+                        <Text fill="WHITE" layoutX="431.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="432.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER">
+                        <Text fill="WHITE" layoutX="428.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                         <Text fx:id="output" fill="WHITE" layoutX="358.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="210.47698974609375">
@@ -142,6 +129,15 @@
                               <Font name="System Bold" size="28.0" />
                            </font>
                         </Text>
+                        <Pane prefHeight="84.0" prefWidth="615.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;">
+                           <children>
+                              <Text fill="WHITE" layoutX="33.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer Service Request">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
@@ -277,6 +273,60 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="341.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
+         <children>
+            <Circle fill="WHITE" layoutX="49.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="127.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="304.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="378.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="215.0" layoutY="45.0" radius="40.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/allRequests.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="90.0" layoutY="18.0" mnemonicParsing="false" onAction="#toMap" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/mapBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="343.0" layoutY="19.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcons/gear-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="180.0" layoutY="20.0" mnemonicParsing="false" onAction="#toHome" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="49.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/hospitalDashboardBLUE.png" />
+                     </image>
+                  </ImageView>
                </graphic>
             </Button>
          </children>

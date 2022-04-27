@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class MealDeliveryController extends ServiceController {
@@ -65,6 +67,8 @@ public class MealDeliveryController extends ServiceController {
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
   ObservableList<MealRequest> meals = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
 
@@ -80,9 +84,21 @@ public class MealDeliveryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    try {
+      locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     for (Node checkBox : requestHolder.getChildren()) {
@@ -90,10 +106,32 @@ public class MealDeliveryController extends ServiceController {
     }
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    try {
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
 
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {

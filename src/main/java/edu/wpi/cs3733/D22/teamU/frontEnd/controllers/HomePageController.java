@@ -61,6 +61,7 @@ public class HomePageController extends ServiceController {
   @FXML Button turtButton;
   @FXML Text message;
   @FXML DatePicker datePicker;
+  @FXML Text timeOfDay;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -117,6 +118,7 @@ public class HomePageController extends ServiceController {
     // handleTurtle();
     // playTurtle();
   }
+
   /*
    private void handleTurtle() {
      TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
@@ -174,6 +176,17 @@ public class HomePageController extends ServiceController {
   */
 
   private void handeDateTime() {
+    Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
+    String hour = sdf3.format(quickStamp).substring(11, 13);
+    int hourInt = Integer.parseInt(hour);
+    if (hourInt >= 0 && hourInt < 12) {
+      timeOfDay.setText("Good Morning ");
+    } else if (hourInt > 12 && hourInt <= 18) {
+      timeOfDay.setText("Good Afternoon ");
+    } else {
+      timeOfDay.setText("Good Evening ");
+    }
+
     Thread timeThread =
         new Thread(
             () -> {
