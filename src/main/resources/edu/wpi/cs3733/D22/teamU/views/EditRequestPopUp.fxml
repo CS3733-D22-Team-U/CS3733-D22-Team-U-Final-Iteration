@@ -50,9 +50,7 @@
             </Pane>
             <Pane fx:id="labFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Orange;" visible="false">
                <children>
-                  <TextField fx:id="labType" layoutX="14.0" layoutY="75.0" />
                   <TextField fx:id="amountLab" layoutX="235.0" layoutY="75.0" />
-                  <Text layoutX="61.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Type" wrappingWidth="53.529296875" />
                   <Text layoutX="282.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" wrappingWidth="53.529296875" />
                </children>
             </Pane>
