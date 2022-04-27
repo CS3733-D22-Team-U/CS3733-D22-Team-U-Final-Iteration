@@ -36,6 +36,7 @@ public class RequestEditController {
   @FXML DatePicker dropOff;
 
   @FXML TextField amount;
+  @FXML TextField amountMed;
   @FXML TextField typeOfRequest;
   @FXML TextField priority;
   @FXML TextField labType;
@@ -51,7 +52,6 @@ public class RequestEditController {
   @FXML TextField gifts;
   @FXML TextField religion;
   @FXML TextField toLang;
-  @FXML TextField amountMed;
   @FXML TextField amountLab;
 
   @FXML StackPane specialFields;
@@ -182,7 +182,7 @@ public class RequestEditController {
         fields.add("name");
         fields.add("date");
         fields.add("time");
-        fields.add("patient");
+        fields.add("patientName");
         fields.add("religion");
         fields.add("status");
         fields.add("destination");
@@ -291,6 +291,7 @@ public class RequestEditController {
         case "amountMed":
           newRequest.setAmount(Integer.parseInt(amountMed.getText().trim()));
           break;
+
         case "amountLab":
           newRequest.setAmount(Integer.parseInt(amountLab.getText().trim()));
           break;
