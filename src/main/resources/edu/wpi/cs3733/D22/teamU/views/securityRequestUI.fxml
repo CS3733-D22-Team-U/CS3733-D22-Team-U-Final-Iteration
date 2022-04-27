@@ -18,12 +18,15 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <HBox layoutX="850.0" layoutY="680.0">
+            <HBox layoutX="863.0" layoutY="679.0">
                <children>
                         <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets right="-15.0" />
+                     </HBox.margin>
                         </Button>
                         <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
                             <font>
