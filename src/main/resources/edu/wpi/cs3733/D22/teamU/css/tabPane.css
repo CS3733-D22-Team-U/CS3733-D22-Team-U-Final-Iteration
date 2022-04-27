@@ -4,7 +4,7 @@
 
 .tab-pane
 {
-    -fx-tab-min-width:90px;
+    -fx-tab-min-width:57px;
 }
 
 .tab{
@@ -12,18 +12,18 @@
 }
 .tab-pane .tab
 {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: #ffffff;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #054f99;
+    -fx-background-color: #3bafb4;
 }
 
 .tab .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #828282;
+    -fx-text-fill: #3bafb4;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }

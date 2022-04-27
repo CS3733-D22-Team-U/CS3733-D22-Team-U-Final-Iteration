@@ -2,6 +2,5 @@ ID,Name,Amount,PatientName,Status,EmployeeName,Location,Date,Time
 MED3083,Alprozalam,2,p,In progress,00002,FSERV00101,2022-04-24,21:48:45
 MED194,Amphetamine Salt,12,leeee,In progress,00002,CHALL007L2,2022-04-25,16:33:20
 MED7242,Al,5,jfeji,In progress,00005,HHALL00202,2022-04-24,21:32:38
-MED8392,Pills,2,will,In progress,00002,FHALL02601,2022-04-24,20:42:38
 MED3496,Oxycodone,6,skjs,In progress,00001,HHALL00203,2022-04-24,22:39:38
 MED29,Metformin,2,kdf,In progress,00003,HDEPT00102,2022-04-25,16:21:57

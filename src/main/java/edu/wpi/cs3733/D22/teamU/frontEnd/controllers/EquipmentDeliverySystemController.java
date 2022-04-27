@@ -26,6 +26,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,9 +41,9 @@ import lombok.SneakyThrows;
 
 public class EquipmentDeliverySystemController extends ServiceController {
 
-  public ComboBox<String> locations;
+  public ComboBox<Location> locations;
 
-  public ComboBox<String> employees;
+  public ComboBox<Employee> employees;
 
   @FXML TableColumn<EquipmentUI, String> nameCol;
 
@@ -64,23 +65,25 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   @FXML Button submitButton;
 
-  @FXML TableColumn<EquipmentUI, String> activeReqID;
+  @FXML TableColumn<EquipRequest, String> activeReqID;
 
-  @FXML TableColumn<EquipmentUI, String> activeReqName;
+  @FXML TableColumn<EquipRequest, String> activeReqName;
 
-  @FXML TableColumn<EquipmentUI, Integer> activeReqAmount;
+  @FXML TableColumn<EquipRequest, Integer> activeReqAmount;
 
-  @FXML TableColumn<EquipmentUI, String> activeReqType;
+  @FXML TableColumn<EquipRequest, String> activeReqStatus;
 
-  @FXML TableColumn<EquipmentUI, String> activeReqDestination;
+  @FXML TableColumn<EquipRequest, String> activeReqEmployee;
 
-  @FXML TableColumn<EquipmentUI, String> activeDate;
+  @FXML TableColumn<EquipRequest, String> activeReqDestination;
 
-  @FXML TableColumn<EquipmentUI, String> activeTime;
+  @FXML TableColumn<EquipRequest, String> activeDate;
 
-  @FXML TableColumn<EquipmentUI, Integer> activePriority;
+  @FXML TableColumn<EquipRequest, String> activeTime;
 
-  @FXML TableView<EquipmentUI> activeRequestTable;
+  @FXML TableColumn<EquipRequest, Integer> activePriority;
+
+  @FXML TableView<EquipRequest> activeRequestTable;
 
   @FXML VBox inputFields;
 
@@ -108,15 +111,24 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   ObservableList<JFXTextArea> checkBoxesInput = FXCollections.observableArrayList();
 
-  ObservableList<EquipmentUI> equipmentUIRequests = FXCollections.observableArrayList();
+  ObservableList<EquipRequest> equipmentRequests = FXCollections.observableArrayList();
 
   // Udb udb;
 
-  ArrayList<String> nodeIDs;
+  ArrayList<Location> nodeIDs;
 
-  ArrayList<String> staff;
+  ArrayList<Employee> staff;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+  // =========declare buttons, popup pane and controller===========
+  RequestEditController newCon;
+  AnchorPane EditRequestPopUp;
+  @FXML Button editButton;
+  @FXML Button closeButton;
+  @FXML Button submitEditButton;
+  @FXML Button removeButton;
+  // ================================================
 
   @SneakyThrows
   @Override
@@ -126,59 +138,36 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     // udb = Udb.getInstance();
 
-    try {
       setUpAllEquipment();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
-    try {
-      setUpActiveRequests();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+
+    setUpActiveRequests();
 
     nodeIDs = new ArrayList<>();
 
-    try {
-      for (Location l : Udb.getInstance().locationImpl.list()) {
+    for (Location l : Udb.getInstance().locationImpl.list()) {
 
-        nodeIDs.add(l.getNodeID());
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      nodeIDs.add(l);
     }
 
     locations.setTooltip(new Tooltip());
 
     locations.getItems().addAll(nodeIDs);
 
-    new ComboBoxAutoComplete<String>(locations, 650, 290);
+    new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
 
-    try {
-      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
 
-        staff.add(l.getEmployeeID());
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      staff.add(l);
     }
 
     employees.setTooltip(new Tooltip());
 
     employees.getItems().addAll(staff);
 
-    new ComboBoxAutoComplete<String>(employees, 675, 380);
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     for (Node checkBox : requestHolder.getChildren()) {
 
@@ -238,6 +227,30 @@ public class EquipmentDeliverySystemController extends ServiceController {
             closeNav.play();
           }
         });
+
+    // =============initialize fxml and controller=============================
+    EditRequestPopUp = new AnchorPane();
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
+      EditRequestPopUp = loader.load();
+      newCon = (RequestEditController) loader.getController();
+
+      EditRequestPopUp.setLayoutX(100);
+      EditRequestPopUp.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    // =====================================================================
+
+    // ==============initialize edit stuff visibility ================
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    // =========================================
   }
 
   private void handleTime() {
@@ -277,37 +290,49 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   private void setUpActiveRequests() throws SQLException, IOException {
 
-    activeReqID.setCellValueFactory(new PropertyValueFactory<>("id"));
+    activeReqID.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("ID"));
 
-    activeReqName.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
+    activeReqName.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("name"));
 
-    activeReqAmount.setCellValueFactory(new PropertyValueFactory<>("requestAmount"));
+    activeReqAmount.setCellValueFactory(new PropertyValueFactory<EquipRequest, Integer>("amount"));
 
-    activeReqType.setCellValueFactory(new PropertyValueFactory<>("type"));
+    activeReqStatus.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("status"));
 
-    activeReqDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    activeReqEmployee.setCellValueFactory(
+        new PropertyValueFactory<EquipRequest, String>("employee"));
 
-    activeDate.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
+    activeReqDestination.setCellValueFactory(
+        new PropertyValueFactory<EquipRequest, String>("location"));
 
-    activeTime.setCellValueFactory(new PropertyValueFactory<>("requestTime"));
+    activeDate.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("date"));
 
-    activePriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
+    activeTime.setCellValueFactory(new PropertyValueFactory<EquipRequest, String>("time"));
+
+    activePriority.setCellValueFactory(new PropertyValueFactory<EquipRequest, Integer>("priority"));
 
     activeRequestTable.setItems(getActiveRequestList());
   }
 
-  private ObservableList<EquipmentUI> newRequest(
+  private ObservableList<EquipRequest> newRequest(
       String id,
       String name,
       int amount,
+      String typeOfRequest,
+      String status,
+      Employee employee,
       String destination,
       String date,
       String time,
       int priority) {
 
-    equipmentUIRequests.add(new EquipmentUI(id, name, amount, destination, date, time, priority));
+    EquipRequest r =
+        new EquipRequest(
+            id, name, amount, typeOfRequest, status, employee, destination, date, time, priority);
 
-    return equipmentUIRequests;
+    r.gettingTheLocation();
+    equipmentRequests.add(r);
+
+    return equipmentRequests;
   }
 
   private ObservableList<EquipmentUI> getEquipmentList() throws SQLException, IOException {
@@ -328,22 +353,29 @@ public class EquipmentDeliverySystemController extends ServiceController {
     return equipmentUI;
   }
 
-  private ObservableList<EquipmentUI> getActiveRequestList() throws SQLException, IOException {
+  private ObservableList<EquipRequest> getActiveRequestList() throws SQLException, IOException {
 
     for (EquipRequest equipRequest : Udb.getInstance().equipRequestImpl.hList().values()) {
 
-      equipmentUIRequests.add(
-          new EquipmentUI(
+      EquipRequest r =
+          new EquipRequest(
               equipRequest.getID(),
               equipRequest.getName(),
               equipRequest.getAmount(),
+              equipRequest.getTypeOfRequest(),
+              equipRequest.getStatus(),
+              equipRequest.getEmployee(),
               equipRequest.getDestination(),
               equipRequest.getDate(),
               equipRequest.getTime(),
-              equipRequest.getPriority()));
+              equipRequest.getPriority());
+
+      r.gettingTheLocation();
+
+      equipmentRequests.add(r);
     }
 
-    return equipmentUIRequests;
+    return equipmentRequests;
   }
 
   @Override
@@ -372,7 +404,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
           inputString = checkBoxesInput.get(i).getText().trim();
         }
 
-        String room = locations.getValue().toString();
+        String room = locations.getValue().getNodeID();
 
         requestAmount = Integer.parseInt(inputString);
 
@@ -401,41 +433,49 @@ public class EquipmentDeliverySystemController extends ServiceController {
           serviceID = "EQU" + (int) rand;
         }
 
-        EquipmentUI request =
-            new EquipmentUI(
+        EquipRequest request =
+            new EquipRequest(
                 serviceID,
                 checkBoxes.get(i).getText(),
                 requestAmount,
+                null,
+                "In Progress",
+                employees.getValue(),
                 room,
                 sdf3.format(timestamp).substring(0, 10),
                 sdf3.format(timestamp).substring(11),
                 1);
 
+        request.gettingTheLocation();
+
         activeRequestTable.setItems(
             newRequest(
-                request.getId(),
-                request.getEquipmentName(),
-                request.getRequestAmount(),
+                request.getID(),
+                request.getName(),
+                request.getAmount(),
+                request.getTypeOfRequest(),
+                request.getStatus(),
+                request.getEmployee(),
                 request.getDestination(),
-                request.getRequestDate(),
-                request.getRequestTime(),
-                1));
+                request.getDate(),
+                request.getTime(),
+                request.getPriority()));
 
         try {
 
           Udb.getInstance()
               .add( // TODO Have random ID and enter Room Destination
                   new EquipRequest(
-                      request.getId(),
-                      request.getEquipmentName(),
-                      request.getRequestAmount(),
-                      request.getType(),
-                      "sent",
-                      checkEmployee(employees.getValue()),
+                      request.getID(),
+                      request.getName(),
+                      request.getAmount(),
+                      request.getTypeOfRequest(),
+                      request.getStatus(),
+                      request.getEmployee(),
                       request.getDestination(),
-                      request.getRequestDate(),
-                      request.getRequestTime(),
-                      1));
+                      request.getDate(),
+                      request.getTime(),
+                      request.getPriority()));
 
         } catch (IOException e) {
 
@@ -470,11 +510,47 @@ public class EquipmentDeliverySystemController extends ServiceController {
         .start();
   }
 
+  // ======remove edit request=============
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    // ---CHANGE---
+    EquipRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
+    equipmentRequests.remove(request);
+    // -----------
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeEdit();
+  }
+  // ====================================
 
+  // =============Update the request from edit======================
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    // -----change------------
+    EquipRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
+    newCon.updateRequest();
+    EquipRequest request = (EquipRequest) newCon.getRequest();
+    request.gettingTheLocation();
+    equipmentRequests.remove(oldRequest);
+    equipmentRequests.add(request);
+    activeRequestTable.setItems(equipmentRequests);
+    // ----------------------------------------------
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  // ====================================================
 
   public void clearRequest() {
 
@@ -541,6 +617,13 @@ public class EquipmentDeliverySystemController extends ServiceController {
     newReqButton.setUnderline(true);
 
     allEquipButton.setUnderline(false);
+    // =========edit and remove buttons========
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    EditRequestPopUp.setVisible(false);
+    // =====================================
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -563,6 +646,10 @@ public class EquipmentDeliverySystemController extends ServiceController {
     newReqButton.setUnderline(false);
 
     allEquipButton.setUnderline(false);
+    // =====edit and remove buttons=====
+    editButton.setVisible(true);
+    removeButton.setVisible(true);
+    // ====================================
   }
 
   public void switchToEquipment(ActionEvent actionEvent) {
@@ -600,4 +687,43 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     button.setStyle("-fx-border-color: transparent");
   }
+
+  // ==========edit button==========================
+  public void editClick(MouseEvent event) {
+    if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+
+      submitEditButton.setVisible(true);
+      closeButton.setVisible(true);
+      EditRequestPopUp.setVisible(true);
+      Pane pane = (Pane) editButton.getParent();
+      if (!pane.getChildren().contains(EditRequestPopUp)) {
+        pane.getChildren().add(EditRequestPopUp);
+      }
+      newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
+    }
+  }
+  // ==============================================
+
+  // =======submit edit button===========
+  public void submitEdit(MouseEvent event) {
+    this.updateRequest();
+    closeEdit();
+  }
+  // =====================================
+
+  // =====close edit pane===================
+  public void closeEdit() {
+    activeRequestTable.getSelectionModel().clearSelection();
+    EditRequestPopUp.setVisible(false);
+    submitEditButton.setVisible(false);
+    closeButton.setVisible(false);
+  }
+  // ======================================
+
+  // ====remove req ======
+  public void editRemoveReq() {
+    removeRequest();
+  }
+  // =========================
+
 }

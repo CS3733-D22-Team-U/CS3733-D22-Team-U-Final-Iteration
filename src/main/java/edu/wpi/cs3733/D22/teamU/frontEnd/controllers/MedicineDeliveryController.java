@@ -25,6 +25,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -123,42 +124,33 @@ public class MedicineDeliveryController extends ServiceController {
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  // =========declare buttons, popup pane and controller===========
+  RequestEditController newCon;
+  AnchorPane EditRequestPopUp;
+  @FXML Button editButton;
+  @FXML Button closeButton;
+  @FXML Button submitEditButton;
+  @FXML Button removeButton;
+  // ================================================
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
 
-    try {
-      setUpActiveRequests();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    setUpActiveRequests();
     nodeIDs = new ArrayList<>();
-    try {
-      for (Location l : Udb.getInstance().locationImpl.list()) {
-        nodeIDs.add(l);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
+    for (Location l : Udb.getInstance().locationImpl.list()) {
+      nodeIDs.add(l);
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    try {
-      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-        staff.add(l);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
+    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+      staff.add(l);
     }
 
     employees.setTooltip(new Tooltip());
@@ -216,6 +208,30 @@ public class MedicineDeliveryController extends ServiceController {
             closeNav.play();
           }
         });
+    // =============initialize fxml and controller=============================
+    EditRequestPopUp = new AnchorPane();
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamU/views/EditRequestPopUp.fxml"));
+      EditRequestPopUp = loader.load();
+      newCon = (RequestEditController) loader.getController();
+
+      EditRequestPopUp.setLayoutX(100);
+      EditRequestPopUp.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    // =====================================================================
+
+    // ==============initialize edit stuff visibility ================
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    // =========================================
+
   }
 
   private void handleTime() {
@@ -305,6 +321,14 @@ public class MedicineDeliveryController extends ServiceController {
     newReq.toBack();
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
+
+    // =========edit and remove buttons========
+    editButton.setVisible(false);
+    removeButton.setVisible(false);
+    closeButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    EditRequestPopUp.setVisible(false);
+    // =====================================
   }
 
   public void switchToActive(ActionEvent actionEvent) {
@@ -317,6 +341,11 @@ public class MedicineDeliveryController extends ServiceController {
     active.toBack();
     activeReqButton.setUnderline(true);
     newReqButton.setUnderline(false);
+
+    // =====edit and remove buttons=====
+    editButton.setVisible(true);
+    removeButton.setVisible(true);
+    // ====================================
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
@@ -585,11 +614,47 @@ public class MedicineDeliveryController extends ServiceController {
     appStage.show();
   }
 
+  // ======remove edit request=============
   @Override
-  public void removeRequest() {}
+  public void removeRequest() {
+    // ---CHANGE---
+    MedicineRequest request = activeRequestTable.getSelectionModel().getSelectedItem();
+    medicineRequests.remove(request);
+    // -----------
+    try {
+      Udb.getInstance().remove(request);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    closeEdit();
+  }
+  // ====================================
 
+  // =============Update the request from edit======================
   @Override
-  public void updateRequest() {}
+  public void updateRequest() {
+    // -----change------------
+    MedicineRequest oldRequest = activeRequestTable.getSelectionModel().getSelectedItem();
+    newCon.updateRequest();
+    MedicineRequest request = (MedicineRequest) newCon.getRequest();
+    request.gettingTheLocation();
+    medicineRequests.remove(oldRequest);
+    medicineRequests.add(request);
+    activeRequestTable.setItems(medicineRequests);
+    // ----------------------------------------------
+    try {
+      Udb.getInstance().remove(oldRequest);
+      Udb.getInstance().add(request);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  // ====================================================
 
   public void clearRequest() {
     for (int i = 0; i < checkBoxes.size(); i++) {
@@ -611,4 +676,42 @@ public class MedicineDeliveryController extends ServiceController {
             })
         .start();
   }
+
+  // ==========edit button==========================
+  public void editClick(MouseEvent event) {
+    if (activeRequestTable.getSelectionModel().getSelectedItem() != null) {
+
+      submitEditButton.setVisible(true);
+      closeButton.setVisible(true);
+      EditRequestPopUp.setVisible(true);
+      Pane pane = (Pane) editButton.getParent();
+      if (!pane.getChildren().contains(EditRequestPopUp)) {
+        pane.getChildren().add(EditRequestPopUp);
+      }
+      newCon.setUp(activeRequestTable.getSelectionModel().getSelectedItem());
+    }
+  }
+  // ==============================================
+
+  // =======submit edit button===========
+  public void submitEdit(MouseEvent event) {
+    this.updateRequest();
+    closeEdit();
+  }
+  // =====================================
+
+  // =====close edit pane===================
+  public void closeEdit() {
+    activeRequestTable.getSelectionModel().clearSelection();
+    EditRequestPopUp.setVisible(false);
+    submitEditButton.setVisible(false);
+    closeButton.setVisible(false);
+  }
+  // ======================================
+
+  // ====remove req ======
+  public void editRemoveReq() {
+    removeRequest();
+  }
+  // =========================
 }

@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -147,7 +149,17 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
               + "time varchar (10) not null)");
 
       for (GiftRequest currGift : List.values()) {
-        // firebaseUpdate(currGift);
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("giftRequests").document(currGift.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currGift);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql gift requests");
+        }
+
         statement.execute(
             "INSERT INTO GiftRequest VALUES("
                 + "'"
@@ -319,6 +331,7 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
           data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

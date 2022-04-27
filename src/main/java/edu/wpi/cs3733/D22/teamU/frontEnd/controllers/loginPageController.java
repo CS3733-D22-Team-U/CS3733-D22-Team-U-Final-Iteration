@@ -83,6 +83,7 @@ public class loginPageController extends ServiceController {
                         Stage appStage =
                             (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                         appStage.setScene(scene);
+
                         appStage.show();
                       } catch (IOException e) {
                         e.printStackTrace();

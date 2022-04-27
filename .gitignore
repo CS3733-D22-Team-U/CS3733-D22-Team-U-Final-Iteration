@@ -161,4 +161,7 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,macos,gradle,intellij+all
 
+/EmployeeObj_save.csv
+/SanitationRequestObj_save.csv
+/TowerLocationsObj_save.csv
 /externalTransportDB/
