@@ -163,6 +163,20 @@ public class Location {
     return Objects.equals(nodeID, location.nodeID);
   }
 
+  public boolean equalsLoc(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Location location = (Location) o;
+    return xcoord == location.xcoord
+        && ycoord == location.ycoord
+        && Objects.equals(nodeID, location.nodeID)
+        && Objects.equals(floor, location.floor)
+        && Objects.equals(building, location.building)
+        && Objects.equals(nodeType, location.nodeType)
+        && Objects.equals(longName, location.longName)
+        && Objects.equals(shortName, location.shortName);
+  }
+
   public void setRequests(ArrayList<Request> requests) {
     this.requests = requests;
   }

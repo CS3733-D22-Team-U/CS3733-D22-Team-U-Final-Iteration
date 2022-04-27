@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.labRequestServices">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.labRequestServices">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -208,11 +196,6 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="387.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Assigned Staff:" wrappingWidth="178.13671875">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Text>
                         <TextField fx:id="patientNameField" layoutX="380.0" layoutY="139.0" prefHeight="30.0" prefWidth="190.0" />
                         <ComboBox fx:id="locations" layoutX="380.0" layoutY="269.0" prefHeight="30.0" prefWidth="190.0" promptText="Destination" />
                         <ComboBox fx:id="employees" layoutX="379.0" layoutY="204.0" prefHeight="30.0" prefWidth="190.0" promptText="Staff" />
@@ -225,16 +208,21 @@
                               </Text>
                            </children>
                         </Pane>
-                        <Text fill="WHITE" layoutX="415.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="125.17037435476038">
+                        <Text fill="WHITE" layoutX="404.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="150.17037435476038">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="426.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="125.17037435476038">
+                        <Text fill="WHITE" layoutX="408.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="125.17037435476038">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
+                        <Button fx:id="submitButton1" alignment="CENTER" layoutX="424.0" layoutY="505.0" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toLabRequestHelp" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                </children>
@@ -251,138 +239,6 @@
                </font>
             </Button>
             <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" text="Close" />
-         </children>
-      </Pane>
-      <AnchorPane fx:id="sideBarAnchor" layoutY="-586.0" maxHeight="596.0" maxWidth="100.0" minHeight="596.0" minWidth="100.0" prefHeight="596.0" prefWidth="100.0">
-         <children>
-            <Pane layoutY="41.0" prefHeight="596.0" prefWidth="100.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
-               <children>
-                  <VBox layoutX="16.0" layoutY="22.0" prefHeight="573.0" prefWidth="66.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/equipmentIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLabRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/labIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMedicineDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/medicineIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMealDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/foodIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toGiftAndFloral" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/giftIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLaundry" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/laundry.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/maintenance.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toReligious" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/religious.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toTranslate" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/translate.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toSecurity" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/security.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toCompService" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/computerService.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" />
-                        <Button mnemonicParsing="false" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" />
-                     </children>
-                  </VBox>
-               </children>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Pane>
-         </children>
-      </AnchorPane>
-      <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
-         <children>
-            <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
-               <graphic>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Request">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="341.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
@@ -405,7 +261,7 @@
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/dashboardIcon.png" />
+                        <Image url="@../icons/newdash.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -423,7 +279,7 @@
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/dashboardIcons/gear-solid.png" />
+                        <Image url="@../icons/dashboardIcons/newgear.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -435,6 +291,147 @@
                         <Image url="@../icons/hospitalDashboardBLUE.png" />
                      </image>
                   </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
+         <children>
+            <Pane layoutY="41.0" prefHeight="678.0" prefWidth="99.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
+               <children>
+                  <VBox layoutX="16.0" layoutY="22.0" prefHeight="573.0" prefWidth="66.0" spacing="2.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/equipmentIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment" translateX="5.0" />
+                        <Button mnemonicParsing="false" onAction="#toLabRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/labIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab" translateX="20.0" />
+                        <Button mnemonicParsing="false" onAction="#toMedicineDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/medicineIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine" translateX="10.0" />
+                        <Button mnemonicParsing="false" onAction="#toMealDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/foodIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal" translateX="20.0" />
+                        <Button mnemonicParsing="false" onAction="#toGiftAndFloral" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/giftIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; Floral" />
+                        <Button mnemonicParsing="false" onAction="#toLaundry" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/laundry.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry" translateX="10.0" />
+                        <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/maintenance.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance" />
+                        <Button mnemonicParsing="false" onAction="#toReligious" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/religious.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Religious" translateX="10.0" />
+                        <Button mnemonicParsing="false" onAction="#toTranslate" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/translate.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate" translateX="10.0" />
+                        <Button mnemonicParsing="false" onAction="#toSecurity" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/security.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Security" translateX="10.0" />
+                        <Button mnemonicParsing="false" onAction="#toCompService" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/menuBar/computerService.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer" translateX="10.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Make Request">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </graphic>
             </Button>
          </children>
