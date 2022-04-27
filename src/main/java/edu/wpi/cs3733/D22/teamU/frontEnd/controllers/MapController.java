@@ -143,6 +143,7 @@ public class MapController extends ServiceController {
   // Udb udb;
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
+
   ArrayList<Location> fromLocation;
   ArrayList<Location> toLocation;
 
