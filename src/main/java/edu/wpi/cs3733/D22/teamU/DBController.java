@@ -145,8 +145,6 @@ public class DBController {
     Udb.getInstance();
     transportApi = new API();
     sanitationAPI = new StartAPI();
-    // Testing testing = new Testing(CSVfiles, udb);
-    // Testing testing = new Testing(CSVfiles, udb);
     Menu m = new Menu();
     // m.menu(); // Uncomment this to start terminal menu
   }
