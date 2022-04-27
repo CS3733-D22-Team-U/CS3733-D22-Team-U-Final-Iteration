@@ -28,8 +28,7 @@ public class APIPageController extends ServiceController {
   @FXML Text time;
   @FXML Text date;
   @FXML DatePicker datePicker;
-  @FXML
-  Pane datePickerPane;
+  @FXML Pane datePickerPane;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
@@ -37,7 +36,6 @@ public class APIPageController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-
 
     Node popupContent = datePickerSkin.getPopupContent();
     datePicker.setVisible(false);

@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -29,10 +30,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class EquipmentDeliverySystemController extends ServiceController {
@@ -96,6 +99,8 @@ public class EquipmentDeliverySystemController extends ServiceController {
   @FXML Button allEquipButton;
 
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   ObservableList<EquipmentUI> equipmentUI = FXCollections.observableArrayList();
 
@@ -121,15 +126,33 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     // udb = Udb.getInstance();
 
-    setUpAllEquipment();
+    try {
+      setUpAllEquipment();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     nodeIDs = new ArrayList<>();
 
-    for (Location l : Udb.getInstance().locationImpl.list()) {
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
 
-      nodeIDs.add(l.getNodeID());
+        nodeIDs.add(l.getNodeID());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
 
     locations.setTooltip(new Tooltip());
@@ -140,9 +163,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     staff = new ArrayList<>();
 
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+    try {
+      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
 
-      staff.add(l.getEmployeeID());
+        staff.add(l.getEmployeeID());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
 
     employees.setTooltip(new Tooltip());
@@ -193,6 +222,22 @@ public class EquipmentDeliverySystemController extends ServiceController {
                 checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
 
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {

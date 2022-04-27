@@ -18,8 +18,14 @@ public abstract class ServiceController implements Initializable, Service {
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
-  public void toHome(ActionEvent actionEvent) throws IOException {
+  public void toSettingsPage(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+  }
 
+  public void toHome(ActionEvent actionEvent) throws IOException {
 
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -194,7 +200,7 @@ public abstract class ServiceController implements Initializable, Service {
     appStage.show();
     masterThread.stop();
   }
-  
+
   public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

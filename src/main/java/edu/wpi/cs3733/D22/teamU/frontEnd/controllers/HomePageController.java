@@ -22,7 +22,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -62,26 +61,23 @@ public class HomePageController extends ServiceController {
   @FXML Button turtButton;
   @FXML Text message;
   @FXML DatePicker datePicker;
+  @FXML Text timeOfDay;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
-  @FXML Pane datePickerPane;
+
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-
-
+    datePickerSkin.getDisplayNode().setLayoutY(datePicker.getLayoutY());
+    datePickerSkin.getDisplayNode().setLayoutX(datePicker.getLayoutX());
+    datePickerSkin.getPopupContent();
+    datePickerSkin.show();
     Node popupContent = datePickerSkin.getPopupContent();
-    datePicker.setVisible(false);
-    datePickerPane.getChildren().add(popupContent);
-
-
-
-
-
+    // [...]
+    LocalDate selectedDate = datePicker.getValue();
 
     try {
       listofEmployees();
@@ -122,6 +118,7 @@ public class HomePageController extends ServiceController {
     // handleTurtle();
     // playTurtle();
   }
+
   /*
    private void handleTurtle() {
      TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
@@ -179,6 +176,17 @@ public class HomePageController extends ServiceController {
   */
 
   private void handeDateTime() {
+    Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
+    String hour = sdf3.format(quickStamp).substring(11, 13);
+    int hourInt = Integer.parseInt(hour);
+    if (hourInt >= 0 && hourInt < 12) {
+      timeOfDay.setText("Good Morning ");
+    } else if (hourInt > 12 && hourInt <= 18) {
+      timeOfDay.setText("Good Afternoon ");
+    } else {
+      timeOfDay.setText("Good Evening ");
+    }
+
     Thread timeThread =
         new Thread(
             () -> {
