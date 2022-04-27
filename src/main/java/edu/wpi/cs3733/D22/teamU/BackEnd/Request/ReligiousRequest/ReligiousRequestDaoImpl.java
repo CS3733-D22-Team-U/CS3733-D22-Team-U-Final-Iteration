@@ -382,7 +382,6 @@ public class ReligiousRequestDaoImpl implements DataDao<ReligiousRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

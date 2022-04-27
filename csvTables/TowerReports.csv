@@ -1,3 +1,8 @@
 ID,Employee,Type,Description,Status,Date,Time
+REP3673,00001,Medical Misconduct,,true,00-00-00,00:00:00
+REP7567,00013,Medical Misconduct,,true,00-00-00,00:00:00
+REP2587,00004,Other,,true,00-00-00,00:00:00
+REP8399,00013,Medical Misconduct,,true,00-00-00,00:00:00
 00002,00000,0001,N/A,true,00-00-00,00:00:00
 00001,00000,meme,N/A,true,00-00-00,00:00:00
+REP3180,00013,Medical Misconduct,,true,00-00-00,00:00:00

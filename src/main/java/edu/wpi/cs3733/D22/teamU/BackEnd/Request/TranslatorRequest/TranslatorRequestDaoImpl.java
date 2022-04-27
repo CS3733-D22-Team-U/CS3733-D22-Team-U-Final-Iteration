@@ -350,7 +350,6 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

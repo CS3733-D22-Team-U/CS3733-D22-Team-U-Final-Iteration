@@ -436,11 +436,11 @@ public class sideViewController extends ServiceController {
     reclinerPie.setLegendVisible(false);
     reclinerPie.setLabelsVisible(false);
 
-    applyCustomColorSequence(pieChartData1, "#53FC7D", "#FC5368"); // old: #53FC7D #FC5368
+    applyCustomColorSequence(pieChartData1, "#5CBD6F", "#FC5368"); // old: #53FC7D #FC5368
 
-    applyCustomColorSequence(pieChartData2, "#53FC7D", "#FC5368");
+    applyCustomColorSequence(pieChartData2, "#5CBD6F", "#FC5368");
 
-    applyCustomColorSequence(pieChartData3, "#53FC7D", "#FC5368");
+    applyCustomColorSequence(pieChartData3, "#5CBD6F", "#FC5368");
 
     dirtyPumpTXT.setText(Integer.toString(pumpInUse));
     pumpTotalTXT.setText(Integer.toString(pumpTotal));

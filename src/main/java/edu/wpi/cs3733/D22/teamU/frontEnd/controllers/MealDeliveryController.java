@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class MealDeliveryController extends ServiceController {
@@ -66,6 +68,8 @@ public class MealDeliveryController extends ServiceController {
   @FXML Button newReqButton;
   @FXML Button activeReqButton;
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
   ObservableList<MealRequest> meals = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
 
@@ -129,6 +133,22 @@ public class MealDeliveryController extends ServiceController {
     submitEditButton.setVisible(false);
     // =========================================
 
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   private void handleTime() {

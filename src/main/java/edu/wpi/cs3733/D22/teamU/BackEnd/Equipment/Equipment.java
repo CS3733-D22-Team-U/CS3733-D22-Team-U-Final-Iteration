@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Equipment;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 
 public class Equipment {
   String id;
@@ -95,6 +96,15 @@ public class Equipment {
 
   public Location getLocation() {
     return location;
+  }
+
+  public void gettingTheLocation() {
+    try {
+      int index = Udb.getInstance().locationImpl.search(locationID);
+      this.location = Udb.getInstance().locationImpl.locations.get(index);
+    } catch (Exception e) {
+      System.out.println("equipment class on line 107");
+    }
   }
 
   public void setLocation(Location location) {

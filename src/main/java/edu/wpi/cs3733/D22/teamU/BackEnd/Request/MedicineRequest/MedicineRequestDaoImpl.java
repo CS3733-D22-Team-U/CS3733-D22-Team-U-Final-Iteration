@@ -372,7 +372,6 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

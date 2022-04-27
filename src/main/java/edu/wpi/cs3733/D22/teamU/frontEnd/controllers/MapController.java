@@ -49,6 +49,10 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
+  public TextField equipNameTF;
+  public TextField equipAmount;
+  public TextField equipInUse;
+  public TextField equipAvailable;
   public AnchorPane masterPane;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
@@ -101,6 +105,9 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> nodeType;
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
+
+  //  @FXML ComboBox<Location> To;
+  //  @FXML ComboBox<Location> From;
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
@@ -517,7 +524,7 @@ public class MapController extends ServiceController {
         });
   }
 
-  private Equipment equipment = null;
+  private Equipment equipment;
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
@@ -615,6 +622,8 @@ public class MapController extends ServiceController {
           b2.setOnMouseClicked(this::Exit);
         } else if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
+        } else if (b2.getId().equals("editEquip")) {
+          b2.setOnMouseClicked(this::editEquipFunc);
         }
       } else if (n instanceof TableView) {
         equipTable = (TableView) n;
@@ -637,6 +646,22 @@ public class MapController extends ServiceController {
                 break;
             }
           }
+        }
+      } else if (n instanceof TextField) {
+        TextField tf = (TextField) n;
+        switch (tf.getId()) {
+          case "equipNameTF":
+            equipNameTF = tf;
+            break;
+          case "equipAmount":
+            equipAmount = tf;
+            break;
+          case "equipInUse":
+            equipInUse = tf;
+            break;
+          case "equipAvailable":
+            equipAvailable = tf;
+            break;
         }
       }
     }
@@ -692,6 +717,7 @@ public class MapController extends ServiceController {
       if (request != null) {
         Udb.getInstance().remove(request);
         reqTable.getItems().remove(request);
+        request.gettingTheLocation(); // init the location for the request
         request.getLocation().getRequests().remove(request);
         popupEdit(mouseEvent);
       }
@@ -707,7 +733,36 @@ public class MapController extends ServiceController {
       if (equipment != null) {
         Udb.getInstance().remove(equipment);
         equipTable.getItems().remove(equipment);
+        equipment.gettingTheLocation(); // init the location for the equipment
         equipment.getLocation().getEquipment().remove(equipment);
+        popupEdit(mouseEvent);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void editEquipFunc(MouseEvent mouseEvent) {
+    try {
+      if (equipment != null) {
+        Equipment newEquip =
+            new Equipment(
+                equipNameTF.getText(),
+                Integer.parseInt(equipAmount.getText()),
+                Integer.parseInt(equipInUse.getText()),
+                Integer.parseInt(equipAvailable.getText()),
+                equipment.getLocationID());
+
+        newEquip.gettingTheLocation(); // init the location for the equipment
+        Udb.getInstance().edit(newEquip);
+        equipTable.getItems().remove(equipment);
+        equipTable.getItems().add(newEquip);
+        equipment.gettingTheLocation(); // init the location for the equipment
+        equipment.getLocation().getEquipment().remove(equipment);
+        equipment.getLocation().getEquipment().add(newEquip);
+        equipment = newEquip;
         popupEdit(mouseEvent);
       }
     } catch (IOException e) {
@@ -725,7 +780,11 @@ public class MapController extends ServiceController {
 
   public void selectEquip(MouseEvent mouseEvent) {
     if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
-      equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipNameTF.setText(this.equipment.getName());
+      this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
+      this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
+      this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
     }
   }
 

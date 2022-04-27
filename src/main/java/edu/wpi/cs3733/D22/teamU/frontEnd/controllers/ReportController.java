@@ -47,8 +47,14 @@ public class ReportController extends ServiceController {
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
     staff = new ArrayList<>();
-    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(e);
+    try {
+      for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(e);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -56,7 +62,13 @@ public class ReportController extends ServiceController {
 
     typeOfReport.setItems(typeList);
     if (Udb.admin) {
-      setUpGraph();
+      try {
+        setUpGraph();
+      } catch (SQLException throwables) {
+        throwables.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     } else {
       reportBarChart.setVisible(false);
     }

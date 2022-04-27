@@ -350,7 +350,6 @@ public class LocationDaoImpl implements DataDao<Location> {
     }
   }
 
-  @Override
   public int search(String id) { // TODO search
     int index = -1;
     for (int i = 0; i < list().size(); i++) if (id.equals(list().get(i).nodeID)) index = i;

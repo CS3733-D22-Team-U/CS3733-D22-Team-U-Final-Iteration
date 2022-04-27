@@ -371,7 +371,6 @@ public class GiftRequestDaoImpl implements DataDao<GiftRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

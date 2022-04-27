@@ -1,61 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>
-                <Pane layoutY="508.0" prefHeight="242.0" prefWidth="219.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
-                    <children>
-                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="238.0" />
-                  <Button layoutX="243.0" layoutY="67.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About" textFill="#044e9a">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow />
-                     </effect></Button>
-                  <Button layoutX="404.0" layoutY="67.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </Button>
-                  <Button layoutX="565.0" layoutY="67.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </Button>
-                    </children>
-                </Pane>
-                <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
-                    <children>
-                        <Text fx:id="time" layoutX="46.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-                    </children>
-                </Pane>
-                <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
-                    <children>
-                        <Text layoutX="209.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="About Us">
-                            <font>
-                                <Font name="System Bold" size="36.0" />
-                            </font>
-                        </Text>
-                    </children>
-                </Pane>
+                <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/background.png" />
+                    </image>
+                </ImageView>
+                <Text layoutX="803.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="About Us">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Text>
                 <StackPane fx:id="requestsStack" layoutX="-106.0" layoutY="121.0" prefWidth="1400.0">
                     <children>
                         <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
@@ -82,44 +56,44 @@
                         </Pane>
                         <Pane fx:id="newRequestPane" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                             <children>
-                                <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="255.0" prefHeight="519.0" prefWidth="255.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                                <Pane layoutX="7.0" layoutY="20.0" maxHeight="519.0" maxWidth="384.0" minWidth="255.0" prefHeight="519.0" prefWidth="255.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                                     <children>
                                         <Text fx:id="requestText1" layoutX="19.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who We Are:" textAlignment="CENTER" wrappingWidth="219.0">
                                             <font>
                                                 <Font name="System Bold" size="28.0" />
                                             </font>
                                         </Text>
-                                        <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are a group of 11 students working together with agile methodology creating an application for Mass Brigham Young" textAlignment="CENTER" wrappingWidth="254.79998779296875">
+                                        <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are a group of 11 students working together with agile methodology creating an application for Mass Brigham General and Women's Hospital" textAlignment="CENTER" wrappingWidth="254.79998779296875">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
                                         </Text>
-                                        <Text fx:id="requestText11" layoutX="18.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" textAlignment="CENTER" wrappingWidth="219.0">
+                                        <Text fx:id="requestText11" layoutX="18.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" textAlignment="CENTER" wrappingWidth="219.0">
                                             <font>
                                                 <Font name="System Bold" size="28.0" />
                                             </font>
                                         </Text>
-                                        <Text fx:id="requestText111" layoutX="18.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Coach:" textAlignment="CENTER" wrappingWidth="219.0">
+                                        <Text fx:id="requestText111" layoutX="18.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Coach:" textAlignment="CENTER" wrappingWidth="219.0">
                                             <font>
                                                 <Font name="System Bold" size="28.0" />
                                             </font>
                                         </Text>
-                                        <Text fx:id="requestText112" layoutX="18.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professor:" textAlignment="CENTER" wrappingWidth="219.0">
+                                        <Text fx:id="requestText112" layoutX="18.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professor:" textAlignment="CENTER" wrappingWidth="219.0">
                                             <font>
                                                 <Font name="System Bold" size="28.0" />
                                             </font>
                                         </Text>
-                                        <Text layoutX="9.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering - CS3733" textAlignment="CENTER" wrappingWidth="238.0">
+                                        <Text layoutX="9.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Software Engineering - CS3733" textAlignment="CENTER" wrappingWidth="238.0">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
                                         </Text>
-                                        <Text layoutX="76.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wilson Wong">
+                                        <Text layoutX="69.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wilson Wong">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
                                         </Text>
-                                        <Text layoutX="64.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luke Deratzou">
+                                        <Text layoutX="64.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Luke Deratzou">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -127,108 +101,152 @@
                                     </children>
                                 </Pane>
                                 <HBox layoutX="-11.0" layoutY="490.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0" />
-                                <Text fx:id="requestText2" fill="WHITE" layoutX="269.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team:" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                <Text fx:id="requestText2" fill="WHITE" layoutX="287.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team:" textAlignment="CENTER" wrappingWidth="128.199951171875">
                                     <font>
                                         <Font name="System Bold" size="28.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
+                                <Text fx:id="sucessRequest" fill="WHITE" layoutX="415.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="clearRequest" fill="WHITE" layoutX="404.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
+                                <Text fx:id="clearRequest" fill="WHITE" layoutX="432.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="missingDescription" fill="WHITE" layoutX="367.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
+                                <Text fx:id="missingDescription" fill="WHITE" layoutX="395.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="278.0" layoutY="169.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="We are comprised of undergraduate students ranging from freshman to juniors. Majors Include Computer Science, Robotics engineering, and IMGD" wrappingWidth="662.4000244140625">
+                                <Text fill="WHITE" layoutX="294.0" layoutY="136.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="We are comprised of undergraduate students ranging from freshman to juniors. Majors Include Computer Science, Robotics engineering, and IMGD" wrappingWidth="662.4000244140625">
                                     <font>
                                         <Font size="19.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="requestText21" fill="WHITE" layoutX="252.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:" textAlignment="CENTER" wrappingWidth="177.199951171875">
+                                <Text fx:id="requestText21" fill="WHITE" layoutX="288.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:" textAlignment="CENTER" wrappingWidth="100.0">
                                     <font>
                                         <Font name="System Bold" size="28.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="378.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPI - Computer Science Department" textAlignment="CENTER" wrappingWidth="380.25384521484375">
+                                <Text fill="WHITE" layoutX="294.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPI - Computer Science Department" textAlignment="CENTER" wrappingWidth="316.25384521484375">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Will Doyle (JR) -  Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Will Doyle (JR) -  Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iain McEwen (JR) - Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iain McEwen (JR) - Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Michael Akstin (SO) - Full Time Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Michael Akstin (SO) - Full Time Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deepti Gosukonda (SO) - Full Time Software Engineer (Front End)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deepti Gosukonda (SO) - Full Time Software Engineer (Front End)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kody Robinson (SO) - Product Owner ">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kody Robinson (SO) - Product Owner ">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belisha Genin (SO) - Documentation Analyist">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belisha Genin (SO) - Documentation Analyist">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel (FR) - Lead Software Engineer">
+                                <Text fill="WHITE" layoutX="270.0" layoutY="232.0" onMouseClicked="#toHarsh" onMouseDragOver="#toHarsh" strokeType="OUTSIDE" strokeWidth="0.0" text="Harsh Patel (FR) - Lead Software Engineer">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joselin Barbosa (SO) - Scrum Master">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joselin Barbosa (SO) - Scrum Master">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="276.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Biliouris (JR) - Product Manager">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Biliouris (JR) - Product Manager">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                        <ImageView fitHeight="216.0" fitWidth="226.0" layoutX="706.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/plsß.png" />
-                           </image>
-                        </ImageView>
+                                <Button layoutX="264.0" layoutY="214.0" mnemonicParsing="false" onAction="#toHarsh" prefHeight="26.0" prefWidth="255.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="271.0" layoutY="213.0" mnemonicParsing="false" onAction="#toHarsh" prefHeight="26.0" prefWidth="255.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="267.0" layoutY="241.0" mnemonicParsing="false" onAction="#toMarko" prefHeight="26.0" prefWidth="368.0" style="-fx-background-color: trahsparent;" />
+                                <Button layoutX="268.0" layoutY="271.0" mnemonicParsing="false" onAction="#toTim" prefHeight="26.0" prefWidth="368.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="269.0" layoutY="298.0" mnemonicParsing="false" onAction="#toMike" prefHeight="26.0" prefWidth="368.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="268.0" layoutY="331.0" mnemonicParsing="false" onAction="#toWill" prefHeight="26.0" prefWidth="336.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="264.0" layoutY="361.0" mnemonicParsing="false" onAction="#toIain" prefHeight="26.0" prefWidth="349.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="268.0" layoutY="391.0" mnemonicParsing="false" onAction="#toDeepti" prefHeight="26.0" prefWidth="390.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="265.0" layoutY="421.0" mnemonicParsing="false" onAction="#toBelisha" prefHeight="26.0" prefWidth="269.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="270.0" layoutY="448.0" mnemonicParsing="false" onAction="#toKody" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="268.0" layoutY="478.0" mnemonicParsing="false" onAction="#toJoselin" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
+                                <Button layoutX="264.0" layoutY="508.0" mnemonicParsing="false" onAction="#toNick" prefHeight="26.0" prefWidth="226.0" style="-fx-background-color: transparent;" />
+                                <ImageView fx:id="imageHover" fitHeight="315.0" fitWidth="265.0" layoutX="658.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" />
                             </children>
                         </Pane>
                     </children>
                 </StackPane>
+                <Button layoutX="344.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About" textFill="#044e9a">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button layoutX="505.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button layoutX="666.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
 
             </children>
         </Pane>
         <TextFlow prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#toHome"  prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/menuBar/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
     </children>
 </AnchorPane>
