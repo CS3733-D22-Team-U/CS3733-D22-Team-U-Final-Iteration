@@ -267,7 +267,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public void add(Equipment data) throws IOException {
     // adds entry to SQL table
     try {
-      EquipmentList.get(search(data.Name));
+      EquipmentList.get(search(data.Name, data.locationID));
       System.out.println("An Equipment With This Name ALready Exists");
     } catch (Exception e) {
       Equipment newEquipment = data;
@@ -287,7 +287,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   @Override
   public void remove(Equipment data) throws IOException {
     try {
-      this.EquipmentList.remove(search(data.Name));
+      this.EquipmentList.remove(search(data.Name, data.locationID));
       db.collection("equipments").document(data.getId()).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
@@ -307,7 +307,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public void edit(Equipment data) throws IOException {
     // takes entries from SQL table that match input node and updates it amount and it's use
     try {
-      list().set(search(data.Name), data);
+      list().set(search(data.Name, data.locationID), data);
       // firebaseUpdate(data);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
@@ -337,10 +337,12 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
     }
   }
 
-  @Override
-  public int search(String name) { // Searches for Equipment w/ matching String Name
+  public int search(
+      String name, String location) { // Searches for Equipment w/ matching String Name
     int index = -1;
-    for (int i = 0; i < list().size(); i++) if (name.equals(list().get(i).Name)) index = i;
+    for (int i = 0; i < list().size(); i++)
+      if (name.equals(list().get(i).Name) && location.equals(list().get(i).getLocationID()))
+        index = i;
     return index;
   }
 

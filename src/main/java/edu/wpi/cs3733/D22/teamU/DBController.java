@@ -121,6 +121,11 @@ public class DBController {
             .getClassLoader()
             .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/TowerReports.csv");
     String reportRequest = copyFile(csvReportRequest, "csvTables/TowerReports.csv");
+    InputStream csvEdges =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/csvTables/AddEdges.csv");
+    String edges = copyFile(csvEdges, "csvTables/AddEdges.csv");
 
     String[] CSVfiles = {
       location, // 0
@@ -137,7 +142,8 @@ public class DBController {
       maintenanceRequest, // 11
       securityRequest,
       compServiceRequest,
-      reportRequest
+      reportRequest,
+      edges // 15
     };
     Udb.username = username;
     Udb.password = password;
