@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
@@ -13,7 +10,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -21,15 +17,17 @@
 
 <AnchorPane fx:id="masterPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #0449a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.sideViewController">
    <children>
+      <ImageView fitHeight="776.0" fitWidth="1109.0">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
       <Pane fx:id="backgroundPane" layoutX="10.0" layoutY="4.0" prefHeight="741.0" prefWidth="1100.0">
          <children>
             <ImageView fitHeight="455.0" fitWidth="277.0" layoutX="132.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/DietaryMorgueMech.png" />
                </image>
-               <effect>
-                  <DropShadow />
-               </effect>
             </ImageView>
             <TableView fx:id="equipFloor" layoutX="553.0" layoutY="484.0" prefHeight="230.0" prefWidth="532.0">
                <columns>
@@ -107,12 +105,12 @@
                   </Text>
                </graphic>
             </Button>
-            <Button layoutX="235.0" layoutY="243.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #029ca6; -fx-background-radius: 15; -fx-border-radius: 15px;" text="Map Editor" textFill="WHITE">
+            <Button layoutX="215.0" layoutY="243.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #029ca6; -fx-background-radius: 15; -fx-border-radius: 15px;" text="Map Editor" textFill="WHITE">
                <effect>
                   <DropShadow />
                </effect>
             </Button>
-            <Text fill="#044e9a" layoutX="740.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Cleanliness State" wrappingWidth="149.9999999999999">
+            <Text fill="#044e9a" layoutX="744.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Cleanliness State" wrappingWidth="149.9999999999999">
                <font>
                   <Font name="SansSerif Regular" size="14.0" />
                </font>
@@ -143,88 +141,88 @@
                   </Button>
                </children>
             </Pane>
-            <JFXTextArea fx:id="alertInfoTextA" editable="false" layoutX="455.0" layoutY="34.0" prefHeight="91.0" prefWidth="290.0" style="-fx-text-fill: WHITE; -fx-background-color: #044E9A;" text=" Alerts appear if there are 6 or more dirty beds, 10 or more dirty infusion pumps, or less than 5 clean infusion pumps. A service request is automatically made if any instance above occurs. " unFocusColor="WHITE" visible="false">
+            <JFXTextArea fx:id="alertInfoTextA" editable="false" layoutX="459.0" layoutY="192.0" prefHeight="91.0" prefWidth="290.0" style="-fx-text-fill: WHITE; -fx-background-color: #044E9A;" text=" Alerts appear if there are 6 or more dirty beds, 10 or more dirty infusion pumps, or less than 5 clean infusion pumps. A service request is automatically made if any instance above occurs. " unFocusColor="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXTextArea>
-            <PieChart fx:id="pumpPie" layoutX="507.0" layoutY="65.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="607.0" layoutY="160.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <PieChart fx:id="bedPie" layoutX="707.0" layoutY="65.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="807.0" layoutY="160.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <PieChart fx:id="reclinerPie" layoutX="906.0" layoutY="65.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="1006.0" layoutY="160.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Text fill="#044e9a" layoutX="556.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infusion Pumps">
+            <PieChart fx:id="pumpPie" layoutX="511.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <Circle fill="WHITE" layoutX="611.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <PieChart fx:id="bedPie" layoutX="711.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <Circle fill="WHITE" layoutX="811.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <PieChart fx:id="reclinerPie" layoutX="910.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <Circle fill="WHITE" layoutX="1010.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Text fill="#044e9a" layoutX="560.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infusion Pumps">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="589.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
+            <Text fill="#044e9a" layoutX="593.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="dirtyPumpTXT" fill="#044e9a" layoutX="600.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="dirtyPumpTXT" fill="#044e9a" layoutX="604.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fx:id="pumpTotalTXT" fill="#044e9a" layoutX="595.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="pumpTotalTXT" fill="#044e9a" layoutX="599.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="791.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beds">
+            <Text fill="#044e9a" layoutX="795.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beds">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="980.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recliners">
+            <Text fill="#044e9a" layoutX="984.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recliners">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="597.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Text fill="#044e9a" layoutX="601.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                <font>
                   <Font size="52.0" />
                </font>
             </Text>
-            <Text fx:id="dirtyBedTXT" fill="#044e9a" layoutX="801.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="dirtyBedTXT" fill="#044e9a" layoutX="805.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fx:id="bedTotalTXT" fill="#044e9a" layoutX="796.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="bedTotalTXT" fill="#044e9a" layoutX="800.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="798.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Text fill="#044e9a" layoutX="802.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                <font>
                   <Font size="52.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="789.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
+            <Text fill="#044e9a" layoutX="793.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <Text fx:id="dirtyRecTXT" fill="#044e9a" layoutX="999.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="dirtyRecTXT" fill="#044e9a" layoutX="1003.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fx:id="recTotalTXT" fill="#044e9a" layoutX="994.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="recTotalTXT" fill="#044e9a" layoutX="998.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="996.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Text fill="#044e9a" layoutX="1000.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                <font>
                   <Font size="52.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="987.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
+            <Text fill="#044e9a" layoutX="991.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
@@ -239,143 +237,5 @@
       <Rectangle fx:id="recLevel5" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="142.0" layoutY="290.0" onMouseClicked="#setFloorL5" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="274.0" />
       <Rectangle fx:id="recLowerL2" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="65.0" layoutX="140.0" layoutY="681.0" onMouseClicked="#setFloorLL2" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="277.0" />
       <Rectangle fx:id="recLowerL1" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="142.0" layoutY="613.0" onMouseClicked="#setFloorLL1" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="275.0" />
-      <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="750.0" prefWidth="86.0" stylesheets="@../css/scrollPane.css">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/homeIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/equipmentIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMap" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/mapIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLabRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/labIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/medicineIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/foodIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/giftIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toLaundry" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/laundry.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/maintenance.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/religious.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/translate.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toSeurity" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/security.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#toCompService" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/menuBar/computerService.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
    </children>
 </AnchorPane>
