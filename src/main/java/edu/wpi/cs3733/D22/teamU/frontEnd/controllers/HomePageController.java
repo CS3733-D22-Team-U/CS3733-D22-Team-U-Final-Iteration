@@ -30,6 +30,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class HomePageController extends ServiceController {
+  @FXML ImageView TEST;
 
   public Button logOutButton;
   public Text headerText;

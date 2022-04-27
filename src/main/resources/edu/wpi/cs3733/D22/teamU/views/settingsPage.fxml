@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -62,7 +63,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
          </children></Pane>
-      <Button layoutX="590.0" layoutY="509.0" mnemonicParsing="false" onAction="#changeName" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Submit Change" textFill="WHITE">
+      <Button layoutX="596.0" layoutY="583.0" mnemonicParsing="false" onAction="#changeName" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Submit Change" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -70,7 +71,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="414.0" layoutY="203.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Choose Image" textFill="WHITE">
+      <Button layoutX="590.0" layoutY="368.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Choose Image" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -78,19 +79,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="773.0" layoutY="203.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Upload Image" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TextField fx:id="changeText" layoutX="543.0" layoutY="444.0" prefHeight="32.0" prefWidth="258.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;">
+      <TextField fx:id="changeText" layoutX="549.0" layoutY="530.0" prefHeight="32.0" prefWidth="258.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>
-      <Text fill="#5898db" layoutX="557.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="229.1601562499999">
+      <Text fill="#5898db" layoutX="563.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="229.1601562499999">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -102,7 +95,7 @@
       </Text>
       <Pane layoutX="590.0" layoutY="144.0" prefHeight="159.0" prefWidth="164.0" style="-fx-background-radius: 20; -fx-background-color: #ffffff;">
          <children>
-            <ImageView fitHeight="123.0" fitWidth="117.0" layoutX="28.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="changeImage" fitHeight="123.0" fitWidth="117.0" layoutX="28.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/ProfPic.png" />
                </image>
@@ -114,5 +107,6 @@
             <Image url="@../icons/unicornLogo.png" />
          </image>
       </ImageView>
+      <ComboBox fx:id="comboImages" layoutX="597.0" layoutY="325.0" prefWidth="150.0" style="-fx-background-color: #5898DB #5898DB #5898DB #5898DB; -fx-border-color: black;" />
    </children>
 </AnchorPane>
