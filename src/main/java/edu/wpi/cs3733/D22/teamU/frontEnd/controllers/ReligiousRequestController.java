@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -86,13 +88,25 @@ public class ReligiousRequestController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    setUpAllReligiousReq();
+    try {
+      setUpAllReligiousReq();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     requestText.setVisible(false);
     // Displays Locations in Table View
     nodes = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodes.add(l);
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodes.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodes);
@@ -100,8 +114,14 @@ public class ReligiousRequestController extends ServiceController {
 
     // Displays EMployess in Table View
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l);
+    try {
+      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -113,11 +133,11 @@ public class ReligiousRequestController extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);
@@ -218,6 +238,13 @@ public class ReligiousRequestController extends ServiceController {
       religiousUIRequests.add(r);
     }
     return religiousUIRequests;
+  }
+
+  public void toReligiousHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/ReligiousHelp.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
   }
 
   @Override

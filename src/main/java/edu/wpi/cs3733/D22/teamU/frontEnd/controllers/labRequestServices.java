@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -103,16 +105,28 @@ public class labRequestServices extends ServiceController {
       e.printStackTrace();
     }
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(e);
+    try {
+      for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(e);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -156,11 +170,11 @@ public class labRequestServices extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);
@@ -191,6 +205,14 @@ public class labRequestServices extends ServiceController {
     closeButton.setVisible(false);
     submitEditButton.setVisible(false);
     // =========================================
+  }
+
+  public void toLabRequestHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/labRequestHelpPage.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+    masterThread.stop();
   }
 
   private void handleTime() {
