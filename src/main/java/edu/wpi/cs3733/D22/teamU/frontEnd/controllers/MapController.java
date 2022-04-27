@@ -7,6 +7,8 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
+import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.Edge;
+import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.PathFinding;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
 import java.io.IOException;
 import java.net.URL;
@@ -37,6 +39,8 @@ import org.assertj.core.util.diff.Delta;
 public class MapController extends ServiceController {
 
   /*Edit Remove Popup*/
+  public ComboBox<Location> To;
+  public ComboBox<Location> From;
   public TextField popupNodeID;
   public TextField popupXCoord;
   public TextField popupFloor;
@@ -133,7 +137,6 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
 
-
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
   @FXML Circle add;
@@ -145,10 +148,19 @@ public class MapController extends ServiceController {
 
   ArrayList<Location> fromLocation;
   ArrayList<Location> toLocation;
+  PathFinding pathFinding;
 
   public MapController() throws IOException, SQLException {}
 
   public void initialize(URL location, ResourceBundle resources) {
+    try {
+      pathFinding = new PathFinding(Udb.getInstance().edgeDao.list());
+      System.out.println(Udb.getInstance().edgeDao.list().size());
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
 
     addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
@@ -169,10 +181,6 @@ public class MapController extends ServiceController {
     } catch (Exception e) {
       System.out.println("here");
     }
-    From.setTooltip(new Tooltip());
-    From.getItems().addAll(fromLocation);
-    To.setTooltip(new Tooltip());
-    To.getItems().addAll(toLocation);
     locations = new HashMap<>();
     //    for(LocationNode ln: locations.values())
     //      ln.setV
@@ -337,13 +345,46 @@ public class MapController extends ServiceController {
     }
   }
 
-  public void PathFind(Location loc1, Location loc2) {}
-
   public void dispMultiService(MouseEvent mouseEvent) {}
 
   public void dispMultiServices(MouseEvent mouseEvent) {}
 
   public void dispElevator(MouseEvent mouseEvent) {}
+
+  public void bestPath(MouseEvent mouseEvent) {
+    if (To.getValue() != null && From.getValue() != null) {}
+  }
+
+  ArrayList<Edge> edges = new ArrayList<>();
+
+  public void findPath(MouseEvent mouseEvent) throws CloneNotSupportedException {
+    for (Edge e : edges) {
+      AnchorPane ap = (AnchorPane) e.getParent();
+      try {
+        ap.getChildren().remove(e);
+      } catch (Exception e2) {
+
+      }
+    }
+    edges = new ArrayList<>();
+    if (To.getValue() != null && From.getValue() != null) {
+      edges = pathFinding.findPath(From.getValue(), To.getValue());
+      System.out.println(edges);
+      for (Edge e : edges) {
+        LocationNode ln1 = locations.get(e.getLoc1().getNodeID());
+        LocationNode ln2 = locations.get(e.getLoc2().getNodeID());
+        e.setStartX(ln1.tempx);
+        e.setStartY(ln1.tempy);
+        e.setEndX(ln2.tempx);
+        e.setEndY(ln2.tempy);
+        try {
+          ln1.getPane().getChildren().add(e);
+        } catch (Exception e1) {
+
+        }
+      }
+    }
+  }
 
   class Delta {
     double x, y;

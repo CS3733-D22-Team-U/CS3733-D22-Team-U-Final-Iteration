@@ -1,28 +1,24 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class PathFinding {
-  private Udb udb;
+  private ArrayList<Edge> edges;
 
   public PathFinding(ArrayList<Edge> edges) throws SQLException, IOException {
-    udb = Udb.getInstance();
-    ArrayList<Location> locations = udb.locationImpl.locations;
-    for (Edge e : edges) {
-      try {
-        locations.get(locations.indexOf(e.loc1)).getConnected().add(e);
-      } catch (IndexOutOfBoundsException e1) {
-      }
-      try {
-        locations.get(locations.indexOf(e.loc2)).getConnected().add(e);
-      } catch (IndexOutOfBoundsException e2) {
-      }
-    }
+    this.edges = edges;
+  }
+
+  public ArrayList<Edge> getEdges() {
+    return edges;
+  }
+
+  public void setEdges(ArrayList<Edge> edges) {
+    this.edges = edges;
   }
 
   public ArrayList<Edge> findPath(Location l1, Location l2) throws CloneNotSupportedException {

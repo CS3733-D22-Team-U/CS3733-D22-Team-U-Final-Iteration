@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Edge extends Line {
@@ -15,6 +16,8 @@ public class Edge extends Line {
     setStartY(loc1.getYcoord());
     setEndX(loc2.getXcoord());
     setEndY(loc2.getYcoord());
+    setStroke(Color.RED);
+    setStrokeWidth(5);
   }
 
   public String getEdgeID() {
@@ -27,5 +30,10 @@ public class Edge extends Line {
 
   public Location getLoc2() {
     return loc2;
+  }
+
+  @Override
+  public String toString() {
+    return edgeID;
   }
 }

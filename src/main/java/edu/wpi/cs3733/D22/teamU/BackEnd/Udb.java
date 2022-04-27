@@ -34,6 +34,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequestDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequestDaoImpl;
+import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.EdgeDao;
 import java.io.*;
 import java.sql.*;
 
@@ -54,6 +55,8 @@ public final class Udb {
   public LocationDaoImpl locationImpl;
   public EquipmentDaoImpl EquipmentImpl;
   public EmployeeDaoImpl EmployeeImpl;
+
+  public EdgeDao edgeDao;
   public EquipRequestDaoImpl equipRequestImpl;
   public LabRequestDaoImpl labRequestImpl;
   public LaundryRequestDaoImpl laundryRequestImpl;
@@ -207,6 +210,7 @@ public final class Udb {
     securityRequestImpl = new SecurityRequestDaoImpl(statement, CSVfiles[12]);
     compServRequestImpl = new CompServRequestDaoImpl(statement, CSVfiles[13]);
     reportImpl = new ReportDaoImpl(statement, CSVfiles[14]);
+    edgeDao = new EdgeDao(statement, CSVfiles[15]);
 
     locationImpl.CSVToJava();
     locationImpl.JavaToSQL();
@@ -252,6 +256,8 @@ public final class Udb {
 
     reportImpl.CSVToJava(EmployeeImpl.hList());
     reportImpl.JavaToSQL();
+
+    edgeDao.CSVToJava(locationImpl.hList());
 
     for (Employee e : EmployeeImpl.hList().values()) {
       for (Report r : e.getReportList()) {
