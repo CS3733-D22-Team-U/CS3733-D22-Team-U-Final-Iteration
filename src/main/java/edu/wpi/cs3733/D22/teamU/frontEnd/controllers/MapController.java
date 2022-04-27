@@ -45,6 +45,10 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
+  public TextField equipNameTF;
+  public TextField equipAmount;
+  public TextField equipInUse;
+  public TextField equipAvailable;
   public AnchorPane masterPane;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
@@ -133,6 +137,8 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
 
+  @FXML ComboBox<Location> To;
+  @FXML ComboBox<Location> From;
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
@@ -511,7 +517,7 @@ public class MapController extends ServiceController {
         });
   }
 
-  private Equipment equipment = null;
+  private Equipment equipment;
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
@@ -632,6 +638,22 @@ public class MapController extends ServiceController {
             }
           }
         }
+      } else if (n instanceof TextField) {
+        TextField tf = (TextField) n;
+        switch (tf.getId()) {
+          case "equipNameTF":
+            equipNameTF = tf;
+            break;
+          case "equipAmount":
+            equipAmount = tf;
+            break;
+          case "equipInUse":
+            equipInUse = tf;
+            break;
+          case "equipAvailable":
+            equipAvailable = tf;
+            break;
+        }
       }
     }
     equipTable.setItems(
@@ -719,7 +741,11 @@ public class MapController extends ServiceController {
 
   public void selectEquip(MouseEvent mouseEvent) {
     if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
-      equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipNameTF.setText(this.equipment.getName());
+      this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
+      this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
+      this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
     }
   }
 
