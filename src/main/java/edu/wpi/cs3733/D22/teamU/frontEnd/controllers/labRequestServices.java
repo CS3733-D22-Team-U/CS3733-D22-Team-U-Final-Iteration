@@ -103,16 +103,28 @@ public class labRequestServices extends ServiceController {
       e.printStackTrace();
     }
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     staff = new ArrayList<>();
-    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(e);
+    try {
+      for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(e);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
@@ -156,11 +168,11 @@ public class labRequestServices extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);

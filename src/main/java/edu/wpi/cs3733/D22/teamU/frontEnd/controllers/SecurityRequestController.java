@@ -100,10 +100,28 @@ public class SecurityRequestController extends ServiceController {
     clearRequest.setVisible(false);
     missingDescription.setVisible(false);
 
-    setUpAllMaintenance();
+    try {
+      setUpAllMaintenance();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    fillDestinations();
-    fillStaff();
+    try {
+      fillDestinations();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      fillStaff();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     handleTime();
 
@@ -135,11 +153,11 @@ public class SecurityRequestController extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);

@@ -264,11 +264,11 @@
             </Button>
          </children>
       </Pane>
-      <AnchorPane fx:id="sideBarAnchor" layoutY="-596.0" maxHeight="596.0" maxWidth="100.0" minHeight="596.0" minWidth="100.0" prefHeight="596.0" prefWidth="100.0">
+      <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
          <children>
-            <Pane layoutY="41.0" prefHeight="596.0" prefWidth="100.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
+            <Pane layoutY="41.0" prefHeight="678.0" prefWidth="99.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
                <children>
-                  <VBox layoutX="16.0" layoutY="22.0" prefHeight="573.0" prefWidth="66.0">
+                  <VBox layoutX="16.0" layoutY="22.0" prefHeight="573.0" prefWidth="66.0" spacing="2.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
@@ -279,6 +279,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment" translateX="5.0" />
                         <Button mnemonicParsing="false" onAction="#toLabRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -288,6 +289,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab" translateX="20.0" />
                         <Button mnemonicParsing="false" onAction="#toMedicineDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -297,6 +299,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine" translateX="10.0" />
                         <Button mnemonicParsing="false" onAction="#toMealDelivery" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -306,6 +309,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal" translateX="20.0" />
                         <Button mnemonicParsing="false" onAction="#toGiftAndFloral" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -315,6 +319,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; Floral" />
                         <Button mnemonicParsing="false" onAction="#toLaundry" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -324,6 +329,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry" translateX="10.0" />
                         <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -333,6 +339,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance" />
                         <Button mnemonicParsing="false" onAction="#toReligious" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -342,6 +349,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Religious" translateX="10.0" />
                         <Button mnemonicParsing="false" onAction="#toTranslate" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -351,6 +359,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate" translateX="10.0" />
                         <Button mnemonicParsing="false" onAction="#toSecurity" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -360,6 +369,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Security" translateX="10.0" />
                         <Button mnemonicParsing="false" onAction="#toCompService" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -368,8 +378,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button mnemonicParsing="false" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" />
-                        <Button mnemonicParsing="false" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer" translateX="10.0" />
                      </children>
                   </VBox>
                </children>

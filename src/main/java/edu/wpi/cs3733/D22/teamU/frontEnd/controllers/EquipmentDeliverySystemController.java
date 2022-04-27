@@ -138,15 +138,33 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     // udb = Udb.getInstance();
 
-    setUpAllEquipment();
+    try {
+      setUpAllEquipment();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     nodeIDs = new ArrayList<>();
 
-    for (Location l : Udb.getInstance().locationImpl.list()) {
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
 
-      nodeIDs.add(l);
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
 
     locations.setTooltip(new Tooltip());
@@ -157,9 +175,15 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     staff = new ArrayList<>();
 
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+    try {
+      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
 
-      staff.add(l);
+        staff.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
 
     employees.setTooltip(new Tooltip());
@@ -215,11 +239,11 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);
