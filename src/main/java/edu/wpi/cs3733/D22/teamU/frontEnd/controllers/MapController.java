@@ -19,6 +19,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,7 @@ public class MapController extends ServiceController {
   public TextField equipAmount;
   public TextField equipInUse;
   public TextField equipAvailable;
+  public TabPane popupTabPane;
   public AnchorPane masterPane;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
@@ -111,7 +113,7 @@ public class MapController extends ServiceController {
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
   @FXML Circle add;
-  @FXML Button addBTN;
+
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
   ListView<String> equipmentView, requestView;
@@ -133,7 +135,7 @@ public class MapController extends ServiceController {
       throw new RuntimeException(e);
     }
 
-    addBTN.setDisable(!Udb.admin);
+    add.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
     setScroll(floor1Pane);
@@ -409,7 +411,7 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) addBTN.getParent();
+    Pane pane = (Pane) add.getParent();
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
     } else {
@@ -539,15 +541,17 @@ public class MapController extends ServiceController {
 
     popupEditPane.setLayoutY(159);
 
+    for (Node n : popupEditPane.getChildren()) {
+      if (n instanceof TabPane) {
+        TabPane tp = (TabPane) n;
+        popupTabPane = tp;
+        tp.getSelectionModel().select(0);
+      }
+    }
     Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
     AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
     for (Node n : locAnchor.getChildren()) {
-      if (n instanceof Button) {
-        Button b2 = (Button) n;
-        if (b2.getId().equals("exit")) {
-          b2.setOnMouseClicked(this::Exit);
-        }
-      } else if (n instanceof GridPane) {
+      if (n instanceof GridPane) {
         GridPane gp = (GridPane) n;
         for (Node n2 : gp.getChildren()) {
           if (n2 instanceof TextField) {
@@ -617,9 +621,7 @@ public class MapController extends ServiceController {
     for (Node n : equipAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit1")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeEquip")) {
+        if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
         } else if (b2.getId().equals("editEquip")) {
           b2.setOnMouseClicked(this::editEquipFunc);
@@ -673,9 +675,7 @@ public class MapController extends ServiceController {
     for (Node n : reqAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit2")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeReq")) {
+        if (b2.getId().equals("removeReq")) {
           b2.setOnMouseClicked(this::deleteRequest);
         }
       } else if (n instanceof TableView) {
@@ -787,7 +787,7 @@ public class MapController extends ServiceController {
     }
   }
 
-  public void Exit(MouseEvent actionEvent) {
+  public void Exit(Event event) {
     popupEditPane.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 
@@ -822,7 +822,6 @@ public class MapController extends ServiceController {
       locations.put(l.getNodeID(), lnNew);
       lnNew.setOnMouseClicked(this::popupOpen);
       enableDrag(lnNew);
-      Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
       lnNew.getPane().getChildren().add(lnNew);
       // toMap(actionEvent);
@@ -847,7 +846,6 @@ public class MapController extends ServiceController {
       Udb.getInstance().locationImpl.remove(l);
       LocationNode lnOld = locations.get(l.getNodeID());
       locations.remove(l.getNodeID());
-      Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
     } catch (IOException e) {
       e.printStackTrace();

@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="masterPane" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
     <children>
-      <Pane prefHeight="712.0" prefWidth="1130.0">
+      <Pane onMouseClicked="#Exit" prefHeight="712.0" prefWidth="1130.0">
          <children>
             <ImageView fitHeight="752.0" fitWidth="1135.0">
                <image>
@@ -34,12 +34,11 @@
                </children>
             </Pane>
             <Button layoutX="35.0" layoutY="29.0" mnemonicParsing="false" onAction="#toHome" onMouseClicked="#toHome" text="Home" />
-            <Button fx:id="addBTN" layoutX="33.0" layoutY="663.0" mnemonicParsing="false" onAction="#popUpAdd" onMouseClicked="#popUpAdd" text="Button" />
          </children>
       </Pane>
       <Group layoutX="110.0" layoutY="13.0">
          <children>
-              <Pane fx:id="backgroundPane" layoutX="25.0" prefHeight="679.0" prefWidth="838.0">
+              <Pane fx:id="backgroundPane" layoutX="25.0" onMouseClicked="#Exit" prefHeight="679.0" prefWidth="838.0">
                   <children>
                       <TabPane layoutX="-25.0" layoutY="140.0" prefHeight="552.0" prefWidth="847.0" side="LEFT" stylesheets="@../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
@@ -205,7 +204,7 @@
                                       </AnchorPane>
                                   </content>
                               </Tab>
-                              <Tab text="Table View">
+                              <Tab onSelectionChanged="#Exit" text="Table View">
                                   <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="872.0">
                                           <children>
