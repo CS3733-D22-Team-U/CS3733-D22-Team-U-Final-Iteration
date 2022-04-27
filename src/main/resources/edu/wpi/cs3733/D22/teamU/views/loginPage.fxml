@@ -18,11 +18,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #c9c9c9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.loginPageController">
+<AnchorPane fx:id="mainPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #c9c9c9;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.loginPageController">
 <children>
-      <ImageView fitHeight="766.0" fitWidth="1107.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
+      <ImageView fitHeight="766.0" fitWidth="1107.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/hospitalBuilding.jpg" />
+            <Image url="@../images/background.png" />
          </image>
       </ImageView>
       <StackPane layoutX="-18.0" layoutY="401.0" prefHeight="146.0" prefWidth="1125.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="0.0">
@@ -61,15 +61,7 @@
           </Pane>
          </children>
       </StackPane>
-      <StackPane layoutX="996.4000244140625" layoutY="664.0" AnchorPane.bottomAnchor="-4.263256414560601E-14" AnchorPane.rightAnchor="13.200000000000273">
-         <children>
-            <ImageView fitHeight="161.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;">
-               <image>
-                  <Image url="@../icons/unicornLogo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </StackPane>
+      <StackPane layoutX="996.4000244140625" layoutY="664.0" AnchorPane.bottomAnchor="-4.263256414560601E-14" AnchorPane.rightAnchor="13.200000000000273" />
       <StackPane layoutX="180.0" layoutY="45.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="196.79999999999995">
          <children>
             <Group>
@@ -156,13 +148,10 @@
                         </Button>
                      </children>
                   </Pane>
-                <Button alignment="CENTER" layoutX="23.0" layoutY="314.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Exit" textFill="WHITE">
+                <Button alignment="CENTER" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Exit" textFill="#044e9a">
                     <font>
                         <Font name="System Bold" size="26.0" />
                     </font>
-                    <effect>
-                        <DropShadow />
-                    </effect>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -251,5 +240,10 @@
             </Group>
          </children>
       </StackPane>
+      <ImageView fitHeight="161.0" fitWidth="90.0" layoutX="983.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;">
+         <image>
+            <Image url="@../icons/unicornLogo.png" />
+         </image>
+      </ImageView>
 </children>
 </AnchorPane>
