@@ -4,18 +4,27 @@ import com.jfoenix.controls.JFXHamburger;
 
 import java.awt.*;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import org.w3c.dom.Text;
+import javafx.scene.text.Text;
+
 
 public class AboutController extends ServiceController {
+
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
   @FXML Pane pane;
   @FXML JFXHamburger hamburger;
@@ -23,6 +32,13 @@ public class AboutController extends ServiceController {
   private double x, y;
   @FXML
   TextField quote;
+
+  @FXML DatePicker datePicker;
+  @FXML Pane datePickerPane;
+  @FXML
+  javafx.scene.text.Text time;
+  @FXML
+  Text date;
 
 
 
@@ -36,7 +52,10 @@ public class AboutController extends ServiceController {
   public void updateRequest() {}
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+
+  }
+
 
 
   public void toHarsh(){

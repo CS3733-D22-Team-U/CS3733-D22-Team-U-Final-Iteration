@@ -53,19 +53,6 @@
                   </Text>
                </children>
             </HBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="49.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
-            <Text fx:id="time" fill="#044e9a" layoutX="115.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fx:id="date" fill="#044e9a" layoutX="112.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="250.0" layoutX="49.0" layoutY="431.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="251.0" />
-            <DatePicker fx:id="datePicker" layoutX="82.0" layoutY="448.0" />
             <Button layoutX="350.0" layoutY="295.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="View Requests" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -108,7 +95,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <ButtonBar buttonMinWidth="64.0" layoutX="273.0" layoutY="566.0" prefHeight="106.0" prefWidth="770.0">
+            <ButtonBar buttonMinWidth="64.0" layoutX="279.0" layoutY="566.0" prefHeight="106.0" prefWidth="770.0">
                <buttons>
                   <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -251,6 +238,23 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="53.0" layoutY="301.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="50.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
+            <Pane fx:id="datePickerPane" layoutX="65.0" layoutY="446.0" prefHeight="193.0" prefWidth="125.0">
+               <children>
+                  <DatePicker fx:id="datePicker" layoutY="1.0" prefHeight="26.0" prefWidth="0.0" />
+               </children>
+            </Pane>
+            <Text fx:id="time" fill="#044e9a" layoutX="112.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="date" fill="#044e9a" layoutX="108.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

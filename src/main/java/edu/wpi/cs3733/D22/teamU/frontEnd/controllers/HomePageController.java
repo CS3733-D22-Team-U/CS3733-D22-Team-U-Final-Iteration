@@ -62,6 +62,7 @@ public class HomePageController extends ServiceController {
   @FXML Text message;
   @FXML DatePicker datePicker;
   @FXML Text timeOfDay;
+  @FXML Pane datePickerPane;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -71,13 +72,11 @@ public class HomePageController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-    datePickerSkin.getDisplayNode().setLayoutY(datePicker.getLayoutY());
-    datePickerSkin.getDisplayNode().setLayoutX(datePicker.getLayoutX());
-    datePickerSkin.getPopupContent();
-    datePickerSkin.show();
+
     Node popupContent = datePickerSkin.getPopupContent();
-    // [...]
-    LocalDate selectedDate = datePicker.getValue();
+    datePicker.setVisible(false);
+    datePickerPane.getChildren().add(popupContent);
+    handeDateTime();
 
     try {
       listofEmployees();
