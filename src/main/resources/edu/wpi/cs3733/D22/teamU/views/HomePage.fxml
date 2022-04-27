@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -60,6 +61,9 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Kody Robinson" />
+               </tooltip>
             </Button>
             <Pane fx:id="turtlePond" layoutX="595.0" layoutY="299.0" prefHeight="253.0" prefWidth="262.0" style="-fx-background-color: #B0E5E3;">
                <children>
@@ -79,11 +83,17 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Kody Robinson" />
+               </tooltip>
             </Button>
             <Button layoutX="350.0" layoutY="375.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Nick Biliouris" />
+               </tooltip>
             </Button>
             <Circle fill="WHITE" layoutX="1016.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="928.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -92,11 +102,17 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Harsh Patel, Belisha Genin, Deepti Gosukonda" />
+               </tooltip>
             </Button>
             <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toMap" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Joselin Barbosa, Belisha Genin, Deepti Gosukonda" />
+               </tooltip>
             </Button>
             <ButtonBar buttonMinWidth="64.0" layoutX="279.0" layoutY="566.0" prefHeight="106.0" prefWidth="770.0">
                <buttons>
@@ -108,6 +124,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Marko Vila" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -117,6 +136,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Nick Biliouris" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -126,6 +148,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Kody Robinson" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -135,6 +160,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Deepti Gosukonda" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -144,6 +172,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Joselin Barbosa" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -153,6 +184,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Deepti Gosukonda, Marko Vila" />
+                     </tooltip>
                   </Button>
                   <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -162,6 +196,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Mike Akstin" />
+                     </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -171,6 +208,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="William Doyle" />
+                     </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: transparent;">
                      <graphic>
@@ -180,6 +220,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Belisha Genin" />
+                     </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: transparent;">
                      <graphic>
@@ -189,6 +232,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Tim Klein" />
+                     </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: transparent;">
                      <graphic>
@@ -198,6 +244,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Iain McEwen" />
+                     </tooltip>
                   </Button>
                </buttons>
             </ButtonBar>
@@ -215,6 +264,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip text="Nick Biliouris" />
+               </tooltip>
             </Button>
             <Button layoutX="984.0" layoutY="173.0" mnemonicParsing="false" onAction="#toSettingsPage" style="-fx-background-color: transparent;">
                <graphic>
@@ -232,7 +284,10 @@
                         <Image url="@../icons/menuBar/APIpls.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Joselin Barbosa" />
+               </tooltip></Button>
             <Button layoutX="896.0" layoutY="174.0" mnemonicParsing="false" onAction="#toReport" prefHeight="45.0" prefWidth="64.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -240,7 +295,10 @@
                         <Image url="@../icons/menuBar/cautionIconBLUE.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Deepti Gosukonda" />
+               </tooltip></Button>
             <Pane fx:id="datePickerPane" layoutX="61.0" layoutY="444.0" prefHeight="193.0" prefWidth="125.0">
                <children>
                   <DatePicker fx:id="datePicker" layoutY="1.0" prefHeight="26.0" prefWidth="0.0" />
