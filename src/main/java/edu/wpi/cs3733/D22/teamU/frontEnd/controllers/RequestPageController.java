@@ -1,10 +1,10 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import edu.wpi.cs3733.D22.teamU.API.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.DBController;
-import edu.wpi.cs3733.D22.teamU.MedicineRequest;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamZ.api.exception.ServiceException;
 import java.io.IOException;
@@ -102,12 +102,11 @@ public class RequestPageController extends ServiceController {
   }
 
   public void toMedicine(ActionEvent actionEvent)
-      throws SQLException, IOException, edu.wpi.cs3733.D22.teamU.Exception.ServiceException {
+      throws SQLException, IOException, edu.wpi.cs3733.D22.teamU.API.Exception.ServiceException {
     ArrayList<String> locs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.locations) locs.add(l.getNodeID());
     MedicineRequest.addLocationIDs(locs);
 
-    Employee test = new Employee("test");
     MedicineRequest.addAuthorizedEmployee("test");
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values())
       MedicineRequest.addAuthorizedEmployee(l.getEmployeeID());

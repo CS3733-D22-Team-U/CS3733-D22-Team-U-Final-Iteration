@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -221,7 +223,16 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
               + "pri int not null)");
 
       for (EquipRequest currReq : List.values()) {
-        //firebaseUpdate(currReq);
+        DocumentReference docRef = db.collection("equipRequests").document(currReq.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currReq);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql equip requests");
+        }
+
         statement.execute(
             "INSERT INTO EquipRequest VALUES("
                 + "'"
@@ -333,6 +344,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
         data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

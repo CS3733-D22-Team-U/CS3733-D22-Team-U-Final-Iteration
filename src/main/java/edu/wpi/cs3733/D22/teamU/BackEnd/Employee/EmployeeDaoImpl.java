@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Employee;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.*;
@@ -76,8 +78,17 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
               + "password varchar(20) not null)");
 
       for (Employee currEmp : List.values()) {
-        // db.collection("employee").add(currEmp.employeeID);
-        // firebaseUpdate(currEmp);
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("employees").document(currEmp.employeeID);
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currEmp);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql employee");
+        }
 
         statement.execute(
             "INSERT INTO Employees VALUES("
@@ -241,6 +252,7 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
 
     if (List.containsKey(data.getEmployeeID())) {
       List.replace(data.getEmployeeID(), data);
+      // firebaseUpdate(data);
     } else {
       System.out.println("Doesn't Exist");
     }
@@ -263,10 +275,24 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
     if (List.containsKey(data.employeeID)) {
       System.out.println("An Employee With This ID Already Exists");
     } else {
-      List.put(data.employeeID, data);
-      this.JavaToSQL();
-      this.JavaToCSV(CSVfile);
+      if(checkIfUsernameTaken(data.getUsername())) {
+        List.put(data.employeeID, data);
+        this.JavaToSQL();
+        this.JavaToCSV(CSVfile);
+      }
+      else {
+        throw new IOException(); // so that front end can display something on screen.
+      }
     }
+  }
+
+  private boolean checkIfUsernameTaken(String username) {
+    for(Employee e : hList().values()) {
+      if(e.getUsername().equals(username)) {
+        return false;
+      }
+    }
+    return true; // true that its free
   }
 
   /**

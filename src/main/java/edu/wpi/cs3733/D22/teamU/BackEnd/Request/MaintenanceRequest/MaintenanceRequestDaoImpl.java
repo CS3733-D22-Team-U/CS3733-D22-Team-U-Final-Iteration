@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -160,7 +162,19 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
               + "time varchar(10) not null)");
 
       for (MaintenanceRequest currMainReq : List.values()) {
-        //firebaseUpdate(currMainReq);
+
+        // checking if the data already exists
+        DocumentReference docRef =
+            db.collection("maintenanceRequests").document(currMainReq.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currMainReq);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
         statement.execute(
             "INSERT INTO MaintenanceRequest VALUES("
                 + "'"
@@ -322,6 +336,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

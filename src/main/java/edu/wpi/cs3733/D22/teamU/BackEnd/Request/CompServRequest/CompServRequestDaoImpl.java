@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -148,7 +150,16 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
               + "device varchar(20) not null)");
 
       for (CompServRequest currCSR : List.values()) {
-        //firebaseUpdate(currCSR);
+        DocumentReference docRef = db.collection("compServRequests").document(currCSR.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currCSR);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql comp serv");
+        }
+
         statement.execute(
             "INSERT INTO CompServRequest VALUES("
                 + "'"
@@ -291,6 +302,7 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
         this.JavaToSQL();
+        // firebaseUpdate(data);
         this.JavaToCSV(csvFile);
       } else {
         System.out.println("No Such Employee Exists in Database");

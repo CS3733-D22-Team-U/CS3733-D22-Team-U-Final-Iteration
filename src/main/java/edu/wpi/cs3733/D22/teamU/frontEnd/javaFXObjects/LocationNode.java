@@ -23,7 +23,7 @@ public class LocationNode extends Group {
   private Location location;
   private AnchorPane pane;
   private double x, y;
-  private final double scale = 10;
+  private final double scale = 7;
 
   public double tempx, tempy;
 

@@ -5,6 +5,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
 import java.io.IOException;
@@ -29,10 +30,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
+
+  public ComboBox<Location> To;
+  public ComboBox<Location> From;
 
   /*Edit Remove Popup*/
   public TextField popupNodeID;
@@ -43,6 +48,7 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
+  public AnchorPane masterPane;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
   @FXML Rectangle PatientRoom;
@@ -64,6 +70,7 @@ public class MapController extends ServiceController {
   @FXML Rectangle Recliners;
   @FXML Rectangle OtherEquip;
   @FXML Rectangle MultiServices;
+  @FXML Button Go;
 
   /* Map Icons State */
   public boolean PRicon = true;
@@ -87,14 +94,6 @@ public class MapController extends ServiceController {
   public boolean MSicon = true;
   public boolean ALLicon = true;
 
-  @FXML ScrollPane imagesPane1;
-  @FXML ScrollPane imagesPane2;
-  @FXML ScrollPane imagesPane3;
-  @FXML ScrollPane imagesPane4;
-  @FXML ScrollPane imagesPane5;
-  @FXML ScrollPane imagesPane6;
-  @FXML ScrollPane imagesPane7;
-
   @FXML Pane pane;
 
   /*Add Popup*/
@@ -108,6 +107,7 @@ public class MapController extends ServiceController {
   ComboBox addBuildingCombo;
   ComboBox addFloorCombo;
   Button addButton;
+
   ObservableList<String> nodeTypeList =
       FXCollections.observableArrayList(
           "PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF",
@@ -136,6 +136,8 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
   @FXML Pane assistPane;
+  ArrayList<Location> nodeIDs;
+  @FXML Circle add;
   @FXML Button addBTN;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
@@ -150,13 +152,6 @@ public class MapController extends ServiceController {
   public MapController() throws IOException, SQLException {}
 
   public void initialize(URL location, ResourceBundle resources) {
-    imagesPane1.setPannable(true);
-    imagesPane2.setPannable(true);
-    imagesPane3.setPannable(true);
-    imagesPane4.setPannable(true);
-    imagesPane5.setPannable(true);
-    imagesPane6.setPannable(true);
-    imagesPane7.setPannable(true);
 
     addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
@@ -184,6 +179,22 @@ public class MapController extends ServiceController {
     locations = new HashMap<>();
     //    for(LocationNode ln: locations.values())
     //      ln.setV
+    nodeIDs = new ArrayList<>();
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    To.setTooltip(new Tooltip());
+    To.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(To, 650, 290);
+    From.setTooltip(new Tooltip());
+    From.getItems().addAll(nodeIDs);
+    new ComboBoxAutoComplete<Location>(From, 650, 290);
 
     setUpMap();
     mapUI.clear();
@@ -258,13 +269,6 @@ public class MapController extends ServiceController {
                   ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
                   ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
                   ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                  imagesPane1.setPannable(false);
-                  imagesPane2.setPannable(false);
-                  imagesPane3.setPannable(false);
-                  imagesPane4.setPannable(false);
-                  imagesPane5.setPannable(false);
-                  imagesPane6.setPannable(false);
-                  imagesPane7.setPannable(false);
                 }
               });
           ln.setOnMouseReleased(
@@ -282,14 +286,6 @@ public class MapController extends ServiceController {
                   } catch (SQLException e) {
                     throw new RuntimeException(e);
                   }
-                  imagesPane1.setPannable(true);
-                  imagesPane2.setPannable(true);
-                  imagesPane3.setPannable(true);
-                  imagesPane4.setPannable(true);
-                  imagesPane5.setPannable(true);
-                  imagesPane6.setPannable(true);
-                  imagesPane7.setPannable(true);
-
                   // popupXCoord.setText("ln.getLayoutX()");
                   // popupYCoord.setText("ln.getLayoutY()");
 
@@ -491,13 +487,6 @@ public class MapController extends ServiceController {
             ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
             ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
             ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-            imagesPane1.setPannable(false);
-            imagesPane2.setPannable(false);
-            imagesPane3.setPannable(false);
-            imagesPane4.setPannable(false);
-            imagesPane5.setPannable(false);
-            imagesPane6.setPannable(false);
-            imagesPane7.setPannable(false);
           }
         });
     ln.setOnMouseReleased(
@@ -515,13 +504,6 @@ public class MapController extends ServiceController {
             } catch (SQLException e) {
               throw new RuntimeException(e);
             }
-            imagesPane1.setPannable(true);
-            imagesPane2.setPannable(true);
-            imagesPane3.setPannable(true);
-            imagesPane4.setPannable(true);
-            imagesPane5.setPannable(true);
-            imagesPane6.setPannable(true);
-            imagesPane7.setPannable(true);
 
             // popupXCoord.setText("ln.getLayoutX()");
             // popupYCoord.setText("ln.getLayoutY()");
@@ -542,16 +524,11 @@ public class MapController extends ServiceController {
     reqTable.getItems().clear();
     LocationNode locationNode = (LocationNode) mouseEvent.getSource();
     Location location = locationNode.getLocation();
-    AnchorPane pane = locationNode.getPane();
-    if (pane.getChildren().contains(popupEditPane)) {
-      pane.getChildren().remove(popupEditPane);
-    }
+    AnchorPane pane = masterPane;
 
-    if (locationNode.tempx + 468 <= 870) popupEditPane.setLayoutX(locationNode.tempx);
-    else popupEditPane.setLayoutX(locationNode.tempx - 458);
+    popupEditPane.setLayoutX(663);
 
-    if (locationNode.tempy - 500 < 0) popupEditPane.setLayoutY(locationNode.tempy);
-    else popupEditPane.setLayoutY(locationNode.tempy - 500);
+    popupEditPane.setLayoutY(159);
 
     Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
     AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
