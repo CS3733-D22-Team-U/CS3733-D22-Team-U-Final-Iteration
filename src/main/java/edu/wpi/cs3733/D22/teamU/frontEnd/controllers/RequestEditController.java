@@ -31,6 +31,7 @@ public class RequestEditController {
 
   @FXML TextField service;
   @FXML TextField notes;
+  @FXML TextField notesRelig;
   @FXML DatePicker pickUp;
   @FXML DatePicker dropOff;
 
@@ -182,7 +183,7 @@ public class RequestEditController {
         fields.add("status");
         fields.add("destination");
         fields.add("employee");
-        fields.add("notes");
+        fields.add("notesRelig");
         activePane = religiousFields;
         break;
 
@@ -269,6 +270,9 @@ public class RequestEditController {
           newRequest.setServices(service.getText().trim());
           break;
         case "notes":
+          newRequest.setNotes(notes.getText().trim());
+          break;
+        case "notesRelig":
           newRequest.setNotes(notes.getText().trim());
           break;
         case "name":
@@ -360,6 +364,9 @@ public class RequestEditController {
           break;
         case "notes":
           notes.setText(request.getNotes());
+          break;
+        case "notesRelig":
+          notesRelig.setText(request.getNotes());
           break;
         case "amount":
           amount.setText(String.valueOf(request.getAmount()));
