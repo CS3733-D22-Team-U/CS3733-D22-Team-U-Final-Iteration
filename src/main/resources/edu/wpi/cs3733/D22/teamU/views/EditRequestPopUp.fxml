@@ -9,32 +9,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="477.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
+<AnchorPane prefHeight="250.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
    <children>
-      <Pane prefHeight="327.0" prefWidth="427.0" style="-fx-background-color: BLUE;">
+      <Pane prefHeight="250.0" prefWidth="389.0" style="-fx-background-color: BLUE;">
          <children>
-            <Text layoutX="149.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Edit Request" wrappingWidth="183.63708543777466">
+            <Text layoutX="140.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Edit Request" wrappingWidth="183.63708543777466">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <TextField fx:id="ID" layoutX="18.0" layoutY="109.0" />
-            <ComboBox fx:id="locations" layoutX="17.0" layoutY="179.0" prefWidth="150.0" />
-            <ComboBox fx:id="employees" layoutX="17.0" layoutY="259.0" prefWidth="150.0" />
-            <TextField fx:id="name" layoutX="235.0" layoutY="109.0" />
-            <TextField fx:id="patientName" layoutX="235.0" layoutY="179.0" />
-            <TextField fx:id="status" layoutX="235.0" layoutY="259.0" />
-            <Text layoutX="79.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="82.13671875" />
-            <Text layoutX="275.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="82.13671875" />
-            <Text layoutX="51.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="82.13671875" />
-            <Text layoutX="51.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee" wrappingWidth="82.13671875" />
-            <Text layoutX="289.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="53.529296875" />
-            <Text layoutX="268.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="82.13671875" />
+            <TextField fx:id="ID" layoutX="15.0" layoutY="54.0" />
+            <ComboBox fx:id="locations" layoutX="14.0" layoutY="124.0" prefWidth="150.0" />
+            <ComboBox fx:id="employees" layoutX="14.0" layoutY="204.0" prefWidth="150.0" />
+            <TextField fx:id="name" layoutX="232.0" layoutY="54.0" />
+            <TextField fx:id="patientName" layoutX="232.0" layoutY="124.0" />
+            <TextField fx:id="status" layoutX="232.0" layoutY="204.0" />
+            <Text layoutX="76.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="82.13671875" />
+            <Text layoutX="272.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="82.13671875" />
+            <Text layoutX="48.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="82.13671875" />
+            <Text layoutX="48.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee" wrappingWidth="82.13671875" />
+            <Text layoutX="286.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="53.529296875" />
+            <Text layoutX="265.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="82.13671875" />
          </children>
       </Pane>
-      <StackPane fx:id="specialFields" layoutY="327.0" prefHeight="150.0" prefWidth="427.0">
+      <StackPane fx:id="specialFields" layoutX="389.0" prefHeight="250.0" prefWidth="427.0">
          <children>
-            <Pane fx:id="religiousFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Magenta;" visible="false">
+            <Pane fx:id="religiousFields" prefHeight="200.0" prefWidth="427.0" style="-fx-background-color: Magenta;" visible="false">
                <children>
                   <TextField fx:id="religion" layoutX="14.0" layoutY="75.0" />
                   <TextField fx:id="notesRelig" layoutX="235.0" layoutY="75.0" />
@@ -94,7 +94,7 @@
                   <Text layoutX="62.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Language" />
                </children>
             </Pane>
-            <Pane fx:id="maintenanceFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Tan;">
+            <Pane fx:id="maintenanceFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Tan;" visible="false">
                <children>
                   <TextField fx:id="typeOfMain" layoutX="14.0" layoutY="75.0" />
                   <TextField fx:id="description" layoutX="234.0" layoutY="75.0" />
@@ -102,7 +102,7 @@
                   <Text layoutX="278.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                </children>
             </Pane>
-            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Blue;">
+            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Blue;" visible="false">
                <children>
                   <TextField fx:id="notes" layoutX="42.0" layoutY="41.0" prefHeight="25.0" prefWidth="149.0" />
                   <DatePicker fx:id="pickUp" layoutX="225.0" layoutY="41.0" />
@@ -114,7 +114,7 @@
                   <TextField fx:id="service" layoutX="42.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
                </children>
             </Pane>
-            <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="518.0" style="-fx-background-color: GREEN;">
+            <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="427.0" style="-fx-background-color: GREEN;" visible="false">
                <children>
                   <TextField fx:id="gifts" layoutX="43.0" layoutY="75.0" />
                   <TextField fx:id="message" layoutX="314.0" layoutY="75.0" />
