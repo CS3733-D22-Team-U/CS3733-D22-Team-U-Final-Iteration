@@ -71,13 +71,12 @@ public class AboutController extends ServiceController {
   private void addTeamImage(String resource) {
     URL a = Uapp.class.getClassLoader().getResource(resource);
     imageHover.setImage(new Image(String.valueOf(a)));
-    imageHover.setScaleX(imageHover.getScaleX());
-    imageHover.setScaleY(imageHover.getScaleY());
-    imageHover.setFitHeight(imageHover.getFitWidth());
-    imageHover.setFitWidth(imageHover.getFitWidth());
+    //imageHover.setScaleX(1.75);
+    //imageHover.setScaleY(1.75);
+    imageHover.setFitHeight(200);
+    imageHover.setFitWidth(150);
     //imageHover.setX((imageHover.getFitWidth()));
     //imageHover.setY((imageHover.getFitHeight()));
-    imageHover.setScaleX(1.15);
-    imageHover.setScaleY(1.15);
+
   }
 }
