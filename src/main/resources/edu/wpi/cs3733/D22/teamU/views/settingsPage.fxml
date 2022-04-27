@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.settingsPageController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.settingsPageController">
    <children>
-      <Pane prefHeight="750.0" prefWidth="258.0" style="-fx-background-color: #044E9A; -fx-background-radius: 0 35 35 0;">
+      <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/background.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="750.0" prefWidth="258.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 35 35 0;">
          <children>
             <Text fill="WHITE" layoutX="33.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
                <font>
@@ -21,17 +30,7 @@
                   <Image url="@../icons/Vector.png" />
                </image>
             </ImageView>
-            <Button layoutY="341.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Help">
-               <effect>
-                  <DropShadow />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutY="273.0" mnemonicParsing="false" onAction="#toApplicationSettings" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Application Settings">
+            <Button layoutY="206.0" mnemonicParsing="false" onAction="#toApplicationSettings" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Application Settings">
                <effect>
                   <DropShadow />
                </effect>
@@ -41,17 +40,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button layoutY="200.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Privacy Settings">
-               <effect>
-                  <DropShadow />
-               </effect>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutY="158.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="Account Settings" textFill="#044e9a">
+            <Button layoutY="158.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="Account Settings" textFill="#5898db">
                <effect>
                   <DropShadow />
                </effect>
@@ -62,7 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
          </children></Pane>
-      <Button layoutX="596.0" layoutY="144.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" text="Submit Change" textFill="WHITE">
+      <Button layoutX="590.0" layoutY="509.0" mnemonicParsing="false" onAction="#changeName" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Submit Change" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -70,7 +59,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="432.0" layoutY="476.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" text="Chose Image" textFill="WHITE">
+      <Button layoutX="414.0" layoutY="203.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Choose Image" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -78,7 +67,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="754.0" layoutY="483.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" text="Upload Image" textFill="WHITE">
+      <Button layoutX="773.0" layoutY="203.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Upload Image" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -86,21 +75,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField layoutX="542.0" layoutY="82.0" prefHeight="32.0" prefWidth="258.0" style="-fx-background-color: #c4c4c4; -fx-background-radius: 15;">
+      <TextField fx:id="changeText" layoutX="543.0" layoutY="444.0" prefHeight="32.0" prefWidth="258.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>
-      <Text layoutX="546.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="250.0000000000001">
+      <Text fill="#5898db" layoutX="557.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="229.1601562499999">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="552.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Avatar">
+      <Text fill="#5898db" layoutX="563.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Avatar">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Pane layoutX="590.0" layoutY="296.0" prefHeight="159.0" prefWidth="164.0" style="-fx-background-radius: 20; -fx-background-color: #ffffff;">
+      <Pane layoutX="590.0" layoutY="144.0" prefHeight="159.0" prefWidth="164.0" style="-fx-background-radius: 20; -fx-background-color: #ffffff;">
          <children>
             <ImageView fitHeight="123.0" fitWidth="117.0" layoutX="28.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -109,7 +98,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="590.0" layoutY="649.0" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+      <Button layoutX="590.0" layoutY="649.0" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
