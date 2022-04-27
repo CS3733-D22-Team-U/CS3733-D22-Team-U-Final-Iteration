@@ -37,6 +37,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,8 +48,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class filterEmployeeController extends ServiceController implements Initializable {
@@ -74,6 +77,8 @@ public class filterEmployeeController extends ServiceController implements Initi
   @FXML TableColumn<Request, String> timeCol;
   @FXML TableView<Request> employeeRequests;
   @FXML Text time;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   ObservableList<Request> employeeRequestsList = FXCollections.observableArrayList();
@@ -83,13 +88,41 @@ public class filterEmployeeController extends ServiceController implements Initi
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setUpEmployeeRequests();
+    try {
+      setUpEmployeeRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     staff = new ArrayList<>();
-    staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    try {
+      staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(670);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 670) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   public void clear(ActionEvent actionEvent) {

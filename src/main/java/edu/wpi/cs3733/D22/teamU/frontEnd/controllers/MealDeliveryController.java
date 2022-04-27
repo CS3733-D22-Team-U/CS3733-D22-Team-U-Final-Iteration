@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -94,9 +96,21 @@ public class MealDeliveryController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    try {
+      locations.getItems().addAll(Udb.getInstance().locationImpl.list());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     for (Node checkBox : requestHolder.getChildren()) {
@@ -104,7 +118,13 @@ public class MealDeliveryController extends ServiceController {
     }
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    try {
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.List.values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
 
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
@@ -138,11 +158,11 @@ public class MealDeliveryController extends ServiceController {
 
   private void handleBar() {
     TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
-    openNav.setToY(596);
+    openNav.setToY(670);
     TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
-          if (sideBarAnchor.getTranslateY() != 596) {
+          if (sideBarAnchor.getTranslateY() != 670) {
             openNav.play();
           } else {
             closeNav.setToY(0);
@@ -172,6 +192,13 @@ public class MealDeliveryController extends ServiceController {
       Employee empty = new Employee("N/A");
       return empty;
     }
+  }
+
+  public void toMealHelp(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/MealHelp.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
   }
 
   private void setUpActiveRequests() throws SQLException, IOException {
@@ -371,8 +398,8 @@ public class MealDeliveryController extends ServiceController {
     newReqButton.setUnderline(false);
 
     // =====edit and remove buttons=====
-    editButton.setVisible(true);
-    removeButton.setVisible(true);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
     // ====================================
   }
 

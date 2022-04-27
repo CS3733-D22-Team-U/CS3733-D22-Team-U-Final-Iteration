@@ -1,25 +1,33 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.EventListener;
+import com.google.cloud.firestore.FirestoreException;
+import com.google.firebase.database.annotations.Nullable;
 import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
-import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.equipSim;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.Edge;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.PathFinding;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +42,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
@@ -105,6 +114,8 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> nodeType;
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   //  @FXML ComboBox<Location> To;
   //  @FXML ComboBox<Location> From;
@@ -221,7 +232,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-
+          // firebaseUpdate(ln); //todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
@@ -315,6 +326,22 @@ public class MapController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(670);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 670) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
   }
 
   public void dispMultiService(MouseEvent mouseEvent) {}
@@ -708,8 +735,10 @@ public class MapController extends ServiceController {
     }
 
     reqTable.setItems(FXCollections.observableArrayList(locationNode.getLocation().getRequests()));
-
-    pane.getChildren().add(popupEditPane);
+    try {
+      pane.getChildren().add(popupEditPane);
+    } catch (Exception e) {
+    }
   }
 
   public void deleteRequest(MouseEvent mouseEvent) {
@@ -772,34 +801,33 @@ public class MapController extends ServiceController {
     }
   }
 
-  public void moveEquip(MouseEvent mouseEvent) {
-    try {
-      if (equipment != null) {
-        Equipment newEquip = equipTable.getSelectionModel().getSelectedItem();
-        newEquip.gettingTheLocation(); // init the location for the equipment
-        Equipment copy = newEquip;
-        copy.gettingTheLocation();
+  public void firebaseUpdate(LocationNode ln) {
+    DocumentReference docRef =
+        DataDao.db.collection("locations").document(ln.getLocation().getNodeID());
+    docRef.addSnapshotListener(
+        new EventListener<DocumentSnapshot>() {
+          @Override
+          public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirestoreException e) {
+            if (e != null) {
+              System.err.println("Listen failed: " + e);
+              return;
+            }
 
-        // todo: this were you put the function to return the nearest location x and y coor
-
-        // this is actually changing the location
-        copy.getLocation().setXcoord();
-        copy.getLocation().setYcoord();
-        copy.setLocationID();
-        copy.gettingTheLocation(); // init the copies location
-
-        // this is editing the back end and map to display equip prop
-        Udb.getInstance().edit(copy);
-        equipTable.getItems().remove(newEquip);
-        equipTable.getItems().add(copy);
-        newEquip.getLocation().getEquipment().remove(newEquip);
-        copy.getLocation().getEquipment().add(copy);
-      }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
+            if (snapshot != null && snapshot.exists()) {
+              Map<String, Object> data = snapshot.getData();
+              if (Integer.parseInt(data.get("xcoord").toString()) != ln.getLocation().getXcoord())
+                locations
+                    .get(snapshot.getId())
+                    .setLayoutX(Integer.parseInt(data.get("xcoord").toString()));
+              if (Integer.parseInt(data.get("ycoord").toString()) != ln.getLocation().getYcoord())
+                locations
+                    .get(snapshot.getId())
+                    .setLayoutY(Integer.parseInt(data.get("ycoord").toString()));
+            } else {
+              System.out.print("Current data: null");
+            }
+          }
+        });
   }
 
   public void selectRequest(MouseEvent mouseEvent) {
@@ -1098,19 +1126,5 @@ public class MapController extends ServiceController {
       }
       SRVicon = true;
     }
-  }
-
-  public void simulate(MouseEvent mouseevent)
-  {
-    double time = 10; // in hours
-    String equip = "PUMPS"; // equipment to be simulate
-    //ArrayList<equipSim> myEquip =
-    // Toggle Icons Off
-    if (LOCicon != false)
-    {
-      dispALL(mouseevent);
-    }
-
-    //
   }
 }

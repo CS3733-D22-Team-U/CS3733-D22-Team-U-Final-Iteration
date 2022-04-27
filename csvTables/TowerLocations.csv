@@ -153,7 +153,7 @@ uSTOR00101,206,389,1,Tower,EQUP,West Plaza,West Plaza
 HHALL00902,488,738,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
 HDEPT00203,438,288,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
 HHALL00903,483,278,3,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
-CLABS001L1,679,723,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
+CLABS001L1,679,722,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
 HBATH00203,498,443,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 uPATI06003,336,551,3,Tower,PATI,Patient Room Pod C,PRC
 FRETL00101,721,302,1,Tower,RETL,Lobby Vending Machine,VM Lobby
@@ -184,7 +184,7 @@ FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
 WELEV00L01,558,388,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
 WELEV00L02,552,383,2,Tower,EQUP,Elevator L Floor 2,Elevator L2
-CHALL006L1,860,742,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
+CHALL006L1,860,741,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
 FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
 HSTAI00302,538,688,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
 FHALL01701,469,414,1,Tower,HALL,Tower Hallway 9,Hallway F01701

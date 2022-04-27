@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -23,6 +20,11 @@
             <children>
                 <Pane layoutX="154.0" layoutY="153.0" prefHeight="598.0" prefWidth="923.0">
                     <children>
+                        <ImageView fitHeight="753.0" fitWidth="1109.0" layoutX="-155.0" layoutY="-143.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/background.png" />
+                            </image>
+                        </ImageView>
                         <Text layoutX="341.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help:" underline="true">
                             <font>
                                 <Font name="System Bold" size="30.0" />
@@ -33,21 +35,21 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Text>
-                        <Text layoutX="4.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input name of the patient you're serving, and the destination." wrappingWidth="433.904296875">
+                        <Text layoutX="4.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Input destination of the patient you're serving, as well as patient name." wrappingWidth="370.904296875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="8.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient, as well as pickup date and drop date." wrappingWidth="424.3310546875">
+                        <Text layoutX="4.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input your name, or employee name assigned to patient, as well as pick-up and drop-off dates." wrappingWidth="424.3310546875">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the laundry request services needed for the patient.">
+                        <Text layoutX="254.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="     Select the laundry services needed for the patient.">
                             <font>
                                 <Font size="18.0" />
                             </font></Text>
-                        <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="209.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="108.0" fitWidth="99.0" layoutX="199.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/arrow-png-download.png" />
                             </image></ImageView>
@@ -60,9 +62,9 @@
                                 <Font size="18.0" />
                             </font>
                         </Text>
-                        <Button layoutX="759.0" layoutY="517.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="149.0" style="-fx-background-color: #89D7BF; -fx-background-radius: 15; -fx-border-radius: 15;" text="Return">
+                        <Button layoutX="358.0" layoutY="545.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="39.0" prefWidth="149.0" style="-fx-background-color: #B0E5E3; -fx-background-radius: 15; -fx-border-radius: 15;" text="Return" textFill="#044e9a">
                             <font>
-                                <Font size="18.0" />
+                                <Font name="System Bold" size="18.0" />
                             </font>
                             <cursor>
                                 <Cursor fx:constant="HAND" />
@@ -71,32 +73,33 @@
                         <Circle fill="#029ca6" layoutX="571.0" layoutY="270.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
                         <Text fill="WHITE" layoutX="249.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
                         <Text fill="WHITE" layoutX="567.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
-                  <ImageView fitHeight="338.0" fitWidth="223.0" layoutX="-10.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="212.0" fitWidth="268.0" layoutX="275.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/laundryserv1.PNG" />
+                        <Image url="@../images/landy2.PNG" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="157.0" fitWidth="254.0" layoutX="284.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="129.0" fitWidth="285.0" layoutX="611.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/laundryserv2.PNG" />
+                        <Image url="@../images/subclear.PNG" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="77.0" fitWidth="295.0" layoutX="612.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="279.0" fitWidth="287.0" layoutX="7.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/compserv3.PNG" />
+                        <Image url="@../images/landy1.PNG" />
                      </image>
                   </ImageView>
                     </children></Pane>
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="247.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Circle fill="#029ca6" layoutX="142.0" layoutY="302.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
-                <Text fill="WHITE" layoutX="138.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                <Text fill="WHITE" layoutX="139.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="259.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Circle fill="#029ca6" layoutX="142.0" layoutY="305.0" radius="12.0" stroke="#029ca6" strokeType="INSIDE" />
+                <Text fill="WHITE" layoutX="138.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                <Text fill="WHITE" layoutX="139.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
             </children>
         </Pane>
         <Pane fx:id="assistPane" layoutX="11.0" layoutY="190.0" prefHeight="563.0" prefWidth="93.0" />
-        <Pane prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #044e9a;">
+        <Pane prefHeight="95.0" prefWidth="1104.0" style="-fx-background-color: #044e9a;">
             <children>
-                <Text fill="WHITE" layoutX="275.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry Request Help" wrappingWidth="756.65234375">
+                <Text fill="WHITE" layoutX="157.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry Service Request Help" wrappingWidth="854.65234375">
                     <font>
                         <Font name="System Bold" size="60.0" />
                     </font>
@@ -106,143 +109,5 @@
                 <DropShadow />
             </effect>
         </Pane>
-        <ScrollPane prefHeight="750.0" prefWidth="86.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">
-                    <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="70.0" spacing="15.0" styleClass="menuBarSmall" stylesheets="@../css/servicePage.css">
-                            <children>
-                                <Button mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/homeIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                    <VBox.margin>
-                                        <Insets top="15.0" />
-                                    </VBox.margin>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/equipmentIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toMap" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/mapIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toLabRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/labIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/medicineIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/foodIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/giftIcon.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toLaundry" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/laundry.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/maintenance.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/religious.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toTranslate" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/translate.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toSecurity" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/security.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#toCompService" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-                                    <graphic>
-                                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/menuBar/computerService.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                            </children>
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT" />
-                            </cursor>
-                        </VBox>
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
     </children>
 </AnchorPane>
