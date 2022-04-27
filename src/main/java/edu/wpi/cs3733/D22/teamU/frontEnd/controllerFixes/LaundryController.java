@@ -71,17 +71,35 @@ public class LaundryController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
 
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    try {
+      locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    try {
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     clearButton
@@ -134,7 +152,7 @@ public class LaundryController extends ServiceController {
   }
 
   @SneakyThrows
-  private ObservableList<LaundryRequest> getActiveRequestList() {
+  private ObservableList<LaundryRequest> getActiveRequestList() throws IOException, SQLException {
     for (LaundryRequest e : Udb.getInstance().laundryRequestImpl.hList().values()) {
       e.gettingTheLocation();
     }

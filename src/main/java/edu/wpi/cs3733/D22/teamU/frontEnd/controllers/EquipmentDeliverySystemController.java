@@ -138,8 +138,7 @@ public class EquipmentDeliverySystemController extends ServiceController {
 
     // udb = Udb.getInstance();
 
-      setUpAllEquipment();
-
+    setUpAllEquipment();
 
     setUpActiveRequests();
 

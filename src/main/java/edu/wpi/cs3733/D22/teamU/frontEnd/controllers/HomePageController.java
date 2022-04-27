@@ -21,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -29,9 +28,8 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-public class DashboardController extends ServiceController {
+public class HomePageController extends ServiceController {
 
   public Button logOutButton;
   public Text headerText;
@@ -117,7 +115,7 @@ public class DashboardController extends ServiceController {
 
     // handleNavButtons();
     userName.setText("Dr." + "____");
-    handleNavButtons();
+    // handleNavButtons();
     handeDateTime();
     // handleTurtle();
     // playTurtle();
