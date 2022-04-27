@@ -143,8 +143,6 @@ public class MapController extends ServiceController {
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
 
-  public ComboBox<Location> To;
-  public ComboBox<Location> From;
   ArrayList<Location> fromLocation;
   ArrayList<Location> toLocation;
 
