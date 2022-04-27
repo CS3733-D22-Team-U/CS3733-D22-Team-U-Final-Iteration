@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.labRequestServices">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.labRequestServices">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -208,11 +196,6 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="387.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Assigned Staff:" wrappingWidth="178.13671875">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Text>
                         <TextField fx:id="patientNameField" layoutX="380.0" layoutY="139.0" prefHeight="30.0" prefWidth="190.0" />
                         <ComboBox fx:id="locations" layoutX="380.0" layoutY="269.0" prefHeight="30.0" prefWidth="190.0" promptText="Destination" />
                         <ComboBox fx:id="employees" layoutX="379.0" layoutY="204.0" prefHeight="30.0" prefWidth="190.0" promptText="Staff" />
@@ -225,16 +208,21 @@
                               </Text>
                            </children>
                         </Pane>
-                        <Text fill="WHITE" layoutX="415.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="125.17037435476038">
+                        <Text fill="WHITE" layoutX="404.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="150.17037435476038">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="426.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="125.17037435476038">
+                        <Text fill="WHITE" layoutX="408.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="125.17037435476038">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
+                        <Button fx:id="submitButton1" alignment="CENTER" layoutX="424.0" layoutY="505.0" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toLabRequestHelp" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                </children>

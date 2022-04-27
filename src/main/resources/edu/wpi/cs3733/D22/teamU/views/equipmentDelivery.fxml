@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -88,7 +76,7 @@
                   </Pane>
                   <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="634.0" minWidth="415.0" prefHeight="552.0" prefWidth="634.0" style="-fx-background-color: #A5D6D8 #A5D6D8; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
-                        <Button alignment="CENTER" layoutX="435.0" layoutY="496.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3 #B0E5E3;" text="Help" textFill="#044e9a">
+                        <Button alignment="CENTER" layoutX="435.0" layoutY="496.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toEquipHelp" prefHeight="56.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3 #B0E5E3;" text="Help" textFill="#044e9a">
                            <font>
                               <Font size="12.0" />
                            </font>
