@@ -3,49 +3,56 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="250.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
+<AnchorPane prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.RequestEditController">
    <children>
-      <Pane prefHeight="250.0" prefWidth="389.0" style="-fx-background-color: BLUE;">
+      <ImageView fitHeight="250.0" fitWidth="816.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/editPopUpbackground.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="250.0" prefWidth="300.0">
          <children>
-            <Text layoutX="140.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Edit Request" wrappingWidth="183.63708543777466">
+            <Text fill="#044e9a" layoutX="13.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Edit Request" wrappingWidth="148.5078125">
                <font>
-                  <Font size="19.0" />
+                  <Font name="System Bold" size="23.0" />
                </font>
             </Text>
-            <TextField fx:id="ID" layoutX="15.0" layoutY="54.0" />
-            <ComboBox fx:id="locations" layoutX="14.0" layoutY="124.0" prefWidth="150.0" />
-            <ComboBox fx:id="employees" layoutX="14.0" layoutY="204.0" prefWidth="150.0" />
-            <TextField fx:id="name" layoutX="232.0" layoutY="54.0" />
-            <TextField fx:id="patientName" layoutX="232.0" layoutY="124.0" />
-            <TextField fx:id="status" layoutX="232.0" layoutY="204.0" />
-            <Text layoutX="76.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="82.13671875" />
-            <Text layoutX="272.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="82.13671875" />
-            <Text layoutX="48.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="82.13671875" />
-            <Text layoutX="48.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee" wrappingWidth="82.13671875" />
-            <Text layoutX="286.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="53.529296875" />
-            <Text layoutX="265.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="82.13671875" />
+            <TextField fx:id="ID" layoutX="36.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+            <ComboBox fx:id="locations" layoutX="36.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" />
+            <ComboBox fx:id="employees" layoutX="35.0" layoutY="167.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="name" layoutX="169.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="patientName" layoutX="171.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="status" layoutX="170.0" layoutY="167.0" prefHeight="25.0" prefWidth="111.0" />
+            <Text layoutX="84.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="13.63671875" />
+            <Text layoutX="209.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="34.63671875" />
+            <Text layoutX="66.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="47.63671875" />
+            <Text layoutX="65.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee" wrappingWidth="52.63671875" />
+            <Text layoutX="208.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="33.029296875" />
+            <Text layoutX="185.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="75.5625" />
          </children>
       </Pane>
-      <StackPane fx:id="specialFields" layoutX="389.0" prefHeight="250.0" prefWidth="427.0">
+      <StackPane fx:id="specialFields" layoutX="300.0" prefHeight="250.0" prefWidth="300.0">
          <children>
-            <Pane fx:id="religiousFields" prefHeight="200.0" prefWidth="427.0" style="-fx-background-color: Magenta;" visible="false">
+            <Pane fx:id="religiousFields" prefHeight="200.0" prefWidth="427.0" visible="false">
                <children>
-                  <TextField fx:id="religion" layoutX="14.0" layoutY="75.0" />
-                  <TextField fx:id="notesRelig" layoutX="235.0" layoutY="75.0" />
-                  <Text layoutX="66.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religion" />
-                  <Text layoutX="293.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
+                  <TextField fx:id="religion" layoutX="23.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+                  <TextField fx:id="notesRelig" layoutX="154.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+                  <Text layoutX="57.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religion" />
+                  <Text layoutX="189.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
                </children>
             </Pane>
-            <Pane fx:id="medicineFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: RED;" visible="false">
+            <Pane fx:id="medicineFields" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField fx:id="amountMed" layoutX="14.0" layoutY="75.0" />
-                  <Text layoutX="66.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
+                  <TextField fx:id="amountMed" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+                  <Text layoutX="44.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
                </children>
             </Pane>
             <Pane fx:id="labFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Orange;" visible="false">
@@ -102,16 +109,16 @@
                   <Text layoutX="278.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                </children>
             </Pane>
-            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Blue;" visible="false">
+            <Pane id=" Laundry Pane" fx:id="laundryFields" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField fx:id="notes" layoutX="42.0" layoutY="41.0" prefHeight="25.0" prefWidth="149.0" />
-                  <DatePicker fx:id="pickUp" layoutX="225.0" layoutY="41.0" />
-                  <DatePicker fx:id="dropOff" layoutX="225.0" layoutY="105.0" />
-                  <Text layoutX="97.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="38.93670654296875" />
-                  <Text layoutX="271.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Pickup" wrappingWidth="82.13671875" />
-                  <Text layoutX="271.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Drop off" wrappingWidth="82.13671875" />
-                  <Text layoutX="90.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="53.529296875" />
-                  <TextField fx:id="service" layoutX="42.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
+                  <TextField fx:id="notes" layoutX="24.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+                  <DatePicker fx:id="pickUp" layoutX="165.0" layoutY="68.0" prefHeight="25.0" prefWidth="111.0" />
+                  <DatePicker fx:id="dropOff" layoutX="165.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" />
+                  <Text layoutX="62.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" wrappingWidth="38.93670654296875" />
+                  <Text layoutX="189.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Pickup" wrappingWidth="63.9609375" />
+                  <Text layoutX="179.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Drop off" wrappingWidth="82.13671875" />
+                  <Text layoutX="58.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="40.029296875" />
+                  <TextField fx:id="service" layoutX="26.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" />
                </children>
             </Pane>
             <Pane id="Gift" fx:id="giftFields" prefHeight="160.0" prefWidth="427.0" style="-fx-background-color: GREEN;" visible="false">
