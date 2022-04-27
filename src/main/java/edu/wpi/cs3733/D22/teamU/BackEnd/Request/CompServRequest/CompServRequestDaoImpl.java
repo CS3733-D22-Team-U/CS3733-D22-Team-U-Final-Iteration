@@ -341,7 +341,6 @@ public class CompServRequestDaoImpl implements DataDao<CompServRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

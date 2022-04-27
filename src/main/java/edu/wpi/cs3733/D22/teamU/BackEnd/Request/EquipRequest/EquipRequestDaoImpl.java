@@ -398,7 +398,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }
