@@ -286,13 +286,10 @@ public class RequestEditController {
         case "priority":
           newRequest.setPriority(Integer.parseInt(priority.getText().trim()));
           break;
-        case "labType":
-          newRequest.setLabType(labType.getText().trim());
-          break;
-        case "descript":
+        case "descriptionOfThreat":
           newRequest.setDescript(description.getText().trim());
           break;
-        case "lethal":
+        case "leathalForcePermitted":
           newRequest.setLethal(lethalForce.getText().trim());
           break;
         case "typeOfMaintenance":
