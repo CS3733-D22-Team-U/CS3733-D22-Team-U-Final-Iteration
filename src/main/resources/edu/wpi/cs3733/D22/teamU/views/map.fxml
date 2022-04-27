@@ -244,10 +244,10 @@
             <Pane layoutX="121.0" layoutY="665.0" prefHeight="82.0" prefWidth="600.0">
                <children>
                   <Circle fx:id="add" fill="#3bafb4" layoutX="47.0" layoutY="47.0" onMouseClicked="#popUpAdd" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Circle fx:id="toggleLoc" fill="#3bafb4" layoutX="155.0" layoutY="47.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Circle fx:id="toggleEquip" fill="#3bafb4" layoutX="263.0" layoutY="47.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Circle fx:id="toggleServ" fill="#3bafb4" layoutX="371.0" layoutY="47.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Circle fx:id="toggleAll" fill="#3bafb4" layoutX="479.0" layoutY="47.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Circle fx:id="toggleLoc" fill="#3bafb4" layoutX="155.0" layoutY="47.0" onMouseClicked="#dispLOC" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Circle fx:id="toggleEquip" fill="#3bafb4" layoutX="263.0" layoutY="47.0" onMouseClicked="#dispEQP" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Circle fx:id="toggleServ" fill="#3bafb4" layoutX="371.0" layoutY="47.0" onMouseClicked="#dispSRV" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Circle fx:id="toggleAll" fill="#3bafb4" layoutX="479.0" layoutY="47.0" onMouseClicked="#dispALL" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                </children>
             </Pane>
          </children>

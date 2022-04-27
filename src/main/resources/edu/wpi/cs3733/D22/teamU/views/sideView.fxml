@@ -194,7 +194,7 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Text>
-            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="430.0" layoutY="671.0" onMouseClicked="#setFloorLL1" strokeType="OUTSIDE" strokeWidth="0.0" text="LL2">
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="430.0" layoutY="671.0" onMouseClicked="#setFloorLL2" strokeType="OUTSIDE" strokeWidth="0.0" text="LL2">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
