@@ -287,8 +287,8 @@ public class MapController extends ServiceController {
                   getClass()
                       .getClassLoader()
                       .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(100);
-      popupAddPane.setLayoutY(200);
+      popupAddPane.setLayoutX(663);
+      popupAddPane.setLayoutY(159);
 
     } catch (IOException e) {
       e.printStackTrace();
