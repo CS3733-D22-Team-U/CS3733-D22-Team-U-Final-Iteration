@@ -78,7 +78,6 @@ public class RequestPageController extends ServiceController {
     for (Location l : Udb.getInstance().locationImpl.locations) locs.add(l.getNodeID());
     MedicineRequest.addLocationIDs(locs);
 
-    Employee test = new Employee("test");
     MedicineRequest.addAuthorizedEmployee("test");
     for (Employee l : Udb.getInstance().EmployeeImpl.hList().values())
       MedicineRequest.addAuthorizedEmployee(l.getEmployeeID());

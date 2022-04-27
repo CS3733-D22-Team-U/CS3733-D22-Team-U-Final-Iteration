@@ -74,7 +74,7 @@ public class MedicineRequest {
 
       if (Settings.getyCoord() <= 0) primaryStage.setY(0);
       primaryStage.setY(Settings.getyCoord());
-      Scene scene = getScene("edu/wpi/cs3733/D22/teamU/fxmlFiles/MedicineRequest.fxml");
+      Scene scene = getScene("edu/wpi/cs3733/D22/teamU/views/API/MedicineRequest.fxml");
       scene.getStylesheets().add(Settings.getCssPath());
       primaryStage.setTitle("Medicine Request Service");
       primaryStage.setScene(scene);
