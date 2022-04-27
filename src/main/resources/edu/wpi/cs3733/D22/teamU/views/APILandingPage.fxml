@@ -90,127 +90,6 @@
                     </font>
                 </Text>
                 <Text layoutX="98.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*look into calendarFX" />
-                <ButtonBar layoutX="317.0" layoutY="636.0" prefHeight="47.0" prefWidth="1055.0">
-                    <buttons>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/equipmentIconBlue.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/labIconBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/medicineIconBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button minWidth="61.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="70.0" style="-fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="63.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </buttons>
-                </ButtonBar>
             <Button layoutX="855.0" layoutY="426.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="222.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Medicine API" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -236,5 +115,108 @@
             <Button layoutX="987.0" layoutY="170.0" mnemonicParsing="false" onAction="#toSettings" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             </children>
         </Pane>
+      <ButtonBar buttonMinWidth="64.0" layoutX="283.0" layoutY="576.0" prefHeight="106.0" prefWidth="770.0">
+         <buttons>
+            <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/equipmentIconBlue.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/labIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/medicineIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/foodIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/giftIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/laundryIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/maintenanceIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/religiousIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/translateIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/securityIconBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/menuBar/computerServiceBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </buttons>
+      </ButtonBar>
     </children>
 </AnchorPane>

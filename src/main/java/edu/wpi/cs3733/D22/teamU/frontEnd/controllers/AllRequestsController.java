@@ -52,7 +52,13 @@ public class AllRequestsController implements Initializable {
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     // testing... System.out.println("we are here");
   }
 

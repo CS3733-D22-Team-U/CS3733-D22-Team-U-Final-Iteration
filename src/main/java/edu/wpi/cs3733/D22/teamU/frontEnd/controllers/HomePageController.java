@@ -100,7 +100,7 @@ public class HomePageController extends ServiceController {
 
     // userName.setText("Dr." + "____");
 
-    handleNavButtons();
+    // handleNavButtons();
     handeDateTime();
     // handleTurtle();
     // playTurtle();
@@ -177,6 +177,7 @@ public class HomePageController extends ServiceController {
     masterThread = timeThread;
   }
 
+  /*
   private void handleNavButtons() {
     for (Node node : topRow.getButtons()) {
       Button button = (Button) node;
@@ -202,6 +203,8 @@ public class HomePageController extends ServiceController {
     }
   }
 
+   */
+
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
   }
@@ -219,20 +222,6 @@ public class HomePageController extends ServiceController {
 
   public void toSettingsPage(ActionEvent actionEvent) throws IOException {
     Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toRequestsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/requestsPage.fxml");
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
@@ -263,6 +252,4 @@ public class HomePageController extends ServiceController {
     }
     return menuItemsList;
   }
-
-  public void toReport(ActionEvent actionEvent) {}
 }

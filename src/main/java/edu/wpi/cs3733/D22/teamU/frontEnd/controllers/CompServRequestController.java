@@ -68,12 +68,24 @@ public class CompServRequestController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpAllCompServReq();
+    try {
+      setUpAllCompServReq();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     // Displays Locations in Table View
     nodeIDs = new ArrayList<>();
-    for (Location l : Udb.getInstance().locationImpl.list()) {
-      nodeIDs.add(l);
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        nodeIDs.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     locations.setTooltip(new Tooltip());
     locations.getItems().addAll(nodeIDs);
@@ -81,8 +93,14 @@ public class CompServRequestController extends ServiceController {
 
     // Displays Employees in Table View
     staff = new ArrayList<>();
-    for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
-      staff.add(l);
+    try {
+      for (Employee l : Udb.getInstance().EmployeeImpl.hList().values()) {
+        staff.add(l);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
     }
     employees.setTooltip(new Tooltip());
     employees.getItems().addAll(staff);
