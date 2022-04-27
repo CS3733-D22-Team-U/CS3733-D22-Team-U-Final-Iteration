@@ -71,7 +71,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="590.0" layoutY="368.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Choose Image" textFill="WHITE">
+      <Button layoutX="590.0" layoutY="368.0" mnemonicParsing="false" onAction="#changeImage" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Choose Image" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

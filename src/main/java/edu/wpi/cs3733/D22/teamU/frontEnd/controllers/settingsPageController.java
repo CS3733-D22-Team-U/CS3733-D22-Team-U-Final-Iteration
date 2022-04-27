@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -25,7 +26,7 @@ import javafx.scene.control.TextField;
 
 
 
-public class settingsPageController {
+public class settingsPageController implements Initializable {
 
   ObservableList<String> URLList = FXCollections.observableArrayList();
 
@@ -60,7 +61,37 @@ public class settingsPageController {
 
   public void changeImage(ActionEvent actionEvent) throws IOException{
     if(comboImages.getValue().equals("Belisha Image")){
-      //addTeamImage();
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/belishaRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Deepti Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/deeptiRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Harsh Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/harshRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Iain Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/iainRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Joselin Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/joselin2RESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Kody Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/kodyRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Marko Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/markoRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Mike Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/mikeRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Nick Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/nickRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Tim Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/timRESIZE.jpeg");
+    }
+    else if(comboImages.getValue().equals("Will Image")){
+      addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/willRESIZE.jpeg");
     }
   }
   private void addTeamImage(String resource) {
