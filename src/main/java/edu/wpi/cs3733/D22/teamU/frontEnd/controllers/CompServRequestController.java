@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class CompServRequestController extends ServiceController {
@@ -58,6 +60,8 @@ public class CompServRequestController extends ServiceController {
   @FXML Button activeReqButton;
   @FXML TextArea messageBox;
   @FXML TextArea inputDevice;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   // =========declare buttons, popup pane and controller===========
   RequestEditController newCon;
@@ -100,6 +104,22 @@ public class CompServRequestController extends ServiceController {
     new ComboBoxAutoComplete<Employee>(employees, 502, 380);
 
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
 
     // =============initialize fxml and controller=============================
     EditRequestPopUp = new AnchorPane();

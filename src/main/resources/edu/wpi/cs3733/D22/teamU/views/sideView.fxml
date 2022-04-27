@@ -10,7 +10,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -19,111 +21,49 @@
    <children>
       <ImageView fitHeight="776.0" fitWidth="1109.0">
          <image>
-            <Image url="@background.png" />
+            <Image url="@../images/background.png" />
          </image>
       </ImageView>
       <Pane fx:id="backgroundPane" layoutX="10.0" layoutY="4.0" prefHeight="741.0" prefWidth="1100.0">
          <children>
-            <ImageView fitHeight="455.0" fitWidth="277.0" layoutX="132.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="592.0" fitWidth="335.0" layoutX="70.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/DietaryMorgueMech.png" />
                </image>
             </ImageView>
-            <TableView fx:id="equipFloor" layoutX="553.0" layoutY="484.0" prefHeight="230.0" prefWidth="532.0">
+            <TableView fx:id="equipFloor" layoutX="530.0" layoutY="516.0" prefHeight="230.0" prefWidth="542.0">
                <columns>
-                  <TableColumn fx:id="equipmentName" prefWidth="107.20001220703125" text="Equipment" />
-                  <TableColumn fx:id="dirty" minWidth="5.0" prefWidth="85.59991455078125" text="Dirty" />
-                  <TableColumn fx:id="clean" minWidth="5.0" prefWidth="87.2000732421875" text="Clean" />
-                  <TableColumn fx:id="location" prefWidth="86.66680908203125" text="Location" />
+                  <TableColumn fx:id="equipmentName" prefWidth="96.0" text="Equipment" />
+                  <TableColumn fx:id="dirty" minWidth="5.0" prefWidth="83.20001220703125" text="Dirty" />
+                  <TableColumn fx:id="clean" minWidth="5.0" prefWidth="102.39996337890625" text="Clean" />
                   <TableColumn fx:id="floor" prefWidth="53.599853515625" text="Floor" />
+                  <TableColumn fx:id="location" prefWidth="86.66680908203125" text="Location" />
                   <TableColumn fx:id="locationType" prefWidth="123.20013427734375" text="Location Type" />
                </columns>
                <effect>
-                  <DropShadow />
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color></DropShadow>
                </effect>
             </TableView>
-            <Button layoutX="428.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#setFloorLL1" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" stroke="#d70f0f" strokeType="OUTSIDE" strokeWidth="0.0" text="LL1">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="429.0" layoutY="690.0" mnemonicParsing="false" onMouseClicked="#setFloorLL2" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="LL2">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="433.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#setFloorL1" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="L1">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="433.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#setFloorL2" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="L2">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="431.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#setFloorL4" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="L4">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="430.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#setFloorL5" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="L5">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="431.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#setFloorL3" onMouseEntered="#mouseHovered" style="-fx-background-color: transparent;">
-               <graphic>
-                  <Text fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="L3">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Text>
-               </graphic>
-            </Button>
-            <Button layoutX="215.0" layoutY="243.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #029ca6; -fx-background-radius: 15; -fx-border-radius: 15px;" text="Map Editor" textFill="WHITE">
+            <Button layoutX="181.0" layoutY="717.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #029ca6; -fx-background-radius: 15; -fx-border-radius: 15px;" text="Map Editor" textFill="WHITE">
                <effect>
-                  <DropShadow />
+                  <DropShadow>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color></DropShadow>
                </effect>
             </Button>
-            <Text fill="#044e9a" layoutX="744.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Cleanliness State" wrappingWidth="149.9999999999999">
-               <font>
-                  <Font name="SansSerif Regular" size="14.0" />
-               </font>
-            </Text>
-            <TableView fx:id="alertTable" layoutX="97.0" layoutY="54.0" prefHeight="173.0" prefWidth="385.0">
+            <TableView fx:id="alertTable" layoutX="605.0" layoutY="111.0" prefHeight="182.0" prefWidth="385.0">
                <columns>
-                  <TableColumn fx:id="dirtyItem" prefWidth="111.46671295166016" text="Dirty Item " />
+                  <TableColumn fx:id="dirtyItem" minWidth="116.0" prefWidth="-1.0" text="Dirty Item " />
                   <TableColumn fx:id="numDirty" prefWidth="67.46664428710938" text="# Dirty" />
+                  <TableColumn fx:id="dirtyFloor" minWidth="78.0" prefWidth="-1.0" text="Floor" />
                   <TableColumn fx:id="dirtyLoc" prefWidth="124.26675415039062" text="Location" />
-                  <TableColumn fx:id="dirtyFloor" prefWidth="80.53329467773438" text="Floor" />
                </columns>
             </TableView>
-            <Pane layoutX="97.0" layoutY="20.0" prefHeight="36.0" prefWidth="385.0" style="-fx-background-color: #029ca6;">
+            <Pane layoutX="605.0" layoutY="77.0" prefHeight="36.0" prefWidth="385.0" style="-fx-background-color: #029ca6;">
                <children>
                   <Text fill="WHITE" layoutX="158.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ALERTS">
                      <font>
@@ -141,101 +81,132 @@
                   </Button>
                </children>
             </Pane>
-            <JFXTextArea fx:id="alertInfoTextA" editable="false" layoutX="459.0" layoutY="192.0" prefHeight="91.0" prefWidth="290.0" style="-fx-text-fill: WHITE; -fx-background-color: #044E9A;" text=" Alerts appear if there are 6 or more dirty beds, 10 or more dirty infusion pumps, or less than 5 clean infusion pumps. A service request is automatically made if any instance above occurs. " unFocusColor="WHITE" visible="false">
+            <PieChart fx:id="pumpPie" layoutX="500.0" layoutY="312.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <Circle fill="WHITE" layoutX="600.0" layoutY="407.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <PieChart fx:id="bedPie" layoutX="700.0" layoutY="312.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <JFXTextArea fx:id="alertInfoTextA" editable="false" focusColor="#415aa6" layoutX="803.0" layoutY="118.0" prefHeight="104.0" prefWidth="275.0" style="-fx-text-fill: WHITE; -fx-background-color: #044E9A;" text=" Alerts appear if there are 6 or more dirty beds, 10 or more dirty infusion pumps, or less than 5 clean infusion pumps. A service request is automatically made if any instance above occurs. " unFocusColor="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXTextArea>
-            <PieChart fx:id="pumpPie" layoutX="511.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="611.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <PieChart fx:id="bedPie" layoutX="711.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="811.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <PieChart fx:id="reclinerPie" layoutX="910.0" layoutY="223.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
-            <Circle fill="WHITE" layoutX="1010.0" layoutY="318.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Text fill="#044e9a" layoutX="560.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infusion Pumps">
+            <Text fill="#044e9a" layoutX="701.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Cleanliness State" wrappingWidth="206.25">
+               <font>
+                  <Font name="SansSerif Bold" size="17.0" />
+               </font>
+            </Text>
+            <Circle fill="WHITE" layoutX="800.0" layoutY="407.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <PieChart fx:id="reclinerPie" layoutX="899.0" layoutY="312.0" maxWidth="10.0" prefHeight="190.0" prefWidth="10.0" />
+            <Circle fill="WHITE" layoutX="999.0" layoutY="407.0" radius="85.0" scaleX="0.75" scaleY="0.74" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Text fill="#044e9a" layoutX="549.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infusion Pumps">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="593.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
+            <Text fill="#044e9a" layoutX="584.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty">
                <font>
-                  <Font name="System Bold Italic" size="14.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Text>
-            <Text fx:id="dirtyPumpTXT" fill="#044e9a" layoutX="604.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text fx:id="pumpTotalTXT" fill="#044e9a" layoutX="599.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="dirtyPumpTXT" fill="#044e9a" layoutX="576.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="795.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beds">
+            <Text fx:id="pumpTotalTXT" fill="#044e9a" layoutX="599.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="784.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beds">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="984.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recliners">
+            <Text fill="#044e9a" layoutX="970.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recliners">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="601.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
-               <font>
-                  <Font size="52.0" />
-               </font>
-            </Text>
-            <Text fx:id="dirtyBedTXT" fill="#044e9a" layoutX="805.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="dirtyBedTXT" fill="#044e9a" layoutX="774.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fx:id="bedTotalTXT" fill="#044e9a" layoutX="800.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="bedTotalTXT" fill="#044e9a" layoutX="797.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="802.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Line endX="617.4666748046875" endY="397.3333435058594" layoutX="-2.0" layoutY="-8.0" startX="581.2000122070312" startY="435.20001220703125" stroke="#044e9a" strokeWidth="2.0" />
+            <Text fill="#044e9a" layoutX="784.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty">
                <font>
-                  <Font size="52.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="793.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
-               <font>
-                  <Font name="System Bold Italic" size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="dirtyRecTXT" fill="#044e9a" layoutX="1003.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="dirtyRecTXT" fill="#044e9a" layoutX="974.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fx:id="recTotalTXT" fill="#044e9a" layoutX="998.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
+            <Text fx:id="recTotalTXT" fill="#044e9a" layoutX="997.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="1000.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+            <Text fill="#044e9a" layoutX="985.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty">
                <font>
-                  <Font size="52.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Text>
-            <Text fill="#044e9a" layoutX="991.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirty:">
+            <Line endX="617.4666748046875" endY="397.3333435058594" layoutX="196.0" layoutY="-11.0" startX="581.2000122070312" startY="435.20001220703125" stroke="#044e9a" strokeWidth="2.0" />
+            <Line endX="617.4666748046875" endY="397.3333435058594" layoutX="395.0" layoutY="-9.0" startX="581.2000122070312" startY="435.20001220703125" stroke="#044e9a" strokeWidth="2.0" />
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="439.0" layoutY="200.0" onMouseClicked="#setFloorL5" strokeType="OUTSIDE" strokeWidth="0.0" text="L5">
                <font>
-                  <Font name="System Bold Italic" size="14.0" />
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="439.0" layoutY="279.0" onMouseClicked="#setFloorL4" strokeType="OUTSIDE" strokeWidth="0.0" text="L4">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="438.0" layoutY="352.0" onMouseClicked="#setFloorL3" strokeType="OUTSIDE" strokeWidth="0.0" text="L3">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="439.0" layoutY="429.0" onMouseClicked="#setFloorL2" strokeType="OUTSIDE" strokeWidth="0.0" text="L2">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="435.0" layoutY="492.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="26.0" style="-fx-background-color: 1;" textFill="TRANSPARENT">
+               <graphic>
+                  <Text accessibleRole="HYPERLINK" fill="#044e9a" onMouseClicked="#setFloorL1" strokeType="OUTSIDE" strokeWidth="0.0" text="L1">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </Button>
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="432.0" layoutY="593.0" onMouseClicked="#setFloorLL1" stroke="#d70f0f" strokeType="OUTSIDE" strokeWidth="0.0" text="LL1">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <Text accessibleRole="HYPERLINK" fill="#044e9a" layoutX="430.0" layoutY="671.0" onMouseClicked="#setFloorLL2" strokeType="OUTSIDE" strokeWidth="0.0" text="LL2">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="assistPane" layoutX="31.0" layoutY="232.0" prefHeight="541.0" prefWidth="93.0" />
-      <Rectangle fx:id="recLevel1" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="141.0" layoutY="549.0" onMouseClicked="#setFloorL1" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="275.0" />
-      <Rectangle fx:id="recLevel2" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="65.0" layoutX="142.0" layoutY="488.0" onMouseClicked="#setFloorL2" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="276.0" />
-      <Rectangle fx:id="recLevel3" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="141.0" layoutY="421.0" onMouseClicked="#setFloorL3" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="276.0" />
-      <Rectangle fx:id="recLevel4" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="142.0" layoutY="357.0" onMouseClicked="#setFloorL4" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="274.0" />
-      <Rectangle fx:id="recLevel5" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="142.0" layoutY="290.0" onMouseClicked="#setFloorL5" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="274.0" />
-      <Rectangle fx:id="recLowerL2" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="65.0" layoutX="140.0" layoutY="681.0" onMouseClicked="#setFloorLL2" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="277.0" />
-      <Rectangle fx:id="recLowerL1" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="72.0" layoutX="142.0" layoutY="613.0" onMouseClicked="#setFloorLL1" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="275.0" />
+      <Rectangle fx:id="recLowerL1" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="79.0" layoutX="81.0" layoutY="550.0" onMouseClicked="#setFloorLL1" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="335.0" />
+      <Rectangle fx:id="recLevel1" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="80.0" layoutX="80.0" layoutY="470.0" onMouseClicked="#setFloorL1" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="335.0" />
+      <Rectangle fx:id="recLevel2" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="78.0" layoutX="80.0" layoutY="393.0" onMouseClicked="#setFloorL2" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="336.0" />
+      <Rectangle fx:id="recLevel3" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="81.0" layoutX="81.0" layoutY="313.0" onMouseClicked="#setFloorL3" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="333.0" />
+      <Rectangle fx:id="recLevel4" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="79.0" layoutX="136.0" layoutY="236.0" onMouseClicked="#setFloorL4" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="229.0" />
+      <Rectangle fx:id="recLevel5" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="79.0" layoutX="138.0" layoutY="157.0" onMouseClicked="#setFloorL5" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="226.0" />
+      <Rectangle fx:id="recLowerL2" arcHeight="5.0" arcWidth="5.0" fill="#029ca659" height="77.0" layoutX="80.0" layoutY="628.0" onMouseClicked="#setFloorLL2" opacity="0.0" stroke="#029ca6" strokeType="INSIDE" strokeWidth="8.0" style="-fx-opacity: 0;" width="335.0" />
    </children>
 </AnchorPane>

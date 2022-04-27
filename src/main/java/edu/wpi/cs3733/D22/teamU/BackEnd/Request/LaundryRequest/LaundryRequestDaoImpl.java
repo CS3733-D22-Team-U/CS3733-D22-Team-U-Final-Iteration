@@ -389,7 +389,6 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
     }
   }
 
-  @Override
   public int search(String id) {
     return 0;
   }

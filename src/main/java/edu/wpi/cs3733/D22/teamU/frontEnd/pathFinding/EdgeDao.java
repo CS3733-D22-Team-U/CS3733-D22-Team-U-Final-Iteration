@@ -98,7 +98,6 @@ public class EdgeDao implements DataDao<Edge> {
   @Override
   public void remove(Edge data) throws IOException {}
 
-  @Override
   public int search(String id) {
     return 0;
   }

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -29,7 +30,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class LaundryController extends ServiceController {
@@ -41,7 +47,8 @@ public class LaundryController extends ServiceController {
   @FXML Button activeReqButton;
   @FXML ComboBox<Location> locations;
   @FXML ComboBox<Employee> employees;
-
+  @FXML Button submitButton;
+  @FXML Button clearButton;
   @FXML Text time;
   @FXML DatePicker pickupDateInput;
   @FXML DatePicker dropOffDateInput;
@@ -53,6 +60,8 @@ public class LaundryController extends ServiceController {
   @FXML TableColumn<LaundryRequest, String> location;
   @FXML TableColumn<LaundryRequest, String> pickUp;
   @FXML TableColumn<LaundryRequest, String> dropOff;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   @FXML TableView<LaundryRequest> activeRequestTable;
 
@@ -72,27 +81,45 @@ public class LaundryController extends ServiceController {
   @FXML Button submitEditButton;
   @FXML Button removeButton;
   // ================================================
-
-  @FXML Button submitButton;
-  @FXML Button clearButton;
-
+  /*
+    @FXML Button submitButton;
+    @FXML Button clearButton;
+  */
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     editButton.setVisible(Udb.admin);
     removeButton.setVisible(Udb.admin);
 
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     for (Node checkBox : requestHolder.getChildren()) {
       checkBoxes.add((JFXCheckBox) checkBox);
     }
 
     locations.setTooltip(new Tooltip());
-    locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    try {
+      locations.getItems().addAll(Udb.getInstance().locationImpl.locations);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Location>(locations, 650, 290);
 
     employees.setTooltip(new Tooltip());
-    employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    try {
+      employees.getItems().addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
     clearButton
@@ -130,6 +157,22 @@ public class LaundryController extends ServiceController {
                 setDisable(empty || date.compareTo(today) < 0);
               }
             });
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
 
     // =============initialize fxml and controller=============================
     EditRequestPopUp = new AnchorPane();
@@ -169,7 +212,7 @@ public class LaundryController extends ServiceController {
   }
 
   @SneakyThrows
-  private ObservableList<LaundryRequest> getActiveRequestList() {
+  private ObservableList<LaundryRequest> getActiveRequestList() throws IOException, SQLException {
     for (LaundryRequest e : Udb.getInstance().laundryRequestImpl.hList().values()) {
       e.gettingTheLocation();
     }

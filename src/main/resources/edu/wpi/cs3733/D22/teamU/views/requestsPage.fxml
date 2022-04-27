@@ -88,7 +88,7 @@
                           <Tooltip text="Michael 'I Can't Walk' Akstin" />
                       </tooltip>
                   </Button>
-                  <Button layoutX="187.0" layoutY="335.0" minHeight="190.0" minWidth="180.0" mnemonicParsing="false" onAction="#toSeurity" prefHeight="59.0" prefWidth="180.0" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
+                  <Button layoutX="187.0" layoutY="335.0" minHeight="190.0" minWidth="180.0" mnemonicParsing="false" onAction="#toSecurity" prefHeight="59.0" prefWidth="180.0" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
                       <tooltip>
                           <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
                       </tooltip>

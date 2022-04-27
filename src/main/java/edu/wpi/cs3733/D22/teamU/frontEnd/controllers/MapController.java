@@ -33,7 +33,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
@@ -49,51 +48,20 @@ public class MapController extends ServiceController {
   public TextField popupNodeType;
   public TextField popupLongName;
   public TextField popupShortName;
+  public TextField equipNameTF;
+  public TextField equipAmount;
+  public TextField equipInUse;
+  public TextField equipAvailable;
   public AnchorPane masterPane;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
-  @FXML Rectangle PatientRoom;
-  @FXML Rectangle EquipStorage;
-  @FXML Rectangle DirtyEquipPickup;
-  @FXML Rectangle Hallway;
-  @FXML Rectangle Elevator;
-  @FXML Rectangle Restroom;
-  @FXML Rectangle Staircase;
-  @FXML Rectangle Department;
-  @FXML Rectangle Labs;
-  @FXML Rectangle Information;
-  @FXML Rectangle Conference;
-  @FXML Rectangle Exit;
-  @FXML Rectangle Retail;
-  @FXML Rectangle Service;
-  @FXML Rectangle Beds;
-  @FXML Rectangle Pumps;
-  @FXML Rectangle Recliners;
-  @FXML Rectangle OtherEquip;
-  @FXML Rectangle MultiServices;
   @FXML Button Go;
 
   /* Map Icons State */
-  public boolean PRicon = true;
-  public boolean ESicon = true;
-  public boolean DEicon = true;
-  public boolean HWicon = true;
-  public boolean EVicon = true;
-  public boolean RRicon = true;
-  public boolean SCicon = true;
-  public boolean DPicon = true;
-  public boolean LBicon = true;
-  public boolean INicon = true;
-  public boolean CFicon = true;
-  public boolean EXicon = true;
-  public boolean RTicon = true;
-  public boolean SVicon = true;
-  public boolean BDicon = true;
-  public boolean PMicon = true;
-  public boolean RCicon = true;
-  public boolean OEicon = true;
-  public boolean MSicon = true;
+  public boolean SRVicon = true;
+  public boolean EQPicon = true;
   public boolean ALLicon = true;
+  public boolean LOCicon = true;
 
   @FXML Pane pane;
 
@@ -136,6 +104,9 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> nodeType;
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
+
+  //  @FXML ComboBox<Location> To;
+  //  @FXML ComboBox<Location> From;
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
@@ -323,8 +294,8 @@ public class MapController extends ServiceController {
                   getClass()
                       .getClassLoader()
                       .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(100);
-      popupAddPane.setLayoutY(200);
+      popupAddPane.setLayoutX(663);
+      popupAddPane.setLayoutY(159);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -552,7 +523,7 @@ public class MapController extends ServiceController {
         });
   }
 
-  private Equipment equipment = null;
+  private Equipment equipment;
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
@@ -650,6 +621,8 @@ public class MapController extends ServiceController {
           b2.setOnMouseClicked(this::Exit);
         } else if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
+        } else if (b2.getId().equals("editEquip")) {
+          b2.setOnMouseClicked(this::editEquipFunc);
         }
       } else if (n instanceof TableView) {
         equipTable = (TableView) n;
@@ -672,6 +645,22 @@ public class MapController extends ServiceController {
                 break;
             }
           }
+        }
+      } else if (n instanceof TextField) {
+        TextField tf = (TextField) n;
+        switch (tf.getId()) {
+          case "equipNameTF":
+            equipNameTF = tf;
+            break;
+          case "equipAmount":
+            equipAmount = tf;
+            break;
+          case "equipInUse":
+            equipInUse = tf;
+            break;
+          case "equipAvailable":
+            equipAvailable = tf;
+            break;
         }
       }
     }
@@ -727,6 +716,7 @@ public class MapController extends ServiceController {
       if (request != null) {
         Udb.getInstance().remove(request);
         reqTable.getItems().remove(request);
+        request.gettingTheLocation(); // init the location for the request
         request.getLocation().getRequests().remove(request);
         popupEdit(mouseEvent);
       }
@@ -742,7 +732,36 @@ public class MapController extends ServiceController {
       if (equipment != null) {
         Udb.getInstance().remove(equipment);
         equipTable.getItems().remove(equipment);
+        equipment.gettingTheLocation(); // init the location for the equipment
         equipment.getLocation().getEquipment().remove(equipment);
+        popupEdit(mouseEvent);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void editEquipFunc(MouseEvent mouseEvent) {
+    try {
+      if (equipment != null) {
+        Equipment newEquip =
+            new Equipment(
+                equipNameTF.getText(),
+                Integer.parseInt(equipAmount.getText()),
+                Integer.parseInt(equipInUse.getText()),
+                Integer.parseInt(equipAvailable.getText()),
+                equipment.getLocationID());
+
+        newEquip.gettingTheLocation(); // init the location for the equipment
+        Udb.getInstance().edit(newEquip);
+        equipTable.getItems().remove(equipment);
+        equipTable.getItems().add(newEquip);
+        equipment.gettingTheLocation(); // init the location for the equipment
+        equipment.getLocation().getEquipment().remove(equipment);
+        equipment.getLocation().getEquipment().add(newEquip);
+        equipment = newEquip;
         popupEdit(mouseEvent);
       }
     } catch (IOException e) {
@@ -760,7 +779,11 @@ public class MapController extends ServiceController {
 
   public void selectEquip(MouseEvent mouseEvent) {
     if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
-      equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+      this.equipNameTF.setText(this.equipment.getName());
+      this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
+      this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
+      this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
     }
   }
 
@@ -890,58 +913,159 @@ public class MapController extends ServiceController {
 
   public void test(ZoomEvent zoomEvent) {}
 
-  public void dispAll(MouseEvent mouseevent) {}
-
-  public void dispElevators(MouseEvent mouseevent) {
-    if (EVicon != true) {
+  public void dispALL(MouseEvent mouseevent) {
+    if (ALLicon == true) {
       for (LocationNode locationNode : locations.values()) {
-        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
-          locationNode.setVisible(false);
-          // set color of rectangle
-          EVicon = false;
-        }
+        locationNode.setVisible(false);
       }
+      EQPicon = false;
+      LOCicon = false;
+      SRVicon = false;
+      ALLicon = false;
     } else {
       for (LocationNode locationNode : locations.values()) {
-        if (locationNode.getLocation().getNodeType().equals("ELEV")) {
-          locationNode.setVisible(true);
-          EVicon = true;
-        }
+        locationNode.setVisible(true);
       }
+      EQPicon = true;
+      LOCicon = true;
+      SRVicon = true;
+      ALLicon = true;
     }
   }
 
-  public void dispDepartment(MouseEvent mouseEvent) {}
+  public void dispLOC(MouseEvent mouseevent) {
+    if (LOCicon == true) {
+      for (LocationNode locationNode : locations.values()) {
+        String compare = locationNode.getLocation().getNodeType().trim();
+        if (compare.equals("ELEV")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("PATI")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("HALL")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("REST")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("LABS")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("DEPT")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("CONF")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("EXIT")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("RETL")) {
+          locationNode.setVisible(false);
+        }
+        if (compare.equals("STAI")) {
+          locationNode.setVisible(false);
+        }
+      }
+      LOCicon = false;
+    } else {
+      for (LocationNode locationNode : locations.values()) {
+        String compare = locationNode.getLocation().getNodeType().trim();
+        if (compare.equals("ELEV")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("PATI")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("HALL")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("REST")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("LABS")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("DEPT")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("CONF")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("EXIT")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("RETL")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("STAI")) {
+          locationNode.setVisible(true);
+        }
+      }
+      LOCicon = true;
+    }
+  }
 
-  public void dispStaircase(MouseEvent mouseEvent) {}
+  public void dispEQP(MouseEvent mousevent) {
+    if (EQPicon == true) {
+      for (LocationNode locationNode : locations.values()) {
+        String currE = locationNode.getLocation().getNodeType().trim();
+        if (currE.equals("RECL")) {
+          locationNode.setVisible(false);
+        }
+        if (currE.equals("BEDS")) {
+          locationNode.setVisible(false);
+        }
+        if (currE.equals("PUMP")) {
+          locationNode.setVisible(false);
+        }
+        if (currE.equals("DIRT")) {
+          locationNode.setVisible(false);
+        }
+        if (currE.equals("EQUP")) {
+          locationNode.setVisible(false);
+        }
+      }
+      EQPicon = false;
+    } else {
+      for (LocationNode locationNode : locations.values()) {
+        String currE = locationNode.getLocation().getNodeType().trim();
+        if (currE.equals("RECL")) {
+          locationNode.setVisible(true);
+        }
+        if (currE.equals("BEDS")) {
+          locationNode.setVisible(true);
+        }
+        if (currE.equals("PUMP")) {
+          locationNode.setVisible(true);
+        }
+        if (currE.equals("DIRT")) {
+          locationNode.setVisible(true);
+        }
+        if (currE.equals("EQUP")) {
+          locationNode.setVisible(true);
+        }
+      }
+      EQPicon = true;
+    }
+  }
 
-  public void dispRestroom(MouseEvent mouseEvent) {}
-
-  public void dispHallway(MouseEvent mouseEvent) {}
-
-  public void dispOtherEquip(MouseEvent mouseEvent) {}
-
-  public void dispRecliner(MouseEvent mouseEvent) {}
-
-  public void dispPump(MouseEvent mouseEvent) {}
-
-  public void dispBed(MouseEvent mouseEvent) {}
-
-  public void dispService(MouseEvent mouseEvent) {}
-
-  public void dispRetail(MouseEvent mouseEvent) {}
-
-  public void dispExit(MouseEvent mouseEvent) {}
-
-  public void dispConference(MouseEvent mouseEvent) {}
-
-  public void dispInfo(MouseEvent mouseEvent) {}
-
-  public void dispLab(MouseEvent mouseEvent) {}
-
-  public void dispDirtyEquipPickup(MouseEvent mouseEvent) {}
-
-  public void dispEquipStorage(MouseEvent mouseEvent) {}
-
-  public void dispPatientRoom(MouseEvent mouseEvent) {}
+  public void dispSRV(MouseEvent mousevent) {
+    if (SRVicon == true) {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("SERV")) {
+          locationNode.setVisible(false);
+        }
+      }
+      SRVicon = false;
+    } else {
+      for (LocationNode locationNode : locations.values()) {
+        if (locationNode.getLocation().getNodeType().equals("SERV")) {
+          locationNode.setVisible(true);
+        }
+      }
+      SRVicon = true;
+    }
+  }
 }

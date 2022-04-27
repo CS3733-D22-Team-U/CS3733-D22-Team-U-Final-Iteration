@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DashboardController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
 
 
    <children>
@@ -204,6 +209,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Text fx:id="message" layoutX="532.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
       </Pane>
       <Pane layoutX="-116.0" layoutY="-256.0" prefHeight="237.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
@@ -285,7 +291,7 @@
                         <Tooltip text="Squire SqWilliam 'The Grand Fortnite Dancer' Doyle" />
                      </tooltip>
                   </Button>
-                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSeurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
+                  <Button minHeight="190.0" mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: #d9f0f1;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" text="Security">
                      <tooltip>
                         <Tooltip text="Timmy 'Anti-Christ' Klein, Devourer of Worlds" />
                      </tooltip>

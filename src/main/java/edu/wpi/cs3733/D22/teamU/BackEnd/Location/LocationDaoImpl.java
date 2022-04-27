@@ -104,6 +104,7 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
+        /*
         try {
           firebaseUpdate(currLoc);
         } catch (ExecutionException e) {
@@ -111,6 +112,7 @@ public class LocationDaoImpl implements DataDao<Location> {
         } catch (InterruptedException e) {
           throw new RuntimeException(e);
         }
+        */
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -348,7 +350,6 @@ public class LocationDaoImpl implements DataDao<Location> {
     }
   }
 
-  @Override
   public int search(String id) { // TODO search
     int index = -1;
     for (int i = 0; i < list().size(); i++) if (id.equals(list().get(i).nodeID)) index = i;

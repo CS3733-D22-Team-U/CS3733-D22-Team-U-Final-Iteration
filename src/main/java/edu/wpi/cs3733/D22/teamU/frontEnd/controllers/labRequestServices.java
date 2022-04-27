@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -31,6 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import lombok.SneakyThrows;
 
 public class labRequestServices extends ServiceController {
@@ -67,6 +69,8 @@ public class labRequestServices extends ServiceController {
   @FXML VBox inputFields;
   @FXML Button clearButton;
   @FXML Button submitButton;
+  @FXML AnchorPane sideBarAnchor;
+  @FXML Button sideBarButton;
 
   ObservableList<LabRequest> labUIRequests = FXCollections.observableArrayList();
   ObservableList<JFXCheckBox> checkBoxes = FXCollections.observableArrayList();
@@ -91,7 +95,13 @@ public class labRequestServices extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
     // super.initialize(location, resources);
     // udb = Udb.getInstance();
-    setUpActiveRequests();
+    try {
+      setUpActiveRequests();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     nodeIDs = new ArrayList<>();
     for (Location l : Udb.getInstance().locationImpl.list()) {
       nodeIDs.add(l);
@@ -141,6 +151,22 @@ public class labRequestServices extends ServiceController {
                 () -> checkBoxes.stream().noneMatch(JFXCheckBox::isSelected),
                 checkBoxes.stream().map(JFXCheckBox::selectedProperty).toArray(Observable[]::new)));
     handleTime();
+    handleBar();
+  }
+
+  private void handleBar() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    openNav.setToY(596);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), sideBarAnchor);
+    sideBarButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (sideBarAnchor.getTranslateY() != 596) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
 
     // =============initialize fxml and controller=============================
     EditRequestPopUp = new AnchorPane();

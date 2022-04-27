@@ -102,7 +102,7 @@
          <children>
             <Group fx:id="loginGroup">
                <children>
-                  <Text fill="#044e9a" layoutX="-15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
+                  <Text fill="#044e9a" layoutX="-33.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
@@ -118,12 +118,15 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </TextField>
-                        <Button layoutX="143.0" layoutY="175.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
+                        <Button layoutX="143.0" layoutY="175.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" onMouseEntered="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <effect>
-                              <DropShadow />
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.0" />
+                                 </color></DropShadow>
                            </effect>
                         </Button>
                         <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
@@ -178,7 +181,7 @@
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Text>
-                  <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
+                  <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;" visible="false">
                      <effect>
                         <DropShadow />
                      </effect>
