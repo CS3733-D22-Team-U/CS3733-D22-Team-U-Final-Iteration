@@ -20,6 +20,17 @@
       </ImageView>
       <Pane prefHeight="750.0" prefWidth="258.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 35 35 0;">
          <children>
+            <Button layoutY="273.0" mnemonicParsing="false" onAction="#toHome" prefHeight="123.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;&#10;Home&#10;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             <Text fill="WHITE" layoutX="33.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
                <font>
                   <Font name="System Bold" size="50.0" />
@@ -30,7 +41,7 @@
                   <Image url="@../icons/Vector.png" />
                </image>
             </ImageView>
-            <Button layoutY="206.0" mnemonicParsing="false" onAction="#toApplicationSettings" prefHeight="103.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Application Settings">
+            <Button layoutY="206.0" mnemonicParsing="false" onAction="#toApplicationSettings" prefHeight="112.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;Application Settings">
                <effect>
                   <DropShadow />
                </effect>
@@ -98,14 +109,6 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="590.0" layoutY="649.0" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="164.0" style="-fx-background-color: #5898DB #5898DB; -fx-background-radius: 15;" text="Back" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <ImageView fitHeight="161.0" fitWidth="90.0" layoutX="996.0" layoutY="647.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/unicornLogo.png" />
