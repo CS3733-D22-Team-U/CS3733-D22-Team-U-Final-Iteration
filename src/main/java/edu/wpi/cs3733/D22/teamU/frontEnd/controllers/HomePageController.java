@@ -65,7 +65,6 @@ public class HomePageController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-
     try {
       listofEmployees();
     } catch (SQLException e) {
