@@ -404,9 +404,13 @@ public class RequestEditController {
         case "typeOfMaintenance":
           typeOfMain.setText(request.getTypeOfMaintenance());
           break;
+        case "description":
+          description.setText(request.getDescription());
+          break;
         case "descriptionOfThreat":
           descriptionSec.setText(request.getDescriptionOfThreat());
           break;
+
         case "message":
           message.setText(request.getMessage());
           break;
