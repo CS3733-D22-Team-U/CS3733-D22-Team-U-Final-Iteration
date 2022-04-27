@@ -67,7 +67,7 @@ WHALL00702,488,850,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
 FHALL02701,814,697,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
 uHALL04C01,448,275,4,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
 FHALL00401,721,368,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
-FHALL02301,593,738,1,Tower,EQUP,Lobby Hallway 1,Hallway F02301
+FHALL02301,593,737,1,Tower,EQUP,Lobby Hallway 1,Hallway F02301
 uHALL04C03,448,491,4,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
 HRETL00202,363,483,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
 FHALL00801,506,308,1,Tower,HALL,Tower Hallway 1,Hallway F00801
@@ -90,7 +90,7 @@ FSTAI00201,421,260,1,Tower,STAI,Tower Stairway 1,Tower Stairs 1
 HHALL01403,482,487,3,Tower,EQUP,Hallway Connector 14 Floor 3,Hallway H01403
 uPATI03203,240,289,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05103,287,487,3,Tower,PATI,Patient Room Pod C,PRC
-FREST00101,839,434,1,Tower,EQUP,Bathroom 75 Lobby,Bathroom Lobby
+FREST00101,839,431,1,Tower,EQUP,Bathroom 75 Lobby,Bathroom Lobby
 FDEPT00401,542,604,1,Tower,SERV,Sharf Admitting Center,Sharf Center
 FHALL01501,375,518,1,Tower,HALL,Tower Hallway 7,Hallway F01501
 FHALL01101,375,388,1,Tower,HALL,Tower Hallway 4,Hallway F01101

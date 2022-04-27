@@ -2,7 +2,6 @@ Name,Amount,In Use,Available,Location
 Body Bag,19,2,17,FHALL02301
 Stethoscope,19,2,17,uSTOR0L1
 Lollipop,6000000,100000,5900000,uPATI05203
-Large Intestine,40000,20000,2000,FREST00101
 Ventilator,4000,200,3800,uSTOR02603
 X-Ray Machine,1,0,1,uPATI04C3
 Infusion Pumps,4,2,2,uPATI04B31
