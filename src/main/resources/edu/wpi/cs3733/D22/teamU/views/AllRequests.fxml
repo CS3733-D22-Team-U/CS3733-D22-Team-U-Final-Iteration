@@ -25,33 +25,22 @@
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
-                <Pane layoutY="508.0" prefHeight="242.0" prefWidth="219.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
-                    <children>
-                        <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="125.0" />
-                          <Button fx:id="activeReqButton" layoutX="975.0" layoutY="45.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
-                              <font>
-                                  <Font name="System Bold" size="12.0" />
-                              </font>
-                          </Button>
-                    </children>
-                </Pane>
-                <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-                <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
-                    <children>
-                        <Text fx:id="time" layoutX="46.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-                    </children>
-                </Pane>
-                <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
-                    <children>
-                        <Text layoutX="160.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="All Active Requests">
-                            <font>
-                                <Font name="System Bold" size="36.0" />
-                            </font>
-                        </Text>
-                    </children>
-                </Pane>
+            <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+                    <Button fx:id="activeReqButton" layoutX="975.0" layoutY="679.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Button>
+                  <Text fx:id="time" layoutX="932.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
+                  <Text layoutX="754.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="All Active Requests">
+                      <font>
+                          <Font name="System Bold" size="36.0" />
+                      </font>
+                  </Text>
                 <StackPane fx:id="requestsStack" layoutX="110.0" layoutY="121.0" prefHeight="589.0" prefWidth="724.0">
                     <children>
                         <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="623.0" minWidth="415.0" prefHeight="552.0" prefWidth="623.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false" StackPane.alignment="TOP_LEFT">

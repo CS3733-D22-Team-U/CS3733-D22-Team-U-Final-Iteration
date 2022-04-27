@@ -20,29 +20,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.ReportController">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
-            <Pane layoutY="508.0" prefHeight="242.0" prefWidth="219.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-            <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" visible="false" />
-            <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-            <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
-               <children>
-                  <Text fx:id="time" layoutX="40.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm:ss" />
-               </children>
-            </Pane>
-            <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
-               <children>
-                  <Text layoutX="116.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Report An Employee">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
+            <ImageView fitHeight="750.0" fitWidth="1168.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="time" layoutX="932.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm:ss" />
+            <Text layoutX="710.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Report An Employee">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
             <StackPane fx:id="requestsStack" layoutX="120.0" layoutY="100.0" prefHeight="548.0" prefWidth="10.0">
                <children>
                   <Pane fx:id="newRequestPane" maxHeight="603.0" maxWidth="360.0" minHeight="-Infinity" minWidth="136.0" prefHeight="548.0" prefWidth="136.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
@@ -118,7 +111,6 @@
             </BarChart>
          </children>
       </Pane>
-      <TextFlow prefHeight="200.0" prefWidth="200.0" />
       <ScrollPane prefHeight="750.0" prefWidth="86.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="58.0">

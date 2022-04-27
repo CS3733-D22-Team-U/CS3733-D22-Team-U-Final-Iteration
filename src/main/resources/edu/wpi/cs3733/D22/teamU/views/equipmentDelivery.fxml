@@ -24,55 +24,45 @@
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
-            <Pane layoutY="508.0" prefHeight="242.0" prefWidth="219.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-            <Pane layoutY="563.0" prefHeight="187.0" prefWidth="285.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;" />
-            <Pane layoutY="634.0" prefHeight="116.0" prefWidth="1100.0" style="-fx-background-color: ffffff; -fx-background-radius: 164 57 0 0;">
+            <ImageView fitHeight="750.0" fitWidth="1180.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/background.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="757.0" layoutY="679.0" prefHeight="70.0" prefWidth="342.0">
                <children>
-                  <HBox layoutX="757.0" layoutY="45.0" prefHeight="70.0" prefWidth="342.0">
-                     <children>
-                        <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="-15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="-15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Equipment" textFill="#044e9a">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </Pane>
-            <Pane layoutX="881.0" prefHeight="242.0" prefWidth="219.0" rotate="180.0" style="-fx-background-color: b0e5e3; -fx-background-radius: 0 150 0 0;" />
-            <Pane layoutX="815.0" prefHeight="187.0" prefWidth="285.0" rotate="180.0" style="-fx-background-color: d9f0f1; -fx-background-radius: 0 150 0 0;">
-               <children>
-                  <Text fx:id="time" layoutX="46.0" layoutY="50.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-               </children>
-            </Pane>
-            <Pane layoutX="594.0" prefHeight="116.0" prefWidth="506.0" style="-fx-background-color: ffffff; -fx-background-radius: 0 0 0 164;">
-               <children>
-                  <Text layoutX="88.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Equipment Request">
+                  <Button fx:id="newReqButton" mnemonicParsing="false" onAction="#switchToNewRequest" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: D9F0F1;" text="New Request" textFill="#044e9a" underline="true">
                      <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
-                  </Text>
+                     <HBox.margin>
+                        <Insets right="-15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="-15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Equipment" textFill="#044e9a">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
                </children>
-            </Pane>
+            </HBox>
+            <Text fx:id="time" layoutX="959.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
+            <Text layoutX="682.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Equipment Request">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
                   <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
