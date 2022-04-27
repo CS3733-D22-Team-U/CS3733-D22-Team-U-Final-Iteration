@@ -153,7 +153,7 @@ uSTOR00101,208,389,1,Tower,DIRT,West Plaza,West Plaza
 HHALL00902,488,738,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
 HDEPT00203,438,288,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
 HHALL00903,483,278,3,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
-CLABS001L1,679,723,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
+CLABS001L1,679,722,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
 HBATH00203,498,443,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 uPATI06003,336,551,3,Tower,PATI,Patient Room Pod C,PRC
 FRETL00101,721,302,1,Tower,RETL,Lobby Vending Machine,VM Lobby

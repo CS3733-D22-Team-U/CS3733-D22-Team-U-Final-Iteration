@@ -35,37 +35,37 @@ public class AboutController extends ServiceController {
 
 
   public void toHarsh(){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/HarshIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/harshRESIZE.jpeg");
   }
   public void toMarko(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/MarkoIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/markoRESIZE.jpeg");
   }
   public void toJoselin(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/JoselinIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/joselin2RESIZE.jpeg");
   }
   public void toDeepti(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/DeeptiIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/deeptiRESIZE.jpeg");
   }
   public void toNick(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/NickIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/nickRESIZE.jpeg");
   }
   public void toKody(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/KodyIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/kodyRESIZE.jpeg");
   }
   public void toTim(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/TimIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/timRESIZE.jpeg");
   }
   public void toWill(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/WillIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/willRESIZE.jpeg");
   }
   public void toMike(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/MikeIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/mikeRESIZE.jpeg");
   }
   public void toIain(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/IAINIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/iainRESIZE.jpeg");
   }
   public void toBelisha(ActionEvent actionEvent){
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/BelishaIcon.jpeg");
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/belishaRESIZE.jpeg");
   }
 
   private void addTeamImage(String resource) {
@@ -73,8 +73,6 @@ public class AboutController extends ServiceController {
     imageHover.setImage(new Image(String.valueOf(a)));
     //imageHover.setScaleX(1.75);
     //imageHover.setScaleY(1.75);
-    imageHover.setFitHeight(200);
-    imageHover.setFitWidth(150);
     //imageHover.setX((imageHover.getFitWidth()));
     //imageHover.setY((imageHover.getFitHeight()));
 
