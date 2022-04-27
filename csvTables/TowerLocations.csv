@@ -1,6 +1,6 @@
 nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
 HHALL00603,483,383,3,Tower,SERV,Hallway Connector 6 Floor 3,Hallway H00603
-CLABS002L1,254,444,L1,Tower,SERV,Pre-Op PACU Floor L1,Lab C002L1
+CLABS002L1,254,443,L1,Tower,SERV,Pre-Op PACU Floor L1,Lab C002L1
 HBATH00103,533,288,3,Tower,SERV,Bathroom 1 Tower Floor 3,Bathroom 0103
 CHALL007L2,478,467,L2,Tower,SERV,Hallway 7 Floor L2,Hallway C007L2
 CHALL007L1,860,503,L1,Tower,SERV,Hallway 7 Floor L1,Hallway C007L1
@@ -183,7 +183,7 @@ FDEPT00201,358,578,1,Tower,SERV,Bretholtz Center for Patients and Families,Breth
 FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
 WELEV00L01,558,388,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
-WELEV00L02,553,383,2,Tower,DIRT,Elevator L Floor 2,Elevator L2
+WELEV00L02,552,383,2,Tower,DIRT,Elevator L Floor 2,Elevator L2
 CHALL006L1,860,742,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
 FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
 HSTAI00302,538,688,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2

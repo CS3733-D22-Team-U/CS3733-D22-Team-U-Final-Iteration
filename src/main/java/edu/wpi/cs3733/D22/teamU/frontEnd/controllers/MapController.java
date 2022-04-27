@@ -615,6 +615,8 @@ public class MapController extends ServiceController {
           b2.setOnMouseClicked(this::Exit);
         } else if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
+        } else if (b2.getId().equals("editEquip")) {
+          b2.setOnMouseClicked(this::editEquipFunc);
         }
       } else if (n instanceof TableView) {
         equipTable = (TableView) n;
@@ -724,6 +726,31 @@ public class MapController extends ServiceController {
         Udb.getInstance().remove(equipment);
         equipTable.getItems().remove(equipment);
         equipment.getLocation().getEquipment().remove(equipment);
+        popupEdit(mouseEvent);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void editEquipFunc(MouseEvent mouseEvent) {
+    try {
+      if (equipment != null) {
+        Equipment newEquip =
+            new Equipment(
+                equipNameTF.getText(),
+                Integer.parseInt(equipAmount.getText()),
+                Integer.parseInt(equipInUse.getText()),
+                Integer.parseInt(equipAvailable.getText()),
+                equipment.getLocationID());
+
+        Udb.getInstance().edit(newEquip);
+        equipTable.getItems().remove(equipment);
+        equipTable.getItems().add(newEquip);
+        equipment.getLocation().getEquipment().remove(equipment);
+        equipment.getLocation().getEquipment().add(newEquip);
         popupEdit(mouseEvent);
       }
     } catch (IOException e) {
