@@ -132,6 +132,8 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> nodeType;
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
+
+
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
   @FXML Circle add;
@@ -686,6 +688,8 @@ public class MapController extends ServiceController {
       if (request != null) {
         Udb.getInstance().remove(request);
         reqTable.getItems().remove(request);
+        request.getLocation().getRequests().remove(request);
+        popupEdit(mouseEvent);
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -699,6 +703,8 @@ public class MapController extends ServiceController {
       if (equipment != null) {
         Udb.getInstance().remove(equipment);
         equipTable.getItems().remove(equipment);
+        equipment.getLocation().getEquipment().remove(equipment);
+        popupEdit(mouseEvent);
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
