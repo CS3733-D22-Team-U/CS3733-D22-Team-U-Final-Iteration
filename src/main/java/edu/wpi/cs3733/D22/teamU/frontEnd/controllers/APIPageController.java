@@ -12,21 +12,36 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class APIPageController extends ServiceController {
 
   @FXML Text time;
   @FXML Text date;
+  @FXML DatePicker datePicker;
+  @FXML
+  Pane datePickerPane;
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    datePicker = new DatePicker(LocalDate.now());
+    DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+
+
+    Node popupContent = datePickerSkin.getPopupContent();
+    datePicker.setVisible(false);
+    datePickerPane.getChildren().add(popupContent);
     handeDateTime();
   }
 
