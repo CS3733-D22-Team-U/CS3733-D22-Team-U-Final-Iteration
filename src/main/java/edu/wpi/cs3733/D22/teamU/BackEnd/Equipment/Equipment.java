@@ -3,6 +3,12 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 
 public class Equipment {
+  String id;
+
+  public String getId() {
+    return id;
+  }
+
   String Name;
   int Amount;
   int InUse;
@@ -20,6 +26,7 @@ public class Equipment {
     this.InUse = 0;
     this.Available = Amount - InUse;
     this.locationID = locationID;
+    id = name + "_" + locationID;
   }
 
   /**
@@ -43,6 +50,7 @@ public class Equipment {
     this.InUse = inuse;
     this.Available = available;
     this.locationID = locationID;
+    id = name + "_" + locationID;
   }
 
   /**

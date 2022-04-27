@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -9,6 +12,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MealRequestDaoImpl implements DataDao<MealRequest> {
@@ -151,6 +155,18 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (MealRequest currMeal : List.values()) {
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("mealRequests").document(currMeal.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currMeal);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql meal requests");
+        }
+
         statement.execute(
             "INSERT INTO MealRequest VALUES("
                 + "'"
@@ -176,6 +192,20 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in MealRequestImp");
     }
+  }
+
+  public void firebaseUpdate(MealRequest currMeal) {
+    DocumentReference docRef = db.collection("mealRequests").document(currMeal.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("patientName", currMeal.getPatientName());
+    data.put("dietRest", currMeal.getDietRest());
+    data.put("status", currMeal.getStatus());
+    data.put("employeeID", currMeal.getEmployee().getEmployeeID());
+    data.put("destination", currMeal.getDestination());
+    data.put("addNotes", currMeal.getAddNotes());
+    data.put("date", currMeal.getDate());
+    data.put("time", currMeal.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -296,6 +326,7 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
         data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
@@ -328,6 +359,8 @@ public class MealRequestDaoImpl implements DataDao<MealRequest> {
 
     try {
       this.List.remove(data.ID);
+      db.collection("mealRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

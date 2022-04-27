@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class LocationDaoImpl implements DataDao<Location> {
 
@@ -98,7 +99,13 @@ public class LocationDaoImpl implements DataDao<Location> {
 
       for (int j = 0; j < locations.size(); j++) {
         Location currLoc = locations.get(j);
-        // firebaseUpdate(currLoc);
+        try {
+          firebaseUpdate(currLoc);
+        } catch (ExecutionException e) {
+          throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
         statement.execute(
             "INSERT INTO Locations VALUES("
                 + "'"
@@ -124,8 +131,15 @@ public class LocationDaoImpl implements DataDao<Location> {
     }
   }
 
-  public void firebaseUpdate(Location loc) {
+  public void firebaseUpdate(Location loc) throws ExecutionException, InterruptedException {
     DocumentReference docRef = db.collection("locations").document(loc.nodeID);
+    // ApiFuture<DocumentSnapshot> ds = docRef.get();
+    // if (!ds.get().exists() || ds == null) {
+    firebaseAdd(loc, docRef);
+    // }
+  }
+
+  public void firebaseAdd(Location loc, DocumentReference docRef) {
     Map<String, Object> data = new HashMap<>();
     data.put("xcoord", loc.xcoord);
     data.put("ycoord", loc.ycoord);
@@ -273,6 +287,7 @@ public class LocationDaoImpl implements DataDao<Location> {
     // input ID
     try {
       list().set(search(data.nodeID), data);
+      firebaseAdd(data, db.collection("locations").document(data.nodeID));
       this.JavaToSQL(); // t
       this.JavaToCSV(csvFile); // t
     } catch (Exception e) {

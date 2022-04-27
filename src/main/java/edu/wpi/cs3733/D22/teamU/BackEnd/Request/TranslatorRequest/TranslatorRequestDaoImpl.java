@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
@@ -148,6 +152,18 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (TranslatorRequest currReq : List.values()) {
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("translatorRequests").document(currReq.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currReq);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
         statement.execute(
             "INSERT INTO TranslatorRequest VALUES("
                 + "'"
@@ -171,6 +187,20 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in TranslatorRequestDaoImpl");
     }
+  }
+
+  public void firebaseUpdate(TranslatorRequest currTranslatorReq) {
+    DocumentReference docRef =
+        db.collection("translatorRequests").document(currTranslatorReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("patientName", currTranslatorReq.getPatientName());
+    data.put("toLang", currTranslatorReq.getToLang());
+    data.put("status", currTranslatorReq.getStatus());
+    data.put("employeeID", currTranslatorReq.getEmployee().getEmployeeID());
+    data.put("destination", currTranslatorReq.getDestination());
+    data.put("date", currTranslatorReq.getDate());
+    data.put("time", currTranslatorReq.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -279,6 +309,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
@@ -310,6 +341,8 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("translatorRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

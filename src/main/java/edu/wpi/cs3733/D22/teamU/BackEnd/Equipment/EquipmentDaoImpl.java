@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Equipment;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
@@ -7,6 +10,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EquipmentDaoImpl implements DataDao<Equipment> {
@@ -121,6 +125,18 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
 
       for (int j = 0; j < EquipmentList.size(); j++) {
         Equipment currLoc = EquipmentList.get(j);
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("equipments").document(currLoc.getId());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currLoc);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql equipment");
+        }
+
         statement.execute(
             "INSERT INTO EquipmentList VALUES("
                 + "'"
@@ -140,6 +156,17 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
       System.out.println("Connection failed. Check output console.");
       e.printStackTrace();
     }
+  }
+
+  public void firebaseUpdate(Equipment equip) {
+    DocumentReference docRef = db.collection("equipments").document(equip.getId());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", equip.getName());
+    data.put("amount", equip.getAmount());
+    data.put("inUse", equip.getInUse());
+    data.put("available", equip.getAvailable());
+    data.put("locationID", equip.getLocationID());
+    docRef.set(data);
   }
 
   /**
@@ -261,6 +288,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
   public void remove(Equipment data) throws IOException {
     try {
       this.EquipmentList.remove(search(data.Name));
+      db.collection("equipments").document(data.getId()).delete();
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {
@@ -280,6 +308,7 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
     // takes entries from SQL table that match input node and updates it amount and it's use
     try {
       list().set(search(data.Name), data);
+      // firebaseUpdate(data);
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

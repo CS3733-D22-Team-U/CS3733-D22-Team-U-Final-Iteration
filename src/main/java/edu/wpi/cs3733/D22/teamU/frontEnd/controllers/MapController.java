@@ -144,6 +144,11 @@ public class MapController extends ServiceController {
   ListView<String> equipmentView, requestView;
   HashMap<String, LocationNode> locations;
 
+  public ComboBox<Location> To;
+  public ComboBox<Location> From;
+  ArrayList<Location> fromLocation;
+  ArrayList<Location> toLocation;
+
   public MapController() throws IOException, SQLException {}
 
   public void initialize(URL location, ResourceBundle resources) {
@@ -157,6 +162,20 @@ public class MapController extends ServiceController {
     setScroll(floor4Pane);
     setScroll(floor5Pane);
 
+    toLocation = new ArrayList<>();
+    fromLocation = new ArrayList<>();
+    try {
+      for (Location l : Udb.getInstance().locationImpl.list()) {
+        fromLocation.add(l);
+        toLocation.add(l);
+      }
+    } catch (Exception e) {
+      System.out.println("here");
+    }
+    From.setTooltip(new Tooltip());
+    From.getItems().addAll(fromLocation);
+    To.setTooltip(new Tooltip());
+    To.getItems().addAll(toLocation);
     locations = new HashMap<>();
     //    for(LocationNode ln: locations.values())
     //      ln.setV

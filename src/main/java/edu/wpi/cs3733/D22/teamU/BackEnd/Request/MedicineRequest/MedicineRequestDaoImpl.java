@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
@@ -209,6 +213,18 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (MedicineRequest currReq : List.values()) {
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("medRequests").document(currReq.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currReq);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
         statement.execute(
             "INSERT INTO MedicineRequest VALUES("
                 + "'"
@@ -234,6 +250,20 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     } catch (SQLException e) {
       System.out.println("JavaToSQL error in MedicineRequestImp");
     }
+  }
+
+  public void firebaseUpdate(MedicineRequest currMedReq) {
+    DocumentReference docRef = db.collection("medRequests").document(currMedReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", currMedReq.getName());
+    data.put("amount", currMedReq.getAmount());
+    data.put("patientName", currMedReq.getPatientName());
+    data.put("status", currMedReq.getStatus());
+    data.put("employeeID", currMedReq.getEmployee().getEmployeeID());
+    data.put("destination", currMedReq.getDestination());
+    data.put("date", currMedReq.getDate());
+    data.put("time", currMedReq.getTime());
+    docRef.set(data);
   }
 
   public void SQLToJava() {
@@ -301,6 +331,7 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
@@ -332,6 +363,8 @@ public class MedicineRequestDaoImpl implements DataDao<MedicineRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("medRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

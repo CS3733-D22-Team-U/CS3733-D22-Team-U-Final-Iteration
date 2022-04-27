@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -11,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
@@ -144,6 +148,18 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
               + "time varchar (10) not null)");
 
       for (SecurityRequest currSecurity : List.values()) {
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("securityRequests").document(currSecurity.getID());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currSecurity);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql security requests");
+        }
+
         statement.execute(
             "INSERT INTO SecurityRequest VALUES("
                 + "'"
@@ -170,6 +186,20 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
       System.out.println("JavaToSQL error in SecurityRequestImp");
       System.out.println(e);
     }
+  }
+
+  public void firebaseUpdate(SecurityRequest currSecReq) {
+    DocumentReference docRef = db.collection("securityRequests").document(currSecReq.getID());
+    Map<String, Object> data = new HashMap<>();
+    data.put("name", currSecReq.getName());
+    data.put("status", currSecReq.getStatus());
+    data.put("employeeID", currSecReq.getEmployee().getEmployeeID());
+    data.put("destination", currSecReq.getDestination());
+    data.put("descript", currSecReq.getDescriptionOfThreat());
+    data.put("lethal", currSecReq.getLeathalForcePermited());
+    data.put("date", currSecReq.getDate());
+    data.put("time", currSecReq.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -290,6 +320,7 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
           data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
+        // firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
@@ -321,6 +352,8 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
     // removes entries from SQL table that match input node
     try {
       this.List.remove(data.ID);
+      db.collection("securityRequests").document(data.getID()).delete();
+
       this.JavaToSQL();
       this.JavaToCSV(csvFile);
     } catch (Exception e) {

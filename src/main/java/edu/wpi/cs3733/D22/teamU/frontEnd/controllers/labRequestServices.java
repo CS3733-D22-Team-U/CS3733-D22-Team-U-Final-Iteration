@@ -366,7 +366,4 @@ public class labRequestServices extends ServiceController {
     activeReqButton.setUnderline(false);
     newReqButton.setUnderline(true);
   }
-
-  public void switchToEquipment(ActionEvent actionEvent) { // todo
-  }
 }

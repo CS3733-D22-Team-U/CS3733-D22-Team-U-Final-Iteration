@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.BackEnd.Report;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import edu.wpi.cs3733.D22.teamU.BackEnd.DataDao;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
@@ -10,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReportDaoImpl implements DataDao<Report> {
@@ -131,6 +135,19 @@ public class ReportDaoImpl implements DataDao<Report> {
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");
       for (Report currReport : List.values()) {
+        // db.collection("employee").add(currEmp.employeeID);
+
+        // checking if the data already exists
+        DocumentReference docRef = db.collection("reports").document(currReport.getId());
+        ApiFuture<DocumentSnapshot> ds = docRef.get();
+        try {
+          if (!ds.get().exists() || ds.get() == null) {
+            // firebaseUpdate(currReport);
+          }
+        } catch (Exception e) {
+          System.out.println("firebase error in java to sql locations");
+        }
+
         statement.execute(
             "INSERT INTO Reports VALUES("
                 + "'"
@@ -178,6 +195,18 @@ public class ReportDaoImpl implements DataDao<Report> {
     } catch (SQLException e) {
       System.out.println("error in SQLToJava - Reports");
     }
+  }
+
+  public void firebaseUpdate(Report report) {
+    DocumentReference docRef = db.collection("reports").document(report.getId());
+    Map<String, Object> data = new HashMap<>();
+    data.put("type", report.getType());
+    data.put("employeeID", report.getEmployee().getEmployeeID());
+    data.put("description", report.getDescription());
+    data.put("status", report.getStatus());
+    data.put("date", report.getDate());
+    data.put("time", report.getTime());
+    docRef.set(data);
   }
 
   @Override
@@ -253,6 +282,7 @@ public class ReportDaoImpl implements DataDao<Report> {
         this.List.replace(data.id, data);
         data.getEmployee().addReport(data);
         this.JavaToSQL();
+        // firebaseUpdate(data);
         this.JavaToCSV(CSVfile);
       } else {
         System.out.println("No Such Employee in Database");
@@ -283,6 +313,8 @@ public class ReportDaoImpl implements DataDao<Report> {
 
     if (this.List.containsKey(data.getId())) {
       this.List.remove(data.getId());
+      db.collection("reports").document(data.getId()).delete();
+
       String emp = data.getEmployee().getEmployeeID();
       if (EmployeeDaoImpl.List.containsKey(emp)) {
         Employee employee = EmployeeDaoImpl.List.get(emp);
