@@ -368,7 +368,7 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
       System.out.println("A Request With This ID Already Exists");
     } else {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
-        data.updateLocation(data.destination, Udb.getInstance().locationImpl.list());
+        data.updateLocation(data.getDestination(), Udb.getInstance().locationImpl.list());
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.put(data.ID, data);
         this.JavaToSQL();
