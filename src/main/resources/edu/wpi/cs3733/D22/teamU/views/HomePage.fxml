@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -95,109 +96,6 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <ButtonBar buttonMinWidth="64.0" layoutX="279.0" layoutY="566.0" prefHeight="106.0" prefWidth="770.0">
-               <buttons>
-                  <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/equipmentIconBlue.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/labIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/medicineIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/foodIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/giftIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/laundryIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/maintenanceIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/religiousIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/translateIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/securityIconBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/menuBar/computerServiceBLUE.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </buttons>
-            </ButtonBar>
             <Button layoutX="654.0" layoutY="654.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
             <Text fill="#044e9a" layoutX="308.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request a Service:">
                <font>
@@ -255,6 +153,142 @@
                   <Font size="24.0" />
                </font>
             </Text>
+            <ButtonBar buttonMinWidth="64.0" layoutX="277.0" layoutY="580.0" prefHeight="106.0" prefWidth="770.0">
+               <buttons>
+                  <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/equipmentIconBlue.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Marko Vila" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/labIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Nick Biliouris" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/medicineIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Kody Robinson" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/foodIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Deepti Gosukonda" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/giftIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Joselin Barbosa" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/laundryIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Deepti Gosukonda, Marko Vila" />
+                     </tooltip>
+                  </Button>
+                  <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/maintenanceIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Mike Akstin" />
+                     </tooltip>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/religiousIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="William Doyle" />
+                     </tooltip>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/translateIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Belisha Genin" />
+                     </tooltip>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/securityIconBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Tim Klein" />
+                     </tooltip>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/menuBar/computerServiceBLUE.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Iain McEwen" />
+                     </tooltip>
+                  </Button>
+               </buttons>
+            </ButtonBar>
          </children>
       </Pane>
    </children>
