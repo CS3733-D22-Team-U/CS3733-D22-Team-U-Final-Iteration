@@ -105,8 +105,8 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> longName;
   @FXML TableColumn<MapUI, String> shortName;
 
-  @FXML ComboBox<Location> To;
-  @FXML ComboBox<Location> From;
+  //  @FXML ComboBox<Location> To;
+  //  @FXML ComboBox<Location> From;
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
@@ -716,6 +716,7 @@ public class MapController extends ServiceController {
       if (request != null) {
         Udb.getInstance().remove(request);
         reqTable.getItems().remove(request);
+        request.gettingTheLocation(); // init the location for the request
         request.getLocation().getRequests().remove(request);
         popupEdit(mouseEvent);
       }
@@ -731,6 +732,7 @@ public class MapController extends ServiceController {
       if (equipment != null) {
         Udb.getInstance().remove(equipment);
         equipTable.getItems().remove(equipment);
+        equipment.gettingTheLocation(); // init the location for the equipment
         equipment.getLocation().getEquipment().remove(equipment);
         popupEdit(mouseEvent);
       }
@@ -752,11 +754,14 @@ public class MapController extends ServiceController {
                 Integer.parseInt(equipAvailable.getText()),
                 equipment.getLocationID());
 
+        newEquip.gettingTheLocation(); // init the location for the equipment
         Udb.getInstance().edit(newEquip);
         equipTable.getItems().remove(equipment);
         equipTable.getItems().add(newEquip);
+        equipment.gettingTheLocation(); // init the location for the equipment
         equipment.getLocation().getEquipment().remove(equipment);
         equipment.getLocation().getEquipment().add(newEquip);
+        equipment = newEquip;
         popupEdit(mouseEvent);
       }
     } catch (IOException e) {
