@@ -275,20 +275,19 @@ public class EmployeeDaoImpl implements DataDao<Employee> {
     if (List.containsKey(data.employeeID)) {
       System.out.println("An Employee With This ID Already Exists");
     } else {
-      if(checkIfUsernameTaken(data.getUsername())) {
+      if (checkIfUsernameTaken(data.getUsername())) {
         List.put(data.employeeID, data);
         this.JavaToSQL();
         this.JavaToCSV(CSVfile);
-      }
-      else {
+      } else {
         throw new IOException(); // so that front end can display something on screen.
       }
     }
   }
 
   private boolean checkIfUsernameTaken(String username) {
-    for(Employee e : hList().values()) {
-      if(e.getUsername().equals(username)) {
+    for (Employee e : hList().values()) {
+      if (e.getUsername().equals(username)) {
         return false;
       }
     }
