@@ -540,5 +540,4 @@ public class sideViewController extends ServiceController {
     recLevel4.setOpacity(0);
     recLevel5.setOpacity(1.0);
   }
-
 }
