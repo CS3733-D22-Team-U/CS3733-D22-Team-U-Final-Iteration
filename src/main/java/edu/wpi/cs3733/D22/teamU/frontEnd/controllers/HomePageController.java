@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -18,8 +19,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -27,11 +28,13 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-public class DashboardController extends ServiceController {
+public class HomePageController extends ServiceController {
 
   public Button logOutButton;
+  public Text headerText;
+  public Pane turtlePond;
+  public ImageView turtle;
   @FXML Button navButton;
   @FXML ImageView navPaneArrow;
 
@@ -56,6 +59,9 @@ public class DashboardController extends ServiceController {
   @FXML Circle apple;
   @FXML AnchorPane turtAnchor;
   @FXML Button turtButton;
+  @FXML Text message;
+  @FXML DatePicker datePicker;
+  @FXML Text timeOfDay;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -63,6 +69,15 @@ public class DashboardController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    datePicker = new DatePicker(LocalDate.now());
+    DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+    datePickerSkin.getDisplayNode().setLayoutY(datePicker.getLayoutY());
+    datePickerSkin.getDisplayNode().setLayoutX(datePicker.getLayoutX());
+    datePickerSkin.getPopupContent();
+    datePickerSkin.show();
+    Node popupContent = datePickerSkin.getPopupContent();
+    // [...]
+    LocalDate selectedDate = datePicker.getValue();
 
     try {
       listofEmployees();
@@ -96,67 +111,84 @@ public class DashboardController extends ServiceController {
               this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
             });
 
-    userName.setText("Dr." + "____");
-    handleNavButtons();
+    // userName.setText("Dr." + "____");
+
+    // handleNavButtons();
+    // userName.setText("Dr." + "____");
+    // handleNavButtons();
     handeDateTime();
-    handleTurtle();
-    playTurtle();
+    // handleTurtle();
+    // playTurtle();
   }
 
-  private void handleTurtle() {
-    TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
-    openNav.setToY(-415);
-    TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
-    turtButton.setOnAction(
-        (ActionEvent evt) -> {
-          if (turtAnchor.getTranslateY() != -415) {
-            openNav.play();
-          } else {
-            closeNav.setToY(0);
-            closeNav.play();
-          }
-        });
-  }
+  /*
+   private void handleTurtle() {
+     TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
+     openNav.setToY(-415);
+     TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
+     turtButton.setOnAction(
+         (ActionEvent evt) -> {
+           if (turtAnchor.getTranslateY() != -415) {
+             openNav.play();
+           } else {
+             closeNav.setToY(0);
+             closeNav.play();
+           }
+         });
+   }
 
-  public void playTurtle() {
-    anchor.setOnKeyPressed(
-        e -> {
-          double nextX;
-          double nextY;
+   public void playTurtle() {
+     anchor.setOnKeyPressed(
+         e -> {
+           double nextX;
+           double nextY;
 
-          if (e.getCode() == KeyCode.D) {
-            nextX = turtlePane.getLayoutX() + 10;
-            if (nextX >= 0 && nextX <= 363) {
-              turtlePane.setLayoutX(nextX);
-              turtlePane.setRotate(90);
-            }
-          }
+           if (e.getCode() == KeyCode.D) {
+             nextX = turtlePane.getLayoutX() + 10;
+             if (nextX >= 0 && nextX <= 363) {
+               turtlePane.setLayoutX(nextX);
+               turtlePane.setRotate(90);
+             }
+           }
 
-          if (e.getCode() == KeyCode.A) {
-            nextX = turtlePane.getLayoutX() - 10;
-            if (nextX >= 0 && nextX <= 363) {
-              turtlePane.setLayoutX(nextX);
-              turtlePane.setRotate(-90);
-            }
-          }
-          if (e.getCode() == KeyCode.W) {
-            nextY = turtlePane.getLayoutY() - 10;
-            if (nextY >= 0 && nextY <= 271) {
-              turtlePane.setLayoutY(nextY);
-              turtlePane.setRotate(0);
-            }
-          }
-          if (e.getCode() == KeyCode.S) {
-            nextY = turtlePane.getLayoutY() + 10;
-            if (nextY >= 0 && nextY <= 271) {
-              turtlePane.setLayoutY(nextY);
-              turtlePane.setRotate(180);
-            }
-          }
-        });
-  }
+           if (e.getCode() == KeyCode.A) {
+             nextX = turtlePane.getLayoutX() - 10;
+             if (nextX >= 0 && nextX <= 363) {
+               turtlePane.setLayoutX(nextX);
+               turtlePane.setRotate(-90);
+             }
+           }
+           if (e.getCode() == KeyCode.W) {
+             nextY = turtlePane.getLayoutY() - 10;
+             if (nextY >= 0 && nextY <= 271) {
+               turtlePane.setLayoutY(nextY);
+               turtlePane.setRotate(0);
+             }
+           }
+           if (e.getCode() == KeyCode.S) {
+             nextY = turtlePane.getLayoutY() + 10;
+             if (nextY >= 0 && nextY <= 271) {
+               turtlePane.setLayoutY(nextY);
+               turtlePane.setRotate(180);
+             }
+           }
+         });
+   }
+
+  */
 
   private void handeDateTime() {
+    Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
+    String hour = sdf3.format(quickStamp).substring(11, 13);
+    int hourInt = Integer.parseInt(hour);
+    if (hourInt >= 0 && hourInt < 12) {
+      timeOfDay.setText("Good Morning ");
+    } else if (hourInt > 12 && hourInt <= 18) {
+      timeOfDay.setText("Good Afternoon ");
+    } else {
+      timeOfDay.setText("Good Evening ");
+    }
+
     Thread timeThread =
         new Thread(
             () -> {
@@ -172,6 +204,7 @@ public class DashboardController extends ServiceController {
     masterThread = timeThread;
   }
 
+  /*
   private void handleNavButtons() {
     for (Node node : topRow.getButtons()) {
       Button button = (Button) node;
@@ -196,6 +229,8 @@ public class DashboardController extends ServiceController {
       button.setOnMouseExited(e -> button.setStyle(initStyle));
     }
   }
+
+   */
 
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
@@ -258,6 +293,4 @@ public class DashboardController extends ServiceController {
     }
     return menuItemsList;
   }
-
-  public void toReport(ActionEvent actionEvent) {}
 }
