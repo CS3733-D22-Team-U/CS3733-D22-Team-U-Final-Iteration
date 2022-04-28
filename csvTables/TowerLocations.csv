@@ -1,12 +1,11 @@
 nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
-HHALL00603,482,383,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
+HHALL00603,481,383,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
 CLABS002L1,498,548,L1,Tower,LABS,Pre-Op PACU Floor L1,Lab C002L1
 HBATH00103,533,288,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
 CHALL007L2,478,467,L2,Tower,HALL,Hallway 7 Floor L2,Hallway C007L2
 CHALL007L1,860,503,L1,Tower,HALL,Hallway 7 Floor L1,Hallway C007L1
 HHALL00202,702,357,2,Tower,HALL,Hallway Connector 2 Floor 2,Hallway H00202
 HDEPT00102,803,788,2,Tower,DEPT,Endoscopy,Endoscopy
-HHALL00203,10,443,3,Tower,HALL,Hallway Connector 2 Floor 3,Hallway H00203
 HDEPT00103,473,358,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
 HHALL00602,523,538,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
 FHALL00301,765,368,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
@@ -93,7 +92,7 @@ uPATI05103,287,487,3,Tower,PATI,Patient Room Pod C,PRC
 FREST00101,839,434,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
 FDEPT00401,542,604,1,Tower,DEPT,Sharf Admitting Center,Sharf Center
 FHALL01501,375,518,1,Tower,HALL,Tower Hallway 7,Hallway F01501
-FHALL01101,375,388,1,Tower,HALL,Tower Hallway 4,Hallway F01101
+FHALL01101,375,387,1,Tower,HALL,Tower Hallway 4,Hallway F01101
 HSTAI00102,807,338,2,Tower,STAI,Stairwell 1 Floor 2,Stairwell 0102
 FHALL01901,506,578,1,Tower,HALL,Tower Hallway 11,Hallway F01901
 HSTAI00103,428,733,3,Tower,STAI,Stairwell 1 Floor 3,Stairwell
@@ -158,7 +157,7 @@ HBATH00203,498,443,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 uPATI06003,336,551,3,Tower,PATI,Patient Room Pod C,PRC
 FRETL00101,721,302,1,Tower,RETL,Lobby Vending Machine,VM Lobby
 CHALL006L2,493,467,L2,Tower,HALL,Hallway 6 Floor L2,Hallway C006L2
-HHALL00102,269,197,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
+HHALL00102,269,500,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
 WELEV00M02,573,738,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
 HHALL00103,73,113,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
 WELEV00M03,563,748,3,Tower,ELEV,Elevator M Floor 3,Elevator M3
@@ -183,7 +182,7 @@ FDEPT00201,358,578,1,Tower,DEPT,Bretholtz Center for Patients and Families,Breth
 FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
 WELEV00L01,558,388,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
-WELEV00L02,189,106,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
+WELEV00L02,189,104,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
 CHALL006L1,860,742,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
 FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
 HSTAI00302,538,688,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
@@ -191,4 +190,6 @@ FHALL01701,469,414,1,Tower,HALL,Tower Hallway 9,Hallway F01701
 ddfnif,80,87,L1,Tower,HALL,hallllll,hall
 test6,100,100,5,Tower,DIRT,test6,test6
 test60,150,150,4,Tower,LABS,test6,test6
-lllllllll,150,150,L1,Tower,STOR,lllllllll,llll
+lllllllll,155,160,L1,Tower,STOR,lllllllll,llll
+test90,200,500,L1,Tower,REST,10988092380,3849234
+dawed,200,499,L1,Tower,PATI,wefcw,wefewf

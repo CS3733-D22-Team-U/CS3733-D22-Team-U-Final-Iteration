@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="masterPane" onMouseClicked="#Exit" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
+<AnchorPane fx:id="masterPane" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController">
     <children>
         <Pane fx:id="circleDragHelp" layoutX="143.0" layoutY="184.0" prefHeight="500.0" prefWidth="500.0" />
         <Pane onMouseClicked="#Exit" prefHeight="712.0" prefWidth="1130.0">
@@ -586,7 +586,7 @@
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#Exit" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
-                                                                        <AnchorPane fx:id="baseEdit" minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="703.0">
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="703.0">
                                                                             <children>
                                                                                 <AnchorPane fx:id="lowerLevel1Pane" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="500.0">
                                                                                     <children>
