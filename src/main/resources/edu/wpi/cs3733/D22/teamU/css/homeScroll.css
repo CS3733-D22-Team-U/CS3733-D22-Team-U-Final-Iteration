@@ -1,5 +1,5 @@
 .scroll-pane {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
@@ -20,9 +20,13 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #054f99;
+    -fx-background-color: transparent;
     -fx-background-radius: 5em;
 }
 .scroll-pane > .corner {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport|{
+    -fx-background-color: transparent;
 }

@@ -42,7 +42,7 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Text layoutX="725.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
+                  <Text fill="#044e9a" layoutX="764.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
                       <font>
                           <Font name="System Bold" size="36.0" />
                       </font>

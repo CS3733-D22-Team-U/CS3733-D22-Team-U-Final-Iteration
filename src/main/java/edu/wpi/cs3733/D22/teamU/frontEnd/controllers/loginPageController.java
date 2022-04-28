@@ -35,7 +35,6 @@ public class loginPageController extends ServiceController {
   @FXML Circle loadingCircle;
   @FXML Group loginGroup;
   @FXML Group passwordGroup;
-  public Employee user;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +61,7 @@ public class loginPageController extends ServiceController {
                           if (a.getUsername().equals(username.getText().trim())
                               && a.getPassword().equals(password.getText().trim())) {
                             foundUser = true;
-                            Employee user = a;
+                            Udb.getInstance().setUser(a);
                             if (a.getOccupation().equals("Administrator")) {
                               Udb.admin = true;
                             } else {
