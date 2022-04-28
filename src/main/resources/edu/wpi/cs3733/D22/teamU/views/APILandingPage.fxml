@@ -21,14 +21,14 @@
             <children>
                 <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
                     <children>
-                        <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="92.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/hospitalIcon.png" />
                             </image>
                         </ImageView>
-                        <Text fx:id="headerText" fill="WHITE" layoutX="133.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="930.7574462890625">
+                        <Text fx:id="headerText" fill="WHITE" layoutX="177.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="930.7574462890625">
                      <font>
-                        <Font size="48.0" />
+                        <Font size="40.0" />
                      </font></Text>
                     </children>
                 </Pane>
