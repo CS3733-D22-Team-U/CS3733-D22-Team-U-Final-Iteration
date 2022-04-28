@@ -217,6 +217,7 @@ public class sideViewController extends ServiceController {
       if ((equipment.getName().equals("Beds") && equipment.getInUse() >= 6)
           || equipment.getName().equals("Infusion Pumps")
               && (equipment.getInUse() >= 10 || equipment.getAvailable() < 5)) {
+        equipment.gettingTheLocation();
         dirtyEquip.add(
             new EquipmentUI(
                 equipment.getName(),

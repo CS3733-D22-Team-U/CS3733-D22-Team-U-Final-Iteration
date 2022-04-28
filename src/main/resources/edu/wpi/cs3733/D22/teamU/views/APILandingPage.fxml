@@ -19,25 +19,13 @@
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
             <children>
-                <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-                    <children>
-                        <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../icons/hospitalIcon.png" />
-                            </image>
-                        </ImageView>
-                        <Text fx:id="headerText" fill="WHITE" layoutX="133.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="930.7574462890625">
-                     <font>
-                        <Font size="48.0" />
-                     </font></Text>
-                    </children>
-                </Pane>
-                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="940.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
+                <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;" />
+                <ImageView fitHeight="106.0" fitWidth="101.0" layoutX="991.0" layoutY="644.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
                     <image>
                         <Image url="@../icons/unicornLogo.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="756.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.11;">
+                <ImageView fitHeight="780.0" fitWidth="1102.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.11;">
                     <image>
                         <Image url="@../images/hospitalBuilding.jpg" />
                     </image>
@@ -111,7 +99,7 @@
             <Button layoutX="987.0" layoutY="170.0" mnemonicParsing="false" onAction="#toSettings" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="30.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="30.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
-            <Pane fx:id="datePickerPane" layoutX="42.0" layoutY="446.0" prefHeight="193.0" prefWidth="222.0">
+            <Pane fx:id="datePickerPane" layoutX="47.0" layoutY="446.0" prefHeight="193.0" prefWidth="222.0">
                <children>
                   <DatePicker fx:id="datePicker" layoutX="30.0" layoutY="11.0" prefHeight="16.0" prefWidth="50.0" />
                </children>
@@ -124,6 +112,16 @@
             <Text fx:id="date" fill="#044e9a" layoutX="94.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
                <font>
                   <Font size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="33.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/hospitalIcon.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="headerText" fill="WHITE" layoutX="119.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="974.9564361572266">
+               <font>
+                  <Font size="48.0" />
                </font>
             </Text>
             </children>

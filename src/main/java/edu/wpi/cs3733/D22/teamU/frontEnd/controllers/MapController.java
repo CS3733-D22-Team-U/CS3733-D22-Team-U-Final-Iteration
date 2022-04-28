@@ -42,6 +42,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.assertj.core.util.diff.Delta;
@@ -121,7 +122,13 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> shortName;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
+  @FXML ScrollPane legendScroll;
+  @FXML Button legendButton;
 
+  @FXML Circle toggleAll;
+  @FXML Circle toggleServ;
+  @FXML Circle toggleEquip;
+  @FXML Circle toggleLoc;
   //  @FXML ComboBox<Location> To;
   //  @FXML ComboBox<Location> From;
 
@@ -329,13 +336,14 @@ public class MapController extends ServiceController {
                   getClass()
                       .getClassLoader()
                       .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(720);
+      popupAddPane.setLayoutX(670);
       popupAddPane.setLayoutY(200);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
     handleBar();
+    handleLegend();
   }
 
   private void handleBar() {
@@ -345,6 +353,21 @@ public class MapController extends ServiceController {
     sideBarButton.setOnAction(
         (ActionEvent evt) -> {
           if (sideBarAnchor.getTranslateY() != 670) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
+  }
+
+  private void handleLegend() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), legendScroll);
+    openNav.setToY(700);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), legendScroll);
+    legendButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (legendScroll.getTranslateY() != 700) {
             openNav.play();
           } else {
             closeNav.setToY(0);
@@ -449,7 +472,9 @@ public class MapController extends ServiceController {
     Pane pane = (Pane) masterPane;
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
+      addC.setFill(Color.rgb(59, 175, 180));
     } else {
+      addC.setFill(Color.rgb(88, 152, 219));
       pane.getChildren().add(popupAddPane);
       for (Node n : ((AnchorPane) popupAddPane.getChildren().get(0)).getChildren()) {
         if (n instanceof GridPane) {
@@ -994,6 +1019,7 @@ public class MapController extends ServiceController {
       for (LocationNode locationNode : locations.values()) {
         locationNode.setVisible(false);
       }
+      toggleAll.setFill(Color.rgb(88, 152, 219));
       EQPicon = false;
       LOCicon = false;
       SRVicon = false;
@@ -1002,6 +1028,7 @@ public class MapController extends ServiceController {
       for (LocationNode locationNode : locations.values()) {
         locationNode.setVisible(true);
       }
+      toggleAll.setFill(Color.rgb(59, 175, 180));
       EQPicon = true;
       LOCicon = true;
       SRVicon = true;
@@ -1013,7 +1040,15 @@ public class MapController extends ServiceController {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getEquipment().size() > 0
           || locationNode.getLocation().getRequests().size() > 0) {
-      } else locationNode.setVisible(LOCicon);
+        if (LOCicon == true) {
+          locationNode.setVisible(false);
+          toggleLoc.setFill(Color.rgb(88, 152, 219));
+        }
+        if (!LOCicon) {
+          locationNode.setVisible(true);
+          toggleLoc.setFill(Color.rgb(59, 175, 180));
+        }
+      }
     }
     LOCicon = !LOCicon;
   }
@@ -1021,7 +1056,17 @@ public class MapController extends ServiceController {
   public void dispEQP(MouseEvent mousevent) {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getEquipment().size() > 0) {
-      } else locationNode.setVisible(EQPicon);
+      } else {
+        if (EQPicon == true) {
+          locationNode.setVisible(EQPicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleEquip.setFill(Color.rgb(59, 175, 180));
+        } else {
+          locationNode.setVisible(EQPicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleEquip.setFill(Color.rgb(88, 152, 219));
+        }
+      }
     }
     EQPicon = !EQPicon;
   }
@@ -1029,7 +1074,17 @@ public class MapController extends ServiceController {
   public void dispSRV(MouseEvent mousevent) {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getRequests().size() > 0) {
-      } else locationNode.setVisible(SRVicon);
+      } else {
+        if (SRVicon == true) {
+          locationNode.setVisible(SRVicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleServ.setFill(Color.rgb(59, 175, 180));
+        } else {
+          locationNode.setVisible(SRVicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleServ.setFill(Color.rgb(88, 152, 219));
+        }
+      }
     }
     SRVicon = !SRVicon;
   }
