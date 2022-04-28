@@ -51,12 +51,7 @@
                   </Button>
                </children>
             </HBox>
-            <Text fx:id="time" layoutX="929.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-            <Text layoutX="845.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Lab Request">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Text>
+            <Text fx:id="time" layoutX="957.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
                   <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
@@ -253,60 +248,6 @@
             <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Close" />
          </children>
       </Pane>
-      <Pane layoutX="341.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
-         <children>
-            <Circle fill="WHITE" layoutX="49.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
-            <Circle fill="WHITE" layoutX="127.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
-            <Circle fill="WHITE" layoutX="304.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
-            <Circle fill="WHITE" layoutX="378.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
-            <Circle fill="WHITE" layoutX="215.0" layoutY="45.0" radius="40.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
-            <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/allRequests.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="90.0" layoutY="18.0" mnemonicParsing="false" onAction="#toMap" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/newdash.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/mapBLUE.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="343.0" layoutY="19.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/dashboardIcons/newgear.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="180.0" layoutY="20.0" mnemonicParsing="false" onAction="#toHome" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
-               <graphic>
-                  <ImageView fitHeight="49.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/hospitalDashboardBLUE.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </Pane>
       <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
          <children>
             <Pane layoutY="41.0" prefHeight="678.0" prefWidth="99.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
@@ -444,6 +385,60 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="361.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
+         <children>
+            <Circle fill="WHITE" layoutX="49.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="127.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="304.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="378.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="215.0" layoutY="45.0" radius="40.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/allRequests.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="90.0" layoutY="18.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/newdash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#toMap" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/mapBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="343.0" layoutY="18.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcons/newgear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="180.0" layoutY="18.0" mnemonicParsing="false" onAction="#toHome" prefHeight="80.0" prefWidth="71.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="49.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/hospitalDashboardBLUE.png" />
+                     </image>
+                  </ImageView>
                </graphic>
             </Button>
          </children>
