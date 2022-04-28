@@ -81,6 +81,13 @@ public class filterEmployeeController extends ServiceController implements Initi
   @FXML Button sideBarButton;
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  @FXML Button addButton;
+  @FXML Button removeButton;
+  @FXML Button editButton;
+  @FXML Button submitEditButton;
+  @FXML Button submitAddButton;
+  @FXML Button cancelButton;
+
   ObservableList<Request> employeeRequestsList = FXCollections.observableArrayList();
 
   ArrayList<Employee> staff = new ArrayList<Employee>();
@@ -108,6 +115,11 @@ public class filterEmployeeController extends ServiceController implements Initi
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     handleTime();
     handleBar();
+    addButton.setVisible(Udb.admin);
+    editButton.setVisible(Udb.admin);
+    removeButton.setVisible(Udb.admin);
+    submitEditButton.setVisible(false);
+    cancelButton.setVisible(false);
   }
 
   private void handleBar() {
@@ -125,7 +137,7 @@ public class filterEmployeeController extends ServiceController implements Initi
         });
   }
 
-  public void clear(ActionEvent actionEvent) {
+  public void clear() {
     employees.valueProperty().set(null);
     employeeRequests.getItems().clear();
     IDTxt.setText("");
@@ -312,7 +324,7 @@ public class filterEmployeeController extends ServiceController implements Initi
     employeeRequests.setItems(FXCollections.observableArrayList(requests));
   }
 
-  public void showAllReq(ActionEvent actionEvent) throws SQLException, IOException {
+  public void showAllReq() throws SQLException, IOException {
     employeeRequests.setItems(getRequestList());
   }
 
@@ -357,5 +369,119 @@ public class filterEmployeeController extends ServiceController implements Initi
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
     appStage.setScene(scene);
     appStage.show();
+  }
+
+  public void editEmployee() {
+    if (employees.getValue() != null) {
+      employees.setDisable(true);
+      editableFields(true);
+      submitEditButton.setVisible(true);
+      cancelButton.setVisible(true);
+      displayInfo();
+    }
+  }
+
+  public void addEmployee() {
+    employees.setValue(null);
+    employees.setDisable(true);
+    cancelButton.setVisible(true);
+    submitAddButton.setVisible(true);
+    editableFields(true);
+    clear();
+  }
+
+  public void submitEmployeeEdit() {
+    //  make an employee with fields' attributes
+    editableFields(false);
+    // add employee to list
+    String ID;
+    String reports;
+    Employee oldEmployee = employees.getValue();
+    oldEmployee.setFirstName(firstTxt.getText().trim());
+    oldEmployee.setLastName(lastTxt.getText().trim());
+    oldEmployee.setOccupation(occupationTxt.getText().trim());
+    oldEmployee.setOnDuty(Boolean.parseBoolean(dutyTxt.getText().trim()));
+    oldEmployee.setUsername(userTxt.getText().trim());
+    oldEmployee.setPassword(passwordTxt.getText().trim());
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    submitEditButton.setVisible(false);
+    cancelButton.setVisible(false);
+    employees.setDisable(false);
+    editableFields(false);
+    employees.setValue(null);
+  }
+
+  public void submitEmployeeAdd() {
+    //  make an employee with fields' attributes
+    editableFields(false);
+    // add employee to list
+    String ID;
+    String reports;
+    int rand = (int) Math.floor(Math.random() * 100000);
+    ID = rand + "";
+    reports = "0";
+    Employee employee =
+        new Employee(
+            ID,
+            firstTxt.getText().trim(),
+            lastTxt.getText().trim(),
+            occupationTxt.getText().trim(),
+            Integer.parseInt(reports),
+            Boolean.parseBoolean(dutyTxt.getText().trim()),
+            userTxt.getText().trim(),
+            passwordTxt.getText().trim());
+    try {
+      Udb.getInstance().EmployeeImpl.add(employee);
+      employees.getItems().add(employee);
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+    }
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    submitAddButton.setVisible(false);
+    cancelButton.setVisible(false);
+    employees.setDisable(false);
+    editableFields(false);
+    employees.setValue(null);
+  }
+
+  public void removeEmployee() {
+    Employee employee = employees.getValue();
+    try {
+      Udb.getInstance().EmployeeImpl.remove(employee);
+      employees.getItems().remove(employee);
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+    }
+    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
+    employees.setValue(null);
+    clear();
+    try {
+      showAllReq();
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+    }
+  }
+
+  public void editableFields(boolean set) {
+    firstTxt.setEditable(set);
+    lastTxt.setEditable(set);
+    occupationTxt.setEditable(set);
+    dutyTxt.setEditable(set);
+    userTxt.setEditable(set);
+    passwordTxt.setEditable(set);
+  }
+
+  public void cancelEdit() {
+    employees.setDisable(false);
+    employees.valueProperty().set(null);
+    clear();
+    try {
+      showAllReq();
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+    }
+    cancelButton.setVisible(false);
+    submitEditButton.setVisible(false);
+    submitAddButton.setVisible(false);
   }
 }

@@ -28,6 +28,7 @@ public class AboutController extends ServiceController {
   @FXML Pane datePickerPane;
   @FXML javafx.scene.text.Text time;
   @FXML Text date;
+  @FXML Text quoteText;
 
   @Override
   public void addRequest() {}
@@ -41,50 +42,6 @@ public class AboutController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
-  public void toHarsh() {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/harshRESIZE.jpeg");
-  }
-
-  public void toMarko(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/markoRESIZE.jpeg");
-  }
-
-  public void toJoselin(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/joselin2RESIZE.jpeg");
-  }
-
-  public void toDeepti(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/deeptiRESIZE.jpeg");
-  }
-
-  public void toNick(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/nickRESIZE.jpeg");
-  }
-
-  public void toKody(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/kodyRESIZE.jpeg");
-  }
-
-  public void toTim(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/timRESIZE.jpeg");
-  }
-
-  public void toWill(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/willRESIZE.jpeg");
-  }
-
-  public void toMike(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/mikeRESIZE.jpeg");
-  }
-
-  public void toIain(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/iainRESIZE.jpeg");
-  }
-
-  public void toBelisha(ActionEvent actionEvent) {
-    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/belishaRESIZE.jpeg");
-  }
-
   private void addTeamImage(String resource) {
     URL a = Uapp.class.getClassLoader().getResource(resource);
     imageHover.setImage(new Image(String.valueOf(a)));
@@ -93,5 +50,72 @@ public class AboutController extends ServiceController {
     // imageHover.setX((imageHover.getFitWidth()));
     // imageHover.setY((imageHover.getFitHeight()));
 
+  }
+
+  public void toHarsh() {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/harshRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'We're all miserable' - Harsh Patel");
+  }
+
+  public void toMarko(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/markoRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'You're a broken turtle' - Marko Vila");
+  }
+
+  public void toJoselin(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/joselin2RESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'Make the UI hot' - Joselin Barbosa");
+  }
+
+  public void toDeepti(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/deeptiRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" *INTERNAL SCREAMING* - Deepti Gosukonda");
+  }
+
+  public void toNick(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/nickRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'I ruptured my ear at Scuba, should be there in 45' - Nick Biliouris");
+  }
+
+  public void toKody(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/kodyRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'I am retiring from SceneBuilder' - Kody Robinson");
+  }
+
+  public void toTim(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/timRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(
+        " 'Gonna be honest with you team, I've been bringing you guys down from the get-go' - Tim Klein");
+  }
+
+  public void toWill(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/willRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'I love Wong' - William Doyle");
+  }
+
+  public void toMike(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/mikeRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'Can front end update my UI?' - Mike Akstin");
+  }
+
+  public void toIain(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/iainRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" ¯\\_(ツ)_/¯ - Iain McEwen");
+  }
+
+  public void toBelisha(ActionEvent actionEvent) {
+    addTeamImage("edu/wpi/cs3733/D22/teamU/images/groupMemberPics/belishaRESIZE.jpeg");
+    quoteText.setVisible(true);
+    quoteText.setText(" 'If it's Wong, it's right' - Belisha Genin");
   }
 }

@@ -53,49 +53,49 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="IDTxt" />
+                              <TextField fx:id="IDTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="firstTxt" />
+                              <TextField fx:id="firstTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="lastTxt" />
+                              <TextField fx:id="lastTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="occupationTxt" />
+                              <TextField fx:id="occupationTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Reports:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="reportsTxt" />
+                              <TextField fx:id="reportsTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="On Duty?">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="dutyTxt" />
+                              <TextField fx:id="dutyTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="userTxt" />
+                              <TextField fx:id="userTxt" editable="false" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="passwordTxt" />
+                              <TextField fx:id="passwordTxt" editable="false" />
                            </children>
                         </VBox>
                         <Button fx:id="submitButton" alignment="CENTER" layoutX="19.0" layoutY="59.0" lineSpacing="5.0" maxHeight="300.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#updateList" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Submit" textFill="#044e9a">
@@ -141,6 +141,36 @@
                   </Button>
                       </children>
                   </Pane>
+            <Button fx:id="addButton" layoutX="970.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#addEmployee" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Add">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="editButton" layoutX="970.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#editEmployee" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Edit">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="removeButton" layoutX="970.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#removeEmployee" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Remove">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelButton" layoutX="970.0" layoutY="553.0" mnemonicParsing="false" onMouseClicked="#cancelEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Cancel">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="submitEditButton" layoutX="970.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#submitEmployeeEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="submitAddButton" layoutX="970.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#submitEmployeeAdd" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
             </children>
         </Pane>
       <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
