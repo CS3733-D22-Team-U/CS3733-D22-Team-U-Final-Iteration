@@ -48,7 +48,9 @@ public class Agent implements Comparable<Agent>, Cloneable {
   public double heuristic() {
     double a = Math.abs(current.getXcoord() - goal.getXcoord());
     double b = Math.abs(current.getYcoord() - goal.getYcoord());
-    return distance + Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    double d = distance + Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    if (!current.getFloor().equals(goal.getFloor())) d += 500;
+    return d;
   }
 
   @Override
