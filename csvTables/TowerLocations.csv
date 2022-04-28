@@ -11,7 +11,7 @@ HDEPT00103,473,358,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
 HHALL00602,523,538,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
 FHALL00301,765,368,1,Tower,HALL,Shattuck Street Lobby 1,Hallway F00301
 FHALL02601,774,697,1,Tower,HALL,Lobby Hallway 4,Hallway F02601
-CHALL010L2,860,307,L2,Tower,HALL,Hallway 10 Floor L2,Hallway C010L2
+CHALL010L2,860,306,L2,Tower,HALL,Hallway 10 Floor L2,Hallway C010L2
 FHALL02201,517,738,1,Tower,HALL,Hallway Lobby Entrance,Entrance Hallway
 CDEPT002L1,146,78,L1,Tower,DEPT,Day Surgery Family Waiting Floor L1,Department C002L1
 CHALL014L1,593,382,L1,Tower,HALL,Hallway 14 Floor L1,Hallway C014L1
@@ -65,10 +65,10 @@ HHALL00302,783,358,2,Tower,HALL,Hallway Connector 3 Floor 2,Hallway H00302
 HHALL00303,73,443,3,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
 WHALL00702,488,850,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
 FHALL02701,814,697,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
-uHALL04C01,448,275,4,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
+uHALL04C01,447,275,4,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
 FHALL00401,721,368,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
 FHALL02301,593,738,1,Tower,HALL,Lobby Hallway 1,Hallway F02301
-uHALL04C03,448,491,4,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
+uHALL04C03,447,490,4,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
 HRETL00202,363,483,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
 FHALL00801,506,308,1,Tower,HALL,Tower Hallway 1,Hallway F00801
 uPATI04C1,305,604,4,Tower,PATI,Patient Room Pod C,PRC
@@ -87,7 +87,7 @@ HHALL01003,533,278,3,Tower,HALL,Hallway Connector 10 Floor 3,Hallway H01003
 WELEV00LL2,533,382,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 CREST002L1,813,742,L1,Tower,REST,Restroom M Elevator Floor L1,Restroom C002L1
 FSTAI00201,421,260,1,Tower,STAI,Tower Stairway 1,Tower Stairs 1
-HHALL01403,483,488,3,Tower,HALL,Hallway Connector 14 Floor 3,Hallway H01403
+HHALL01403,481,487,3,Tower,HALL,Hallway Connector 14 Floor 3,Hallway H01403
 uPATI03203,240,289,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05103,287,487,3,Tower,PATI,Patient Room Pod C,PRC
 FREST00101,839,434,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
@@ -146,7 +146,7 @@ FDEPT00501,876,758,1,Tower,DEPT,Emergency Department,Emergency
 FHALL01201,296,388,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
 FHALL03101,774,434,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
 CHALL005L2,493,738,L2,Tower,HALL,Hallway 5 Floor L2,Hallway C005L2
-CHALL005L1,498,742,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
+CHALL005L1,498,741,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
 FDEPT00101,365,283,1,Tower,DEPT,Center for International Medicine,CIM
 HSTAI00202,443,623,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
 uSTOR00101,208,389,1,Tower,STOR,West Plaza,West Plaza
@@ -170,7 +170,7 @@ FHALL00201,774,368,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
 FHALL02501,713,697,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
 FHALL02101,517,604,1,Tower,HALL,Tower Hallway Entrance,Tower Entrance 2
 FHALL00601,617,388,1,Tower,HALL,Tower Lobby Entrance 1,Tower Entrance
-FHALL02901,448,738,1,Tower,HALL,75 Lobby,75 Lobby
+FHALL02901,447,737,1,Tower,HALL,75 Lobby,75 Lobby
 uPATI03403,203,228,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05703,263,608,3,Tower,PATI,Patient Room Pod C,PRC
 uPATI03803,300,165,3,Tower,PATI,Patient Room Pod B,PRB

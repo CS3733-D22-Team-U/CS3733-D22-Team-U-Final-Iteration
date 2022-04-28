@@ -64,6 +64,7 @@ public class MapController extends ServiceController {
   public TextField equipAmount;
   public TextField equipInUse;
   public TextField equipAvailable;
+  public TabPane popupTabPane;
   public AnchorPane masterPane;
   public TabPane mapTab;
   public Pane circleDragHelp;
@@ -126,8 +127,10 @@ public class MapController extends ServiceController {
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
-  @FXML Circle add;
+  @FXML Circle addC;
   @FXML Button addBTN;
+
+  @FXML AnchorPane baseEdit;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
   ListView<String> equipmentView, requestView;
@@ -149,7 +152,7 @@ public class MapController extends ServiceController {
       throw new RuntimeException(e);
     }
 
-    addBTN.setDisable(!Udb.admin);
+    // addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
     setScroll(floor1Pane);
@@ -160,6 +163,7 @@ public class MapController extends ServiceController {
 
     toLocation = new ArrayList<>();
     fromLocation = new ArrayList<>();
+
     try {
       for (Location l : Udb.getInstance().locationImpl.list()) {
         fromLocation.add(l);
@@ -301,21 +305,6 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
-    popupAddPane = new AnchorPane();
-    try {
-      popupAddPane
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  getClass()
-                      .getClassLoader()
-                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(663);
-      popupAddPane.setLayoutY(159);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
     popupEditPane = new AnchorPane();
     try {
@@ -327,6 +316,22 @@ public class MapController extends ServiceController {
                       getClass()
                           .getClassLoader()
                           .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    popupAddPane = new AnchorPane();
+    try {
+      popupAddPane
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  getClass()
+                      .getClassLoader()
+                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
+      popupAddPane.setLayoutX(720);
+      popupAddPane.setLayoutY(200);
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -441,7 +446,7 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) addBTN.getParent();
+    Pane pane = (Pane) masterPane;
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
     } else {
@@ -571,15 +576,18 @@ public class MapController extends ServiceController {
 
     popupEditPane.setLayoutY(159);
 
+    for (Node n : popupEditPane.getChildren()) {
+      if (n instanceof TabPane) {
+        TabPane tp = (TabPane) n;
+        popupTabPane = tp;
+        tp.getSelectionModel().select(0);
+      }
+    }
+
     Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
     AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
     for (Node n : locAnchor.getChildren()) {
-      if (n instanceof Button) {
-        Button b2 = (Button) n;
-        if (b2.getId().equals("exit")) {
-          b2.setOnMouseClicked(this::Exit);
-        }
-      } else if (n instanceof GridPane) {
+      if (n instanceof GridPane) {
         GridPane gp = (GridPane) n;
         for (Node n2 : gp.getChildren()) {
           if (n2 instanceof TextField) {
@@ -649,9 +657,7 @@ public class MapController extends ServiceController {
     for (Node n : equipAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit1")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeEquip")) {
+        if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
         } else if (b2.getId().equals("editEquip")) {
           b2.setOnMouseClicked(this::editEquipFunc);
@@ -705,9 +711,7 @@ public class MapController extends ServiceController {
     for (Node n : reqAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit2")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeReq")) {
+        if (b2.getId().equals("removeReq")) {
           b2.setOnMouseClicked(this::deleteRequest);
         }
       } else if (n instanceof TableView) {
