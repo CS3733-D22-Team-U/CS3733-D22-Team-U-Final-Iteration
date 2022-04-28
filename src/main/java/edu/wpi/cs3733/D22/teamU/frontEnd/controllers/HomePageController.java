@@ -79,7 +79,6 @@ public class HomePageController extends ServiceController {
     Node popupContent = datePickerSkin.getPopupContent();
     datePicker.setVisible(false);
     datePickerPane.getChildren().add(popupContent);
-    handleDateTime();
 
     try {
       listofEmployees();
