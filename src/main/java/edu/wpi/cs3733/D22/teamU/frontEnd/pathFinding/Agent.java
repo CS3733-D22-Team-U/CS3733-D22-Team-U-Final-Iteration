@@ -24,10 +24,13 @@ public class Agent implements Comparable<Agent>, Cloneable {
 
   public void move(Edge moved, Location current) {
     edges.add(moved);
+    boolean sameFloor = current.getFloor().equals(this.current.getFloor());
     this.current = current;
-    double a = Math.abs(moved.loc1.getXcoord() - moved.loc2.getXcoord());
-    double b = Math.abs(moved.loc1.getYcoord() - moved.loc2.getYcoord());
-    distance += Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    if (sameFloor) {
+      double a = Math.abs(moved.loc1.getXcoord() - moved.loc2.getXcoord());
+      double b = Math.abs(moved.loc1.getYcoord() - moved.loc2.getYcoord());
+      distance += Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    } else distance += 500;
   }
 
   @Override

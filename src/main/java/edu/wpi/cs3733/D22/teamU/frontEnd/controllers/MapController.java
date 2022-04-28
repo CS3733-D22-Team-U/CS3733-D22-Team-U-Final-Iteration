@@ -42,6 +42,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.assertj.core.util.diff.Delta;
@@ -364,6 +365,7 @@ public class MapController extends ServiceController {
   }
 
   ArrayList<Edge> edges = new ArrayList<>();
+  ArrayList<Circle> elevs = new ArrayList<>();
 
   public void findPath(MouseEvent mouseEvent) throws CloneNotSupportedException {
     for (Edge e : edges) {
@@ -371,10 +373,20 @@ public class MapController extends ServiceController {
       try {
         ap.getChildren().remove(e);
       } catch (Exception e2) {
+      }
+    }
 
+    for (Circle e : elevs) {
+      AnchorPane ap = (AnchorPane) e.getParent();
+      try {
+        ap.getChildren().remove(e);
+      } catch (Exception e2) {
+        e2.printStackTrace();
       }
     }
     edges = new ArrayList<>();
+    elevs = new ArrayList<>();
+
     if (To.getValue() != null && From.getValue() != null) {
       edges = pathFinding.findPath(From.getValue(), To.getValue());
       System.out.println(edges);
@@ -386,7 +398,24 @@ public class MapController extends ServiceController {
         e.setEndX(ln2.tempx);
         e.setEndY(ln2.tempy);
         try {
-          ln1.getPane().getChildren().add(e);
+          if (ln1.getPane().equals(ln2.getPane())) ln1.getPane().getChildren().add(e);
+          else {
+            Circle c1 = new Circle();
+            c1.setFill(Color.RED);
+            c1.setRadius(7);
+            c1.setCenterX(ln1.tempx);
+            c1.setCenterY(ln1.tempy);
+            ln1.getPane().getChildren().add(c1);
+            elevs.add(c1);
+
+            Circle c2 = new Circle();
+            c2.setFill(Color.RED);
+            c2.setRadius(7);
+            c2.setCenterX(ln2.tempx);
+            c2.setCenterY(ln2.tempy);
+            ln2.getPane().getChildren().add(c2);
+            elevs.add(c2);
+          }
         } catch (Exception e1) {
 
         }
