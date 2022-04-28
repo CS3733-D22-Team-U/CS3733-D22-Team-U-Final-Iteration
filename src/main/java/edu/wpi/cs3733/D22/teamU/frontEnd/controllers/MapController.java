@@ -27,8 +27,8 @@ import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,7 +125,7 @@ public class MapController extends ServiceController {
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
   @FXML Circle add;
-
+  @FXML Button addBTN;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
   ListView<String> equipmentView, requestView;
@@ -147,7 +147,7 @@ public class MapController extends ServiceController {
       throw new RuntimeException(e);
     }
 
-    add.setDisable(!Udb.admin);
+    addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
     setScroll(floor1Pane);
@@ -439,7 +439,7 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) add.getParent();
+    Pane pane = (Pane) addBTN.getParent();
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
     } else {
@@ -576,6 +576,7 @@ public class MapController extends ServiceController {
         tp.getSelectionModel().select(0);
       }
     }
+
     Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
     AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
     for (Node n : locAnchor.getChildren()) {
@@ -846,7 +847,7 @@ public class MapController extends ServiceController {
     }
   }
 
-  public void Exit(Event event) {
+  public void Exit(Event Event) {
     popupEditPane.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 

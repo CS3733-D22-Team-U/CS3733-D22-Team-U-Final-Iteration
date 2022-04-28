@@ -135,7 +135,10 @@
                         <Image url="@../icons/menuBar/cautionIconBLUE.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Report An Employee" />
+               </tooltip></Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="53.0" layoutY="301.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="50.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
             <Pane fx:id="datePickerPane" layoutX="65.0" layoutY="446.0" prefHeight="193.0" prefWidth="125.0">
