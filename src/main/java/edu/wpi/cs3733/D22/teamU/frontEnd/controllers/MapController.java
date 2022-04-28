@@ -78,16 +78,16 @@ public class MapController extends ServiceController {
   @FXML Pane pane;
 
   /*Add Popup*/
-  AnchorPane popupAddPane;
-  TextField addNodeID;
-  TextField addXcoord;
-  TextField addYcoord;
-  TextField addLongName;
-  TextField addShortName;
-  ComboBox addNodeTypeCombo;
-  ComboBox addBuildingCombo;
-  ComboBox addFloorCombo;
-  Button addButton;
+  public AnchorPane popupAddPane;
+  public TextField addNodeID;
+  public TextField addXcoord;
+  public TextField addYcoord;
+  public TextField addLongName;
+  public TextField addShortName;
+  public ComboBox addNodeTypeCombo;
+  public ComboBox addBuildingCombo;
+  public ComboBox addFloorCombo;
+  public Button addButton;
 
   ObservableList<String> nodeTypeList =
       FXCollections.observableArrayList(
@@ -124,8 +124,10 @@ public class MapController extends ServiceController {
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
-  @FXML Circle add;
+  @FXML Circle addC;
   @FXML Button addBTN;
+
+  @FXML AnchorPane baseEdit;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
   ListView<String> equipmentView, requestView;
@@ -147,7 +149,7 @@ public class MapController extends ServiceController {
       throw new RuntimeException(e);
     }
 
-    addBTN.setDisable(!Udb.admin);
+    // addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
     setScroll(floor1Pane);
@@ -299,21 +301,6 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
-    popupAddPane = new AnchorPane();
-    try {
-      popupAddPane
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  getClass()
-                      .getClassLoader()
-                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(663);
-      popupAddPane.setLayoutY(159);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
     popupEditPane = new AnchorPane();
     try {
@@ -325,6 +312,22 @@ public class MapController extends ServiceController {
                       getClass()
                           .getClassLoader()
                           .getResource("edu/wpi/cs3733/D22/teamU/views/popup.fxml"))));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    popupAddPane = new AnchorPane();
+    try {
+      popupAddPane
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  getClass()
+                      .getClassLoader()
+                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
+      popupAddPane.setLayoutX(520);
+      popupAddPane.setLayoutY(100);
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -439,7 +442,7 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) addBTN.getParent();
+    Pane pane = (Pane) baseEdit.getParent();
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
     } else {

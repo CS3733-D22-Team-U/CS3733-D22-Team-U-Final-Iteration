@@ -37,7 +37,6 @@
                         </ScrollPane>
                     </children>
                 </Pane>
-                <Button fx:id="addBTN" layoutX="33.0" layoutY="663.0" mnemonicParsing="false" onAction="#popUpAdd" onMouseClicked="#popUpAdd" text="Button" visible="false" />
             </children>
         </Pane>
         <Group layoutX="110.0" layoutY="13.0">
@@ -56,7 +55,7 @@
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
-                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="703.0">
+                                                                        <AnchorPane fx:id="baseEdit" minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="703.0">
                                                                             <children>
                                                                                 <AnchorPane fx:id="lowerLevel1Pane" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="500.0">
                                                                                     <children>
@@ -70,6 +69,7 @@
                                                                                         </ImageView>
                                                                                     </children>
                                                                                 </AnchorPane>
+                                                            <Pane layoutX="497.0" layoutY="-58.0" prefHeight="200.0" prefWidth="257.0" />
                                                                             </children>
                                                                         </AnchorPane>
                                                                     </children>
@@ -246,7 +246,7 @@
                 <Button fx:id="Go" layoutX="465.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#findPath" text="Go" />
                 <Pane layoutX="121.0" layoutY="665.0" prefHeight="82.0" prefWidth="600.0">
                     <children>
-                        <Circle fx:id="add" fill="#3bafb4" layoutX="47.0" layoutY="47.0" onMouseClicked="#popUpAdd" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <Circle fx:id="addC" fill="#3bafb4" layoutX="47.0" layoutY="47.0" onMouseClicked="#popUpAdd" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleLoc" fill="#3bafb4" layoutX="155.0" layoutY="47.0" onMouseClicked="#dispLOC" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleEquip" fill="#3bafb4" layoutX="263.0" layoutY="47.0" onMouseClicked="#dispEQP" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleServ" fill="#3bafb4" layoutX="371.0" layoutY="47.0" onMouseClicked="#dispSRV" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
