@@ -1,12 +1,19 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
+import com.google.firebase.cloud.FirestoreClient;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
@@ -24,6 +31,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class loginPageController extends ServiceController {
+  Firestore db = FirestoreClient.getFirestore();
+
   public PasswordField password;
   public TextField username;
   public Text feedback;
@@ -35,6 +44,53 @@ public class loginPageController extends ServiceController {
   @FXML Circle loadingCircle;
   @FXML Group loginGroup;
   @FXML Group passwordGroup;
+  double startTime;
+  double endTime;
+  double elapsedTime;
+
+  public void firebaseUpdate(double time, String userName)
+      throws ExecutionException, InterruptedException {
+    // boolean isFastest = false;
+    UUID UK = UUID.randomUUID();
+    String uKey = UK.toString();
+    DocumentReference docRef = db.collection("loginTimes").document(userName);
+    ApiFuture<QuerySnapshot> future = db.collection("loginTimes").get();
+    List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+    for (QueryDocumentSnapshot document : documents) {
+      ApiFuture<DocumentSnapshot> ds = docRef.get();
+      if (!ds.get().exists() || ds.get() == null) {
+        firebaseInit(time, userName);
+      }
+
+      if (document.getId().equals(userName)) {
+        if (document.getDouble("Time") > elapsedTime) {
+          docRef.collection("loginTimes");
+          HashMap<String, Object> data = new HashMap<>();
+          data.put("Time", time);
+          docRef.set(data);
+        }
+      }
+    }
+  }
+
+  public void firebaseInit(double time, String userName)
+      throws ExecutionException, InterruptedException {
+    DocumentReference docRef = db.collection("loginTimes").document(userName);
+    ApiFuture<QuerySnapshot> future = db.collection("loginTimes").get();
+    List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+    for (QueryDocumentSnapshot document : documents) {
+      if (document.getId().equals(userName)) {
+        if (document.getDouble("Time") < elapsedTime) {
+          return;
+        }
+      }
+    }
+
+    docRef.collection("loginTimes");
+    HashMap<String, Object> data = new HashMap<>();
+    data.put("Time", time);
+    docRef.set(data);
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -83,13 +139,21 @@ public class loginPageController extends ServiceController {
                         Stage appStage =
                             (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                         appStage.setScene(scene);
+                        this.endTime = System.currentTimeMillis();
 
+                        elapsedTime = (endTime - startTime) / 1000;
+
+                        firebaseInit(elapsedTime, username.getText().trim());
                         appStage.show();
                       } catch (IOException e) {
                         e.printStackTrace();
                       } catch (SQLException throwables) {
                         feedback.setText("Wrong Username/Password");
                         loginGroup.setVisible(true);
+                      } catch (ExecutionException e) {
+                        e.printStackTrace();
+                      } catch (InterruptedException e) {
+                        e.printStackTrace();
                       }
                     });
               } catch (InterruptedException ie) {
