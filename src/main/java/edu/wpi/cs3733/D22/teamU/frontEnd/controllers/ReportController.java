@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +45,7 @@ public class ReportController extends ServiceController {
   @FXML Text time;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
+  @FXML Text adminMessage;
 
   ArrayList<Employee> staff;
   ObservableList<String> typeList =
@@ -204,10 +206,31 @@ public class ReportController extends ServiceController {
   }
 
   public void toAllReports(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-    masterThread.stop();
+    if (Udb.admin) {
+      Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml");
+      Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+      appStage.setScene(scene);
+      appStage.show();
+      masterThread.stop();
+    } else {
+      adminMessage.setVisible(true);
+
+      new Thread(
+              () -> {
+                try {
+
+                  Thread.sleep(3500); // milliseconds
+
+                  Platform.runLater(
+                      () -> {
+                        adminMessage.setVisible(false);
+                      });
+
+                } catch (InterruptedException ie) {
+
+                }
+              })
+          .start();
+    }
   }
 }
