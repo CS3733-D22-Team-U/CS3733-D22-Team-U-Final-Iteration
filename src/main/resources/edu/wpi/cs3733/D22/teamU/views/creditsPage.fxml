@@ -42,21 +42,21 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Text layoutX="803.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Credits">
+                  <Text fill="#044e9a" layoutX="917.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Credits">
                       <font>
                           <Font name="System Bold" size="36.0" />
                       </font>
                   </Text>
                   <Pane fx:id="newRequestPane" layoutX="127.0" layoutY="121.0" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                       <children>
-                          <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="255.0" prefHeight="519.0" prefWidth="255.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                          <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="652.0" minWidth="255.0" prefHeight="519.0" prefWidth="652.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                               <children>
-                                  <Text fx:id="requestText1" layoutX="19.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="219.0">
+                                  <Text fx:id="requestText1" layoutX="19.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="219.0">
                                       <font>
                                           <Font name="System Bold" size="28.0" />
                                       </font>
                                   </Text>
-                                  <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Editor:" textAlignment="CENTER" wrappingWidth="254.79998779296875">
+                                  <Text layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z : External Trasportation" textAlignment="CENTER" wrappingWidth="422.1226764728697">
                                       <font>
                                           <Font size="20.0" />
                                       </font>
@@ -66,6 +66,11 @@
                                           <Font size="20.0" />
                                       </font>
                                   </Text>
+                        <Text layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D : Sanitation" textAlignment="CENTER" wrappingWidth="324.8144489338072">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
                               </children>
                           </Pane>
                           <ImageView fitHeight="216.0" fitWidth="226.0" layoutX="706.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
