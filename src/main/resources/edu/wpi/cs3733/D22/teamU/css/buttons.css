@@ -9,6 +9,13 @@
     -fx-text-fill: #044E9A;
 }
 
+.editButton{
+    -fx-background-color:  #B0E5E3;
+    -fx-background-radius: 15;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: #044e9a;
+}
 .hamburgerButton{
     -fx-background-radius : 15;
     -fx-border-radius : 15 px;

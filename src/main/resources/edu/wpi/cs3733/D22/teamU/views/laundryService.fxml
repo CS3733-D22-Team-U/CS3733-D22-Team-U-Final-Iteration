@@ -181,21 +181,75 @@
                         </Pane>
                     </children>
                 </StackPane>
-            <Button fx:id="editButton" layoutX="871.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editClick" prefHeight="43.0" prefWidth="86.0" text="Edit">
+            <Button fx:id="editButton" layoutX="871.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editClick" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Edit">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" text="Submit" />
-            <Button fx:id="removeButton" layoutX="981.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editRemoveReq" prefHeight="43.0" prefWidth="89.0" text="Remove">
+            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit" />
+            <Button fx:id="removeButton" layoutX="981.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editRemoveReq" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Remove">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" text="Close" />
+            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Close" />
 
             </children>
         </Pane>
+      <Pane layoutX="341.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
+         <children>
+            <Circle fill="WHITE" layoutX="49.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="127.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="304.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="378.0" layoutY="45.0" radius="26.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Circle fill="WHITE" layoutX="215.0" layoutY="45.0" radius="40.0" stroke="#044e9a" strokeType="INSIDE" strokeWidth="5.0" />
+            <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/allRequests.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="90.0" layoutY="18.0" mnemonicParsing="false" onAction="#toMap" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/newdash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/mapBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="343.0" layoutY="19.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcons/newgear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="180.0" layoutY="20.0" mnemonicParsing="false" onAction="#toHome" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+               <graphic>
+                  <ImageView fitHeight="49.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/hospitalDashboardBLUE.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
       <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
          <children>
             <Pane layoutY="41.0" prefHeight="678.0" prefWidth="99.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 0 15 15;">
