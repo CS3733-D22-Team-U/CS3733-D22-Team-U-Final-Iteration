@@ -51,12 +51,7 @@
                   </Button>
                </children>
             </HBox>
-            <Text fx:id="time" layoutX="929.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
-            <Text layoutX="845.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Lab Request">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Text>
+            <Text fx:id="time" layoutX="957.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
                   <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
