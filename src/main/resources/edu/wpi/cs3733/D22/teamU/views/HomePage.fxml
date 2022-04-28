@@ -50,7 +50,7 @@
                         <Font size="36.0" />
                      </font>
                   </Text>
-                  <Text fx:id="name" fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                  <Text fx:id="name" fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="118.6656494140625">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -304,6 +304,61 @@
             </ButtonBar>
             <Button layoutX="60.0" layoutY="692.0" mnemonicParsing="false" onAction="#toLogOut" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Log Out" textFill="WHITE" />
             <Button layoutX="165.0" layoutY="692.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Exit" textFill="WHITE" />
+            <Text fill="#044e9a" layoutX="313.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="401.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="458.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="540.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="593.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; Floral">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="675.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="735.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="817.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religious">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="881.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="960.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="1026.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>
