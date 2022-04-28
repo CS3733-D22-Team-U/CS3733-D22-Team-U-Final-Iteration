@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -202,7 +198,7 @@
                         </Pane>
                     </children>
                 </StackPane>
-                <Button layoutX="344.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About" textFill="#044e9a">
+                <Button layoutX="212.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About" textFill="#044e9a">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -210,7 +206,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-                <Button layoutX="505.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                <Button layoutX="376.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -218,15 +214,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-                <Button layoutX="666.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                    <effect>
-                        <DropShadow />
-                    </effect>
-                </Button>
-            <Button layoutX="124.0" layoutY="700.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
+            <Button layoutX="768.0" layoutY="700.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -235,6 +223,14 @@
 
                </effect>
             </Button>
+                <Button layoutX="540.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
             <Text fill="#044e9a" layoutX="116.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;The Brigham's and Women's Hospital malps and data used in this application are copyrighted and provided for the sole use of educational purposes&quot;">
                <font>
                   <Font name="System Bold" size="14.0" />

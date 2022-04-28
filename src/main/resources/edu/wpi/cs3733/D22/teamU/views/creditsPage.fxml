@@ -95,6 +95,14 @@
                           </ImageView>
                       </children>
                   </Pane>
+            <Button layoutX="785.0" layoutY="701.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
 
             </children>
         </Pane>
