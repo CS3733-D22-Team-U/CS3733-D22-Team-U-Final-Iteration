@@ -164,6 +164,20 @@ public class ReportController extends ServiceController {
     }
     employees.getSelectionModel().clearSelection();
     typeOfReport.getSelectionModel().clearSelection();
+    reportDescrip.setText("");
+    reportBarChart.getData().clear();
+    XYChart.Series data = new XYChart.Series();
+
+    for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
+      if (employee.getReportList().size() >= 1) {
+        data.getData()
+            .add(
+                new XYChart.Data<>(
+                    employee.getFirstName() + " " + employee.getLastName(),
+                    employee.getReportList().size()));
+      }
+    }
+    reportBarChart.getData().add(data);
   }
 
   @Override
