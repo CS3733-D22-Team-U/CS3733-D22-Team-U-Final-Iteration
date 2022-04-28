@@ -51,14 +51,14 @@
                       <children>
                           <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="652.0" minWidth="255.0" prefHeight="519.0" prefWidth="652.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                               <children>
-                                  <Text fx:id="requestText1" layoutX="19.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="219.0">
+                                  <Text fx:id="requestText1" fill="#044e9a" layoutX="243.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="182.0">
                                       <font>
                                           <Font name="System Bold" size="28.0" />
                                       </font>
                                   </Text>
-                                  <Text layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z : External Trasportation" textAlignment="CENTER" wrappingWidth="422.1226764728697">
+                                  <Text fill="#044e9a" layoutX="-33.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z : External Trasportation" textAlignment="CENTER" wrappingWidth="422.1226764728697">
                                       <font>
-                                          <Font size="20.0" />
+                                          <Font name="System Bold" size="20.0" />
                                       </font>
                                   </Text>
                                   <Text layoutX="9.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="238.0">
@@ -66,7 +66,22 @@
                                           <Font size="20.0" />
                                       </font>
                                   </Text>
-                        <Text layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D : Sanitation" textAlignment="CENTER" wrappingWidth="324.8144489338072">
+                        <Text fill="#044e9a" layoutX="-28.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D : Sanitation" textAlignment="CENTER" wrappingWidth="324.8144489338072">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="50.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Through this API, our application would allow for staff to transport patients through helicopter, ambulance, patient car, or plane." wrappingWidth="601.69091796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are using Team D’s Sanitation Request Version 2.0. With using this API, our application would allow for staff to request sanitation services." wrappingWidth="601.69091796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="200.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you Team Z and Team D!">
                            <font>
                               <Font size="20.0" />
                            </font>
