@@ -49,6 +49,7 @@ import org.assertj.core.util.diff.Delta;
 public class MapController extends ServiceController {
 
   /*Edit Remove Popup*/
+
   public ComboBox<Location> To;
   public ComboBox<Location> From;
   public TextField popupNodeID;
