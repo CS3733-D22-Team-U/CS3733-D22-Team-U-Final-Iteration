@@ -101,6 +101,7 @@ public class LoginTimeController extends ServiceController {
         case "staff":
           drStaffTime.setText(document.getDouble("Time").toString() + " seconds");
           break;
+
       }
     }
   }
