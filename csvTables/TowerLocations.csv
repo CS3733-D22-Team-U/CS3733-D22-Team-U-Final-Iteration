@@ -49,13 +49,13 @@ uPATI05B32,240,289,5,Tower,PATI,Patient Room Pod B,PRB
 FHALL01801,506,414,1,Tower,HALL,Tower Hallway 10,Hallway F01801
 uPATI05B37,267,159,5,Tower,PATI,Patient Room Pod B,PRB
 uPATI05C3,336,551,5,Tower,PATI,Patient Room Pod C,PRC
-uDIRT00103,308,390,3,Tower,DIRT ,Dirty Equipment Storage,DES
+uDIRT00103,308,389,3,Tower,DIRT ,Dirty Equipment Storage,DES
 uPATI05B38,300,165,5,Tower,PATI,Patient Room Pod B,PRB
 uPATI05B35,209,197,5,Tower,PATI,Patient Room Pod B,PRB
 uPATI05C56,237,481,5,Tower,PATI,Patient Room Pod C,PRC
 uPATI05B36,234,176,5,Tower,PATI,Patient Room Pod B,PRB
 uPATI05C57,287,487,5,Tower,PATI,Patient Room Pod C,PRC
-HHALL00702,488,623,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
+HHALL00702,487,623,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
 HHALL00703,483,358,3,Tower,HALL,Hallway Connector 7 Floor 3,Hallway H00703
 uHALL02003,448,491,3,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
 uPATI05C51,263,608,5,Tower,PATI,Patient Room Pod C,PRC
@@ -88,7 +88,7 @@ WELEV00LL2,533,382,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 CREST002L1,813,741,L1,Tower,REST,Restroom M Elevator Floor L1,Restroom C002L1
 FSTAI00201,421,260,1,Tower,STAI,Tower Stairway 1,Tower Stairs 1
 HHALL01403,483,488,3,Tower,HALL,Hallway Connector 14 Floor 3,Hallway H01403
-uPATI03203,240,289,3,Tower,PATI,Patient Room Pod B,PRB
+uPATI03203,240,288,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05103,287,487,3,Tower,PATI,Patient Room Pod C,PRC
 FREST00101,839,434,1,Tower,REST,Bathroom 75 Lobby,Bathroom Lobby
 FDEPT00401,542,604,1,Tower,DEPT,Sharf Admitting Center,Sharf Center
@@ -146,14 +146,14 @@ FDEPT00501,876,758,1,Tower,DEPT,Emergency Department,Emergency
 FHALL01201,296,388,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
 FHALL03101,774,434,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
 CHALL005L2,493,737,L2,Tower,HALL,Hallway 5 Floor L2,Hallway C005L2
-CHALL005L1,498,741,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
+CHALL005L1,498,740,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
 FDEPT00101,365,283,1,Tower,DEPT,Center for International Medicine,CIM
 HSTAI00202,443,623,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
 uSTOR00101,208,389,1,Tower,STOR,West Plaza,West Plaza
 HHALL00902,488,738,2,Tower,HALL,Hallway Connector 9 Floor 2,Hallway H00902
 HDEPT00203,438,288,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
 HHALL00903,483,278,3,Tower,HALL,Hallway Connector 9 Floor 3,Hallway H00903
-CLABS001L1,713,741,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
+CLABS001L1,713,740,L1,Tower,LABS,Outpatient Fluoroscopy Floor L1,Lab C001L1
 HBATH00203,498,443,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 uPATI06003,336,551,3,Tower,PATI,Patient Room Pod C,PRC
 FRETL00101,721,302,1,Tower,RETL,Lobby Vending Machine,VM Lobby
@@ -172,7 +172,7 @@ FHALL02101,517,604,1,Tower,HALL,Tower Hallway Entrance,Tower Entrance 2
 FHALL00601,617,388,1,Tower,HALL,Tower Lobby Entrance 1,Tower Entrance
 FHALL02901,448,738,1,Tower,HALL,75 Lobby,75 Lobby
 uPATI03403,203,228,3,Tower,PATI,Patient Room Pod B,PRB
-uPATI05703,263,608,3,Tower,PATI,Patient Room Pod C,PRC
+uPATI05703,263,607,3,Tower,PATI,Patient Room Pod C,PRC
 uPATI03803,300,165,3,Tower,PATI,Patient Room Pod B,PRB
 uHALL01003,448,275,3,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
 FSERV00201,353,487,1,Tower,SERV,Tower Medical Cashier,Tower Cashier
@@ -182,7 +182,7 @@ uPATI05303,207,518,3,Tower,PATI,Patient Room Pod C,PRC
 FDEPT00201,358,578,1,Tower,DEPT,Bretholtz Center for Patients and Families,Bretholtz WR
 FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
-WELEV00L01,558,388,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
+WELEV00L01,558,387,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
 WELEV00L02,553,383,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
 CHALL006L1,860,741,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
 FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
