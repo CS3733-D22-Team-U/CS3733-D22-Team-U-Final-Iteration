@@ -61,16 +61,16 @@
             </Button>
             <Pane fx:id="turtlePond" layoutX="595.0" layoutY="299.0" prefHeight="253.0" prefWidth="262.0" style="-fx-background-color: #B0E5E3;">
                <children>
-                  <Circle fx:id="apple" fill="#ff1f1f" layoutX="178.0" layoutY="56.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-                  <Pane fx:id="turtlePane" prefHeight="93.0" prefWidth="84.0">
-                     <children>
-                        <ImageView fx:id="turtle" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/dashboardIcons/noun-turtle-1630789.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
+                  <ImageView fx:id="appleImage" fitHeight="25.0" fitWidth="50.0" layoutX="171.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcons/apple.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="turtle" fitHeight="60.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/dashboardIcons/noun-turtle-1630789.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Button layoutX="350.0" layoutY="461.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Employees" textFill="WHITE">

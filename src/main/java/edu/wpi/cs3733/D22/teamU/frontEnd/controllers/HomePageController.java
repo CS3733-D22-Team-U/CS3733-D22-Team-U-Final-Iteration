@@ -10,23 +10,22 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class HomePageController extends ServiceController {
@@ -35,7 +34,6 @@ public class HomePageController extends ServiceController {
   public Button logOutButton;
   public Text headerText;
   public Pane turtlePond;
-  public ImageView turtle;
   @FXML Button navButton;
   @FXML ImageView navPaneArrow;
 
@@ -57,15 +55,12 @@ public class HomePageController extends ServiceController {
   @FXML Button allRequestsButton;
   @FXML Text name;
 
-  @FXML Pane turtlePane;
-  @FXML Circle apple;
+  @FXML ImageView turtle;
+  @FXML ImageView appleImage;
   @FXML AnchorPane turtAnchor;
-  @FXML Button turtButton;
-  @FXML Text message;
   @FXML DatePicker datePicker;
   @FXML Text timeOfDay;
   @FXML Pane datePickerPane;
-  String userFirstName;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -79,8 +74,6 @@ public class HomePageController extends ServiceController {
     Node popupContent = datePickerSkin.getPopupContent();
     datePicker.setVisible(false);
     datePickerPane.getChildren().add(popupContent);
-    handleDateTime();
-
     try {
       listofEmployees();
     } catch (SQLException e) {
@@ -88,96 +81,83 @@ public class HomePageController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    this.anchor
-        .heightProperty()
-        .addListener(
-            (obs, oldVal, newVal) -> {
-              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-              Math.min(yScale, xScale);
-              Scale scale = new Scale(xScale, yScale);
-              scale.setPivotX(0.0D);
-              scale.setPivotY(0.0D);
-              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-            });
-    this.anchor
-        .widthProperty()
-        .addListener(
-            (obs, oldVal, newVal) -> {
-              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-              Math.min(yScale, xScale);
-              Scale scale = new Scale(xScale, yScale);
-              scale.setPivotX(0.0D);
-              scale.setPivotY(0.0D);
-              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-            });
-
-    // userName.setText("Dr." + "____");
-
-    // handleNavButtons();
-    // userName.setText("Dr." + "____");
-    // handleNavButtons();
+    /*
+      this.anchor
+          .heightProperty()
+          .addListener(
+              (obs, oldVal, newVal) -> {
+                double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+                double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+                Math.min(yScale, xScale);
+                Scale scale = new Scale(xScale, yScale);
+                scale.setPivotX(0.0D);
+                scale.setPivotY(0.0D);
+                this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+              });
+      this.anchor
+          .widthProperty()
+          .addListener(
+              (obs, oldVal, newVal) -> {
+                double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
+                double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
+                Math.min(yScale, xScale);
+                Scale scale = new Scale(xScale, yScale);
+                scale.setPivotX(0.0D);
+                scale.setPivotY(0.0D);
+                this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
+              });
+    */
     handleDateTime();
-    // handleTurtle();
-    // playTurtle();
+    playTurtle();
   }
 
-  /*
-   private void handleTurtle() {
-     TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
-     openNav.setToY(-415);
-     TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
-     turtButton.setOnAction(
-         (ActionEvent evt) -> {
-           if (turtAnchor.getTranslateY() != -415) {
-             openNav.play();
-           } else {
-             closeNav.setToY(0);
-             closeNav.play();
-           }
-         });
-   }
+  public void playTurtle() {
+    anchor.setOnKeyPressed(
+        e -> {
+          double nextX;
+          double nextY;
 
-   public void playTurtle() {
-     anchor.setOnKeyPressed(
-         e -> {
-           double nextX;
-           double nextY;
+          if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
+            nextX = turtle.getLayoutX() + 10;
+            if (nextX >= 0 && nextX <= 363) {
+              turtle.setLayoutX(nextX);
+              turtle.setRotate(90);
+            }
+          }
 
-           if (e.getCode() == KeyCode.D) {
-             nextX = turtlePane.getLayoutX() + 10;
-             if (nextX >= 0 && nextX <= 363) {
-               turtlePane.setLayoutX(nextX);
-               turtlePane.setRotate(90);
-             }
-           }
+          if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.LEFT) {
+            nextX = turtle.getLayoutX() - 10;
+            if (nextX >= 0 && nextX <= 363) {
+              turtle.setLayoutX(nextX);
+              turtle.setRotate(-90);
+            }
+          }
+          if (e.getCode() == KeyCode.W || e.getCode() == KeyCode.UP) {
+            nextY = turtle.getLayoutY() - 10;
+            if (nextY >= 0 && nextY <= 271) {
+              turtle.setLayoutY(nextY);
+              turtle.setRotate(0);
+            }
+          }
+          if (e.getCode() == KeyCode.S || e.getCode() == KeyCode.DOWN) {
+            nextY = turtle.getLayoutY() + 10;
+            if (nextY >= 0 && nextY <= 271) {
+              turtle.setLayoutY(nextY);
+              turtle.setRotate(180);
+            }
+          }
+        });
 
-           if (e.getCode() == KeyCode.A) {
-             nextX = turtlePane.getLayoutX() - 10;
-             if (nextX >= 0 && nextX <= 363) {
-               turtlePane.setLayoutX(nextX);
-               turtlePane.setRotate(-90);
-             }
-           }
-           if (e.getCode() == KeyCode.W) {
-             nextY = turtlePane.getLayoutY() - 10;
-             if (nextY >= 0 && nextY <= 271) {
-               turtlePane.setLayoutY(nextY);
-               turtlePane.setRotate(0);
-             }
-           }
-           if (e.getCode() == KeyCode.S) {
-             nextY = turtlePane.getLayoutY() + 10;
-             if (nextY >= 0 && nextY <= 271) {
-               turtlePane.setLayoutY(nextY);
-               turtlePane.setRotate(180);
-             }
-           }
-         });
-   }
-
-  */
+    turtlePond.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent event) {
+            appleImage.setLayoutX(event.getX());
+            appleImage.setLayoutY(event.getY());
+          }
+        });
+   
+  }
 
   private void handleDateTime() {
     Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
@@ -216,34 +196,6 @@ public class HomePageController extends ServiceController {
     timeThread.start();
     masterThread = timeThread;
   }
-
-  /*
-  private void handleNavButtons() {
-    for (Node node : topRow.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-    for (Node node : bottomRow.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-
-    for (Node node : bottomRow1.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-  }
-
-   */
 
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
