@@ -81,8 +81,6 @@ public class HomePageController extends ServiceController {
     datePickerPane.getChildren().add(popupContent);
     handleDateTime();
 
-
-
     try {
       listofEmployees();
     } catch (SQLException e) {
@@ -195,7 +193,7 @@ public class HomePageController extends ServiceController {
 
     Employee user;
 
-    try{
+    try {
       user = Udb.getInstance().getUser();
     } catch (SQLException e) {
       throw new RuntimeException(e);
