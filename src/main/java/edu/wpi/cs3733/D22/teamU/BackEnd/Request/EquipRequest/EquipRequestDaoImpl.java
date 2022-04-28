@@ -81,7 +81,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
-          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -129,7 +128,6 @@ public class EquipRequestDaoImpl implements DataDao<EquipRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
-          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
