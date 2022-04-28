@@ -110,6 +110,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip text="About Page" />
+               </tooltip>
             </Button>
             <Button layoutX="984.0" layoutY="173.0" mnemonicParsing="false" onAction="#toSettingsPage" style="-fx-background-color: transparent;">
                <graphic>
@@ -119,6 +122,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip text="Settings" />
+               </tooltip>
             </Button>
             <Button layoutX="659.0" layoutY="664.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="82.0" prefWidth="71.0" style="-fx-background-color: transparent;">
                <graphic>

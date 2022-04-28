@@ -160,6 +160,7 @@ public class MapController extends ServiceController {
 
     toLocation = new ArrayList<>();
     fromLocation = new ArrayList<>();
+
     try {
       for (Location l : Udb.getInstance().locationImpl.list()) {
         fromLocation.add(l);
@@ -1028,6 +1029,9 @@ public class MapController extends ServiceController {
         if (compare.equals("STAI")) {
           locationNode.setVisible(false);
         }
+        if (compare.equals("STOR")) {
+          locationNode.setVisible(false);
+        }
       }
       LOCicon = false;
     } else {
@@ -1061,6 +1065,9 @@ public class MapController extends ServiceController {
           locationNode.setVisible(true);
         }
         if (compare.equals("STAI")) {
+          locationNode.setVisible(true);
+        }
+        if (compare.equals("STOR")) {
           locationNode.setVisible(true);
         }
       }

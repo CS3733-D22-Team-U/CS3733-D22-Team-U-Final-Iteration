@@ -37,6 +37,7 @@
                         </ScrollPane>
                     </children>
                 </Pane>
+                <Button fx:id="addBTN" layoutX="33.0" layoutY="663.0" mnemonicParsing="false" onAction="#popUpAdd" onMouseClicked="#popUpAdd" text="Button" visible="false" />
             </children>
         </Pane>
         <Group layoutX="110.0" layoutY="13.0">
@@ -69,7 +70,6 @@
                                                                                         </ImageView>
                                                                                     </children>
                                                                                 </AnchorPane>
-                                                            <Pane layoutX="497.0" layoutY="-58.0" prefHeight="200.0" prefWidth="257.0" />
                                                                             </children>
                                                                         </AnchorPane>
                                                                     </children>
@@ -235,24 +235,58 @@
                                 <Pane prefHeight="41.0" prefWidth="370.0" />
                             </children>
                         </Group>
-                        <ComboBox fx:id="To" layoutX="-19.0" layoutY="103.0" prefHeight="30.0" prefWidth="150.0" />
-                        <ComboBox fx:id="From" layoutX="151.0" layoutY="104.0" prefWidth="150.0" />
+                        <ComboBox fx:id="To" layoutX="-6.0" layoutY="103.0" prefHeight="19.0" prefWidth="145.0" style="-fx-background-color: #84C7C4;" />
+                        <ComboBox fx:id="From" layoutX="151.0" layoutY="104.0" prefWidth="150.0" style="-fx-background-color: #84C7C4;" />
                     </children>
                 </Pane>
             </children>
         </Group>
         <Group>
             <children>
-                <Button fx:id="Go" layoutX="465.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#findPath" text="Go" />
-                <Pane layoutX="121.0" layoutY="665.0" prefHeight="82.0" prefWidth="600.0">
+                <Button fx:id="Go" layoutX="465.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#findPath" prefHeight="25.0" prefWidth="56.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Go" textFill="WHITE" />
+                <Pane layoutX="127.0" layoutY="664.0" prefHeight="82.0" prefWidth="600.0">
                     <children>
                         <Circle fx:id="addC" fill="#3bafb4" layoutX="47.0" layoutY="47.0" onMouseClicked="#popUpAdd" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleLoc" fill="#3bafb4" layoutX="155.0" layoutY="47.0" onMouseClicked="#dispLOC" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleEquip" fill="#3bafb4" layoutX="263.0" layoutY="47.0" onMouseClicked="#dispEQP" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleServ" fill="#3bafb4" layoutX="371.0" layoutY="47.0" onMouseClicked="#dispSRV" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                         <Circle fx:id="toggleAll" fill="#3bafb4" layoutX="479.0" layoutY="47.0" onMouseClicked="#dispALL" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Text fill="WHITE" layoutX="459.0" layoutY="54.0" onMouseClicked="#dispALL" strokeType="OUTSIDE" strokeWidth="0.0" text="ALL">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="141.0" layoutY="27.0" onMouseClicked="#dispLOC" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mapIcons/locFilter.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="72.0" layoutX="237.0" layoutY="24.0" onMouseClicked="#dispEQP" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mapIcons/generalEquip.png" />
+                     </image></ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="351.0" layoutY="21.0" onMouseClicked="#dispSRV" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mapIcons/generalServ.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="41.0" fitWidth="48.0" layoutX="24.0" layoutY="25.0" onMouseClicked="#popUpAdd" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mapIcons/plusIcon.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </Pane>
+            <Text fill="#044e9a" layoutX="129.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#044e9a" layoutX="290.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Text>
             </children>
         </Group>
         <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">

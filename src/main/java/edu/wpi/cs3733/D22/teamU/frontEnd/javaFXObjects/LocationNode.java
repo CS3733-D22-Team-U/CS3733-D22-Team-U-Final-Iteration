@@ -1,10 +1,18 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DraggableMaker;
 import java.awt.*;
@@ -100,6 +108,14 @@ public class LocationNode extends Group {
     boolean equipCheck = true;
     boolean labCheck = true;
     boolean medicineCheck = true;
+    boolean mealCheck = true;
+    boolean giftCheck = true;
+    boolean laundryCheck = true;
+    boolean maintenanceCheck = true;
+    boolean religionCheck = true;
+    boolean translatorCheck = true;
+    boolean compServCheck = true;
+    boolean securityCheck = true;
     for (Request request : location.getRequests()) {
       if (request instanceof EquipRequest && equipCheck) {
         dupes++;
@@ -117,6 +133,60 @@ public class LocationNode extends Group {
         dupes++;
         medicineCheck = false;
         addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof MedicineRequest && medicineCheck) {
+        dupes++;
+        medicineCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof MealRequest && mealCheck) {
+        dupes++;
+        mealCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof GiftRequest && giftCheck) {
+        dupes++;
+        giftCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof LaundryRequest && laundryCheck) {
+        dupes++;
+        laundryCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof MaintenanceRequest && maintenanceCheck) {
+        dupes++;
+        maintenanceCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof ReligiousRequest && religionCheck) {
+        dupes++;
+        religionCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof TranslatorRequest && translatorCheck) {
+        dupes++;
+        translatorCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof SecurityRequest && securityCheck) {
+        dupes++;
+        securityCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof CompServRequest && compServCheck) {
+        dupes++;
+        compServCheck = false;
+        // addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
         continue;
       }
       if (dupes > 1) {
