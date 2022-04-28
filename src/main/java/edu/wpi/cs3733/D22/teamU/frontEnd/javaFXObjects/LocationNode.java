@@ -192,20 +192,20 @@ public class LocationNode extends Group {
         addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/stor.png");
         break;
       case "DIRT":
-//        for (int i = 0; i < location.getEquipment().size(); i++) {
-//          String currE = location.getEquipment().get(i).getName().trim();
-//          if (currE.equals("Recliners")) {
-//            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/recliner.png");
-//          }
-//          if (currE.equals("Beds")) {
-//            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/beds.png");
-//          }
-//          if (currE.equals("Infusion Pumps")) {
-//            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/infoPump.png");
-//          } else {
-//            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dirt.png");
-//          }
-//        }
+        //        for (int i = 0; i < location.getEquipment().size(); i++) {
+        //          String currE = location.getEquipment().get(i).getName().trim();
+        //          if (currE.equals("Recliners")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/recliner.png");
+        //          }
+        //          if (currE.equals("Beds")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/beds.png");
+        //          }
+        //          if (currE.equals("Infusion Pumps")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/infoPump.png");
+        //          } else {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dirt.png");
+        //          }
+        //        }
         addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dirt.png");
         break;
       case "HALL":

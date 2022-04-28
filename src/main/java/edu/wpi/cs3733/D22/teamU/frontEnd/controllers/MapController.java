@@ -519,6 +519,14 @@ public class MapController extends ServiceController {
               addButton = (Button) n2;
               // addButton.setDisable(!Udb.admin);
               addButton.setOnMouseClicked(this::popupAddLocation);
+              addBuildingCombo.getSelectionModel().clearSelection();
+              addNodeTypeCombo.getSelectionModel().clearSelection();
+              addFloorCombo.getSelectionModel().clearSelection();
+              addNodeID.clear();
+              addXcoord.clear();
+              addYcoord.clear();
+              addLongName.clear();
+              addShortName.clear();
             }
           }
         }
