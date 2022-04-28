@@ -470,6 +470,13 @@ public class MapController extends ServiceController {
 
   public void popUpAdd(MouseEvent mouseEvent) {
     Pane pane = (Pane) masterPane;
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
+    if (pane.getChildren().contains(popupEditPane)) {
+      pane.getChildren().remove(popupEditPane);
+    }
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
       addC.setFill(Color.rgb(59, 175, 180));
@@ -589,6 +596,13 @@ public class MapController extends ServiceController {
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
+    if (masterPane.getChildren().contains(popupAddPane)) {
+      masterPane.getChildren().remove(popupAddPane);
+    }
     request = null;
     equipment = null;
     equipTable.getItems().clear();
@@ -807,6 +821,10 @@ public class MapController extends ServiceController {
   }
 
   public void editEquipFunc(MouseEvent mouseEvent) {
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
     try {
       if (equipment != null) {
         Equipment newEquip =
@@ -880,6 +898,10 @@ public class MapController extends ServiceController {
       this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
       this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
       this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
+      if (masterPane.getChildren().contains(dc)) {
+        masterPane.getChildren().remove(dc);
+        dragCircle dc = null;
+      }
       dc =
           new dragCircle(
               circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
