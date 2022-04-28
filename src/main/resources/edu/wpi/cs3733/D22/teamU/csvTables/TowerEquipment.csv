@@ -1,4 +1,6 @@
 Name,Amount,In Use,Available,Location
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 First Aid Kit,10000,9000,1000,WELEV00LL2
 Syringe,100,20,80,uSTOR00101
 Body Bag,19,2,17,FHALL02301
@@ -31,3 +33,18 @@ Beds,12,10,2,uPATI05B32
 Infusion Pumps,4,2,2,uPATI05B33
 Recliners,2,0,2,uPATI05B35
 Recliners,2,1,1,uPATI05B36
+Beds,15,12,3,uPATI06003
+Recliners,5,2,3,uPATI06003
+Infusion Pumps,4,2,2,uPATI06003
+Beds,9,6,3,HHALL00702
+Recliners,10,5,5,HHALL00702
+Infusion Pumps,8,6,2,HHALL00702
+Beds,1,0,1,WELEV00L01
+Recliners,5,2,3,WELEV00L01
+Infusion Pumps,9,6,3,WELEV00L01
+Beds,12,0,12,CHALL008L2
+Recliners,7,4,3,CHALL008L2
+Infusion Pumps,7,6,1,CHALL008L2
+Beds,17,5,12,CLABS001L1
+Recliners,8,7,1,CLABS001L1
+Infusion Pumps,4,2,2,CLABS001L1

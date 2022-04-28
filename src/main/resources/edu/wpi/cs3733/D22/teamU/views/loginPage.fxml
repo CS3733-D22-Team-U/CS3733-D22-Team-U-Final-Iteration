@@ -23,241 +23,241 @@
 
 
 <GridPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.loginPageController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-   </rowConstraints>
-   <children>
-      <AnchorPane fx:id="mainPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #c9c9c9;">
-      <children>
-            <ImageView fx:id="backgroundImage" fitHeight="766.0" fitWidth="1107.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.772705078125">
-               <image>
-                  <Image url="@../images/background.png" />
-               </image>
-            </ImageView>
-            <StackPane layoutX="-18.0" layoutY="401.0" prefHeight="146.0" prefWidth="1125.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <Circle fx:id="loadingCircle" fill="#1f93ff00" radius="100.0" strokeType="INSIDE" strokeWidth="15.0">
-                     <stroke>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.13736598193645477" green="0.4696129858493805" blue="0.7236841917037964" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.47845321325591506">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.2916666567325592" green="0.8289473652839661" blue="0.6319444179534912" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </stroke>
-                  </Circle>
-               </children>
-            </StackPane>
-            <StackPane layoutX="-18.0" layoutY="-48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                <Pane prefHeight="310.0" prefWidth="1137.0" style="-fx-background-color: #044e9a; -fx-background-radius: 36;">
-                    <effect>
-                        <DropShadow />
-                    </effect>
-                </Pane>
-               </children>
-            </StackPane>
-            <StackPane layoutX="180.0" layoutY="45.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="196.79999999999995">
-               <children>
-                  <Group>
-                     <children>
-                        <ImageView fitHeight="95.0" fitWidth="77.0" layoutY="-2.7060546875" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../icons/hospitalIcon.png" />
-                            </image>
-                        </ImageView>
-                        <Text fill="WHITE" layoutX="77.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham" wrappingWidth="645.65234375">
-                            <font>
-                                <Font name="System Bold" size="60.0" />
-                            </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the">
-                           <font>
-                              <Font name="System Bold" size="29.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="233.0" layoutY="121.1298828125" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Platform">
-                           <font>
-                              <Font name="System Bold" size="40.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Group>
-               </children>
-            </StackPane>
-            <StackPane layoutX="355.0" layoutY="314.0" AnchorPane.leftAnchor="355.0" AnchorPane.rightAnchor="373.79999999999995">
-               <children>
-                  <Group fx:id="loginGroup">
-                     <children>
-                        <Text fill="#044e9a" layoutX="-33.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                        </Text>
-                        <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                           <children>
-                              <PasswordField fx:id="password" layoutX="80.0" layoutY="87.0" prefHeight="46.0" prefWidth="209.0" promptText="Password" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;" />
-                              <TextField fx:id="username" layoutX="80.0" layoutY="23.0" prefHeight="46.0" prefWidth="209.0" promptText="Username" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-                              <Button layoutX="143.0" layoutY="175.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color opacity="0.0" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect>
-                              </Button>
-                              <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="RED" layoutX="52.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed. Account locked for 5 minutes." visible="false">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Text>
-                              <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="41.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/userLogo.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="40.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/keyLogo.png" />
-                                 </image>
-                              </ImageView>
-                              <Button layoutX="110.0" layoutY="133.0" mnemonicParsing="false" onAction="#goToChangePassword" prefHeight="31.0" prefWidth="133.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #FFFFFF;" text="Change Password" textFill="#044e9a" underline="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <AnchorPane fx:id="mainPane" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: #c9c9c9;">
+            <children>
+                <ImageView fx:id="backgroundImage" fitHeight="766.0" fitWidth="1107.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.772705078125">
+                    <image>
+                        <Image url="@../images/background.png" />
+                    </image>
+                </ImageView>
+                <StackPane layoutX="-18.0" layoutY="401.0" prefHeight="146.0" prefWidth="1125.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Circle fx:id="loadingCircle" fill="#1f93ff00" radius="100.0" strokeType="INSIDE" strokeWidth="15.0">
+                            <stroke>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.13736598193645477" green="0.4696129858493805" blue="0.7236841917037964" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="0.47845321325591506">
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="0.2916666567325592" green="0.8289473652839661" blue="0.6319444179534912" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </stroke>
+                        </Circle>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="-18.0" layoutY="-48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Pane prefHeight="310.0" prefWidth="1137.0" style="-fx-background-color: #044e9a; -fx-background-radius: 36;">
+                            <effect>
+                                <DropShadow />
+                            </effect>
                         </Pane>
-                      <Button alignment="CENTER" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Exit" textFill="#044e9a">
-                          <font>
-                              <Font name="System Bold" size="26.0" />
-                          </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                      </Button>
-                        <Text fx:id="feedback" fill="#940c00" layoutX="-12.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0">
-                           <font>
-                              <Font name="System Bold" size="21.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Group>
-                  <Group fx:id="passwordGroup" visible="false">
-                     <children>
-                        <Text fill="#044e9a" layoutX="-15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Change Password" textAlignment="CENTER" wrappingWidth="273.24609375">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Text>
-                        <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;" visible="false">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                           <children>
-                              <TextField fx:id="activeUsername" layoutX="80.0" layoutY="14.0" prefHeight="46.0" prefWidth="209.0" promptText="Username" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-                              <Button fx:id="changeButton" layoutX="143.0" layoutY="196.0" mnemonicParsing="false" onAction="#callChangePasswordFunction" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Change" textFill="WHITE">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </Button>
-                              <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="RED" layoutX="52.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed. Account locked for 5 minutes." visible="false">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Text>
-                              <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="42.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/userLogo.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="39.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/keyLogo.png" />
-                                 </image>
-                              </ImageView>
-                              <TextField fx:id="newPassword" layoutX="80.0" layoutY="78.0" prefHeight="46.0" prefWidth="209.0" promptText="New Password" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-                              <TextField fx:id="activeID" layoutX="80.0" layoutY="139.0" prefHeight="46.0" prefWidth="209.0" promptText="ID" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-                           </children>
-                        </Pane>
-                        <Button fx:id="backButton" alignment="CENTER" layoutX="23.0" layoutY="314.0" mnemonicParsing="false" onAction="#goBackToLogIn" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Back" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="26.0" />
-                           </font>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Text fx:id="feedback1" fill="#991505" layoutX="-12.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0">
-                           <font>
-                              <Font name="System Bold" size="21.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Group>
-               </children>
-            </StackPane>
-            <ImageView fitHeight="161.0" fitWidth="90.0" layoutX="983.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;" AnchorPane.bottomAnchor="10.262771606445312" AnchorPane.rightAnchor="34.0">
-               <image>
-                  <Image url="@../icons/unicornLogo.png" />
-               </image>
-            </ImageView>
-      </children>
-      </AnchorPane>
-   </children>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="180.0" layoutY="45.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="196.79999999999995">
+                    <children>
+                        <Group>
+                            <children>
+                                <ImageView fitHeight="95.0" fitWidth="77.0" layoutY="-2.7060546875" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/hospitalIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Text fill="WHITE" layoutX="77.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass General Brigham" wrappingWidth="645.65234375">
+                                    <font>
+                                        <Font name="System Bold" size="60.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the">
+                                    <font>
+                                        <Font name="System Bold" size="29.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="233.0" layoutY="121.1298828125" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Platform">
+                                    <font>
+                                        <Font name="System Bold" size="40.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Group>
+                    </children>
+                </StackPane>
+                <StackPane layoutX="355.0" layoutY="314.0" AnchorPane.leftAnchor="355.0" AnchorPane.rightAnchor="373.79999999999995">
+                    <children>
+                        <Group fx:id="loginGroup">
+                            <children>
+                                <Text fill="#044e9a" layoutX="-33.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Log in to Continue">
+                                    <font>
+                                        <Font name="System Bold" size="27.0" />
+                                    </font>
+                                </Text>
+                                <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <children>
+                                        <PasswordField fx:id="password" layoutX="80.0" layoutY="87.0" prefHeight="46.0" prefWidth="209.0" promptText="Password" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;" />
+                                        <TextField fx:id="username" layoutX="80.0" layoutY="23.0" prefHeight="46.0" prefWidth="209.0" promptText="Username" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                                        <Button layoutX="143.0" layoutY="175.0" mnemonicParsing="false" onAction="#toHomeExtraSteps" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Log In" textFill="WHITE">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                            <effect>
+                                                <DropShadow>
+                                                    <color>
+                                                        <Color opacity="0.0" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </Button>
+                                        <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="RED" layoutX="52.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed. Account locked for 5 minutes." visible="false">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Text>
+                                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="41.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/userLogo.png" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="40.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/keyLogo.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button layoutX="110.0" layoutY="133.0" mnemonicParsing="false" onAction="#goToChangePassword" prefHeight="31.0" prefWidth="133.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #FFFFFF;" text="Change Password" textFill="#044e9a" underline="true">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </Pane>
+                                <Button alignment="CENTER" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Exit" textFill="#044e9a">
+                                    <font>
+                                        <Font name="System Bold" size="26.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Text fx:id="feedback" fill="#940c00" layoutX="-12.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                    <font>
+                                        <Font name="System Bold" size="21.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Group>
+                        <Group fx:id="passwordGroup" visible="false">
+                            <children>
+                                <Text fill="#044e9a" layoutX="-15.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Change Password" textAlignment="CENTER" wrappingWidth="273.24609375">
+                                    <font>
+                                        <Font name="System Bold" size="25.0" />
+                                    </font>
+                                </Text>
+                                <Pane layoutX="-49.0" layoutY="56.0" prefHeight="241.0" prefWidth="353.0" style="-fx-background-color: #ffffff; -fx-background-radius: 40; -fx-border-radius: 40;" visible="false">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <children>
+                                        <TextField fx:id="activeUsername" layoutX="80.0" layoutY="14.0" prefHeight="46.0" prefWidth="209.0" promptText="Username" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                                        <Button fx:id="changeButton" layoutX="143.0" layoutY="196.0" mnemonicParsing="false" onAction="#callChangePasswordFunction" prefHeight="31.0" prefWidth="67.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Change" textFill="WHITE">
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                            <effect>
+                                                <DropShadow />
+                                            </effect>
+                                        </Button>
+                                        <Text fill="RED" layoutX="72.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed! 5 attempts remaining." visible="false">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="RED" layoutX="52.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in failed. Account locked for 5 minutes." visible="false">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Text>
+                                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="42.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/userLogo.png" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fitHeight="39.0" fitWidth="30.0" layoutX="39.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../icons/keyLogo.png" />
+                                            </image>
+                                        </ImageView>
+                                        <TextField fx:id="newPassword" layoutX="80.0" layoutY="78.0" prefHeight="46.0" prefWidth="209.0" promptText="New Password" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                                        <TextField fx:id="activeID" layoutX="80.0" layoutY="139.0" prefHeight="46.0" prefWidth="209.0" promptText="ID" style="-fx-background-radius: 8; -fx-background-color: #E5E5E5;">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                                    </children>
+                                </Pane>
+                                <Button fx:id="backButton" alignment="CENTER" layoutX="23.0" layoutY="314.0" mnemonicParsing="false" onAction="#goBackToLogIn" prefHeight="40.0" prefWidth="209.0" style="-fx-border-radius: 15px; -fx-background-radius: 15; -fx-background-color: #044e9a;" text="Back" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="26.0" />
+                                    </font>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Text fx:id="feedback1" fill="#991505" layoutX="-12.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                    <font>
+                                        <Font name="System Bold" size="21.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Group>
+                    </children>
+                </StackPane>
+                <ImageView fitHeight="161.0" fitWidth="90.0" layoutX="983.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;" AnchorPane.bottomAnchor="10.262771606445312" AnchorPane.rightAnchor="34.0">
+                    <image>
+                        <Image url="@../icons/unicornLogo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
 </GridPane>

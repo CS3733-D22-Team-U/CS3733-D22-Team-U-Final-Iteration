@@ -35,7 +35,7 @@ public class dragCircle extends Circle {
     setCenterX(x);
     setCenterY(y);
     setRadius(10);
-    setFill(Color.RED);
+    setFill(Color.rgb(4, 78, 154));
     enableDrag();
     mc.masterPane.getChildren().add(this);
   }

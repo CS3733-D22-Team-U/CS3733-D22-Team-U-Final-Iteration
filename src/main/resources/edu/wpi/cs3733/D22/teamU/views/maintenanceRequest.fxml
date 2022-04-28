@@ -127,17 +127,17 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
+                        <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <Text fx:id="clearRequest" fill="WHITE" layoutX="404.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
+                        <Text fx:id="clearRequest" fill="WHITE" layoutX="404.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request has been cleared!" textAlignment="CENTER" visible="false" wrappingWidth="143.39990234375">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
-                        <Text fx:id="missingDescription" fill="WHITE" layoutX="367.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
+                        <Text fx:id="missingDescription" fill="WHITE" layoutX="366.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing a Description for your maintenance request" textAlignment="CENTER" visible="false" wrappingWidth="218.99999999999994">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
