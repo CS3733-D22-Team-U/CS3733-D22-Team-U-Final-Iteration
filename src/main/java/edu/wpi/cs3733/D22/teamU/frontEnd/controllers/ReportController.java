@@ -134,6 +134,7 @@ public class ReportController extends ServiceController {
     String inputDesc = reportDescrip.getText().trim();
     boolean alreadyHere = true;
     String reportID = "notWork";
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     while (alreadyHere) {
       double rand = Math.random() * 10000;
@@ -147,7 +148,14 @@ public class ReportController extends ServiceController {
       reportID = "REP" + (int) rand;
     }
     Report r =
-        new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
+        new Report(
+            reportID,
+            temp_employee,
+            inputType,
+            inputDesc,
+            true,
+            sdf3.format(timestamp).substring(0, 10),
+            sdf3.format(timestamp).substring(11));
     // Report r = new Report(
     try {
       Udb.getInstance().add(r);
