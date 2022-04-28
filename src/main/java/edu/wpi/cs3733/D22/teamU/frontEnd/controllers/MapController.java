@@ -29,7 +29,6 @@ import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -240,7 +239,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          //firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
+          // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
@@ -329,8 +328,8 @@ public class MapController extends ServiceController {
                   getClass()
                       .getClassLoader()
                       .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(520);
-      popupAddPane.setLayoutY(100);
+      popupAddPane.setLayoutX(720);
+      popupAddPane.setLayoutY(200);
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -446,7 +445,7 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) baseEdit.getParent();
+    Pane pane = (Pane) masterPane;
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
     } else {
