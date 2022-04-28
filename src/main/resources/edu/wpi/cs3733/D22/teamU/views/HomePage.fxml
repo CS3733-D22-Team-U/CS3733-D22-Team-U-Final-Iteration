@@ -20,14 +20,17 @@
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="132.0" prefWidth="1100.0" styleClass="header" stylesheets="@../css/headersAndLabels.css">
+            <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
                <children>
-                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="118.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/hospitalIcon.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="headerText" layoutX="218.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's" wrappingWidth="830.0" />
+                  <Text fx:id="headerText" fill="WHITE" layoutX="133.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="918.9564361572266">
+                     <font>
+                        <Font size="48.0" />
+                     </font></Text>
                </children>
             </Pane>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="940.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
@@ -54,12 +57,12 @@
                   </Text>
                </children>
             </HBox>
-            <Button layoutX="350.0" layoutY="295.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="View Requests" textFill="WHITE">
+            <Button layoutX="350.0" layoutY="279.0" mnemonicParsing="false" onAction="#toAllRequests" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="View Requests" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Pane fx:id="turtlePond" layoutX="595.0" layoutY="299.0" prefHeight="253.0" prefWidth="262.0" style="-fx-background-color: #B0E5E3;">
+            <Pane fx:id="turtlePond" layoutX="588.0" layoutY="280.0" prefHeight="253.0" prefWidth="262.0" style="-fx-background-color: #B0E5E3;">
                <children>
                   <Circle fx:id="apple" fill="#ff1f1f" layoutX="178.0" layoutY="56.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
                   <Pane fx:id="turtlePane" prefHeight="93.0" prefWidth="84.0">
@@ -73,12 +76,12 @@
                   </Pane>
                </children>
             </Pane>
-            <Button layoutX="350.0" layoutY="461.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Employees" textFill="WHITE">
+            <Button layoutX="350.0" layoutY="445.0" mnemonicParsing="false" onAction="#toEmployeeReq" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="Employees" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="350.0" layoutY="375.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
+            <Button layoutX="350.0" layoutY="361.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -86,12 +89,13 @@
             <Circle fill="WHITE" layoutX="1016.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="928.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="840.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Button layoutX="887.0" layoutY="295.0" mnemonicParsing="false" onAction="#toMapEditor" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="View Map" textFill="WHITE">
+            <Circle fill="WHITE" layoutX="755.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Button layoutX="887.0" layoutY="280.0" mnemonicParsing="false" onAction="#toMapEditor" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="View Map" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="887.0" layoutY="425.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
+            <Button layoutX="887.0" layoutY="410.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -110,9 +114,6 @@
                      </image>
                   </ImageView>
                </graphic>
-               <tooltip>
-                  <Tooltip text="About Page" />
-               </tooltip>
             </Button>
             <Button layoutX="984.0" layoutY="173.0" mnemonicParsing="false" onAction="#toSettingsPage" style="-fx-background-color: transparent;">
                <graphic>
@@ -122,13 +123,10 @@
                      </image>
                   </ImageView>
                </graphic>
-               <tooltip>
-                  <Tooltip text="Settings" />
-               </tooltip>
             </Button>
-            <Button layoutX="659.0" layoutY="664.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="82.0" prefWidth="71.0" style="-fx-background-color: transparent;">
+            <Button layoutX="722.0" layoutY="173.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="75.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/menuBar/APIpls.png" />
                      </image>
@@ -141,28 +139,25 @@
                         <Image url="@../icons/menuBar/cautionIconBLUE.png" />
                      </image>
                   </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Report An Employee" />
-               </tooltip></Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="53.0" layoutY="301.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="50.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
-            <Pane fx:id="datePickerPane" layoutX="65.0" layoutY="446.0" prefHeight="193.0" prefWidth="125.0">
+               </graphic></Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="30.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="251.0" layoutX="30.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
+            <Pane fx:id="datePickerPane" layoutX="40.0" layoutY="446.0" prefHeight="193.0" prefWidth="218.0">
                <children>
-                  <DatePicker fx:id="datePicker" layoutY="1.0" prefHeight="26.0" prefWidth="0.0" />
+                  <DatePicker fx:id="datePicker" layoutX="25.0" layoutY="9.0" prefHeight="13.0" prefWidth="50.0" />
                </children>
             </Pane>
-            <Text fx:id="time" fill="#044e9a" layoutX="112.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm">
+            <Text fx:id="time" fill="#044e9a" layoutX="100.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-            <Text fx:id="date" fill="#044e9a" layoutX="108.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
+            <Text fx:id="date" fill="#044e9a" layoutX="94.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mm/dd/yyyy">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <ButtonBar buttonMinWidth="64.0" layoutX="277.0" layoutY="580.0" prefHeight="106.0" prefWidth="770.0">
+            <ButtonBar buttonMinWidth="50.0" layoutX="288.0" layoutY="578.0" prefHeight="87.0" prefWidth="793.0" style="-fx-background-color: transparent;" stylesheets="@../css/homeScroll.css">
                <buttons>
                   <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -298,6 +293,8 @@
                   </Button>
                </buttons>
             </ButtonBar>
+            <Button layoutX="33.0" layoutY="696.0" mnemonicParsing="false" onAction="#toLogOut" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Log Out" textFill="WHITE" />
+            <Button layoutX="138.0" layoutY="696.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Sign Out" textFill="WHITE" />
          </children>
       </Pane>
    </children>

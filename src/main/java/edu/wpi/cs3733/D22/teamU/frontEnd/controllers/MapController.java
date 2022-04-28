@@ -13,6 +13,7 @@ import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.ComboBoxAutoComplete;
 import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.LocationNode;
+import edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects.dragCircle;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.Edge;
 import edu.wpi.cs3733.D22.teamU.frontEnd.pathFinding.PathFinding;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.map.MapUI;
@@ -65,6 +66,8 @@ public class MapController extends ServiceController {
   public TextField equipAvailable;
   public TabPane popupTabPane;
   public AnchorPane masterPane;
+  public TabPane mapTab;
+  public Pane circleDragHelp;
   AnchorPane popupEditPane;
   /* Rectangle Icons */
   @FXML Button Go;
@@ -78,16 +81,16 @@ public class MapController extends ServiceController {
   @FXML Pane pane;
 
   /*Add Popup*/
-  public AnchorPane popupAddPane;
-  public TextField addNodeID;
-  public TextField addXcoord;
-  public TextField addYcoord;
-  public TextField addLongName;
-  public TextField addShortName;
-  public ComboBox addNodeTypeCombo;
-  public ComboBox addBuildingCombo;
-  public ComboBox addFloorCombo;
-  public Button addButton;
+  AnchorPane popupAddPane;
+  TextField addNodeID;
+  TextField addXcoord;
+  TextField addYcoord;
+  TextField addLongName;
+  TextField addShortName;
+  ComboBox addNodeTypeCombo;
+  ComboBox addBuildingCombo;
+  ComboBox addFloorCombo;
+  Button addButton;
 
   ObservableList<String> nodeTypeList =
       FXCollections.observableArrayList(
@@ -131,7 +134,7 @@ public class MapController extends ServiceController {
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
   // Udb udb;
   ListView<String> equipmentView, requestView;
-  HashMap<String, LocationNode> locations;
+  public HashMap<String, LocationNode> locations;
 
   ArrayList<Location> fromLocation;
   ArrayList<Location> toLocation;
@@ -237,7 +240,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          // firebaseUpdate(ln); //todo for presentation uncomment to show bidirectional
+          //firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
@@ -498,10 +501,10 @@ public class MapController extends ServiceController {
     }
   }
 
-  private TableView<Equipment> equipTable = new TableView();
+  public TableView<Equipment> equipTable = new TableView();
   private TableView<Request> reqTable = new TableView();
 
-  private void enableDrag(LocationNode ln) {
+  public void enableDrag(LocationNode ln) {
     final Delta dragDelta = new Delta();
     AnchorPane temp = ln.getPane();
     Location loc = ln.getLocation();
@@ -820,14 +823,18 @@ public class MapController extends ServiceController {
 
             if (snapshot != null && snapshot.exists()) {
               Map<String, Object> data = snapshot.getData();
-              if (Integer.parseInt(data.get("xcoord").toString()) != ln.getLocation().getXcoord())
+
+              double scale = Double.min(ln.getPane().getPrefHeight(), ln.getPane().getPrefWidth());
+
+              if (Integer.parseInt(data.get("xcoord").toString()) != ln.getLocation().getXcoord()) {
                 locations
                     .get(snapshot.getId())
-                    .setLayoutX(Integer.parseInt(data.get("xcoord").toString()));
+                    .setLayoutX(scale / imageX * Integer.parseInt(data.get("xcoord").toString()));
+              }
               if (Integer.parseInt(data.get("ycoord").toString()) != ln.getLocation().getYcoord())
                 locations
                     .get(snapshot.getId())
-                    .setLayoutY(Integer.parseInt(data.get("ycoord").toString()));
+                    .setLayoutY(scale / imageY * Integer.parseInt(data.get("ycoord").toString()));
             } else {
               System.out.print("Current data: null");
             }
@@ -848,10 +855,15 @@ public class MapController extends ServiceController {
       this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
       this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
       this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
+      dc =
+          new dragCircle(
+              circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
     }
   }
 
-  public void Exit(Event Event) {
+  public dragCircle dc = null;
+
+  public void Exit(MouseEvent actionEvent) {
     popupEditPane.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 
@@ -886,6 +898,7 @@ public class MapController extends ServiceController {
       locations.put(l.getNodeID(), lnNew);
       lnNew.setOnMouseClicked(this::popupOpen);
       enableDrag(lnNew);
+      Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
       lnNew.getPane().getChildren().add(lnNew);
       // toMap(actionEvent);
@@ -910,6 +923,7 @@ public class MapController extends ServiceController {
       Udb.getInstance().locationImpl.remove(l);
       LocationNode lnOld = locations.get(l.getNodeID());
       locations.remove(l.getNodeID());
+      Exit(actionEvent);
       lnOld.getPane().getChildren().remove(lnOld);
     } catch (IOException e) {
       e.printStackTrace();
@@ -996,144 +1010,27 @@ public class MapController extends ServiceController {
   }
 
   public void dispLOC(MouseEvent mouseevent) {
-    if (LOCicon == true) {
-      for (LocationNode locationNode : locations.values()) {
-        String compare = locationNode.getLocation().getNodeType().trim();
-        if (compare.equals("ELEV")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("PATI")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("HALL")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("REST")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("LABS")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("DEPT")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("CONF")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("EXIT")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("RETL")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("STAI")) {
-          locationNode.setVisible(false);
-        }
-        if (compare.equals("STOR")) {
-          locationNode.setVisible(false);
-        }
-      }
-      LOCicon = false;
-    } else {
-      for (LocationNode locationNode : locations.values()) {
-        String compare = locationNode.getLocation().getNodeType().trim();
-        if (compare.equals("ELEV")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("PATI")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("HALL")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("REST")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("LABS")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("DEPT")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("CONF")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("EXIT")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("RETL")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("STAI")) {
-          locationNode.setVisible(true);
-        }
-        if (compare.equals("STOR")) {
-          locationNode.setVisible(true);
-        }
-      }
-      LOCicon = true;
+    for (LocationNode locationNode : locations.values()) {
+      if (locationNode.getLocation().getEquipment().size() > 0
+          || locationNode.getLocation().getRequests().size() > 0) {
+      } else locationNode.setVisible(LOCicon);
     }
+    LOCicon = !LOCicon;
   }
 
   public void dispEQP(MouseEvent mousevent) {
-    if (EQPicon == true) {
-      for (LocationNode locationNode : locations.values()) {
-        String currE = locationNode.getLocation().getNodeType().trim();
-        if (currE.equals("RECL")) {
-          locationNode.setVisible(false);
-        }
-        if (currE.equals("BEDS")) {
-          locationNode.setVisible(false);
-        }
-        if (currE.equals("PUMP")) {
-          locationNode.setVisible(false);
-        }
-        if (currE.equals("DIRT")) {
-          locationNode.setVisible(false);
-        }
-        if (currE.equals("EQUP")) {
-          locationNode.setVisible(false);
-        }
-      }
-      EQPicon = false;
-    } else {
-      for (LocationNode locationNode : locations.values()) {
-        String currE = locationNode.getLocation().getNodeType().trim();
-        if (currE.equals("RECL")) {
-          locationNode.setVisible(true);
-        }
-        if (currE.equals("BEDS")) {
-          locationNode.setVisible(true);
-        }
-        if (currE.equals("PUMP")) {
-          locationNode.setVisible(true);
-        }
-        if (currE.equals("DIRT")) {
-          locationNode.setVisible(true);
-        }
-        if (currE.equals("EQUP")) {
-          locationNode.setVisible(true);
-        }
-      }
-      EQPicon = true;
+    for (LocationNode locationNode : locations.values()) {
+      if (locationNode.getLocation().getEquipment().size() > 0) {
+      } else locationNode.setVisible(EQPicon);
     }
+    EQPicon = !EQPicon;
   }
 
   public void dispSRV(MouseEvent mousevent) {
-    if (SRVicon == true) {
-      for (LocationNode locationNode : locations.values()) {
-        if (locationNode.getLocation().getNodeType().equals("SERV")) {
-          locationNode.setVisible(false);
-        }
-      }
-      SRVicon = false;
-    } else {
-      for (LocationNode locationNode : locations.values()) {
-        if (locationNode.getLocation().getNodeType().equals("SERV")) {
-          locationNode.setVisible(true);
-        }
-      }
-      SRVicon = true;
+    for (LocationNode locationNode : locations.values()) {
+      if (locationNode.getLocation().getRequests().size() > 0) {
+      } else locationNode.setVisible(SRVicon);
     }
+    SRVicon = !SRVicon;
   }
 }

@@ -30,6 +30,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class HomePageController extends ServiceController {
+  @FXML ImageView TEST;
 
   public Button logOutButton;
   public Text headerText;
@@ -54,6 +55,7 @@ public class HomePageController extends ServiceController {
 
   @FXML Text userName;
   @FXML Button allRequestsButton;
+  @FXML Text name;
 
   @FXML Pane turtlePane;
   @FXML Circle apple;
@@ -63,6 +65,7 @@ public class HomePageController extends ServiceController {
   @FXML DatePicker datePicker;
   @FXML Text timeOfDay;
   @FXML Pane datePickerPane;
+  String userFirstName;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #029ca6";
 
@@ -76,7 +79,6 @@ public class HomePageController extends ServiceController {
     Node popupContent = datePickerSkin.getPopupContent();
     datePicker.setVisible(false);
     datePickerPane.getChildren().add(popupContent);
-    handeDateTime();
 
     try {
       listofEmployees();
@@ -115,7 +117,7 @@ public class HomePageController extends ServiceController {
     // handleNavButtons();
     // userName.setText("Dr." + "____");
     // handleNavButtons();
-    handeDateTime();
+    handleDateTime();
     // handleTurtle();
     // playTurtle();
   }
@@ -176,7 +178,7 @@ public class HomePageController extends ServiceController {
 
   */
 
-  private void handeDateTime() {
+  private void handleDateTime() {
     Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
     String hour = sdf3.format(quickStamp).substring(11, 13);
     int hourInt = Integer.parseInt(hour);
@@ -187,6 +189,17 @@ public class HomePageController extends ServiceController {
     } else {
       timeOfDay.setText("Good Evening ");
     }
+
+    Employee user;
+
+    try {
+      user = Udb.getInstance().getUser();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    name.setText(user.getFirstName());
 
     Thread timeThread =
         new Thread(

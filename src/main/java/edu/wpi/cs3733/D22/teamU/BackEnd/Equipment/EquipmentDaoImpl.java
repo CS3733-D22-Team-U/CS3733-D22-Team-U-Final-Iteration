@@ -63,7 +63,6 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
           Location temp = new Location();
           temp.setNodeID(e.locationID);
           Location l = locations.get(locations.indexOf(temp));
-          l.setNodeType("DIRT");
           l.addEquipment(e);
           e.setLocation(l);
         } catch (Exception exception) {
@@ -96,7 +95,6 @@ public class EquipmentDaoImpl implements DataDao<Equipment> {
                 .locationImpl
                 .list()
                 .get(Udb.getInstance().locationImpl.list().indexOf(e.locationID));
-        l.setNodeType("DIRT");
         l.addEquipment(e);
         EquipmentList.add(e);
       }
