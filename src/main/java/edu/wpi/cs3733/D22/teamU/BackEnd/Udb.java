@@ -52,6 +52,15 @@ public final class Udb {
   public Statement statement;
   public String authentication;
 
+  public Employee getUser() {
+    return user;
+  }
+
+  public void setUser(Employee user) {
+    this.user = user;
+  }
+
+  public Employee user;
   public LocationDaoImpl locationImpl;
   public EquipmentDaoImpl EquipmentImpl;
   public EmployeeDaoImpl EmployeeImpl;

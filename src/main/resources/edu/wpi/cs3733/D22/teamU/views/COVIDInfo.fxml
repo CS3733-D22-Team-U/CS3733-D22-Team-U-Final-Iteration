@@ -42,7 +42,7 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Text layoutX="725.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
+                  <Text fill="#044e9a" layoutX="770.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="COVID Information">
                       <font>
                           <Font name="System Bold" size="36.0" />
                       </font>
@@ -111,11 +111,6 @@
                   </Text>
                </children>
                   </Pane>
-            <ImageView fitHeight="86.0" fitWidth="420.0" layoutX="122.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/hospitalName.png" />
-               </image>
-            </ImageView>
 
             </children>
         </Pane>

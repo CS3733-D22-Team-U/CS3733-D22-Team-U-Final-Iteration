@@ -92,6 +92,7 @@ public class loginPageController extends ServiceController {
                           if (a.getUsername().equals(username.getText().trim())
                               && a.getPassword().equals(password.getText().trim())) {
                             foundUser = true;
+                            Udb.getInstance().setUser(a);
                             if (a.getOccupation().equals("Administrator")) {
                               Udb.admin = true;
                             } else {

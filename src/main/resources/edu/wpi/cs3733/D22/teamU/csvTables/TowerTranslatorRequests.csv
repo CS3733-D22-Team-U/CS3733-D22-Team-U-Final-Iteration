@@ -1,2 +1,4 @@
 ID,Patient,Language Needed,Status,Staff,Destination,Date,Time
-001,Tom,Yiddish,N/A,00003,N/A,N/A,N/A
+TRA5300,Tom,German,Pending,00003,CLABS002L1,2022-04-22,14:12:40
+TRA7579,Rick,English,Pending,00003,CLABS002L1,2022-04-23,17:44:43
+TRA6617,Nick,Spanish,Pending,00003,HHALL00603,2022-04-23,17:41:36

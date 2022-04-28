@@ -62,7 +62,6 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
                   .locationImpl
                   .locations
                   .get(Udb.getInstance().locationImpl.locations.indexOf(temp));
-          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
@@ -102,7 +101,6 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
           Location temp = new Location();
           temp.setNodeID(r.destination);
           Location l = locations.get(locations.indexOf(temp));
-          l.setNodeType("SERV");
           l.addRequest(r);
           r.setLocation(l);
         } catch (Exception exception) {
