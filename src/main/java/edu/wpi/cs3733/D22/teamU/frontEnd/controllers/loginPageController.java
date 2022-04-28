@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -48,31 +47,6 @@ public class loginPageController extends ServiceController {
   double endTime;
   double elapsedTime;
 
-  public void firebaseUpdate(double time, String userName)
-      throws ExecutionException, InterruptedException {
-    // boolean isFastest = false;
-    UUID UK = UUID.randomUUID();
-    String uKey = UK.toString();
-    DocumentReference docRef = db.collection("loginTimes").document(userName);
-    ApiFuture<QuerySnapshot> future = db.collection("loginTimes").get();
-    List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-    for (QueryDocumentSnapshot document : documents) {
-      ApiFuture<DocumentSnapshot> ds = docRef.get();
-      if (!ds.get().exists() || ds.get() == null) {
-        firebaseInit(time, userName);
-      }
-
-      if (document.getId().equals(userName)) {
-        if (document.getDouble("Time") > elapsedTime) {
-          docRef.collection("loginTimes");
-          HashMap<String, Object> data = new HashMap<>();
-          data.put("Time", time);
-          docRef.set(data);
-        }
-      }
-    }
-  }
-
   public void firebaseInit(double time, String userName)
       throws ExecutionException, InterruptedException {
     DocumentReference docRef = db.collection("loginTimes").document(userName);
@@ -99,6 +73,7 @@ public class loginPageController extends ServiceController {
     rt.setCycleCount(RotateTransition.INDEFINITE);
     rt.setInterpolator(Interpolator.LINEAR);
     rt.play();
+    this.startTime = System.currentTimeMillis();
   }
 
   public void toHomeExtraSteps(ActionEvent actionEvent) throws IOException, InterruptedException {
