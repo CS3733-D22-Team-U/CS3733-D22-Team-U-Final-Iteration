@@ -235,7 +235,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          // firebaseUpdate(ln); //todo for presentation uncomment to show bidirectional
+          //firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(
@@ -818,14 +818,18 @@ public class MapController extends ServiceController {
 
             if (snapshot != null && snapshot.exists()) {
               Map<String, Object> data = snapshot.getData();
-              if (Integer.parseInt(data.get("xcoord").toString()) != ln.getLocation().getXcoord())
+
+              double scale = Double.min(ln.getPane().getPrefHeight(), ln.getPane().getPrefWidth());
+
+              if (Integer.parseInt(data.get("xcoord").toString()) != ln.getLocation().getXcoord()) {
                 locations
                     .get(snapshot.getId())
-                    .setLayoutX(Integer.parseInt(data.get("xcoord").toString()));
+                    .setLayoutX(scale / imageX * Integer.parseInt(data.get("xcoord").toString()));
+              }
               if (Integer.parseInt(data.get("ycoord").toString()) != ln.getLocation().getYcoord())
                 locations
                     .get(snapshot.getId())
-                    .setLayoutY(Integer.parseInt(data.get("ycoord").toString()));
+                    .setLayoutY(scale / imageY * Integer.parseInt(data.get("ycoord").toString()));
             } else {
               System.out.print("Current data: null");
             }
