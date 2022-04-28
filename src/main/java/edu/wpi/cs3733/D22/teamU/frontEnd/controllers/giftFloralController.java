@@ -89,6 +89,7 @@ public class giftFloralController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     try {
       setUpActiveRequests();
     } catch (SQLException throwables) {

@@ -16,8 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
@@ -25,8 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class HomePageController extends ServiceController {
@@ -77,13 +76,14 @@ public class HomePageController extends ServiceController {
   @FXML Button religiousButton;
   @FXML Button securityButton;
   String userFirstName;
-
+  @FXML ImageView backgroundImage;
   private static final String HOVERED_BUTTON = "-fx-border-color: #5898DB";
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
 
@@ -98,30 +98,6 @@ public class HomePageController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    this.anchor
-        .heightProperty()
-        .addListener(
-            (obs, oldVal, newVal) -> {
-              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-              Math.min(yScale, xScale);
-              Scale scale = new Scale(xScale, yScale);
-              scale.setPivotX(0.0D);
-              scale.setPivotY(0.0D);
-              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-            });
-    this.anchor
-        .widthProperty()
-        .addListener(
-            (obs, oldVal, newVal) -> {
-              double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-              double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-              Math.min(yScale, xScale);
-              Scale scale = new Scale(xScale, yScale);
-              scale.setPivotX(0.0D);
-              scale.setPivotY(0.0D);
-              this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-            });
 
     // userName.setText("Dr." + "____");
 
@@ -132,62 +108,6 @@ public class HomePageController extends ServiceController {
     // handleTurtle();
     // playTurtle();
   }
-
-  /*
-   private void handleTurtle() {
-     TranslateTransition openNav = new TranslateTransition(new Duration(350), turtAnchor);
-     openNav.setToY(-415);
-     TranslateTransition closeNav = new TranslateTransition(new Duration(350), turtAnchor);
-     turtButton.setOnAction(
-         (ActionEvent evt) -> {
-           if (turtAnchor.getTranslateY() != -415) {
-             openNav.play();
-           } else {
-             closeNav.setToY(0);
-             closeNav.play();
-           }
-         });
-   }
-
-   public void playTurtle() {
-     anchor.setOnKeyPressed(
-         e -> {
-           double nextX;
-           double nextY;
-
-           if (e.getCode() == KeyCode.D) {
-             nextX = turtlePane.getLayoutX() + 10;
-             if (nextX >= 0 && nextX <= 363) {
-               turtlePane.setLayoutX(nextX);
-               turtlePane.setRotate(90);
-             }
-           }
-
-           if (e.getCode() == KeyCode.A) {
-             nextX = turtlePane.getLayoutX() - 10;
-             if (nextX >= 0 && nextX <= 363) {
-               turtlePane.setLayoutX(nextX);
-               turtlePane.setRotate(-90);
-             }
-           }
-           if (e.getCode() == KeyCode.W) {
-             nextY = turtlePane.getLayoutY() - 10;
-             if (nextY >= 0 && nextY <= 271) {
-               turtlePane.setLayoutY(nextY);
-               turtlePane.setRotate(0);
-             }
-           }
-           if (e.getCode() == KeyCode.S) {
-             nextY = turtlePane.getLayoutY() + 10;
-             if (nextY >= 0 && nextY <= 271) {
-               turtlePane.setLayoutY(nextY);
-               turtlePane.setRotate(180);
-             }
-           }
-         });
-   }
-
-  */
 
   private void handleDateTime() {
     Timestamp quickStamp = new Timestamp(System.currentTimeMillis());
@@ -227,68 +147,23 @@ public class HomePageController extends ServiceController {
     masterThread = timeThread;
   }
 
-  /*
-  private void handleNavButtons() {
-    for (Node node : topRow.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-    for (Node node : bottomRow.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-
-    for (Node node : bottomRow1.getButtons()) {
-      Button button = (Button) node;
-      String initStyle = button.getStyle();
-      button.setStyle(initStyle);
-      button.setOnMouseEntered(e -> button.setStyle(initStyle + HOVERED_BUTTON));
-      button.setOnMouseExited(e -> button.setStyle(initStyle));
-    }
-  }
-
-   */
-
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
   }
 
   public void toLogOut(ActionEvent actionEvent) throws IOException, SQLException {
-
     Udb.getInstance().closeConnection();
     Udb.password = "";
     Udb.username = "";
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/logInPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toSettingsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toRequestsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/requestsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/logInPage.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Stage stage = Uapp.stage;
+    stage.show();
+    masterThread.stop();
   }
 
   public void toSettings(ActionEvent actionEvent) {

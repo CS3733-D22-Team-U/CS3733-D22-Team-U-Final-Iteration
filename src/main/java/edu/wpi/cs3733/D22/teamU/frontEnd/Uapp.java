@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 public class Uapp extends Application {
 
   public static boolean running = false;
+  public static boolean isFullScreen = true;
+  public static Stage stage = new Stage();
 
   @Override
   public void init() {
@@ -30,6 +32,8 @@ public class Uapp extends Application {
     primaryStage.setTitle("Mass General Brigham");
     primaryStage.setScene(scene);
     primaryStage.setResizable(true);
+    primaryStage.setFullScreen(true);
+    stage = primaryStage;
     primaryStage.show();
   }
 

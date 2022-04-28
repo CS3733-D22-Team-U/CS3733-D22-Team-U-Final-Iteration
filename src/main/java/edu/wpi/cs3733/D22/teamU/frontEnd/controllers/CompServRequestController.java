@@ -22,7 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -83,7 +83,7 @@ public class CompServRequestController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // super.initialize(location, resources);
+    super.initialize(location, resources);
     // udb = Udb.getInstance();
     try {
       setUpAllCompServReq();
@@ -128,10 +128,15 @@ public class CompServRequestController extends ServiceController {
   }
 
   public void toCompHelp(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/computerHelp.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Stage stage = Uapp.stage;
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/computerHelp.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    stage.show();
+    masterThread.stop();
   }
 
   private void handleBar() {

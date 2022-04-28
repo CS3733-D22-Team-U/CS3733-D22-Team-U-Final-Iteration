@@ -20,7 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
-public class AllReportsController implements Initializable {
+public class AllReportsController extends ServiceController implements Initializable {
   @FXML TableColumn<Report, String> idCol;
   @FXML TableColumn<Report, String> employeeCol;
   @FXML TableColumn<Report, String> typeCol;
@@ -36,8 +36,19 @@ public class AllReportsController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+
     setUpAllReports();
   }
+
+  @Override
+  public void addRequest() throws SQLException, IOException {}
+
+  @Override
+  public void removeRequest() {}
+
+  @Override
+  public void updateRequest() {}
 
   private void setUpAllReports() throws SQLException, IOException {
 
