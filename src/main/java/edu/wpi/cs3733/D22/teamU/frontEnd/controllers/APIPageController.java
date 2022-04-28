@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
@@ -29,6 +30,19 @@ public class APIPageController extends ServiceController {
   @FXML Text date;
   @FXML DatePicker datePicker;
   @FXML Pane datePickerPane;
+  @FXML Button equipmentButton;
+  @FXML Button medicineButton;
+  @FXML Button labButton;
+  @FXML Button mealButton;
+  @FXML Button giftButton;
+  @FXML Button laundryButton;
+  @FXML Button compButton;
+  @FXML Button translateButton;
+  @FXML Button mainButton;
+  @FXML Button religiousButton;
+  @FXML Button securityButton;
+
+  private static final String HOVERED_BUTTON = "-fx-border-color: #5898DB";
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
@@ -98,5 +112,31 @@ public class APIPageController extends ServiceController {
     MedicineRequest.setCurrentEmployee("test");
 
     MedicineRequest.run(0, 0, 1920, 1080, "", "CHALL007L2");
+  }
+
+  public void showText() {
+    String initStyle = equipmentButton.getStyle();
+    equipmentButton.setOnMouseEntered(e -> equipmentButton.setStyle(initStyle + HOVERED_BUTTON));
+    equipmentButton.setOnMouseExited(e -> equipmentButton.setStyle(initStyle));
+    mealButton.setOnMouseEntered(e -> mealButton.setStyle(initStyle + HOVERED_BUTTON));
+    mealButton.setOnMouseExited(e -> mealButton.setStyle(initStyle));
+    labButton.setOnMouseEntered(e -> labButton.setStyle(initStyle + HOVERED_BUTTON));
+    labButton.setOnMouseExited(e -> labButton.setStyle(initStyle));
+    giftButton.setOnMouseEntered(e -> giftButton.setStyle(initStyle + HOVERED_BUTTON));
+    giftButton.setOnMouseExited(e -> giftButton.setStyle(initStyle));
+    religiousButton.setOnMouseEntered(e -> religiousButton.setStyle(initStyle + HOVERED_BUTTON));
+    religiousButton.setOnMouseExited(e -> religiousButton.setStyle(initStyle));
+    translateButton.setOnMouseEntered(e -> translateButton.setStyle(initStyle + HOVERED_BUTTON));
+    translateButton.setOnMouseExited(e -> translateButton.setStyle(initStyle));
+    mainButton.setOnMouseEntered(e -> mainButton.setStyle(initStyle + HOVERED_BUTTON));
+    mainButton.setOnMouseExited(e -> mainButton.setStyle(initStyle));
+    securityButton.setOnMouseEntered(e -> securityButton.setStyle(initStyle + HOVERED_BUTTON));
+    securityButton.setOnMouseExited(e -> securityButton.setStyle(initStyle));
+    medicineButton.setOnMouseEntered(e -> medicineButton.setStyle(initStyle + HOVERED_BUTTON));
+    medicineButton.setOnMouseExited(e -> medicineButton.setStyle(initStyle));
+    laundryButton.setOnMouseEntered(e -> laundryButton.setStyle(initStyle + HOVERED_BUTTON));
+    laundryButton.setOnMouseExited(e -> laundryButton.setStyle(initStyle));
+    compButton.setOnMouseEntered(e -> compButton.setStyle(initStyle + HOVERED_BUTTON));
+    compButton.setOnMouseExited(e -> compButton.setStyle(initStyle));
   }
 }
