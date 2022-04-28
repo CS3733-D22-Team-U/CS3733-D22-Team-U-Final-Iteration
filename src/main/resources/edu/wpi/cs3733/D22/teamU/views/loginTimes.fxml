@@ -27,7 +27,7 @@
                         <Font name="System Bold" size="36.0" />
                     </font>
                 </Text>
-                <StackPane fx:id="requestsStack" layoutX="-106.0" layoutY="121.0" prefWidth="1400.0">
+                <StackPane fx:id="requestsStack" layoutX="-135.0" layoutY="98.0" prefWidth="1400.0">
                     <children>
                         <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                      <children>
@@ -218,7 +218,7 @@
                         </Pane>
                     </children>
                 </StackPane>
-                <Button layoutX="243.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
+                <Button layoutX="212.0" layoutY="700.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -226,7 +226,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-                <Button layoutX="408.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                <Button layoutX="376.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -234,7 +234,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-                <Button layoutX="574.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                <Button layoutX="540.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -242,7 +242,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-            <Button layoutX="801.0" layoutY="700.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time" textFill="#044e9a">
+            <Button layoutX="768.0" layoutY="700.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time" textFill="#044e9a">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

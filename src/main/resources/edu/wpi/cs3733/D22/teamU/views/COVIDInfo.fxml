@@ -18,7 +18,7 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-                  <Button layoutX="243.0" layoutY="701.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
+                  <Button layoutX="212.0" layoutY="700.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -26,7 +26,7 @@
                           <DropShadow />
                       </effect>
             </Button>
-                  <Button layoutX="404.0" layoutY="701.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                  <Button layoutX="376.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -34,7 +34,7 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Button layoutX="565.0" layoutY="701.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information" textFill="#044e9a">
+                  <Button layoutX="540.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information" textFill="#044e9a">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -111,7 +111,7 @@
                   </Text>
                </children>
                   </Pane>
-            <Button layoutX="783.0" layoutY="701.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
+            <Button layoutX="768.0" layoutY="701.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
