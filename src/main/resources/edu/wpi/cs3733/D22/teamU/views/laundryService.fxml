@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LaundryController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
             <children>
@@ -170,18 +170,18 @@
                         </Pane>
                     </children>
                 </StackPane>
-            <Button fx:id="editButton" layoutX="871.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editClick" prefHeight="43.0" prefWidth="86.0" text="Edit">
+            <Button fx:id="editButton" layoutX="871.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editClick" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Edit">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" text="Submit" />
-            <Button fx:id="removeButton" layoutX="981.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editRemoveReq" prefHeight="43.0" prefWidth="89.0" text="Remove">
+            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit" />
+            <Button fx:id="removeButton" layoutX="981.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editRemoveReq" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Remove">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" text="Close" />
+            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Close" />
 
             </children>
         </Pane>
