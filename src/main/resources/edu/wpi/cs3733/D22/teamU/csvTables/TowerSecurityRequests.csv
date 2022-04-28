@@ -1,3 +1,7 @@
 ID,Name,Status,Staff,Destination,Description,Lethal,Date,Time
-meme,N/A,N/A,00001,FHALL00801,N/A,absolutely,N/A,N/A
-testing,N/A,N/A,00003,FHALL00801,N/A,absolutely,N/A,N/A
+SEC9324,admin,Pending,00002,CHALL007L1,Gunman,No,2022-04-21,22:50:51
+SEC89,admin,Pending,00003,HHALL00202,Lost cat,Yes,2022-04-25,16:35:40
+SEC3363,admin,Resolved,00009,HHALL00603,Loose patient,Yes,2022-04-23,17:32:08
+SEC2400,admin,Pending,00001,HHALL00203,Computer crashed,Yes,2022-04-25,16:50:22
+SEC7018,admin,Pending,00009,HBATH00103,Could I get some tea?,No,2022-04-22,00:30:42
+SEC5852,admin,Pending,00002,CLABS002L1,Deranged man ranting about end of the world,No,2022-04-21,22:25:27
