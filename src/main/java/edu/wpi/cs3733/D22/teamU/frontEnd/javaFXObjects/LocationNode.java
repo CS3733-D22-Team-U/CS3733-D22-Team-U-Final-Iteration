@@ -36,23 +36,16 @@ public class LocationNode extends Group {
     this.y = y;
     tempx = x;
     tempy = y;
-    Color color;
-
+    Color color; // .setonMouseDrag();
     Circle c = new Circle();
+    c.setRadius(scale);
     setLocationIcon(c);
     DraggableMaker draggableMaker = new DraggableMaker();
     draggableMaker.makeDraggable(c);
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
-      //      r.setX(x - scale);
-      //      r.setWidth(2 * scale);
-      //      r.setHeight(2 * scale);
-      //      r.setY(y - scale);
       setEquip(r);
-      //      r.setStroke(color);
-      //      r.setStrokeWidth(5);
-      // getChildren().add(r);
     }
 
     if (location.getRequests().size() > 0) {
@@ -75,25 +68,6 @@ public class LocationNode extends Group {
     aView.setScaleY(.8);
     getChildren().add(aView);
   }
-
-  //  private void setRequest(Shape s) {
-  //    for (int i = 0; i < location.getRequests().size(); i++) {
-  //      Request aRequest = location.getRequests().get(i);
-  //      if (location.getRequests().size() > 1) {
-  //        ImageView multi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
-  //        addMapIcon(multi);
-  //      } else if (aRequest instanceof EquipRequest) {
-  //        ImageView medEquip = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
-  //        addMapIcon(medEquip);
-  //      } else if (aRequest instanceof LabRequest) {
-  //        ImageView labServ = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
-  //        addMapIcon(labServ);
-  //      } else if (aRequest instanceof MedicineRequest) {
-  //        ImageView medi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
-  //        addMapIcon(medi);
-  //      }
-  //    }
-  //  }
 
   private void setRequest(Shape s) {
     int dupes = 0;
@@ -132,19 +106,15 @@ public class LocationNode extends Group {
       switch (name) {
         case "Beds":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
-          location.getEquipment().get(i).getLocation().setNodeType("BEDS");
           break;
         case "Infusion Pumps":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
-          location.getEquipment().get(i).getLocation().setNodeType("PUMP");
           break;
         case "Recliners":
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
-          location.getEquipment().get(i).getLocation().setNodeType("RECL");
           break;
         default:
           addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/DefaultEquip.png");
-          location.getEquipment().get(i).getLocation().setNodeType("EQUP");
       }
     }
   }
@@ -163,15 +133,12 @@ public class LocationNode extends Group {
           String currE = location.getEquipment().get(i).getName().trim();
           if (currE.equals("Recliners")) {
             addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
-            location.getEquipment().get(i).getLocation().setNodeType("RECL");
           }
           if (currE.equals("Beds")) {
             addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
-            location.getEquipment().get(i).getLocation().setNodeType("BEDS");
           }
           if (currE.equals("Infusion Pumps")) {
             addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
-            location.getEquipment().get(i).getLocation().setNodeType("PUMP");
           } else {
             addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
           }
@@ -211,7 +178,8 @@ public class LocationNode extends Group {
         addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
         break;
       default:
-        s.setFill(Color.YELLOWGREEN);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
+        break;
     }
   }
 

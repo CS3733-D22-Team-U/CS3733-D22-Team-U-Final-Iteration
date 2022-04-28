@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.EmployeeDaoImpl;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.awt.*;
@@ -102,7 +101,7 @@ public class settingsPageController implements Initializable {
     String newFirst = changeText.getText();
     user.setFirstName(newFirst);
     changeText.clear();
-    Udb.getInstance().EmployeeImpl.edit(user );
+    Udb.getInstance().EmployeeImpl.edit(user);
 
     // possibly add so username saves to CSV?
   }

@@ -179,7 +179,7 @@ FSERV00201,353,487,1,Tower,SERV,Tower Medical Cashier,Tower Cashier
 HHALL01203,348,277,3,Tower,HALL,Hallway Connector 12 Floor 3,Hallway H01203
 FLABS00101,593,708,1,Tower,LABS,Obstetrics Admitting,Obs Admitting
 uPATI05303,207,518,3,Tower,PATI,Patient Room Pod C,PRC
-FDEPT00201,358,578,1,Tower,SERV,Bretholtz Center for Patients and Families,Bretholtz WR
+FDEPT00201,357,577,1,Tower,SERV,Bretholtz Center for Patients and Families,Bretholtz WR
 FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
 WELEV00L01,558,388,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
