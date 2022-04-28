@@ -113,6 +113,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </BarChart>
+            <Button fx:id="allReports" layoutX="945.0" layoutY="670.0" mnemonicParsing="false" onAction="#toAllReports" prefHeight="66.0" prefWidth="116.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="All Reports" />
          </children>
       </Pane>
       <AnchorPane fx:id="sideBarAnchor" layoutY="-670.0" maxHeight="727.0" maxWidth="100.0" minHeight="596.0" minWidth="99.0" prefHeight="727.0" prefWidth="99.0">
