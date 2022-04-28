@@ -49,6 +49,7 @@ import org.assertj.core.util.diff.Delta;
 public class MapController extends ServiceController {
 
   /*Edit Remove Popup*/
+
   public ComboBox<Location> To;
   public ComboBox<Location> From;
   public TextField popupNodeID;
@@ -235,7 +236,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          //firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
+          // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           ln.setOnMousePressed(

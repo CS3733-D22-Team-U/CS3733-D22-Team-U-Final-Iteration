@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LoginTimeController">
+    <children>
+        <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
+            <children>
+                <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/background.png" />
+                    </image>
+                </ImageView>
+                <Text layoutX="803.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="About Us">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Text>
+                <StackPane fx:id="requestsStack" layoutX="-106.0" layoutY="121.0" prefWidth="1400.0">
+                    <children>
+                        <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                     <children>
+                        <Text fx:id="drMikeTime" fill="WHITE" layoutX="52.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="59.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Akstin">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drVillaTime" fill="WHITE" layoutX="52.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="59.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Villa">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drIainTime" fill="WHITE" layoutX="52.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="59.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. McEwen">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drKodyTime" fill="WHITE" layoutX="55.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="62.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Robinson">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drHarshTime" fill="WHITE" layoutX="55.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="62.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Patel">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drBelishaTime" fill="WHITE" layoutX="55.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="62.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Genin">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drStaffTime" fill="WHITE" layoutX="55.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="62.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drWilsonTime" fill="WHITE" layoutX="429.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="436.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Wong">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drNickTime" fill="WHITE" layoutX="429.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="436.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Biliouris">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drTimTime" fill="WHITE" layoutX="429.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="436.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Klein">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drDeeptiTime" fill="WHITE" layoutX="432.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="439.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Gosukonda">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drJoselinTime" fill="WHITE" layoutX="432.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="439.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Barbosa">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drWillTime" fill="WHITE" layoutX="432.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="439.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dr. Doyle">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="drAdminTime" fill="WHITE" layoutX="432.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*insert time*" wrappingWidth="111.99996948242188">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="439.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                     </children>
+
+                        </Pane>
+                    </children>
+                </StackPane>
+                <Button layoutX="344.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About" textFill="#044e9a">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button layoutX="505.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCredits" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button layoutX="666.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+
+            </children>
+        </Pane>
+        <TextFlow prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#toHome" prefHeight="53.0" prefWidth="70.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/menuBar/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+    </children>
+</AnchorPane>
