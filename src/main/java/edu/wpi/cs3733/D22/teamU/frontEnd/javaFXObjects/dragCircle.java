@@ -2,16 +2,12 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
-import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -108,9 +104,7 @@ public class dragCircle extends Circle {
 
               best.getLocation().getEquipment().add(equipment);
 
-              lnOld.getChildren().add(0, setLocationIcon(lnOld));
-
-
+              lnOld.getChildren().remove(1);
               try {
                 update(best);
               } catch (IOException e) {
@@ -132,84 +126,6 @@ public class dragCircle extends Circle {
         });
   }
 
-  private ImageView setLocationIcon(LocationNode ln) {
-    ImageView temp = null;
-    switch (ln.getLocation().getNodeType()) {
-      case "PATI":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
-        break;
-      case "STOR":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
-        break;
-      case "DIRT":
-        for (int i = 0; i < ln.getLocation().getEquipment().size(); i++) {
-          String currE = ln.getLocation().getEquipment().get(i).getName().trim();
-          if (currE.equals("Recliners")) {
-            temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
-          }
-          if (currE.equals("Beds")) {
-            temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
-          }
-          if (currE.equals("Infusion Pumps")) {
-            temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
-          } else {
-            temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
-          }
-        }
-        break;
-      case "HALL":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
-        break;
-      case "ELEV":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
-        break;
-      case "REST":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
-        break;
-      case "STAI":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
-        break;
-      case "DEPT":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
-        break;
-      case "LABS":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
-        break;
-      case "INFO":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
-        break;
-      case "CONF":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
-        break;
-      case "EXIT":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
-        break;
-      case "RETL":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
-        break;
-      case "SERV":
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
-        break;
-      default:
-        temp = addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
-        break;
-    }
-    return temp;
-  }
-
-  private ImageView addMapIcon(String resource) {
-    ImageView aView = new ImageView();
-    URL a = Uapp.class.getClassLoader().getResource(resource);
-    aView.setImage(new Image(String.valueOf(a)));
-    aView.setFitHeight(7 * 5);
-    aView.setFitWidth(7 * 5);
-    aView.setX(x - (aView.getFitWidth() / 2));
-    aView.setY(y - (aView.getFitHeight() / 2));
-    aView.setScaleX(.8);
-    aView.setScaleY(.8);
-    return aView;
-  }
-
   public void update(LocationNode ln) throws IOException {
     LocationNode lnNew = new LocationNode(ln.getLocation(), ln.tempx, ln.tempy, ln.getPane());
     mc.locations.put(lnNew.getLocation().getNodeID(), lnNew);
@@ -218,8 +134,6 @@ public class dragCircle extends Circle {
     lnNew.setOnMouseClicked(mc::popupOpen);
     lnNew.getPane().getChildren().add(lnNew);
   }
-
-  public void setNewNode() {}
 
   class Delta {
     double x, y;

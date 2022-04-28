@@ -37,7 +37,6 @@ public class LocationNode extends Group {
     tempx = x;
     tempy = y;
     Color color; // .setonMouseDrag();
-
     Circle c = new Circle();
     c.setRadius(scale);
     setLocationIcon(c);
@@ -179,7 +178,7 @@ public class LocationNode extends Group {
         addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
         break;
       default:
-        s.setFill(Color.YELLOWGREEN);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
         break;
     }
   }
