@@ -116,7 +116,8 @@ public class sideViewController extends ServiceController {
   public void initialize(URL location, ResourceBundle resources) {
 
     setUpAllEquipment();
-    setUpPieChart("4");
+    setUpPieChart("5");
+    recLevel5.setOpacity(1.0);
 
     try {
       staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
