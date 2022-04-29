@@ -58,7 +58,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toHome(ActionEvent actionEvent) throws IOException {
@@ -69,7 +68,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toEquipmentDelivery(ActionEvent actionEvent) throws IOException {
@@ -91,7 +89,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/mealDelivery.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toMaintenanceRequest(ActionEvent actionEvent) throws IOException {
@@ -125,7 +122,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/medRevamp.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toLabRequest(ActionEvent actionEvent) throws IOException {
@@ -175,7 +171,7 @@ public abstract class ServiceController implements Initializable, Service {
         FXMLLoader.load(
             Uapp.class
                 .getClassLoader()
-                .getResource("edu/wpi/cs3733/D22/teamU/views/allRequest.fxml"));
+                .getResource("edu/wpi/cs3733/D22/teamU/views/allRequests.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
     masterThread.stop();
@@ -207,7 +203,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/compServRequest.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toReligious(ActionEvent actionEvent) throws IOException {

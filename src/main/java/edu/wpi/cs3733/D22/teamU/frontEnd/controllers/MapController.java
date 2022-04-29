@@ -45,7 +45,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
 
@@ -66,7 +65,7 @@ public class MapController extends ServiceController {
   public TextField equipInUse;
   public TextField equipAvailable;
   public TabPane popupTabPane;
-  public AnchorPane masterPane;
+  public AnchorPane anchor;
   public TabPane mapTab;
   public Pane circleDragHelp;
   AnchorPane popupEditPane;
@@ -149,7 +148,9 @@ public class MapController extends ServiceController {
 
   public MapController() throws IOException, SQLException {}
 
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     try {
       pathFinding = new PathFinding(Udb.getInstance().edgeDao.list());
       System.out.println(Udb.getInstance().edgeDao.list().size());
@@ -497,9 +498,9 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) masterPane;
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    Pane pane = (Pane) anchor;
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
     if (pane.getChildren().contains(popupEditPane)) {
@@ -632,12 +633,12 @@ public class MapController extends ServiceController {
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
-    if (masterPane.getChildren().contains(popupAddPane)) {
-      masterPane.getChildren().remove(popupAddPane);
+    if (anchor.getChildren().contains(popupAddPane)) {
+      anchor.getChildren().remove(popupAddPane);
     }
     request = null;
     equipment = null;
@@ -645,7 +646,7 @@ public class MapController extends ServiceController {
     reqTable.getItems().clear();
     LocationNode locationNode = (LocationNode) mouseEvent.getSource();
     Location location = locationNode.getLocation();
-    Pane pane = (Pane) masterPane;
+    Pane pane = (Pane) anchor;
 
     popupEditPane.setLayoutX(663);
 
@@ -857,8 +858,8 @@ public class MapController extends ServiceController {
   }
 
   public void editEquipFunc(MouseEvent mouseEvent) {
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
     try {
@@ -934,8 +935,8 @@ public class MapController extends ServiceController {
       this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
       this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
       this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
-      if (masterPane.getChildren().contains(dc)) {
-        masterPane.getChildren().remove(dc);
+      if (anchor.getChildren().contains(dc)) {
+        anchor.getChildren().remove(dc);
         dragCircle dc = null;
       }
       dc =

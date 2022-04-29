@@ -19,8 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -29,7 +29,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -54,6 +53,7 @@ public class ReportController extends ServiceController {
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     staff = new ArrayList<>();
     try {
       for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
@@ -212,10 +212,13 @@ public class ReportController extends ServiceController {
   }
 
   public void toAllReports(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Uapp.stage.show();
     masterThread.stop();
   }
 }
