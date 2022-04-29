@@ -20,8 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
@@ -235,10 +233,10 @@ public class ReportController extends ServiceController {
 
     if (Udb.admin) {
       Parent home =
-              FXMLLoader.load(
-                      Uapp.class
-                              .getClassLoader()
-                              .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
+          FXMLLoader.load(
+              Uapp.class
+                  .getClassLoader()
+                  .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
       Uapp.stage.getScene().setRoot(home);
       Uapp.stage.show();
       masterThread.stop();
