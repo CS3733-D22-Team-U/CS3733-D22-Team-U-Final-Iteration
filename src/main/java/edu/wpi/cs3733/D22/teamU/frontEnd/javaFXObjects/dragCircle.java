@@ -1,10 +1,8 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapController;
 import java.io.IOException;
-import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -125,13 +123,6 @@ public class dragCircle extends Circle {
 
             }
             mc.anchor.getChildren().remove(mc.dc);
-            try {
-              Udb.getInstance().edit(equipment);
-            } catch (IOException e) {
-              e.printStackTrace();
-            } catch (SQLException e) {
-              e.printStackTrace();
-            }
           }
         });
   }
