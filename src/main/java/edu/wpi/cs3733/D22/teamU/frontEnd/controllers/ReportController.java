@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +44,7 @@ public class ReportController extends ServiceController {
   @FXML Text time;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
+  @FXML Text adminMessage;
   @FXML Button allReports;
 
   ArrayList<Employee> staff;
@@ -228,13 +230,35 @@ public class ReportController extends ServiceController {
   }
 
   public void toAllReports(ActionEvent actionEvent) throws IOException {
-    Parent home =
-        FXMLLoader.load(
-            Uapp.class
-                .getClassLoader()
-                .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
-    Uapp.stage.getScene().setRoot(home);
-    Uapp.stage.show();
-    masterThread.stop();
+
+    if (Udb.admin) {
+      Parent home =
+          FXMLLoader.load(
+              Uapp.class
+                  .getClassLoader()
+                  .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
+      Uapp.stage.getScene().setRoot(home);
+      Uapp.stage.show();
+      masterThread.stop();
+    } else {
+      adminMessage.setVisible(true);
+
+      new Thread(
+              () -> {
+                try {
+
+                  Thread.sleep(3500); // milliseconds
+
+                  Platform.runLater(
+                      () -> {
+                        adminMessage.setVisible(false);
+                      });
+
+                } catch (InterruptedException ie) {
+
+                }
+              })
+          .start();
+    }
   }
 }

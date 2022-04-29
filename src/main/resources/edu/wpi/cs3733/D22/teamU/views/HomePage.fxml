@@ -14,13 +14,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
 
 
    <children>
@@ -346,6 +341,17 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
+            <Text fill="#044e9a" layoutX="310.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment" />
+            <Text fill="#044e9a" layoutX="399.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab" />
+            <Text fill="#044e9a" layoutX="455.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="537.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="588.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; FLoral" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="672.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="730.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="815.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religous" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="875.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="959.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="1023.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>
