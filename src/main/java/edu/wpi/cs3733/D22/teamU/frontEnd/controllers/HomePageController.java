@@ -16,8 +16,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
@@ -73,6 +74,8 @@ public class HomePageController extends ServiceController {
   @FXML Button religiousButton;
   @FXML Button securityButton;
 
+  String userFirstName;
+  @FXML ImageView backgroundImage;
 
   private static final String HOVERED_BUTTON = "-fx-border-color: #5898DB";
 
@@ -80,6 +83,7 @@ public class HomePageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
 
@@ -94,32 +98,6 @@ public class HomePageController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    /*
-      this.anchor
-          .heightProperty()
-          .addListener(
-              (obs, oldVal, newVal) -> {
-                double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-                double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-                Math.min(yScale, xScale);
-                Scale scale = new Scale(xScale, yScale);
-                scale.setPivotX(0.0D);
-                scale.setPivotY(0.0D);
-                this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-              });
-      this.anchor
-          .widthProperty()
-          .addListener(
-              (obs, oldVal, newVal) -> {
-                double yScale = this.anchor.getHeight() / this.anchor.getPrefHeight();
-                double xScale = this.anchor.getWidth() / this.anchor.getPrefWidth();
-                Math.min(yScale, xScale);
-                Scale scale = new Scale(xScale, yScale);
-                scale.setPivotX(0.0D);
-                scale.setPivotY(0.0D);
-                this.anchor.getScene().getRoot().getTransforms().setAll(new Transform[] {scale});
-              });
-    */
     handleDateTime();
     playTurtle();
   }
@@ -215,35 +193,18 @@ public class HomePageController extends ServiceController {
   }
 
   public void toLogOut(ActionEvent actionEvent) throws IOException, SQLException {
-
     Udb.getInstance().closeConnection();
     Udb.password = "";
     Udb.username = "";
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/logInPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toSettingsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/settingsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toEmployeeReq(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/filterEmployee.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
-
-  public void toRequestsPage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/requestsPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/logInPage.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Stage stage = Uapp.stage;
+    stage.show();
+    masterThread.stop();
   }
 
   public void toSettings(ActionEvent actionEvent) {

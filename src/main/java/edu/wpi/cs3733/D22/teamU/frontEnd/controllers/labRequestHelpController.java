@@ -7,7 +7,9 @@ import javafx.event.ActionEvent;
 
 public class labRequestHelpController extends ServiceController {
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+  }
 
   @Override
   public void addRequest() {}

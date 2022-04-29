@@ -48,6 +48,8 @@ public class APIPageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
 

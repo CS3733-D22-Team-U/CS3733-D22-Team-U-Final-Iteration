@@ -13,7 +13,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LoginTimeController">
+<AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.LoginTimeController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
+<AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -28,6 +29,9 @@
                      <HBox.margin>
                         <Insets right="-15.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="activeReqButton" mnemonicParsing="false" onAction="#switchToActive" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: C9EDEB;" text="Active Request" textFill="#044e9a">
                      <font>
@@ -36,6 +40,9 @@
                      <HBox.margin>
                         <Insets right="-15.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="allEquipButton" mnemonicParsing="false" onAction="#switchToEquipment" prefHeight="70.0" prefWidth="125.0" style="-fx-background-radius: 15 0 0 0; -fx-background-color: B0E5E3;" text="All Equipment" textFill="#044e9a">
                      <font>
@@ -44,6 +51,9 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>
@@ -80,6 +90,9 @@
                            <font>
                               <Font size="12.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Pane layoutX="17.0" layoutY="118.0" maxHeight="519.0" maxWidth="384.0" minWidth="323.0" prefHeight="419.0" prefWidth="323.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
@@ -369,11 +382,17 @@
                                  <HBox.margin>
                                     <Insets left="45.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="clearButton" alignment="CENTER" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#clearRequest" prefHeight="56.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Clear" textFill="#044e9a">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children>
                         </HBox>
@@ -410,14 +429,26 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit" />
+            <Button fx:id="submitEditButton" layoutX="871.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#submitEdit" prefHeight="43.0" prefWidth="86.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Submit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button fx:id="removeButton" layoutX="981.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#editRemoveReq" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Remove">
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Close" />
+            <Button fx:id="closeButton" layoutX="981.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#closeEdit" prefHeight="43.0" prefWidth="89.0" styleClass="editButton" stylesheets="@../css/buttons.css" text="Close">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
 
          </children>
       </Pane>
@@ -545,6 +576,9 @@
                </effect>
             </Pane>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
          <effect>
@@ -559,6 +593,9 @@
                      </font>
                   </Text>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </Pane>
@@ -577,6 +614,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="90.0" layoutY="18.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                <graphic>
@@ -586,6 +626,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="269.0" layoutY="20.0" mnemonicParsing="false" onAction="#toMap" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                <graphic>
@@ -595,6 +638,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="343.0" layoutY="18.0" mnemonicParsing="false" onAction="#toSettingsPage" prefHeight="90.0" prefWidth="94.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                <graphic>
@@ -604,6 +650,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="180.0" layoutY="18.0" mnemonicParsing="false" onAction="#toHome" prefHeight="80.0" prefWidth="71.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css">
                <graphic>
@@ -613,6 +662,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </Pane>

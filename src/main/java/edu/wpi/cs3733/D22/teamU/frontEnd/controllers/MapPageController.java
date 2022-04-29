@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
@@ -20,6 +19,7 @@ public class MapPageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     handeDateTime();
   }
 
@@ -36,14 +36,6 @@ public class MapPageController extends ServiceController {
               }
             });
     timeThread.start();
-  }
-
-  public void toSettings(ActionEvent actionEvent) {
-    System.out.println("Going to settings");
-  }
-
-  public void logOut(ActionEvent actionEvent) {
-    System.out.println("Logging out");
   }
 
   @Override
