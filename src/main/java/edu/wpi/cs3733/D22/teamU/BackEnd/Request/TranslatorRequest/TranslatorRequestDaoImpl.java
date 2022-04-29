@@ -156,7 +156,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            // firebaseUpdate(currReq);
+            firebaseupdate(currReq);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
@@ -307,7 +307,7 @@ public class TranslatorRequestDaoImpl implements DataDao<TranslatorRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        // firebaseUpdate(data);
+        firebaseupdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {

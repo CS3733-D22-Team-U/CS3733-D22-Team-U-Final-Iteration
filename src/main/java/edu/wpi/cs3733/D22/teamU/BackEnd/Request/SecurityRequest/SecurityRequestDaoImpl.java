@@ -152,7 +152,7 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            // firebaseUpdate(currSecurity);
+            firebaseupdate(currSecurity);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql security requests");
@@ -318,7 +318,7 @@ public class SecurityRequestDaoImpl implements DataDao<SecurityRequest> {
           data.getEmployee().getEmployeeID())) { // check if employee to be added exists
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        // firebaseUpdate(data);
+        firebaseupdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
