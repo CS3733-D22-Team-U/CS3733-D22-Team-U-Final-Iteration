@@ -51,8 +51,12 @@ public class dragCircle extends Circle {
             // setPaneOnMousePressedEventHandler(null);
             // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-            dragDelta.x = getCenterX() - mouseEvent.getSceneX();
-            dragDelta.y = getCenterY() - mouseEvent.getSceneY();
+            dragDelta.x =
+                getCenterX()
+                    - mouseEvent.getSceneX() / mc.anchor.getWidth() * mc.anchor.getPrefWidth();
+            dragDelta.y =
+                getCenterY()
+                    - mouseEvent.getSceneY() / mc.anchor.getHeight() * mc.anchor.getPrefHeight();
             setCursor(Cursor.MOVE);
           }
         });
@@ -61,10 +65,16 @@ public class dragCircle extends Circle {
           @Override
           public void handle(MouseEvent mouseEvent) {
 
-            tempx = mouseEvent.getSceneX() + dragDelta.x + getLayoutX();
-            tempy = mouseEvent.getSceneY() + dragDelta.y + getLayoutY();
-            setCenterX(mouseEvent.getSceneX() + dragDelta.x);
-            setCenterY(mouseEvent.getSceneY() + dragDelta.y);
+            tempx =
+                mouseEvent.getSceneX() / mc.anchor.getWidth() * mc.anchor.getPrefWidth()
+                    + dragDelta.x
+                    + getLayoutX();
+            tempy =
+                mouseEvent.getSceneY() / mc.anchor.getHeight() * mc.anchor.getPrefHeight()
+                    + dragDelta.y
+                    + getLayoutY();
+            setCenterX(tempx);
+            setCenterY(tempy);
           }
         });
 

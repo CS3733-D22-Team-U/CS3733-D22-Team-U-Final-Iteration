@@ -12,3 +12,4 @@ Employee ID,First Name,Last Name,Occupation,Reports,On Duty,Username,Password
 00004,Deepti,Gosukonda,Surgeon,3,true,Dr.Deepti,Gosukonda
 00005,Mike,Akstin,Family Physician,0,false,Dr.Mike,Akstin
 00010,Belisha,Genin,Janitor,0,false,Dr.Belisha,Genin
+00011, admin, test, Administrator,0,false,admin,admin

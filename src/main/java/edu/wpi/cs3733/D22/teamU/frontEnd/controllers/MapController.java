@@ -273,10 +273,10 @@ public class MapController extends ServiceController {
                   @Override
                   public void handle(MouseEvent mouseEvent) {
 
-                    ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
-                    ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
-                    ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-                    ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+                    ln.tempx = mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth() + dragDelta.x + ln.getX();
+                    ln.tempy = mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()+ dragDelta.y + ln.getY();
+                    ln.setLayoutX(mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth() + dragDelta.x);
+                    ln.setLayoutY(mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight() + dragDelta.y);
                   }
                 });
           }
@@ -985,8 +985,12 @@ public class MapController extends ServiceController {
           dragCircle dc = null;
         }
         dc =
-            new dragCircle(
-                circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
+                new dragCircle(
+                        circleDragHelp,
+                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth(),
+                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
+                        equipment,
+                        this);;
       }
     }
   }
