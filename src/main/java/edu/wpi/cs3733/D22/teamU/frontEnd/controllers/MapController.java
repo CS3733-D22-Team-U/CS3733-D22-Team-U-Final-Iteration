@@ -252,30 +252,32 @@ public class MapController extends ServiceController {
           // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
-          ln.setOnMousePressed(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  // record a delta distance for the drag and drop operation.
-                  // setPaneOnMousePressedEventHandler(null);
-                  // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+          if (Udb.admin) {
+            ln.setOnMousePressed(
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
+                    // record a delta distance for the drag and drop operation.
+                    // setPaneOnMousePressedEventHandler(null);
+                    // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
-                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
-                  ln.setCursor(Cursor.MOVE);
-                }
-              });
-          ln.setOnMouseDragged(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+                    dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
+                    dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
+                    ln.setCursor(Cursor.MOVE);
+                  }
+                });
+            ln.setOnMouseDragged(
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
 
-                  ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
-                  ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
-                  ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-                  ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                }
-              });
+                    ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
+                    ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
+                    ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+                    ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+                  }
+                });
+          }
           ln.setOnMouseReleased(
               new EventHandler<MouseEvent>() {
                 @Override
@@ -314,6 +316,7 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
+    // }
 
     popupEditPane = new AnchorPane();
     try {
@@ -608,6 +611,7 @@ public class MapController extends ServiceController {
   private TableView<Request> reqTable = new TableView();
 
   public void enableDrag(LocationNode ln) {
+    System.out.printf("ADMIN");
     final Delta dragDelta = new Delta();
     AnchorPane temp = ln.getPane();
     Location loc = ln.getLocation();
@@ -747,11 +751,11 @@ public class MapController extends ServiceController {
             try {
               switch (b.getId()) {
                 case "edit":
-                  b.setDisable(!Udb.getInstance().admin);
+                  b.setDisable(!Udb.admin);
                   b.setOnMouseClicked(this::popupEdit);
                   break;
                 case "remove":
-                  b.setDisable(!Udb.getInstance().admin);
+                  b.setDisable(!Udb.admin);
                   b.setOnMouseClicked(this::popupRemove);
                   break;
                 default:
@@ -772,8 +776,10 @@ public class MapController extends ServiceController {
       if (n instanceof Button) {
         Button b2 = (Button) n;
         if (b2.getId().equals("removeEquip")) {
+          b2.setDisable(!Udb.admin);
           b2.setOnMouseClicked(this::deleteEquip);
         } else if (b2.getId().equals("editEquip")) {
+          b2.setDisable(!Udb.admin);
           b2.setOnMouseClicked(this::editEquipFunc);
         }
       } else if (n instanceof TableView) {
@@ -967,19 +973,21 @@ public class MapController extends ServiceController {
   }
 
   public void selectEquip(MouseEvent mouseEvent) {
-    if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
-      this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
-      this.equipNameTF.setText(this.equipment.getName());
-      this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
-      this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
-      this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
-      if (masterPane.getChildren().contains(dc)) {
-        masterPane.getChildren().remove(dc);
-        dragCircle dc = null;
+    if (Udb.admin) {
+      if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
+        this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+        this.equipNameTF.setText(this.equipment.getName());
+        this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
+        this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
+        this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
+        if (masterPane.getChildren().contains(dc)) {
+          masterPane.getChildren().remove(dc);
+          dragCircle dc = null;
+        }
+        dc =
+            new dragCircle(
+                circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
       }
-      dc =
-          new dragCircle(
-              circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
     }
   }
 
