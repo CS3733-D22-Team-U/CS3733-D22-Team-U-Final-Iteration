@@ -1,0 +1,15 @@
+Employee ID,First Name,Last Name,Occupation,Reports,On Duty,Username,Password
+00008,Joselin,Barbosa,Nurse,0,false,Dr.Joselin,Barbosa
+00009,Nick,Biliouris,Nurse,2,false,Dr.Nick,Biliouris
+00002,Kody,Robinson,Chef,0,false,Dr.Kody,Robinson
+00013,Wong,Wilson,Administrator,0,false,Dr.Wilson,Wong
+00003,Timothy,Klein,Nurse,0,false,Dr.Tim,Klein
+00011,Iain,McEwen,Nurse,0,false,Dr.Iain,McEwen
+00001,Harsh,Patel,Administrator,0,true,Dr.Harsh,Patel
+00012,Staff,Staff,Nurse,0,false,staff,staff
+00006,William,Doyle,Surgeon,0,false,Dr.Will,Doyle
+00007,Marko,Villa,Surgeon,0,false,Dr.Marko,Villa
+00004,Deepti,Gosukonda,Surgeon,3,true,Dr.Deepti,Gosukonda
+00005,Mike,Akstin,Family Physician,0,false,Dr.Mike,Akstin
+00010,Belisha,Genin,Janitor,0,false,Dr.Belisha,Genin
+00011, admin, test, Administrator,0,false,admin,admin

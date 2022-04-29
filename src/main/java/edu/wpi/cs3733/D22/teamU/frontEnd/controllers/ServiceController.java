@@ -174,7 +174,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/allRequests.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toMap(ActionEvent actionEvent) throws IOException {
@@ -183,7 +182,6 @@ public abstract class ServiceController implements Initializable, Service {
             Uapp.class.getClassLoader().getResource("edu/wpi/cs3733/D22/teamU/views/map.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toMapEditor(ActionEvent actionEvent) throws IOException {

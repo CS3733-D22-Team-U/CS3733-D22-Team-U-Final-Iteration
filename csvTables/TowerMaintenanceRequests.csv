@@ -1,0 +1,7 @@
+ID,name,Status,Destination,Employee,Type of Maintenance,Description,Date,Time
+MAI7936,N/A,Pending,HBATH00103,00011,N/A,Computer broken,2022-04-28,16:14:41
+MAI5250,N/A,Pending,HBATH00103,00011,clean,someone threw up,2022-04-24,17:38:32
+MAI4166,N/A,Pending,HHALL00603,00002,broken,lights busted,2022-04-23,16:47:34
+MAI9531,N/A,Pending,CHALL007L2,00002,N/A,Screen wont turn on,2022-04-28,16:26:30
+MAI6432,N/A,Pending,HBATH00103,00002,blood,someone got cut,2022-04-22,14:49:01
+MAI115,N/A,Pending,CHALL007L1,00002,N/A,Computer on fire,2022-04-28,16:27:09
