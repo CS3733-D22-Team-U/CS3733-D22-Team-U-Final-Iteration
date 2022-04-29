@@ -65,18 +65,18 @@ HHALL00302,783,358,2,Tower,HALL,Hallway Connector 3 Floor 2,Hallway H00302
 HHALL00303,73,443,3,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
 WHALL00702,488,850,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway W0702
 FHALL02701,814,697,1,Tower,HALL,Lobby Hallway 7,Hallway F02701
-uHALL04C01,448,275,4,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
+uHALL04C01,447,275,4,Tower,HALL,Bed and Reciner Parking A-B,BRPAB
 FHALL00401,721,368,1,Tower,HALL,Shattuck Street Lobby 2,Hallway F00401
 FHALL02301,593,738,1,Tower,HALL,Lobby Hallway 1,Hallway F02301
-uHALL04C03,448,491,4,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
+uHALL04C03,447,490,4,Tower,HALL,Bed and Recliner Parking C-D,BRPCD
 HRETL00202,363,483,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
 FHALL00801,506,308,1,Tower,HALL,Tower Hallway 1,Hallway F00801
-uPATI04C1,305,604,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C1,304,604,4,Tower,PATI,Patient Room Pod C,PRC
 WHALL001L2,493,849,L2,Tower,HALL,Hallway Connector 1 Floor L2,Hallway W01L2
 uPATI03603,231,174,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05503,213,574,3,Tower,PATI,Patient Room Pod C,PRC
-uPATI04C2,334,581,4,Tower,PATI,Patient Room Pod C,PRC
-uPATI04C3,336,551,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C2,333,580,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C3,336,551,4,Tower,PATI,Patient Room Pod C1,PRC
 uPATI05903,333,580,3,Tower,PATI,Patient Room Pod C,PRC
 FEXIT00201,496,779,1,Tower,EXIT,75 Francis Valet Drop-off,75 Francis Exit
 HHALL01002,803,738,2,Tower,HALL,Hallway Connector 10 Floor 2,Hallway H01002
@@ -107,29 +107,29 @@ uPATI04003,333,213,3,Tower,PATI,Patient Room Pod B,PRB
 HHALL00403,73,748,3,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
 FHALL00501,698,368,1,Tower,HALL,Shattuck Street Lobby 3,Hallway F00501
 FHALL02401,713,738,1,Tower,HALL,Lobby Hallway 2,Hallway F02401
-uPATI04B38,300,165,4,Tower,PATI,Patient Room Pod B,PRB
+uPATI04B38,300,165,4,Tower,PATI,Patient Room Pod Btes,PRB
 CREST001L1,480,477,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
-uPATI04B39,332,184,4,Tower,PATI,Patient Room Pod B,PRB
+uPATI04B39,330,183,4,Tower,PATI,Patient Room Pod B1,PRB
 HSERV00103,498,323,3,Tower,SERV,Nursing Room,Nursing Room
 FHALL00101,803,368,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101
 FHALL02001,448,578,1,Tower,HALL,Tower Hallway 12,Hallway F02001
-uPATI04B32,240,289,4,Tower,PATI,Patient Room Pod B,PRB
-uPATI04C53,213,575,4,Tower,PATI,Patient Room Pod C,PRC
-uPATI04B33,211,265,4,Tower,PATI,Patient Room Pod B,PRB
-uPATI04C54,206,546,4,Tower,PATI,Patient Room Pod C,PRC
-uPATI04C51,263,608,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04B32,240,288,4,Tower,PATI,Patient Room Pod B,PRB
+uPATI04C53,213,574,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04B33,210,265,4,Tower,PATI,Patient Room Pod B,PRB
+uPATI04C54,206,545,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C51,263,607,4,Tower,PATI,Patient Room Pod C,PRC
 HRETL00102,683,318,2,Tower,RETL,Garden Cafe,Garden Cafe
 uPATI04B31,267,291,4,Tower,PATI,Patient Room Pod B,PRB
-uPATI04C52,232,592,4,Tower,PATI,Patient Room Pod C,PRC
-uPATI04B36,234,176,4,Tower,PATI,Patient Room Pod B,PRB
+uPATI04C52,231,591,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04B36,233,175,4,Tower,PATI,Patient Room Pod B,PRB
 uPATI04C57,287,487,4,Tower,PATI,Patient Room Pod C,PRC
 uPATI04B37,267,159,4,Tower,PATI,Patient Room Pod BE,PRB
 FHALL00901,375,308,1,Tower,HALL,Tower Hallway 2,Hallway F00901
 FHALL02801,496,738,1,Tower,HALL,Lobby Entrance Hallway,HallwayF02801
 uPATI04B34,203,228,5,Tower,PATI,Patient Room Pod B,PRB
-uPATI04C55,207,518,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C55,206,517,4,Tower,PATI,Patient Room Pod C,PRC
 uPATI04B35,209,197,4,Tower,PATI,Patient Room Pod B,PRB
-uPATI04C56,237,481,4,Tower,PATI,Patient Room Pod C,PRC
+uPATI04C56,237,480,4,Tower,PATI,Patient Room Pod C,PRC
 uPATI03303,209,265,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05603,231,591,3,Tower,PATI,Patient Room Pod C,PRC
 uPATI03703,267,159,3,Tower,PATI,Patient Room Pod B,PRB
@@ -189,3 +189,5 @@ FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
 HSTAI00302,538,688,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
 FHALL01701,469,414,1,Tower,HALL,Tower Hallway 9,Hallway F01701
 WELEV00L05,522,375,5,Tower,ELEV,Elevator L Floor 5,Elevator L5
+uHALL04C04,484,389,4,Tower,HALL,Hallway44,Hallway
+WELEV00L04,538,383,4,Tower,ELEV,Elevator4th,Elevator4th
