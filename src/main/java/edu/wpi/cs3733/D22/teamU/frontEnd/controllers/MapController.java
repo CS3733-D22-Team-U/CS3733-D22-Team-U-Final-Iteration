@@ -256,42 +256,42 @@ public class MapController extends ServiceController {
           if (Udb.admin) {
 
             ln.setOnMousePressed(
-                    new EventHandler<MouseEvent>() {
-                      @Override
-                      public void handle(MouseEvent mouseEvent) {
-                        // record a delta distance for the drag and drop operation.
-                        // setPaneOnMousePressedEventHandler(null);
-                        // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
+                    // record a delta distance for the drag and drop operation.
+                    // setPaneOnMousePressedEventHandler(null);
+                    // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-                        dragDelta.x =
-                                ln.getLayoutX()
-                                        - mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth();
-                        dragDelta.y =
-                                ln.getLayoutY()
-                                        - mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight();
-                        ln.setCursor(Cursor.MOVE);
-                      }
-                    });
+                    dragDelta.x =
+                        ln.getLayoutX()
+                            - mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth();
+                    dragDelta.y =
+                        ln.getLayoutY()
+                            - mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight();
+                    ln.setCursor(Cursor.MOVE);
+                  }
+                });
             ln.setOnMouseDragged(
-                    new EventHandler<MouseEvent>() {
-                      @Override
-                      public void handle(MouseEvent mouseEvent) {
-                        ln.tempx =
-                                mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
-                                        + dragDelta.x
-                                        + ln.getX();
-                        ln.tempy =
-                                mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
-                                        + dragDelta.y
-                                        + ln.getY();
-                        ln.setLayoutX(
-                                mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
-                                        + dragDelta.x);
-                        ln.setLayoutY(
-                                mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
-                                        + dragDelta.y);
-                      }
-                    });
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
+                    ln.tempx =
+                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                            + dragDelta.x
+                            + ln.getX();
+                    ln.tempy =
+                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                            + dragDelta.y
+                            + ln.getY();
+                    ln.setLayoutX(
+                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                            + dragDelta.x);
+                    ln.setLayoutY(
+                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                            + dragDelta.y);
+                  }
+                });
           }
           ln.setOnMouseReleased(
               new EventHandler<MouseEvent>() {
@@ -998,12 +998,13 @@ public class MapController extends ServiceController {
           dragCircle dc = null;
         }
         dc =
-                new dragCircle(
-                        circleDragHelp,
-                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth(),
-                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
-                        equipment,
-                        this);;
+            new dragCircle(
+                circleDragHelp,
+                mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth(),
+                mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
+                equipment,
+                this);
+
       }
     }
   }
