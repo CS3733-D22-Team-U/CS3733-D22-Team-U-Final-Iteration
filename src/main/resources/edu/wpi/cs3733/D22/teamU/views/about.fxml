@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.AboutController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>
@@ -76,7 +70,7 @@
                                     </children>
                                 </Pane>
                                 <HBox layoutX="-11.0" layoutY="490.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0" />
-                                <Text fx:id="requestText2" fill="WHITE" layoutX="264.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team:" textAlignment="CENTER" wrappingWidth="128.199951171875">
+                                <Text fx:id="requestText2" fill="WHITE" layoutX="254.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Team:" textAlignment="CENTER" wrappingWidth="168.199951171875">
                                     <font>
                                         <Font name="System Bold" size="28.0" />
                                     </font>
@@ -101,22 +95,22 @@
                                         <Font size="19.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="requestText21" fill="WHITE" layoutX="264.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:" textAlignment="CENTER" wrappingWidth="100.0">
+                                <Text fx:id="requestText21" fill="WHITE" layoutX="270.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:" textAlignment="CENTER" wrappingWidth="100.0">
                                     <font>
                                         <Font name="System Bold" size="28.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="265.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPI - Computer Science Department" textAlignment="CENTER" wrappingWidth="316.25384521484375">
+                                <Text fill="WHITE" layoutX="273.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WPI - Computer Science Department" textAlignment="CENTER" wrappingWidth="356.001953125">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="269.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistent Lead Software Engineer (Back end)">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tim Klein (SO) - Assistant Lead Software Engineer (Back end)">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="269.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistent Lead Software Engineer (Front end) ">
+                                <Text fill="WHITE" layoutX="269.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marko Vila (JR) - Assistant Lead Software Engineer (Front end) ">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -189,7 +183,7 @@
                               <Image url="@../icons/plsß.png" />
                            </image>
                         </ImageView>
-                        <Text fx:id="requestText22" fill="WHITE" layoutX="247.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Dream Team:" textAlignment="CENTER" wrappingWidth="246.3125">
+                        <Text fx:id="requestText22" fill="WHITE" layoutX="260.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Dream Team:" textAlignment="CENTER" wrappingWidth="246.3125">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -231,7 +225,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
-            <Text fill="#044e9a" layoutX="116.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;The Brigham's and Women's Hospital malps and data used in this application are copyrighted and provided for the sole use of educational purposes&quot;">
+            <Text fill="#044e9a" layoutX="94.0" layoutY="686.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;The Brigham's and Women's Hospital malps and data used in this application are copyrighted and provided for the sole use of educational purposes&quot;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

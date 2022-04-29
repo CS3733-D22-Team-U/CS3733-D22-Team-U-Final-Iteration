@@ -15,6 +15,7 @@ public class EquipRequest extends Request {
     if (o == null || getClass() != o.getClass()) return false;
     EquipRequest that = (EquipRequest) o;
     return amount == that.amount
+        && Objects.equals(destination, that.destination)
         && priority == that.priority
         && Objects.equals(typeOfRequest, that.typeOfRequest);
   }

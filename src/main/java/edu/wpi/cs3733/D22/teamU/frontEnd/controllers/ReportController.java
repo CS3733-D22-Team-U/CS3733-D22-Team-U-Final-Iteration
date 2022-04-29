@@ -44,6 +44,7 @@ public class ReportController extends ServiceController {
   @FXML Text time;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
+  @FXML Button allReports;
 
   ArrayList<Employee> staff;
   ObservableList<String> typeList =
@@ -54,6 +55,7 @@ public class ReportController extends ServiceController {
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
+    allReports.setVisible(Udb.admin);
     staff = new ArrayList<>();
     try {
       for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {

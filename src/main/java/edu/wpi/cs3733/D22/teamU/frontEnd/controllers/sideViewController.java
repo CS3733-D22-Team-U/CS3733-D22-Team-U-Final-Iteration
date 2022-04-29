@@ -232,7 +232,7 @@ public class sideViewController extends ServiceController {
     return equipmentUI;
   }
 
-  private void addCleanReq(Equipment equipment) throws SQLException, IOException {
+  /*private void addCleanReq(Equipment equipment) throws SQLException, IOException {
     // auto request for dirty things
 
     boolean alreadyHere = true;
@@ -274,12 +274,11 @@ public class sideViewController extends ServiceController {
             1);
 
     if (!Udb.getInstance().equipRequestImpl.hList().containsValue(r)) {
-      System.out.println(r);
+      System.out.println(r.name + r.getAmount() + r.getDestination());
       Udb.getInstance().equipRequestImpl.hList().put(serviceID, r);
     }
-    // -------------
   }
-
+*/
   ArrayList<EquipmentUI> dirtyEquip = new ArrayList<>();
 
   private boolean tooManyDirtyThings() throws SQLException, IOException {
@@ -298,7 +297,7 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
 
-        addCleanReq(equipment);
+        //addCleanReq(equipment);
 
         // Just popup
         AnchorPane bedAP = (AnchorPane) popupAlert.getChildren().get(0);
