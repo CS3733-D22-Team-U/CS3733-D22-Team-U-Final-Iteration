@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,9 +21,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -34,7 +33,6 @@ public class HomePageController extends ServiceController {
   public Button logOutButton;
   public Text headerText;
   public Pane turtlePond;
-  public ImageView turtle;
   @FXML Button navButton;
   @FXML ImageView navPaneArrow;
 
@@ -56,11 +54,8 @@ public class HomePageController extends ServiceController {
   @FXML Button allRequestsButton;
   @FXML Text name;
 
-  @FXML Pane turtlePane;
-  @FXML Circle apple;
+  @FXML ImageView turtle;
   @FXML AnchorPane turtAnchor;
-  @FXML Button turtButton;
-  @FXML Text message;
   @FXML DatePicker datePicker;
   @FXML Text timeOfDay;
   @FXML Pane datePickerPane;
@@ -75,8 +70,10 @@ public class HomePageController extends ServiceController {
   @FXML Button mainButton;
   @FXML Button religiousButton;
   @FXML Button securityButton;
+
   String userFirstName;
   @FXML ImageView backgroundImage;
+
   private static final String HOVERED_BUTTON = "-fx-border-color: #5898DB";
 
   private static final SimpleDateFormat sdf3 = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -98,15 +95,46 @@ public class HomePageController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    // userName.setText("Dr." + "____");
-
-    // handleNavButtons();
-    // userName.setText("Dr." + "____");
-    // handleNavButtons();
     handleDateTime();
-    // handleTurtle();
-    // playTurtle();
+    playTurtle();
+  }
+
+  public void playTurtle() {
+    anchor.setOnKeyPressed(
+        e -> {
+          double nextX;
+          double nextY;
+
+          if (e.getCode() == KeyCode.D) {
+            nextX = turtle.getLayoutX() + 10;
+            if (nextX >= 0 && nextX <= 220) {
+              turtle.setLayoutX(nextX);
+              turtle.setRotate(90);
+            }
+          }
+
+          if (e.getCode() == KeyCode.A) {
+            nextX = turtle.getLayoutX() - 10;
+            if (nextX >= 0 && nextX <= 220) {
+              turtle.setLayoutX(nextX);
+              turtle.setRotate(-90);
+            }
+          }
+          if (e.getCode() == KeyCode.W) {
+            nextY = turtle.getLayoutY() - 10;
+            if (nextY >= 0 && nextY <= 200) {
+              turtle.setLayoutY(nextY);
+              turtle.setRotate(0);
+            }
+          }
+          if (e.getCode() == KeyCode.S) {
+            nextY = turtle.getLayoutY() + 10;
+            if (nextY >= 0 && nextY <= 200) {
+              turtle.setLayoutY(nextY);
+              turtle.setRotate(180);
+            }
+          }
+        });
   }
 
   private void handleDateTime() {
