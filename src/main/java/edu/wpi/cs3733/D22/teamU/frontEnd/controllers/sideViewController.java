@@ -149,8 +149,8 @@ public class sideViewController extends ServiceController {
     try {
       if (tooManyDirtyThings() == true) {
         masterPane.getChildren().add(popupAlert);
-        popupAlert.setLayoutX(0);
-        popupAlert.setLayoutY(0);
+        popupAlert.setLayoutX(600);
+        popupAlert.setLayoutY(80);
       }
     } catch (SQLException throwables) {
       throwables.printStackTrace();
