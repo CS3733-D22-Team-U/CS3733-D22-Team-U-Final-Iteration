@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,6 +42,16 @@ public class Uapp extends Application {
   @Override
   public void stop() {
     running = false;
+
+    try {
+      Udb.getInstance().equipRequestImpl.JavaToSQL();
+      Udb.getInstance().equipRequestImpl.JavaToCSV(Udb.getInstance().equipRequestImpl.csvFile);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
     log.info("Shutting Down");
   }
 

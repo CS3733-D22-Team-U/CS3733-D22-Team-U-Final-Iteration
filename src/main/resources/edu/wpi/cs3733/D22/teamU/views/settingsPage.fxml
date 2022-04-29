@@ -83,7 +83,7 @@
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>
-      <Text fill="#5898db" layoutX="563.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="229.1601562499999">
+      <Text fill="#5898db" layoutX="549.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Display Name" wrappingWidth="258.4">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
