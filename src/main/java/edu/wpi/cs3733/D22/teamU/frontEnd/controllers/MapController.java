@@ -250,7 +250,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
+          firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           if (Udb.admin) {
@@ -1004,7 +1004,6 @@ public class MapController extends ServiceController {
                 mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
                 equipment,
                 this);
-
       }
     }
   }
