@@ -21,10 +21,10 @@
                 <AnchorPane fx:id="pane" prefHeight="470.0" prefWidth="468.0">
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3bafb4f2" height="472.0" stroke="#b0e5e3" strokeType="INSIDE" width="423.0" />
-                        <GridPane layoutX="14.0" layoutY="10.0" prefHeight="253.0" prefWidth="378.0">
+                        <GridPane layoutX="14.0" layoutY="15.0" prefHeight="310.0" prefWidth="328.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.20000000000002" minWidth="10.0" prefWidth="108.80000762939454" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0000160217285" minWidth="0.0" prefWidth="273.99999237060547" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.20000000000002" minWidth="10.0" prefWidth="111.80000000000001" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0000160217285" minWidth="0.0" prefWidth="214.2" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -41,7 +41,6 @@
                                 <RowConstraints maxHeight="30.0" minHeight="8.800012969970702" prefHeight="22.4" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="30.0" minHeight="8.800012969970702" prefHeight="22.4" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
@@ -100,7 +99,7 @@
                                         <Font size="15.0" />
                                     </font>
                                 </TextField>
-                                <TextField fx:id="popupYCoord" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                <TextField fx:id="popupYCoord" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -127,11 +126,10 @@
                                 </TextField>
                             </children>
                         </GridPane>
-                        <GridPane layoutX="30.0" layoutY="347.0" prefHeight="54.0" prefWidth="340.0">
+                        <GridPane layoutX="73.0" layoutY="343.0" prefHeight="54.0" prefWidth="349.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.33329264322916" minWidth="10.0" prefWidth="124.0000244140625" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.6666259765625" minWidth="10.0" prefWidth="79.9999755859375" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.79996337890626" minWidth="10.0" prefWidth="136.79996337890626" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.59998779296876" minWidth="10.0" prefWidth="132.0000244140625" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.39997558593748" minWidth="10.0" prefWidth="207.39997558593748" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints />
@@ -143,13 +141,18 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="remove" mnemonicParsing="false" prefHeight="44.0" prefWidth="107.0" style="-fx-background-color: #029ca6ff;" text="Remove" textFill="WHITE" GridPane.columnIndex="2">
+                                <Button fx:id="remove" mnemonicParsing="false" prefHeight="44.0" prefWidth="107.0" style="-fx-background-color: #029ca6ff;" text="Remove" textFill="WHITE" GridPane.columnIndex="1">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Button>
                      </children>
                         </GridPane>
+                  <Button fx:id="exitEdit" layoutX="355.0" layoutY="8.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="43.0" style="-fx-background-color: #A5D6D8;" text="X">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </content>

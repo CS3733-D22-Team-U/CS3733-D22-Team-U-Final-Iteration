@@ -93,7 +93,7 @@ public class LocationNode extends Group {
       if (request instanceof EquipRequest && equipCheck) {
         dupes++;
         equipCheck = false;
-        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/medEquip.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/DefaultEquip.png");
         continue;
       }
       if (request instanceof LabRequest && labCheck) {
