@@ -48,7 +48,7 @@
             <Text fx:id="time" layoutX="957.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
             <StackPane fx:id="requestsStack" layoutX="214.0" layoutY="116.0">
                <children>
-                  <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="activeRequestPane" maxHeight="563.0" maxWidth="656.0" minWidth="415.0" prefHeight="555.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
@@ -85,7 +85,7 @@
                            <children>
                               <Text fx:id="requestText1" fill="#044e9a" layoutX="52.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                               <TextArea fx:id="textInput" layoutX="21.0" layoutY="49.0" maxHeight="1.7976931348623157E308" prefHeight="291.0" prefWidth="273.0" />
@@ -93,10 +93,10 @@
                         </Pane>
                         <Pane layoutX="340.0" layoutY="18.0" prefHeight="151.0" prefWidth="285.0">
                            <children>
-                              <ComboBox fx:id="locations" layoutX="48.0" layoutY="150.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <ComboBox fx:id="locations" layoutX="48.0" layoutY="150.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                               <Text fx:id="requestText" fill="WHITE" layoutX="54.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -121,10 +121,10 @@
                               </Button>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="staffDropDown" layoutX="387.0" layoutY="234.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox fx:id="staffDropDown" layoutX="387.0" layoutY="234.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                         <Text fx:id="requestText2" fill="WHITE" layoutX="388.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff" textAlignment="CENTER" wrappingWidth="177.199951171875">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <Text fx:id="sucessRequest" fill="WHITE" layoutX="387.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your maintenance request was sucessfull!" textAlignment="CENTER" visible="false" wrappingWidth="190.40006103515628">
@@ -293,9 +293,6 @@
          </children>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>

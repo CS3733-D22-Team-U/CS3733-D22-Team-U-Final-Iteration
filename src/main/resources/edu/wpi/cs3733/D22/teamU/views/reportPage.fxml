@@ -35,21 +35,21 @@
                <children>
                   <Pane fx:id="newRequestPane" maxHeight="603.0" maxWidth="360.0" minHeight="-Infinity" minWidth="136.0" prefHeight="548.0" prefWidth="136.0" style="-fx-background-color: #A5D6D8 #A5D6D8; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
-                        <Text fx:id="textStaff" fill="#044e9a" layoutX="147.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff">
+                        <Text fx:id="textStaff" fill="WHITE" layoutX="147.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font size="25.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="employees" layoutX="84.0" layoutY="132.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                        <Text fx:id="textStaff1" fill="#044e9a" layoutX="87.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Of Report">
+                        <ComboBox fx:id="employees" layoutX="84.0" layoutY="132.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
+                        <Text fx:id="textStaff1" fill="WHITE" layoutX="87.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Of Report">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font size="25.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="typeOfReport" layoutX="84.0" layoutY="231.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                        <Text fx:id="textStaff11" fill="#044e9a" layoutX="111.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                        <ComboBox fx:id="typeOfReport" layoutX="84.0" layoutY="231.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
+                        <Text fx:id="textStaff11" fill="WHITE" layoutX="111.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font size="25.0" />
                            </font>
                         </Text>
                         <JFXTextArea fx:id="reportDescrip" layoutX="32.0" layoutY="331.0" prefHeight="128.0" prefWidth="298.0" style="-fx-background-color: white;" unFocusColor="WHITE" />
@@ -84,9 +84,9 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="allActiveRequestsPane" maxHeight="614.0" maxWidth="656.0" minWidth="415.0" prefHeight="614.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="allActiveRequestsPane" maxHeight="614.0" maxWidth="656.0" minWidth="415.0" prefHeight="614.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
-                        <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
+                        <TableView fx:id="table" editable="true" layoutX="154.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
                               <TableColumn fx:id="nameID" prefWidth="75.0" text="ID" />
                               <TableColumn fx:id="patientName" prefWidth="75.0" text="Patient" />
@@ -101,6 +101,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
+                        <ComboBox fx:id="employees2" layoutX="-8.0" layoutY="25.0" prefHeight="12.0" prefWidth="143.0" style="-fx-background-color: #3BAFB4;" />
                      </children>
                   </Pane>
                </children>
@@ -253,9 +254,6 @@
                </graphic>
             </Button>
          </children>
-         <effect>
-            <DropShadow />
-         </effect>
       </Pane>
       <Pane layoutX="361.0" prefHeight="44.0" prefWidth="422.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15  15;">
          <children>

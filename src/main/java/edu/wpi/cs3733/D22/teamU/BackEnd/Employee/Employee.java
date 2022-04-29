@@ -28,6 +28,13 @@ public class Employee {
     this.password = "N/A";
   }
 
+  public Employee() {
+    this.employeeID = employeeID;
+    this.occupation = "N/A";
+    this.reports = 0;
+    this.onDuty = false;
+  }
+
   public Employee(
       String employeeID,
       String firstName,
@@ -45,6 +52,16 @@ public class Employee {
     this.onDuty = onDuty;
     this.username = username;
     this.password = password;
+  }
+
+  public Employee(
+      String employeeID, String firstName, String lastName, String occupation, boolean onDuty) {
+    this.employeeID = employeeID;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.occupation = occupation;
+    this.reports = reports;
+    this.onDuty = onDuty;
   }
 
   public ArrayList<Report> getReportList() {

@@ -83,7 +83,7 @@ HHALL01002,803,738,2,Tower,HALL,Hallway Connector 10 Floor 2,Hallway H01002
 WELEV00LL1,533,382,L1,Tower,ELEV,Elevator L Floor L1,Elevator LL1
 FHALL03001,393,704,1,Tower,HALL,Lobby Hallway 5,Hallway F02701
 FSERV00401,469,428,1,Tower,DEPT,Spiritual Care Office,SCO
-HHALL01003,533,278,3,Tower,HALL,Hallway Connector 10 Floor 3,Hallway H01003
+HHALL01003,533,277,3,Tower,HALL,Hallway Connector 10 Floor 3,Hallway H01003
 WELEV00LL2,533,382,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 CREST002L1,813,741,L1,Tower,REST,Restroom M Elevator Floor L1,Restroom C002L1
 FSTAI00201,421,260,1,Tower,STAI,Tower Stairway 1,Tower Stairs 1
@@ -169,7 +169,7 @@ HHALL00503,428,748,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
 FHALL00201,774,368,1,Tower,HALL,Lobby Shattuck Street,Hallway F00201
 FHALL02501,713,697,1,Tower,HALL,Lobby Hallway 3,Hallway F02501
 FHALL02101,517,604,1,Tower,HALL,Tower Hallway Entrance,Tower Entrance 2
-FHALL00601,617,388,1,Tower,HALL,Tower Lobby Entrance 1,Tower Entrance
+FHALL00601,617,385,1,Tower,HALL,Tower Lobby Entrance 1,Tower Entrance
 FHALL02901,448,738,1,Tower,HALL,75 Lobby,75 Lobby
 uPATI03403,203,228,3,Tower,PATI,Patient Room Pod B,PRB
 uPATI05703,263,607,3,Tower,PATI,Patient Room Pod C,PRC
@@ -182,9 +182,9 @@ uPATI05303,207,518,3,Tower,PATI,Patient Room Pod C,PRC
 FDEPT00201,358,578,1,Tower,DEPT,Bretholtz Center for Patients and Families,Bretholtz WR
 FHALL01301,375,283,1,Tower,HALL,Tower Hallway 5,Hallway F01301
 FDEPT00601,528,487,1,Tower,DEPT,International Patient Center,IPC
-WELEV00L01,558,387,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
+WELEV00L01,558,385,1,Tower,ELEV,Elevator L Floor 1,Elevator L1
 WELEV00L02,553,383,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
-CHALL006L1,860,741,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
+CHALL006L1,860,740,L1,Tower,HALL,Hallway 6 Floor L1,Hallway C006L1
 FHALL03201,506,487,1,Tower,HALL,Tower Hallway 13,Hallway F03201
 HSTAI00302,538,688,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
-FHALL01701,469,414,1,Tower,HALL,Tower Hallway 9,Hallway F01701
+FHALL01701,468,413,1,Tower,HALL,Tower Hallway 9,Hallway F01701

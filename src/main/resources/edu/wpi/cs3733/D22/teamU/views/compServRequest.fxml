@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.CompServRequestController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.CompServRequestController">
    <children>
       <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/servicePage.css">
          <children>
@@ -41,7 +51,7 @@
             <Text fx:id="time" layoutX="957.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
             <StackPane fx:id="requestsStack" layoutX="219.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
-                  <Pane fx:id="allRequestPane" maxHeight="559.0" maxWidth="756.0" minWidth="415.0" prefHeight="552.0" prefWidth="610.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="allRequestPane" maxHeight="559.0" maxWidth="756.0" minWidth="415.0" prefHeight="552.0" prefWidth="610.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
                         <TableView fx:id="table" editable="true" layoutX="32.0" layoutY="24.0" prefHeight="504.0" prefWidth="550.0">
                            <columns>
@@ -67,19 +77,19 @@
                   <Pane fx:id="newRequestPane" maxHeight="564.0" maxWidth="758.0" minWidth="415.0" prefHeight="552.0" prefWidth="648.0" style="-fx-background-color: #A5D6D8 #A5D6D8; -fx-background-radius: 15;" StackPane.alignment="TOP_LEFT">
                      <children>
                         <HBox layoutX="174.0" layoutY="480.0" maxHeight="43.0" maxWidth="492.0" minHeight="25.0" minWidth="100.0" prefHeight="43.0" prefWidth="342.0" spacing="51.0" />
-                        <ComboBox id="destination" fx:id="locations" layoutX="385.0" layoutY="151.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                        <ComboBox id="destination" fx:id="employees" layoutX="386.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox id="destination" fx:id="locations" layoutX="385.0" layoutY="151.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
+                        <ComboBox id="destination" fx:id="employees" layoutX="386.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                         <Pane layoutX="17.0" layoutY="114.0" maxHeight="530.0" maxWidth="384.0" minWidth="320.0" prefHeight="423.0" prefWidth="320.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                            <children>
                               <Text fx:id="textFromLanguage" fill="#044e9a" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                               <HBox layoutX="-27.0" layoutY="480.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" spacing="51.0" />
                               <Text fx:id="textPatientName" fill="#044e9a" layoutX="51.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Device" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                               <TextArea id="message" fx:id="messageBox" layoutX="27.0" layoutY="40.0" prefHeight="198.0" prefWidth="266.0" promptText="Description of Issue" wrapText="true">
@@ -277,9 +287,6 @@
          </children>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>

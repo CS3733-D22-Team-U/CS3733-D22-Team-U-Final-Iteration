@@ -47,7 +47,7 @@
                            <children>
                               <Text fx:id="textFromLanguage" fill="#044e9a" layoutX="52.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religion" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                               <TextArea fx:id="inputReligion" layoutX="20.0" layoutY="164.0" maxHeight="1.7976931348623157E308" prefHeight="39.0" prefWidth="285.0" promptText="Input Religion" />
@@ -73,14 +73,14 @@
                               </HBox>
                               <Text fx:id="textPatientName1" fill="#044e9a" layoutX="52.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                               <TextArea fx:id="inputNotes" layoutX="23.0" layoutY="242.0" maxHeight="1.7976931348623157E308" prefHeight="41.0" prefWidth="285.0" promptText="Input Notes" />
                               <TextArea fx:id="inputName" layoutX="19.0" layoutY="56.0" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="285.0" promptText="Describe Request" />
                               <Text fx:id="textFromLanguage1" fill="#044e9a" layoutX="52.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request" textAlignment="CENTER" wrappingWidth="219.0">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -89,12 +89,12 @@
                            <children>
                               <Text fx:id="textDestination" fill="WHITE" layoutX="54.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" textAlignment="CENTER" wrappingWidth="177.199951171875">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
                         </Pane>
-                        <ComboBox fx:id="employees" layoutX="387.0" layoutY="241.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox fx:id="employees" layoutX="387.0" layoutY="241.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                         <Text fx:id="requestText" layoutX="439.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cleared!" visible="false" wrappingWidth="85.336669921875" />
                         <Pane prefHeight="84.0" prefWidth="615.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;">
                            <children>
@@ -108,15 +108,15 @@
                         <TextArea fx:id="inputPatient" layoutX="388.0" layoutY="315.0" maxHeight="1.7976931348623157E308" prefHeight="30.0" prefWidth="190.0" />
                         <Text fx:id="textPatientName" fill="WHITE" layoutX="374.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" textAlignment="CENTER" wrappingWidth="219.0">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <Text fx:id="textStaff" fill="WHITE" layoutX="463.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="locations" layoutX="387.0" layoutY="169.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                        <ComboBox fx:id="locations" layoutX="387.0" layoutY="169.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                         <Button fx:id="clearButton1" alignment="CENTER" layoutX="421.0" layoutY="415.0" lineSpacing="5.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toReligiousHelp" prefHeight="30.0" prefWidth="125.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -124,7 +124,7 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Pane fx:id="allActiveRequestsPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="530.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="allActiveRequestsPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="530.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
                         <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
@@ -288,9 +288,6 @@
          </children>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>

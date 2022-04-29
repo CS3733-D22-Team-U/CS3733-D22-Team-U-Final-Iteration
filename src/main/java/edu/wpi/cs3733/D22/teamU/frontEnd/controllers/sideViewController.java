@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
-import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
@@ -233,52 +232,52 @@ public class sideViewController extends ServiceController {
   }
 
   /*private void addCleanReq(Equipment equipment) throws SQLException, IOException {
-    // auto request for dirty things
+      // auto request for dirty things
 
-    boolean alreadyHere = true;
-    String serviceID = "notWork";
+      boolean alreadyHere = true;
+      String serviceID = "notWork";
 
-    // makes the id
-    while (alreadyHere) {
-      double rand = Math.random() * 10000;
+      // makes the id
+      while (alreadyHere) {
+        double rand = Math.random() * 10000;
 
-      try {
-        alreadyHere = Udb.getInstance().equipRequestImpl.hList().containsKey("EQU" + (int) rand);
-      } catch (Exception e) {
-        System.out.println(
-            "alreadyHere variable messed up in religious service request controller");
+        try {
+          alreadyHere = Udb.getInstance().equipRequestImpl.hList().containsKey("EQU" + (int) rand);
+        } catch (Exception e) {
+          System.out.println(
+              "alreadyHere variable messed up in religious service request controller");
+        }
+
+        serviceID = "EQU" + (int) rand;
       }
 
-      serviceID = "EQU" + (int) rand;
-    }
+      String l;
+      if (equipment.getName().equals("Infusion Pumps")) {
+        l = "uSTOR00101";
+      } else {
+        // THIS NEED TO CHANGE TO OR PARK
+        l = "HHALL00603";
+      }
 
-    String l;
-    if (equipment.getName().equals("Infusion Pumps")) {
-      l = "uSTOR00101";
-    } else {
-      // THIS NEED TO CHANGE TO OR PARK
-      l = "HHALL00603";
-    }
+      EquipRequest r =
+          new EquipRequest(
+              serviceID,
+              equipment.getName(),
+              equipment.getInUse(),
+              null,
+              "In Progress",
+              e,
+              l,
+              sdf3.format(timestamp).substring(0, 10),
+              sdf3.format(timestamp).substring(11),
+              1);
 
-    EquipRequest r =
-        new EquipRequest(
-            serviceID,
-            equipment.getName(),
-            equipment.getInUse(),
-            null,
-            "In Progress",
-            e,
-            l,
-            sdf3.format(timestamp).substring(0, 10),
-            sdf3.format(timestamp).substring(11),
-            1);
-
-    if (!Udb.getInstance().equipRequestImpl.hList().containsValue(r)) {
-      System.out.println(r.name + r.getAmount() + r.getDestination());
-      Udb.getInstance().equipRequestImpl.hList().put(serviceID, r);
+      if (!Udb.getInstance().equipRequestImpl.hList().containsValue(r)) {
+        System.out.println(r.name + r.getAmount() + r.getDestination());
+        Udb.getInstance().equipRequestImpl.hList().put(serviceID, r);
+      }
     }
-  }
-*/
+  */
   ArrayList<EquipmentUI> dirtyEquip = new ArrayList<>();
 
   private boolean tooManyDirtyThings() throws SQLException, IOException {
@@ -297,7 +296,7 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
 
-        //addCleanReq(equipment);
+        // addCleanReq(equipment);
 
         // Just popup
         AnchorPane bedAP = (AnchorPane) popupAlert.getChildren().get(0);
