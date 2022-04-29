@@ -1004,7 +1004,6 @@ public class MapController extends ServiceController {
                 mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
                 equipment,
                 this);
-
       }
     }
   }
