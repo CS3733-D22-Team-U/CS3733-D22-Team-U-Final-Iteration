@@ -167,7 +167,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            // firebaseUpdate(currMainReq);
+            firebaseUpdate(currMainReq);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
@@ -334,7 +334,7 @@ public class MaintenanceRequestDaoImpl implements DataDao<MaintenanceRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        // firebaseUpdate(data);
+        firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
