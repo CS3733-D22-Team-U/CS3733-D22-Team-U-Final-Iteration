@@ -443,7 +443,7 @@ public class MapController extends ServiceController {
       edges = pathFinding.findPath(From.getValue(), To.getValue());
       System.out.println(edges.size());
       if (edges.size() == 0) {
-        masterPane.getChildren().add(popupAlert);
+        anchor.getChildren().add(popupAlert);
         popupAlert.setLayoutX(700);
         popupAlert.setLayoutY(100);
         closePopup();
