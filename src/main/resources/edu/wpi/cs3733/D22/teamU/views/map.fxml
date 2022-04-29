@@ -728,9 +728,9 @@
                                 </Tab>
                                 <Tab text="Table View">
                                     <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="872.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="900.0">
                                             <children>
-                                                <TableView fx:id="mapTable" layoutX="3.0" layoutY="-27.0" prefHeight="534.0" prefWidth="1010.0">
+                                                <TableView fx:id="mapTable" layoutX="3.0" layoutY="-27.0" prefHeight="534.0" prefWidth="820.0" stylesheets="@../css/tableViewPopUp.css">
                                                     <columns>
                                                         <TableColumn fx:id="nodeID" prefWidth="117.0" text="NodeId" />
                                                         <TableColumn prefWidth="88.0" text="xCoord" fx:id="x" />

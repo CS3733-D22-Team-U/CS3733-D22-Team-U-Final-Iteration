@@ -14,8 +14,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
 
 
    <children>
@@ -23,14 +28,14 @@
          <children>
             <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
                <children>
-                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="23.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="32.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/hospitalIcon.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="headerText" fill="WHITE" layoutX="109.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="974.9564361572266">
+                  <Text fx:id="headerText" fill="WHITE" layoutX="118.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="974.9564361572266">
                      <font>
-                        <Font size="40.0" />
+                        <Font size="48.0" />
                      </font></Text>
                </children>
             </Pane>
