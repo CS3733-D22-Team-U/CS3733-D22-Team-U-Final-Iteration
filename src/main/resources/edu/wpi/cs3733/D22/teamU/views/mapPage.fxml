@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapPageController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.MapPageController">
 
 
     <children>
@@ -54,9 +54,18 @@
                   </Button>
                     </children>
                 </Pane>
-                <Button layoutX="283.0" layoutY="298.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;" />
-                <Button layoutX="644.0" layoutY="307.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;" />
-                <Button layoutX="477.0" layoutY="499.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+                <Button layoutX="283.0" layoutY="298.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutX="644.0" layoutY="307.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="141.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button layoutX="477.0" layoutY="499.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
                     <Button layoutX="717.0" layoutY="408.0" minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: transparent;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" textFill="#2a20ea">
                         <tooltip>
                             <Tooltip text="Lord Harsh 'Mid-Life Crisis' Patel, the All-Knowing" />
@@ -71,6 +80,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                     </Button>
             <Button layoutX="228.0" layoutY="411.0" minHeight="190.0" mnemonicParsing="false" onAction="#toMap" style="-fx-background-color: transparent;" styleClass="dashboardNavButton" stylesheets="@../css/buttons.css" textFill="#2a20ea">
                <tooltip>
@@ -86,6 +98,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Pane layoutX="165.0" layoutY="252.0" prefHeight="145.0" prefWidth="328.0" style="-fx-background-color: #d9f0f1;" styleClass="horizontalLabel" stylesheets="@../css/homePageLabels.css">
                <children>

@@ -43,14 +43,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -92,6 +89,7 @@ public class filterEmployeeController extends ServiceController implements Initi
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     try {
       setUpEmployeeRequests();
     } catch (SQLException throwables) {
@@ -352,13 +350,6 @@ public class filterEmployeeController extends ServiceController implements Initi
   public void mouseExit(MouseEvent mouseEvent) {
     Button button = (Button) mouseEvent.getSource();
     button.setStyle("-fx-border-color: transparent");
-  }
-
-  public void toEmployeePage(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/employeePage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
   }
 
   public void editEmployee() {

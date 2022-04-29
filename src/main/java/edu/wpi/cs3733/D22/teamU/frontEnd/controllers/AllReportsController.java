@@ -13,16 +13,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
-public class AllReportsController implements Initializable {
+public class AllReportsController extends ServiceController implements Initializable {
   @FXML TableColumn<Report, String> idCol;
   @FXML TableColumn<Report, String> employeeCol;
   @FXML TableColumn<Report, String> typeCol;
@@ -39,6 +38,8 @@ public class AllReportsController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+
     setUpAllReports();
     //    staff = new ArrayList<>();
     //    try {
@@ -54,6 +55,15 @@ public class AllReportsController implements Initializable {
     //    employees.getItems().addAll(staff);
     //    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
   }
+
+  @Override
+  public void addRequest() throws SQLException, IOException {}
+
+  @Override
+  public void removeRequest() {}
+
+  @Override
+  public void updateRequest() {}
 
   private void setUpAllReports() throws SQLException, IOException {
 
@@ -85,10 +95,13 @@ public class AllReportsController implements Initializable {
   }
 
   public void backToReport(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/reportPage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/reportPage.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Uapp.stage.show();
   }
 
   //  public void updat2eList(ActionEvent actionEvent) throws SQLException, IOException {

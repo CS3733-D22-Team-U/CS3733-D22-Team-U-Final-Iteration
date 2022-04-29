@@ -37,7 +37,7 @@ public class dragCircle extends Circle {
     setRadius(10);
     setFill(Color.rgb(4, 78, 154));
     enableDrag();
-    mc.masterPane.getChildren().add(this);
+    mc.anchor.getChildren().add(this);
   }
 
   private void enableDrag() {
@@ -51,8 +51,12 @@ public class dragCircle extends Circle {
             // setPaneOnMousePressedEventHandler(null);
             // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-            dragDelta.x = getCenterX() - mouseEvent.getSceneX();
-            dragDelta.y = getCenterY() - mouseEvent.getSceneY();
+            dragDelta.x =
+                getCenterX()
+                    - mouseEvent.getSceneX() / mc.anchor.getWidth() * mc.anchor.getPrefWidth();
+            dragDelta.y =
+                getCenterY()
+                    - mouseEvent.getSceneY() / mc.anchor.getHeight() * mc.anchor.getPrefHeight();
             setCursor(Cursor.MOVE);
           }
         });
@@ -61,10 +65,16 @@ public class dragCircle extends Circle {
           @Override
           public void handle(MouseEvent mouseEvent) {
 
-            tempx = mouseEvent.getSceneX() + dragDelta.x + getLayoutX();
-            tempy = mouseEvent.getSceneY() + dragDelta.y + getLayoutY();
-            setCenterX(mouseEvent.getSceneX() + dragDelta.x);
-            setCenterY(mouseEvent.getSceneY() + dragDelta.y);
+            tempx =
+                mouseEvent.getSceneX() / mc.anchor.getWidth() * mc.anchor.getPrefWidth()
+                    + dragDelta.x
+                    + getLayoutX();
+            tempy =
+                mouseEvent.getSceneY() / mc.anchor.getHeight() * mc.anchor.getPrefHeight()
+                    + dragDelta.y
+                    + getLayoutY();
+            setCenterX(tempx);
+            setCenterY(tempy);
           }
         });
 
@@ -114,7 +124,7 @@ public class dragCircle extends Circle {
               // Updating the Location HashMap
 
             }
-            mc.masterPane.getChildren().remove(mc.dc);
+            mc.anchor.getChildren().remove(mc.dc);
             try {
               Udb.getInstance().edit(equipment);
             } catch (IOException e) {
@@ -131,6 +141,7 @@ public class dragCircle extends Circle {
     mc.locations.put(lnNew.getLocation().getNodeID(), lnNew);
     ln.getPane().getChildren().remove(ln);
     mc.enableDrag(lnNew);
+
     lnNew.setOnMouseClicked(mc::popupOpen);
     lnNew.getPane().getChildren().add(lnNew);
   }

@@ -48,6 +48,8 @@ public class APIPageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+
     datePicker = new DatePicker(LocalDate.now());
     DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
 
@@ -90,7 +92,17 @@ public class APIPageController extends ServiceController {
   @Override
   public void updateRequest() {}
 
-  public void openTransport(ActionEvent actionEvent) throws ServiceException {
+  public void openTransport(ActionEvent actionEvent) throws ServiceException, IOException {
+    /*
+    File folder = new File("cssAPI");
+    folder.mkdir();
+    InputStream csvEdges =
+        Main.class
+            .getClassLoader()
+            .getResourceAsStream("edu/wpi/cs3733/D22/teamU/css/API/style.css");
+    String edges = DBController.copyFile(csvEdges, "cssAPI/style.css");
+
+     */
     DBController.transportApi.run(0, 0, 1920, 1080, "", "CHALL007L2", "CHALL007L2");
   }
 

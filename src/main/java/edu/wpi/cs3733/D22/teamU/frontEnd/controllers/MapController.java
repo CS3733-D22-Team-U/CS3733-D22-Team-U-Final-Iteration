@@ -45,7 +45,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import org.assertj.core.util.diff.Delta;
 
 public class MapController extends ServiceController {
 
@@ -66,7 +65,7 @@ public class MapController extends ServiceController {
   public TextField equipInUse;
   public TextField equipAvailable;
   public TabPane popupTabPane;
-  public AnchorPane masterPane;
+  public AnchorPane anchor;
   public TabPane mapTab;
   public Pane circleDragHelp;
   AnchorPane popupEditPane;
@@ -151,7 +150,9 @@ public class MapController extends ServiceController {
 
   public MapController() throws IOException, SQLException {}
 
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     try {
       pathFinding = new PathFinding(Udb.getInstance().edgeDao.list());
       System.out.println(Udb.getInstance().edgeDao.list().size());
@@ -252,30 +253,46 @@ public class MapController extends ServiceController {
           // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
-          ln.setOnMousePressed(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                  // record a delta distance for the drag and drop operation.
-                  // setPaneOnMousePressedEventHandler(null);
-                  // setPaneOnMouseDraggedEventHandlerEventHandler(null);
+          if (Udb.admin) {
 
-                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX();
-                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY();
-                  ln.setCursor(Cursor.MOVE);
-                }
-              });
-          ln.setOnMouseDragged(
-              new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
+            ln.setOnMousePressed(
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
+                    // record a delta distance for the drag and drop operation.
+                    // setPaneOnMousePressedEventHandler(null);
+                    // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-                  ln.tempx = mouseEvent.getSceneX() + dragDelta.x + ln.getX();
-                  ln.tempy = mouseEvent.getSceneY() + dragDelta.y + ln.getY();
-                  ln.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
-                  ln.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                }
-              });
+                    dragDelta.x =
+                        ln.getLayoutX()
+                            - mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth();
+                    dragDelta.y =
+                        ln.getLayoutY()
+                            - mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight();
+                    ln.setCursor(Cursor.MOVE);
+                  }
+                });
+            ln.setOnMouseDragged(
+                new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent mouseEvent) {
+                    ln.tempx =
+                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                            + dragDelta.x
+                            + ln.getX();
+                    ln.tempy =
+                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                            + dragDelta.y
+                            + ln.getY();
+                    ln.setLayoutX(
+                        mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                            + dragDelta.x);
+                    ln.setLayoutY(
+                        mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                            + dragDelta.y);
+                  }
+                });
+          }
           ln.setOnMouseReleased(
               new EventHandler<MouseEvent>() {
                 @Override
@@ -442,7 +459,7 @@ public class MapController extends ServiceController {
       edges = pathFinding.findPath(From.getValue(), To.getValue());
       System.out.println(edges.size());
       if (edges.size() == 0) {
-        masterPane.getChildren().add(popupAlert);
+        anchor.getChildren().add(popupAlert);
         popupAlert.setLayoutX(700);
         popupAlert.setLayoutY(100);
         closePopup();
@@ -532,9 +549,9 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) masterPane;
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    Pane pane = (Pane) anchor;
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
     if (pane.getChildren().contains(popupEditPane)) {
@@ -667,12 +684,12 @@ public class MapController extends ServiceController {
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
-    if (masterPane.getChildren().contains(popupAddPane)) {
-      masterPane.getChildren().remove(popupAddPane);
+    if (anchor.getChildren().contains(popupAddPane)) {
+      anchor.getChildren().remove(popupAddPane);
     }
     request = null;
     equipment = null;
@@ -680,7 +697,7 @@ public class MapController extends ServiceController {
     reqTable.getItems().clear();
     LocationNode locationNode = (LocationNode) mouseEvent.getSource();
     Location location = locationNode.getLocation();
-    Pane pane = (Pane) masterPane;
+    Pane pane = (Pane) anchor;
 
     popupEditPane.setLayoutX(663);
 
@@ -747,11 +764,11 @@ public class MapController extends ServiceController {
             try {
               switch (b.getId()) {
                 case "edit":
-                  b.setDisable(!Udb.getInstance().admin);
+                  b.setDisable(!Udb.admin);
                   b.setOnMouseClicked(this::popupEdit);
                   break;
                 case "remove":
-                  b.setDisable(!Udb.getInstance().admin);
+                  b.setDisable(!Udb.admin);
                   b.setOnMouseClicked(this::popupRemove);
                   break;
                 default:
@@ -772,8 +789,10 @@ public class MapController extends ServiceController {
       if (n instanceof Button) {
         Button b2 = (Button) n;
         if (b2.getId().equals("removeEquip")) {
+          b2.setDisable(!Udb.admin);
           b2.setOnMouseClicked(this::deleteEquip);
         } else if (b2.getId().equals("editEquip")) {
+          b2.setDisable(!Udb.admin);
           b2.setOnMouseClicked(this::editEquipFunc);
         }
       } else if (n instanceof TableView) {
@@ -896,8 +915,8 @@ public class MapController extends ServiceController {
   }
 
   public void editEquipFunc(MouseEvent mouseEvent) {
-    if (masterPane.getChildren().contains(dc)) {
-      masterPane.getChildren().remove(dc);
+    if (anchor.getChildren().contains(dc)) {
+      anchor.getChildren().remove(dc);
       dragCircle dc = null;
     }
     try {
@@ -967,19 +986,26 @@ public class MapController extends ServiceController {
   }
 
   public void selectEquip(MouseEvent mouseEvent) {
-    if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
-      this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
-      this.equipNameTF.setText(this.equipment.getName());
-      this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
-      this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
-      this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
-      if (masterPane.getChildren().contains(dc)) {
-        masterPane.getChildren().remove(dc);
-        dragCircle dc = null;
+    if (Udb.admin) {
+      if (equipTable.getSelectionModel().getSelectedItem() instanceof Equipment) {
+        this.equipment = (Equipment) equipTable.getSelectionModel().getSelectedItem();
+        this.equipNameTF.setText(this.equipment.getName());
+        this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
+        this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
+        this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
+        if (anchor.getChildren().contains(dc)) {
+          anchor.getChildren().remove(dc);
+          dragCircle dc = null;
+        }
+        dc =
+            new dragCircle(
+                circleDragHelp,
+                mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth(),
+                mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight(),
+                equipment,
+                this);
+
       }
-      dc =
-          new dragCircle(
-              circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
     }
   }
 

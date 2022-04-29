@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
+<AnchorPane fx:id="anchor" maxHeight="750.0" maxWidth="1100.0" minHeight="750.0" minWidth="1100.0" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.HomePageController">
 
 
    <children>
@@ -42,7 +51,7 @@
                         <Font size="36.0" />
                      </font>
                   </Text>
-                  <Text fx:id="name" fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="118.6656494140625">
+                  <Text fx:id="name" fill="#044e9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -53,6 +62,9 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Pane fx:id="turtlePond" layoutX="588.0" layoutY="280.0" prefHeight="253.0" prefWidth="262.0" style="-fx-background-color: #B0E5E3;">
                <children>
@@ -72,11 +84,17 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="350.0" layoutY="361.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="66.0" prefWidth="200.0" style="-fx-background-radius: 15; -fx-background-color: #84C7C4;" text="COVID-19" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Circle fill="WHITE" layoutX="1016.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="928.0" layoutY="201.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -86,11 +104,17 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="887.0" layoutY="410.0" mnemonicParsing="false" onAction="#toSideView" prefHeight="113.0" prefWidth="142.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="654.0" layoutY="654.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
             <Text fill="#044e9a" layoutX="308.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request a Service:">
@@ -109,6 +133,9 @@
                <tooltip>
                   <Tooltip text="About Us" />
                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="984.0" layoutY="173.0" mnemonicParsing="false" onAction="#toSettingsPage" style="-fx-background-color: transparent;">
                <graphic>
@@ -121,6 +148,9 @@
                <tooltip>
                   <Tooltip text="Settings" />
                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="722.0" layoutY="173.0" mnemonicParsing="false" onAction="#toAPI" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                <graphic>
@@ -129,7 +159,10 @@
                         <Image url="@../icons/menuBar/APIpls.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button layoutX="896.0" layoutY="174.0" mnemonicParsing="false" onAction="#toReport" prefHeight="45.0" prefWidth="64.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -140,7 +173,10 @@
                </graphic>
                <tooltip>
                   <Tooltip text="Report An Employee" />
-               </tooltip></Button>
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="30.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="251.0" layoutX="30.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Pane fx:id="datePickerPane" layoutX="46.0" layoutY="446.0" prefHeight="193.0" prefWidth="218.0">
@@ -293,64 +329,29 @@
                      </tooltip>
                   </Button>
                </buttons>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ButtonBar>
-            <Button layoutX="60.0" layoutY="692.0" mnemonicParsing="false" onAction="#toLogOut" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Log Out" textFill="WHITE" />
-            <Button layoutX="165.0" layoutY="692.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Exit" textFill="WHITE" />
-            <Text fill="#044e9a" layoutX="313.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="401.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="458.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="540.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="593.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; Floral">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="675.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="735.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="817.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religious">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="881.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="960.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
-            <Text fill="#044e9a" layoutX="1026.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Text>
+            <Button layoutX="60.0" layoutY="692.0" mnemonicParsing="false" onAction="#toLogOut" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Log Out" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutX="165.0" layoutY="692.0" mnemonicParsing="false" onAction="#toCloseApp" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: #84C7C4 #84C7C4; -fx-background-radius: 15;" text="Exit" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Text fill="#044e9a" layoutX="310.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment" />
+            <Text fill="#044e9a" layoutX="399.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab" />
+            <Text fill="#044e9a" layoutX="455.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="537.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="588.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gift &amp; FLoral" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="672.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="730.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="815.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Religous" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="875.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Translate" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="959.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security" textAlignment="CENTER" />
+            <Text fill="#044e9a" layoutX="1023.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>

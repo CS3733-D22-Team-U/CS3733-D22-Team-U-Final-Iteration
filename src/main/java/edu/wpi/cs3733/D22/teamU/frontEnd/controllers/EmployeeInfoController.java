@@ -20,7 +20,7 @@ public class EmployeeInfoController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    super.initialize(location, resources);
     handeDateTime();
   }
 

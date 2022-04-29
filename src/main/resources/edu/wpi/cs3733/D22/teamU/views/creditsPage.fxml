@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.CreditsController">
+<AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.CreditsController">
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0" styleClass="background">
             <children>
@@ -22,6 +23,9 @@
                       <effect>
                           <DropShadow />
                       </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
                   <Button layoutX="376.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits" textFill="#044e9a">
                       <font>
@@ -30,6 +34,9 @@
                       <effect>
                           <DropShadow />
                       </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                   </Button>
                   <Button layoutX="540.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
                       <font>
@@ -38,6 +45,9 @@
                       <effect>
                           <DropShadow />
                       </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                   </Button>
                   <Text fill="#044e9a" layoutX="917.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Credits">
                       <font>
@@ -99,6 +109,9 @@
                <effect>
                   <DropShadow />
                </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
 
             </children>
