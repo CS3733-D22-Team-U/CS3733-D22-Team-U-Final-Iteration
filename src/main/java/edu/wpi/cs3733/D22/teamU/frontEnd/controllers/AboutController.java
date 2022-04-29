@@ -40,9 +40,12 @@ public class AboutController extends ServiceController {
   public void updateRequest() {}
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
+  }
 
   private void addTeamImage(String resource) {
+
     URL a = Uapp.class.getClassLoader().getResource(resource);
     imageHover.setImage(new Image(String.valueOf(a)));
     // imageHover.setScaleX(1.75);

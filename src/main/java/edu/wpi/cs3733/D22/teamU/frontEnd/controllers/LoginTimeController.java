@@ -47,6 +47,7 @@ public class LoginTimeController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     ApiFuture<QuerySnapshot> future = db.collection("loginTimes").get();
     List<QueryDocumentSnapshot> documents = null;
     try {

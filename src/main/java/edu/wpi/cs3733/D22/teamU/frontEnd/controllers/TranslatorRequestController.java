@@ -22,7 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -30,7 +30,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -85,7 +84,7 @@ public class TranslatorRequestController extends ServiceController {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    // super.initialize(location, resources);
+    super.initialize(location, resources);
     // udb = Udb.getInstance();
     try {
       setUpAllTranslatorReq();
@@ -130,10 +129,14 @@ public class TranslatorRequestController extends ServiceController {
   }
 
   public void toTranslateHelp(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/translationHelp.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/translationHelp.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Uapp.stage.show();
+    masterThread.stop();
   }
 
   private void handleBar() {
