@@ -130,7 +130,7 @@ public class ReportDaoImpl implements DataDao<Report> {
               + "id varchar(15) not null,"
               + "employee varchar(15) not null,"
               + "type varchar(20) not null,"
-              + "description varchar(20) not null,"
+              + "description varchar(200) not null,"
               + "status boolean not null,"
               + "date varchar(10) not null,"
               + "time varchar(10) not null)");

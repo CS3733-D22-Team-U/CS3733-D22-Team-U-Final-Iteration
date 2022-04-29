@@ -42,6 +42,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.assertj.core.util.diff.Delta;
@@ -49,6 +50,7 @@ import org.assertj.core.util.diff.Delta;
 public class MapController extends ServiceController {
 
   /*Edit Remove Popup*/
+
   public ComboBox<Location> To;
   public ComboBox<Location> From;
   public TextField popupNodeID;
@@ -63,6 +65,7 @@ public class MapController extends ServiceController {
   public TextField equipAmount;
   public TextField equipInUse;
   public TextField equipAvailable;
+  public TabPane popupTabPane;
   public AnchorPane masterPane;
   public TabPane mapTab;
   public Pane circleDragHelp;
@@ -119,15 +122,25 @@ public class MapController extends ServiceController {
   @FXML TableColumn<MapUI, String> shortName;
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
+  @FXML ScrollPane legendScroll;
+  @FXML Button legendButton;
 
+  @FXML Circle toggleAll;
+  @FXML Circle toggleServ;
+  @FXML Circle toggleEquip;
+  @FXML Circle toggleLoc;
   //  @FXML ComboBox<Location> To;
   //  @FXML ComboBox<Location> From;
 
   @FXML Pane assistPane;
   ArrayList<Location> nodeIDs;
-  @FXML Circle add;
+  @FXML Circle addC;
   @FXML Button addBTN;
+
+  @FXML AnchorPane baseEdit;
   ObservableList<MapUI> mapUI = FXCollections.observableArrayList();
+
+  AnchorPane popupAlert;
   // Udb udb;
   ListView<String> equipmentView, requestView;
   public HashMap<String, LocationNode> locations;
@@ -148,7 +161,7 @@ public class MapController extends ServiceController {
       throw new RuntimeException(e);
     }
 
-    addBTN.setDisable(!Udb.admin);
+    // addBTN.setDisable(!Udb.admin);
     setScroll(lowerLevel1Pane);
     setScroll(lowerLevel2Pane);
     setScroll(floor1Pane);
@@ -159,6 +172,7 @@ public class MapController extends ServiceController {
 
     toLocation = new ArrayList<>();
     fromLocation = new ArrayList<>();
+
     try {
       for (Location l : Udb.getInstance().locationImpl.list()) {
         fromLocation.add(l);
@@ -300,21 +314,6 @@ public class MapController extends ServiceController {
       e.printStackTrace();
     }
     mapTable.setItems(mapUI);
-    popupAddPane = new AnchorPane();
-    try {
-      popupAddPane
-          .getChildren()
-          .add(
-              FXMLLoader.load(
-                  getClass()
-                      .getClassLoader()
-                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
-      popupAddPane.setLayoutX(663);
-      popupAddPane.setLayoutY(159);
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
     popupEditPane = new AnchorPane();
     try {
@@ -329,7 +328,39 @@ public class MapController extends ServiceController {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    popupAddPane = new AnchorPane();
+    try {
+      popupAddPane
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  getClass()
+                      .getClassLoader()
+                      .getResource("edu/wpi/cs3733/D22/teamU/views/addLocPopUp.fxml")));
+      popupAddPane.setLayoutX(670);
+      popupAddPane.setLayoutY(200);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    popupAlert = new AnchorPane();
+    try {
+      popupAlert
+          .getChildren()
+          .add(
+              FXMLLoader.load(
+                  Objects.requireNonNull(
+                      getClass()
+                          .getClassLoader()
+                          .getResource("edu/wpi/cs3733/D22/teamU/views/popupPathfinding.fxml"))));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     handleBar();
+    handleLegend();
   }
 
   private void handleBar() {
@@ -347,17 +378,45 @@ public class MapController extends ServiceController {
         });
   }
 
+  private void handleLegend() {
+    TranslateTransition openNav = new TranslateTransition(new Duration(350), legendScroll);
+    openNav.setToY(700);
+    TranslateTransition closeNav = new TranslateTransition(new Duration(350), legendScroll);
+    legendButton.setOnAction(
+        (ActionEvent evt) -> {
+          if (legendScroll.getTranslateY() != 700) {
+            openNav.play();
+          } else {
+            closeNav.setToY(0);
+            closeNav.play();
+          }
+        });
+  }
+
   public void dispMultiService(MouseEvent mouseEvent) {}
 
   public void dispMultiServices(MouseEvent mouseEvent) {}
 
   public void dispElevator(MouseEvent mouseEvent) {}
 
+  public void closePopup() {
+    AnchorPane alert = (AnchorPane) popupAlert.getChildren().get(0);
+    for (Node n : alert.getChildren()) {
+      if (n instanceof Button) {
+        Button b1 = (Button) n;
+        if (b1.getId().equals("okWarn")) {
+          b1.setOnMouseClicked(this::ExitAlert);
+        }
+      }
+    }
+  }
+
   public void bestPath(MouseEvent mouseEvent) {
     if (To.getValue() != null && From.getValue() != null) {}
   }
 
   ArrayList<Edge> edges = new ArrayList<>();
+  ArrayList<Circle> elevs = new ArrayList<>();
 
   public void findPath(MouseEvent mouseEvent) throws CloneNotSupportedException {
     for (Edge e : edges) {
@@ -365,13 +424,29 @@ public class MapController extends ServiceController {
       try {
         ap.getChildren().remove(e);
       } catch (Exception e2) {
+      }
+    }
 
+    for (Circle e : elevs) {
+      AnchorPane ap = (AnchorPane) e.getParent();
+      try {
+        ap.getChildren().remove(e);
+      } catch (Exception e2) {
+        e2.printStackTrace();
       }
     }
     edges = new ArrayList<>();
+    elevs = new ArrayList<>();
+
     if (To.getValue() != null && From.getValue() != null) {
       edges = pathFinding.findPath(From.getValue(), To.getValue());
-      System.out.println(edges);
+      System.out.println(edges.size());
+      if (edges.size() == 0) {
+        masterPane.getChildren().add(popupAlert);
+        popupAlert.setLayoutX(700);
+        popupAlert.setLayoutY(100);
+        closePopup();
+      }
       for (Edge e : edges) {
         LocationNode ln1 = locations.get(e.getLoc1().getNodeID());
         LocationNode ln2 = locations.get(e.getLoc2().getNodeID());
@@ -380,7 +455,24 @@ public class MapController extends ServiceController {
         e.setEndX(ln2.tempx);
         e.setEndY(ln2.tempy);
         try {
-          ln1.getPane().getChildren().add(e);
+          if (ln1.getPane().equals(ln2.getPane())) ln1.getPane().getChildren().add(e);
+          else {
+            Circle c1 = new Circle();
+            c1.setFill(Color.RED);
+            c1.setRadius(7);
+            c1.setCenterX(ln1.tempx);
+            c1.setCenterY(ln1.tempy);
+            ln1.getPane().getChildren().add(c1);
+            elevs.add(c1);
+
+            Circle c2 = new Circle();
+            c2.setFill(Color.RED);
+            c2.setRadius(7);
+            c2.setCenterX(ln2.tempx);
+            c2.setCenterY(ln2.tempy);
+            ln2.getPane().getChildren().add(c2);
+            elevs.add(c2);
+          }
         } catch (Exception e1) {
 
         }
@@ -440,10 +532,19 @@ public class MapController extends ServiceController {
   public void updateRequest() {}
 
   public void popUpAdd(MouseEvent mouseEvent) {
-    Pane pane = (Pane) addBTN.getParent();
+    Pane pane = (Pane) masterPane;
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
+    if (pane.getChildren().contains(popupEditPane)) {
+      pane.getChildren().remove(popupEditPane);
+    }
     if (pane.getChildren().contains(popupAddPane)) {
       pane.getChildren().remove(popupAddPane);
+      addC.setFill(Color.rgb(59, 175, 180));
     } else {
+      addC.setFill(Color.rgb(88, 152, 219));
       pane.getChildren().add(popupAddPane);
       for (Node n : ((AnchorPane) popupAddPane.getChildren().get(0)).getChildren()) {
         if (n instanceof GridPane) {
@@ -484,12 +585,20 @@ public class MapController extends ServiceController {
                   addShortName = tf;
                   break;
               }
+            } else if (n2 instanceof Button && n2.getId().equals("addButton")) {
+              addButton = (Button) n2;
+              // addButton.setDisable(!Udb.admin);
+              addButton.setOnMouseClicked(this::popupAddLocation);
+              addBuildingCombo.getSelectionModel().clearSelection();
+              addNodeTypeCombo.getSelectionModel().clearSelection();
+              addFloorCombo.getSelectionModel().clearSelection();
+              addNodeID.clear();
+              addXcoord.clear();
+              addYcoord.clear();
+              addLongName.clear();
+              addShortName.clear();
             }
           }
-        } else if (n instanceof Button && n.getId().equals("addButton")) {
-          addButton = (Button) n;
-          // addButton.setDisable(!Udb.admin);
-          addButton.setOnMouseClicked(this::popupAddLocation);
         }
       }
     }
@@ -558,27 +667,41 @@ public class MapController extends ServiceController {
   private Request request = null;
 
   public void popupOpen(MouseEvent mouseEvent) {
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
+    if (masterPane.getChildren().contains(popupAddPane)) {
+      masterPane.getChildren().remove(popupAddPane);
+    }
     request = null;
     equipment = null;
     equipTable.getItems().clear();
     reqTable.getItems().clear();
     LocationNode locationNode = (LocationNode) mouseEvent.getSource();
     Location location = locationNode.getLocation();
-    AnchorPane pane = masterPane;
+    Pane pane = (Pane) masterPane;
 
     popupEditPane.setLayoutX(663);
 
     popupEditPane.setLayoutY(159);
 
+    for (Node n : popupEditPane.getChildren()) {
+      if (n instanceof TabPane) {
+        TabPane tp = (TabPane) n;
+        popupTabPane = tp;
+        tp.getSelectionModel().select(0);
+      }
+    }
+
     Tab locationTab = ((TabPane) popupEditPane.getChildren().get(0)).getTabs().get(0);
     AnchorPane locAnchor = (AnchorPane) locationTab.getContent();
     for (Node n : locAnchor.getChildren()) {
-      if (n instanceof Button) {
-        Button b2 = (Button) n;
-        if (b2.getId().equals("exit")) {
-          b2.setOnMouseClicked(this::Exit);
-        }
-      } else if (n instanceof GridPane) {
+      if (n instanceof Button && n.getId().equals("exitEdit")) {
+        Button b = (Button) n;
+        b.setOnMouseClicked(this::Exit);
+      }
+      if (n instanceof GridPane) {
         GridPane gp = (GridPane) n;
         for (Node n2 : gp.getChildren()) {
           if (n2 instanceof TextField) {
@@ -648,9 +771,7 @@ public class MapController extends ServiceController {
     for (Node n : equipAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit1")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeEquip")) {
+        if (b2.getId().equals("removeEquip")) {
           b2.setOnMouseClicked(this::deleteEquip);
         } else if (b2.getId().equals("editEquip")) {
           b2.setOnMouseClicked(this::editEquipFunc);
@@ -704,9 +825,7 @@ public class MapController extends ServiceController {
     for (Node n : reqAnchor.getChildren()) {
       if (n instanceof Button) {
         Button b2 = (Button) n;
-        if (b2.getId().equals("exit2")) {
-          b2.setOnMouseClicked(this::Exit);
-        } else if (b2.getId().equals("removeReq")) {
+        if (b2.getId().equals("removeReq")) {
           b2.setOnMouseClicked(this::deleteRequest);
         }
       } else if (n instanceof TableView) {
@@ -777,6 +896,10 @@ public class MapController extends ServiceController {
   }
 
   public void editEquipFunc(MouseEvent mouseEvent) {
+    if (masterPane.getChildren().contains(dc)) {
+      masterPane.getChildren().remove(dc);
+      dragCircle dc = null;
+    }
     try {
       if (equipment != null) {
         Equipment newEquip =
@@ -850,6 +973,10 @@ public class MapController extends ServiceController {
       this.equipAmount.setText(Integer.toString(this.equipment.getAmount()));
       this.equipInUse.setText(Integer.toString(this.equipment.getInUse()));
       this.equipAvailable.setText(Integer.toString(this.equipment.getAvailable()));
+      if (masterPane.getChildren().contains(dc)) {
+        masterPane.getChildren().remove(dc);
+        dragCircle dc = null;
+      }
       dc =
           new dragCircle(
               circleDragHelp, mouseEvent.getSceneX(), mouseEvent.getSceneY(), equipment, this);
@@ -858,8 +985,12 @@ public class MapController extends ServiceController {
 
   public dragCircle dc = null;
 
-  public void Exit(MouseEvent actionEvent) {
+  public void Exit(MouseEvent mouseEvent) {
     popupEditPane.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
+  }
+
+  public void ExitAlert(MouseEvent mouseEvent) {
+    popupAlert.relocate(Integer.MIN_VALUE, Integer.MIN_VALUE);
   }
 
   public void popupEdit(MouseEvent actionEvent) {
@@ -989,6 +1120,7 @@ public class MapController extends ServiceController {
       for (LocationNode locationNode : locations.values()) {
         locationNode.setVisible(false);
       }
+      toggleAll.setFill(Color.rgb(88, 152, 219));
       EQPicon = false;
       LOCicon = false;
       SRVicon = false;
@@ -997,6 +1129,7 @@ public class MapController extends ServiceController {
       for (LocationNode locationNode : locations.values()) {
         locationNode.setVisible(true);
       }
+      toggleAll.setFill(Color.rgb(59, 175, 180));
       EQPicon = true;
       LOCicon = true;
       SRVicon = true;
@@ -1008,7 +1141,15 @@ public class MapController extends ServiceController {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getEquipment().size() > 0
           || locationNode.getLocation().getRequests().size() > 0) {
-      } else locationNode.setVisible(LOCicon);
+        if (LOCicon == true) {
+          locationNode.setVisible(false);
+          toggleLoc.setFill(Color.rgb(88, 152, 219));
+        }
+        if (!LOCicon) {
+          locationNode.setVisible(true);
+          toggleLoc.setFill(Color.rgb(59, 175, 180));
+        }
+      }
     }
     LOCicon = !LOCicon;
   }
@@ -1016,7 +1157,17 @@ public class MapController extends ServiceController {
   public void dispEQP(MouseEvent mousevent) {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getEquipment().size() > 0) {
-      } else locationNode.setVisible(EQPicon);
+      } else {
+        if (EQPicon == true) {
+          locationNode.setVisible(EQPicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleEquip.setFill(Color.rgb(59, 175, 180));
+        } else {
+          locationNode.setVisible(EQPicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleEquip.setFill(Color.rgb(88, 152, 219));
+        }
+      }
     }
     EQPicon = !EQPicon;
   }
@@ -1024,7 +1175,17 @@ public class MapController extends ServiceController {
   public void dispSRV(MouseEvent mousevent) {
     for (LocationNode locationNode : locations.values()) {
       if (locationNode.getLocation().getRequests().size() > 0) {
-      } else locationNode.setVisible(SRVicon);
+      } else {
+        if (SRVicon == true) {
+          locationNode.setVisible(SRVicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleServ.setFill(Color.rgb(59, 175, 180));
+        } else {
+          locationNode.setVisible(SRVicon);
+          // toggleAll.setFill(Color.rgb(59, 175, 180));
+          toggleServ.setFill(Color.rgb(88, 152, 219));
+        }
+      }
     }
     SRVicon = !SRVicon;
   }

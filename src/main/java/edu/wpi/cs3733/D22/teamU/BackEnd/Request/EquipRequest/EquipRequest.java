@@ -2,11 +2,28 @@ package edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import java.util.Objects;
 
 public class EquipRequest extends Request {
   int amount;
   String typeOfRequest;
   int priority;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    EquipRequest that = (EquipRequest) o;
+    return amount == that.amount
+        && Objects.equals(destination, that.destination)
+        && priority == that.priority
+        && Objects.equals(typeOfRequest, that.typeOfRequest);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(amount, typeOfRequest, priority);
+  }
 
   public EquipRequest(
       String ID,

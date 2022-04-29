@@ -1,3 +1,18 @@
 ID,Employee,Type,Description,Status,Date,Time
+REP7668,00004,Patient Mistreatment,ate a human,true,2022-04-28,01:33:16
+REP7515,00010,Medical Misconduct,stealing organs,true,2022-04-28,01:32:34
+REP6701,00008,Sexual Harassment,A,true,2022-04-28,19:42:14
+REP933,00002,Patient Mistreatment,Hurt patient,true,2022-04-28,00:07:20
+REP8921,00008,Sexual Harassment,Help,true,2022-04-28,19:39:30
+REP4588,00008,Sexual Harassment,Test,true,2022-04-28,19:37:14
 REP6178,00002,Medical Misconduct,UUUHHHHHH,true,00-00-00,00:00:00
-00001,00005,Sexual harassment,just needed descript,true,N/A,N/A
+REP5189,00013,Sexual Harassment,We can not talk about it,true,2022-04-28,01:31:42
+REP3193,00008,Medical Misconduct,Selling drugs,true,2022-04-28,01:20:23
+REP9068,00003,Other,Just being to good at his job,true,2022-04-28,01:30:37
+REP287,00008,Sexual Harassment,touching patients,true,2022-04-28,01:27:10
+REP5384,00011,Medical Misconduct,Took all the meds,true,2022-04-28,01:31:05
+REP880,00006,Sexual Harassment,Having sex in the dumbster,true,2022-04-28,01:32:10
+REP3604,00008,Medical Misconduct,a,true,2022-04-28,19:30:31
+REP9909,00002,Patient Mistreatment,Punched a man,true,2022-04-28,01:30:18
+REP7703,00009,Sexual Harassment,Inappropriate talking,true,00-00-00,00:00:00
+REP1911,00008,Medical Misconduct,Test,true,2022-04-28,19:41:56

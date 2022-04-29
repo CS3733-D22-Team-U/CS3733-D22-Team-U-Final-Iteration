@@ -2,12 +2,16 @@ package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Equipment.Equipment;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.services.equipmentDelivery.EquipmentUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -95,6 +99,12 @@ public class sideViewController extends ServiceController {
   int reclInUse;
   int bedsInUse;
 
+  ArrayList<Employee> staff = new ArrayList<>();
+  Employee e = null;
+
+  private static final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
   AnchorPane popupAlert;
 
   String[] floors = new String[] {"L2", "L1", "1", "2", "3", "4", "5"};
@@ -108,6 +118,18 @@ public class sideViewController extends ServiceController {
     setUpAllEquipment();
     setUpPieChart("4");
 
+    try {
+      staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
+    } catch (SQLException | IOException throwables) {
+      throwables.printStackTrace();
+    }
+
+    for (Employee emp : staff) {
+      if (emp.getOccupation().equalsIgnoreCase("janitor")) {
+        e = emp;
+        break;
+      }
+    }
     /*
     HamburgerBasicCloseTransition closeTransition = new HamburgerBasicCloseTransition(hamburger);
 
@@ -149,8 +171,8 @@ public class sideViewController extends ServiceController {
     try {
       if (tooManyDirtyThings() == true) {
         masterPane.getChildren().add(popupAlert);
-        popupAlert.setLayoutX(0);
-        popupAlert.setLayoutY(0);
+        popupAlert.setLayoutX(600);
+        popupAlert.setLayoutY(80);
       }
     } catch (SQLException throwables) {
       throwables.printStackTrace();
@@ -209,14 +231,62 @@ public class sideViewController extends ServiceController {
     return equipmentUI;
   }
 
+  /*private void addCleanReq(Equipment equipment) throws SQLException, IOException {
+    // auto request for dirty things
+
+    boolean alreadyHere = true;
+    String serviceID = "notWork";
+
+    // makes the id
+    while (alreadyHere) {
+      double rand = Math.random() * 10000;
+
+      try {
+        alreadyHere = Udb.getInstance().equipRequestImpl.hList().containsKey("EQU" + (int) rand);
+      } catch (Exception e) {
+        System.out.println(
+            "alreadyHere variable messed up in religious service request controller");
+      }
+
+      serviceID = "EQU" + (int) rand;
+    }
+
+    String l;
+    if (equipment.getName().equals("Infusion Pumps")) {
+      l = "uSTOR00101";
+    } else {
+      // THIS NEED TO CHANGE TO OR PARK
+      l = "HHALL00603";
+    }
+
+    EquipRequest r =
+        new EquipRequest(
+            serviceID,
+            equipment.getName(),
+            equipment.getInUse(),
+            null,
+            "In Progress",
+            e,
+            l,
+            sdf3.format(timestamp).substring(0, 10),
+            sdf3.format(timestamp).substring(11),
+            1);
+
+    if (!Udb.getInstance().equipRequestImpl.hList().containsValue(r)) {
+      System.out.println(r.name + r.getAmount() + r.getDestination());
+      Udb.getInstance().equipRequestImpl.hList().put(serviceID, r);
+    }
+  }
+*/
   ArrayList<EquipmentUI> dirtyEquip = new ArrayList<>();
 
   private boolean tooManyDirtyThings() throws SQLException, IOException {
     boolean temp = false;
     for (Equipment equipment : Udb.getInstance().EquipmentImpl.EquipmentList) {
       if ((equipment.getName().equals("Beds") && equipment.getInUse() >= 6)
-          || equipment.getName().equals("Infusion Pumps")
-              && (equipment.getInUse() >= 10 || equipment.getAvailable() < 5)) {
+          || (equipment.getName().equals("Infusion Pumps")
+              && (equipment.getInUse() >= 10 || equipment.getAvailable() < 5))) {
+        equipment.gettingTheLocation();
         dirtyEquip.add(
             new EquipmentUI(
                 equipment.getName(),
@@ -225,6 +295,10 @@ public class sideViewController extends ServiceController {
                 equipment.getLocationID(),
                 equipment.getLocation().getFloor(),
                 equipment.getLocation().getNodeType()));
+
+        //addCleanReq(equipment);
+
+        // Just popup
         AnchorPane bedAP = (AnchorPane) popupAlert.getChildren().get(0);
         System.out.println(bedAP.getChildren().size());
         for (Node n : bedAP.getChildren()) {
@@ -235,9 +309,11 @@ public class sideViewController extends ServiceController {
             }
           }
         }
+
         temp = true;
       }
     }
+
     return temp;
   }
 

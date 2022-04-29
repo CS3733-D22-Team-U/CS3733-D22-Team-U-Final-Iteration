@@ -46,6 +46,7 @@ public class ReportController extends ServiceController {
   @FXML AnchorPane sideBarAnchor;
   @FXML Button sideBarButton;
   @FXML Text adminMessage;
+  @FXML Button allReports;
 
   ArrayList<Employee> staff;
   ObservableList<String> typeList =
@@ -56,6 +57,7 @@ public class ReportController extends ServiceController {
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
+    allReports.setVisible(Udb.admin);
     staff = new ArrayList<>();
     try {
       for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
@@ -136,6 +138,7 @@ public class ReportController extends ServiceController {
     String inputDesc = reportDescrip.getText().trim();
     boolean alreadyHere = true;
     String reportID = "notWork";
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     while (alreadyHere) {
       double rand = Math.random() * 10000;
@@ -149,7 +152,14 @@ public class ReportController extends ServiceController {
       reportID = "REP" + (int) rand;
     }
     Report r =
-        new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
+        new Report(
+            reportID,
+            temp_employee,
+            inputType,
+            inputDesc,
+            true,
+            sdf3.format(timestamp).substring(0, 10),
+            sdf3.format(timestamp).substring(11));
     // Report r = new Report(
     try {
       Udb.getInstance().add(r);
@@ -158,6 +168,20 @@ public class ReportController extends ServiceController {
     }
     employees.getSelectionModel().clearSelection();
     typeOfReport.getSelectionModel().clearSelection();
+    reportDescrip.setText("");
+    reportBarChart.getData().clear();
+    XYChart.Series data = new XYChart.Series();
+
+    for (Employee employee : Udb.getInstance().EmployeeImpl.hList().values()) {
+      if (employee.getReportList().size() >= 1) {
+        data.getData()
+            .add(
+                new XYChart.Data<>(
+                    employee.getFirstName() + " " + employee.getLastName(),
+                    employee.getReportList().size()));
+      }
+    }
+    reportBarChart.getData().add(data);
   }
 
   @Override

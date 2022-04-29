@@ -19,25 +19,13 @@
     <children>
         <Pane fx:id="backgroundPane" prefHeight="750.0" prefWidth="1100.0">
             <children>
-                <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-                    <children>
-                        <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../icons/hospitalIcon.png" />
-                            </image>
-                        </ImageView>
-                        <Text fx:id="headerText" fill="WHITE" layoutX="133.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="930.7574462890625">
-                     <font>
-                        <Font size="48.0" />
-                     </font></Text>
-                    </children>
-                </Pane>
-                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="940.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
+                <Pane prefHeight="132.0" prefWidth="1100.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;" />
+                <ImageView fitHeight="106.0" fitWidth="101.0" layoutX="991.0" layoutY="644.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.34;">
                     <image>
                         <Image url="@../icons/unicornLogo.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="756.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.11;">
+                <ImageView fitHeight="780.0" fitWidth="1102.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.11;">
                     <image>
                         <Image url="@../images/hospitalBuilding.jpg" />
                     </image>
@@ -111,7 +99,7 @@
             <Button layoutX="987.0" layoutY="170.0" mnemonicParsing="false" onAction="#toSettings" prefHeight="61.0" prefWidth="53.0" style="-fx-background-color: transparent;" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="117.0" layoutX="30.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="250.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c1edeb" height="262.0" layoutX="30.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="256.0" />
-            <Pane fx:id="datePickerPane" layoutX="42.0" layoutY="446.0" prefHeight="193.0" prefWidth="222.0">
+            <Pane fx:id="datePickerPane" layoutX="47.0" layoutY="446.0" prefHeight="193.0" prefWidth="222.0">
                <children>
                   <DatePicker fx:id="datePicker" layoutX="30.0" layoutY="11.0" prefHeight="16.0" prefWidth="50.0" />
                </children>
@@ -126,11 +114,21 @@
                   <Font size="24.0" />
                </font>
             </Text>
+            <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="33.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/hospitalIcon.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="headerText" fill="WHITE" layoutX="119.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="974.9564361572266">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
       <ButtonBar buttonMinWidth="50.0" layoutX="298.0" layoutY="520.0" prefHeight="87.0" prefWidth="793.0" style="-fx-background-color: transparent;" stylesheets="@../css/homeScroll.css">
          <buttons>
-            <Button minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="equipmentButton" minHeight="75.0" minWidth="61.0" mnemonicParsing="false" onAction="#toEquipmentDelivery" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -142,7 +140,7 @@
                   <Tooltip text="Marko Vila" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="labButton" minWidth="61.0" mnemonicParsing="false" onAction="#toLabRequest" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -154,7 +152,7 @@
                   <Tooltip text="Nick Biliouris" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="medicineButton" minWidth="61.0" mnemonicParsing="false" onAction="#toMedicineDelivery" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -166,7 +164,7 @@
                   <Tooltip text="Kody Robinson" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="mealButton" minWidth="61.0" mnemonicParsing="false" onAction="#toMealDelivery" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -178,7 +176,7 @@
                   <Tooltip text="Deepti Gosukonda" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="giftButton" minWidth="61.0" mnemonicParsing="false" onAction="#toGiftAndFloral" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -190,7 +188,7 @@
                   <Tooltip text="Joselin Barbosa" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="laundryButton" minWidth="61.0" mnemonicParsing="false" onAction="#toLaundry" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -202,7 +200,7 @@
                   <Tooltip text="Deepti Gosukonda, Marko Vila" />
                </tooltip>
             </Button>
-            <Button minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="mainButton" minWidth="61.0" mnemonicParsing="false" onAction="#toMaintenanceRequest" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -214,7 +212,7 @@
                   <Tooltip text="Mike Akstin" />
                </tooltip>
             </Button>
-            <Button mnemonicParsing="false" onAction="#toReligious" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button fx:id="religiousButton" mnemonicParsing="false" onAction="#toReligious" onMouseEntered="#showText" onMouseExited="#showText" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -226,7 +224,7 @@
                   <Tooltip text="William Doyle" />
                </tooltip>
             </Button>
-            <Button mnemonicParsing="false" onAction="#toTranslate" style="-fx-background-color: transparent;">
+            <Button fx:id="translateButton" mnemonicParsing="false" onAction="#toTranslate" onMouseEntered="#showText" onMouseExited="#showText" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -238,7 +236,7 @@
                   <Tooltip text="Belisha Genin" />
                </tooltip>
             </Button>
-            <Button mnemonicParsing="false" onAction="#toSecurity" style="-fx-background-color: transparent;">
+            <Button fx:id="securityButton" mnemonicParsing="false" onAction="#toSecurity" onMouseEntered="#showText" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -250,7 +248,7 @@
                   <Tooltip text="Tim Klein" />
                </tooltip>
             </Button>
-            <Button mnemonicParsing="false" onAction="#toCompService" style="-fx-background-color: transparent;">
+            <Button fx:id="compButton" mnemonicParsing="false" onAction="#toCompService" onMouseEntered="#showText" onMouseExited="#showText" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
