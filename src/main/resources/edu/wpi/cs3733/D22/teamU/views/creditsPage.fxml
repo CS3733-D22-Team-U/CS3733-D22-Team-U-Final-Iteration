@@ -18,7 +18,7 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-                  <Button layoutX="243.0" layoutY="701.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
+                  <Button layoutX="212.0" layoutY="700.0" mnemonicParsing="false" onAction="#toAbout" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="About">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -26,7 +26,7 @@
                           <DropShadow />
                       </effect>
             </Button>
-                  <Button layoutX="404.0" layoutY="701.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits" textFill="#044e9a">
+                  <Button layoutX="376.0" layoutY="700.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Credits" textFill="#044e9a">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -34,7 +34,7 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Button layoutX="565.0" layoutY="701.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
+                  <Button layoutX="540.0" layoutY="700.0" mnemonicParsing="false" onAction="#toCovidInfo" prefHeight="48.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="COVID-19 Information">
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font>
@@ -42,23 +42,23 @@
                           <DropShadow />
                       </effect>
                   </Button>
-                  <Text layoutX="803.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Credits">
+                  <Text fill="#044e9a" layoutX="917.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mainHeading" text="Credits">
                       <font>
                           <Font name="System Bold" size="36.0" />
                       </font>
                   </Text>
                   <Pane fx:id="newRequestPane" layoutX="127.0" layoutY="121.0" maxHeight="570.0" maxWidth="935.0" minHeight="-Infinity" minWidth="415.0" prefHeight="570.0" prefWidth="935.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                       <children>
-                          <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="384.0" minWidth="255.0" prefHeight="519.0" prefWidth="255.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
+                          <Pane layoutX="14.0" layoutY="18.0" maxHeight="519.0" maxWidth="652.0" minWidth="255.0" prefHeight="519.0" prefWidth="652.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;">
                               <children>
-                                  <Text fx:id="requestText1" layoutX="19.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="219.0">
+                                  <Text fx:id="requestText1" fill="#044e9a" layoutX="243.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="API's Used" textAlignment="CENTER" wrappingWidth="182.0">
                                       <font>
                                           <Font name="System Bold" size="28.0" />
                                       </font>
                                   </Text>
-                                  <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request Editor:" textAlignment="CENTER" wrappingWidth="254.79998779296875">
+                                  <Text fill="#044e9a" layoutX="-33.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Z : External Trasportation" textAlignment="CENTER" wrappingWidth="422.1226764728697">
                                       <font>
-                                          <Font size="20.0" />
+                                          <Font name="System Bold" size="20.0" />
                                       </font>
                                   </Text>
                                   <Text layoutX="9.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="238.0">
@@ -66,6 +66,26 @@
                                           <Font size="20.0" />
                                       </font>
                                   </Text>
+                        <Text fill="#044e9a" layoutX="-28.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team D : Sanitation" textAlignment="CENTER" wrappingWidth="324.8144489338072">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="50.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Through this API, our application would allow for staff to transport patients through helicopter, ambulance, patient car, or plane." wrappingWidth="601.69091796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are using Team D’s Sanitation Request Version 2.0. With using this API, our application would allow for staff to request sanitation services." wrappingWidth="601.69091796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#044e9a" layoutX="200.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you Team Z and Team D!">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
                               </children>
                           </Pane>
                           <ImageView fitHeight="216.0" fitWidth="226.0" layoutX="706.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
@@ -75,6 +95,14 @@
                           </ImageView>
                       </children>
                   </Pane>
+            <Button layoutX="768.0" layoutY="700.0" mnemonicParsing="false" onAction="#toLoginTimes" prefHeight="48.0" prefWidth="157.0" style="-fx-background-color: #ffffff; -fx-background-radius: 35 35 0 0;" text="Login Time">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
 
             </children>
         </Pane>

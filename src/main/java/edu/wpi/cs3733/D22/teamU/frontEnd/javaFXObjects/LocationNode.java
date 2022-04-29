@@ -1,13 +1,20 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.javaFXObjects;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Location.Location;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.CompServRequest.CompServRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.EquipRequest.EquipRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.GiftRequest.GiftRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LabRequest.LabRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.LaundryRequest.LaundryRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MaintenanceRequest.MaintenanceRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MealRequest.MealRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.MedicineRequest.MedicineRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.ReligiousRequest.ReligiousRequest;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Request.Request;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.SecurityRequest.SecurityRequest;
+import edu.wpi.cs3733.D22.teamU.BackEnd.Request.TranslatorRequest.TranslatorRequest;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.DraggableMaker;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import javafx.scene.Group;
@@ -36,23 +43,16 @@ public class LocationNode extends Group {
     this.y = y;
     tempx = x;
     tempy = y;
-    Color color;
-
+    Color color; // .setonMouseDrag();
     Circle c = new Circle();
+    c.setRadius(scale);
     setLocationIcon(c);
     DraggableMaker draggableMaker = new DraggableMaker();
     draggableMaker.makeDraggable(c);
 
     if (location.getEquipment().size() > 0) {
       Rectangle r = new Rectangle();
-      //      r.setX(x - scale);
-      //      r.setWidth(2 * scale);
-      //      r.setHeight(2 * scale);
-      //      r.setY(y - scale);
       setEquip(r);
-      //      r.setStroke(color);
-      //      r.setStrokeWidth(5);
-      // getChildren().add(r);
     }
 
     if (location.getRequests().size() > 0) {
@@ -76,51 +76,88 @@ public class LocationNode extends Group {
     getChildren().add(aView);
   }
 
-  //  private void setRequest(Shape s) {
-  //    for (int i = 0; i < location.getRequests().size(); i++) {
-  //      Request aRequest = location.getRequests().get(i);
-  //      if (location.getRequests().size() > 1) {
-  //        ImageView multi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
-  //        addMapIcon(multi);
-  //      } else if (aRequest instanceof EquipRequest) {
-  //        ImageView medEquip = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
-  //        addMapIcon(medEquip);
-  //      } else if (aRequest instanceof LabRequest) {
-  //        ImageView labServ = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
-  //        addMapIcon(labServ);
-  //      } else if (aRequest instanceof MedicineRequest) {
-  //        ImageView medi = new ImageView("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
-  //        addMapIcon(medi);
-  //      }
-  //    }
-  //  }
-
   private void setRequest(Shape s) {
     int dupes = 0;
     boolean equipCheck = true;
     boolean labCheck = true;
     boolean medicineCheck = true;
+    boolean mealCheck = true;
+    boolean giftCheck = true;
+    boolean laundryCheck = true;
+    boolean maintenanceCheck = true;
+    boolean religionCheck = true;
+    boolean translatorCheck = true;
+    boolean compServCheck = true;
+    boolean securityCheck = true;
     for (Request request : location.getRequests()) {
       if (request instanceof EquipRequest && equipCheck) {
         dupes++;
         equipCheck = false;
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medEquip.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/medEquip.png");
         continue;
       }
       if (request instanceof LabRequest && labCheck) {
         dupes++;
         labCheck = false;
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/labServ.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/labServ.png");
         continue;
       }
       if (request instanceof MedicineRequest && medicineCheck) {
         dupes++;
         medicineCheck = false;
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/medicineServ.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/medicineServ.png");
+        continue;
+      }
+      if (request instanceof MealRequest && mealCheck) {
+        dupes++;
+        mealCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/mealServ.png");
+        continue;
+      }
+      if (request instanceof GiftRequest && giftCheck) {
+        dupes++;
+        giftCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/giftServ.png");
+        continue;
+      }
+      if (request instanceof LaundryRequest && laundryCheck) {
+        dupes++;
+        laundryCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/laundryServ.png");
+        continue;
+      }
+      if (request instanceof MaintenanceRequest && maintenanceCheck) {
+        dupes++;
+        maintenanceCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/maintenanceServ.png");
+        continue;
+      }
+      if (request instanceof ReligiousRequest && religionCheck) {
+        dupes++;
+        religionCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/religiousServ.png");
+        continue;
+      }
+      if (request instanceof TranslatorRequest && translatorCheck) {
+        dupes++;
+        translatorCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/translatorServ.png");
+        continue;
+      }
+      if (request instanceof SecurityRequest && securityCheck) {
+        dupes++;
+        securityCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/securityServ.png");
+        continue;
+      }
+      if (request instanceof CompServRequest && compServCheck) {
+        dupes++;
+        compServCheck = false;
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/compServ.png");
         continue;
       }
       if (dupes > 1) {
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/multiServ.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/multiServ.png");
         break;
       }
     }
@@ -131,20 +168,16 @@ public class LocationNode extends Group {
       String name = location.getEquipment().get(i).getName();
       switch (name) {
         case "Beds":
-          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
-          location.getEquipment().get(i).getLocation().setNodeType("BEDS");
+          addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/beds.png");
           break;
         case "Infusion Pumps":
-          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
-          location.getEquipment().get(i).getLocation().setNodeType("PUMP");
+          addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/infoPump.png");
           break;
         case "Recliners":
-          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
-          location.getEquipment().get(i).getLocation().setNodeType("RECL");
+          addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/recliner.png");
           break;
         default:
-          addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/DefaultEquip.png");
-          location.getEquipment().get(i).getLocation().setNodeType("EQUP");
+          addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/medEquip.png");
       }
     }
   }
@@ -153,65 +186,64 @@ public class LocationNode extends Group {
 
     switch (location.getNodeType()) {
       case "PATI":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/pati.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/pati.png");
         break;
       case "STOR":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stor.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/stor.png");
         break;
       case "DIRT":
-        for (int i = 0; i < location.getEquipment().size(); i++) {
-          String currE = location.getEquipment().get(i).getName().trim();
-          if (currE.equals("Recliners")) {
-            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/recliner.png");
-            location.getEquipment().get(i).getLocation().setNodeType("RECL");
-          }
-          if (currE.equals("Beds")) {
-            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/beds.png");
-            location.getEquipment().get(i).getLocation().setNodeType("BEDS");
-          }
-          if (currE.equals("Infusion Pumps")) {
-            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/infuPump.png");
-            location.getEquipment().get(i).getLocation().setNodeType("PUMP");
-          } else {
-            addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dirt.png");
-          }
-        }
+        //        for (int i = 0; i < location.getEquipment().size(); i++) {
+        //          String currE = location.getEquipment().get(i).getName().trim();
+        //          if (currE.equals("Recliners")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/recliner.png");
+        //          }
+        //          if (currE.equals("Beds")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/beds.png");
+        //          }
+        //          if (currE.equals("Infusion Pumps")) {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/infoPump.png");
+        //          } else {
+        //            addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dirt.png");
+        //          }
+        //        }
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dirt.png");
         break;
       case "HALL":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/hall.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/hall.png");
         break;
       case "ELEV":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/elev.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/elev.png");
         break;
       case "REST":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/restroom.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/restroom.png");
         break;
       case "STAI":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/stairs.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/stairs.png");
         break;
       case "DEPT":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/dept.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/dept.png");
         break;
       case "LABS":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/lab3.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/lab3.png");
         break;
       case "INFO":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/info.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/info.png");
         break;
       case "CONF":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/conf.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/conf.png");
         break;
       case "EXIT":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/exit.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/exit.png");
         break;
       case "RETL":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/retail.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/retail.png");
         break;
       case "SERV":
-        addMapIcon("edu/wpi/cs3733/D22/teamU/mapIcons/serv.png");
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/serv.png");
         break;
       default:
-        s.setFill(Color.YELLOWGREEN);
+        addMapIcon("edu/wpi/cs3733/D22/teamU/EditedIcons/serv.png");
+        break;
     }
   }
 

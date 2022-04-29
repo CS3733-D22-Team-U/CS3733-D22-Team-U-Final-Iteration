@@ -1,3 +1,5 @@
 ID,Name,Date,Time,Patient,Religion,Status,Location,Employee,Notes
 REL5907,christmas,2022-04-24,16:26:22,tom,Christian,Pending,CHALL007L1,00011,gifts
-REL5819,Beheading,2022-04-22,14:20:17,lol,Pastafarian,Pending,CHALL007L1,00010,
+REL5819,death,2022-04-22,14:20:17,Rick,Pastafarian,Pending,CHALL007L1,00010,flowers
+REL7115,Leaving,2022-04-28,17:31:56,Rob,Christian,Pending,HHALL00203,00002,going back home
+REL2326,Last words,2022-04-28,17:31:14,Nick,Christian,Pending,HHALL00603,00003,He is dying soon

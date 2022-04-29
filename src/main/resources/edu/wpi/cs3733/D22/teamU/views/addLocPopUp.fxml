@@ -36,6 +36,8 @@
                 <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="25.0" minHeight="7.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label prefHeight="17.0" prefWidth="85.0" text="Node ID" textAlignment="RIGHT" textFill="WHITE">
@@ -78,8 +80,8 @@
                 <ComboBox fx:id="addNodeTypeCombo" prefWidth="150.0" style="-fx-background-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                 <ComboBox fx:id="addBuildingCombo" prefWidth="150.0" style="-fx-background-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <ComboBox fx:id="addFloorCombo" prefWidth="150.0" style="-fx-background-color: WHITE;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Button fx:id="addButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #029ca6ff;" text="Add" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="16" />
             </children>
         </GridPane>
-          <Button fx:id="addButton" layoutX="104.0" layoutY="283.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #029ca6ff;" text="Add" textFill="WHITE" />
     </children>
 </AnchorPane>

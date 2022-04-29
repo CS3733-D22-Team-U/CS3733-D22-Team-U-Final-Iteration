@@ -1,3 +1,12 @@
-ID,PatientName,Staff,Status,Destination,Pick Up,Drop Off,Time,Services,Additional Notes,
-101,Greg,00003,In Progress,FDEPT00401,01-01-01,02-02-02,12:49:49,Dry Clean,N/A,
-202,Greg,00001,N/A,FDEPT00401,02-02-02,02-02-02,06:50:40,Cold,N/A,
+ID,PatientName,Staff,Status,Location,Pick Up,Drop Off,Time,Services,Notes
+LAU7223,John,00011,done,HHALL00603,2022-04-23,2022-04-25,16:41:42,Regular Wash/Hang Dry,separate
+LAU3140,Rick,00001,done,HDEPT00102,2022-05-07,2022-05-06,16:46:39,Regular Wash/Machine-Dry,whites
+LAU8710,Tim,00009,done,HHALL00203,2022-05-03,2022-05-06,16:06:53,Regular Wash/Hypo-Allergenic,N/A
+LAU5052,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:16,Regular Wash/Machine-Dry,N/A
+LAU7270,Nick,00013,done,CLABS002L1,2022-04-28,2022-04-30,16:04:49,Regular Wash/Machine-Dry,N/A
+LAU4126,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:15,Regular Wash/Hang Dry,N/A
+LAU165,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:17,Regular Wash/Hypo-Allergenic,N/A
+LAU3417,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:14,Regular Wash/Hang Dry,N/A
+LAU5407,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:14,Regular Wash/Machine-Dry,N/A
+LAU2229,Nick,00013,done,CLABS002L1,2022-04-28,2022-04-30,16:04:49,Regular Wash/Hang Dry,N/A
+LAU3458,Johnny,00001,done,CHALL007L2,2022-05-03,2022-05-06,16:07:15,Regular Wash/Hypo-Allergenic,N/A

@@ -89,7 +89,7 @@ public class settingsPageController implements Initializable {
 
   }
 
-  public void changeName(ActionEvent actionEvent) throws IOException {
+  public void changeName(ActionEvent actionEvent) throws IOException, SQLException {
     Employee user;
     try {
       user = Udb.getInstance().getUser();
@@ -101,6 +101,7 @@ public class settingsPageController implements Initializable {
     String newFirst = changeText.getText();
     user.setFirstName(newFirst);
     changeText.clear();
+    Udb.getInstance().EmployeeImpl.edit(user);
 
     // possibly add so username saves to CSV?
   }

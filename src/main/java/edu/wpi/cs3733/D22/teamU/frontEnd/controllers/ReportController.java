@@ -19,6 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -27,6 +29,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -131,6 +134,7 @@ public class ReportController extends ServiceController {
     String inputDesc = reportDescrip.getText().trim();
     boolean alreadyHere = true;
     String reportID = "notWork";
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     while (alreadyHere) {
       double rand = Math.random() * 10000;
@@ -144,7 +148,14 @@ public class ReportController extends ServiceController {
       reportID = "REP" + (int) rand;
     }
     Report r =
-        new Report(reportID, temp_employee, inputType, inputDesc, true, "00-00-00", "00:00:00");
+        new Report(
+            reportID,
+            temp_employee,
+            inputType,
+            inputDesc,
+            true,
+            sdf3.format(timestamp).substring(0, 10),
+            sdf3.format(timestamp).substring(11));
     // Report r = new Report(
     try {
       Udb.getInstance().add(r);
@@ -198,5 +209,13 @@ public class ReportController extends ServiceController {
     }
 
     reportBarChart.getData().add(data);
+  }
+
+  public void toAllReports(ActionEvent actionEvent) throws IOException {
+    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml");
+    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    appStage.setScene(scene);
+    appStage.show();
+    masterThread.stop();
   }
 }
