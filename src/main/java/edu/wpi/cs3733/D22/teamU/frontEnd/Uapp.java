@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd;
 
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
+import edu.wpi.cs3733.D22.teamU.frontEnd.controllers.ServiceController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,7 +43,7 @@ public class Uapp extends Application {
   @Override
   public void stop() {
     running = false;
-
+    ServiceController.masterThread.stop();
     try {
       Udb.getInstance().equipRequestImpl.JavaToSQL();
       Udb.getInstance().equipRequestImpl.JavaToCSV(Udb.getInstance().equipRequestImpl.csvFile);

@@ -17,7 +17,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public abstract class ServiceController implements Initializable, Service {
-  public Thread masterThread;
+  public static Thread masterThread;
   @FXML AnchorPane anchor;
   private Stage stage = Uapp.stage;
 
@@ -233,7 +233,6 @@ public abstract class ServiceController implements Initializable, Service {
                 .getResource("edu/wpi/cs3733/D22/teamU/views/translatorRequest.fxml"));
     Uapp.stage.getScene().setRoot(home);
     stage.show();
-    masterThread.stop();
   }
 
   public void toCredits(ActionEvent actionEvent) throws IOException {

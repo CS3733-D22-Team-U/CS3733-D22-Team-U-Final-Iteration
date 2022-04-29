@@ -124,7 +124,7 @@ public class TranslatorRequestController extends ServiceController {
     employees.getItems().addAll(staff);
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
 
-    handleTime();
+    //handleTime();
     handleBar();
   }
 
