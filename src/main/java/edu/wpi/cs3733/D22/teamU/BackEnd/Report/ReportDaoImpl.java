@@ -142,7 +142,7 @@ public class ReportDaoImpl implements DataDao<Report> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseupdate(currReport);
+            firebaseUpdate(currReport);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql locations");
@@ -282,7 +282,7 @@ public class ReportDaoImpl implements DataDao<Report> {
         this.List.replace(data.id, data);
         data.getEmployee().addReport(data);
         this.JavaToSQL();
-        firebaseupdate(data);
+        firebaseUpdate(data);
         this.JavaToCSV(CSVfile);
       } else {
         System.out.println("No Such Employee in Database");

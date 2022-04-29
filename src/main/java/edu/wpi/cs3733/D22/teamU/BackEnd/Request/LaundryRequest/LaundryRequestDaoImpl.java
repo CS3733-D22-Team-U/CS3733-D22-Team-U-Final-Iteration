@@ -169,7 +169,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
         ApiFuture<DocumentSnapshot> ds = docRef.get();
         try {
           if (!ds.get().exists() || ds.get() == null) {
-            firebaseupdate(currLaud);
+            firebaseUpdate(currLaud);
           }
         } catch (Exception e) {
           System.out.println("firebase error in java to sql laundry requests");
@@ -346,7 +346,7 @@ public class LaundryRequestDaoImpl implements DataDao<LaundryRequest> {
       if (EmployeeDaoImpl.List.containsKey(data.getEmployee().getEmployeeID())) {
         data.setEmployee(EmployeeDaoImpl.List.get(data.getEmployee().getEmployeeID()));
         this.List.replace(data.ID, data);
-        firebaseupdate(data);
+        firebaseUpdate(data);
         this.JavaToSQL();
         this.JavaToCSV(csvFile);
       } else {
