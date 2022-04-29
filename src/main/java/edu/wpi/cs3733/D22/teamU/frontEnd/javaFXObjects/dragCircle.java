@@ -141,6 +141,7 @@ public class dragCircle extends Circle {
     mc.locations.put(lnNew.getLocation().getNodeID(), lnNew);
     ln.getPane().getChildren().remove(ln);
     mc.enableDrag(lnNew);
+
     lnNew.setOnMouseClicked(mc::popupOpen);
     lnNew.getPane().getChildren().add(lnNew);
   }
