@@ -29,7 +29,7 @@
                   </ImageView>
                   <Text fx:id="headerText" fill="WHITE" layoutX="109.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Mass General Brigham and Women's Hospital" wrappingWidth="974.9564361572266">
                      <font>
-                        <Font size="40.0" />
+                        <Font size="48.0" />
                      </font></Text>
                </children>
             </Pane>
