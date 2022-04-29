@@ -56,10 +56,7 @@ public class filterEmployeeController extends ServiceController implements Initi
   @FXML TextField firstTxt;
   @FXML TextField lastTxt;
   @FXML TextField occupationTxt;
-  @FXML TextField reportsTxt;
   @FXML TextField dutyTxt;
-  @FXML TextField userTxt;
-  @FXML TextField passwordTxt;
   @FXML ComboBox<Employee> employees = new ComboBox<Employee>();
   @FXML Button submitButton;
   @FXML Button clearButton;
@@ -142,10 +139,7 @@ public class filterEmployeeController extends ServiceController implements Initi
     firstTxt.setText("");
     lastTxt.setText("");
     occupationTxt.setText("");
-    reportsTxt.setText("");
     dutyTxt.setText("");
-    userTxt.setText("");
-    passwordTxt.setText("");
     employees.setPromptText("Choose Employee:");
   }
 
@@ -330,17 +324,13 @@ public class filterEmployeeController extends ServiceController implements Initi
 
     Employee employee = employees.getValue();
 
-    int reports = employee.getReports();
     boolean onDuty = employee.getOnDuty();
 
     IDTxt.setText(employee.getEmployeeID());
     firstTxt.setText(employee.getFirstName());
     lastTxt.setText(employee.getLastName());
     occupationTxt.setText(employee.getOccupation());
-    reportsTxt.setText(String.valueOf(reports));
     dutyTxt.setText(String.valueOf(onDuty));
-    userTxt.setText(employee.getUsername());
-    passwordTxt.setText(employee.getPassword());
   }
 
   public Employee checkEmployee(String employee) throws NullPointerException {
@@ -386,14 +376,11 @@ public class filterEmployeeController extends ServiceController implements Initi
     editableFields(false);
     // add employee to list
     String ID;
-    String reports;
     Employee oldEmployee = employees.getValue();
     oldEmployee.setFirstName(firstTxt.getText().trim());
     oldEmployee.setLastName(lastTxt.getText().trim());
     oldEmployee.setOccupation(occupationTxt.getText().trim());
     oldEmployee.setOnDuty(Boolean.parseBoolean(dutyTxt.getText().trim()));
-    oldEmployee.setUsername(userTxt.getText().trim());
-    oldEmployee.setPassword(passwordTxt.getText().trim());
     new ComboBoxAutoComplete<Employee>(employees, 675, 380);
     submitEditButton.setVisible(false);
     cancelButton.setVisible(false);
@@ -407,20 +394,15 @@ public class filterEmployeeController extends ServiceController implements Initi
     editableFields(false);
     // add employee to list
     String ID;
-    String reports;
     int rand = (int) Math.floor(Math.random() * 100000);
     ID = rand + "";
-    reports = "0";
     Employee employee =
         new Employee(
             ID,
             firstTxt.getText().trim(),
             lastTxt.getText().trim(),
             occupationTxt.getText().trim(),
-            Integer.parseInt(reports),
-            Boolean.parseBoolean(dutyTxt.getText().trim()),
-            userTxt.getText().trim(),
-            passwordTxt.getText().trim());
+            Boolean.parseBoolean(dutyTxt.getText().trim()));
     try {
       Udb.getInstance().EmployeeImpl.add(employee);
       employees.getItems().add(employee);
@@ -458,8 +440,6 @@ public class filterEmployeeController extends ServiceController implements Initi
     lastTxt.setEditable(set);
     occupationTxt.setEditable(set);
     dutyTxt.setEditable(set);
-    userTxt.setEditable(set);
-    passwordTxt.setEditable(set);
   }
 
   public void cancelEdit() {

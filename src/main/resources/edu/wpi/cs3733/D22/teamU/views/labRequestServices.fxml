@@ -49,7 +49,7 @@
             <Text fx:id="time" layoutX="957.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time" text="hh:mm" />
             <StackPane fx:id="requestsStack" layoutX="225.0" layoutY="116.0" prefHeight="552.0" prefWidth="615.0">
                <children>
-                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
+                  <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
                         <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
@@ -196,17 +196,17 @@
                         <TextArea layoutX="368.0" layoutY="347.0" prefHeight="137.0" prefWidth="226.0" promptText="Input Other Request" />
                         <Text fill="WHITE" layoutX="416.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Request" wrappingWidth="178.13671875">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="416.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" wrappingWidth="125.17037435476038">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <TextField fx:id="patientNameField" layoutX="380.0" layoutY="139.0" prefHeight="30.0" prefWidth="190.0" />
-                        <ComboBox fx:id="locations" layoutX="380.0" layoutY="269.0" prefHeight="30.0" prefWidth="190.0" promptText="Destination" />
-                        <ComboBox fx:id="employees" layoutX="379.0" layoutY="204.0" prefHeight="30.0" prefWidth="190.0" promptText="Staff" />
+                        <ComboBox fx:id="locations" layoutX="380.0" layoutY="269.0" prefHeight="30.0" prefWidth="190.0" promptText="Destination" style="-fx-background-color: #3BAFB4;" />
+                        <ComboBox fx:id="employees" layoutX="379.0" layoutY="204.0" prefHeight="30.0" prefWidth="190.0" promptText="Staff" style="-fx-background-color: #3BAFB4;" />
                         <Pane prefHeight="84.0" prefWidth="623.0" style="-fx-background-color: #3BAFB4; -fx-background-radius: 15;">
                            <children>
                               <Text fill="WHITE" layoutX="201.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Request">
@@ -218,12 +218,12 @@
                         </Pane>
                         <Text fill="WHITE" layoutX="404.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Member" wrappingWidth="150.17037435476038">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="408.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="125.17037435476038">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font size="20.0" />
                            </font>
                         </Text>
                         <Button fx:id="submitButton1" alignment="CENTER" layoutX="424.0" layoutY="505.0" lineSpacing="5.0" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#toLabRequestHelp" prefHeight="30.0" prefWidth="216.0" style="-fx-background-radius: 15; -fx-background-color: #B0E5E3;" text="Help" textFill="#044e9a">
@@ -393,9 +393,6 @@
          </cursor>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>

@@ -108,7 +108,7 @@ HHALL00403,73,748,3,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
 FHALL00501,698,368,1,Tower,HALL,Shattuck Street Lobby 3,Hallway F00501
 FHALL02401,713,738,1,Tower,HALL,Lobby Hallway 2,Hallway F02401
 uPATI04B38,300,165,4,Tower,PATI,Patient Room Pod B,PRB
-CREST001L1,481,479,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
+CREST001L1,485,485,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
 uPATI04B39,332,184,4,Tower,PATI,Patient Room Pod B,PRB
 HSERV00103,498,323,3,Tower,SERV,Nursing Room,Nursing Room
 FHALL00101,803,368,1,Tower,HALL,Lower Pike Hallway Exit Lobby,Hallway F00101

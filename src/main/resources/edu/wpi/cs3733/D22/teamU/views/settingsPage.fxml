@@ -21,7 +21,7 @@
       </ImageView>
       <Pane prefHeight="750.0" prefWidth="258.0" style="-fx-background-color: #5898DB; -fx-background-radius: 0 35 35 0;">
          <children>
-            <Button layoutY="273.0" mnemonicParsing="false" onAction="#toHome" prefHeight="123.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;&#10;Home&#10;">
+            <Button layoutY="261.0" mnemonicParsing="false" onAction="#toHome" prefHeight="123.0" prefWidth="258.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 35 0;" text="&#10;&#10;Home&#10;">
                <effect>
                   <DropShadow />
                </effect>

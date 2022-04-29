@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.D22.teamU.frontEnd.controllers;
 
+import edu.wpi.cs3733.D22.teamU.BackEnd.Employee.Employee;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Report.Report;
 import edu.wpi.cs3733.D22.teamU.BackEnd.Udb;
 import edu.wpi.cs3733.D22.teamU.frontEnd.Uapp;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,8 +29,9 @@ public class AllReportsController extends ServiceController implements Initializ
   @FXML TableColumn<Report, String> statusCol;
   @FXML TableColumn<Report, String> dateCol;
   @FXML TableColumn<Report, String> timeCol;
-
   @FXML TableView<Report> reportTable;
+
+  ArrayList<Employee> staff;
 
   ObservableList<Report> reportList = FXCollections.observableArrayList();
 
@@ -38,6 +41,19 @@ public class AllReportsController extends ServiceController implements Initializ
     super.initialize(location, resources);
 
     setUpAllReports();
+    //    staff = new ArrayList<>();
+    //    try {
+    //      for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+    //        staff.add(e);
+    //      }
+    //    } catch (IOException e) {
+    //      e.printStackTrace();
+    //    } catch (SQLException throwables) {
+    //      throwables.printStackTrace();
+    //    }
+    //    employees.setTooltip(new Tooltip());
+    //    employees.getItems().addAll(staff);
+    //    new ComboBoxAutoComplete<Employee>(employees, 675, 380);
   }
 
   @Override
@@ -87,4 +103,18 @@ public class AllReportsController extends ServiceController implements Initializ
     Uapp.stage.getScene().setRoot(home);
     Uapp.stage.show();
   }
+
+  //  public void updat2eList(ActionEvent actionEvent) throws SQLException, IOException {
+  //    //Employee employee = employees.getValue();
+  //
+  //    ArrayList<Report> reports = new ArrayList<Report>();
+  //    for (Employee e : Udb.getInstance().EmployeeImpl.hList().values()) {
+  //      if (e == employee) {
+  //        reports.addAll(e.getReportList());
+  //      }
+  //    }
+  //
+  //    reportList.addAll(reports);
+  //    setUpAllReports();
+  //  }
 }

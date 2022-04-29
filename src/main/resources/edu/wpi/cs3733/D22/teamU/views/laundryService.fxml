@@ -84,8 +84,8 @@
                                 <Pane layoutX="340.0" layoutY="82.0" prefHeight="444.0" prefWidth="275.0">
                                     <children>
                               <TextField fx:id="patientNameInput" layoutX="50.0" layoutY="70.0" prefHeight="30.0" prefWidth="190.0" promptText="Enter Patient Name" />
-                                        <ComboBox fx:id="locations" layoutX="49.0" layoutY="129.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" promptText="Select Location" />
-                                        <ComboBox fx:id="employees" layoutX="49.0" layoutY="193.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" promptText="Select Employee" />
+                                        <ComboBox fx:id="locations" layoutX="49.0" layoutY="129.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" promptText="Select Location" style="-fx-background-color: #3BAFB4;" />
+                                        <ComboBox fx:id="employees" layoutX="49.0" layoutY="193.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" promptText="Select Employee" style="-fx-background-color: #3BAFB4;" />
                                         <Text fx:id="requestText" fill="WHITE" layoutX="5.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                             <font>
                                                 <Font size="16.0" />
@@ -162,7 +162,7 @@
                         </Pane>
                             </children>
                         </Pane>
-                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                        <Pane fx:id="activeRequestPane" maxHeight="559.0" maxWidth="656.0" minWidth="415.0" prefHeight="559.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                             <children>
                                 <TableView fx:id="activeRequestTable" layoutX="17.0" layoutY="18.0" prefHeight="519.0" prefWidth="582.0">
                                     <columns>
@@ -342,9 +342,6 @@
          </cursor>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>

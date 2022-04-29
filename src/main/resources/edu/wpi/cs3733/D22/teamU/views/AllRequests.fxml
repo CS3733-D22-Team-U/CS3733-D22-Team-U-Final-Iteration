@@ -316,7 +316,7 @@
                         </Pane>
                         <Pane fx:id="activeRequestPane" maxHeight="678.0" maxWidth="751.0" minWidth="415.0" prefHeight="614.0" prefWidth="724.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;">
                             <children>
-                                <TableView fx:id="activeRequestTable" layoutX="22.0" layoutY="60.0" prefHeight="469.0" prefWidth="680.0">
+                                <TableView fx:id="activeRequestTable" layoutX="22.0" layoutY="60.0" prefHeight="469.0" prefWidth="680.0" stylesheets="@../css/tableViewPopUp.css">
                                     <columns>
                                         <TableColumn fx:id="allID" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="allType" prefWidth="75.0" text="Request Type" />

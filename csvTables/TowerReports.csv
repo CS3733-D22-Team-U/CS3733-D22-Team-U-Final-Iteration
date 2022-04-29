@@ -2,6 +2,7 @@ ID,Employee,Type,Description,Status,Date,Time
 REP7668,00004,Patient Mistreatment,ate a human,true,2022-04-28,01:33:16
 REP7515,00010,Medical Misconduct,stealing organs,true,2022-04-28,01:32:34
 REP6701,00008,Sexual Harassment,A,true,2022-04-28,19:42:14
+REP4586,00008,Other,,true,2022-04-28,23:26:25
 REP933,00002,Patient Mistreatment,Hurt patient,true,2022-04-28,00:07:20
 REP8921,00008,Sexual Harassment,Help,true,2022-04-28,19:39:30
 REP4588,00008,Sexual Harassment,Test,true,2022-04-28,19:37:14

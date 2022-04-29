@@ -10,6 +10,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamU.frontEnd.controllers.EquipmentDeliverySystemController">
    <children>
@@ -364,8 +384,8 @@
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <ComboBox fx:id="locations" layoutX="43.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
-                              <ComboBox fx:id="employees" layoutX="43.0" layoutY="142.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" />
+                              <ComboBox fx:id="locations" layoutX="43.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
+                              <ComboBox fx:id="employees" layoutX="43.0" layoutY="142.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #3BAFB4;" />
                               <Text fx:id="requestText" fill="WHITE" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filler Text" textAlignment="CENTER" visible="false" wrappingWidth="266.0">
                                  <font>
                                     <Font size="16.0" />
@@ -407,7 +427,7 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" style="-fx-background-color: #044E9A; -fx-background-radius: 15;" visible="false">
+                  <Pane fx:id="allEquipPane" maxHeight="570.0" maxWidth="656.0" minWidth="415.0" prefHeight="570.0" prefWidth="615.0" stylesheets="@../css/tableViewRequest.css" visible="false">
                      <children>
                         <TableView fx:id="table" editable="true" layoutX="17.0" layoutY="23.0" prefHeight="519.0" prefWidth="582.0">
                            <columns>
@@ -581,9 +601,6 @@
          </cursor>
       </AnchorPane>
       <Pane prefHeight="57.0" prefWidth="132.0" style="-fx-background-color: #044e9a; -fx-background-radius: 0 0 15 15;">
-         <effect>
-            <DropShadow />
-         </effect>
          <children>
             <Button fx:id="sideBarButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" styleClass="menuBarSmallButton" stylesheets="@../css/servicePage.css" text="Button" textFill="#044e9a">
                <graphic>
