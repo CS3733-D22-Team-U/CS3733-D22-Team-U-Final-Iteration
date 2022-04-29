@@ -147,6 +147,8 @@ public class HomePageController extends ServiceController {
             appleImage.setLayoutY(event.getY());
           }
         });
+
+    
   }
 
   private void handleDateTime() {
