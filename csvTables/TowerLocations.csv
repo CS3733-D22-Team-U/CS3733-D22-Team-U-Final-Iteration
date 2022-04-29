@@ -144,7 +144,7 @@ uPATI05203,237,481,3,Tower,PATI,Patient Room Pod C,PRC
 FHALL01601,506,518,1,Tower,HALL,Tower Hallway 8,Hallway F01601
 FDEPT00501,876,758,1,Tower,DEPT,Emergency Department,Emergency
 FHALL01201,296,388,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
-FHALL03101,774,434,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
+FHALL03101,773,434,1,Tower,HALL,Lobby Hallway 6,Hallway F02801
 CHALL005L2,493,737,L2,Tower,HALL,Hallway 5 Floor L2,Hallway C005L2
 CHALL005L1,494,742,L1,Tower,HALL,Hallway 5 Floor L1,Hallway C005L1
 FDEPT00101,365,283,1,Tower,DEPT,Center for International Medicine,CIM
@@ -162,7 +162,7 @@ HHALL00102,623,383,2,Tower,HALL,Hallway Connector 1 Floor 2,Hallway H00102
 WELEV00M02,573,738,2,Tower,ELEV,Elevator M Floor 2,Elevator M2
 HHALL00103,73,113,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
 WELEV00M03,563,748,3,Tower,ELEV,Elevator M Floor 3,Elevator M3
-CDEPT003L1,299,153,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
+CDEPT003L1,297,153,L1,Tower,DEPT,Day Surgery Family Waiting Exit Floor L1,Department C003L1
 FINFO00101,448,684,1,Tower,INFO,75 Lobby Information Desk,Lobby Info Desk
 HHALL00502,573,483,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
 HHALL00503,428,748,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502

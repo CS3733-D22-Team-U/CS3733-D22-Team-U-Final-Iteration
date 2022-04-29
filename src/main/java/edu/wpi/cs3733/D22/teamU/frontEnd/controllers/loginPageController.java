@@ -18,15 +18,15 @@ import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class loginPageController extends ServiceController {
@@ -46,6 +46,7 @@ public class loginPageController extends ServiceController {
   double startTime;
   double endTime;
   double elapsedTime;
+  @FXML ImageView backgroundImage;
 
   public void firebaseInit(double time, String userName)
       throws ExecutionException, InterruptedException {
@@ -59,7 +60,6 @@ public class loginPageController extends ServiceController {
         }
       }
     }
-
     docRef.collection("loginTimes");
     HashMap<String, Object> data = new HashMap<>();
     data.put("Time", time);
@@ -68,6 +68,11 @@ public class loginPageController extends ServiceController {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    if (Uapp.isFullScreen) {
+      backgroundImage.setFitWidth(1920);
+      backgroundImage.setFitHeight(1080);
+      backgroundImage.setPreserveRatio(false);
+    }
     RotateTransition rt = new RotateTransition(new Duration(2500), loadingCircle);
     rt.setByAngle(360);
     rt.setCycleCount(RotateTransition.INDEFINITE);
@@ -106,21 +111,18 @@ public class loginPageController extends ServiceController {
                           throw new SQLException();
                         }
 
-                        Scene scene = null;
-                        try {
-                          scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml");
-                        } catch (IOException e) {
-                          e.printStackTrace();
-                        }
-                        Stage appStage =
-                            (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                        appStage.setScene(scene);
+                        Parent home =
+                            FXMLLoader.load(
+                                Uapp.class
+                                    .getClassLoader()
+                                    .getResource("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml"));
+                        Uapp.stage.getScene().setRoot(home);
+
                         this.endTime = System.currentTimeMillis();
 
                         elapsedTime = (endTime - startTime) / 1000;
 
                         firebaseInit(elapsedTime, username.getText().trim());
-                        appStage.show();
                       } catch (IOException e) {
                         e.printStackTrace();
                       } catch (SQLException throwables) {
@@ -173,4 +175,6 @@ public class loginPageController extends ServiceController {
   public void toCloseApp(ActionEvent actionEvent) {
     Platform.exit();
   }
+
+  public void makeBig(ActionEvent actionEvent) {}
 }

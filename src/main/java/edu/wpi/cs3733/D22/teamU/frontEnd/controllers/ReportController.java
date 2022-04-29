@@ -22,6 +22,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -30,7 +32,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 
@@ -57,6 +58,7 @@ public class ReportController extends ServiceController {
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     allReports.setVisible(Udb.admin);
     staff = new ArrayList<>();
     try {
@@ -230,11 +232,15 @@ public class ReportController extends ServiceController {
   }
 
   public void toAllReports(ActionEvent actionEvent) throws IOException {
+
     if (Udb.admin) {
-      Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml");
-      Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-      appStage.setScene(scene);
-      appStage.show();
+      Parent home =
+              FXMLLoader.load(
+                      Uapp.class
+                              .getClassLoader()
+                              .getResource("edu/wpi/cs3733/D22/teamU/views/AllReports.fxml"));
+      Uapp.stage.getScene().setRoot(home);
+      Uapp.stage.show();
       masterThread.stop();
     } else {
       adminMessage.setVisible(true);

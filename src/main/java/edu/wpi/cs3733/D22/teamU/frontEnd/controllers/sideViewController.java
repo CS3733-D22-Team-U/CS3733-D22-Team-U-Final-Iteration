@@ -36,7 +36,7 @@ import lombok.SneakyThrows;
 public class sideViewController extends ServiceController {
 
   public MenuItem lower2;
-  public AnchorPane masterPane;
+  public AnchorPane anchor;
   @FXML JFXHamburger hamburger;
   @FXML VBox vBoxPane;
   @FXML Pane backgroundPane;
@@ -113,9 +113,10 @@ public class sideViewController extends ServiceController {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    super.initialize(location, resources);
     setUpAllEquipment();
-    setUpPieChart("4");
+    setUpPieChart("5");
+    recLevel5.setOpacity(1.0);
 
     try {
       staff.addAll(Udb.getInstance().EmployeeImpl.hList().values());
@@ -169,7 +170,7 @@ public class sideViewController extends ServiceController {
 
     try {
       if (tooManyDirtyThings() == true) {
-        masterPane.getChildren().add(popupAlert);
+        anchor.getChildren().add(popupAlert);
         popupAlert.setLayoutX(600);
         popupAlert.setLayoutY(80);
       }
@@ -214,18 +215,6 @@ public class sideViewController extends ServiceController {
                 equipment.getLocation().getNodeType()));
       } catch (Exception e) {
       }
-      /*
-      if (equipment.getLocation().getFloor().equals(floors))
-        equipmentUI.add(
-            new EquipmentUI(
-                equipment.getLocationID(),
-                equipment.getName(),
-                equipment.getAmount(),
-                equipment.getLocation().getShortName(),
-                equipment.getLocation().getFloor(),
-                equipment.getLocation().getNodeType()));
-
-       */
     }
     return equipmentUI;
   }

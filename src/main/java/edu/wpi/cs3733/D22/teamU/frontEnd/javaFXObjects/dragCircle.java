@@ -37,7 +37,7 @@ public class dragCircle extends Circle {
     setRadius(10);
     setFill(Color.rgb(4, 78, 154));
     enableDrag();
-    mc.masterPane.getChildren().add(this);
+    mc.anchor.getChildren().add(this);
   }
 
   private void enableDrag() {
@@ -114,7 +114,7 @@ public class dragCircle extends Circle {
               // Updating the Location HashMap
 
             }
-            mc.masterPane.getChildren().remove(mc.dc);
+            mc.anchor.getChildren().remove(mc.dc);
             try {
               Udb.getInstance().edit(equipment);
             } catch (IOException e) {

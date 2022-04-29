@@ -13,16 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
-public class settingsPageController implements Initializable {
+public class settingsPageController extends ServiceController implements Initializable {
 
   ObservableList<String> URLList = FXCollections.observableArrayList();
 
@@ -31,7 +31,11 @@ public class settingsPageController implements Initializable {
   @FXML ImageView changeImage;
   private ArrayList<String> URLs;
 
+  @FXML AnchorPane anchor;
+
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
+    super.initialize(location, resources);
     URLList.add("Belisha Image");
     URLList.add("Deepti Image");
     URLList.add("Harsh Image");
@@ -44,13 +48,17 @@ public class settingsPageController implements Initializable {
     URLList.add("Tim Image");
     URLList.add("Will Image");
     comboImages.setItems(URLList);
+    Uapp.stage.setFullScreen(true);
   }
 
   public void toApplicationSettings(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/applicationSettings.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
+    Parent home =
+        FXMLLoader.load(
+            Uapp.class
+                .getClassLoader()
+                .getResource("edu/wpi/cs3733/D22/teamU/views/applicationSettings.fxml"));
+    Uapp.stage.getScene().setRoot(home);
+    Uapp.stage.show();
   }
 
   public void changeImage(ActionEvent actionEvent) throws IOException {
@@ -106,10 +114,12 @@ public class settingsPageController implements Initializable {
     // possibly add so username saves to CSV?
   }
 
-  public void toHome(ActionEvent actionEvent) throws IOException {
-    Scene scene = Uapp.getScene("edu/wpi/cs3733/D22/teamU/views/HomePage.fxml");
-    Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-    appStage.setScene(scene);
-    appStage.show();
-  }
+  @Override
+  public void addRequest() throws SQLException, IOException {}
+
+  @Override
+  public void removeRequest() {}
+
+  @Override
+  public void updateRequest() {}
 }
