@@ -14,7 +14,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,7 +22,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -57,7 +55,6 @@ public class HomePageController extends ServiceController {
   @FXML Text name;
 
   @FXML ImageView turtle;
-  @FXML ImageView appleImage;
   @FXML AnchorPane turtAnchor;
   @FXML DatePicker datePicker;
   @FXML Text timeOfDay;
@@ -108,47 +105,36 @@ public class HomePageController extends ServiceController {
           double nextX;
           double nextY;
 
-          if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
+          if (e.getCode() == KeyCode.D) {
             nextX = turtle.getLayoutX() + 10;
-            if (nextX >= 0 && nextX <= 363) {
+            if (nextX >= 0 && nextX <= 220) {
               turtle.setLayoutX(nextX);
               turtle.setRotate(90);
             }
           }
 
-          if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.LEFT) {
+          if (e.getCode() == KeyCode.A) {
             nextX = turtle.getLayoutX() - 10;
-            if (nextX >= 0 && nextX <= 363) {
+            if (nextX >= 0 && nextX <= 220) {
               turtle.setLayoutX(nextX);
               turtle.setRotate(-90);
             }
           }
-          if (e.getCode() == KeyCode.W || e.getCode() == KeyCode.UP) {
+          if (e.getCode() == KeyCode.W) {
             nextY = turtle.getLayoutY() - 10;
-            if (nextY >= 0 && nextY <= 271) {
+            if (nextY >= 0 && nextY <= 200) {
               turtle.setLayoutY(nextY);
               turtle.setRotate(0);
             }
           }
-          if (e.getCode() == KeyCode.S || e.getCode() == KeyCode.DOWN) {
+          if (e.getCode() == KeyCode.S) {
             nextY = turtle.getLayoutY() + 10;
-            if (nextY >= 0 && nextY <= 271) {
+            if (nextY >= 0 && nextY <= 200) {
               turtle.setLayoutY(nextY);
               turtle.setRotate(180);
             }
           }
         });
-
-    turtlePond.setOnMouseClicked(
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent event) {
-            appleImage.setLayoutX(event.getX());
-            appleImage.setLayoutY(event.getY());
-          }
-        });
-
-    
   }
 
   private void handleDateTime() {

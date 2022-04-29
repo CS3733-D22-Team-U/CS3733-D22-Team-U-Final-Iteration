@@ -261,8 +261,12 @@ public class MapController extends ServiceController {
                   // setPaneOnMousePressedEventHandler(null);
                   // setPaneOnMouseDraggedEventHandlerEventHandler(null);
 
-                  dragDelta.x = ln.getLayoutX() - mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth();
-                  dragDelta.y = ln.getLayoutY() - mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight();
+                  dragDelta.x =
+                      ln.getLayoutX()
+                          - mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth();
+                  dragDelta.y =
+                      ln.getLayoutY()
+                          - mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight();
                   ln.setCursor(Cursor.MOVE);
                 }
               });
@@ -270,10 +274,20 @@ public class MapController extends ServiceController {
               new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                  ln.tempx = mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth() + dragDelta.x + ln.getX();
-                  ln.tempy = mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()+ dragDelta.y + ln.getY();
-                  ln.setLayoutX(mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth() + dragDelta.x);
-                  ln.setLayoutY(mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight() + dragDelta.y);
+                  ln.tempx =
+                      mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                          + dragDelta.x
+                          + ln.getX();
+                  ln.tempy =
+                      mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                          + dragDelta.y
+                          + ln.getY();
+                  ln.setLayoutX(
+                      mouseEvent.getSceneX() / anchor.getWidth() * anchor.getPrefWidth()
+                          + dragDelta.x);
+                  ln.setLayoutY(
+                      mouseEvent.getSceneY() / anchor.getHeight() * anchor.getPrefHeight()
+                          + dragDelta.y);
                 }
               });
           ln.setOnMouseReleased(
