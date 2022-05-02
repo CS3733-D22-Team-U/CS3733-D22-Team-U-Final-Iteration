@@ -250,7 +250,7 @@ public class MapController extends ServiceController {
           double x = scale / imageX * loc.getXcoord();
           double y = scale / imageY * loc.getYcoord();
           ln = new LocationNode(loc, x, y, temp);
-          firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
+          // firebaseUpdate(ln); // todo for presentation uncomment to show bidirectional
           // code to drag node around
           final Delta dragDelta = new Delta();
           if (Udb.admin) {
@@ -301,6 +301,17 @@ public class MapController extends ServiceController {
 
                   ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
                   ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+
+                  DataDao.db
+                      .collection("locations")
+                      .document(ln.getLocation().getNodeID())
+                      .update("xcoord", ln.getLocation().getXcoord());
+                  DataDao.db
+                      .collection("locations")
+                      .document(ln.getLocation().getNodeID())
+                      .update("ycoord", ln.getLocation().getYcoord());
+
+                  System.out.println("Test");
                   try {
                     Udb.getInstance().edit(ln.getLocation());
                   } catch (IOException e) {
@@ -454,7 +465,6 @@ public class MapController extends ServiceController {
     }
     edges = new ArrayList<>();
     elevs = new ArrayList<>();
-
     if (To.getValue() != null && From.getValue() != null) {
       edges = pathFinding.findPath(From.getValue(), To.getValue());
       System.out.println(edges.size());
@@ -663,6 +673,14 @@ public class MapController extends ServiceController {
 
             ln.getLocation().setXcoord((int) (ln.tempx / scale * imageX));
             ln.getLocation().setYcoord((int) (ln.tempy / scale * imageY));
+            DataDao.db
+                .collection("locations")
+                .document(ln.getLocation().getNodeID())
+                .update("xcoord", ln.getLocation().getXcoord());
+            DataDao.db
+                .collection("locations")
+                .document(ln.getLocation().getNodeID())
+                .update("ycoord", ln.getLocation().getYcoord());
             try {
               Udb.getInstance().edit(ln.getLocation());
             } catch (IOException e) {
